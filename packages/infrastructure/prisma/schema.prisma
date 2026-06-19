@@ -1,0 +1,310 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+}
+
+model Tenant {
+  id            String   @id @default(cuid())
+  name          String
+  slug          String   @unique
+  timezone      String   @default("America/New_York")
+  loyaltyConfig Json     @default("{}")
+  createdAt     DateTime @default(now())
+
+  locations       Location[]
+  customers       Customer[]
+  campaigns       Campaign[]
+  alerts          Alert[]
+  recommendations Recommendation[]
+  users           User[]
+  segments        CustomerSegment[]
+
+  @@map("tenants")
+}
+
+model Location {
+  id            String   @id @default(cuid())
+  tenantId      String
+  name          String
+  address       String
+  googlePlaceId String?
+  createdAt     DateTime @default(now())
+
+  tenant               Tenant                @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  orders               Order[]
+  reviews              Review[]
+  trafficSnapshots     TrafficSnapshot[]
+  keywordSnapshots     KeywordSnapshot[]
+  revenueSnapshots     RevenueSnapshot[]
+  locationHealth       LocationHealth[]
+  connectorCredentials ConnectorCredential[]
+
+  @@map("locations")
+}
+
+model Order {
+  id          String   @id @default(cuid())
+  locationId  String
+  customerId  String?
+  occurredAt  DateTime
+  channel     String
+  totalAmount Int
+  currency    String   @default("USD")
+  itemsCount  Int
+  sourceRef   String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  location Location  @relation(fields: [locationId], references: [id])
+  customer Customer? @relation(fields: [customerId], references: [id])
+
+  @@index([locationId, occurredAt])
+  @@index([customerId])
+  @@map("orders")
+}
+
+model Customer {
+  id                 String    @id @default(cuid())
+  tenantId           String
+  firstSeenAt        DateTime
+  lastSeenAt         DateTime
+  acquisitionSource  String?
+  totalOrders        Int       @default(0)
+  totalSpentAmount   Int       @default(0)
+  totalSpentCurrency String    @default("USD")
+  avgTicketAmount    Int       @default(0)
+  visitFrequency     Float?
+  preferredChannel   String?
+  loyaltyTier        String    @default("standard")
+  churnRisk          Float?
+  churnRiskReason    String?
+  churnRiskUpdatedAt DateTime?
+  tags               String[]
+  notes              String?
+
+  tenant      Tenant               @relation(fields: [tenantId], references: [id])
+  identifiers CustomerIdentifier[]
+  orders      Order[]
+  activities  CustomerActivity[]
+
+  @@index([tenantId])
+  @@index([tenantId, loyaltyTier])
+  @@index([tenantId, churnRisk])
+  @@map("customers")
+}
+
+model CustomerIdentifier {
+  id         String  @id @default(cuid())
+  customerId String
+  type       String
+  value      String
+  provider   String?
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@unique([type, value])
+  @@index([customerId])
+  @@map("customer_identifiers")
+}
+
+model CustomerActivity {
+  id         String   @id @default(cuid())
+  customerId String
+  tenantId   String
+  type       String
+  payload    Json
+  occurredAt DateTime
+
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([customerId, occurredAt])
+  @@map("customer_activities")
+}
+
+model CustomerSegment {
+  id       String @id @default(cuid())
+  tenantId String
+  name     String
+  type     String
+  rules    Json
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@unique([tenantId, name])
+  @@map("customer_segments")
+}
+
+model Review {
+  id             String    @id @default(cuid())
+  locationId     String
+  platform       String
+  rating         Int
+  content        String?
+  reply          String?
+  publishedAt    DateTime
+  respondedAt    DateTime?
+  sentimentScore Float?
+  sourceRef      String    @unique
+
+  location Location @relation(fields: [locationId], references: [id])
+
+  @@index([locationId, publishedAt])
+  @@map("reviews")
+}
+
+model RevenueSnapshot {
+  id           String   @id @default(cuid())
+  locationId   String
+  periodType   String
+  periodStart  DateTime
+  totalRevenue Int
+  currency     String   @default("USD")
+  orderCount   Int
+  avgTicket    Int
+
+  location Location @relation(fields: [locationId], references: [id])
+
+  @@unique([locationId, periodType, periodStart])
+  @@index([locationId, periodType, periodStart])
+  @@map("revenue_snapshots")
+}
+
+model LocationHealth {
+  id         String   @id @default(cuid())
+  locationId String
+  computedAt DateTime
+  score      Float
+  revenue    Float
+  reputation Float
+  traffic    Float
+  retention  Float
+  trend      String
+
+  location Location @relation(fields: [locationId], references: [id])
+
+  @@index([locationId, computedAt])
+  @@map("location_health")
+}
+
+model TrafficSnapshot {
+  id          String   @id @default(cuid())
+  locationId  String
+  periodStart DateTime
+  periodEnd   DateTime
+  sessions    Int
+  users       Int
+  source      String
+
+  location Location @relation(fields: [locationId], references: [id])
+
+  @@index([locationId, periodStart])
+  @@map("traffic_snapshots")
+}
+
+model KeywordSnapshot {
+  id          String   @id @default(cuid())
+  locationId  String
+  capturedAt  DateTime
+  keyword     String
+  position    Float
+  impressions Int
+  clicks      Int
+
+  location Location @relation(fields: [locationId], references: [id])
+
+  @@index([locationId, capturedAt])
+  @@map("keyword_snapshots")
+}
+
+model Alert {
+  id             String    @id @default(cuid())
+  tenantId       String
+  locationId     String?
+  type           String
+  severity       String
+  payload        Json
+  triggeredAt    DateTime
+  acknowledgedAt DateTime?
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId, triggeredAt])
+  @@map("alerts")
+}
+
+model Recommendation {
+  id        String    @id @default(cuid())
+  tenantId  String
+  category  String
+  title     String
+  body      String
+  rationale String
+  status    String    @default("pending")
+  createdAt DateTime  @default(now())
+  expiresAt DateTime?
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId, status])
+  @@map("recommendations")
+}
+
+model Campaign {
+  id         String    @id @default(cuid())
+  tenantId   String
+  locationId String?
+  name       String
+  channel    String
+  promoCode  String?
+  startsAt   DateTime
+  endsAt     DateTime?
+  status     String    @default("draft")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("campaigns")
+}
+
+model User {
+  id          String  @id @default(cuid())
+  tenantId    String?
+  clerkUserId String  @unique
+  role        String  @default("viewer")
+
+  tenant Tenant? @relation(fields: [tenantId], references: [id])
+
+  @@map("users")
+}
+
+model ConnectorCredential {
+  id          String   @id @default(cuid())
+  locationId  String
+  provider    String
+  credentials String   // encrypted JSON
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  location Location @relation(fields: [locationId], references: [id])
+
+  @@unique([locationId, provider])
+  @@map("connector_credentials")
+}
+
+// Infra-only — raw payload preservation; domain never reads this table
+model ConnectorEvent {
+  id          String   @id @default(cuid())
+  locationId  String?
+  provider    String
+  eventType   String
+  payload     Json
+  processedAt DateTime @default(now())
+
+  @@index([locationId, provider])
+  @@map("connector_events")
+}
