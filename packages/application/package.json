@@ -1,0 +1,20 @@
+{
+  "name": "@atrium/application",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "echo 'application: no build needed'",
+    "test": "bun test",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@atrium/domain": "workspace:*",
+    "@atrium/events": "workspace:*",
+    "@atrium/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
