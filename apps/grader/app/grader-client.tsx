@@ -264,7 +264,17 @@ export function GraderClient() {
         {loading && <ScanStatusCards activeIndex={scanStep} />}
         {!loading && report && <ResultStage report={report} onReset={resetFlow} />}
       </section>
+      <SiteFooter />
     </main>
+  )
+}
+
+function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <span>Powered by Atrium</span>
+      <span>© 2026 Atrium. All rights reserved.</span>
+    </footer>
   )
 }
 

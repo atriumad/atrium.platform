@@ -120,6 +120,8 @@ button:disabled {
 .grader-page {
   display: grid;
   min-height: 100svh;
+  grid-template-rows: 1fr auto;
+  gap: 28px;
   align-items: start;
   justify-items: center;
   overflow: auto;
@@ -151,6 +153,24 @@ button:disabled {
   gap: 18px;
   justify-items: center;
   margin-top: 0;
+}
+
+.site-footer {
+  display: flex;
+  width: min(100%, 920px);
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+  padding-top: 16px;
+}
+
+.site-footer span:first-child {
+  color: var(--ink);
 }
 
 .search-module {
@@ -851,6 +871,11 @@ button:disabled {
     align-items: start;
     overflow: visible;
     padding: 20px 14px;
+  }
+
+  .site-footer {
+    justify-content: center;
+    text-align: center;
   }
 
   .grader-stage {
