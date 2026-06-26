@@ -310,7 +310,7 @@ function SearchStage({
   return (
     <div className={`search-module ${compact ? "search-module--compact" : ""}`}>
       <div className="search-lockup">
-        <p className="micro-label">Atrium Growth Grader</p>
+        <p className="uppercase micro-label">Atrium Growth Grader</p>
         <h1 className="display-title">
           Find the <span className="title-serif">leaks</span> before <span className="title-serif">guests</span> do.
         </h1>
