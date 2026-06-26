@@ -6,7 +6,8 @@
   "types": "./src/index.ts",
   "scripts": {
     "build": "echo 'ui: no build needed'",
-    "lint": "tsc --noEmit"
+    "lint": "biome check .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@atrium/shared": "workspace:*"

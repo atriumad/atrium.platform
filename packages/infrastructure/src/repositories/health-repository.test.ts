@@ -1,4 +1,5 @@
 import { describe, expect, mock, test } from "bun:test"
+import type { PrismaClient } from "@prisma/client"
 import { PrismaHealthRepository } from "./health-repository"
 
 function mockPrisma() {
@@ -7,7 +8,7 @@ function mockPrisma() {
     findFirst: mock(() => Promise.resolve(null)),
     findMany: mock(() => Promise.resolve([])),
   }
-  return { locationHealth } as any
+  return { locationHealth }
 }
 
 describe("PrismaHealthRepository", () => {
@@ -22,7 +23,7 @@ describe("PrismaHealthRepository", () => {
 
   test("save calls upsert with mapped data", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaHealthRepository(prisma)
+    const repo = new PrismaHealthRepository(prisma as unknown as PrismaClient)
 
     await repo.save(sampleHealth)
 
@@ -47,11 +48,12 @@ describe("PrismaHealthRepository", () => {
         trend: "up",
       }),
     )
-    const repo = new PrismaHealthRepository(prisma)
+    const repo = new PrismaHealthRepository(prisma as unknown as PrismaClient)
 
     const result = await repo.findLatest("loc-1")
     expect(result).not.toBeNull()
-    expect(result!.score).toBe(78.5)
+    if (!result) return
+    expect(result.score).toBe(78.5)
     expect(prisma.locationHealth.findFirst.mock.calls[0][0].where.locationId).toBe("loc-1")
     expect(prisma.locationHealth.findFirst.mock.calls[0][0].orderBy.computedAt).toBe("desc")
   })
@@ -59,7 +61,7 @@ describe("PrismaHealthRepository", () => {
   test("findHistory returns limited recent records", async () => {
     const prisma = mockPrisma()
     prisma.locationHealth.findMany = mock(() => Promise.resolve([]))
-    const repo = new PrismaHealthRepository(prisma)
+    const repo = new PrismaHealthRepository(prisma as unknown as PrismaClient)
 
     await repo.findHistory("loc-1", 30)
 

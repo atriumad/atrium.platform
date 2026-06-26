@@ -1,4 +1,5 @@
 import { describe, expect, mock, test } from "bun:test"
+import type { PrismaClient } from "@prisma/client"
 import { PrismaAlertRepository } from "./alert-repository"
 
 function mockPrisma() {
@@ -7,7 +8,7 @@ function mockPrisma() {
     findMany: mock(() => Promise.resolve([])),
     update: mock(() => Promise.resolve()),
   }
-  return { alert } as any
+  return { alert }
 }
 
 const sampleAlert = {
@@ -24,7 +25,7 @@ const sampleAlert = {
 describe("PrismaAlertRepository", () => {
   test("save calls create with mapped data", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaAlertRepository(prisma)
+    const repo = new PrismaAlertRepository(prisma as unknown as PrismaClient)
 
     await repo.save(sampleAlert)
 
@@ -38,7 +39,7 @@ describe("PrismaAlertRepository", () => {
   test("findActive returns unacknowledged alerts", async () => {
     const prisma = mockPrisma()
     prisma.alert.findMany = mock(() => Promise.resolve([]))
-    const repo = new PrismaAlertRepository(prisma)
+    const repo = new PrismaAlertRepository(prisma as unknown as PrismaClient)
 
     await repo.findActive("tenant-1")
 
@@ -50,7 +51,7 @@ describe("PrismaAlertRepository", () => {
 
   test("acknowledge updates acknowledgedAt", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaAlertRepository(prisma)
+    const repo = new PrismaAlertRepository(prisma as unknown as PrismaClient)
     const now = new Date("2026-06-18T12:00:00Z")
 
     await repo.acknowledge("alert-1", now)

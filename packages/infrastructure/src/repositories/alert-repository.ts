@@ -1,5 +1,4 @@
-import type { AlertRepository } from "@atrium/domain"
-import type { Alert } from "@atrium/domain"
+import type { Alert, AlertRepository } from "@atrium/domain"
 import type { PrismaClient } from "@prisma/client"
 import { alertMapper } from "./mappers/alert-mapper"
 

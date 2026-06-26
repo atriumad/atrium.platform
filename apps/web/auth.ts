@@ -1,14 +1,10 @@
-import { SignJWT, jwtVerify } from "jose"
+import { SignJWT } from "jose/jwt/sign"
+import { jwtVerify } from "jose/jwt/verify"
 import { cookies } from "next/headers"
+import { readAuthSecret } from "@/lib/auth-secret"
 
 const COOKIE = "atrium-session"
 const EXPIRY = "7d"
-
-function secret(): Uint8Array {
-  const s = process.env.AUTH_SECRET
-  if (!s) throw new Error("AUTH_SECRET env var is not set")
-  return new TextEncoder().encode(s)
-}
 
 export type AuthSession = {
   id:       string
@@ -22,12 +18,12 @@ export async function createSessionToken(payload: AuthSession): Promise<string> 
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(EXPIRY)
-    .sign(secret())
+    .sign(readAuthSecret())
 }
 
 export async function verifySessionToken(token: string): Promise<AuthSession | null> {
   try {
-    const { payload } = await jwtVerify(token, secret())
+    const { payload } = await jwtVerify(token, readAuthSecret())
     return payload as unknown as AuthSession
   } catch {
     return null

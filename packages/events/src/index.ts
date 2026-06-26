@@ -1,14 +1,14 @@
-export * from "./sales"
-export * from "./reputation"
-export * from "./crm"
-export * from "./analytics"
 export * from "./ai"
+export * from "./analytics"
+export * from "./crm"
+export * from "./reputation"
+export * from "./sales"
 
-import type { SalesEvent } from "./sales"
-import type { ReputationEvent } from "./reputation"
-import type { CrmEvent } from "./crm"
-import type { AnalyticsEvent } from "./analytics"
 import type { AiEvent } from "./ai"
+import type { AnalyticsEvent } from "./analytics"
+import type { CrmEvent } from "./crm"
+import type { ReputationEvent } from "./reputation"
+import type { SalesEvent } from "./sales"
 
 export type DomainEvent =
   | SalesEvent

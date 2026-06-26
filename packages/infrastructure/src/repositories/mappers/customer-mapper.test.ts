@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import { customerMapper } from "./customer-mapper"
 import { money } from "@atrium/shared"
+import { customerMapper } from "./customer-mapper"
 
 const row = {
   id: "cus-1",
@@ -21,8 +21,8 @@ const row = {
   tags: ["vip", "high-value"],
   notes: "Prefers contactless pickup",
   identifiers: [
-    { id: "ci-1", customerId: "cus-1", type: "email", value: "test@example.com", provider: null },
-    { id: "ci-2", customerId: "cus-1", type: "phone", value: "+15551234567", provider: null },
+    { id: "ci-1", tenantId: "tenant-1", customerId: "cus-1", type: "email", value: "test@example.com", provider: "" },
+    { id: "ci-2", tenantId: "tenant-1", customerId: "cus-1", type: "phone", value: "+15551234567", provider: "" },
   ],
 }
 
@@ -123,8 +123,10 @@ describe("customerMapper", () => {
     const data = customerMapper.toPersistence(domain)
     expect(data.identifiers?.create).toHaveLength(2)
     expect(data.identifiers?.create?.[0]).toMatchObject({
+      tenantId: "tenant-1",
       type: "email",
       value: "a@b.com",
+      provider: "",
     })
   })
 })

@@ -1,6 +1,6 @@
-import type { CustomerRepository, LoyaltyTier, Customer } from "@atrium/domain"
+import type { Customer, CustomerRepository, LoyaltyTier } from "@atrium/domain"
 import type { Result } from "@atrium/shared"
-import { ok, err } from "@atrium/shared"
+import { err, ok } from "@atrium/shared"
 
 export type ListCustomersInput = {
   tenantId: string

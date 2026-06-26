@@ -1,8 +1,8 @@
-import type { RevenueSnapshot, PeriodType } from "@atrium/domain"
-import { money } from "@atrium/shared"
-import type { Prisma } from "@prisma/client"
+import type { PeriodType, RevenueSnapshot } from "@atrium/domain"
+import { type Currency, money } from "@atrium/shared"
+import type { Prisma, RevenueSnapshot as PrismaRevenueSnapshot } from "@prisma/client"
 
-type RevenueSnapshotRow = Prisma.RevenueSnapshotGetPayload<{}>
+type RevenueSnapshotRow = PrismaRevenueSnapshot
 
 export const revenueSnapshotMapper = {
   toDomain(row: RevenueSnapshotRow): RevenueSnapshot {
@@ -11,9 +11,9 @@ export const revenueSnapshotMapper = {
       locationId: row.locationId,
       periodType: row.periodType as PeriodType,
       periodStart: row.periodStart,
-      totalRevenue: money(row.totalRevenue, row.currency as any),
+      totalRevenue: money(row.totalRevenue, row.currency as Currency),
       orderCount: row.orderCount,
-      avgTicket: money(row.avgTicket, row.currency as any),
+      avgTicket: money(row.avgTicket, row.currency as Currency),
     }
   },
 

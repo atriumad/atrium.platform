@@ -1,4 +1,5 @@
 import { describe, expect, mock, test } from "bun:test"
+import type { PrismaClient } from "@prisma/client"
 import { PrismaRevenueSnapshotRepository } from "./revenue-snapshot-repository"
 
 function mockPrisma() {
@@ -6,7 +7,7 @@ function mockPrisma() {
     upsert: mock(() => Promise.resolve()),
     findMany: mock(() => Promise.resolve([])),
   }
-  return { revenueSnapshot } as any
+  return { revenueSnapshot }
 }
 
 const sampleSnapshot = {
@@ -22,7 +23,7 @@ const sampleSnapshot = {
 describe("PrismaRevenueSnapshotRepository", () => {
   test("save calls upsert with mapped data", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaRevenueSnapshotRepository(prisma)
+    const repo = new PrismaRevenueSnapshotRepository(prisma as unknown as PrismaClient)
 
     await repo.save(sampleSnapshot)
 
@@ -49,11 +50,11 @@ describe("PrismaRevenueSnapshotRepository", () => {
         },
       ]),
     )
-    const repo = new PrismaRevenueSnapshotRepository(prisma)
+    const repo = new PrismaRevenueSnapshotRepository(prisma as unknown as PrismaClient)
 
     const result = await repo.findByLocation("loc-1", "weekly")
     expect(result).toHaveLength(1)
-    expect(result[0]!.periodType).toBe("weekly")
+    expect(result[0]?.periodType).toBe("weekly")
     expect(prisma.revenueSnapshot.findMany.mock.calls[0][0].where.periodType).toBe("weekly")
   })
 })

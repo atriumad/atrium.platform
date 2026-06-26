@@ -1,8 +1,8 @@
 import type { Order, OrderChannel } from "@atrium/domain"
-import { money } from "@atrium/shared"
-import type { Prisma } from "@prisma/client"
+import { type Currency, money } from "@atrium/shared"
+import type { Prisma, Order as PrismaOrder } from "@prisma/client"
 
-type OrderRow = Prisma.OrderGetPayload<{}>
+type OrderRow = PrismaOrder
 
 export const orderMapper = {
   toDomain(row: OrderRow): Order {
@@ -12,7 +12,7 @@ export const orderMapper = {
       customerId: row.customerId,
       occurredAt: row.occurredAt,
       channel: row.channel as OrderChannel,
-      total: money(row.totalAmount, row.currency as any),
+      total: money(row.totalAmount, row.currency as Currency),
       itemsCount: row.itemsCount,
       sourceRef: row.sourceRef,
     }

@@ -1,12 +1,12 @@
 import { describe, expect, test } from "bun:test"
+import type { Review, StarRating } from "@atrium/domain"
 import {
-  computeRevenueScore,
   computeReputationScore,
-  computeTrafficScore,
   computeRetentionScore,
+  computeRevenueScore,
+  computeTrafficScore,
   computeTrend,
 } from "./health-score-service"
-import type { Review, StarRating, HealthTrend } from "@atrium/domain"
 
 describe("HealthScoreService", () => {
   describe("computeRevenueScore", () => {

@@ -1,7 +1,6 @@
 import { describe, expect, mock, test } from "bun:test"
+import type { Customer, CustomerRepository } from "@atrium/domain"
 import { ListCustomers } from "./list-customers"
-import type { CustomerRepository } from "@atrium/domain"
-import type { Customer } from "@atrium/domain"
 
 function mockRepo() {
   return {

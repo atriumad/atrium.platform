@@ -1,4 +1,5 @@
 import { describe, expect, mock, test } from "bun:test"
+import type { PrismaClient } from "@prisma/client"
 import { PrismaReviewRepository } from "./review-repository"
 
 function mockPrisma() {
@@ -7,7 +8,7 @@ function mockPrisma() {
     findMany: mock(() => Promise.resolve([])),
     findUnique: mock(() => Promise.resolve(null)),
   }
-  return { review } as any
+  return { review }
 }
 
 const sampleReview = {
@@ -26,7 +27,7 @@ const sampleReview = {
 describe("PrismaReviewRepository", () => {
   test("save calls upsert with mapped data", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaReviewRepository(prisma)
+    const repo = new PrismaReviewRepository(prisma as unknown as PrismaClient)
 
     await repo.save(sampleReview)
 
@@ -55,16 +56,16 @@ describe("PrismaReviewRepository", () => {
         },
       ]),
     )
-    const repo = new PrismaReviewRepository(prisma)
+    const repo = new PrismaReviewRepository(prisma as unknown as PrismaClient)
 
     const result = await repo.findByLocation("loc-1")
     expect(result).toHaveLength(1)
-    expect(result[0]!.platform).toBe("google")
+    expect(result[0]?.platform).toBe("google")
   })
 
   test("findBySourceRef returns null when not found", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaReviewRepository(prisma)
+    const repo = new PrismaReviewRepository(prisma as unknown as PrismaClient)
 
     const result = await repo.findBySourceRef("nonexistent")
     expect(result).toBeNull()

@@ -3,7 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Tenant {
@@ -98,15 +100,17 @@ model Customer {
 
 model CustomerIdentifier {
   id         String  @id @default(cuid())
+  tenantId   String
   customerId String
   type       String
   value      String
-  provider   String?
+  provider   String  @default("")
 
   customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
-  @@unique([type, value])
+  @@unique([tenantId, type, provider, value])
   @@index([customerId])
+  @@index([tenantId])
   @@map("customer_identifiers")
 }
 

@@ -1,10 +1,10 @@
-import type { Customer, LoyaltyTier } from "../entities/customer"
 import type { CustomerIdentifier } from "@atrium/shared"
+import type { Customer, LoyaltyTier } from "../entities/customer"
 
 export interface CustomerRepository {
   save(customer: Customer): Promise<void>
   findById(id: string): Promise<Customer | null>
-  findByIdentifier(identifier: CustomerIdentifier): Promise<Customer | null>
+  findByIdentifier(tenantId: string, identifier: CustomerIdentifier): Promise<Customer | null>
   findByTenant(tenantId: string, opts?: {
     tier?: LoyaltyTier
     minChurnRisk?: number

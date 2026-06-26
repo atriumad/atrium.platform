@@ -1,6 +1,6 @@
-import { prisma } from "../src/client"
-import { money } from "@atrium/shared"
 import type { Customer } from "@atrium/domain"
+import { money } from "@atrium/shared"
+import { prisma } from "../src/client"
 import { createUseCases } from "../src/composition-root"
 
 function daysAgo(n: number): Date {
@@ -33,7 +33,6 @@ async function seed() {
   console.log("  ✓ Tenant + Location created")
 
   // Customers
-  const customerIds = ["seed-c1", "seed-c2", "seed-c3", "seed-c4", "seed-c5"]
   const customerData: { id: string; tier: string; email: string }[] = [
     { id: "seed-c1", tier: "gold", email: "c1@seed.test" },
     { id: "seed-c2", tier: "silver", email: "c2@seed.test" },
@@ -204,8 +203,9 @@ async function verify() {
     console.log("  ✗ Failed:", churnResult.error.message)
   } else {
     const c = churnResult.value
+    const churnRisk = c.customer.churnRisk !== null ? `${(c.customer.churnRisk * 100).toFixed(1)}%` : "null"
     console.log(`  Customer: seed-c3`)
-    console.log(`  Churn risk: ${c.customer.churnRisk !== null ? (c.customer.churnRisk * 100).toFixed(1) + '%' : 'null'}`)
+    console.log(`  Churn risk: ${churnRisk}`)
     console.log(`  Reason: ${c.customer.churnRiskReason ?? 'none'}`)
     console.log(`  Elevated event: ${c.event ? 'YES' : 'NO'}`)
   }
@@ -216,8 +216,9 @@ async function verify() {
     console.log("  ✗ Failed:", safeResult.error.message)
   } else {
     const c = safeResult.value
+    const churnRisk = c.customer.churnRisk !== null ? `${(c.customer.churnRisk * 100).toFixed(1)}%` : "null"
     console.log(`\n  Customer: seed-c1`)
-    console.log(`  Churn risk: ${c.customer.churnRisk !== null ? (c.customer.churnRisk * 100).toFixed(1) + '%' : 'null'}`)
+    console.log(`  Churn risk: ${churnRisk}`)
     console.log(`  Elevated event: ${c.event ? 'YES' : 'NO'}`)
   }
 

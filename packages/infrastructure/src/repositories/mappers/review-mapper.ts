@@ -1,7 +1,7 @@
 import type { Review, ReviewPlatform, StarRating } from "@atrium/domain"
-import type { Prisma } from "@prisma/client"
+import type { Prisma, Review as PrismaReview } from "@prisma/client"
 
-type ReviewRow = Prisma.ReviewGetPayload<{}>
+type ReviewRow = PrismaReview
 
 export const reviewMapper = {
   toDomain(row: ReviewRow): Review {

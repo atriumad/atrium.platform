@@ -1,19 +1,22 @@
 import type {
-  OrderRepository,
   HealthRepository,
-  ReviewRepository,
-  RevenueSnapshotRepository,
-  LocationHealth,
   HealthTrend,
+  LocationHealth,
   Order,
+  OrderRepository,
+  RevenueSnapshot,
+  RevenueSnapshotRepository,
+  ReviewRepository,
+  TrafficSnapshot,
+  TrafficSnapshotRepository,
 } from "@atrium/domain"
 import { computeOverallScore } from "@atrium/domain"
-import { lastNDays, dateRange, type Result, ok, err } from "@atrium/shared"
+import { dateRange, err, lastNDays, ok, type Result } from "@atrium/shared"
 import {
-  computeRevenueScore,
   computeReputationScore,
-  computeTrafficScore,
   computeRetentionScore,
+  computeRevenueScore,
+  computeTrafficScore,
   computeTrend,
 } from "./health-score-service"
 
@@ -27,6 +30,7 @@ export class RecalculateHealthScore {
     private readonly healthRepo: HealthRepository,
     private readonly reviewRepo: ReviewRepository,
     private readonly revenueRepo: RevenueSnapshotRepository,
+    private readonly trafficRepo: TrafficSnapshotRepository,
   ) {}
 
   async execute(
@@ -43,12 +47,22 @@ export class RecalculateHealthScore {
     const sixtyDaysAgo = new Date(now.getTime() - 60 * 24 * 60 * 60 * 1000)
     const previousRange = dateRange(sixtyDaysAgo, thirtyDaysAgo)
 
-    const [currentOrders, previousOrders, reviews, revenueSnapshots, previousHealth] =
+    const [
+      currentOrders,
+      previousOrders,
+      reviews,
+      revenueSnapshots,
+      currentTraffic,
+      previousTraffic,
+      previousHealth,
+    ] =
       await Promise.all([
         this.orderRepo.findByLocation(input.locationId, currentRange),
         this.orderRepo.findByLocation(input.locationId, previousRange),
         this.reviewRepo.findByLocation(input.locationId),
         this.revenueRepo.findByLocation(input.locationId, "weekly"),
+        this.trafficRepo.findByLocation(input.locationId, currentRange),
+        this.trafficRepo.findByLocation(input.locationId, previousRange),
         this.healthRepo.findHistory(input.locationId, 3),
       ])
 
@@ -60,7 +74,12 @@ export class RecalculateHealthScore {
 
     const reputationScore = computeReputationScore(reviews)
 
-    const trafficScore = this.computeTrafficScore(currentOrders, previousOrders)
+    const trafficScore = this.computeTrafficScore(
+      currentOrders,
+      previousOrders,
+      currentTraffic,
+      previousTraffic,
+    )
 
     const retentionScore = this.computeRetentionScore(currentOrders, previousOrders)
 
@@ -92,8 +111,16 @@ export class RecalculateHealthScore {
   private computeRevenueScore(
     currentOrders: Order[],
     previousOrders: Order[],
-    revenueSnapshots: { totalRevenue: { amount: number } }[],
+    revenueSnapshots: RevenueSnapshot[],
   ): number {
+    const [currentSnapshot, previousSnapshot] = revenueSnapshots
+    if (currentSnapshot && previousSnapshot) {
+      return computeRevenueScore(
+        currentSnapshot.totalRevenue.amount,
+        previousSnapshot.totalRevenue.amount,
+      )
+    }
+
     const currentRevenue = currentOrders.reduce(
       (sum, o) => sum + o.total.amount,
       0,
@@ -109,7 +136,16 @@ export class RecalculateHealthScore {
   private computeTrafficScore(
     currentOrders: Order[],
     previousOrders: Order[],
+    currentTraffic: TrafficSnapshot[],
+    previousTraffic: TrafficSnapshot[],
   ): number {
+    if (currentTraffic.length > 0 || previousTraffic.length > 0) {
+      return computeTrafficScore(
+        this.totalSessions(currentTraffic),
+        this.totalSessions(previousTraffic),
+      )
+    }
+
     return computeTrafficScore(
       currentOrders.length,
       previousOrders.length,
@@ -143,5 +179,9 @@ export class RecalculateHealthScore {
       if (o.customerId) ids.add(o.customerId)
     }
     return Array.from(ids)
+  }
+
+  private totalSessions(snapshots: TrafficSnapshot[]): number {
+    return snapshots.reduce((sum, snapshot) => sum + snapshot.sessions, 0)
   }
 }

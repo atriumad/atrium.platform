@@ -1,5 +1,4 @@
-import type { RevenueSnapshotRepository } from "@atrium/domain"
-import type { RevenueSnapshot, PeriodType } from "@atrium/domain"
+import type { PeriodType, RevenueSnapshot, RevenueSnapshotRepository } from "@atrium/domain"
 import type { PrismaClient } from "@prisma/client"
 import { revenueSnapshotMapper } from "./mappers/revenue-snapshot-mapper"
 
@@ -9,7 +8,7 @@ export class PrismaRevenueSnapshotRepository implements RevenueSnapshotRepositor
   async save(snapshot: RevenueSnapshot): Promise<void> {
     const data = revenueSnapshotMapper.toPersistence(snapshot)
     await this.prisma.revenueSnapshot.upsert({
-      where: { id: data.id! },
+      where: { id: snapshot.id },
       create: data,
       update: data,
     })

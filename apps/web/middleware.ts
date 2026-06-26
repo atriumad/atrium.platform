@@ -1,11 +1,8 @@
-import { NextRequest, NextResponse } from "next/server"
-import { jwtVerify } from "jose"
+import { jwtVerify } from "jose/jwt/verify"
+import { type NextRequest, NextResponse } from "next/server"
+import { readAuthSecret } from "./lib/auth-secret"
 
 const COOKIE = "atrium-session"
-
-function secret(): Uint8Array {
-  return new TextEncoder().encode(process.env.AUTH_SECRET ?? "")
-}
 
 const PUBLIC_PATHS = ["/sign-in", "/sign-up", "/api/auth", "/api/signup"]
 
@@ -29,7 +26,7 @@ export async function middleware(req: NextRequest) {
   }
 
   try {
-    await jwtVerify(token, secret())
+    await jwtVerify(token, readAuthSecret())
     if (isAuthPage(pathname)) return NextResponse.redirect(new URL("/", req.url))
     return NextResponse.next()
   } catch {

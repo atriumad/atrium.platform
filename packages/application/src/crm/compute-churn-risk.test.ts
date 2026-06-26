@@ -1,6 +1,6 @@
 import { describe, expect, mock, test } from "bun:test"
+import type { Customer, CustomerRepository } from "@atrium/domain"
 import { ComputeChurnRisk } from "./compute-churn-risk"
-import type { Customer, CustomerRepository, OrderRepository } from "@atrium/domain"
 
 function mockRepos() {
   const customerRepo = {
@@ -10,15 +10,7 @@ function mockRepos() {
     findByTenant: mock(() => Promise.resolve({ customers: [], total: 0 })),
   } satisfies CustomerRepository
 
-  const orderRepo = {
-    save: mock(() => Promise.resolve()),
-    findBySourceRef: mock(() => Promise.resolve(null)),
-    findByLocation: mock(() => Promise.resolve([])),
-    findByCustomer: mock(() => Promise.resolve([])),
-    countByLocation: mock(() => Promise.resolve(0)),
-  } satisfies OrderRepository
-
-  return { customerRepo, orderRepo }
+  return { customerRepo }
 }
 
 function makeCustomer(overrides: Partial<Customer> = {}): Customer {
@@ -46,12 +38,12 @@ function makeCustomer(overrides: Partial<Customer> = {}): Customer {
 
 describe("ComputeChurnRisk", () => {
   test("returns low risk for recently active customer", async () => {
-    const { customerRepo, orderRepo } = mockRepos()
+    const { customerRepo } = mockRepos()
     const customer = makeCustomer({ lastSeenAt: new Date() })
 
     customerRepo.findById = mock(() => Promise.resolve(customer))
 
-    const useCase = new ComputeChurnRisk(customerRepo, orderRepo)
+    const useCase = new ComputeChurnRisk(customerRepo)
     const result = await useCase.execute({ customerId: "cus-1" })
 
     expect(result.ok).toBe(true)
@@ -63,13 +55,13 @@ describe("ComputeChurnRisk", () => {
   })
 
   test("returns elevated risk for customer inactive 60+ days", async () => {
-    const { customerRepo, orderRepo } = mockRepos()
+    const { customerRepo } = mockRepos()
     const sixtyDaysAgo = new Date(Date.now() - 60 * 24 * 60 * 60 * 1000)
     const customer = makeCustomer({ lastSeenAt: sixtyDaysAgo })
 
     customerRepo.findById = mock(() => Promise.resolve(customer))
 
-    const useCase = new ComputeChurnRisk(customerRepo, orderRepo)
+    const useCase = new ComputeChurnRisk(customerRepo)
     const result = await useCase.execute({ customerId: "cus-1" })
 
     expect(result.ok).toBe(true)
@@ -78,24 +70,26 @@ describe("ComputeChurnRisk", () => {
     expect(result.value.customer.churnRisk).toBeGreaterThanOrEqual(0.6)
     expect(result.value.customer.churnRiskReason).not.toBeNull()
     expect(result.value.event).toBeDefined()
-    expect(result.value.event!.type).toBe("crm.churn_risk.elevated")
-    expect(result.value.event!.payload.riskScore).toBeGreaterThanOrEqual(0.6)
-    expect(result.value.event!.payload.customerId).toBe("cus-1")
-    expect(result.value.event!.payload.tenantId).toBe("tenant-1")
+    const { event } = result.value
+    if (!event) return
+    expect(event.type).toBe("crm.churn_risk.elevated")
+    expect(event.payload.riskScore).toBeGreaterThanOrEqual(0.6)
+    expect(event.payload.customerId).toBe("cus-1")
+    expect(event.payload.tenantId).toBe("tenant-1")
   })
 
   test("returns error when customer not found", async () => {
-    const { customerRepo, orderRepo } = mockRepos()
+    const { customerRepo } = mockRepos()
     customerRepo.findById = mock(() => Promise.resolve(null))
 
-    const useCase = new ComputeChurnRisk(customerRepo, orderRepo)
+    const useCase = new ComputeChurnRisk(customerRepo)
     const result = await useCase.execute({ customerId: "nonexistent" })
 
     expect(result.ok).toBe(false)
   })
 
   test("does not fire event when score exactly 0.5 (below 0.6 threshold)", async () => {
-    const { customerRepo, orderRepo } = mockRepos()
+    const { customerRepo } = mockRepos()
     const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)
     const customer = makeCustomer({
       lastSeenAt: fourteenDaysAgo,
@@ -105,7 +99,7 @@ describe("ComputeChurnRisk", () => {
 
     customerRepo.findById = mock(() => Promise.resolve(customer))
 
-    const useCase = new ComputeChurnRisk(customerRepo, orderRepo)
+    const useCase = new ComputeChurnRisk(customerRepo)
     const result = await useCase.execute({ customerId: "cus-1" })
 
     expect(result.ok).toBe(true)
@@ -116,7 +110,7 @@ describe("ComputeChurnRisk", () => {
   })
 
   test("handles new customer with no visit frequency data", async () => {
-    const { customerRepo, orderRepo } = mockRepos()
+    const { customerRepo } = mockRepos()
     const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
     const customer = makeCustomer({
       lastSeenAt: thirtyDaysAgo,
@@ -127,7 +121,7 @@ describe("ComputeChurnRisk", () => {
 
     customerRepo.findById = mock(() => Promise.resolve(customer))
 
-    const useCase = new ComputeChurnRisk(customerRepo, orderRepo)
+    const useCase = new ComputeChurnRisk(customerRepo)
     const result = await useCase.execute({ customerId: "cus-1" })
 
     expect(result.ok).toBe(true)

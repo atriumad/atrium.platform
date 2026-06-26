@@ -17,6 +17,9 @@
     "lint": {
       "cache": true
     },
+    "typecheck": {
+      "cache": true
+    },
     "db:generate": {
       "cache": false
     }

@@ -1,5 +1,5 @@
-import { describe, it, expect } from "bun:test"
-import { money, addMoney, zeroCents, formatMoney } from "./money"
+import { describe, expect, it } from "bun:test"
+import { addMoney, formatMoney, money, zeroCents } from "./money"
 
 describe("money", () => {
   it("creates a Money value object", () => {

@@ -7,7 +7,8 @@
   "scripts": {
     "build": "echo 'events: no build needed'",
     "test": "bun test",
-    "lint": "tsc --noEmit"
+    "lint": "biome check .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@atrium/shared": "workspace:*",

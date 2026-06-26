@@ -1,6 +1,6 @@
-import type { Customer, CustomerRepository, OrderRepository, Order } from "@atrium/domain"
+import type { Customer, CustomerRepository, Order, OrderRepository } from "@atrium/domain"
 import type { Result } from "@atrium/shared"
-import { ok, err } from "@atrium/shared"
+import { err, ok } from "@atrium/shared"
 
 export type CustomerProfile = {
   customer: Customer

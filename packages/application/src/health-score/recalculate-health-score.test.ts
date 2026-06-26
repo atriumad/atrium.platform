@@ -1,13 +1,13 @@
 import { describe, expect, mock, test } from "bun:test"
-import { RecalculateHealthScore } from "./recalculate-health-score"
 import type {
-  OrderRepository,
   HealthRepository,
-  ReviewRepository,
+  OrderRepository,
   RevenueSnapshotRepository,
-  LocationHealth,
+  ReviewRepository,
+  TrafficSnapshotRepository,
 } from "@atrium/domain"
-import { lastNDays } from "@atrium/shared"
+import { money } from "@atrium/shared"
+import { RecalculateHealthScore } from "./recalculate-health-score"
 
 function mockRepos() {
   const orderRepo = {
@@ -35,12 +35,17 @@ function mockRepos() {
     findByLocation: mock(() => Promise.resolve([])),
   } satisfies RevenueSnapshotRepository
 
-  return { orderRepo, healthRepo, reviewRepo, revenueRepo }
+  const trafficRepo = {
+    save: mock(() => Promise.resolve()),
+    findByLocation: mock(() => Promise.resolve([])),
+  } satisfies TrafficSnapshotRepository
+
+  return { orderRepo, healthRepo, reviewRepo, revenueRepo, trafficRepo }
 }
 
 describe("RecalculateHealthScore", () => {
   test("computes health score and saves it", async () => {
-    const { orderRepo, healthRepo, reviewRepo, revenueRepo } = mockRepos()
+    const { orderRepo, healthRepo, reviewRepo, revenueRepo, trafficRepo } = mockRepos()
 
     // Current period orders
     orderRepo.findByLocation = mock(() =>
@@ -75,6 +80,7 @@ describe("RecalculateHealthScore", () => {
       healthRepo,
       reviewRepo,
       revenueRepo,
+      trafficRepo,
     )
 
     const result = await useCase.execute({ locationId: "loc-1" })
@@ -95,7 +101,7 @@ describe("RecalculateHealthScore", () => {
   })
 
   test("retention calculation uses correct customer overlap", async () => {
-    const { orderRepo, healthRepo, reviewRepo, revenueRepo } = mockRepos()
+    const { orderRepo, healthRepo, reviewRepo, revenueRepo, trafficRepo } = mockRepos()
 
     // Current period: 3 orders from 3 customers
     // Previous period: 2 orders from 2 of those same customers
@@ -124,6 +130,7 @@ describe("RecalculateHealthScore", () => {
       healthRepo,
       reviewRepo,
       revenueRepo,
+      trafficRepo,
     )
 
     const result = await useCase.execute({ locationId: "loc-1" })
@@ -135,15 +142,105 @@ describe("RecalculateHealthScore", () => {
   })
 
   test("returns error when locationId is empty", async () => {
-    const { orderRepo, healthRepo, reviewRepo, revenueRepo } = mockRepos()
+    const { orderRepo, healthRepo, reviewRepo, revenueRepo, trafficRepo } = mockRepos()
     const useCase = new RecalculateHealthScore(
       orderRepo,
       healthRepo,
       reviewRepo,
       revenueRepo,
+      trafficRepo,
     )
 
     const result = await useCase.execute({ locationId: "" })
     expect(result.ok).toBe(false)
+  })
+
+  test("uses latest revenue snapshots for the revenue dimension when available", async () => {
+    const { orderRepo, healthRepo, reviewRepo, revenueRepo, trafficRepo } = mockRepos()
+    orderRepo.findByLocation = mock(() => Promise.resolve([]))
+    revenueRepo.findByLocation = mock(() =>
+      Promise.resolve([
+        {
+          id: "rev-current",
+          locationId: "loc-1",
+          periodType: "weekly",
+          periodStart: new Date("2026-06-15T00:00:00Z"),
+          totalRevenue: money(15000, "USD"),
+          orderCount: 10,
+          avgTicket: money(1500, "USD"),
+        },
+        {
+          id: "rev-previous",
+          locationId: "loc-1",
+          periodType: "weekly",
+          periodStart: new Date("2026-06-08T00:00:00Z"),
+          totalRevenue: money(10000, "USD"),
+          orderCount: 8,
+          avgTicket: money(1250, "USD"),
+        },
+      ]),
+    )
+
+    const useCase = new RecalculateHealthScore(
+      orderRepo,
+      healthRepo,
+      reviewRepo,
+      revenueRepo,
+      trafficRepo,
+    )
+
+    const result = await useCase.execute({ locationId: "loc-1" })
+    expect(result.ok).toBe(true)
+    if (!result.ok) return
+
+    expect(result.value.dimensions.revenue).toBe(100)
+  })
+
+  test("uses traffic snapshots for the traffic dimension", async () => {
+    const { orderRepo, healthRepo, reviewRepo, revenueRepo, trafficRepo } = mockRepos()
+    orderRepo.findByLocation = mock(() => Promise.resolve([]))
+
+    let callCount = 0
+    trafficRepo.findByLocation = mock(() => {
+      callCount++
+      if (callCount === 1) {
+        return Promise.resolve([
+          {
+            id: "traffic-current",
+            locationId: "loc-1",
+            periodStart: new Date("2026-06-01T00:00:00Z"),
+            periodEnd: new Date("2026-06-30T00:00:00Z"),
+            sessions: 150,
+            users: 100,
+            source: "organic" as const,
+          },
+        ])
+      }
+      return Promise.resolve([
+        {
+          id: "traffic-previous",
+          locationId: "loc-1",
+          periodStart: new Date("2026-05-01T00:00:00Z"),
+          periodEnd: new Date("2026-05-31T00:00:00Z"),
+          sessions: 100,
+          users: 70,
+          source: "organic" as const,
+        },
+      ])
+    })
+
+    const useCase = new RecalculateHealthScore(
+      orderRepo,
+      healthRepo,
+      reviewRepo,
+      revenueRepo,
+      trafficRepo,
+    )
+
+    const result = await useCase.execute({ locationId: "loc-1" })
+    expect(result.ok).toBe(true)
+    if (!result.ok) return
+
+    expect(result.value.dimensions.traffic).toBe(100)
   })
 })

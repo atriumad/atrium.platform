@@ -1,5 +1,4 @@
-import type { ReviewRepository } from "@atrium/domain"
-import type { Review } from "@atrium/domain"
+import type { Review, ReviewRepository } from "@atrium/domain"
 import type { PrismaClient } from "@prisma/client"
 import { reviewMapper } from "./mappers/review-mapper"
 
@@ -9,7 +8,7 @@ export class PrismaReviewRepository implements ReviewRepository {
   async save(review: Review): Promise<void> {
     const data = reviewMapper.toPersistence(review)
     await this.prisma.review.upsert({
-      where: { id: data.id! },
+      where: { id: review.id },
       create: data,
       update: data,
     })

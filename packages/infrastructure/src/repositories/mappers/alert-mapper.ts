@@ -1,7 +1,7 @@
 import type { Alert, AlertSeverity, AlertType } from "@atrium/domain"
-import type { Prisma } from "@prisma/client"
+import type { Prisma, Alert as PrismaAlert } from "@prisma/client"
 
-type AlertRow = Prisma.AlertGetPayload<{}>
+type AlertRow = PrismaAlert
 
 export const alertMapper = {
   toDomain(row: AlertRow): Alert {

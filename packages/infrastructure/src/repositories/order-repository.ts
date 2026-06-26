@@ -1,5 +1,4 @@
-import type { OrderRepository } from "@atrium/domain"
-import type { Order } from "@atrium/domain"
+import type { Order, OrderRepository } from "@atrium/domain"
 import type { DateRange } from "@atrium/shared"
 import type { PrismaClient } from "@prisma/client"
 import { orderMapper } from "./mappers/order-mapper"
@@ -10,7 +9,7 @@ export class PrismaOrderRepository implements OrderRepository {
   async save(order: Order): Promise<void> {
     const data = orderMapper.toPersistence(order)
     await this.prisma.order.upsert({
-      where: { id: data.id! },
+      where: { id: order.id },
       create: data,
       update: data,
     })

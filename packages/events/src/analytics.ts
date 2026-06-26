@@ -1,4 +1,4 @@
-import type { RevenueSnapshot, LocationHealth, PeriodType } from "@atrium/domain"
+import type { LocationHealth, PeriodType, RevenueSnapshot } from "@atrium/domain"
 
 export type RevenueRecomputedEvent = {
   readonly type: "analytics.revenue.recomputed"

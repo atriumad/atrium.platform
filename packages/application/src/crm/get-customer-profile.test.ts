@@ -1,8 +1,6 @@
 import { describe, expect, mock, test } from "bun:test"
+import type { Customer, CustomerRepository, OrderRepository } from "@atrium/domain"
 import { GetCustomerProfile } from "./get-customer-profile"
-import type { CustomerRepository } from "@atrium/domain"
-import type { OrderRepository } from "@atrium/domain"
-import type { Customer } from "@atrium/domain"
 
 function mockRepos() {
   const customerRepo = {
@@ -95,7 +93,7 @@ describe("GetCustomerProfile", () => {
     if (!result.ok) return
     expect(result.value.recentOrders).toBeDefined()
     expect(result.value.recentOrders).toHaveLength(1)
-    expect(result.value.recentOrders![0]!.id).toBe("ord-1")
+    expect(result.value.recentOrders?.[0]?.id).toBe("ord-1")
   })
 
   test("does not fetch orders when not requested", async () => {

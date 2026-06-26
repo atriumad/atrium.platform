@@ -1,7 +1,7 @@
 # Atrium Platform — System Design Spec
 
 **Date:** 2026-06-18
-**Status:** Approved — ready for implementation planning
+**Status:** Partially implemented — foundation active, integrations pending
 **Version:** 2.0 (clean rewrite — v1 deprecated)
 
 ---
@@ -39,8 +39,8 @@ The system must be useful even when zero connectors are active. It must improve 
 | Styling | Tailwind CSS + Shadcn | Confirmed |
 | ORM | Prisma | Confirmed |
 | Database | Neon (Postgres serverless) | Recommended over Supabase — Prisma-native, Vercel-native, no auth lock-in |
-| Auth | Clerk | Multi-tenant organizations + RBAC out of the box |
-| Events / Jobs | Trigger.dev | Event-driven jobs, cron, long-running backfill, realtime progress |
+| Auth | Email/password + JWT cookie | Current implementation. Clerk was removed from the foundation branch |
+| Events / Jobs | Typed event contracts only | Trigger.dev remains a future integration, not installed yet |
 | Deployment | Vercel | web app + edge functions |
 | AI | Provider-agnostic port | Claude (default) or OpenAI, switchable via env var |
 
@@ -61,7 +61,7 @@ atrium.platform/
       google-business/        # Google Business Profile adapter
       google-analytics/       # GA4 + Search Console adapter
     infrastructure/           # Prisma client, Trigger.dev, port implementations
-    ai/                       # Agents, prompts, providers, evaluators
+    ai/                       # Future: agents, prompts, providers, evaluators
     shared/                   # Common utilities, types, helpers
     ui/                       # Shadcn design system + reusable components
   tooling/
@@ -82,10 +82,11 @@ connectors/*    → events, shared         (NEVER domain directly)
 infrastructure  → domain, application, prisma
 ai              → domain, events, shared
 ui              → shared
-web             → application, ui        (NEVER connectors or infrastructure)
+web             → application, ui, infrastructure composition for route handlers
 ```
 
-If `web` needs infra, it goes through a use case in `application`.
+Route handlers must stay thin. Reusable business rules belong in `application`;
+database adapters and Prisma stay in `infrastructure`.
 If a connector needs domain data, it maps to an event in `events`.
 
 ---
@@ -584,11 +585,13 @@ Prompts are versioned TypeScript files. Updatable without touching job logic.
 
 ## 8. Auth & Multi-tenancy
 
-**Clerk** handles authentication, sessions, and organization management.
+The current foundation branch uses email/password authentication and JWT session
+cookies. Passwords are hashed with bcrypt and sessions are signed with
+`AUTH_SECRET`.
 
 ```
-Clerk Organization  →  Tenant (in domain)
-Clerk User          →  User.clerk_user_id
+Signup creates a Tenant, owner User, and system customer segments in one
+transaction.
 ```
 
 **Roles:**
@@ -599,15 +602,14 @@ type Role = 'atrium_admin' | 'owner' | 'manager' | 'viewer'
 `atrium_admin` — cross-tenant access (Atrium team)
 `owner / manager / viewer` — scoped to their tenant only
 
-**Client onboarding flow:**
+**Current client onboarding flow:**
 ```
-1. Atrium creates Clerk Organization for the restaurant
-2. Invites owner by email (Clerk handles invitation)
-3. Clerk webhook → user.created → application creates Tenant + Location
-4. Client connects integrations from /settings
+1. Owner creates an account with restaurant name, email, and password
+2. API creates Tenant + owner User + system customer segments
+3. Client connects integrations from /settings once connectors exist
 ```
 
-No custom invitation tokens. No custom session management. No bcrypt in the codebase.
+Invitation flows, MFA, and organization-level RBAC are not implemented yet.
 
 ---
 
@@ -714,8 +716,8 @@ Score clamped to 0–1. AI generates the `reason` string when score > 0.6.
 ## 11. Non-Negotiable Rules
 
 1. `domain` imports nothing external.
-2. `connectors` never import from `domain` — only from `events` and `shared`.
-3. `web` never imports from `connectors` or `infrastructure`.
+2. Future `connectors` should publish typed events and avoid business rules.
+3. `web` route handlers must remain thin and push reusable rules into `application`.
 4. Money is always a `Money` value object — never a raw number.
 5. Customer deduplication logic lives in `domain` — never in SQL or migrations.
 6. Every job in Trigger.dev must be idempotent (`upsert` by `source_ref`).

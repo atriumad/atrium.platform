@@ -1,5 +1,4 @@
-import type { HealthRepository } from "@atrium/domain"
-import type { LocationHealth } from "@atrium/domain"
+import type { HealthRepository, LocationHealth } from "@atrium/domain"
 import type { PrismaClient } from "@prisma/client"
 import { healthMapper } from "./mappers/health-mapper"
 
@@ -9,7 +8,7 @@ export class PrismaHealthRepository implements HealthRepository {
   async save(health: LocationHealth): Promise<void> {
     const data = healthMapper.toPersistence(health)
     await this.prisma.locationHealth.upsert({
-      where: { id: data.id! },
+      where: { id: health.id },
       create: data,
       update: data,
     })

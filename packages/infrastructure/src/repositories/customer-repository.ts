@@ -1,5 +1,4 @@
-import type { CustomerRepository } from "@atrium/domain"
-import type { Customer, LoyaltyTier } from "@atrium/domain"
+import type { Customer, CustomerRepository, LoyaltyTier } from "@atrium/domain"
 import type { CustomerIdentifier } from "@atrium/shared"
 import type { PrismaClient } from "@prisma/client"
 import { customerMapper } from "./mappers/customer-mapper"
@@ -11,25 +10,33 @@ export class PrismaCustomerRepository implements CustomerRepository {
     const data = customerMapper.toPersistence(customer)
     const { identifiers: _ids, ...customerFields } = data
     await this.prisma.customer.upsert({
-      where: { id: customerFields.id! },
+      where: { id: customer.id },
       create: customerFields,
       update: customerFields,
     })
     for (const id of customer.identifiers) {
+      const provider = id.type === "external_ref" ? id.provider : ""
       await this.prisma.customerIdentifier.upsert({
         where: {
-          type_value: { type: id.type, value: id.value },
+          tenantId_type_provider_value: {
+            tenantId: customer.tenantId,
+            type: id.type,
+            provider,
+            value: id.value,
+          },
         },
         create: {
+          tenantId: customer.tenantId,
           type: id.type,
           value: id.value,
-          provider: id.type === "external_ref" ? id.provider : null,
+          provider,
           customerId: customer.id,
         },
         update: {
+          tenantId: customer.tenantId,
           type: id.type,
           value: id.value,
-          provider: id.type === "external_ref" ? id.provider : null,
+          provider,
           customerId: customer.id,
         },
       })
@@ -44,12 +51,16 @@ export class PrismaCustomerRepository implements CustomerRepository {
     return row ? customerMapper.toDomain(row) : null
   }
 
-  async findByIdentifier(identifier: CustomerIdentifier): Promise<Customer | null> {
+  async findByIdentifier(tenantId: string, identifier: CustomerIdentifier): Promise<Customer | null> {
+    const provider = identifier.type === "external_ref" ? identifier.provider : ""
     const row = await this.prisma.customer.findFirst({
       where: {
+        tenantId,
         identifiers: {
           some: {
+            tenantId,
             type: identifier.type,
+            provider,
             value: identifier.value,
           },
         },

@@ -1,8 +1,8 @@
-import type { Customer, CustomerRepository, OrderRepository } from "@atrium/domain"
-import { computeChurnRiskScore } from "./churn-risk-service"
-import type { Result } from "@atrium/shared"
-import { ok, err } from "@atrium/shared"
+import type { Customer, CustomerRepository } from "@atrium/domain"
 import type { ChurnRiskElevatedEvent } from "@atrium/events"
+import type { Result } from "@atrium/shared"
+import { err, ok } from "@atrium/shared"
+import { computeChurnRiskScore } from "./churn-risk-service"
 
 export type ComputeChurnRiskInput = {
   customerId: string
@@ -14,10 +14,7 @@ export type ComputeChurnRiskResult = {
 }
 
 export class ComputeChurnRisk {
-  constructor(
-    private readonly customerRepo: CustomerRepository,
-    private readonly orderRepo: OrderRepository,
-  ) {}
+  constructor(private readonly customerRepo: CustomerRepository) {}
 
   async execute(input: ComputeChurnRiskInput): Promise<Result<ComputeChurnRiskResult>> {
     if (!input.customerId) {

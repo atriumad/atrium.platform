@@ -8,15 +8,21 @@
     "tooling/*"
   ],
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "test": "turbo test",
-    "lint": "turbo lint",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:grader": "turbo run dev --filter=@atrium/grader",
+    "test": "turbo run test",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "typecheck": "turbo run typecheck",
+    "graphify:update": "graphify update .",
+    "graphify:callflow": "graphify export callflow-html",
     "db:generate": "cd packages/infrastructure && bunx prisma generate",
     "db:migrate": "cd packages/infrastructure && bunx prisma migrate dev",
     "db:studio": "cd packages/infrastructure && bunx prisma studio"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.0",
     "turbo": "^2.3.0",
     "typescript": "^5.5.0"
   }

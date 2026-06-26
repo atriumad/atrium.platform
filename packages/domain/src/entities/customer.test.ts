@@ -1,6 +1,6 @@
-import { describe, it, expect } from "bun:test"
-import { createCustomer, addIdentifier, hasIdentifier, mergeIdentifiers } from "./customer"
+import { describe, expect, it } from "bun:test"
 import type { CustomerIdentifier } from "@atrium/shared"
+import { addIdentifier, createCustomer, hasIdentifier, mergeIdentifiers } from "./customer"
 
 const base = {
   id: "c1",

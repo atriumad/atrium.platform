@@ -5,22 +5,22 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbopack",
-    "lint": "next lint",
+    "lint": "biome check .",
+    "typecheck": "tsc --noEmit",
     "test": "bun test"
   },
   "dependencies": {
+    "@atrium/application": "workspace:*",
     "@atrium/domain": "workspace:*",
     "@atrium/infrastructure": "workspace:*",
     "@atrium/shared": "workspace:*",
     "@atrium/ui": "workspace:*",
-    "bcryptjs": "^3.0.3",
     "jose": "^6.2.3",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^3.0.0",
     "@types/node": "^26.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

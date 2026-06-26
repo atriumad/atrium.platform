@@ -2,6 +2,18 @@ Perfecto. Abajo te dejo un **documento técnico base** pensado para que sirva ta
 
 # Documento de arquitectura
 
+## Estado actual de implementación
+
+Este repositorio implementa la base del monorepo con Bun, Turborepo, Next.js,
+TypeScript estricto, Prisma 5 y autenticación propia por email/password con JWT
+en cookie HTTP-only. Clerk, Trigger.dev, conectores externos y la capa de IA
+siguen siendo direcciones de producto, no módulos presentes en el código actual.
+
+La app web actúa como capa de entrega: sus route handlers de auth/signup parsean
+HTTP, delegan en casos de uso de `packages/application` y dejan persistencia,
+hashing y transacciones en adapters de `packages/infrastructure`. La regla
+operativa vigente es mantener esos handlers delgados antes de añadir más flujos.
+
 ## 1) Visión del sistema
 
 La plataforma será un sistema interno de crecimiento para restaurantes, agnóstico a proveedores, con una capa propia de datos, métricas, reglas e IA. Los conectores externos solo alimentan el core; el producto debe seguir funcionando aunque un cliente no conecte uno o varios servicios. [martinfowler](https://martinfowler.com/architecture/)
@@ -44,10 +56,10 @@ apps/
 packages/
   domain/               # Entidades, value objects, invariantes
   application/          # Use cases, orchestration, workflows
-  connectors/           # Integrations: Toast, Google, Meta, etc.
+  connectors/           # Futuro: integrations Toast, Google, Meta, etc.
   infrastructure/       # DB, queues, cache, observability
   events/               # Event contracts, schemas, versioning
-  ai/                   # Agents, prompts, evaluators, tools
+  ai/                   # Futuro: agents, prompts, evaluators, tools
   shared/               # Common utilities, types, helpers
   ui/                   # Design system and reusable components
 ```

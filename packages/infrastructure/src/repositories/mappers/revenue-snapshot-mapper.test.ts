@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import { revenueSnapshotMapper } from "./revenue-snapshot-mapper"
 import { money } from "@atrium/shared"
+import { revenueSnapshotMapper } from "./revenue-snapshot-mapper"
 
 const row = {
   id: "rs-1",

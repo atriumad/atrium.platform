@@ -1,5 +1,5 @@
-import type { Order } from "../entities/order"
 import type { DateRange } from "@atrium/shared"
+import type { Order } from "../entities/order"
 
 export interface OrderRepository {
   save(order: Order): Promise<void>

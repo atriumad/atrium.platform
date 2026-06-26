@@ -1,7 +1,7 @@
 import type { HealthTrend, LocationHealth } from "@atrium/domain"
-import type { Prisma } from "@prisma/client"
+import type { Prisma, LocationHealth as PrismaLocationHealth } from "@prisma/client"
 
-type HealthRow = Prisma.LocationHealthGetPayload<{}>
+type HealthRow = PrismaLocationHealth
 
 export const healthMapper = {
   toDomain(row: HealthRow): LocationHealth {

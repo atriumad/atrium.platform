@@ -1,7 +1,7 @@
 import { describe, expect, mock, test } from "bun:test"
+import { dateRange, money } from "@atrium/shared"
+import type { PrismaClient } from "@prisma/client"
 import { PrismaOrderRepository } from "./order-repository"
-import { money } from "@atrium/shared"
-import { dateRange } from "@atrium/shared"
 
 function mockPrisma() {
   const order = {
@@ -10,7 +10,7 @@ function mockPrisma() {
     findMany: mock(() => Promise.resolve([])),
     count: mock(() => Promise.resolve(0)),
   }
-  return { order } as any
+  return { order }
 }
 
 const sampleOrder = {
@@ -27,7 +27,7 @@ const sampleOrder = {
 describe("PrismaOrderRepository", () => {
   test("save calls upsert with mapped data", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaOrderRepository(prisma)
+    const repo = new PrismaOrderRepository(prisma as unknown as PrismaClient)
 
     await repo.save(sampleOrder)
 
@@ -55,17 +55,18 @@ describe("PrismaOrderRepository", () => {
         updatedAt: new Date(),
       }),
     )
-    const repo = new PrismaOrderRepository(prisma)
+    const repo = new PrismaOrderRepository(prisma as unknown as PrismaClient)
 
     const result = await repo.findBySourceRef("square:txn_123")
     expect(result).not.toBeNull()
-    expect(result!.id).toBe("ord-1")
-    expect(result!.sourceRef).toBe("square:txn_123")
+    if (!result) return
+    expect(result.id).toBe("ord-1")
+    expect(result.sourceRef).toBe("square:txn_123")
   })
 
   test("findBySourceRef returns null when not found", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaOrderRepository(prisma)
+    const repo = new PrismaOrderRepository(prisma as unknown as PrismaClient)
 
     const result = await repo.findBySourceRef("missing")
     expect(result).toBeNull()
@@ -74,7 +75,7 @@ describe("PrismaOrderRepository", () => {
   test("findByLocation queries with locationId and date range", async () => {
     const prisma = mockPrisma()
     prisma.order.findMany = mock(() => Promise.resolve([]))
-    const repo = new PrismaOrderRepository(prisma)
+    const repo = new PrismaOrderRepository(prisma as unknown as PrismaClient)
     const range = dateRange(new Date("2026-06-01"), new Date("2026-06-30"))
 
     await repo.findByLocation("loc-1", range)
@@ -89,7 +90,7 @@ describe("PrismaOrderRepository", () => {
   test("findByCustomer returns orders for customer", async () => {
     const prisma = mockPrisma()
     prisma.order.findMany = mock(() => Promise.resolve([]))
-    const repo = new PrismaOrderRepository(prisma)
+    const repo = new PrismaOrderRepository(prisma as unknown as PrismaClient)
 
     await repo.findByCustomer("cus-1")
 
@@ -100,7 +101,7 @@ describe("PrismaOrderRepository", () => {
   test("countByLocation returns count", async () => {
     const prisma = mockPrisma()
     prisma.order.count = mock(() => Promise.resolve(5))
-    const repo = new PrismaOrderRepository(prisma)
+    const repo = new PrismaOrderRepository(prisma as unknown as PrismaClient)
     const range = dateRange(new Date("2026-06-01"), new Date("2026-06-30"))
 
     const count = await repo.countByLocation("loc-1", range)

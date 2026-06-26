@@ -1,16 +1,10 @@
 import type { Customer, LoyaltyTier, OrderChannel } from "@atrium/domain"
-import { money, type CustomerIdentifier } from "@atrium/shared"
+import { type Currency, money } from "@atrium/shared"
 import type { Prisma } from "@prisma/client"
 
 type CustomerRow = Prisma.CustomerGetPayload<{
   include: { identifiers: true }
 }>
-
-function mapIdentifierType(prismaType: string): CustomerIdentifier["type"] {
-  if (prismaType === "email") return "email"
-  if (prismaType === "phone") return "phone"
-  return "external_ref"
-}
 
 export const customerMapper = {
   toDomain(row: CustomerRow): Customer {
@@ -21,13 +15,13 @@ export const customerMapper = {
         const base = { value: id.value }
         if (id.type === "email") return { ...base, type: "email" as const }
         if (id.type === "phone") return { ...base, type: "phone" as const }
-        return { ...base, type: "external_ref" as const, provider: id.provider! }
+        return { ...base, type: "external_ref" as const, provider: id.provider }
       }),
       firstSeenAt: row.firstSeenAt,
       lastSeenAt: row.lastSeenAt,
       acquisitionSource: row.acquisitionSource,
       totalOrders: row.totalOrders,
-      totalSpent: money(row.totalSpentAmount, row.totalSpentCurrency as any),
+      totalSpent: money(row.totalSpentAmount, row.totalSpentCurrency as Currency),
       avgTicket: money(row.avgTicketAmount, "USD"),
       visitFrequency: row.visitFrequency,
       preferredChannel: row.preferredChannel as OrderChannel | null,
@@ -59,9 +53,10 @@ export const customerMapper = {
       notes: customer.notes,
       identifiers: {
         create: customer.identifiers.map((id) => ({
+          tenantId: customer.tenantId,
           type: id.type,
           value: id.value,
-          provider: id.type === "external_ref" ? id.provider : null,
+          provider: id.type === "external_ref" ? id.provider : "",
         })),
       },
     }

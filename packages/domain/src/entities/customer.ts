@@ -1,4 +1,4 @@
-import type { Money, CustomerIdentifier } from "@atrium/shared"
+import type { CustomerIdentifier, Money } from "@atrium/shared"
 import { sameIdentifier } from "@atrium/shared"
 import type { OrderChannel } from "./order"
 

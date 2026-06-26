@@ -1,6 +1,7 @@
 import { describe, expect, mock, test } from "bun:test"
-import { PrismaCustomerRepository } from "./customer-repository"
 import { money } from "@atrium/shared"
+import type { PrismaClient } from "@prisma/client"
+import { PrismaCustomerRepository } from "./customer-repository"
 
 function mockPrisma() {
   const customer = {
@@ -12,7 +13,7 @@ function mockPrisma() {
   const customerIdentifier = {
     upsert: mock(() => Promise.resolve()),
   }
-  return { customer, customerIdentifier } as any
+  return { customer, customerIdentifier }
 }
 
 const sampleCustomer = {
@@ -37,7 +38,7 @@ const sampleCustomer = {
 describe("PrismaCustomerRepository", () => {
   test("save upserts customer and identifiers separately", async () => {
     const prisma = mockPrisma()
-    const repo = new PrismaCustomerRepository(prisma)
+    const repo = new PrismaCustomerRepository(prisma as unknown as PrismaClient)
 
     await repo.save(sampleCustomer)
 
@@ -49,8 +50,30 @@ describe("PrismaCustomerRepository", () => {
 
     expect(prisma.customerIdentifier.upsert).toHaveBeenCalledTimes(1)
     const idCall = prisma.customerIdentifier.upsert.mock.calls[0][0]
-    expect(idCall.where.type_value.type).toBe("email")
-    expect(idCall.where.type_value.value).toBe("test@example.com")
+    expect(idCall.where.tenantId_type_provider_value.tenantId).toBe("tenant-1")
+    expect(idCall.where.tenantId_type_provider_value.type).toBe("email")
+    expect(idCall.where.tenantId_type_provider_value.provider).toBe("")
+    expect(idCall.where.tenantId_type_provider_value.value).toBe("test@example.com")
+    expect(idCall.create.tenantId).toBe("tenant-1")
+    expect(idCall.create.provider).toBe("")
+  })
+
+  test("save scopes external references by tenant and provider", async () => {
+    const prisma = mockPrisma()
+    const repo = new PrismaCustomerRepository(prisma as unknown as PrismaClient)
+
+    await repo.save({
+      ...sampleCustomer,
+      identifiers: [{ type: "external_ref", provider: "toast", value: "cust-1" }],
+    })
+
+    const idCall = prisma.customerIdentifier.upsert.mock.calls[0][0]
+    expect(idCall.where.tenantId_type_provider_value).toEqual({
+      tenantId: "tenant-1",
+      type: "external_ref",
+      provider: "toast",
+      value: "cust-1",
+    })
   })
 
   test("findById returns customer with identifiers", async () => {
@@ -75,23 +98,46 @@ describe("PrismaCustomerRepository", () => {
         tags: [],
         notes: null,
         identifiers: [
-          { id: "ci-1", customerId: "cus-1", type: "email", value: "test@example.com", provider: null },
+          { id: "ci-1", tenantId: "tenant-1", customerId: "cus-1", type: "email", value: "test@example.com", provider: "" },
         ],
       }),
     )
-    const repo = new PrismaCustomerRepository(prisma)
+    const repo = new PrismaCustomerRepository(prisma as unknown as PrismaClient)
 
     const result = await repo.findById("cus-1")
     expect(result).not.toBeNull()
-    expect(result!.id).toBe("cus-1")
-    expect(result!.identifiers).toHaveLength(1)
+    if (!result) return
+    expect(result.id).toBe("cus-1")
+    expect(result.identifiers).toHaveLength(1)
+  })
+
+  test("findByIdentifier filters by tenant and provider", async () => {
+    const prisma = mockPrisma()
+    prisma.customer.findFirst = mock(() => Promise.resolve(null))
+    const repo = new PrismaCustomerRepository(prisma as unknown as PrismaClient)
+
+    await repo.findByIdentifier("tenant-1", {
+      type: "external_ref",
+      provider: "toast",
+      value: "cust-1",
+    })
+
+    expect(prisma.customer.findFirst).toHaveBeenCalledTimes(1)
+    const where = prisma.customer.findFirst.mock.calls[0][0].where
+    expect(where.tenantId).toBe("tenant-1")
+    expect(where.identifiers.some).toEqual({
+      tenantId: "tenant-1",
+      type: "external_ref",
+      provider: "toast",
+      value: "cust-1",
+    })
   })
 
   test("findByTenant returns paginated results", async () => {
     const prisma = mockPrisma()
     prisma.customer.findMany = mock(() => Promise.resolve([]))
     prisma.customer.count = mock(() => Promise.resolve(42))
-    const repo = new PrismaCustomerRepository(prisma)
+    const repo = new PrismaCustomerRepository(prisma as unknown as PrismaClient)
 
     const result = await repo.findByTenant("tenant-1", { limit: 10, offset: 0 })
     expect(result.customers).toEqual([])
@@ -105,7 +151,7 @@ describe("PrismaCustomerRepository", () => {
     const prisma = mockPrisma()
     prisma.customer.findMany = mock(() => Promise.resolve([]))
     prisma.customer.count = mock(() => Promise.resolve(0))
-    const repo = new PrismaCustomerRepository(prisma)
+    const repo = new PrismaCustomerRepository(prisma as unknown as PrismaClient)
 
     await repo.findByTenant("tenant-1", { tier: "gold" })
     const where = prisma.customer.findMany.mock.calls[0][0].where

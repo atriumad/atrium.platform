@@ -1,4 +1,4 @@
-import type { AlertType, AlertSeverity, Recommendation } from "@atrium/domain"
+import type { AlertSeverity, AlertType, Recommendation } from "@atrium/domain"
 
 export type AnomalyDetectedEvent = {
   readonly type: "ai.anomaly.detected"

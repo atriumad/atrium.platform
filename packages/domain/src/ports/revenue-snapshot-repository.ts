@@ -1,4 +1,4 @@
-import type { RevenueSnapshot, PeriodType } from "../entities/revenue-snapshot"
+import type { PeriodType, RevenueSnapshot } from "../entities/revenue-snapshot"
 
 export interface RevenueSnapshotRepository {
   save(snapshot: RevenueSnapshot): Promise<void>

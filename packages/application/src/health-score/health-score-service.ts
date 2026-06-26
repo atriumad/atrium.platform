@@ -1,4 +1,4 @@
-import type { Review, HealthTrend } from "@atrium/domain"
+import type { HealthTrend, Review } from "@atrium/domain"
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value))
