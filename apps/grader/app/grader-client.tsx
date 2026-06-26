@@ -533,7 +533,7 @@ function buildAgencyContactHref(report: RestaurantGrowthReport) {
     ].join("\n"),
   )
 
-  return `mailto:hello@atrium.agency?subject=${subject}&body=${body}`
+  return `mailto:dev@tbsadvertising.com?subject=${subject}&body=${body}`
 }
 
 function delay(ms: number) {
