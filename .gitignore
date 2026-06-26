@@ -4,6 +4,7 @@ node_modules
 .env.local
 dist
 .turbo
+.vercel
 .DS_Store
 *.log
 *.tsbuildinfo
