@@ -37,7 +37,7 @@ type PlaceSuggestion = {
   name: string
   address: string
   description: string
-  source: "openstreetmap"
+  source: "google" | "openstreetmap"
 }
 
 type SearchResponse = {

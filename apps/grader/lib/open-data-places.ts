@@ -5,6 +5,25 @@ import type {
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org"
 const OVERPASS_URL = "https://overpass-api.de/api/interpreter"
+const GOOGLE_PLACES_BASE_URL = "https://places.googleapis.com/v1"
+const GOOGLE_TEXT_SEARCH_FIELD_MASK = [
+  "places.id",
+  "places.displayName",
+  "places.formattedAddress",
+  "places.types",
+].join(",")
+const GOOGLE_PLACE_DETAILS_FIELD_MASK = [
+  "id",
+  "displayName",
+  "formattedAddress",
+  "types",
+  "websiteUri",
+  "nationalPhoneNumber",
+  "currentOpeningHours",
+  "rating",
+  "userRatingCount",
+  "location",
+].join(",")
 const FOOD_TYPES = new Set([
   "bakery",
   "bar",
@@ -21,7 +40,7 @@ export type PlaceSuggestion = {
   readonly name: string
   readonly address: string
   readonly description: string
-  readonly source: "openstreetmap"
+  readonly source: "google" | "openstreetmap"
 }
 
 export type ManualReputationInput = {
@@ -67,6 +86,32 @@ type LocalBenchmark = {
   readonly competitorsWithHours: number
 }
 
+type GoogleLocalizedText = {
+  readonly text?: string
+}
+
+type GooglePlace = {
+  readonly id?: string
+  readonly displayName?: GoogleLocalizedText
+  readonly formattedAddress?: string
+  readonly types?: string[]
+  readonly websiteUri?: string
+  readonly nationalPhoneNumber?: string
+  readonly currentOpeningHours?: {
+    readonly weekdayDescriptions?: string[]
+  }
+  readonly rating?: number
+  readonly userRatingCount?: number
+  readonly location?: {
+    readonly latitude?: number
+    readonly longitude?: number
+  }
+}
+
+type GoogleTextSearchResponse = {
+  readonly places?: GooglePlace[]
+}
+
 export class OpenDataPlacesLookupError extends Error {}
 
 export async function searchRestaurantPlaces(
@@ -76,6 +121,10 @@ export async function searchRestaurantPlaces(
   const input = query.trim()
 
   if (input.length < 3) return []
+
+  if (getGooglePlacesApiKey()) {
+    return searchGoogleRestaurantPlaces(input, fetcher)
+  }
 
   const params = new URLSearchParams({
     q: input,
@@ -115,6 +164,11 @@ export async function getRestaurantGrowthProfileFromPlace(
   reputation: ManualReputationInput | undefined,
   fetcher: typeof fetch = fetch,
 ): Promise<RestaurantGrowthProfile> {
+  const googlePlaceId = parseGooglePlaceId(placeId)
+  if (googlePlaceId) {
+    return getGoogleRestaurantGrowthProfile(googlePlaceId, fetcher)
+  }
+
   const osmId = parsePlaceId(placeId)
   if (!osmId) {
     throw new OpenDataPlacesLookupError("placeId is required")
@@ -155,6 +209,87 @@ export async function getRestaurantGrowthProfileFromPlace(
   ])
 
   return toGrowthProfile(placeId, place, websiteUrl, website, benchmark, reputation)
+}
+
+async function searchGoogleRestaurantPlaces(
+  query: string,
+  fetcher: typeof fetch,
+): Promise<PlaceSuggestion[]> {
+  const res = await fetcher(`${GOOGLE_PLACES_BASE_URL}/places:searchText`, {
+    method: "POST",
+    headers: googlePlacesHeaders(GOOGLE_TEXT_SEARCH_FIELD_MASK),
+    body: JSON.stringify({
+      includedType: "restaurant",
+      maxResultCount: 6,
+      textQuery: query,
+    }),
+  })
+
+  if (!res.ok) {
+    throw new OpenDataPlacesLookupError("Unable to search Google Places")
+  }
+
+  const data = await res.json() as GoogleTextSearchResponse
+  return (data.places ?? [])
+    .filter((place) => Boolean(place.id))
+    .map((place) => ({
+      placeId: toGooglePlaceId(place.id ?? ""),
+      name: place.displayName?.text ?? "Unknown restaurant",
+      address: place.formattedAddress ?? "Address unavailable",
+      description: place.formattedAddress ?? place.displayName?.text ?? "Address unavailable",
+      source: "google",
+    }))
+}
+
+async function getGoogleRestaurantGrowthProfile(
+  googlePlaceId: string,
+  fetcher: typeof fetch,
+): Promise<RestaurantGrowthProfile> {
+  const res = await fetcher(`${GOOGLE_PLACES_BASE_URL}/places/${encodeURIComponent(googlePlaceId)}`, {
+    method: "GET",
+    headers: googlePlacesHeaders(GOOGLE_PLACE_DETAILS_FIELD_MASK),
+  })
+
+  if (res.status === 404) {
+    throw new OpenDataPlacesLookupError("Business not found")
+  }
+
+  if (!res.ok) {
+    throw new OpenDataPlacesLookupError("Unable to load Google Place details")
+  }
+
+  const place = await res.json() as GooglePlace
+  const websiteUrl = normalizeUrl(place.websiteUri ?? null)
+  const website = await scanRestaurantWebsite(websiteUrl, fetcher)
+  const rating = typeof place.rating === "number" && Number.isFinite(place.rating) ? place.rating : 0
+  const reviewCount = typeof place.userRatingCount === "number" && Number.isFinite(place.userRatingCount)
+    ? Math.max(0, Math.round(place.userRatingCount))
+    : 0
+  const hasPhone = Boolean(place.nationalPhoneNumber)
+
+  return {
+    id: toGooglePlaceId(googlePlaceId),
+    name: place.displayName?.text ?? "Unknown restaurant",
+    category: readableType(place.types?.[0] ?? "restaurant"),
+    address: place.formattedAddress ?? "Address unavailable",
+    websiteUrl,
+    googleRating: rating,
+    googleReviewCount: reviewCount,
+    recentNegativeReviewCount: estimateNegativeReviews(rating, reviewCount),
+    unansweredReviewCount: 0,
+    reputationDataSource: rating > 0 || reviewCount > 0 ? "google" : "unavailable",
+    profileCompleteness: computeGoogleProfileCompleteness(place, websiteUrl),
+    localRank: null,
+    competitorAverageRating: null,
+    website,
+    conversion: {
+      hasPrimaryCta: website.hasOnlineOrdering || website.hasReservations || website.hasPhoneVisible || hasPhone,
+      hasOnlineOrderingCta: website.hasOnlineOrdering,
+      hasReservationCta: website.hasReservations,
+      hasTrackingPixel: false,
+      hasClickToCall: website.hasPhoneVisible || hasPhone,
+    },
+  }
 }
 
 async function fetchLocalBenchmark(
@@ -307,6 +442,19 @@ function computeProfileCompleteness(place: NominatimPlace, websiteUrl: string | 
   return checks.filter(Boolean).length / checks.length
 }
 
+function computeGoogleProfileCompleteness(place: GooglePlace, websiteUrl: string | null): number {
+  const checks = [
+    place.displayName?.text,
+    place.formattedAddress,
+    place.types?.length ? place.types.join(",") : null,
+    websiteUrl,
+    place.nationalPhoneNumber,
+    place.currentOpeningHours?.weekdayDescriptions?.length ? "hours" : null,
+  ]
+
+  return checks.filter(Boolean).length / checks.length
+}
+
 function deriveLocalRank(hasWebsite: boolean, benchmark: LocalBenchmark): number | null {
   if (benchmark.competitorCount < 3) return null
 
@@ -344,6 +492,16 @@ function parsePlaceId(placeId: string): { readonly prefix: "N" | "W" | "R"; read
     prefix: type === "node" ? "N" : type === "way" ? "W" : "R",
     id,
   }
+}
+
+function parseGooglePlaceId(placeId: string): string | null {
+  const [, rawId] = placeId.trim().match(/^google:(.+)$/) ?? []
+  const id = rawId?.trim()
+  return id && id.length > 0 ? id : null
+}
+
+function toGooglePlaceId(id: string): string {
+  return `google:${id.replace(/^places\//, "")}`
 }
 
 function toPlaceId(type: "node" | "way" | "relation", id: number): string {
@@ -444,4 +602,22 @@ function openDataHeaders(): HeadersInit {
     "Accept-Language": "en",
     "User-Agent": process.env.OSM_USER_AGENT ?? "AtriumGrader/0.1 (https://atrium.local)",
   }
+}
+
+function googlePlacesHeaders(fieldMask: string): HeadersInit {
+  const apiKey = getGooglePlacesApiKey()
+  if (!apiKey) {
+    throw new OpenDataPlacesLookupError("GOOGLE_PLACES_API_KEY is required")
+  }
+
+  return {
+    "Content-Type": "application/json",
+    "X-Goog-Api-Key": apiKey,
+    "X-Goog-FieldMask": fieldMask,
+  }
+}
+
+function getGooglePlacesApiKey(): string | null {
+  const value = process.env.GOOGLE_PLACES_API_KEY?.trim()
+  return value && value.length > 0 ? value : null
 }
