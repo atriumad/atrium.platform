@@ -41,7 +41,7 @@ function extractHrefs(html: string): string[] {
   let match: RegExpExecArray | null
 
   while ((match = re.exec(html)) !== null) {
-    hrefs.push(match[1])
+    if (match[1]) hrefs.push(match[1])
   }
 
   return hrefs
