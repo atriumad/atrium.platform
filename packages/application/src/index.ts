@@ -42,6 +42,17 @@ export type {
 } from "./diagnostics/restaurant-growth-grader"
 export { gradeRestaurantGrowth } from "./diagnostics/restaurant-growth-grader"
 
+// Social
+export type {
+  SocialHandles,
+  SocialHealthScore,
+  SocialPlatformData,
+  SocialPlatformScore,
+  SocialPost,
+  SocialScanResult,
+} from "./diagnostics/social-health-scorer"
+export { scoreSocialHealth } from "./diagnostics/social-health-scorer"
+
 // Health Score
 export {
   computeReputationScore,
