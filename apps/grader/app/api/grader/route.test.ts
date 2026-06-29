@@ -1,4 +1,7 @@
-import { describe, expect, mock, test } from "bun:test"
+import { afterEach, describe, expect, mock, test } from "bun:test"
+
+const originalFetch = globalThis.fetch
+afterEach(() => { globalThis.fetch = originalFetch })
 
 function graderRequest(body: Record<string, unknown>): Request {
   return new Request("http://localhost/api/grader", {
@@ -89,6 +92,62 @@ describe("POST /api/grader", () => {
 
     expect(res.status).toBe(400)
     expect(await res.json()).toEqual({ error: "placeId is required" })
+  })
+
+  test("includes socialHealth when social handles provided and API key set", async () => {
+    process.env.SCRAPECREATORS_API_KEY = "test-key"
+
+    globalThis.fetch = mock(async (input: string | URL | Request) => {
+      const url = String(input)
+
+      if (url.includes("nominatim.openstreetmap.org/lookup")) {
+        return Response.json([{ osm_type: "node", osm_id: 123, lat: "25.79065", lon: "-80.13005", category: "amenity", type: "restaurant", display_name: "Real Bistro, Miami Beach, FL", namedetails: { name: "Real Bistro" }, extratags: {} }])
+      }
+      if (url.includes("overpass-api.de")) return Response.json({ elements: [] })
+      if (url.includes("scrapecreators.com") && url.includes("/v1/instagram/profile")) {
+        return Response.json({ biography: "Fresh seafood", profile_pic_url: "https://example.com/pic.jpg", external_url: "https://bistro.com", follower_count: 2000 })
+      }
+      if (url.includes("scrapecreators.com") && url.includes("/v2/instagram/user/posts")) {
+        return Response.json({ data: Array.from({ length: 5 }, (_, i) => ({ taken_at: Math.floor((Date.now() - (i + 1) * 86400000) / 1000), like_count: 50, comment_count: 5 })) })
+      }
+      if (url.includes("scrapecreators.com")) return Response.json({})
+
+      return Response.json({})
+    }) as unknown as typeof fetch
+
+    const { POST } = await import("./route")
+
+    const res = await POST(graderRequest({
+      placeId: "osm:node:123",
+      socialHandles: { instagram: "bistromia", facebook: null, tiktok: null },
+    }))
+    const body = await res.json()
+
+    expect(res.status).toBe(200)
+    expect(body.report.socialHealth).toBeDefined()
+    expect(body.report.socialHealth.score).toBeGreaterThan(0)
+    expect(body.report.scores.social).toBeGreaterThan(0)
+
+    delete process.env.SCRAPECREATORS_API_KEY
+  })
+
+  test("returns report without socialHealth when no social handles provided", async () => {
+    globalThis.fetch = mock(async (input: string | URL | Request) => {
+      const url = String(input)
+      if (url.includes("nominatim.openstreetmap.org/lookup")) {
+        return Response.json([{ osm_type: "node", osm_id: 123, lat: "25.79065", lon: "-80.13005", category: "amenity", type: "restaurant", display_name: "Real Bistro, Miami Beach, FL", namedetails: { name: "Real Bistro" }, extratags: {} }])
+      }
+      return Response.json({ elements: [] })
+    }) as unknown as typeof fetch
+
+    const { POST } = await import("./route")
+
+    const res = await POST(graderRequest({ placeId: "osm:node:123" }))
+    const body = await res.json()
+
+    expect(res.status).toBe(200)
+    expect(body.report.socialHealth).toBeUndefined()
+    expect(body.report.scores.social).toBeUndefined()
   })
 
   test("does not require a paid API key", async () => {

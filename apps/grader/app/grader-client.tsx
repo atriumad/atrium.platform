@@ -53,6 +53,7 @@ const scoreLabels: Record<keyof RestaurantGrowthScores, string> = {
   website: "Website",
   reputation: "Reputation",
   conversion: "Conversion",
+  social: "Social",
 }
 
 async function requestRestaurantSuggestions(

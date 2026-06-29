@@ -1,4 +1,5 @@
 import { err, ok, type Result } from "@atrium/shared"
+import type { SocialHealthScore } from "./social-health-scorer"
 
 export type RestaurantGrowthProfile = {
   readonly id: string
@@ -42,6 +43,7 @@ export type RestaurantGrowthScores = {
   readonly website: number
   readonly reputation: number
   readonly conversion: number
+  readonly social?: number
 }
 
 export type RestaurantGrowthIssue = {
@@ -80,6 +82,7 @@ export type RestaurantGrowthReport = {
   readonly estimatedLostOpportunity: string
   readonly nextBestAction: string
   readonly confidence: "low" | "medium" | "high"
+  readonly socialHealth?: SocialHealthScore
 }
 
 export function gradeRestaurantGrowth(
