@@ -1,14 +1,12 @@
 import { gradeRestaurantGrowth } from "@atrium/application"
 import { NextResponse } from "next/server"
 import { getRestaurantGrowthProfileFromPlace, OpenDataPlacesLookupError } from "@/lib/open-data-places"
+import type { ManualReputationInput } from "@/lib/open-data-places"
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null) as {
     placeId?: unknown
-    reputation?: {
-      rating?: unknown
-      reviewCount?: unknown
-    }
+    reputation?: ManualReputationInput
   } | null
   const placeId = typeof body?.placeId === "string" ? body.placeId : ""
 

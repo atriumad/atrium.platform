@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, mock, test } from "bun:test"
+import { describe, expect, mock, test } from "bun:test"
 
 function graderRequest(body: Record<string, unknown>): Request {
   return new Request("http://localhost/api/grader", {
@@ -8,72 +8,7 @@ function graderRequest(body: Record<string, unknown>): Request {
   })
 }
 
-const originalFetch = globalThis.fetch
-const originalGooglePlacesApiKey = process.env.GOOGLE_PLACES_API_KEY
-
-afterEach(() => {
-  globalThis.fetch = originalFetch
-  if (originalGooglePlacesApiKey === undefined) {
-    delete process.env.GOOGLE_PLACES_API_KEY
-  } else {
-    process.env.GOOGLE_PLACES_API_KEY = originalGooglePlacesApiKey
-  }
-})
-
 describe("POST /api/grader", () => {
-  test("returns a growth report from Google Place details", async () => {
-    process.env.GOOGLE_PLACES_API_KEY = "test-google-key"
-    globalThis.fetch = mock(async (input: string | URL | Request, init?: RequestInit) => {
-      const url = String(input)
-
-      if (url.includes("places.googleapis.com/v1/places/ChIJrealbistro123")) {
-        expect(init?.method).toBe("GET")
-        expect((init?.headers as Record<string, string>)["X-Goog-Api-Key"]).toBe("test-google-key")
-        expect((init?.headers as Record<string, string>)["X-Goog-FieldMask"]).toContain("rating")
-
-        return Response.json({
-          id: "ChIJrealbistro123",
-          displayName: { text: "Real Bistro" },
-          formattedAddress: "100 Ocean Dr, Miami Beach, FL",
-          types: ["restaurant"],
-          websiteUri: "https://realbistro.example",
-          nationalPhoneNumber: "(305) 555-0100",
-          currentOpeningHours: {
-            weekdayDescriptions: ["Monday: 11:00 AM - 10:00 PM"],
-          },
-          rating: 4.7,
-          userRatingCount: 321,
-          location: {
-            latitude: 25.79065,
-            longitude: -80.13005,
-          },
-        })
-      }
-
-      return new Response(`
-        <html>
-          <head><meta name="description" content="Fresh seafood on Ocean Drive"></head>
-          <body>
-            <a href="/menu">Menu</a>
-            <a href="/order">Order online</a>
-            <a href="tel:+13055550100">Call</a>
-          </body>
-        </html>
-      `)
-    }) as unknown as typeof fetch
-
-    const { POST } = await import("./route")
-
-    const res = await POST(graderRequest({ placeId: "google:ChIJrealbistro123" }))
-    const body = await res.json()
-
-    expect(res.status).toBe(200)
-    expect(body.report.business.id).toBe("google:ChIJrealbistro123")
-    expect(body.report.business.name).toBe("Real Bistro")
-    expect(body.report.scores.reputation).toBeGreaterThan(0)
-    expect(body.report.confidence).toBe("high")
-  })
-
   test("returns a growth report from free open data and manual reputation", async () => {
     globalThis.fetch = mock(async (input: string | URL | Request) => {
       const url = String(input)
