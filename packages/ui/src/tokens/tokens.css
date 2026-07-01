@@ -1,0 +1,293 @@
+/* =============================================================
+   Atrium Design System — Unified Token File
+   Single source of truth for all apps in the monorepo.
+   Import via: @import "@atrium/ui/src/tokens/tokens.css";
+   ============================================================= */
+
+:root {
+  /* ─── Raw palette ─────────────────────────────────────────── */
+  --teal-900: #042024;
+  --teal-800: #072F34;
+  --teal-700: #0E3A40;
+  --teal-500: #2C6168;
+  --teal-300: #6fa39f;
+
+  --mint-500: #8fe6c2;
+  --mint-400: #B5F2DB;
+  --mint-300: #CDF6E6;
+  --mint-200: #E4FAF1;
+
+  --amber-600: #E0911A;
+  --amber-500: #F7A823;
+  --amber-400: #FFC21F;
+  --amber-200: #FFE6A8;
+
+  --cloud-100: #ffffff;
+  --cloud-200: #F4F8F8;
+  --cloud-300: #E4EEF0;
+  --cloud-400: #CFdcdd;
+  --ink-700:   #1C2B2C;
+
+  /* ─── Semantic — surfaces ─────────────────────────────────── */
+  --surface-page:        var(--cloud-200);
+  --surface-card:        var(--cloud-100);
+  --surface-sunken:      var(--cloud-300);
+  --surface-dark:        var(--teal-800);
+  --surface-dark-raised: var(--teal-700);
+  --surface-mint:        var(--mint-400);
+  --surface-amber:       var(--amber-500);
+
+  /* ─── Semantic — text ─────────────────────────────────────── */
+  --text-strong:         var(--teal-800);
+  --text-body:           var(--ink-700);
+  --text-muted:          var(--teal-500);
+  --text-on-dark:        var(--cloud-300);
+  --text-on-dark-strong: var(--mint-400);
+  --text-on-mint:        var(--teal-800);
+  --text-on-amber:       var(--teal-800);
+
+  /* ─── Semantic — lines & accents ──────────────────────────── */
+  --border-light:    var(--cloud-400);
+  --border-strong:   var(--teal-800);
+  --border-on-dark:  var(--teal-500);
+  --border-width:    1.5px;
+  --border-width-bold: 2px;
+  --accent:          var(--mint-400);
+  --accent-warm:     var(--amber-500);
+  --highlight:       var(--amber-400);
+  --focus-ring:      var(--amber-500);
+
+  /* ─── Typography — families ───────────────────────────────── */
+  --font-display: "Nimora", "Inter Tight", system-ui, sans-serif;
+  --font-sans:    "Inter Tight", system-ui, -apple-system, sans-serif;
+  --font-serif:   "Instrument Serif", Georgia, serif;
+  --font-accent:  var(--font-serif);
+  /* --font-script and --font-inter-tight injected by Next.js font loader */
+
+  /* ─── Typography — fluid display scale ───────────────────── */
+  --text-display-xl: clamp(3.5rem,  9vw,   7.5rem);
+  --text-display-lg: clamp(2.75rem, 6vw,   5rem);
+  --text-display-md: clamp(2.25rem, 4.5vw, 3.5rem);
+
+  /* ─── Typography — static ramp ───────────────────────────── */
+  --text-6xl:  4.5rem;
+  --text-5xl:  3.5rem;
+  --text-4xl:  2.75rem;
+  --text-3xl:  2rem;
+  --text-2xl:  1.5rem;
+  --text-xl:   1.25rem;
+  --text-lg:   1.125rem;
+  --text-base: 1rem;
+  --text-sm:   0.875rem;
+  --text-xs:   0.75rem;
+
+  /* ─── Typography — weights ────────────────────────────────── */
+  --weight-light:     300;
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-extrabold: 800;
+
+  /* ─── Typography — line heights ───────────────────────────── */
+  --leading-tight:   0.95;
+  --leading-snug:    1.1;
+  --leading-heading: 1.15;
+  --leading-body:    1.6;
+  --leading-relaxed: 1.75;
+
+  /* ─── Typography — letter spacing ────────────────────────── */
+  --tracking-tight:   -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.08em;
+  --tracking-wider:   0.18em;
+  --tracking-widest:  0.32em;
+
+  /* ─── Spacing (8px grid) ──────────────────────────────────── */
+  --space-0:  0;
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.5rem;
+  --space-6:  2rem;
+  --space-7:  2.5rem;
+  --space-8:  3rem;
+  --space-10: 4rem;
+  --space-12: 5rem;
+  --space-16: 8rem;
+
+  /* ─── Radii ───────────────────────────────────────────────── */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   22px;
+  --radius-xl:   32px;
+  --radius-bento: 20px;
+  --radius-float: 16px;
+  --radius-pill: 999px;
+
+  /* ─── Layout ──────────────────────────────────────────────── */
+  --container-max:  1200px;
+  --container-wide: 1360px;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+
+  /* ─── Shadows ─────────────────────────────────────────────── */
+  --shadow-none:        none;
+  --shadow-soft:        0 2px 6px rgba(7,47,52,.04), 0 14px 34px rgba(7,47,52,.07);
+  --shadow-float:       0 4px 10px rgba(7,47,52,.05), 0 24px 60px rgba(7,47,52,.12);
+  --shadow-pop:         0 12px 40px rgba(7,47,52,.14);
+  --shadow-dark:        0 18px 50px rgba(0,0,0,.35);
+  --shadow-inset-card:  0 1px 3px rgba(7,47,52,.06), 0 10px 24px rgba(7,47,52,.08);
+
+  /* ─── Motion ──────────────────────────────────────────────── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:    120ms;
+  --dur-base:    220ms;
+  --dur-slow:    420ms;
+  --press-scale: 0.97;
+
+  /* ─── Aurora gradients ────────────────────────────────────── */
+  --grad-aurora:
+    radial-gradient(120% 115% at 14% 16%, var(--mint-400) 0%, transparent 55%),
+    radial-gradient(110% 110% at 88% 10%, var(--amber-200) 0%, transparent 52%),
+    radial-gradient(120% 120% at 82% 94%, var(--mint-500) 0%, transparent 55%),
+    radial-gradient(130% 125% at 22% 100%, var(--amber-200) 0%, transparent 50%),
+    var(--mint-200);
+
+  --grad-aurora-warm:
+    radial-gradient(120% 115% at 16% 16%, var(--amber-200) 0%, transparent 55%),
+    radial-gradient(115% 110% at 90% 12%, var(--mint-400) 0%, transparent 50%),
+    radial-gradient(125% 120% at 78% 92%, var(--mint-500) 0%, transparent 55%),
+    radial-gradient(130% 125% at 24% 100%, var(--amber-200) 0%, transparent 50%),
+    var(--mint-200);
+
+  --grad-aurora-cool:
+    radial-gradient(120% 115% at 12% 14%, var(--mint-500) 0%, transparent 55%),
+    radial-gradient(115% 110% at 86% 16%, var(--mint-400) 0%, transparent 52%),
+    radial-gradient(125% 120% at 82% 92%, var(--mint-300) 0%, transparent 55%),
+    var(--mint-200);
+
+  --grad-aurora-deep:
+    radial-gradient(120% 120% at 16% 18%, rgba(143,230,194,0.30) 0%, transparent 55%),
+    radial-gradient(120% 115% at 86% 84%, rgba(247,168,35,0.20) 0%, transparent 55%),
+    radial-gradient(140% 140% at 50% 50%, var(--teal-700) 0%, var(--teal-800) 70%);
+
+  /* ─── Textures ────────────────────────────────────────────── */
+  --surface-grain:      url("/textures/grain-paper-silver.png");
+  --surface-atmos:      url("/textures/gradient-forest-glow.png");
+  --surface-atmos-deep: url("/textures/gradient-charcoal-sage.png");
+  --grain-opacity:      0.10;
+
+  /* ─── Marker highlight ────────────────────────────────────── */
+  --marker-amber: var(--amber-400);
+  --marker-mint:  var(--mint-400);
+}
+
+/* ─── Marker highlight utility ────────────────────────────────── */
+.atr-marker {
+  background-image: linear-gradient(var(--marker-amber), var(--marker-amber));
+  background-repeat: no-repeat;
+  background-size: 100% 62%;
+  background-position: 0 72%;
+  padding: 0 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.atr-marker--mint {
+  background-image: linear-gradient(var(--marker-mint), var(--marker-mint));
+}
+
+/* ─── Aurora surface utilities ────────────────────────────────── */
+.atr-aurora,
+.atr-aurora--warm,
+.atr-aurora--cool,
+.atr-aurora--deep { position: relative; }
+
+.atr-aurora       { background-color: var(--mint-200); background-image: var(--grad-aurora); }
+.atr-aurora--warm { background-color: var(--mint-200); background-image: var(--grad-aurora-warm); }
+.atr-aurora--cool { background-color: var(--mint-200); background-image: var(--grad-aurora-cool); }
+.atr-aurora--deep { background-color: var(--teal-800); background-image: var(--grad-aurora-deep); color: var(--text-on-dark); }
+
+.atr-aurora::after,
+.atr-aurora--warm::after,
+.atr-aurora--cool::after,
+.atr-aurora--deep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--surface-grain);
+  background-size: 320px auto;
+  opacity: 0.16;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* ─── Grain overlay ────────────────────────────────────────────── */
+.atr-grain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: var(--surface-grain);
+  background-size: 380px auto;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.atr-grain-overlay--soft {
+  mix-blend-mode: soft-light;
+  opacity: 0.16;
+}
+
+/* ─── Bento cards ──────────────────────────────────────────────── */
+.atr-bento-card {
+  position: relative;
+  border-radius: var(--radius-bento);
+  background-color: var(--mint-200);
+  background-image: var(--grad-aurora);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.atr-bento-card--teal {
+  background-color: var(--teal-800);
+  background-image: var(--grad-aurora-deep);
+  color: var(--text-on-dark);
+  box-shadow: var(--shadow-float);
+}
+.atr-float-card {
+  background: var(--cloud-100);
+  border-radius: var(--radius-float);
+  box-shadow: var(--shadow-inset-card);
+}
+
+/* ─── Interactive lift ─────────────────────────────────────────── */
+.atr-lift {
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.atr-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-float);
+}
+
+/* ─── Atmospheric background ───────────────────────────────────── */
+.atr-bg-atmos {
+  background-color: var(--teal-800);
+  background-image: var(--surface-atmos);
+  background-size: cover;
+  background-position: center;
+}
+.atr-bg-atmos--deep {
+  background-color: #0a1512;
+  background-image: var(--surface-atmos-deep);
+  background-size: cover;
+  background-position: center;
+}
+
+/* ─── Reduced motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
