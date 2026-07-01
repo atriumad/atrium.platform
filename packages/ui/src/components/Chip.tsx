@@ -1,4 +1,4 @@
-import { type ReactNode, type CSSProperties, type MouseEvent } from 'react'
+import type { CSSProperties, MouseEvent, ReactNode } from 'react'
 
 type ChipVariant = 'outline' | 'outline-light' | 'outline-soft' | 'mint' | 'mint-soft' | 'teal' | 'ink' | 'amber'
 type ChipSize    = 'sm' | 'md' | 'lg'

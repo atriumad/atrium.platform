@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test"
 import {
-  scoreSocialHealth,
   type SocialPlatformData,
   type SocialScanResult,
+  scoreSocialHealth,
 } from "./social-health-scorer"
 
 function platform(overrides: Partial<SocialPlatformData> = {}): SocialPlatformData {

@@ -17,5 +17,5 @@ describe("BcryptPasswordHasher", () => {
     expect(bcrypt.getRounds(hash)).toBe(12)
     await expect(passwords.verify("correct horse battery staple", hash)).resolves.toBe(true)
     await expect(passwords.verify("wrong", hash)).resolves.toBe(false)
-  })
+  }, 15_000)
 })

@@ -1,4 +1,6 @@
-import { useState, useId, type CSSProperties, type InputHTMLAttributes } from 'react'
+'use client'
+
+import { type CSSProperties, type InputHTMLAttributes, useId, useState } from 'react'
 
 type InputProps = {
   label?: string

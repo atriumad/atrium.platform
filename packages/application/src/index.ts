@@ -31,13 +31,22 @@ export { ListCustomers } from "./crm/list-customers"
 
 // Diagnostics
 export type {
+  DiagnosticStepResult,
+  RestaurantBusinessImpact,
   RestaurantConversionSignals,
+  RestaurantDataQuality,
+  RestaurantExecutiveSummary,
   RestaurantGrowthIssue,
   RestaurantGrowthOpportunity,
   RestaurantGrowthProfile,
   RestaurantGrowthRecommendation,
   RestaurantGrowthReport,
   RestaurantGrowthScores,
+  RestaurantLighthouseAuditResult,
+  RestaurantLighthouseAuditSummary,
+  RestaurantLighthouseStrategy,
+  RestaurantScoreDetails,
+  RestaurantScoreInterpretation,
   RestaurantWebsiteSignals,
 } from "./diagnostics/restaurant-growth-grader"
 export { gradeRestaurantGrowth } from "./diagnostics/restaurant-growth-grader"

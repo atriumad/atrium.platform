@@ -45,6 +45,30 @@ describe("gradeRestaurantGrowth", () => {
     expect(result.value.scores.website).toBeGreaterThanOrEqual(80)
     expect(result.value.scores.reputation).toBeGreaterThanOrEqual(80)
     expect(result.value.scores.conversion).toBeGreaterThanOrEqual(80)
+    expect(result.value.executiveSummary.headline).toContain("Strong")
+    expect(result.value.businessImpact.level).toBe("low")
+    expect(result.value.scoreInterpretation).toHaveLength(4)
+    expect(result.value.scoreDetails.website.some((detail) =>
+      detail.includes("website conversion signals")
+    )).toBe(true)
+    expect(result.value.diagnosticSteps).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        id: "website",
+        status: expect.any(String),
+        confidence: expect.any(String),
+        source: expect.any(String),
+        checked: expect.any(Array),
+        found: expect.any(Array),
+        missing: expect.any(Array),
+        assumptions: expect.any(Array),
+        errors: expect.any(Array),
+      }),
+    ]))
+    expect(result.value.dataQuality).toEqual(expect.objectContaining({
+      hasWebsite: true,
+      hasReputation: true,
+      hasSocial: false,
+    }))
     expect(result.value.nextBestAction).toContain("Maintain")
   })
 
@@ -70,6 +94,8 @@ describe("gradeRestaurantGrowth", () => {
     if (!result.ok) return
 
     expect(result.value.scores.conversion).toBeLessThan(50)
+    expect(result.value.businessImpact.level).toBe("high")
+    expect(result.value.executiveSummary.priority).toContain("conversion paths")
     expect(result.value.issues.some((issue) =>
       issue.severity === "high" && issue.message.includes("conversion paths")
     )).toBe(true)
@@ -108,6 +134,16 @@ describe("gradeRestaurantGrowth", () => {
 
     expect(result.value.scores.reputation).toBeGreaterThanOrEqual(60)
     expect(result.value.confidence).toBe("medium")
+    expect(result.value.dataQuality.hasReputation).toBe(false)
+    expect(result.value.dataQuality.missingCriticalData).toContain("Verified reputation data")
+    expect(result.value.diagnosticSteps).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        id: "reputation",
+        status: "partial",
+        confidence: "low",
+        assumptions: expect.arrayContaining(["A neutral reputation baseline was used because ratings and review volume were unavailable."]),
+      }),
+    ]))
     expect(result.value.recommendations.some((recommendation) =>
       recommendation.title.includes("reputation data")
     )).toBe(true)

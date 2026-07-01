@@ -1,4 +1,6 @@
-import { useState, type ReactNode, type CSSProperties } from 'react'
+'use client'
+
+import { type CSSProperties, type ReactNode, useState } from 'react'
 
 type CardTone      = 'light' | 'cloud' | 'mint' | 'amber' | 'teal' | 'aurora' | 'aurora-warm' | 'aurora-cool' | 'aurora-deep'
 type CardElevation = 'none' | 'soft' | 'float'
