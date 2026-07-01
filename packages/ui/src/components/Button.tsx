@@ -1,20 +1,25 @@
-import { useState, type ReactNode, type CSSProperties, type ButtonHTMLAttributes } from 'react'
+'use client'
+
+import { type AnchorHTMLAttributes, type ButtonHTMLAttributes, type CSSProperties, type ReactNode, useState } from 'react'
 
 type ButtonVariant = 'primary' | 'mint' | 'amber' | 'outline' | 'ghost' | 'ghostLight'
 type ButtonSize    = 'sm' | 'md' | 'lg'
 
-type ButtonProps = {
+type SharedProps = {
   variant?: ButtonVariant
   size?: ButtonSize
-  href?: string
   iconLeft?: ReactNode
   iconRight?: ReactNode
   fullWidth?: boolean
   disabled?: boolean
   children?: ReactNode
   style?: CSSProperties
-  className?: string
-} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'style'>
+}
+
+type ButtonAsButton = SharedProps & { href?: undefined } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof SharedProps | 'style'>
+type ButtonAsAnchor = SharedProps & { href: string } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof SharedProps | 'style' | 'href'>
+
+type ButtonProps = ButtonAsButton | ButtonAsAnchor
 
 const sizes: Record<ButtonSize, CSSProperties> = {
   sm: { padding: '8px 16px',  fontSize: '13px', gap: '6px' },
@@ -60,18 +65,19 @@ const base: CSSProperties = {
   transition: 'transform var(--dur-fast) var(--ease-out), background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out)',
 }
 
-export function Button({
-  variant = 'primary',
-  size = 'md',
-  href,
-  iconLeft,
-  iconRight,
-  fullWidth = false,
-  disabled = false,
-  children,
-  style,
-  ...rest
-}: ButtonProps) {
+export function Button(props: ButtonProps) {
+  const {
+    variant = 'primary',
+    size = 'md',
+    iconLeft,
+    iconRight,
+    fullWidth = false,
+    disabled = false,
+    children,
+    style,
+    ...rest
+  } = props
+
   const [pressed, setPressed] = useState(false)
   const [hover,   setHover]   = useState(false)
 
@@ -94,16 +100,17 @@ export function Button({
     onPointerEnter: () => setHover(true),
   }
 
-  if (href) {
+  if ('href' in props && props.href !== undefined) {
+    const { href } = props
     return (
-      <a href={disabled ? undefined : href} style={computed} aria-disabled={disabled} {...events}>
+      <a href={disabled ? undefined : href} style={computed} aria-disabled={disabled} {...events} {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}>
         {iconLeft}{children}{iconRight}
       </a>
     )
   }
 
   return (
-    <button disabled={disabled} style={computed} {...events} {...rest}>
+    <button disabled={disabled} style={computed} {...events} {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}>
       {iconLeft}{children}{iconRight}
     </button>
   )
