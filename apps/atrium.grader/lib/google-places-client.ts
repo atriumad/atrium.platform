@@ -28,13 +28,23 @@ const GOOGLE_PLACE_DETAILS_FIELD_MASK = [
   "formattedAddress",
   "shortFormattedAddress",
   "types",
+  "primaryTypeDisplayName",
   "websiteUri",
   "nationalPhoneNumber",
   "currentOpeningHours",
+  "regularOpeningHours",
   "rating",
   "userRatingCount",
+  "reviews",
   "location",
   "photos",
+  "editorialSummary",
+  "businessStatus",
+  "priceLevel",
+  "reservable",
+  "takeout",
+  "delivery",
+  "dineIn",
 ].join(",")
 
 const DEFAULT_PHOTO_WIDTH = 420
@@ -54,24 +64,36 @@ type GooglePlacePhoto = {
   readonly authorAttributions?: GoogleAuthorAttribution[]
 }
 
+type GooglePlaceReview = {
+  readonly rating?: number
+  readonly publishTime?: string
+  readonly text?: GoogleLocalizedText
+  readonly authorAttribution?: GoogleAuthorAttribution
+}
+
 type GooglePlace = {
   readonly id?: string
   readonly displayName?: GoogleLocalizedText
+  readonly primaryTypeDisplayName?: GoogleLocalizedText
   readonly formattedAddress?: string
   readonly shortFormattedAddress?: string
   readonly types?: string[]
   readonly websiteUri?: string
   readonly nationalPhoneNumber?: string
-  readonly currentOpeningHours?: {
-    readonly weekdayDescriptions?: string[]
-  }
+  readonly currentOpeningHours?: { readonly weekdayDescriptions?: string[] }
+  readonly regularOpeningHours?: { readonly weekdayDescriptions?: string[] }
   readonly rating?: number
   readonly userRatingCount?: number
-  readonly location?: {
-    readonly latitude?: number
-    readonly longitude?: number
-  }
+  readonly reviews?: GooglePlaceReview[]
+  readonly location?: { readonly latitude?: number; readonly longitude?: number }
   readonly photos?: GooglePlacePhoto[]
+  readonly editorialSummary?: GoogleLocalizedText
+  readonly businessStatus?: "OPERATIONAL" | "CLOSED_TEMPORARILY" | "CLOSED_PERMANENTLY"
+  readonly priceLevel?: "PRICE_LEVEL_FREE" | "PRICE_LEVEL_INEXPENSIVE" | "PRICE_LEVEL_MODERATE" | "PRICE_LEVEL_EXPENSIVE" | "PRICE_LEVEL_VERY_EXPENSIVE"
+  readonly reservable?: boolean
+  readonly takeout?: boolean
+  readonly delivery?: boolean
+  readonly dineIn?: boolean
 }
 
 type GooglePlacePrediction = {
@@ -169,16 +191,27 @@ async function getGoogleSuggestionDetails(
 }
 
 function computeProfileCompleteness(place: GooglePlace, websiteUrl: string | null): number {
+  const hasHours = Boolean(
+    place.regularOpeningHours?.weekdayDescriptions?.length
+    ?? place.currentOpeningHours?.weekdayDescriptions?.length,
+  )
   const checks = [
     place.displayName?.text,
     place.formattedAddress,
     place.types?.length ? place.types.join(",") : null,
     websiteUrl,
     place.nationalPhoneNumber,
-    place.currentOpeningHours?.weekdayDescriptions?.length ? "hours" : null,
+    hasHours ? "hours" : null,
+    place.editorialSummary?.text,
+    place.photos?.length ? "photos" : null,
   ]
 
   return checks.filter(Boolean).length / checks.length
+}
+
+function realNegativeReviewCount(reviews: GooglePlaceReview[] | undefined): number {
+  if (!reviews?.length) return 0
+  return reviews.filter((r) => typeof r.rating === "number" && r.rating <= 2).length
 }
 
 export async function searchGooglePlaces(
@@ -233,6 +266,11 @@ export async function getGoogleRestaurantProfile(
   if (!res.ok) throw new Error("Unable to load Google Place details")
 
   const place = await res.json() as GooglePlace
+
+  if (place.businessStatus === "CLOSED_PERMANENTLY") {
+    throw new Error("Business not found")
+  }
+
   const websiteUrl = normalizeUrl(place.websiteUri ?? null)
   const website = await scanRestaurantWebsite(websiteUrl, fetcher)
   const rating = typeof place.rating === "number" && Number.isFinite(place.rating) ? place.rating : 0
@@ -242,24 +280,40 @@ export async function getGoogleRestaurantProfile(
   const hasPhone = Boolean(place.nationalPhoneNumber)
   const photo = firstPhoto(place)
 
+  // Google attributes override website HTML scan when available — more reliable
+  const enrichedWebsite = {
+    ...website,
+    hasReservations: place.reservable ?? website.hasReservations,
+    hasOnlineOrdering: (place.takeout === true || place.delivery === true) ? true : website.hasOnlineOrdering,
+  }
+
+  // Use real review data for negative count when available, fall back to estimate
+  const negativeCount = place.reviews?.length
+    ? realNegativeReviewCount(place.reviews)
+    : estimateNegativeReviews(rating, reviewCount)
+
+  // Use primary type display name if available (cleaner than raw type key)
+  const category = place.primaryTypeDisplayName?.text
+    ?? readableType(place.types?.[0] ?? "restaurant")
+
   return {
     id: toGooglePlaceId(googlePlaceId),
     name: place.displayName?.text ?? "Unknown restaurant",
-    category: readableType(place.types?.[0] ?? "restaurant"),
+    category,
     address: place.formattedAddress ?? "Address unavailable",
     websiteUrl,
     photoUrl: photo?.name ? photoProxyUrl(photo.name, 900, 540) : null,
     photoAttribution: googlePhotoAttribution(photo ?? undefined),
     googleRating: rating,
     googleReviewCount: reviewCount,
-    recentNegativeReviewCount: estimateNegativeReviews(rating, reviewCount),
+    recentNegativeReviewCount: negativeCount,
     unansweredReviewCount: 0,
     reputationDataSource: rating > 0 || reviewCount > 0 ? "google" : "unavailable",
     profileCompleteness: computeProfileCompleteness(place, websiteUrl),
     localRank: null,
     competitorAverageRating: null,
-    website,
-    conversion: buildConversionSignals(website, hasPhone),
+    website: enrichedWebsite,
+    conversion: buildConversionSignals(enrichedWebsite, hasPhone),
   }
 }
 

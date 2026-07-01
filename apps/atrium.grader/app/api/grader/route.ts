@@ -4,7 +4,18 @@ import { NextResponse } from "next/server"
 import { autoDetectSocial } from "@/lib/auto-detect-social"
 import type { ManualReputationInput } from "@/lib/open-data-places"
 import { getRestaurantGrowthProfileFromPlace, OpenDataPlacesLookupError } from "@/lib/open-data-places"
+import { runPageSpeedWebsiteAudit } from "@/lib/pagespeed-client"
 import { scanSocialProfiles } from "@/lib/scrape-creators"
+
+const PAGESPEED_TIMEOUT_MS = 20_000
+
+function pagespeedWithTimeout(websiteUrl: string): Promise<Awaited<ReturnType<typeof runPageSpeedWebsiteAudit>> | null> {
+  const timeout = new Promise<null>((resolve) => setTimeout(() => resolve(null), PAGESPEED_TIMEOUT_MS))
+  return Promise.race([
+    runPageSpeedWebsiteAudit(websiteUrl).catch(() => null),
+    timeout,
+  ])
+}
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null) as {
@@ -23,16 +34,30 @@ export async function POST(req: Request) {
       rating: typeof body?.reputation?.rating === "number" ? body.reputation.rating : null,
       reviewCount: typeof body?.reputation?.reviewCount === "number" ? body.reputation.reviewCount : null,
     })
-    const result = gradeRestaurantGrowth(profile)
+
+    // Run PageSpeed and social detection in parallel — both optional, neither blocks the other
+    const hasPagespeedKey = Boolean(process.env.PAGESPEED_API_KEY?.trim())
+    const hasSocialKey = Boolean(process.env.SCRAPECREATORS_API_KEY)
+
+    const [lighthouseResult, handles] = await Promise.all([
+      hasPagespeedKey && profile.websiteUrl
+        ? pagespeedWithTimeout(profile.websiteUrl)
+        : Promise.resolve(null),
+      hasSocialKey
+        ? autoDetectSocial(profile.websiteUrl, profile.name).catch(() => null)
+        : Promise.resolve(null),
+    ])
+
+    // Merge lighthouse data into profile before grading if it arrived in time
+    const gradingProfile = lighthouseResult && profile.websiteUrl
+      ? { ...profile, website: { ...profile.website, lighthouse: lighthouseResult } }
+      : profile
+
+    const result = gradeRestaurantGrowth(gradingProfile)
 
     if (!result.ok) {
       return NextResponse.json({ error: result.error.message }, { status: 400 })
     }
-
-    // Auto-detect social handles — silently, no client input required
-    const handles = process.env.SCRAPECREATORS_API_KEY
-      ? await autoDetectSocial(profile.websiteUrl, profile.name)
-      : null
 
     if (!handles) {
       return NextResponse.json({ report: result.value })

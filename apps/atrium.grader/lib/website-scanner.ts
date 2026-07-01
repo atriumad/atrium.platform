@@ -1,5 +1,4 @@
 import type { RestaurantWebsiteSignals } from "@atrium/application"
-import { runPageSpeedWebsiteAudit } from "./pagespeed-client"
 
 export function emptyWebsiteSignals(): RestaurantWebsiteSignals {
   return {
@@ -22,18 +21,7 @@ export async function scanRestaurantWebsite(
     return emptyWebsiteSignals()
   }
 
-  const basicSignals = await scanBasicWebsiteSignals(websiteUrl, fetcher)
-
-  if (process.env.WEBSITE_AUDIT_PROVIDER?.trim().toLowerCase() !== "pagespeed") {
-    return basicSignals
-  }
-
-  try {
-    const lighthouse = await runPageSpeedWebsiteAudit(websiteUrl, fetcher)
-    return { ...basicSignals, lighthouse }
-  } catch {
-    return basicSignals
-  }
+  return scanBasicWebsiteSignals(websiteUrl, fetcher)
 }
 
 async function scanBasicWebsiteSignals(
