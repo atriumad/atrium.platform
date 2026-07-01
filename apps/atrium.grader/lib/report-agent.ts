@@ -1,5 +1,6 @@
 import { createAnthropic } from "@ai-sdk/anthropic"
 import { createGoogleGenerativeAI } from "@ai-sdk/google"
+import { createOpenAI } from "@ai-sdk/openai"
 import type {
   RestaurantGrowthIssue,
   RestaurantGrowthProfile,
@@ -128,18 +129,30 @@ function resolveModel(provider: string) {
     return createAnthropic({ apiKey: key })("claude-haiku-4-5-20251001")
   }
 
-  const key = process.env.GOOGLE_GENERATIVE_AI_API_KEY?.trim()
-  if (!key) throw new Error("GOOGLE_GENERATIVE_AI_API_KEY required for google provider")
-  return createGoogleGenerativeAI({ apiKey: key })("gemini-2.0-flash")
+  if (provider === "google") {
+    const key = process.env.GOOGLE_GENERATIVE_AI_API_KEY?.trim()
+    if (!key) throw new Error("GOOGLE_GENERATIVE_AI_API_KEY required for google provider")
+    return createGoogleGenerativeAI({ apiKey: key })("gemini-2.0-flash")
+  }
+
+  // openrouter — default provider, uses free models
+  const key = process.env.OPENROUTER_API_KEY?.trim()
+  if (!key) throw new Error("OPENROUTER_API_KEY required for openrouter provider")
+  const model = process.env.GRADER_AI_MODEL?.trim() ?? "openai/gpt-oss-120b:free"
+  return createOpenAI({
+    baseURL: "https://openrouter.ai/api/v1",
+    apiKey: key,
+  })(model)
 }
 
 export async function generateReportNarrative(ctx: AgentContext): Promise<NarrativeOutput | null> {
-  const provider = process.env.GRADER_AI_PROVIDER?.trim().toLowerCase() ?? "google"
+  const provider = process.env.GRADER_AI_PROVIDER?.trim().toLowerCase() ?? "openrouter"
 
   let model
   try {
     model = resolveModel(provider)
-  } catch {
+  } catch (e) {
+    console.error("[report-agent] model init failed:", e)
     return null
   }
 
@@ -152,7 +165,8 @@ export async function generateReportNarrative(ctx: AgentContext): Promise<Narrat
     })
 
     return object
-  } catch {
+  } catch (e) {
+    console.error("[report-agent] generateObject failed:", e)
     return null
   }
 }
