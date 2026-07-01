@@ -1,0 +1,38 @@
+/* ============================================================
+   Atrium — Spacing, radius, layout
+   8px base grid. Atrium's identity uses generous open space and
+   fully-rounded "stadium" pills (the SEO / Marketing / Photography
+   chips), so radii skew toward pill + soft-card.
+   ============================================================ */
+:root {
+  /* ---- Spacing scale (8px grid) ---- */
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4  */
+  --space-2: 0.5rem;   /* 8  */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.5rem;   /* 24 */
+  --space-6: 2rem;     /* 32 */
+  --space-7: 2.5rem;   /* 40 */
+  --space-8: 3rem;     /* 48 */
+  --space-10: 4rem;    /* 64 */
+  --space-12: 5rem;    /* 80 */
+  --space-16: 8rem;    /* 128 */
+
+  /* ---- Radii ---- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;    /* default card */
+  --radius-lg: 22px;    /* big amber hero panel */
+  --radius-xl: 32px;
+  --radius-pill: 999px; /* stadium chips & buttons */
+
+  /* ---- Layout ---- */
+  --container-max: 1200px;
+  --container-wide: 1360px;
+  --gutter: clamp(1.25rem, 4vw, 4rem); /* @kind spacing */
+
+  /* ---- Borders ---- */
+  --border-width: 1.5px;     /* pills are drawn with a clean ~1.5px stroke */
+  --border-width-bold: 2px;
+}

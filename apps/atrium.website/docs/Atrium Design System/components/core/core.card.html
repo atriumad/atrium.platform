@@ -1,0 +1,111 @@
+<!-- @dsCard group="Components" viewport="700x540" name="Core — buttons, chips, cards" subtitle="Atrium's reusable primitives" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body{margin:0;font-family:var(--font-sans);background:var(--cloud-200);color:var(--text-body);padding:24px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .panel{background:var(--cloud-100);border:1px solid var(--cloud-400);border-radius:var(--radius-md);padding:18px}
+  .panel.dark{background:var(--teal-800);border-color:var(--teal-700)}
+  .lbl{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);margin:0 0 12px}
+  .dark .lbl{color:var(--teal-300)}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .stack{display:flex;flex-direction:column;gap:12px}
+  .full{grid-column:1 / -1}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { Button, Chip, Card, Badge, Logo, Highlight, Eyebrow, ScriptAccent, Input } = window.AtriumDesignSystem_31d170;
+const base = "../../assets/logos";
+
+function Demo() {
+  return (
+    <div className="grid">
+      <div className="panel">
+        <p className="lbl">Buttons</p>
+        <div className="stack">
+          <div className="row">
+            <Button variant="primary">Start a project</Button>
+            <Button variant="mint">See our work</Button>
+            <Button variant="amber">Get a quote</Button>
+          </div>
+          <div className="row">
+            <Button variant="outline">Learn more</Button>
+            <Button variant="ghost">Skip</Button>
+            <Button variant="primary" disabled>Disabled</Button>
+          </div>
+          <div className="row">
+            <Button size="sm" variant="primary">Small</Button>
+            <Button size="md" variant="primary">Medium</Button>
+            <Button size="lg" variant="primary">Large</Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="panel dark">
+        <p className="lbl">Chips · service pills</p>
+        <div className="row">
+          <Chip variant="outline-light">Seo</Chip>
+          <Chip variant="outline-light">Marketing</Chip>
+          <Chip variant="outline-light">Graphic Design</Chip>
+          <Chip variant="mint">Photography</Chip>
+          <Chip variant="amber">Featured</Chip>
+        </div>
+        <p className="lbl" style={{marginTop:18}}>Logo</p>
+        <div className="row" style={{gap:24}}>
+          <Logo variant="mark" color="var(--mint-400)" height={40} assetBase={base} />
+          <Logo variant="wordmark" color="var(--mint-400)" height={26} assetBase={base} />
+        </div>
+      </div>
+
+      <div className="panel">
+        <p className="lbl">Cards</p>
+        <div className="row" style={{gap:12,flexWrap:'nowrap'}}>
+          <Card tone="mint" padding="16px" radius="var(--radius-md)" style={{flex:1}}>
+            <strong style={{display:'block',fontSize:16}}>Graphic Design</strong>
+            <span style={{fontSize:13,opacity:.8}}>Brand systems</span>
+          </Card>
+          <Card tone="amber" padding="16px" style={{flex:1}}>
+            <strong style={{display:'block',fontSize:16}}>SEO</strong>
+            <span style={{fontSize:13,opacity:.8}}>Get found</span>
+          </Card>
+        </div>
+        <div className="row" style={{marginTop:12}}>
+          <Badge tone="mint">New</Badge>
+          <Badge tone="amber">Featured</Badge>
+          <Badge tone="teal">Case study</Badge>
+          <Badge tone="outline">SEO</Badge>
+        </div>
+      </div>
+
+      <div className="panel">
+        <p className="lbl">Input</p>
+        <Input label="Work email" type="email" placeholder="you@studio.com" />
+        <div style={{height:12}} />
+        <Input label="Budget" hint="Required" invalid placeholder="$" />
+      </div>
+
+      <div className="panel full">
+        <p className="lbl">Type treatments</p>
+        <div style={{fontFamily:'var(--font-display)',fontSize:34,fontWeight:700,color:'var(--text-strong)',lineHeight:1.1}}>
+          We're <ScriptAccent>humans.</ScriptAccent> Simple software for <Highlight>better Business</Highlight>
+        </div>
+        <div style={{marginTop:14}}>
+          <Eyebrow tone="amber">Media and Advertising</Eyebrow>
+        </div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+</script>
+</body>
+</html>

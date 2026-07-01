@@ -1,0 +1,62 @@
+/* ============================================================
+   Atrium — Textures: grain & atmospheric backgrounds
+   Three brand-photographed surfaces that sit under type and UI.
+   Use them for warmth and depth — never load-bearing for meaning.
+
+   Paths are relative to this file (tokens/). When you use a texture
+   token outside the design-system root, the url() still resolves
+   because consumers ship the whole assets/ tree.
+   ============================================================ */
+:root {
+  /* ---- Raw texture image tokens ---- */
+  --texture-grain-silver: url("../assets/textures/grain-paper-silver.png"); /* @kind other */
+  --texture-forest-glow: url("../assets/textures/gradient-forest-glow.png"); /* @kind other */
+  --texture-charcoal-sage: url("../assets/textures/gradient-charcoal-sage.png"); /* @kind other */
+
+  /* ---- Semantic aliases ---- */
+  --surface-grain: var(--texture-grain-silver);   /* light paper grain overlay */
+  --surface-atmos: var(--texture-forest-glow);    /* hero / section background */
+  --surface-atmos-deep: var(--texture-charcoal-sage); /* moodier, lower-key bg */
+
+  /* Overlay opacity for grain layered over color */
+  --grain-opacity: 0.10; /* @kind other */
+}
+
+/* ----------------------------------------------------------
+   Utility classes
+   ---------------------------------------------------------- */
+
+/* Full-cover atmospheric background (forest glow). Put light text on top. */
+.atr-bg-atmos {
+  background-color: var(--teal-800);
+  background-image: var(--surface-atmos);
+  background-size: cover;
+  background-position: center;
+}
+.atr-bg-atmos--deep {
+  background-color: #0a1512;
+  background-image: var(--surface-atmos-deep);
+  background-size: cover;
+  background-position: center;
+}
+
+/* Tiling paper grain as a solid surface (light cards / poster blocks). */
+.atr-bg-grain {
+  background-color: var(--cloud-200);
+  background-image: var(--surface-grain);
+  background-size: 420px auto;
+  background-blend-mode: multiply;
+}
+
+/* Grain OVERLAY — drop as an absolutely-positioned child to add texture
+   over any color field or photo. Pair with position:relative parent. */
+.atr-grain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: var(--surface-grain);
+  background-size: 380px auto;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.atr-grain-overlay--soft { mix-blend-mode: soft-light; opacity: 0.16; }

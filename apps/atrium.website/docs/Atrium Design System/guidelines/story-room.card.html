@@ -1,0 +1,37 @@
+<!-- @dsCard group="Posts" viewport="1080x1920" subtitle="9:16 story · cream field · grain · repeated label + photo + serif CTA" name="Story · Show the room" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<script src="../assets/social/image-slot.js"></script>
+<style>
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:var(--font-sans);color:var(--teal-800)}
+  image-slot{display:block}
+  .story{width:1080px;height:1920px;position:relative;overflow:hidden;background-color:var(--mint-200);background-image:var(--grad-aurora-cool)}
+  .grain{position:absolute;inset:0;background-image:var(--surface-grain);background-size:560px auto;opacity:.16;mix-blend-mode:soft-light;pointer-events:none;z-index:2}
+  .top{position:absolute;top:40px;left:40px;right:40px;z-index:4}
+  .bars{display:flex;gap:8px;margin-bottom:22px}
+  .bars span{flex:1;height:5px;border-radius:3px;background:rgba(7,47,52,.22)}
+  .bars span.on{background:var(--teal-800)}
+  .who{display:flex;align-items:center;gap:14px;color:var(--teal-800);font-size:24px}
+  .av{width:48px;height:48px;border-radius:50%;background:var(--teal-800);color:var(--mint-400);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px}
+  .label{position:absolute;left:14px;top:300px;bottom:340px;z-index:2;display:flex;flex-direction:column;justify-content:space-between;font-weight:800;font-size:62px;letter-spacing:-.02em;color:var(--amber-500);padding-left:30px}
+  .main{position:absolute;left:170px;right:60px;top:340px;z-index:3}
+  .photo{position:relative;border-radius:22px;overflow:hidden;height:560px;background:var(--teal-700);box-shadow:var(--shadow-soft)}
+  .h{font-family:var(--font-serif);font-style:italic;font-size:84px;line-height:.98;color:var(--teal-800);margin-top:44px}
+  .d{font-size:26px;color:var(--text-muted);margin-top:18px;line-height:1.4;max-width:24ch}
+  .reply{position:absolute;left:40px;right:40px;bottom:48px;z-index:4;display:flex;align-items:center;gap:12px;border:1.5px solid rgba(7,47,52,.4);border-radius:999px;padding:22px 30px;color:rgba(7,47,52,.65);font-size:24px}
+</style></head><body>
+  <div class="story">
+    <div class="grain"></div>
+    <div class="top">
+      <div class="bars"><span></span><span></span><span class="on"></span></div>
+      <div class="who"><span class="av">α</span><b style="font-weight:600">atrium</b><span style="opacity:.6">· 4h</span><span style="margin-left:auto;opacity:.7">✕</span></div>
+    </div>
+    <div class="label"><span>SEO</span><span>SEO</span><span>SEO</span><span>SEO</span></div>
+    <div class="main">
+      <div class="photo"><image-slot id="story-room-photo" style="position:absolute;inset:0;width:100%;height:100%" shape="rect" placeholder="Drop a signature dish"></image-slot></div>
+      <div class="h">Found<br>first.</div>
+      <div class="d">When they search "best near me," you're the answer.</div>
+    </div>
+    <div class="reply">Send message<span style="margin-left:auto">➤</span></div>
+  </div>
+</body></html>

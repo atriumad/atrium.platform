@@ -1,0 +1,155 @@
+import type { DiagnosticStepResult, RestaurantGrowthReport, RestaurantScoreInterpretation } from "@atrium/application"
+import { gradeRestaurantGrowth, scoreSocialHealth } from "@atrium/application"
+import { NextResponse } from "next/server"
+import { autoDetectSocial } from "@/lib/auto-detect-social"
+import type { ManualReputationInput } from "@/lib/open-data-places"
+import { getRestaurantGrowthProfileFromPlace, OpenDataPlacesLookupError } from "@/lib/open-data-places"
+import { scanSocialProfiles } from "@/lib/scrape-creators"
+
+export async function POST(req: Request) {
+  const body = await req.json().catch(() => null) as {
+    placeId?: unknown
+    reputation?: ManualReputationInput
+  } | null
+
+  const placeId = typeof body?.placeId === "string" ? body.placeId : ""
+
+  if (!placeId) {
+    return NextResponse.json({ error: "placeId is required" }, { status: 400 })
+  }
+
+  try {
+    const profile = await getRestaurantGrowthProfileFromPlace(placeId, {
+      rating: typeof body?.reputation?.rating === "number" ? body.reputation.rating : null,
+      reviewCount: typeof body?.reputation?.reviewCount === "number" ? body.reputation.reviewCount : null,
+    })
+    const result = gradeRestaurantGrowth(profile)
+
+    if (!result.ok) {
+      return NextResponse.json({ error: result.error.message }, { status: 400 })
+    }
+
+    // Auto-detect social handles — silently, no client input required
+    const handles = process.env.SCRAPECREATORS_API_KEY
+      ? await autoDetectSocial(profile.websiteUrl, profile.name)
+      : null
+
+    if (!handles) {
+      return NextResponse.json({ report: result.value })
+    }
+
+    const socialScan = await scanSocialProfiles(handles)
+    const socialHealth = scoreSocialHealth(socialScan)
+    const baseReport = result.value
+    const socialDetails = buildSocialDetails(socialHealth)
+
+    const report: RestaurantGrowthReport = {
+      ...baseReport,
+      scores: { ...baseReport.scores, social: socialHealth.score },
+      scoreDetails: {
+        ...baseReport.scoreDetails,
+        social: socialDetails,
+      },
+      scoreInterpretation: [
+        ...baseReport.scoreInterpretation,
+        buildSocialInterpretation(socialHealth.score),
+      ],
+      diagnosticSteps: baseReport.diagnosticSteps.map((step) =>
+        step.id === "social" ? buildSocialDiagnosticStep(socialHealth, socialDetails) : step
+      ),
+      dataQuality: {
+        ...baseReport.dataQuality,
+        hasSocial: true,
+        missingCriticalData: baseReport.dataQuality.missingCriticalData.filter((item) =>
+          item !== "Confirmed social profile data"
+        ),
+      },
+      overallScore: Math.round(
+        baseReport.scores.discovery * 0.20
+        + baseReport.scores.website * 0.20
+        + baseReport.scores.reputation * 0.20
+        + baseReport.scores.conversion * 0.20
+        + socialHealth.score * 0.20,
+      ),
+      socialHealth,
+    }
+
+    return NextResponse.json({ report })
+  } catch (error) {
+    if (error instanceof OpenDataPlacesLookupError) {
+      const status = error.message === "Business not found"
+        ? 404
+        : error.message === "placeId is required"
+          ? 400
+          : 502
+      return NextResponse.json({ error: error.message }, { status })
+    }
+
+    return NextResponse.json({ error: "Unable to run diagnostic" }, { status: 500 })
+  }
+}
+
+function buildSocialDetails(socialHealth: RestaurantGrowthReport["socialHealth"]): string[] {
+  if (!socialHealth) return []
+
+  const activePlatforms = socialHealth.platforms.filter((platform) => platform.score > 0)
+  const bestPlatform = [...socialHealth.platforms].sort((a, b) => b.score - a.score)[0]
+  const issueCount = socialHealth.issues.length
+
+  return [
+    activePlatforms.length > 0
+      ? `${activePlatforms.length} social platform${activePlatforms.length === 1 ? "" : "s"} returned usable signals.`
+      : "No usable social platform signals were found.",
+    bestPlatform
+      ? `Strongest social channel: ${bestPlatform.platform} at ${bestPlatform.score}/100.`
+      : "No social channel is strong enough to benchmark yet.",
+    issueCount > 0
+      ? `${issueCount} social issue${issueCount === 1 ? "" : "s"} need attention.`
+      : "No major social issue was detected.",
+  ]
+}
+
+function buildSocialDiagnosticStep(
+  socialHealth: NonNullable<RestaurantGrowthReport["socialHealth"]>,
+  details: readonly string[],
+): DiagnosticStepResult {
+  const activePlatforms = socialHealth.platforms.filter((platform) => platform.score > 0)
+  const inactivePlatforms = socialHealth.platforms.filter((platform) => platform.score <= 0)
+
+  return {
+    id: "social",
+    status: activePlatforms.length > 0 ? "complete" : "partial",
+    source: "ScrapeCreators public social scan",
+    confidence: activePlatforms.length >= 2 ? "medium" : "low",
+    checked: ["Instagram profile", "Facebook profile", "TikTok profile", "Posting activity", "Profile completeness", "Engagement"],
+    found: [
+      ...activePlatforms.map((platform) => `${platform.platform}: ${platform.score}/100`),
+      ...details,
+    ],
+    missing: inactivePlatforms.map((platform) => `${platform.platform} usable signals`),
+    assumptions: ["Social score uses public profile data only and does not include reach, saves, shares, paid media, or conversion data."],
+    errors: [],
+  }
+}
+
+function buildSocialInterpretation(score: number): RestaurantScoreInterpretation {
+  const status = score >= 80 ? "healthy" : score >= 60 ? "watch" : "leaking"
+
+  return {
+    category: "social",
+    label: "Social",
+    score,
+    status,
+    meaning: status === "healthy"
+      ? "Social presence is supporting discovery and trust."
+      : status === "watch"
+        ? "Social presence exists, but posting cadence or profile completeness is uneven."
+        : "Social channels are not yet creating enough proof, activity, or attention.",
+    businessImpact: status === "healthy"
+      ? "Social can reinforce decisions after guests discover the restaurant elsewhere."
+      : "Weak social signals can make the restaurant feel less active than competitors.",
+    atriumFix: status === "healthy"
+      ? "Atrium would tie social cadence to offers, events, and measurable demand."
+      : "Atrium would repair profile completeness, posting rhythm, and high-intent calls to action.",
+  }
+}

@@ -1,0 +1,41 @@
+<!-- @dsCard group="Posts" viewport="1080x1350" subtitle="4:5 feed · aurora + grain · float quote card · photo space · script + marker" name="Feed · We're humans" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<script src="../assets/social/image-slot.js"></script>
+<style>
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:var(--font-sans);color:var(--text-strong)}
+  image-slot{display:block}
+  .post{width:1080px;height:1350px;position:relative;overflow:hidden;background-color:var(--mint-200);background-image:var(--grad-aurora);padding:84px 84px 76px;display:flex;flex-direction:column}
+  .grain{position:absolute;inset:0;background-image:var(--surface-grain);background-size:480px auto;opacity:.16;mix-blend-mode:soft-light;pointer-events:none;z-index:1}
+  .row{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center}
+  .mono{font-family:var(--font-display);color:var(--teal-800)}
+  .pill{display:inline-flex;align-items:center;gap:9px;border:1.5px solid var(--cloud-400);background:var(--cloud-100);border-radius:999px;padding:11px 22px;font-size:19px;font-weight:600;color:var(--teal-800)}
+  .eb{font-size:18px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--text-muted)}
+  .float{position:relative;z-index:2;background:var(--cloud-100);border-radius:28px;box-shadow:var(--shadow-float);padding:48px 52px;margin-top:48px}
+  h1{margin:18px 0 0;font-family:var(--font-serif);font-weight:400;font-size:72px;line-height:1.04;letter-spacing:-.01em;color:var(--teal-800)}
+  .mk{background-image:linear-gradient(var(--amber-400),var(--amber-400));background-repeat:no-repeat;background-size:100% 54%;background-position:0 72%;padding:0 .08em}
+  .script{font-family:var(--font-script);color:var(--teal-700)}
+  .photo{position:relative;z-index:2;margin-top:auto;border-radius:24px;overflow:hidden;height:430px;background:var(--teal-700);box-shadow:var(--shadow-soft)}
+  .cap{position:absolute;left:26px;bottom:22px;z-index:3;color:var(--cloud-100);font-size:21px;font-weight:500;text-shadow:0 1px 8px rgba(7,47,52,.6)}
+  .foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;margin-top:30px}
+</style></head><body>
+  <div class="post">
+    <div class="grain"></div>
+    <div class="row">
+      <span class="mono" style="font-size:56px">α</span>
+      <span class="pill">@atrium.studio</span>
+    </div>
+    <div class="float">
+      <div class="eb">We're humans</div>
+      <h1>Simple software <span class="script" style="font-size:80px">for</span><br><span class="mk">better business.</span></h1>
+    </div>
+    <div class="photo">
+      <image-slot id="feed-humans-photo" style="position:absolute;inset:0;width:100%;height:100%" shape="rect" placeholder="Drop a team / room photo"></image-slot>
+      <span class="cap">The team behind the table</span>
+    </div>
+    <div class="foot">
+      <span class="mono" style="font-size:34px">atrium</span>
+      <span class="eb" style="font-size:16px">Kansas City</span>
+    </div>
+  </div>
+</body></html>

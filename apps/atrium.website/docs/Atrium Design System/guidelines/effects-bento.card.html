@@ -1,0 +1,44 @@
+<!-- @dsCard group="Brand" viewport="700x240" subtitle="Soft-bento effect system — aurora tiles, floating cards, diffuse shadows, pills" name="Soft / Bento effects" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);background:var(--cloud-200);padding:22px;color:var(--teal-800)}
+  .grid{display:grid;grid-template-columns:1.1fr 1.1fr 1fr;gap:16px;align-items:stretch}
+  .tile{position:relative;border-radius:var(--radius-bento);box-shadow:var(--shadow-soft);overflow:hidden;padding:18px;border:1px solid rgba(255,255,255,.55);min-height:196px;display:flex;flex-direction:column;justify-content:space-between}
+  .aurora{background:var(--grad-aurora)}
+  .aurora-a{background:var(--grad-aurora-amber)}
+  .aurora-m{background:var(--grad-aurora-mint)}
+  .lbl{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted)}
+  .tok{font-size:11px;color:var(--text-muted);font-family:var(--font-display)}
+  .float{background:var(--cloud-100);border-radius:var(--radius-float);box-shadow:var(--shadow-inset-card);border:1px solid rgba(7,47,52,.05);padding:13px 15px}
+  .float .ttl{font-family:var(--font-serif);font-style:italic;font-size:21px;line-height:1}
+  .pill{display:inline-flex;align-items:center;border-radius:999px;font-size:12px;font-weight:600;padding:6px 13px}
+  .p-out{background:var(--cloud-100);border:1.5px solid var(--cloud-400);color:var(--teal-800)}
+  .p-ink{background:var(--teal-800);color:var(--cloud-300)}
+  .p-amber{background:var(--amber-500);color:var(--teal-800)}
+  .p-mint{background:var(--mint-300);color:var(--teal-800)}
+  .pills{display:flex;gap:7px;flex-wrap:wrap}
+</style></head><body>
+  <div class="grid">
+    <div class="tile aurora">
+      <div class="lbl">Aurora tile + float card</div>
+      <div class="float"><div class="ttl">Floats on top.</div><div class="tok" style="margin-top:6px">--grad-aurora · --shadow-inset-card</div></div>
+      <div class="tok">.atr-bento-card</div>
+    </div>
+    <div class="tile aurora-a">
+      <div class="lbl">Diffuse elevation</div>
+      <div class="float" style="box-shadow:var(--shadow-float)"><div class="ttl">Soft &amp; float.</div><div class="tok" style="margin-top:6px">--shadow-soft · --shadow-float</div></div>
+      <div class="tok">--radius-bento 24px</div>
+    </div>
+    <div class="tile aurora-m">
+      <div class="lbl">Pills</div>
+      <div class="pills">
+        <span class="pill p-amber">ROI</span>
+        <span class="pill p-mint">rank #1</span>
+        <span class="pill p-out">local SEO</span>
+        <span class="pill p-ink">high-intent</span>
+      </div>
+      <div class="tok">Chip · outline-soft / mint-soft / ink / amber</div>
+    </div>
+  </div>
+</body></html>

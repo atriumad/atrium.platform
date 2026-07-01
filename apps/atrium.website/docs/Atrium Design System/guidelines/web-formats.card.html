@@ -1,0 +1,146 @@
+<!-- @dsCard group="Web Samples" viewport="1200x760" subtitle="Services board — solid 3×3 bento grid, real icons, grain texture, marker highlights, photo slot" name="Site · Services Bento" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<script src="../assets/social/image-slot.js"></script>
+<style>
+  body{margin:0;background:var(--surface-page)}
+  image-slot{display:block}
+  .board{position:relative;width:1200px;height:760px;background:var(--surface-page);font-family:var(--font-sans);color:var(--text-body);overflow:hidden;-webkit-font-smoothing:antialiased;
+    --marker:var(--amber-400)}
+  .tile{position:absolute;border-radius:18px;overflow:hidden}
+  .grain{position:absolute;inset:0;background:url(../assets/social/grain.svg);background-size:170px;opacity:.46;mix-blend-mode:soft-light;pointer-events:none}
+  /* token-driven aurora fields — palette-pure (mint/amber/cloud only) */
+  .gbase{border:1px solid rgba(255,255,255,.55);box-shadow:0 1px 2px rgba(7,47,52,.05),0 10px 28px rgba(7,47,52,.07);background-color:var(--mint-200)}
+  .g1{background-image:var(--grad-aurora)}
+  .g2{background-image:var(--grad-aurora-warm)}
+  .g3{background-image:var(--grad-aurora-cool)}
+  .g4{background-image:var(--grad-aurora-warm)}
+  .g5{background-image:var(--grad-aurora)}
+  .eb{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-500)}
+  .mk{background-image:linear-gradient(var(--marker),var(--marker));background-repeat:no-repeat;background-size:100% 60%;background-position:0 78%;padding:0 .1em}
+  .cursor{filter:drop-shadow(0 1px 1px rgba(7,47,52,.3))}
+</style></head><body>
+<div class="board">
+
+  <!-- TILE 1 — GRAPHIC DESIGN -->
+  <div class="tile gbase g1" style="left:16px;top:16px;width:372px;height:248px">
+    <div class="grain"></div>
+    <div style="position:absolute;left:18px;top:20px;width:176px;background:var(--cloud-100);border-radius:13px;padding:10px;box-shadow:0 1px 2px rgba(7,47,52,.06),0 14px 30px rgba(7,47,52,.14)">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 11px;border-radius:8px;background:var(--mint-300);margin-bottom:2px"><span style="font-size:13.5px;font-weight:600;color:var(--teal-800)">Identity</span><span style="font-size:11px;color:var(--teal-500)">α systems</span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 11px"><span style="font-size:13.5px;font-weight:500;color:var(--teal-800)">Packaging</span><span style="font-size:11px;color:var(--teal-300)">retail</span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 11px"><span style="font-size:13.5px;font-weight:500;color:var(--teal-800)">Editorial</span><span style="font-size:11px;color:var(--teal-300)">print</span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 11px"><span style="font-size:13.5px;font-weight:500;color:var(--teal-800)">Web</span><span style="font-size:11px;color:var(--teal-300)">UI / UX</span></div>
+    </div>
+    <svg width="20" height="20" viewBox="0 0 24 24" class="cursor" style="position:absolute;left:158px;top:52px"><path d="M5 3 L5 18 L9 14 L12 20 L14.5 19 L11.5 13 L17 13 Z" fill="#072F34" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+    <div style="position:absolute;right:20px;bottom:22px;width:172px;text-align:right">
+      <div class="eb" style="margin-bottom:8px">Visual identity</div>
+      <div style="font-size:27px;font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(--teal-800)">Graphic<br>Design</div>
+    </div>
+  </div>
+
+  <!-- TILE 2 — THE RECEIPTS -->
+  <div class="tile" style="left:404px;top:16px;width:300px;height:248px;background:var(--surface-card);border:1px solid var(--cloud-300);box-shadow:0 1px 2px rgba(7,47,52,.04),0 8px 24px rgba(7,47,52,.06)">
+    <div style="padding:24px 22px 0;text-align:center">
+      <div class="eb" style="margin-bottom:8px">The receipts</div>
+      <div style="font-size:19px;font-weight:600;line-height:1.2;letter-spacing:-.01em;color:var(--teal-800)">The work, by<br>the numbers.</div>
+    </div>
+    <div style="position:absolute;left:18px;right:18px;bottom:18px;background:var(--cloud-200);border:1px solid var(--cloud-300);border-radius:13px;padding:16px 16px 18px">
+      <span style="position:absolute;top:13px;right:13px;font-size:11px;font-weight:600;color:var(--teal-800);background:var(--amber-500);padding:3px 9px;border-radius:999px">ROI</span>
+      <div style="font-size:12px;line-height:1.55;color:var(--teal-300);width:78%">Across paid media, content and SEO retainers in the last twelve months —</div>
+      <div style="display:flex;align-items:baseline;gap:10px;margin-top:14px">
+        <span class="mk" style="font-family:var(--font-serif);font-style:italic;font-size:46px;line-height:.9;color:var(--teal-800);background-size:100% 42%;background-position:0 72%;padding:0 .04em">2.7&times;</span>
+        <span style="font-size:12px;line-height:1.3;color:var(--teal-500)">average return<br>on ad spend</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TILE 3 — MARKETING -->
+  <div class="tile gbase g2" style="left:720px;top:16px;width:464px;height:248px">
+    <div class="grain"></div>
+    <div style="position:absolute;left:28px;top:30px;width:200px">
+      <div class="eb" style="margin-bottom:10px">Media &amp; advertising</div>
+      <div style="font-size:30px;font-weight:600;line-height:1.08;letter-spacing:-.02em;color:var(--teal-800)">We build growth engines, <span style="font-family:var(--font-serif);font-style:italic;font-weight:400">not just ads.</span></div>
+    </div>
+    <div style="position:absolute;right:22px;top:24px;width:218px;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:8px;box-shadow:0 14px 32px rgba(7,47,52,.12)">
+      <div style="display:flex;align-items:center;gap:11px;padding:9px 11px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#072F34" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4.5"></circle><circle cx="12" cy="12" r="1"></circle></svg><span style="font-size:14.5px;font-weight:500;color:var(--teal-800)">Paid Media</span></div>
+      <div style="position:relative;display:flex;align-items:center;gap:11px;padding:9px 11px;background:var(--cloud-100);border-radius:9px;box-shadow:0 2px 8px rgba(7,47,52,.1)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#072F34" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="2.5"></circle><circle cx="6" cy="12" r="2.5"></circle><circle cx="18" cy="19" r="2.5"></circle><path d="M8.2 10.7 15.8 6.3M8.2 13.3 15.8 17.7"></path></svg><span style="font-size:14.5px;font-weight:600;color:var(--teal-800)">Social</span><svg width="19" height="19" viewBox="0 0 24 24" class="cursor" style="position:absolute;right:-2px;bottom:-4px"><path d="M5 3 L5 18 L9 14 L12 20 L14.5 19 L11.5 13 L17 13 Z" fill="#072F34" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"></path></svg></div>
+      <div style="display:flex;align-items:center;gap:11px;padding:9px 11px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#072F34" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6 8.5-6"></path></svg><span style="font-size:14.5px;font-weight:500;color:var(--teal-800)">Email &amp; CRM</span></div>
+      <div style="display:flex;align-items:center;gap:11px;padding:9px 11px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#072F34" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v16H5z"></path><path d="M8 8h8M8 12h8M8 16h5"></path></svg><span style="font-size:14.5px;font-weight:500;color:var(--teal-800)">Content</span></div>
+      <div style="display:flex;align-items:center;gap:11px;padding:9px 11px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#072F34" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg><span style="font-size:14.5px;font-weight:500;color:var(--teal-800)">Analytics</span></div>
+    </div>
+  </div>
+
+  <!-- TILE 4 — STUDIO MINI -->
+  <div class="tile" style="left:16px;top:280px;width:372px;height:148px;background:var(--mint-400);box-shadow:0 1px 2px rgba(7,47,52,.05),0 8px 22px rgba(7,47,52,.07);display:flex;align-items:center;gap:20px;padding:0 26px">
+    <span style="display:block;width:46px;height:46px;flex:none;background:var(--teal-800);-webkit-mask:url(../assets/logos/atrium-mark.svg) center/contain no-repeat;mask:url(../assets/logos/atrium-mark.svg) center/contain no-repeat"></span>
+    <div>
+      <div style="font-family:var(--font-script);font-size:30px;line-height:1;color:var(--teal-800)">We&rsquo;re humans.</div>
+      <div style="font-size:10.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-500);margin-top:8px">Creative + marketing studio</div>
+    </div>
+  </div>
+
+  <!-- TILE 5 — HERO α / atrium -->
+  <div class="tile" style="left:404px;top:280px;width:300px;height:148px;background:var(--teal-800);box-shadow:0 1px 2px rgba(7,47,52,.1),0 14px 32px rgba(7,47,52,.22);display:flex;align-items:center;justify-content:center;gap:18px">
+    <div class="grain" style="opacity:.34"></div>
+    <span style="display:block;width:46px;height:46px;flex:none;background:var(--mint-400);-webkit-mask:url(../assets/logos/atrium-mark.svg) center/contain no-repeat;mask:url(../assets/logos/atrium-mark.svg) center/contain no-repeat"></span>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:9px">
+      <div style="font-family:var(--font-serif);font-style:italic;font-size:25px;line-height:.98;color:var(--mint-400)">Our<br>Services</div>
+      <span style="display:block;width:62px;height:17px;background:var(--mint-400);opacity:.9;-webkit-mask:url(../assets/logos/atrium-wordmark.svg) left/contain no-repeat;mask:url(../assets/logos/atrium-wordmark.svg) left/contain no-repeat"></span>
+    </div>
+  </div>
+
+  <!-- TILE 6 — WHY ATRIUM -->
+  <div class="tile gbase g3" style="left:720px;top:280px;width:464px;height:148px;display:flex;align-items:center;gap:22px;padding:0 24px">
+    <div class="grain" style="opacity:.3"></div>
+    <div style="position:relative;flex:none;width:96px;height:96px;background:var(--cloud-100);border-radius:16px;box-shadow:0 10px 26px rgba(7,47,52,.12);display:flex;align-items:center;justify-content:center">
+      <div style="width:50px;height:50px;border-radius:50%;filter:blur(2px);background:conic-gradient(from 200deg,#F7A823,#B5F2DB,#2c6168,#FFC21F,#F7A823)"></div>
+      <svg width="20" height="20" viewBox="0 0 24 24" class="cursor" style="position:absolute;right:18px;bottom:14px"><path d="M5 3 L5 18 L9 14 L12 20 L14.5 19 L11.5 13 L17 13 Z" fill="#072F34" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+    </div>
+    <div style="position:relative">
+      <div class="eb" style="margin-bottom:7px">Why atrium</div>
+      <div style="font-size:27px;font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(--teal-800)">Help, <span style="font-family:var(--font-serif);font-style:italic;font-weight:400">yesterday.</span></div>
+      <div style="font-size:13px;line-height:1.45;color:var(--teal-500);margin-top:6px;max-width:280px">The team you call when you needed it done last week — and still want it done right.</div>
+    </div>
+  </div>
+
+  <!-- TILE 7 — THE EXPERIENCE ERA -->
+  <div class="tile gbase g4" style="left:16px;top:444px;width:372px;height:300px;padding:20px">
+    <div class="grain" style="opacity:.3"></div>
+    <div style="position:relative;display:flex;align-items:baseline;gap:10px;margin-bottom:14px">
+      <span style="font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-800)">The Experience Era</span>
+      <span style="font-family:var(--font-serif);font-style:italic;font-size:17px;color:var(--teal-500)">together is more fun</span>
+    </div>
+    <div style="position:relative;background:var(--cloud-100);border-radius:14px;padding:17px 18px;box-shadow:0 1px 2px rgba(7,47,52,.05),0 12px 28px rgba(7,47,52,.1)">
+      <p style="margin:0;font-size:14px;line-height:1.62;color:var(--ink-700)">We&rsquo;re a creative &amp; marketing studio. We pair&nbsp;<span style="display:inline-flex;align-items:center;gap:5px;vertical-align:baseline;padding:1px 9px;border:1.5px solid var(--teal-800);border-radius:999px;font-size:12px;font-weight:500;color:var(--teal-800)"><span style="width:12px;height:12px;display:inline-block;background:var(--teal-800);-webkit-mask:url(../assets/logos/atrium-mark.svg) center/contain no-repeat;mask:url(../assets/logos/atrium-mark.svg) center/contain no-repeat"></span>strategy</span>&nbsp;with bold <span class="mk">creative</span> and obsess over your <span class="mk">ROI</span> &mdash; never vanity metrics.</p>
+      <p style="margin:11px 0 0;font-size:14px;line-height:1.62;color:var(--ink-700)">From the first <span style="display:inline-block;vertical-align:baseline;padding:1px 9px;border:1.5px solid var(--teal-800);border-radius:999px;font-size:12px;font-weight:500;color:var(--teal-800)">brand audit</span> to launch day, we&rsquo;re the team you call when you need help <span class="mk" style="font-style:italic;font-family:var(--font-serif);font-size:16px">yesterday.</span></p>
+    </div>
+  </div>
+
+  <!-- TILE 8 — PHOTOGRAPHY -->
+  <div class="tile" style="left:404px;top:444px;width:300px;height:300px;background:var(--surface-card);border:1px solid var(--cloud-300);box-shadow:0 1px 2px rgba(7,47,52,.04),0 8px 24px rgba(7,47,52,.06);padding:16px">
+    <div class="eb" style="margin-bottom:6px">Photography</div>
+    <div style="font-size:19px;font-weight:600;line-height:1.1;letter-spacing:-.01em;color:var(--teal-800);margin-bottom:12px">Show the room.</div>
+    <div style="position:relative;border-radius:12px;overflow:hidden">
+      <image-slot id="svc-photo-1" shape="rounded" radius="12" placeholder="Drop a photo" style="display:block;width:100%;height:196px"></image-slot>
+      <div style="position:absolute;left:0;right:0;bottom:0;padding:18px 12px 9px;background:linear-gradient(transparent,rgba(7,47,52,.72));font-size:11.5px;font-weight:500;color:var(--cloud-300)">On location &middot; Kansas City</div>
+    </div>
+  </div>
+
+  <!-- TILE 9 — SEO -->
+  <div class="tile gbase g5" style="left:720px;top:444px;width:464px;height:300px">
+    <div class="grain" style="opacity:.3"></div>
+    <div style="position:absolute;right:22px;top:24px;width:150px;text-align:right">
+      <div class="eb" style="margin-bottom:8px">SEO</div>
+      <div style="font-size:27px;font-weight:600;line-height:1.05;letter-spacing:-.02em;color:var(--teal-800)">Get found <span style="font-family:var(--font-serif);font-style:italic;font-weight:400">first.</span></div>
+    </div>
+    <div style="position:absolute;left:20px;bottom:20px;width:236px;background:var(--cloud-100);border-radius:13px;padding:16px;box-shadow:0 1px 2px rgba(7,47,52,.05),0 12px 28px rgba(7,47,52,.12)">
+      <p style="margin:0;font-size:12.5px;line-height:1.6;color:var(--teal-500)">We obsess over <strong style="color:var(--teal-800);font-weight:600">high-intent</strong> search &mdash; the people already looking for what you sell. Technical, content &amp; local, tuned to revenue.</p>
+    </div>
+    <span style="position:absolute;left:30px;top:34px;font-size:12px;font-weight:600;color:var(--teal-800);background:var(--amber-400);padding:5px 12px;border-radius:999px;box-shadow:0 6px 16px rgba(7,47,52,.14)">+212% traffic</span>
+    <span style="position:absolute;left:150px;top:96px;font-size:12px;font-weight:600;color:var(--teal-800);background:var(--mint-400);padding:5px 12px;border-radius:999px;box-shadow:0 6px 16px rgba(7,47,52,.14)">rank #1</span>
+    <span style="position:absolute;left:40px;top:118px;font-size:12px;font-weight:500;color:var(--teal-800);background:var(--cloud-100);border:1.5px solid var(--teal-800);padding:4px 12px;border-radius:999px;box-shadow:0 6px 16px rgba(7,47,52,.1)">local SEO</span>
+    <span style="position:absolute;left:300px;top:150px;font-size:12px;font-weight:500;color:var(--teal-800);background:var(--cloud-100);border:1.5px solid var(--teal-500);padding:4px 12px;border-radius:999px;box-shadow:0 6px 16px rgba(7,47,52,.1)">keywords</span>
+    <span style="position:absolute;left:236px;top:230px;font-size:12px;font-weight:600;color:var(--cloud-300);background:var(--teal-800);padding:5px 12px;border-radius:999px;box-shadow:0 6px 16px rgba(7,47,52,.18)">high-intent</span>
+  </div>
+
+</div>
+</body></html>

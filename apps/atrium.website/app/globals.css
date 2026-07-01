@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import "@atrium/ui/src/tokens/tokens.css";
+
+/* ─── Tailwind theme ──────────────────────────────────────────────────────── */
+@theme inline {
+  --color-background: var(--cloud-200);
+  --color-foreground: var(--ink-700);
+  --font-sans: var(--font-sans);
+}
+
+/* Legacy website aliases retained for sections still authored against the
+   pre-@atrium/ui token names. Remove once those components use semantic tokens. */
+:root {
+  --color-primary: var(--teal-800);
+  --color-primary-900: var(--teal-900);
+  --color-surface: var(--surface-page);
+  --color-surface-alt: var(--surface-sunken);
+  --color-accent: var(--accent);
+  --color-text-light: var(--text-on-dark);
+  --color-text-dark: var(--text-strong);
+  --color-border-subtle: rgba(228, 238, 240, 0.1);
+  --color-forest: var(--teal-800);
+  --color-forest-2: var(--teal-700);
+}
+
+/* ─── Base reset ──────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+body {
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 em, h2 em, h3 em, h4 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ─── Grain keyframe ──────────────────────────────────────────────────── */
+@keyframes grain {
+  0%,100% { transform: translate(0,0); }
+  10%  { transform: translate(-5%,-5%); }
+  20%  { transform: translate(-10%,5%); }
+  30%  { transform: translate(5%,-10%); }
+  40%  { transform: translate(-5%,15%); }
+  50%  { transform: translate(-10%,5%); }
+  60%  { transform: translate(15%,0); }
+  70%  { transform: translate(0,10%); }
+  80%  { transform: translate(-15%,0); }
+  90%  { transform: translate(10%,5%); }
+}

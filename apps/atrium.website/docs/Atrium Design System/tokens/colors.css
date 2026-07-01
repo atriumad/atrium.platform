@@ -1,0 +1,62 @@
+/* ============================================================
+   Atrium — Color tokens
+   Brand anchors sampled directly from the identity artwork:
+     Deep Teal  #072F34  — the brand's dark anchor
+     Mint       #B5F2DB  — the brand's light/accent green
+     Cloud      #E4EEF0  — cool off-white (from the logo lockups)
+     Amber      #F7A823  — warm marigold accent (poster campaigns)
+   ============================================================ */
+:root {
+  /* ---- Raw brand palette ---- */
+  --teal-900: #042024;   /* near-black ink, deepest teal */
+  --teal-800: #072f34;   /* DEEP TEAL — primary dark anchor */
+  --teal-700: #0e3a40;   /* raised teal surface */
+  --teal-600: #18505408; /* (unused placeholder kept stable) */
+  --teal-500: #2c6168;   /* mid teal, hairlines on dark */
+  --teal-300: #6fa39f;   /* muted teal, secondary text on dark */
+
+  --mint-500: #8fe6c2;   /* saturated mint */
+  --mint-400: #b5f2db;   /* MINT — primary light accent */
+  --mint-300: #cdf6e6;   /* soft mint wash */
+  --mint-200: #e4faf1;   /* faintest mint tint */
+
+  --amber-600: #e0911a;  /* pressed amber */
+  --amber-500: #f7a823;  /* AMBER — warm marigold accent */
+  --amber-400: #ffc21f;  /* highlighter amber (marker callouts) */
+  --amber-200: #ffe6a8;  /* amber tint */
+
+  --cloud-100: #ffffff;  /* pure white */
+  --cloud-200: #f4f8f8;  /* page off-white */
+  --cloud-300: #e4eef0;  /* CLOUD — cool brand white */
+  --cloud-400: #cfdcdd;  /* hairline grey-teal */
+  --ink-700: #1c2b2c;    /* body ink on light */
+
+  /* ---- Semantic — surfaces ---- */
+  --surface-page: var(--cloud-200);
+  --surface-card: var(--cloud-100);
+  --surface-sunken: var(--cloud-300);
+  --surface-dark: var(--teal-800);
+  --surface-dark-raised: var(--teal-700);
+  --surface-mint: var(--mint-400);
+  --surface-amber: var(--amber-500);
+
+  /* ---- Semantic — text ---- */
+  --text-strong: var(--teal-800);   /* headlines on light */
+  --text-body: var(--ink-700);      /* body on light */
+  --text-muted: var(--teal-500);    /* secondary on light */
+  --text-on-dark: var(--cloud-300); /* body on deep teal */
+  --text-on-dark-strong: var(--mint-400);
+  --text-on-mint: var(--teal-800);
+  --text-on-amber: var(--teal-800);
+
+  /* ---- Semantic — lines & accents ---- */
+  --border-light: var(--cloud-400);
+  --border-strong: var(--teal-800);
+  --border-on-dark: var(--teal-500);
+  --accent: var(--mint-400);
+  --accent-warm: var(--amber-500);
+  --highlight: var(--amber-400);    /* marker highlight behind words */
+
+  /* ---- Focus ---- */
+  --focus-ring: var(--amber-500);
+}

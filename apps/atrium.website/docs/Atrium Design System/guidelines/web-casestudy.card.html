@@ -1,0 +1,66 @@
+<!-- @dsCard group="Web Samples" viewport="1280x720" subtitle="Case study — solid two-tile grid, grain over palette gradient, photo feature + proof card" name="Site · Case Study" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<script src="../assets/social/image-slot.js"></script>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--teal-800);position:relative;
+    background-color:var(--mint-200);background-image:var(--grad-aurora-cool);padding:48px 56px}
+  .pgrain{position:fixed;inset:0;background-image:var(--surface-grain);background-size:420px auto;opacity:.18;mix-blend-mode:soft-light;pointer-events:none;z-index:0}
+  .eb{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+  .head{position:relative;z-index:1;display:flex;align-items:baseline;gap:14px;margin-bottom:18px;white-space:nowrap}
+  .lead{font-family:var(--font-serif);font-style:italic;font-size:26px;line-height:1;color:var(--teal-800)}
+  .grid{position:relative;z-index:1;display:grid;grid-template-columns:744px 1fr;gap:24px;height:534px}
+  .grain{position:absolute;inset:0;background-image:var(--surface-grain);background-size:300px auto;opacity:.2;mix-blend-mode:soft-light;pointer-events:none;z-index:3}
+  /* feature photo tile */
+  .feature{position:relative;border-radius:18px;overflow:hidden;background:var(--teal-700);box-shadow:0 1px 2px rgba(7,47,52,.05),0 12px 30px rgba(7,47,52,.12);border:1px solid var(--cloud-400)}
+  .feature .ov{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(7,47,52,.06) 45%,rgba(7,47,52,.62))}
+  .tag{position:absolute;left:22px;top:22px;background:var(--cloud-100);color:var(--teal-800);font-size:13px;font-weight:600;border-radius:999px;padding:8px 17px;white-space:nowrap;z-index:4;box-shadow:var(--shadow-soft)}
+  .cap{position:absolute;left:26px;bottom:26px;z-index:4}
+  .name{font-family:var(--font-serif);font-size:52px;color:var(--cloud-100);line-height:1;white-space:nowrap;margin:0}
+  .role{font-size:16px;color:var(--mint-200);margin:9px 0 0}
+  /* detail / proof tile */
+  .card{position:relative;background:var(--cloud-100);border-radius:18px;overflow:hidden;box-shadow:0 1px 2px rgba(7,47,52,.05),0 12px 30px rgba(7,47,52,.1);border:1px solid var(--cloud-300);display:flex;flex-direction:column}
+  .food{position:relative;height:176px;overflow:hidden;flex:none}
+  .body{padding:20px 24px;display:flex;flex-direction:column;height:100%}
+  .cn{font-size:23px;font-weight:600;color:var(--teal-800);margin:0 0 8px}
+  .cd{font-size:13.5px;line-height:1.55;color:var(--text-muted);margin:0 0 14px}
+  .stars{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--text-muted);border-bottom:1px solid var(--cloud-300);padding-bottom:15px}
+  .stars .s{color:var(--amber-500);letter-spacing:2px;font-size:16px}
+  .mm{font-size:14px;font-weight:600;color:var(--teal-800);margin:15px 0 9px}
+  .opt{border:1.5px solid var(--cloud-400);border-radius:12px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;font-size:14.5px;font-weight:600;margin-bottom:8px}
+  .opt.sel{border-color:transparent;background:var(--mint-300)}
+  .price{display:flex;align-items:center;gap:10px;color:var(--text-muted)}
+  .dot{width:20px;height:20px;border-radius:999px;background:var(--teal-800);color:var(--cloud-100);display:flex;align-items:center;justify-content:center;font-size:11px}
+  .radio{width:19px;height:19px;border-radius:999px;border:1.6px solid var(--cloud-400)}
+</style></head><body>
+  <div class="pgrain"></div>
+  <div class="head">
+    <span class="eb">Case study · The receipts</span>
+    <span class="lead">Worth talking about.</span>
+  </div>
+  <div class="grid">
+    <div class="feature">
+      <image-slot id="cs-portrait" style="position:absolute;inset:0;width:100%;height:100%;z-index:1" shape="rect" placeholder="Drop a founder / chef portrait"></image-slot>
+      <div class="ov"></div>
+      <div class="grain"></div>
+      <span class="tag">Restaurant · Kansas City</span>
+      <div class="cap">
+        <div class="name">Saigon Social</div>
+        <div class="role">+2.7× covers booked in 90 days</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="food">
+        <image-slot id="cs-dish" style="position:absolute;inset:0;width:100%;height:100%" shape="rect" placeholder="Drop dish photography"></image-slot>
+      </div>
+      <div class="body">
+        <h3 class="cn">The dinner series</h3>
+        <p class="cd">The food at Saigon Social carries a sense of place — Vietnam, the Midwest, and everywhere between. Our campaign put that story in front of the right rooms.</p>
+        <div class="stars"><span class="s">★★★★★</span><span>4.6 · Based on 83 reviews</span></div>
+        <div class="mm">Membership</div>
+        <div class="opt sel"><span>Feast for one</span><span class="price">$107 <span class="dot">✓</span></span></div>
+        <div class="opt"><span>Feast for two</span><span class="price">$190 <span class="radio"></span></span></div>
+      </div>
+    </div>
+  </div>
+</body></html>
