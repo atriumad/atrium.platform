@@ -31,6 +31,7 @@
       "name": "@atrium/website",
       "version": "0.1.0",
       "dependencies": {
+        "@atrium/ui": "workspace:*",
         "@gsap/react": "^2.1.2",
         "@react-three/drei": "10.7.7",
         "@react-three/fiber": "9.6.1",

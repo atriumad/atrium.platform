@@ -6,6 +6,7 @@ type EyebrowProps = {
   children: ReactNode
   tone?: EyebrowTone
   style?: CSSProperties
+  className?: string
 }
 
 const toneColor: Record<EyebrowTone, string> = {
@@ -16,10 +17,10 @@ const toneColor: Record<EyebrowTone, string> = {
   onDark:  'var(--teal-300)',
 }
 
-export function Eyebrow({ children, tone = 'default', style }: EyebrowProps) {
+export function Eyebrow({ children, tone = 'default', style, className = '' }: EyebrowProps) {
   const color = toneColor[tone]
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', ...style }}>
+    <div className={className} style={{ display: 'flex', alignItems: 'center', gap: '12px', ...style }}>
       <span style={{ width: '24px', height: '1px', flexShrink: 0, background: color }} />
       <p
         style={{
