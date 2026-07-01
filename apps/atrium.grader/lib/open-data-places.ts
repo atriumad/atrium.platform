@@ -1,3 +1,4 @@
+import type { GooglePlaceMeta } from "./google-places-client"
 import { getGooglePlacesApiKey, getGoogleRestaurantProfile, searchGooglePlaces } from "./google-places-client"
 import { getOsmRestaurantProfile, getOsmWebsiteUrl, searchOsmPlaces } from "./osm-client"
 import { parseGooglePlaceId } from "./place-id"
@@ -6,6 +7,7 @@ import { BusinessProviderConfigError, configuredBusinessProviderMode } from "./p
 
 export type { PlaceSuggestion } from "./osm-client"
 export type { ManualReputationInput } from "./place-utils"
+export type { GooglePlaceMeta } from "./google-places-client"
 
 export class OpenDataPlacesLookupError extends Error {}
 
@@ -68,7 +70,7 @@ export async function getRestaurantGrowthProfileFromPlace(
   placeId: string,
   reputation: ManualReputationInput | undefined,
   fetcher: typeof fetch = fetch,
-) {
+): Promise<{ profile: import("@atrium/application").RestaurantGrowthProfile; googleMeta: GooglePlaceMeta | null }> {
   let useGoogle: boolean
   try {
     useGoogle = shouldUseGoogleForProfile(placeId)

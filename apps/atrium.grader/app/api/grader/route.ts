@@ -5,6 +5,7 @@ import { autoDetectSocial } from "@/lib/auto-detect-social"
 import type { ManualReputationInput } from "@/lib/open-data-places"
 import { getRestaurantGrowthProfileFromPlace, OpenDataPlacesLookupError } from "@/lib/open-data-places"
 import { runPageSpeedWebsiteAudit } from "@/lib/pagespeed-client"
+import { generateReportNarrative, mergeNarrativeIntoReport } from "@/lib/report-agent"
 import { scanSocialProfiles } from "@/lib/scrape-creators"
 
 const PAGESPEED_TIMEOUT_MS = 20_000
@@ -30,25 +31,22 @@ export async function POST(req: Request) {
   }
 
   try {
-    const profile = await getRestaurantGrowthProfileFromPlace(placeId, {
+    const { profile, googleMeta } = await getRestaurantGrowthProfileFromPlace(placeId, {
       rating: typeof body?.reputation?.rating === "number" ? body.reputation.rating : null,
       reviewCount: typeof body?.reputation?.reviewCount === "number" ? body.reputation.reviewCount : null,
     })
 
-    // Run PageSpeed and social detection in parallel — both optional, neither blocks the other
-    const hasPagespeedKey = Boolean(process.env.PAGESPEED_API_KEY?.trim())
-    const hasSocialKey = Boolean(process.env.SCRAPECREATORS_API_KEY)
-
+    // PageSpeed + social run in parallel — both optional, neither blocks the other
     const [lighthouseResult, handles] = await Promise.all([
-      hasPagespeedKey && profile.websiteUrl
+      Boolean(process.env.PAGESPEED_API_KEY?.trim()) && profile.websiteUrl
         ? pagespeedWithTimeout(profile.websiteUrl)
         : Promise.resolve(null),
-      hasSocialKey
+      Boolean(process.env.SCRAPECREATORS_API_KEY)
         ? autoDetectSocial(profile.websiteUrl, profile.name).catch(() => null)
         : Promise.resolve(null),
     ])
 
-    // Merge lighthouse data into profile before grading if it arrived in time
+    // Merge Lighthouse into profile before grading if it arrived in time
     const gradingProfile = lighthouseResult && profile.websiteUrl
       ? { ...profile, website: { ...profile.website, lighthouse: lighthouseResult } }
       : profile
@@ -59,45 +57,51 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: result.error.message }, { status: 400 })
     }
 
-    if (!handles) {
-      return NextResponse.json({ report: result.value })
-    }
+    let baseReport = result.value
 
-    const socialScan = await scanSocialProfiles(handles)
-    const socialHealth = scoreSocialHealth(socialScan)
-    const baseReport = result.value
-    const socialDetails = buildSocialDetails(socialHealth)
+    // Social layer — enriches scores and interpretation if handles were found
+    if (handles) {
+      const socialScan = await scanSocialProfiles(handles)
+      const socialHealth = scoreSocialHealth(socialScan)
+      const socialDetails = buildSocialDetails(socialHealth)
 
-    const report: RestaurantGrowthReport = {
-      ...baseReport,
-      scores: { ...baseReport.scores, social: socialHealth.score },
-      scoreDetails: {
-        ...baseReport.scoreDetails,
-        social: socialDetails,
-      },
-      scoreInterpretation: [
-        ...baseReport.scoreInterpretation,
-        buildSocialInterpretation(socialHealth.score),
-      ],
-      diagnosticSteps: baseReport.diagnosticSteps.map((step) =>
-        step.id === "social" ? buildSocialDiagnosticStep(socialHealth, socialDetails) : step
-      ),
-      dataQuality: {
-        ...baseReport.dataQuality,
-        hasSocial: true,
-        missingCriticalData: baseReport.dataQuality.missingCriticalData.filter((item) =>
-          item !== "Confirmed social profile data"
+      baseReport = {
+        ...baseReport,
+        scores: { ...baseReport.scores, social: socialHealth.score },
+        scoreDetails: { ...baseReport.scoreDetails, social: socialDetails },
+        scoreInterpretation: [...baseReport.scoreInterpretation, buildSocialInterpretation(socialHealth.score)],
+        diagnosticSteps: baseReport.diagnosticSteps.map((step) =>
+          step.id === "social" ? buildSocialDiagnosticStep(socialHealth, socialDetails) : step
         ),
-      },
-      overallScore: Math.round(
-        baseReport.scores.discovery * 0.20
-        + baseReport.scores.website * 0.20
-        + baseReport.scores.reputation * 0.20
-        + baseReport.scores.conversion * 0.20
-        + socialHealth.score * 0.20,
-      ),
-      socialHealth,
+        dataQuality: {
+          ...baseReport.dataQuality,
+          hasSocial: true,
+          missingCriticalData: baseReport.dataQuality.missingCriticalData.filter((item) =>
+            item !== "Confirmed social profile data"
+          ),
+        },
+        overallScore: Math.round(
+          baseReport.scores.discovery * 0.20
+          + baseReport.scores.website * 0.20
+          + baseReport.scores.reputation * 0.20
+          + baseReport.scores.conversion * 0.20
+          + socialHealth.score * 0.20,
+        ),
+        socialHealth,
+      }
     }
+
+    // Agentic narrative layer — generates contextual copy from scored data
+    const narrative = await generateReportNarrative({
+      profile: gradingProfile,
+      googleMeta,
+      scores: baseReport.scores,
+      overallScore: baseReport.overallScore,
+      issues: baseReport.issues,
+      recommendations: baseReport.recommendations,
+    })
+
+    const report = narrative ? mergeNarrativeIntoReport(baseReport, narrative) : baseReport
 
     return NextResponse.json({ report })
   } catch (error) {
@@ -117,7 +121,7 @@ export async function POST(req: Request) {
 function buildSocialDetails(socialHealth: RestaurantGrowthReport["socialHealth"]): string[] {
   if (!socialHealth) return []
 
-  const activePlatforms = socialHealth.platforms.filter((platform) => platform.score > 0)
+  const activePlatforms = socialHealth.platforms.filter((p) => p.score > 0)
   const bestPlatform = [...socialHealth.platforms].sort((a, b) => b.score - a.score)[0]
   const issueCount = socialHealth.issues.length
 
@@ -138,8 +142,8 @@ function buildSocialDiagnosticStep(
   socialHealth: NonNullable<RestaurantGrowthReport["socialHealth"]>,
   details: readonly string[],
 ): DiagnosticStepResult {
-  const activePlatforms = socialHealth.platforms.filter((platform) => platform.score > 0)
-  const inactivePlatforms = socialHealth.platforms.filter((platform) => platform.score <= 0)
+  const activePlatforms = socialHealth.platforms.filter((p) => p.score > 0)
+  const inactivePlatforms = socialHealth.platforms.filter((p) => p.score <= 0)
 
   return {
     id: "social",
@@ -147,11 +151,8 @@ function buildSocialDiagnosticStep(
     source: "ScrapeCreators public social scan",
     confidence: activePlatforms.length >= 2 ? "medium" : "low",
     checked: ["Instagram profile", "Facebook profile", "TikTok profile", "Posting activity", "Profile completeness", "Engagement"],
-    found: [
-      ...activePlatforms.map((platform) => `${platform.platform}: ${platform.score}/100`),
-      ...details,
-    ],
-    missing: inactivePlatforms.map((platform) => `${platform.platform} usable signals`),
+    found: [...activePlatforms.map((p) => `${p.platform}: ${p.score}/100`), ...details],
+    missing: inactivePlatforms.map((p) => `${p.platform} usable signals`),
     assumptions: ["Social score uses public profile data only and does not include reach, saves, shares, paid media, or conversion data."],
     errors: [],
   }

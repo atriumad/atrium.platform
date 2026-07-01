@@ -180,7 +180,7 @@ export async function getOsmRestaurantProfile(
   placeId: string,
   reputation: ManualReputationInput | undefined,
   fetcher: typeof fetch = fetch,
-): Promise<RestaurantGrowthProfile> {
+): Promise<{ profile: RestaurantGrowthProfile; googleMeta: null }> {
   const osmId = parsePlaceId(placeId)
   if (!osmId) {
     throw new Error("placeId is required")
@@ -216,7 +216,7 @@ export async function getOsmRestaurantProfile(
     fetchLocalBenchmark(lat, lon, placeId, fetcher),
   ])
 
-  return toGrowthProfile(placeId, place, websiteUrl, website, benchmark, reputation)
+  return { profile: toGrowthProfile(placeId, place, websiteUrl, website, benchmark, reputation), googleMeta: null }
 }
 
 export async function getOsmWebsiteUrl(

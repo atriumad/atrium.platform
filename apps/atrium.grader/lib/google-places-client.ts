@@ -47,6 +47,16 @@ const GOOGLE_PLACE_DETAILS_FIELD_MASK = [
   "dineIn",
 ].join(",")
 
+export type GooglePlaceMeta = {
+  readonly priceLevel?: string
+  readonly reservable?: boolean
+  readonly takeout?: boolean
+  readonly delivery?: boolean
+  readonly dineIn?: boolean
+  readonly openingHoursPublished: boolean
+  readonly hasEditorialSummary: boolean
+}
+
 const DEFAULT_PHOTO_WIDTH = 420
 const DEFAULT_PHOTO_HEIGHT = 260
 
@@ -256,7 +266,7 @@ export async function searchGooglePlaces(
 export async function getGoogleRestaurantProfile(
   googlePlaceId: string,
   fetcher: typeof fetch = fetch,
-): Promise<RestaurantGrowthProfile> {
+): Promise<{ profile: RestaurantGrowthProfile; googleMeta: GooglePlaceMeta }> {
   const res = await fetcher(googlePlaceDetailsUrl(googlePlaceId), {
     method: "GET",
     headers: googlePlacesHeaders(GOOGLE_PLACE_DETAILS_FIELD_MASK),
@@ -296,7 +306,20 @@ export async function getGoogleRestaurantProfile(
   const category = place.primaryTypeDisplayName?.text
     ?? readableType(place.types?.[0] ?? "restaurant")
 
-  return {
+  const googleMeta: GooglePlaceMeta = {
+    ...(place.priceLevel !== undefined && { priceLevel: place.priceLevel }),
+    ...(place.reservable !== undefined && { reservable: place.reservable }),
+    ...(place.takeout !== undefined && { takeout: place.takeout }),
+    ...(place.delivery !== undefined && { delivery: place.delivery }),
+    ...(place.dineIn !== undefined && { dineIn: place.dineIn }),
+    openingHoursPublished: Boolean(
+      place.regularOpeningHours?.weekdayDescriptions?.length
+      ?? place.currentOpeningHours?.weekdayDescriptions?.length,
+    ),
+    hasEditorialSummary: Boolean(place.editorialSummary?.text),
+  }
+
+  const profile: RestaurantGrowthProfile = {
     id: toGooglePlaceId(googlePlaceId),
     name: place.displayName?.text ?? "Unknown restaurant",
     category,
@@ -315,6 +338,8 @@ export async function getGoogleRestaurantProfile(
     website: enrichedWebsite,
     conversion: buildConversionSignals(enrichedWebsite, hasPhone),
   }
+
+  return { profile, googleMeta }
 }
 
 export async function getGooglePlacePhotoUri(
