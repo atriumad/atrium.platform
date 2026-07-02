@@ -173,30 +173,13 @@ describe("POST /api/grader", () => {
     ]))
   })
 
-  test("includes socialHealth when auto-detected social handles found and API key set", async () => {
-    process.env.SCRAPECREATORS_API_KEY = "test-key"
-
+  test("returns meta with profile and googleMeta for client enrichment", async () => {
     globalThis.fetch = mock(async (input: string | URL | Request) => {
       const url = String(input)
-
       if (url.includes("nominatim.openstreetmap.org/lookup")) {
         return Response.json([{ osm_type: "node", osm_id: 123, lat: "25.79065", lon: "-80.13005", category: "amenity", type: "restaurant", display_name: "Real Bistro, Miami Beach, FL", namedetails: { name: "Real Bistro" }, extratags: {} }])
       }
-      if (url.includes("overpass-api.de")) return Response.json({ elements: [] })
-      // Instagram name search — return matching handle
-      if (url.includes("instagram.com/web/search/topsearch")) {
-        return Response.json({ users: [{ user: { username: "realbistro", full_name: "Real Bistro" } }] })
-      }
-      if (url.includes("tiktok.com/api/search")) return Response.json({ user_list: [] })
-      if (url.includes("scrapecreators.com") && url.includes("/v1/instagram/profile")) {
-        return Response.json({ biography: "Fresh seafood", profile_pic_url: "https://example.com/pic.jpg", external_url: "https://bistro.com", follower_count: 2000 })
-      }
-      if (url.includes("scrapecreators.com") && url.includes("/v2/instagram/user/posts")) {
-        return Response.json({ data: Array.from({ length: 5 }, (_, i) => ({ taken_at: Math.floor((Date.now() - (i + 1) * 86400000) / 1000), like_count: 50, comment_count: 5 })) })
-      }
-      if (url.includes("scrapecreators.com")) return Response.json({})
-
-      return Response.json({})
+      return Response.json({ elements: [] })
     }) as unknown as typeof fetch
 
     const { POST } = await import("./route")
@@ -205,24 +188,13 @@ describe("POST /api/grader", () => {
     const body = await res.json()
 
     expect(res.status).toBe(200)
-    expect(body.report.socialHealth).toBeDefined()
-    expect(body.report.socialHealth.score).toBeGreaterThan(0)
-    expect(body.report.scores.social).toBeGreaterThan(0)
-    expect(body.report.scoreDetails.social.length).toBeGreaterThan(0)
-    expect(body.report.dataQuality.hasSocial).toBe(true)
-    expect(body.report.dataQuality.missingCriticalData).not.toContain("Confirmed social profile data")
-    expect(body.report.diagnosticSteps).toEqual(expect.arrayContaining([
-      expect.objectContaining({
-        id: "social",
-        status: "complete",
-        source: "ScrapeCreators public social scan",
-      }),
-    ]))
-    expect(body.report.scoreInterpretation.some((item: { category: string }) =>
-      item.category === "social"
-    )).toBe(true)
-
-    delete process.env.SCRAPECREATORS_API_KEY
+    expect(body.report).toBeDefined()
+    expect(body.meta).toBeDefined()
+    expect(body.meta.profile).toBeDefined()
+    expect(body.meta.profile.name).toBe("Real Bistro")
+    // socialHealth is no longer in the base report — lives in /api/grader/social
+    expect(body.report.socialHealth).toBeUndefined()
+    expect(body.report.scores.social).toBeUndefined()
   })
 
   test("returns report without socialHealth when no social handles provided", async () => {

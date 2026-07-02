@@ -3,6 +3,8 @@
 import type { RestaurantGrowthReport } from "@atrium/application"
 import type { CSSProperties, FormEvent, SVGProps } from "react"
 import { useEffect, useId, useMemo, useState } from "react"
+import type { NarrativeData } from "@/lib/report-merger"
+import { mergeNarrativeIntoReport, mergeSocialIntoReport } from "@/lib/report-merger"
 
 const scanSteps = [
   {
@@ -84,9 +86,27 @@ const scanSteps = [
   },
 ] as const
 
+type ReportMeta = {
+  profile: {
+    websiteUrl: string | null
+    name: string
+    [key: string]: unknown
+  }
+  googleMeta: unknown
+}
+
 type GraderResponse = {
   report?: RestaurantGrowthReport
+  meta?: ReportMeta
   error?: string
+}
+
+type SocialResponse = {
+  socialHealth: RestaurantGrowthReport["socialHealth"]
+}
+
+type NarrativeResponse = {
+  narrative: NarrativeData | null
 }
 
 type PlaceSuggestion = {
@@ -263,19 +283,21 @@ export function GraderClient() {
     setSearchError(null)
     setScanStep(0)
 
-    const request = fetch("/api/grader", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ placeId: selectedPlace.placeId }),
-    })
-
     try {
-      for (let i = 0; i < scanSteps.length; i += 1) {
+      // Step 1: profile + grade (deterministic, fast)
+      const step1Promise = fetch("/api/grader", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ placeId: selectedPlace.placeId }),
+      })
+
+      // Animate first 4 scan steps while Step 1 fetches
+      for (let i = 0; i < 4; i += 1) {
         setScanStep(i)
-        await delay(i === 0 ? 900 : 1400)
+        await delay(i === 0 ? 800 : 700)
       }
 
-      const res = await request
+      const res = await step1Promise
       const body = await res.json() as GraderResponse
 
       if (!res.ok || !body.report) {
@@ -283,7 +305,52 @@ export function GraderClient() {
         return
       }
 
+      // Show base report immediately — user can start reading
       setReport(body.report)
+      setLoading(false)
+
+      // Steps 2+3 run in parallel as background enrichment
+      if (body.meta) {
+        const { profile, googleMeta } = body.meta
+        const baseReport = body.report
+
+        void Promise.all([
+          // Step 2: social scan
+          fetch("/api/grader/social", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ websiteUrl: profile.websiteUrl, name: profile.name }),
+          })
+            .then((r) => r.json() as Promise<SocialResponse>)
+            .then(({ socialHealth }) => {
+              if (socialHealth) {
+                setReport((prev) => prev ? mergeSocialIntoReport(prev, socialHealth) : prev)
+              }
+            })
+            .catch(() => null),
+
+          // Step 3: AI narrative
+          fetch("/api/grader/narrative", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              profile,
+              googleMeta,
+              scores: baseReport.scores,
+              overallScore: baseReport.overallScore,
+              issues: baseReport.issues,
+              recommendations: baseReport.recommendations,
+            }),
+          })
+            .then((r) => r.json() as Promise<NarrativeResponse>)
+            .then(({ narrative }) => {
+              if (narrative) {
+                setReport((prev) => prev ? mergeNarrativeIntoReport(prev, narrative) : prev)
+              }
+            })
+            .catch(() => null),
+        ])
+      }
     } catch {
       setError("Unable to run diagnostic")
     } finally {

@@ -5,13 +5,12 @@ import type {
   RestaurantGrowthIssue,
   RestaurantGrowthProfile,
   RestaurantGrowthRecommendation,
-  RestaurantGrowthReport,
   RestaurantGrowthScores,
-  RestaurantScoreInterpretation,
 } from "@atrium/application"
 import { generateObject } from "ai"
 import { z } from "zod"
 import type { GooglePlaceMeta } from "./google-places-client"
+import type { NarrativeData } from "./report-merger"
 
 export type AgentContext = {
   readonly profile: RestaurantGrowthProfile
@@ -37,8 +36,6 @@ const NarrativeSchema = z.object({
     atriumFix: z.string().describe("What Atrium would specifically do to fix it."),
   })).describe("One entry per score category present."),
 })
-
-type NarrativeOutput = z.infer<typeof NarrativeSchema>
 
 const SYSTEM_PROMPT = `You are the Atrium Growth Intelligence engine — an AI analyst for restaurant marketing diagnostics.
 
@@ -138,14 +135,14 @@ function resolveModel(provider: string) {
   // openrouter — default provider, uses free models
   const key = process.env.OPENROUTER_API_KEY?.trim()
   if (!key) throw new Error("OPENROUTER_API_KEY required for openrouter provider")
-  const model = process.env.GRADER_AI_MODEL?.trim() ?? "openai/gpt-oss-120b:free"
+  const model = process.env.GRADER_AI_MODEL?.trim() ?? "openrouter/auto"
   return createOpenAI({
     baseURL: "https://openrouter.ai/api/v1",
     apiKey: key,
   })(model)
 }
 
-export async function generateReportNarrative(ctx: AgentContext): Promise<NarrativeOutput | null> {
+export async function generateReportNarrative(ctx: AgentContext): Promise<NarrativeData | null> {
   const provider = process.env.GRADER_AI_PROVIDER?.trim().toLowerCase() ?? "openrouter"
 
   let model
@@ -171,31 +168,3 @@ export async function generateReportNarrative(ctx: AgentContext): Promise<Narrat
   }
 }
 
-export function mergeNarrativeIntoReport(
-  report: RestaurantGrowthReport,
-  narrative: NarrativeOutput,
-): RestaurantGrowthReport {
-  const updatedInterpretations: RestaurantScoreInterpretation[] = report.scoreInterpretation.map((interp) => {
-    const match = narrative.scoreInterpretations.find((i) => i.category === interp.category)
-    if (!match) return interp
-    return { ...interp, meaning: match.meaning, businessImpact: match.businessImpact, atriumFix: match.atriumFix }
-  })
-
-  return {
-    ...report,
-    executiveSummary: {
-      ...report.executiveSummary,
-      headline: narrative.headline,
-      summary: narrative.summary,
-      priority: narrative.priority,
-      atriumPlan: narrative.atriumPlan,
-    },
-    businessImpact: {
-      ...report.businessImpact,
-      headline: narrative.businessImpactHeadline,
-      explanation: narrative.businessImpactExplanation,
-    },
-    estimatedLostOpportunity: narrative.estimatedLostOpportunity,
-    scoreInterpretation: updatedInterpretations,
-  }
-}
