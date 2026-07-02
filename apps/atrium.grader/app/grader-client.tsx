@@ -1,90 +1,11 @@
 "use client"
 
 import type { RestaurantGrowthReport } from "@atrium/application"
+import { gsap } from "gsap"
 import type { CSSProperties, FormEvent, SVGProps } from "react"
-import { useEffect, useId, useMemo, useState } from "react"
+import { useEffect, useId, useMemo, useRef, useState } from "react"
 import type { NarrativeData } from "@/lib/report-merger"
 import { mergeNarrativeIntoReport, mergeSocialIntoReport } from "@/lib/report-merger"
-
-const scanSteps = [
-  {
-    id: "openData",
-    area: "open",
-    kicker: "Listing",
-    title: "Open data",
-    detail: "Confirming the public listing, category, address, website, and profile completeness.",
-    runningDetail: "We verify the public profile, category, address, website presence, and basic completeness.",
-    source: "Open restaurant listing",
-    limit: "No private CRM or sales data",
-    signals: ["Listing accuracy", "Website found", "Profile gaps"],
-    scoreKey: "discovery",
-    detailKey: "openData",
-  },
-  {
-    id: "website",
-    area: "website",
-    kicker: "Web audit",
-    title: "Website scan",
-    detail: "Checking whether ready-to-buy guests can find the menu, order, reserve, or call.",
-    runningDetail: "We inspect the public website for the action paths a guest needs before spending money.",
-    source: "Public website signals",
-    limit: "No analytics or checkout data",
-    signals: ["Menu access", "Ordering path", "Call path"],
-    scoreKey: "website",
-    detailKey: "website",
-  },
-  {
-    id: "benchmark",
-    area: "benchmark",
-    kicker: "Market",
-    title: "Local benchmark",
-    detail: "Comparing discovery strength against nearby restaurant signals.",
-    runningDetail: "We compare visible local discovery signals, not revenue, ticket size, or ad spend.",
-    source: "Local discovery context",
-    limit: "Directional, not a sales comp",
-    signals: ["Local visibility", "Competitor density", "Owned presence"],
-    scoreKey: "discovery",
-    detailKey: "benchmark",
-  },
-  {
-    id: "reputation",
-    area: "reputation",
-    kicker: "Trust",
-    title: "Reputation layer",
-    detail: "Reading trust signals that affect whether guests choose this restaurant or compare alternatives.",
-    runningDetail: "We read public trust signals that influence whether a guest feels safe choosing the restaurant.",
-    source: "Rating/review context",
-    limit: "Depends on available reputation data",
-    signals: ["Rating baseline", "Review volume", "Response risk"],
-    scoreKey: "reputation",
-    detailKey: "reputation",
-  },
-  {
-    id: "social",
-    area: "social",
-    kicker: "Social proof",
-    title: "Social audit",
-    detail: "Looking for public Instagram, Facebook, and TikTok signals when social data is available.",
-    runningDetail: "We look for social proof and activity that can turn attention into demand.",
-    source: "Public social profiles",
-    limit: "Requires detectable handles",
-    signals: ["Presence", "Activity", "Engagement"],
-    scoreKey: "social",
-    detailKey: "social",
-  },
-  {
-    id: "brief",
-    area: "brief",
-    kicker: "Plan",
-    title: "Growth brief",
-    detail: "Translating the numbers into business impact, first priority, and how Atrium would fix it.",
-    runningDetail: "We translate the weak signals into a first action plan, with clear assumptions.",
-    source: "Combined audit signals",
-    limit: "Free scan, not a full strategy",
-    signals: ["Demand leak", "First fix", "30-day plan"],
-    detailKey: "brief",
-  },
-] as const
 
 type ReportMeta = {
   profile: {
@@ -108,6 +29,120 @@ type SocialResponse = {
 type NarrativeResponse = {
   narrative: NarrativeData | null
 }
+
+const loadingScenes = [
+  {
+    id: "studio",
+    image: "/metaphoto.jpg",
+    imageTone: "photo",
+    badges: ["atrium", "studio", "growth"],
+    cards: [
+      { label: "creative", body: "Social content that converts followers into regulars." },
+      { label: "market", body: "Local SEO that puts you on the map before they're hungry." },
+      { label: "signal", body: "Data signals that show you exactly where to grow next." },
+    ],
+    metrics: [
+      { label: "lift", value: "2.4x" },
+      { label: "reach", value: "+38%" },
+    ],
+  },
+  {
+    id: "forest",
+    image: "/textures/gradient-forest-glow.png",
+    imageTone: "texture",
+    badges: ["local", "social", "intent"],
+    cards: [
+      { label: "content", body: "Reels, posts & stories—published for you, every week." },
+      { label: "growth", body: "Turn local intent searches into real walk-in customers." },
+      { label: "proof", body: "Reviews that build trust before the first visit." },
+    ],
+    metrics: [
+      { label: "rank", value: "#1" },
+      { label: "demand", value: "84%" },
+    ],
+  },
+  {
+    id: "sage",
+    image: "/textures/gradient-charcoal-sage.png",
+    imageTone: "texture",
+    badges: ["ads", "crm", "seo"],
+    cards: [
+      { label: "channel", body: "Meta & Google ads tuned for restaurant-level CPAs." },
+      { label: "audience", body: "Reach locals in your area—not the whole city." },
+      { label: "offer", body: "Promotions that fill slow nights without killing margins." },
+    ],
+    metrics: [
+      { label: "roi", value: "3.1x" },
+      { label: "cpa", value: "-22%" },
+    ],
+  },
+  {
+    id: "mark",
+    image: "/Atrium%20Works%20-08.png",
+    imageTone: "mark",
+    badges: ["brand", "audit", "brief"],
+    cards: [
+      { label: "identity", body: "A visual brand that stands out on every platform." },
+      { label: "system", body: "Consistent look from storefront to scroll to DM." },
+      { label: "handoff", body: "Ready-to-run creative assets delivered in 2 weeks." },
+    ],
+    metrics: [
+      { label: "score", value: "92" },
+      { label: "moves", value: "05" },
+    ],
+  },
+] as const
+
+const scanSteps = [
+  {
+    id: "locate", label: "Business", status: "Locating your business on Google Maps",
+    details: [
+      "Locating your business on Google Maps",
+      "Verifying listing status & ownership",
+      "Checking name, address & phone (NAP)",
+      "Matching category & attributes",
+    ],
+  },
+  {
+    id: "google", label: "Google", status: "Pulling visibility, ratings & reviews",
+    details: [
+      "Reading star rating & review count",
+      "Measuring review velocity & recency",
+      "Checking local search visibility",
+      "Analyzing competitor positioning",
+    ],
+  },
+  {
+    id: "web", label: "Web", status: "Scanning website and local citations",
+    details: [
+      "Testing page load speed",
+      "Scanning on-page SEO signals",
+      "Auditing local citation consistency",
+      "Checking mobile & Core Web Vitals",
+    ],
+  },
+  {
+    id: "social", label: "Social", status: "Checking Instagram, Facebook & TikTok",
+    details: [
+      "Finding Instagram profile & followers",
+      "Checking Facebook page & engagement",
+      "Scanning TikTok presence & reach",
+      "Measuring post frequency & consistency",
+    ],
+  },
+  {
+    id: "brief", label: "Brief", status: "Building your personalized growth brief",
+    details: [
+      "Calculating overall growth score",
+      "Benchmarking against category average",
+      "Identifying highest-impact opportunities",
+      "Drafting personalized recommendations",
+    ],
+  },
+] as const
+
+const loadingSceneDurationMs = 7000
+const loadingSceneExitDurationMs = 760
 
 type PlaceSuggestion = {
   placeId: string
@@ -159,7 +194,6 @@ export function GraderClient() {
   const [searchError, setSearchError] = useState<string | null>(null)
   const [searching, setSearching] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [scanStep, setScanStep] = useState(0)
 
   const phase: ScanPhase = loading ? "loading" : report ? "result" : "search"
 
@@ -234,7 +268,6 @@ export function GraderClient() {
     setSuggestions([])
     setSelectedPlace(null)
     setQuery("")
-    setScanStep(0)
   }
 
   async function searchRestaurants(event?: FormEvent<HTMLFormElement>) {
@@ -281,23 +314,14 @@ export function GraderClient() {
     setError(null)
     setReport(null)
     setSearchError(null)
-    setScanStep(0)
 
     try {
-      // Step 1: profile + grade (deterministic, fast)
-      const step1Promise = fetch("/api/grader", {
+      const res = await fetch("/api/grader", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ placeId: selectedPlace.placeId }),
       })
 
-      // Animate first 4 scan steps while Step 1 fetches
-      for (let i = 0; i < 4; i += 1) {
-        setScanStep(i)
-        await delay(i === 0 ? 800 : 700)
-      }
-
-      const res = await step1Promise
       const body = await res.json() as GraderResponse
 
       if (!res.ok || !body.report) {
@@ -305,52 +329,46 @@ export function GraderClient() {
         return
       }
 
-      // Show base report immediately — user can start reading
-      setReport(body.report)
-      setLoading(false)
+      // Steps 2+3 run in parallel — keep loading until all resolve
+      let finalReport = body.report
 
-      // Steps 2+3 run in parallel as background enrichment
       if (body.meta) {
         const { profile, googleMeta } = body.meta
-        const baseReport = body.report
 
-        void Promise.all([
-          // Step 2: social scan
+        const [socialResult, narrativeResult] = await Promise.all([
           fetch("/api/grader/social", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ websiteUrl: profile.websiteUrl, name: profile.name }),
+            body: JSON.stringify({ websiteUrl: profile.websiteUrl, name: profile.name, address: profile.address }),
           })
             .then((r) => r.json() as Promise<SocialResponse>)
-            .then(({ socialHealth }) => {
-              if (socialHealth) {
-                setReport((prev) => prev ? mergeSocialIntoReport(prev, socialHealth) : prev)
-              }
-            })
-            .catch(() => null),
+            .catch(() => ({ socialHealth: undefined }) as SocialResponse),
 
-          // Step 3: AI narrative
           fetch("/api/grader/narrative", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               profile,
               googleMeta,
-              scores: baseReport.scores,
-              overallScore: baseReport.overallScore,
-              issues: baseReport.issues,
-              recommendations: baseReport.recommendations,
+              scores: finalReport.scores,
+              overallScore: finalReport.overallScore,
+              issues: finalReport.issues,
+              recommendations: finalReport.recommendations,
             }),
           })
             .then((r) => r.json() as Promise<NarrativeResponse>)
-            .then(({ narrative }) => {
-              if (narrative) {
-                setReport((prev) => prev ? mergeNarrativeIntoReport(prev, narrative) : prev)
-              }
-            })
-            .catch(() => null),
+            .catch(() => ({ narrative: null }) as NarrativeResponse),
         ])
+
+        if (socialResult.socialHealth) {
+          finalReport = mergeSocialIntoReport(finalReport, socialResult.socialHealth)
+        }
+        if (narrativeResult.narrative) {
+          finalReport = mergeNarrativeIntoReport(finalReport, narrativeResult.narrative)
+        }
       }
+
+      setReport(finalReport)
     } catch {
       setError("Unable to run diagnostic")
     } finally {
@@ -381,7 +399,6 @@ export function GraderClient() {
 
         {loading && selectedPlace && (
           <LoadingStage
-            activeIndex={scanStep}
             selectedPlace={selectedPlace}
           />
         )}
@@ -505,13 +522,8 @@ function SearchStage({
         <div className="selected-inline">
           <div className={`selected-media ${selectedPlace.photoUrl ? "selected-media--photo" : "selected-media--fallback"}`}>
             {selectedPlace.photoUrl ? (
-              <>
-                {/* biome-ignore lint/performance/noImgElement: Google Place photos are dynamic proxied media and must bypass Next image optimization. */}
-                <img alt={`${selectedPlace.name} restaurant`} src={selectedPlace.photoUrl} />
-                {selectedPlace.photoAttribution && (
-                  <span className="selected-photo-credit">Photo: {selectedPlace.photoAttribution}</span>
-                )}
-              </>
+              /* biome-ignore lint/performance/noImgElement: Google Place photos are dynamic proxied media and must bypass Next image optimization. */
+              <img alt={`${selectedPlace.name} restaurant`} src={selectedPlace.photoUrl} />
             ) : (
               <span>Loaded restaurant</span>
             )}
@@ -529,52 +541,195 @@ function SearchStage({
 }
 
 function LoadingStage({
-  activeIndex,
   selectedPlace,
 }: {
-  activeIndex: number
   selectedPlace: PlaceSuggestion
 }) {
-  const activeStep = scanSteps[activeIndex] ?? scanSteps[0]
-  if (!activeStep) return null
+  const [sceneIndex, setSceneIndex] = useState(0)
+  const [stepIndex, setStepIndex] = useState(0)
+  const [subIndex, setSubIndex] = useState(0)
+  const collageRef = useRef<HTMLDivElement | null>(null)
+  const scene = loadingScenes[sceneIndex] ?? loadingScenes[0]
+  const step = scanSteps[stepIndex] ?? scanSteps[0]
 
-  const progress = Math.min(96, Math.round(((activeIndex + 0.72) / scanSteps.length) * 100))
-  const loadingAction = loadingActionCopy(activeStep, selectedPlace)
+  useEffect(() => {
+    const root = collageRef.current
+    if (!root) return
+
+    root.dataset.loadingScene = scene.id
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (prefersReducedMotion) {
+      const timeout = window.setTimeout(() => {
+        setSceneIndex((current) => (current + 1) % loadingScenes.length)
+      }, loadingSceneDurationMs)
+      return () => window.clearTimeout(timeout)
+    }
+
+    const context = gsap.context(() => {
+      const photo = root.querySelector<HTMLElement>(".loading-collage-photo")
+      const photoTargets = photo ? [photo] : []
+      const pieces = gsap.utils.toArray<HTMLElement>(".loading-card, .loading-badge", root)
+      const floatTargets = [...photoTargets, ...pieces]
+      const floatDuration = Math.max(1.8, (loadingSceneDurationMs - loadingSceneExitDurationMs - 1900) / 2000)
+
+      gsap.set(root, { autoAlpha: 0, filter: "blur(10px)", scale: 0.988, y: 16 })
+      gsap.set(photoTargets, { autoAlpha: 0, filter: "blur(14px)", rotation: 1.5, scale: 0.965, y: 22 })
+      gsap.set(pieces, { autoAlpha: 0, filter: "blur(8px)", scale: 0.94, y: 24 })
+
+      const timeline = gsap.timeline({ defaults: { overwrite: "auto" } })
+      timeline
+        .to(root, { autoAlpha: 1, duration: 0.72, ease: "power4.out", filter: "blur(0px)", scale: 1, y: 0 })
+        .to(photoTargets, { autoAlpha: 1, duration: 0.86, ease: "power4.out", filter: "blur(0px)", rotation: -2, scale: 1, y: 0 }, "<0.08")
+        .to(pieces, {
+          autoAlpha: 1,
+          duration: 0.78,
+          ease: "power4.out",
+          filter: "blur(0px)",
+          scale: 1,
+          stagger: { each: 0.075, from: "edges" },
+          y: 0,
+        }, "<0.16")
+        .to(floatTargets, {
+          duration: floatDuration,
+          ease: "sine.inOut",
+          stagger: { amount: 0.28, from: "center" },
+          y: (index) => (photo && index === 0 ? -8 : -6),
+        }, ">0.18")
+        .to(floatTargets, {
+          duration: floatDuration,
+          ease: "sine.inOut",
+          stagger: { amount: 0.28, from: "center" },
+          y: 0,
+        })
+        .to(pieces, {
+          autoAlpha: 0,
+          duration: loadingSceneExitDurationMs / 1000,
+          ease: "power2.in",
+          filter: "blur(8px)",
+          scale: 0.97,
+          stagger: { each: 0.035, from: "end" },
+          y: -14,
+        })
+        .to(photoTargets, { autoAlpha: 0, duration: 0.64, ease: "power2.in", filter: "blur(10px)", rotation: -3, scale: 0.985, y: -16 }, "<")
+        .to(root, { autoAlpha: 0, duration: 0.64, ease: "power2.in", filter: "blur(9px)", scale: 0.992, y: -10 }, "<")
+        .add(() => {
+          setSceneIndex((current) => (current + 1) % loadingScenes.length)
+        })
+    }, root)
+
+    return () => context.revert()
+  }, [scene.id])
+
+  // Cycle sub-steps within each main step
+  // Brief (last step) uses longer interval so it doesn't loop visibly
+  useEffect(() => {
+    const details = scanSteps[stepIndex]?.details
+    if (!details) return
+    const isBrief = stepIndex === scanSteps.length - 1
+    const interval = isBrief ? 2600 : 1700
+    let current = 0
+    let cancelled = false
+    const cycle = async () => {
+      while (!cancelled) {
+        await new Promise<void>((resolve) => window.setTimeout(resolve, interval))
+        if (cancelled) break
+        current = (current + 1) % details.length
+        setSubIndex(current)
+      }
+    }
+    void cycle()
+    return () => { cancelled = true }
+  }, [stepIndex])
+
+  useEffect(() => {
+    const durations = [5200, 5400, 5400, 5600, 6000]
+    let current = 0
+    let cancelled = false
+
+    const advance = async () => {
+      while (!cancelled) {
+        const duration = durations[current] ?? 3000
+        await new Promise<void>((resolve) => window.setTimeout(resolve, duration))
+        if (cancelled) break
+        if (current < scanSteps.length - 1) {
+          current += 1
+          setSubIndex(0)
+          setStepIndex(current)
+        } else {
+          break
+        }
+      }
+    }
+
+    void advance()
+    return () => { cancelled = true }
+  }, [])
 
   return (
-    <section aria-live="polite" className="scan-loading-stage" role="status">
-      <article className="scan-loading-card">
-        <div className="scan-loading-brand">
-          <span className="diagnostic-wordmark">atrium</span>
-          <span>Building diagnostic</span>
-        </div>
-
-        <div className="scan-loading-body">
-          <p className="micro-label">Scanning {selectedPlace.name}</p>
-          <h1>Preparando el reporte.</h1>
-          <span>{selectedPlace.address || selectedPlace.description}</span>
-
-          <div className="diagnostic-live-line scan-loading-line">
-            <span>{loadingAction}</span>
-            <span aria-hidden="true" className="loading-dots">
-              <i />
-              <i />
-              <i />
-            </span>
+    <section
+      aria-label={`Atrium report loading: ${step.status}`}
+      aria-live="polite"
+      className="scan-loading-stage loading-collage-stage"
+      role="status"
+    >
+      <div className="loading-collage" key={scene.id} ref={collageRef}>
+        <div className="loading-collage-media">
+          <div className={`loading-collage-photo loading-collage-photo--${scene.imageTone}`}>
+            {/* biome-ignore lint/performance/noImgElement: Loading-state art is a rotating design-system asset and does not need Next image optimization. */}
+            <img alt="" src={scene.image} />
           </div>
 
-          <p>
-            Estamos leyendo señales públicas primero. El layout final aparece solo cuando el scan tenga datos suficientes para explicar el resultado.
-          </p>
+          <div className="loading-card loading-card--text loading-card--a">
+            <span>{scene.cards[0]?.label}</span>
+            <p>{scene.cards[0]?.body}</p>
+          </div>
 
-          <div className="scan-loading-meter">
-            <div aria-hidden="true" className="diagnostic-meter" style={{ "--diagnostic-progress": `${progress}%` } as CSSProperties}>
-              <span />
+          <div className="loading-card loading-card--metric loading-card--b">
+            <span>{scene.metrics[0]?.label}</span>
+            <strong>{scene.metrics[0]?.value}</strong>
+          </div>
+
+          <div className="loading-card loading-card--text loading-card--c">
+            <span>{scene.cards[1]?.label}</span>
+            <p>{scene.cards[1]?.body}</p>
+          </div>
+
+          <div className="loading-card loading-card--metric loading-card--d">
+            <span>{scene.metrics[1]?.label}</span>
+            <strong>{scene.metrics[1]?.value}</strong>
+          </div>
+
+          <div className="loading-card loading-card--text loading-card--e">
+            <span>{scene.cards[2]?.label}</span>
+            <p>{scene.cards[2]?.body}</p>
+          </div>
+
+          <span className="loading-badge loading-badge--a">{scene.badges[0]}</span>
+          <span className="loading-badge loading-badge--b">{scene.badges[1]}</span>
+          <span className="loading-badge loading-badge--c">{scene.badges[2]}</span>
+          <span className="loading-badge loading-badge--target">{selectedPlace.name}</span>
+        </div>
+      </div>
+
+      <div className="loading-progress" aria-hidden="true">
+        {scanSteps.map((s, i) => {
+          const state = i < stepIndex ? "done" : i === stepIndex ? "active" : "pending"
+          return (
+            <div key={s.id} className={`loading-step loading-step--${state}`}>
+              <div className="loading-step-dot">
+                {i < stepIndex && <span aria-hidden="true" className="loading-step-check" />}
+              </div>
+              <span className="loading-step-label">{s.label}</span>
             </div>
-            <span>{progress}% · Step {activeIndex + 1} of {scanSteps.length}</span>
-          </div>
-        </div>
-      </article>
+          )
+        })}
+      </div>
+
+      <p className="loading-step-sub" key={`${stepIndex}-${subIndex}`}>
+        {scanSteps[stepIndex]?.details[subIndex]}
+      </p>
     </section>
   )
 }
@@ -593,27 +748,33 @@ function ReportStage({
   const missingCriticalData = report.dataQuality?.missingCriticalData ?? []
   const contactHref = buildAgencyContactHref(report)
   const opensNewTab = !contactHref.startsWith("mailto:")
+  const scoreSignal = scoreSignalCopy(tone)
 
   return (
     <section className="diagnostic-stage diagnostic-stage--ready">
       <article className={`diagnostic-hero-panel diagnostic-hero-panel--${tone}`}>
         <div className="diagnostic-brand-row">
-          <span className="diagnostic-wordmark">atrium</span>
-          <span>Restaurant Growth Diagnostic</span>
+          <div className="diagnostic-brand-lockup">
+            <span aria-label="Atrium" className="diagnostic-brand-wordmark" role="img" />
+            <span>Growth Grader</span>
+          </div>
+          <div className="diagnostic-report-tags">
+            <span>Restaurant Growth Diagnostic</span>
+            <span>{confidenceCopy(report.confidence)}</span>
+          </div>
         </div>
 
         <div className="diagnostic-hero-grid">
           <div className="diagnostic-score-block">
             <span>Growth score</span>
             <strong>{report.overallScore}</strong>
-            <small>{confidenceCopy(report.confidence)}</small>
+            <small>{scoreSignal}</small>
             <div aria-hidden="true" className="diagnostic-meter" style={{ "--diagnostic-progress": "100%" } as CSSProperties}>
               <span />
             </div>
           </div>
 
           <div className="diagnostic-summary-block">
-            <p className="micro-label">Report ready</p>
             <h1>{report.business.name}</h1>
             <span>{report.business.address}</span>
             <h2>{report.executiveSummary.headline}</h2>
@@ -644,8 +805,10 @@ function ReportStage({
           <div className="score-translation-list">
             {report.scoreInterpretation.slice(0, 5).map((insight) => (
               <div className={`score-translation-row score-translation-row--${insight.status}`} key={insight.category}>
-                <span>{insight.label}</span>
-                <strong>{insight.score}</strong>
+                <div className="score-translation-metric">
+                  <span>{insight.label}</span>
+                  <strong>{insight.score}</strong>
+                </div>
                 <p>{insight.businessImpact}</p>
               </div>
             ))}
@@ -729,26 +892,6 @@ function DotPattern({
   )
 }
 
-function loadingActionCopy(
-  step: typeof scanSteps[number],
-  selectedPlace: PlaceSuggestion | null,
-) {
-  const listingSource = selectedPlace?.source === "google"
-    ? "Leyendo data de Google"
-    : "Leyendo data pública del restaurante"
-
-  const copy: Record<typeof scanSteps[number]["id"], string> = {
-    openData: listingSource,
-    website: "Revisando website, menú y rutas de acción",
-    benchmark: "Comparando señales locales visibles",
-    reputation: "Revisando rating y reviews disponibles",
-    social: "Buscando señales sociales públicas",
-    brief: "Traduciendo hallazgos en un plan de crecimiento",
-  }
-
-  return copy[step.id]
-}
-
 function confidenceCopy(confidence: RestaurantGrowthReport["confidence"]) {
   if (confidence === "high") return "High confidence"
   if (confidence === "medium") return "Medium confidence"
@@ -759,6 +902,12 @@ function scoreTone(score: number): ScoreTone {
   if (score >= 80) return "high"
   if (score >= 60) return "medium"
   return "low"
+}
+
+function scoreSignalCopy(tone: ScoreTone) {
+  if (tone === "high") return "Strong base"
+  if (tone === "medium") return "Watch zone"
+  return "Leak alert"
 }
 
 function buildAgencyContactHref(report: RestaurantGrowthReport) {
@@ -784,8 +933,4 @@ function buildAgencyContactHref(report: RestaurantGrowthReport) {
   )
 
   return `mailto:dev@tbsadvertising.com?subject=${subject}&body=${body}`
-}
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
 }

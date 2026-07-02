@@ -20,8 +20,10 @@ function searchRequest(query: string): Request {
   })
 }
 
-describe("POST /api/grader/search", () => {
+describe.serial("POST /api/grader/search", () => {
   test("returns OpenStreetMap restaurant suggestions", async () => {
+    process.env.GRADER_BUSINESS_PROVIDER = "osm"
+
     globalThis.fetch = mock(async () =>
       Response.json([
         {
@@ -66,6 +68,8 @@ describe("POST /api/grader/search", () => {
   })
 
   test("returns food places when cuisine tags are present", async () => {
+    process.env.GRADER_BUSINESS_PROVIDER = "osm"
+
     globalThis.fetch = mock(async () =>
       Response.json([
         {

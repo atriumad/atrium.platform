@@ -7,7 +7,7 @@ import type {
   RestaurantGrowthRecommendation,
   RestaurantGrowthScores,
 } from "@atrium/application"
-import { generateObject } from "ai"
+import { generateText } from "ai"
 import { z } from "zod"
 import type { GooglePlaceMeta } from "./google-places-client"
 import type { NarrativeData } from "./report-merger"
@@ -43,7 +43,9 @@ Analyze the restaurant data and write the narrative sections of a growth diagnos
 Tone: direct, expert, business-focused. Not motivational or salesy. Honest about gaps.
 The restaurant owner or operator will read this. Avoid jargon.
 Be specific — use the actual restaurant name, category, address, and real data points in your copy.
-Never invent data not present in the input. Never be vague when a number is available.`
+Never invent data not present in the input. Never be vague when a number is available.
+
+IMPORTANT: Respond ONLY with a valid JSON object. No markdown. No code fences. No explanation. Raw JSON only.`
 
 function buildPrompt(ctx: AgentContext): string {
   const { profile, googleMeta, scores, overallScore, issues, recommendations } = ctx
@@ -116,7 +118,26 @@ ISSUES
 ${issueLines}
 
 RECOMMENDATIONS
-${recLines}`
+${recLines}
+
+OUTPUT: Return ONLY this JSON object with these exact keys filled in (no other keys, no markdown):
+{
+  "headline": "<one sharp sentence — the key growth situation, max 12 words>",
+  "summary": "<2-3 sentences about this specific restaurant using its actual data>",
+  "priority": "<one sentence: what must be fixed first and why>",
+  "atriumPlan": ["<action 1>", "<action 2>", "<action 3>", "<action 4>"],
+  "businessImpactHeadline": "<one sentence: business consequence of the current score>",
+  "businessImpactExplanation": "<2 sentences: what this means in guests, orders, revenue>",
+  "estimatedLostOpportunity": "<one sentence: qualitative estimate of demand leaking>",
+  "scoreInterpretations": [
+    {
+      "category": "discovery",
+      "meaning": "<what this score means operationally>",
+      "businessImpact": "<what this costs in guests or revenue>",
+      "atriumFix": "<what Atrium would specifically do>"
+    }
+  ]
+}`
 }
 
 function resolveModel(provider: string) {
@@ -135,11 +156,34 @@ function resolveModel(provider: string) {
   // openrouter — default provider, uses free models
   const key = process.env.OPENROUTER_API_KEY?.trim()
   if (!key) throw new Error("OPENROUTER_API_KEY required for openrouter provider")
-  const model = process.env.GRADER_AI_MODEL?.trim() ?? "openrouter/auto"
+  const model = process.env.GRADER_AI_MODEL?.trim() ?? "openrouter/free"
   return createOpenAI({
     baseURL: "https://openrouter.ai/api/v1",
     apiKey: key,
   })(model)
+}
+
+function extractFirstJsonObject(text: string): string | null {
+  const start = text.indexOf("{")
+  if (start === -1) return null
+
+  let depth = 0
+  let inString = false
+  let escape = false
+
+  for (let i = start; i < text.length; i++) {
+    const ch = text[i]!
+    if (escape) { escape = false; continue }
+    if (ch === "\\") { escape = true; continue }
+    if (ch === '"') { inString = !inString; continue }
+    if (inString) continue
+    if (ch === "{") depth++
+    else if (ch === "}") {
+      depth--
+      if (depth === 0) return text.slice(start, i + 1)
+    }
+  }
+  return null
 }
 
 export async function generateReportNarrative(ctx: AgentContext): Promise<NarrativeData | null> {
@@ -154,16 +198,37 @@ export async function generateReportNarrative(ctx: AgentContext): Promise<Narrat
   }
 
   try {
-    const { object } = await generateObject({
+    const { text } = await generateText({
       model,
-      schema: NarrativeSchema,
       system: SYSTEM_PROMPT,
       prompt: buildPrompt(ctx),
     })
 
-    return object
+    const jsonStr = extractFirstJsonObject(text)
+    if (!jsonStr) {
+      console.error("[report-agent] no JSON found in response:", text.slice(0, 200))
+      return null
+    }
+
+    const parsed: unknown = JSON.parse(jsonStr)
+
+    // Try top-level first, then one level deep (some models wrap in a parent key)
+    const candidates: unknown[] = [parsed]
+    if (parsed !== null && typeof parsed === "object") {
+      for (const v of Object.values(parsed as Record<string, unknown>)) {
+        if (v !== null && typeof v === "object") candidates.push(v)
+      }
+    }
+
+    for (const candidate of candidates) {
+      const result = NarrativeSchema.safeParse(candidate)
+      if (result.success) return result.data
+    }
+
+    console.error("[report-agent] schema validation failed for all candidates")
+    return null
   } catch (e) {
-    console.error("[report-agent] generateObject failed:", e)
+    console.error("[report-agent] generateText failed:", e)
     return null
   }
 }

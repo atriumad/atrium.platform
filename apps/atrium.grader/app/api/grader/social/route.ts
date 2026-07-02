@@ -8,12 +8,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ socialHealth: null })
   }
 
-  const body = await req.json().catch(() => null) as { websiteUrl?: unknown; name?: unknown } | null
+  const body = await req.json().catch(() => null) as { websiteUrl?: unknown; name?: unknown; address?: unknown } | null
   const websiteUrl = typeof body?.websiteUrl === "string" ? body.websiteUrl : null
   const name = typeof body?.name === "string" ? body.name : ""
+  const address = typeof body?.address === "string" ? body.address : null
 
   try {
-    const handles = await autoDetectSocial(websiteUrl, name).catch(() => null)
+    const handles = await autoDetectSocial(websiteUrl, name, fetch, { address }).catch(() => null)
     if (!handles) return NextResponse.json({ socialHealth: null })
 
     const socialScan = await scanSocialProfiles(handles)

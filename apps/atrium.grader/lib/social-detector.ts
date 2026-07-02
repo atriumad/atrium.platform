@@ -1,7 +1,7 @@
 import type { SocialHandles } from "@atrium/application"
 
 const INSTAGRAM_SKIP = /instagram\.com\/(p|reel|stories|explore|accounts|tv)\//i
-const FACEBOOK_SKIP = /facebook\.com\/(sharer|dialog|plugins|login)\b/i
+const FACEBOOK_SKIP = /facebook\.com\/(sharer|dialog|plugins|login|\d{4})\b/i
 
 export function detectSocialHandles(html: string): SocialHandles {
   const hrefs = extractHrefs(html)

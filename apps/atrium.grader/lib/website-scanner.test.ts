@@ -1,14 +1,12 @@
 import { afterEach, describe, expect, mock, test } from "bun:test"
+import { runPageSpeedWebsiteAudit } from "./pagespeed-client"
 import { scanRestaurantWebsite } from "./website-scanner"
 
 const originalFetch = globalThis.fetch
-const originalAuditProvider = process.env.WEBSITE_AUDIT_PROVIDER
 const originalPageSpeedKey = process.env.PAGESPEED_API_KEY
 
 afterEach(() => {
   globalThis.fetch = originalFetch
-  if (originalAuditProvider === undefined) delete process.env.WEBSITE_AUDIT_PROVIDER
-  else process.env.WEBSITE_AUDIT_PROVIDER = originalAuditProvider
   if (originalPageSpeedKey === undefined) delete process.env.PAGESPEED_API_KEY
   else process.env.PAGESPEED_API_KEY = originalPageSpeedKey
 })
@@ -34,9 +32,8 @@ function pageSpeedResponse(score: number) {
   })
 }
 
-describe("scanRestaurantWebsite", () => {
+describe.serial("scanRestaurantWebsite", () => {
   test("keeps using the basic scanner by default", async () => {
-    delete process.env.WEBSITE_AUDIT_PROVIDER
     delete process.env.PAGESPEED_API_KEY
 
     globalThis.fetch = mock(async () => new Response(`
@@ -57,8 +54,34 @@ describe("scanRestaurantWebsite", () => {
     expect(result.lighthouse).toBeUndefined()
   })
 
-  test("attaches mobile and desktop Lighthouse summaries when PageSpeed is enabled", async () => {
-    process.env.WEBSITE_AUDIT_PROVIDER = "pagespeed"
+  test("keeps Lighthouse outside the basic website scan", async () => {
+    process.env.PAGESPEED_API_KEY = "test-pagespeed-key"
+
+    globalThis.fetch = mock(async () => new Response(`
+      <html>
+        <head>
+          <meta name="viewport" content="width=device-width">
+          <meta name="description" content="Bistro">
+        </head>
+        <body>
+          <a href="/menu">Menu</a>
+          <a href="/order">Order online</a>
+          <a href="/reservations">Reservations</a>
+          <a href="tel:+13055550123">Call</a>
+          <script type="application/ld+json">{ "@type": "Restaurant" }</script>
+        </body>
+      </html>
+    `)) as unknown as typeof fetch
+
+    const result = await scanRestaurantWebsite("https://bistro.example")
+
+    expect(result.lighthouse).toBeUndefined()
+    expect(result.hasOnlineOrdering).toBe(true)
+  })
+})
+
+describe.serial("runPageSpeedWebsiteAudit", () => {
+  test("attaches mobile and desktop Lighthouse summaries", async () => {
     process.env.PAGESPEED_API_KEY = "test-pagespeed-key"
 
     globalThis.fetch = mock(async (input: string | URL | Request) => {
@@ -72,29 +95,14 @@ describe("scanRestaurantWebsite", () => {
         return pageSpeedResponse(0.94)
       }
 
-      return new Response(`
-        <html>
-          <head>
-            <meta name="viewport" content="width=device-width">
-            <meta name="description" content="Bistro">
-          </head>
-          <body>
-            <a href="/menu">Menu</a>
-            <a href="/order">Order online</a>
-            <a href="/reservations">Reservations</a>
-            <a href="tel:+13055550123">Call</a>
-            <script type="application/ld+json">{ "@type": "Restaurant" }</script>
-          </body>
-        </html>
-      `)
+      return Response.json({})
     }) as unknown as typeof fetch
 
-    const result = await scanRestaurantWebsite("https://bistro.example")
+    const result = await runPageSpeedWebsiteAudit("https://bistro.example")
 
-    expect(result.lighthouse?.provider).toBe("pagespeed")
-    expect(result.lighthouse?.mobile?.performanceScore).toBe(87)
-    expect(result.lighthouse?.desktop?.performanceScore).toBe(94)
-    expect(result.lighthouse?.mobile?.metrics.largestContentfulPaintMs).toBe(2100)
-    expect(result.hasOnlineOrdering).toBe(true)
+    expect(result.provider).toBe("pagespeed")
+    expect(result.mobile?.performanceScore).toBe(87)
+    expect(result.desktop?.performanceScore).toBe(94)
+    expect(result.mobile?.metrics.largestContentfulPaintMs).toBe(2100)
   })
 })

@@ -1,8 +1,12 @@
 import type { SocialHandles } from "@atrium/application"
 import { detectSocialHandles } from "./social-detector"
-import { searchInstagramByName, searchTikTokByName } from "./social-name-search"
+import { searchFacebookByName, searchInstagramByName, searchTikTokByName } from "./social-name-search"
 
 const EMPTY: SocialHandles = { instagram: null, facebook: null, tiktok: null, confidence: "manual" }
+
+type SocialDetectionContext = {
+  readonly address?: string | null
+}
 
 async function scrapeWebsite(url: string, fetcher: typeof fetch): Promise<SocialHandles> {
   try {
@@ -25,16 +29,18 @@ export async function autoDetectSocial(
   websiteUrl: string | null,
   businessName: string,
   fetcher: typeof fetch = fetch,
+  context: SocialDetectionContext = {},
 ): Promise<SocialHandles | null> {
-  const [website, instagram, tiktok] = await Promise.all([
+  const [website, instagram, tiktok, facebook] = await Promise.all([
     websiteUrl ? scrapeWebsite(websiteUrl, fetcher) : Promise.resolve(EMPTY),
     searchInstagramByName(businessName, fetcher),
     searchTikTokByName(businessName, fetcher),
+    searchFacebookByName(businessName, context, fetcher),
   ])
 
   // Website-detected handles take priority over name-search
   const resolvedInstagram = website.instagram ?? instagram
-  const resolvedFacebook = website.facebook
+  const resolvedFacebook = website.facebook ?? facebook
   const resolvedTiktok = website.tiktok ?? tiktok
 
   if (!resolvedInstagram && !resolvedFacebook && !resolvedTiktok) return null

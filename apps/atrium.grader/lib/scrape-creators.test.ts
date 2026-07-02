@@ -29,10 +29,30 @@ describe("scanSocialProfiles", () => {
     globalThis.fetch = mock(async (input: string | URL | Request) => {
       const url = String(input)
       if (url.includes("/v1/instagram/profile")) {
-        return Response.json({ biography: "Fresh seafood", profile_pic_url: "https://example.com/pic.jpg", external_url: "https://bistro.com", follower_count: 2500 })
+        return Response.json({
+          data: {
+            user: {
+              biography: "Fresh seafood",
+              profile_pic_url: "https://example.com/pic.jpg",
+              external_url: "https://bistro.com",
+              edge_followed_by: { count: 2500 },
+              edge_owner_to_timeline_media: {
+                edges: [
+                  {
+                    node: {
+                      taken_at_timestamp: Math.floor((Date.now() - 86400000) / 1000),
+                      edge_liked_by: { count: 120 },
+                      edge_media_to_comment: { count: 8 },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        })
       }
       if (url.includes("/v2/instagram/user/posts")) {
-        return Response.json({ data: [{ taken_at: Math.floor((Date.now() - 86400000) / 1000), like_count: 120, comment_count: 8 }] })
+        return Response.json({})
       }
       return Response.json({})
     }) as unknown as typeof fetch
@@ -60,7 +80,7 @@ describe("scanSocialProfiles", () => {
         return Response.json({ userInfo: { user: { signature: "Food vibes", avatarMedium: "https://example.com/tt.jpg", bioLink: { link: "https://bistro.com" } }, stats: { followerCount: 3200 } } })
       }
       if (url.includes("/v3/tiktok/profile/videos")) {
-        return Response.json({ itemList: [{ createTime: Math.floor((Date.now() - 86400000) / 1000), stats: { diggCount: 200, commentCount: 12 } }] })
+        return Response.json({ aweme_list: [{ create_time: Math.floor((Date.now() - 86400000) / 1000), statistics: { digg_count: 200, comment_count: 12 } }] })
       }
       return Response.json({})
     }) as unknown as typeof fetch
@@ -69,14 +89,32 @@ describe("scanSocialProfiles", () => {
     expect(result.tiktok.exists).toBe(true)
     expect(result.tiktok.followers).toBe(3200)
     expect(result.tiktok.bio).toBe("Food vibes")
+    expect(result.tiktok.recentPosts).toEqual([
+      expect.objectContaining({ likes: 200, comments: 12 }),
+    ])
   })
 
   test("normalizes facebook profile data", async () => {
     globalThis.fetch = mock(async (input: string | URL | Request) => {
       const url = String(input)
-      if (url.includes("/v1/facebook/profile/posts")) return Response.json({ data: [] })
+      if (url.includes("/v1/facebook/profile/posts")) {
+        return Response.json({
+          posts: [
+            {
+              publishTime: Math.floor((Date.now() - 86400000) / 1000),
+              reactionCount: 42,
+              commentCount: 5,
+            },
+          ],
+        })
+      }
       if (url.includes("/v1/facebook/profile")) {
-        return Response.json({ about: "Miami's finest bistro", picture: "https://example.com/fb.jpg", website: "https://bistro.com", followers: 1800 })
+        return Response.json({
+          pageIntro: "Miami's finest bistro",
+          profilePhoto: { url: "https://example.com/fb.jpg" },
+          website: "https://bistro.com",
+          followerCount: 1800,
+        })
       }
       return Response.json({})
     }) as unknown as typeof fetch
@@ -85,6 +123,10 @@ describe("scanSocialProfiles", () => {
     expect(result.facebook.exists).toBe(true)
     expect(result.facebook.followers).toBe(1800)
     expect(result.facebook.bio).toBe("Miami's finest bistro")
+    expect(result.facebook.hasProfilePic).toBe(true)
+    expect(result.facebook.recentPosts).toEqual([
+      expect.objectContaining({ likes: 42, comments: 5 }),
+    ])
   })
 
   test("sends x-api-key header", async () => {
