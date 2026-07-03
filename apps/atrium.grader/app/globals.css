@@ -1496,11 +1496,17 @@ button:disabled { cursor: not-allowed; }
 }
 
 .loading-collage-stage .loading-collage-media {
-  min-height: clamp(420px, 55vh, 600px);
+  min-height: clamp(420px, 55svh, 600px);
 }
 
 .loading-collage-stage .loading-collage {
   margin-bottom: var(--space-8);
+}
+
+@media (max-width: 760px) {
+  .loading-collage-stage .loading-collage {
+    margin-bottom: var(--space-3);
+  }
 }
 
 /* Step progress strip */
@@ -1820,19 +1826,11 @@ button:disabled { cursor: not-allowed; }
 
   .loading-badge--b {
     top: 37%;
-    right: 0;
+    right: 3%;
   }
 }
 
 @media (max-width: 560px) {
-  .loading-collage-stage {
-    min-height: 830px;
-  }
-
-  .loading-collage-media {
-    min-height: 800px;
-  }
-
   .loading-card {
     width: min(100%, 220px);
     padding: var(--space-2);
@@ -1849,37 +1847,37 @@ button:disabled { cursor: not-allowed; }
 
   .loading-card--a {
     top: 3%;
-    left: 0;
+    left: 4%;
   }
 
   .loading-card--b {
     top: 16%;
-    right: 0;
+    right: 4%;
   }
 
   .loading-card--c {
     bottom: 26%;
-    left: 0;
+    left: 4%;
   }
 
   .loading-card--d {
-    right: 0;
+    right: 4%;
     bottom: 15%;
   }
 
   .loading-card--e {
     bottom: 2%;
-    left: 0;
+    left: 4%;
   }
 
   .loading-badge--a {
     top: 31%;
-    left: 0;
+    left: 4%;
   }
 
   .loading-badge--b {
     top: 38%;
-    right: 0;
+    right: 4%;
   }
 
   .loading-badge--c {
@@ -1891,7 +1889,7 @@ button:disabled { cursor: not-allowed; }
     top: auto;
     bottom: 10%;
     left: auto;
-    right: 0;
+    right: 4%;
   }
 }
 
@@ -3812,7 +3810,7 @@ button:disabled { cursor: not-allowed; }
 
 @media (max-width: 760px) {
   .grader-page {
-    padding: 18px 14px;
+    padding: 18px 20px;
   }
 
   .workflow-stage {
