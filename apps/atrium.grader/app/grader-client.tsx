@@ -32,63 +32,65 @@ type NarrativeResponse = {
 
 const loadingScenes = [
   {
+    kind: "informative",
     id: "studio",
-    image: "/metaphoto.jpg",
+    image: "/slide-1.png",
     imageTone: "photo",
-    badges: ["atrium", "studio", "growth"],
+    badges: ["growth", "studio"],
     cards: [
       { label: "creative", body: "Social content that converts followers into regulars." },
       { label: "market", body: "Local SEO that puts you on the map before they're hungry." },
       { label: "signal", body: "Data signals that show you exactly where to grow next." },
     ],
-    metrics: [
-      { label: "lift", value: "2.4x" },
-      { label: "reach", value: "+38%" },
-    ],
   },
   {
+    kind: "informative",
     id: "forest",
-    image: "/textures/gradient-forest-glow.png",
-    imageTone: "texture",
-    badges: ["local", "social", "intent"],
+    image: "/slide-2.png",
+    imageTone: "photo",
+    badges: ["local", "social"],
     cards: [
       { label: "content", body: "Reels, posts & stories—published for you, every week." },
       { label: "growth", body: "Turn local intent searches into real walk-in customers." },
       { label: "proof", body: "Reviews that build trust before the first visit." },
     ],
-    metrics: [
-      { label: "rank", value: "#1" },
-      { label: "demand", value: "84%" },
-    ],
   },
   {
-    id: "sage",
-    image: "/textures/gradient-charcoal-sage.png",
-    imageTone: "texture",
-    badges: ["ads", "crm", "seo"],
-    cards: [
-      { label: "channel", body: "Meta & Google ads tuned for restaurant-level CPAs." },
-      { label: "audience", body: "Reach locals in your area—not the whole city." },
-      { label: "offer", body: "Promotions that fill slow nights without killing margins." },
-    ],
-    metrics: [
-      { label: "roi", value: "3.1x" },
-      { label: "cpa", value: "-22%" },
-    ],
-  },
-  {
+    kind: "informative",
     id: "mark",
-    image: "/Atrium%20Works%20-08.png",
-    imageTone: "mark",
-    badges: ["brand", "audit", "brief"],
+    image: "/slide-3.png",
+    imageTone: "photo",
+    badges: ["brand", "audit"],
     cards: [
       { label: "identity", body: "A visual brand that stands out on every platform." },
       { label: "system", body: "Consistent look from storefront to scroll to DM." },
       { label: "handoff", body: "Ready-to-run creative assets delivered in 2 weeks." },
     ],
-    metrics: [
-      { label: "score", value: "92" },
-      { label: "moves", value: "05" },
+  },
+  {
+    kind: "client",
+    id: "taha",
+    image: "/slide-4.png",
+    imageTone: "photo",
+    client: "T'ähä Mexican Kitchen",
+    summary: "Improved local awareness for T'ähä Mexican Kitchen with social content and search visibility.",
+    badges: ["client reference", "local growth"],
+    stats: [
+      { value: "5.24M+", label: "impressions (+544%)" },
+      { value: "30%", label: "email open rate" },
+    ],
+  },
+  {
+    kind: "client",
+    id: "doncucy",
+    image: "/slide-5.png",
+    imageTone: "photo",
+    client: "Don Chuy's",
+    summary: "Improved social demand for Don Chuy's with stronger creative rhythm and audience signals.",
+    badges: ["client reference", "social growth"],
+    stats: [
+      { value: "+839%", label: "total impressions" },
+      { value: "+302%", label: "instagram growth" },
     ],
   },
 ] as const
@@ -398,9 +400,7 @@ export function GraderClient() {
         )}
 
         {loading && selectedPlace && (
-          <LoadingStage
-            selectedPlace={selectedPlace}
-          />
+          <LoadingStage />
         )}
         {!loading && report && (
           <ReportStage
@@ -540,11 +540,7 @@ function SearchStage({
   )
 }
 
-function LoadingStage({
-  selectedPlace,
-}: {
-  selectedPlace: PlaceSuggestion
-}) {
+function LoadingStage() {
   const [sceneIndex, setSceneIndex] = useState(0)
   const [stepIndex, setStepIndex] = useState(0)
   const [subIndex, setSubIndex] = useState(0)
@@ -675,41 +671,50 @@ function LoadingStage({
       role="status"
     >
       <div className="loading-collage" key={scene.id} ref={collageRef}>
-        <div className="loading-collage-media">
+        <div className={`loading-collage-media loading-collage-media--${scene.kind}`}>
           <div className={`loading-collage-photo loading-collage-photo--${scene.imageTone}`}>
             {/* biome-ignore lint/performance/noImgElement: Loading-state art is a rotating design-system asset and does not need Next image optimization. */}
             <img alt="" src={scene.image} />
           </div>
 
-          <div className="loading-card loading-card--text loading-card--a">
-            <span>{scene.cards[0]?.label}</span>
-            <p>{scene.cards[0]?.body}</p>
-          </div>
+          {scene.kind === "informative" ? (
+            <>
+              <div className="loading-card loading-card--text loading-card--a">
+                <span>{scene.cards[0]?.label}</span>
+                <p>{scene.cards[0]?.body}</p>
+              </div>
 
-          <div className="loading-card loading-card--metric loading-card--b">
-            <span>{scene.metrics[0]?.label}</span>
-            <strong>{scene.metrics[0]?.value}</strong>
-          </div>
+              <div className="loading-card loading-card--text loading-card--c">
+                <span>{scene.cards[1]?.label}</span>
+                <p>{scene.cards[1]?.body}</p>
+              </div>
 
-          <div className="loading-card loading-card--text loading-card--c">
-            <span>{scene.cards[1]?.label}</span>
-            <p>{scene.cards[1]?.body}</p>
-          </div>
+              <div className="loading-card loading-card--text loading-card--e">
+                <span>{scene.cards[2]?.label}</span>
+                <p>{scene.cards[2]?.body}</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="loading-card loading-card--text loading-card--client loading-card--a">
+                <span>{scene.client}</span>
+                <p>{scene.summary}</p>
+              </div>
 
-          <div className="loading-card loading-card--metric loading-card--d">
-            <span>{scene.metrics[1]?.label}</span>
-            <strong>{scene.metrics[1]?.value}</strong>
-          </div>
+              <div className="loading-card loading-card--metric loading-card--b">
+                <span>{scene.stats[0]?.label}</span>
+                <strong>{scene.stats[0]?.value}</strong>
+              </div>
 
-          <div className="loading-card loading-card--text loading-card--e">
-            <span>{scene.cards[2]?.label}</span>
-            <p>{scene.cards[2]?.body}</p>
-          </div>
+              <div className="loading-card loading-card--metric loading-card--d">
+                <span>{scene.stats[1]?.label}</span>
+                <strong>{scene.stats[1]?.value}</strong>
+              </div>
+            </>
+          )}
 
           <span className="loading-badge loading-badge--a">{scene.badges[0]}</span>
           <span className="loading-badge loading-badge--b">{scene.badges[1]}</span>
-          <span className="loading-badge loading-badge--c">{scene.badges[2]}</span>
-          <span className="loading-badge loading-badge--target">{selectedPlace.name}</span>
         </div>
       </div>
 
