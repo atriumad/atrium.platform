@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/atrium-design-system-31d170c1-6ffa-4c08-bbd9-e03e3b55b095/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/atrium-design-system-31d170c1-6ffa-4c08-bbd9-e03e3b55b095/tokens/colors.css">
+<link rel="stylesheet" href="_ds/atrium-design-system-31d170c1-6ffa-4c08-bbd9-e03e3b55b095/tokens/typography.css">
+<link rel="stylesheet" href="_ds/atrium-design-system-31d170c1-6ffa-4c08-bbd9-e03e3b55b095/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/atrium-design-system-31d170c1-6ffa-4c08-bbd9-e03e3b55b095/tokens/effects.css">
+<script src="_ds/atrium-design-system-31d170c1-6ffa-4c08-bbd9-e03e3b55b095/_ds_bundle.js"></script>
+<script src="image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--cloud-200); font-family: var(--font-sans); color: var(--ink-700); }
+  image-slot { display: block; }
+  .sect { scroll-margin-top: 108px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  .navlink { font-size: 13px; font-weight: 600; color: var(--teal-300); text-decoration: none; padding: 6px 0; white-space: nowrap; letter-spacing: 0.02em; }
+  .navlink:hover { color: var(--mint-400); }
+  @keyframes om-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @keyframes om-glow { 0%,100% { opacity: .5; transform: translate(-50%,-50%) scale(1); } 50% { opacity: .8; transform: translate(-50%,-50%) scale(1.07); } }
+  @keyframes om-pop { 0% { opacity: 0; transform: translateY(22px) scale(.96); } 100% { opacity: 1; transform: none; } }
+  @keyframes om-spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+  @keyframes om-spin2 { to { transform: rotate(360deg); } }
+  @keyframes om-flowy { 0% { background-position: 0 0; } 100% { background-position: 0 -200%; } }
+  @keyframes om-flowx { 0% { background-position: 0 0; } 100% { background-position: 200% 0; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  @media print { .screen-only { display: none !important; } html { -webkit-print-color-adjust: exact; print-color-adjust: exact; } body { background:#fff; } [style*="om-float"] { animation: none !important; } }
+</style>
+</helmet>
+
+<!-- ===== sticky top bar + section nav ===== -->
+<div style="position:sticky; top:0; z-index:60; background:var(--teal-800); color:var(--cloud-300);">
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; padding:14px 32px;">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <span style="font-family:var(--font-display); font-size:22px; color:var(--mint-400); line-height:1;">atrium</span>
+      <span style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal-300);">Growth Diagnostic</span>
+    </div>
+    <div class="screen-only" style="display:flex; align-items:center; gap:16px;">
+      <span style="font-size:13px; color:var(--teal-300);">El Camino Cantina · scanned Jun 26, 2026</span>
+      <button onClick="window.print()" style="background:var(--amber-500); color:var(--teal-800); border:none; padding:9px 18px; border-radius:999px; font-size:13px; font-weight:700; cursor:pointer;">Export PDF</button>
+    </div>
+  </div>
+  <div class="screen-only" style="border-top:1px solid var(--teal-700);">
+    <div class="wrap" style="display:flex; gap:26px; padding:0 32px; overflow-x:auto;">
+      <a class="navlink" href="#overview">Overview</a>
+      <a class="navlink" href="#homework">The Scan</a>
+      <a class="navlink" href="#snapshot">Snapshot</a>
+      <a class="navlink" href="#market">Market</a>
+      <a class="navlink" href="#competitors">Competitors</a>
+      <a class="navlink" href="#brand">Brand</a>
+      <a class="navlink" href="#social">Social</a>
+      <a class="navlink" href="#systems">Systems</a>
+      <a class="navlink" href="#impact">Impact</a>
+      <a class="navlink" href="#delivers">Delivers</a>
+      <a class="navlink" href="#projection">Projection</a>
+      <a class="navlink" href="#plan">The Plan</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO / OVERVIEW ===== -->
+<section id="overview" class="sect" style="background:radial-gradient(125% 95% at 50% -12%, #0a3a41 0%, var(--teal-800) 52%, #042226 100%), var(--teal-800); color:var(--cloud-300); padding:60px 0 70px; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.055; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+&quot;); background-size:170px 170px;"></div>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <div style="display:grid; grid-template-columns:1fr 320px; gap:48px; align-items:center;">
+      <div>
+        <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-300); margin-bottom:18px;">Restaurant Growth Diagnostic</div>
+        <div style="font-size:60px; font-weight:700; letter-spacing:-0.03em; color:var(--cloud-100); line-height:1.0;">El Camino Cantina</div>
+        <div style="font-size:16px; color:var(--mint-400); margin-top:14px;">Kansas City, MO&nbsp; ·&nbsp; Mexican · Casual&nbsp; ·&nbsp; Single location&nbsp; ·&nbsp; 4.1★ · 612 reviews</div>
+        <div style="font-family:var(--font-serif); font-style:italic; font-size:28px; color:var(--cloud-300); margin-top:26px; line-height:1.35; max-width:520px;">Strong food, loyal regulars — and a growth engine that's barely running. Here's everything we found.</div>
+      </div>
+      <!-- big gauge -->
+      <div style="display:flex; flex-direction:column; align-items:center; position:relative;">
+        <div style="position:absolute; top:130px; left:50%; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle, rgba(181,242,219,0.28) 0%, rgba(181,242,219,0.10) 38%, transparent 68%); transform:translate(-50%,-50%); animation:om-glow 5s ease-in-out infinite; pointer-events:none;"></div>
+        <div style="position:absolute; top:130px; left:50%; width:340px; height:340px; border-radius:50%; transform:translate(-50%,-50%); background:conic-gradient(from 0deg, transparent 0deg, rgba(181,242,219,0.35) 55deg, rgba(247,168,35,0.25) 110deg, transparent 150deg, transparent 360deg); -webkit-mask:radial-gradient(circle, transparent 50%, #000 52%, #000 69%, transparent 71%); mask:radial-gradient(circle, transparent 50%, #000 52%, #000 69%, transparent 71%); animation:om-spin 12s linear infinite; pointer-events:none;"></div>
+        <svg width="260" height="260" viewBox="0 0 260 260" style="position:relative; animation:om-float 6s ease-in-out infinite; filter:drop-shadow(0 18px 36px rgba(4,28,32,.45));">
+          <circle cx="130" cy="130" r="104" fill="none" stroke="var(--teal-700)" stroke-width="22"></circle>
+          <circle cx="130" cy="130" r="104" fill="none" stroke="var(--amber-500)" stroke-width="22" stroke-linecap="round" stroke-dasharray="324 653" transform="rotate(-90 130 130)"></circle>
+          <text x="130" y="120" text-anchor="middle" font-family="var(--font-sans)" font-size="68" font-weight="700" fill="var(--cloud-100)" data-count>248</text>
+          <text x="130" y="150" text-anchor="middle" font-family="var(--font-sans)" font-size="15" fill="var(--teal-300)">GROWTH SCORE / 500</text>
+        </svg>
+        <div style="margin-top:14px; background:var(--amber-400); color:var(--teal-800); font-weight:700; font-size:14px; letter-spacing:0.12em; text-transform:uppercase; padding:9px 22px; border-radius:999px;">Developing</div>
+      </div>
+    </div>
+
+    <!-- topline KPI strip -->
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-top:48px;">
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:14px; padding:20px;">
+        <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-300);">Revenue / yr</div>
+        <div style="font-size:30px; font-weight:700; color:var(--cloud-100); margin-top:8px; letter-spacing:-0.02em;">$1.42M</div>
+        <div style="font-size:12px; color:var(--mint-400); margin-top:4px;">Toast POS</div>
+      </div>
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:14px; padding:20px;">
+        <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-300);">Repeat rate</div>
+        <div style="font-size:30px; font-weight:700; color:var(--amber-400); margin-top:8px; letter-spacing:-0.02em;">17%</div>
+        <div style="font-size:12px; color:var(--teal-300); margin-top:4px;">KC avg 35%</div>
+      </div>
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:14px; padding:20px;">
+        <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-300);">Market share</div>
+        <div style="font-size:30px; font-weight:700; color:var(--amber-400); margin-top:8px; letter-spacing:-0.02em;">6%</div>
+        <div style="font-size:12px; color:var(--teal-300); margin-top:4px;">of local demand</div>
+      </div>
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:14px; padding:20px;">
+        <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-300);">Google rating</div>
+        <div style="font-size:30px; font-weight:700; color:var(--cloud-100); margin-top:8px; letter-spacing:-0.02em;">4.1★</div>
+        <div style="font-size:12px; color:var(--amber-400); margin-top:4px;">6 reviews / mo</div>
+      </div>
+      <div style="background:var(--mint-400); border:1px solid var(--mint-400); border-radius:14px; padding:20px;">
+        <div style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-800);">Upside / yr</div>
+        <div style="font-size:30px; font-weight:700; color:var(--teal-800); margin-top:8px; letter-spacing:-0.02em;">+$424K</div>
+        <div style="font-size:12px; color:var(--teal-800); margin-top:4px; font-weight:600;">addressable now</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE SCAN / HOMEWORK ===== -->
+<section id="homework" class="sect" style="padding:64px 0;">
+  <div class="wrap">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-500);">We did our homework</div>
+    <div style="font-size:38px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:8px; max-width:720px; line-height:1.08;">Before we said a word, we <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">read everything.</span></div>
+    <div style="font-size:16px; color:var(--text-muted); margin-top:12px; max-width:620px;">Your menu, your website, your socials, your reviews, your competitors. This whole report is built on what we found — not a template.</div>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:38px;">
+      <!-- menu -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:24px;">
+        <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-size:24px;">📋</span><span style="font-size:11px; font-weight:700; color:var(--teal-800); background:var(--mint-200); padding:5px 10px; border-radius:999px;">Scanned</span></div>
+        <div style="font-size:16px; font-weight:700; color:var(--teal-800); margin-top:16px;">Your menu</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-top:6px; line-height:1.5;">64 items · avg $14 entrée. Margaritas &amp; shareables underpriced for the neighborhood — easy upsell.</div>
+      </div>
+      <!-- website -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:24px;">
+        <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-size:24px;">🌐</span><span style="font-size:11px; font-weight:700; color:var(--amber-600); background:var(--amber-200); padding:5px 10px; border-radius:999px;">3.1s load</span></div>
+        <div style="font-size:16px; font-weight:700; color:var(--teal-800); margin-top:16px;">Your website</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-top:6px; line-height:1.5;">No online ordering above the fold. Not mobile-optimized. No tracking pixel — every ad dollar would fly blind.</div>
+      </div>
+      <!-- socials -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:24px;">
+        <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-size:24px;">📱</span><span style="font-size:11px; font-weight:700; color:var(--amber-600); background:var(--amber-200); padding:5px 10px; border-radius:999px;">2 posts/wk</span></div>
+        <div style="font-size:16px; font-weight:700; color:var(--teal-800); margin-top:16px;">Your socials</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-top:6px; line-height:1.5;">3.4K followers, flat 8 months. Great food photos, zero Reels, no offers, no posting rhythm.</div>
+      </div>
+      <!-- reviews -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:24px;">
+        <div style="display:flex; align-items:center; justify-content:space-between;"><span style="font-size:24px;">⭐</span><span style="font-size:11px; font-weight:700; color:var(--amber-600); background:var(--amber-200); padding:5px 10px; border-radius:999px;">612 read</span></div>
+        <div style="font-size:16px; font-weight:700; color:var(--teal-800); margin-top:16px;">Your reviews</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-top:6px; line-height:1.5;">4.1★. "Service slow" appears 41×. Only 8% get a reply. Competitors answer every one.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; background:var(--teal-800); color:var(--cloud-300); border-radius:16px; padding:20px 26px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <span style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--mint-400); font-weight:700;">Also analyzed</span>
+      <span style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="font-size:13px; border:1px solid var(--teal-500); padding:6px 13px; border-radius:999px;">Google Business Profile</span>
+        <span style="font-size:13px; border:1px solid var(--teal-500); padding:6px 13px; border-radius:999px;">3 direct competitors</span>
+        <span style="font-size:13px; border:1px solid var(--teal-500); padding:6px 13px; border-radius:999px;">Local search demand</span>
+        <span style="font-size:13px; border:1px solid var(--teal-500); padding:6px 13px; border-radius:999px;">Maps ranking</span>
+        <span style="font-size:13px; border:1px solid var(--teal-500); padding:6px 13px; border-radius:999px;">Delivery apps</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATEGORY SNAPSHOT ===== -->
+<section id="snapshot" class="sect" style="padding:64px 0;">
+  <div class="wrap">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-500);">The Snapshot</div>
+    <div style="font-size:38px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:8px; max-width:680px; line-height:1.08;">Five engines of growth — <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">scored.</span></div>
+    <div style="font-size:16px; color:var(--text-muted); margin-top:12px; max-width:620px;">Each engine is scored out of 100 from live signals across Google, Meta, the website, and the POS. Three are underpowered.</div>
+
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-top:38px;">
+      <!-- Acquisition -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px 18px; text-align:center;">
+        <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="44" fill="none" stroke="var(--cloud-300)" stroke-width="11"></circle><circle cx="55" cy="55" r="44" fill="none" stroke="var(--amber-500)" stroke-width="11" stroke-linecap="round" stroke-dasharray="124 276" transform="rotate(-90 55 55)"></circle><text x="55" y="62" text-anchor="middle" font-size="30" font-weight="700" fill="var(--teal-800)" font-family="var(--font-sans)">45</text></svg>
+        <div style="font-size:15px; font-weight:700; color:var(--teal-800); margin-top:10px;">Acquisition</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; font-weight:600; color:var(--amber-600);"><span style="width:8px; height:8px; border-radius:50%; background:var(--amber-400);"></span>Underpowered</div>
+      </div>
+      <!-- Retention -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px 18px; text-align:center;">
+        <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="44" fill="none" stroke="var(--cloud-300)" stroke-width="11"></circle><circle cx="55" cy="55" r="44" fill="none" stroke="var(--amber-500)" stroke-width="11" stroke-linecap="round" stroke-dasharray="97 276" transform="rotate(-90 55 55)"></circle><text x="55" y="62" text-anchor="middle" font-size="30" font-weight="700" fill="var(--teal-800)" font-family="var(--font-sans)">35</text></svg>
+        <div style="font-size:15px; font-weight:700; color:var(--teal-800); margin-top:10px;">Retention</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; font-weight:600; color:var(--amber-600);"><span style="width:8px; height:8px; border-radius:50%; background:var(--amber-400);"></span>Critical gap</div>
+      </div>
+      <!-- Visibility -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px 18px; text-align:center;">
+        <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="44" fill="none" stroke="var(--cloud-300)" stroke-width="11"></circle><circle cx="55" cy="55" r="44" fill="none" stroke="var(--teal-800)" stroke-width="11" stroke-linecap="round" stroke-dasharray="166 276" transform="rotate(-90 55 55)"></circle><text x="55" y="62" text-anchor="middle" font-size="30" font-weight="700" fill="var(--teal-800)" font-family="var(--font-sans)">60</text></svg>
+        <div style="font-size:15px; font-weight:700; color:var(--teal-800); margin-top:10px;">Visibility</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; font-weight:600; color:var(--teal-500);"><span style="width:8px; height:8px; border-radius:50%; background:var(--mint-500);"></span>Room to grow</div>
+      </div>
+      <!-- Reputation -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px 18px; text-align:center;">
+        <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="44" fill="none" stroke="var(--cloud-300)" stroke-width="11"></circle><circle cx="55" cy="55" r="44" fill="none" stroke="var(--teal-800)" stroke-width="11" stroke-linecap="round" stroke-dasharray="146 276" transform="rotate(-90 55 55)"></circle><text x="55" y="62" text-anchor="middle" font-size="30" font-weight="700" fill="var(--teal-800)" font-family="var(--font-sans)">53</text></svg>
+        <div style="font-size:15px; font-weight:700; color:var(--teal-800); margin-top:10px;">Reputation</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; font-weight:600; color:var(--amber-600);"><span style="width:8px; height:8px; border-radius:50%; background:var(--amber-400);"></span>Slipping</div>
+      </div>
+      <!-- Infrastructure -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px 18px; text-align:center;">
+        <svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="44" fill="none" stroke="var(--cloud-300)" stroke-width="11"></circle><circle cx="55" cy="55" r="44" fill="none" stroke="var(--teal-800)" stroke-width="11" stroke-linecap="round" stroke-dasharray="152 276" transform="rotate(-90 55 55)"></circle><text x="55" y="62" text-anchor="middle" font-size="30" font-weight="700" fill="var(--teal-800)" font-family="var(--font-sans)">55</text></svg>
+        <div style="font-size:15px; font-weight:700; color:var(--teal-800); margin-top:10px;">Infrastructure</div>
+        <div style="display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:12px; font-weight:600; color:var(--teal-500);"><span style="width:8px; height:8px; border-radius:50%; background:var(--mint-500);"></span>Decent base</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== MARKET OVERVIEW ===== -->
+<section id="market" class="sect" style="background:radial-gradient(110% 80% at 85% 0%, #0a3a41 0%, var(--teal-800) 55%, #052327 100%), var(--teal-800); color:var(--cloud-300); padding:64px 0; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.05; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+&quot;); background-size:170px 170px;"></div>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-300);">The Market</div>
+    <div style="font-size:38px; font-weight:700; color:var(--cloud-100); letter-spacing:-0.02em; margin-top:8px; max-width:760px; line-height:1.08;">A market searching <span style="font-family:var(--font-serif); font-style:italic; font-weight:400; color:var(--amber-400);">18,400×</span> a month. You're catching 6% of it.</div>
+    <div style="font-size:16px; color:var(--mint-400); margin-top:12px; max-width:640px;">Within a 5-mile trade area there are 142,000 households and steady local demand for your category. Most of it is going to three competitors.</div>
+
+    <div style="display:grid; grid-template-columns:1.15fr 1fr; gap:24px; margin-top:40px; align-items:stretch;">
+      <!-- MAP -->
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:18px; padding:24px; position:relative;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <div style="font-size:13px; font-weight:600; color:var(--cloud-100);">Trade area · brand reach</div>
+          <div style="font-size:12px; color:var(--teal-300);">Kansas City, MO</div>
+        </div>
+        <div style="position:relative; height:380px; border-radius:12px; overflow:hidden; background:linear-gradient(135deg, #0b363c 0%, #0e3a40 100%);">
+          <!-- subtle street grid -->
+          <svg width="100%" height="100%" viewBox="0 0 460 380" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0;">
+            <g stroke="#15464c" stroke-width="1">
+              <line x1="0" y1="64" x2="460" y2="64"></line><line x1="0" y1="150" x2="460" y2="150"></line><line x1="0" y1="236" x2="460" y2="236"></line><line x1="0" y1="316" x2="460" y2="316"></line>
+              <line x1="80" y1="0" x2="80" y2="380"></line><line x1="180" y1="0" x2="180" y2="380"></line><line x1="300" y1="0" x2="300" y2="380"></line><line x1="392" y1="0" x2="392" y2="380"></line>
+            </g>
+            <path d="M0 200 L150 170 L240 230 L340 190 L460 220" stroke="#1c545b" stroke-width="6" fill="none" opacity="0.7"></path>
+            <!-- reach rings -->
+            <circle cx="230" cy="190" r="150" fill="rgba(181,242,219,0.05)" stroke="#2c6168" stroke-width="1.5"></circle>
+            <circle cx="230" cy="190" r="100" fill="rgba(181,242,219,0.06)" stroke="#2c6168" stroke-width="1.5"></circle>
+            <circle cx="230" cy="190" r="52" fill="rgba(247,168,35,0.12)" stroke="#f7a823" stroke-width="1.5" stroke-dasharray="4 4"></circle>
+          </svg>
+          <!-- ring labels -->
+          <div style="position:absolute; left:calc(50% + 150px); top:calc(50% - 8px); transform:translateX(-50%); font-size:10px; color:var(--teal-300); letter-spacing:0.1em;">5 MI</div>
+          <div style="position:absolute; left:calc(50% + 100px); top:calc(50% - 8px); transform:translateX(-50%); font-size:10px; color:var(--teal-300); letter-spacing:0.1em;">3 MI</div>
+          <!-- restaurant pin -->
+          <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:128px; height:128px; border-radius:50%; border:2px dashed rgba(247,168,35,0.45); animation:om-spin2 16s linear infinite; pointer-events:none;"></div>
+          <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:18px; height:18px; border-radius:50%; background:var(--amber-400); box-shadow:0 0 0 6px rgba(247,168,35,0.22);"></div>
+          <div style="position:absolute; left:calc(50% + 16px); top:calc(50% - 28px); font-size:12px; font-weight:700; color:var(--amber-400);">El Camino</div>
+          <!-- competitor pins -->
+          <div style="position:absolute; left:30%; top:30%; width:11px; height:11px; border-radius:50%; background:var(--cloud-300);"></div>
+          <div style="position:absolute; left:31%; top:23%; font-size:11px; color:var(--cloud-300);">Taqueria Norte ·&nbsp;4.6★</div>
+          <div style="position:absolute; left:70%; top:34%; width:11px; height:11px; border-radius:50%; background:var(--cloud-300);"></div>
+          <div style="position:absolute; left:55%; top:27%; font-size:11px; color:var(--cloud-300);">Casa Verde ·&nbsp;4.4★</div>
+          <div style="position:absolute; left:62%; top:72%; width:11px; height:11px; border-radius:50%; background:var(--cloud-300);"></div>
+          <div style="position:absolute; left:46%; top:79%; font-size:11px; color:var(--cloud-300);">El Mercado ·&nbsp;4.2★</div>
+          <div style="position:absolute; left:16px; bottom:14px; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--teal-300);">◆ You&nbsp;&nbsp;&nbsp;● Competitor&nbsp;&nbsp;&nbsp;⊙ Est. organic reach</div>
+        </div>
+      </div>
+
+      <!-- market metrics -->
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:16px; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline;"><div style="font-size:13px; color:var(--teal-300); letter-spacing:0.04em;">Local search demand / mo</div><div style="font-size:13px; color:var(--mint-400);">category</div></div>
+          <div style="font-size:34px; font-weight:700; color:var(--cloud-100); margin-top:6px; letter-spacing:-0.02em;">18,400</div>
+          <div style="height:8px; background:var(--teal-500); border-radius:999px; margin-top:12px;"><div style="width:100%; height:100%; background:var(--mint-400); border-radius:999px;"></div></div>
+        </div>
+        <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:16px; padding:22px;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline;"><div style="font-size:13px; color:var(--teal-300); letter-spacing:0.04em;">Share you capture</div><div style="font-size:13px; color:var(--amber-400);">6%</div></div>
+          <div style="font-size:34px; font-weight:700; color:var(--amber-400); margin-top:6px; letter-spacing:-0.02em;">~1,100 <span style="font-size:15px; color:var(--teal-300); font-weight:600;">visits / mo from search</span></div>
+          <div style="height:8px; background:var(--teal-500); border-radius:999px; margin-top:12px;"><div style="width:6%; height:100%; background:var(--amber-400); border-radius:999px;"></div></div>
+        </div>
+        <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:16px; padding:22px;">
+          <div style="font-size:13px; color:var(--teal-300); letter-spacing:0.04em;">Addressable households · 5 mi</div>
+          <div style="font-size:34px; font-weight:700; color:var(--cloud-100); margin-top:6px; letter-spacing:-0.02em;">142,000</div>
+          <div style="font-size:13px; color:var(--mint-400); margin-top:6px;">Median HH income $61K · dense lunch + dinner daypart</div>
+        </div>
+        <div style="background:var(--mint-400); color:var(--teal-800); border-radius:16px; padding:22px;">
+          <div style="font-size:13px; letter-spacing:0.04em; font-weight:600;">The gap, in plain terms</div>
+          <div style="font-size:17px; margin-top:6px; line-height:1.4;">Capture just <span style="font-family:var(--font-serif); font-style:italic;">4 more points</span> of this market and that's ~730 extra visits a month.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPETITIVE SET ===== -->
+<section id="competitors" class="sect" style="padding:64px 0;">
+  <div class="wrap">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-500);">The Competition</div>
+    <div style="font-size:38px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:8px; max-width:720px; line-height:1.08;">Who's eating your <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">lunch.</span></div>
+    <div style="font-size:16px; color:var(--text-muted); margin-top:12px; max-width:640px;">Three direct competitors inside your trade area. They out-review, out-post, and out-rank you — here's the head-to-head.</div>
+
+    <!-- comparison table -->
+    <div style="margin-top:36px; background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; overflow:hidden;">
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; background:var(--teal-800); color:var(--mint-400); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; font-weight:600;">
+        <div style="padding:16px 22px;">Restaurant</div>
+        <div style="padding:16px 14px; text-align:center;">Rating</div>
+        <div style="padding:16px 14px; text-align:center;">Reviews</div>
+        <div style="padding:16px 14px; text-align:center;">New / mo</div>
+        <div style="padding:16px 14px; text-align:center;">IG followers</div>
+      </div>
+      <!-- rows -->
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; border-bottom:1px solid var(--cloud-300); align-items:center;">
+        <div style="padding:18px 22px; font-weight:700; color:var(--teal-800); display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; border-radius:50%; background:var(--cloud-400);"></span>Taqueria Norte</div>
+        <div style="padding:18px 14px; text-align:center; font-weight:700; color:var(--teal-800);">4.6★</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">1,240</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">28</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">11.2K</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; border-bottom:1px solid var(--cloud-300); align-items:center;">
+        <div style="padding:18px 22px; font-weight:700; color:var(--teal-800); display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; border-radius:50%; background:var(--cloud-400);"></span>Casa Verde</div>
+        <div style="padding:18px 14px; text-align:center; font-weight:700; color:var(--teal-800);">4.4★</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">880</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">19</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">6.8K</div>
+      </div>
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; border-bottom:1px solid var(--cloud-300); align-items:center;">
+        <div style="padding:18px 22px; font-weight:700; color:var(--teal-800); display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; border-radius:50%; background:var(--cloud-400);"></span>El Mercado</div>
+        <div style="padding:18px 14px; text-align:center; font-weight:700; color:var(--teal-800);">4.2★</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">540</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">12</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--text-body);">2.1K</div>
+      </div>
+      <!-- you -->
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr 1fr; background:var(--amber-200); align-items:center;">
+        <div style="padding:18px 22px; font-weight:700; color:var(--teal-800); display:flex; align-items:center; gap:10px;"><span style="width:9px; height:9px; border-radius:50%; background:var(--amber-500);"></span>El Camino Cantina <span style="font-size:11px; background:var(--teal-800); color:var(--mint-400); padding:3px 8px; border-radius:999px; letter-spacing:0.06em;">YOU</span></div>
+        <div style="padding:18px 14px; text-align:center; font-weight:700; color:var(--amber-600);">4.1★</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--amber-600); font-weight:600;">612</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--amber-600); font-weight:600;">6</div>
+        <div style="padding:18px 14px; text-align:center; color:var(--amber-600); font-weight:600;">3.4K</div>
+      </div>
+    </div>
+
+    <!-- what they're posting -->
+    <div style="margin-top:36px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px;">
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--teal-800); margin-bottom:4px;">Taqueria Norte</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">Posts 5×/week · heavy Reels</div>
+        <image-slot id="comp-1" style="width:100%; height:200px;" shape="rounded" radius="14" placeholder="Drop their top IG post"></image-slot>
+      </div>
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--teal-800); margin-bottom:4px;">Casa Verde</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">Posts 3×/week · UGC + offers</div>
+        <image-slot id="comp-2" style="width:100%; height:200px;" shape="rounded" radius="14" placeholder="Drop their top IG post"></image-slot>
+      </div>
+      <div>
+        <div style="font-size:13px; font-weight:700; color:var(--teal-800); margin-bottom:4px;">El Mercado</div>
+        <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">Posts 2×/week · photos</div>
+        <image-slot id="comp-3" style="width:100%; height:200px;" shape="rounded" radius="14" placeholder="Drop their top IG post"></image-slot>
+      </div>
+    </div>
+
+    <!-- where you win / lose -->
+    <div style="margin-top:34px; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+      <div style="background:var(--mint-200); border:1px solid var(--mint-400); border-radius:16px; padding:24px;">
+        <div style="font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--teal-800); font-weight:700; margin-bottom:14px;">Where you win</div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--ink-700);">
+          <div style="display:flex; gap:10px;"><span style="color:var(--teal-800); font-weight:700;">+</span>Higher avg check ($24 vs ~$19 category)</div>
+          <div style="display:flex; gap:10px;"><span style="color:var(--teal-800); font-weight:700;">+</span>Loyal dinner regulars — strong word of mouth</div>
+          <div style="display:flex; gap:10px;"><span style="color:var(--teal-800); font-weight:700;">+</span>Toast POS already capturing guest data</div>
+        </div>
+      </div>
+      <div style="background:var(--amber-200); border:1px solid var(--amber-500); border-radius:16px; padding:24px;">
+        <div style="font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--amber-600); font-weight:700; margin-bottom:14px;">Where you lose</div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--ink-700);">
+          <div style="display:flex; gap:10px;"><span style="color:var(--amber-600); font-weight:700;">−</span>4–5× fewer new reviews per month</div>
+          <div style="display:flex; gap:10px;"><span style="color:var(--amber-600); font-weight:700;">−</span>No paid ads — invisible to new movers</div>
+          <div style="display:flex; gap:10px;"><span style="color:var(--amber-600); font-weight:700;">−</span>Not in the Maps top-3 for "tacos near me"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BRAND RECOGNITION & PENETRATION ===== -->
+<section id="brand" class="sect" style="background:var(--cloud-300); padding:64px 0;">
+  <div class="wrap">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-500);">Brand Recognition & Penetration</div>
+    <div style="font-size:38px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:8px; max-width:760px; line-height:1.08;">People aren't searching for you <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">by name.</span></div>
+    <div style="font-size:16px; color:var(--text-muted); margin-top:12px; max-width:660px;">Only 11% of your category's local searches are branded ("El Camino Cantina") — the rest is up for grabs and going to whoever shows up first.</div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:40px;">
+      <!-- branded vs nonbranded -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:28px;">
+        <div style="font-size:13px; font-weight:700; color:var(--teal-800); margin-bottom:20px;">Branded vs. category search</div>
+        <div style="display:flex; flex-direction:column; gap:18px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:6px;"><span style="color:var(--text-body);">Branded — search your name</span><span style="font-weight:700; color:var(--teal-800);">2,100 / mo</span></div>
+            <div style="height:14px; background:var(--cloud-300); border-radius:999px;"><div style="width:11%; height:100%; background:var(--teal-800); border-radius:999px;"></div></div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">11% share of voice</div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:6px;"><span style="color:var(--text-body);">Non-branded — "tacos near me"</span><span style="font-weight:700; color:var(--amber-600);">16,300 / mo</span></div>
+            <div style="height:14px; background:var(--cloud-300); border-radius:999px;"><div style="width:89%; height:100%; background:var(--amber-500); border-radius:999px;"></div></div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">89% — the open field</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- penetration gauge -->
+      <div style="background:var(--teal-800); color:var(--cloud-300); border-radius:18px; padding:28px; display:flex; align-items:center; gap:26px;">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+          <circle cx="75" cy="75" r="60" fill="none" stroke="var(--teal-600,#0e3a40)" stroke-width="14"></circle>
+          <circle cx="75" cy="75" r="60" fill="none" stroke="var(--teal-500)" stroke-width="14"></circle>
+          <circle cx="75" cy="75" r="60" fill="none" stroke="var(--mint-400)" stroke-width="14" stroke-linecap="round" stroke-dasharray="56 377" transform="rotate(-90 75 75)"></circle>
+          <text x="75" y="70" text-anchor="middle" font-size="34" font-weight="700" fill="var(--cloud-100)" font-family="var(--font-sans)">15%</text>
+          <text x="75" y="92" text-anchor="middle" font-size="11" fill="var(--teal-300)" font-family="var(--font-sans)">PENETRATION</text>
+        </svg>
+        <div>
+          <div style="font-size:13px; color:var(--teal-300); letter-spacing:0.04em;">Brand penetration</div>
+          <div style="font-size:17px; color:var(--cloud-100); margin-top:6px; line-height:1.45;">An estimated <span style="font-family:var(--font-serif); font-style:italic; color:var(--mint-400);">15%</span> of households in your trade area know the brand. The other 121,000 have never heard of you.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- signal strength row -->
+    <div style="margin-top:24px; background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:28px;">
+      <div style="font-size:13px; font-weight:700; color:var(--teal-800); margin-bottom:20px;">Brand signals · strength read</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:22px;">
+        <div>
+          <div style="font-size:13px; color:var(--text-muted);">Share of voice</div>
+          <div style="font-size:26px; font-weight:700; color:var(--teal-800); margin:6px 0 10px;">11%</div>
+          <div style="display:flex; gap:4px;"><span style="flex:1; height:6px; border-radius:3px; background:var(--amber-400);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span></div>
+        </div>
+        <div>
+          <div style="font-size:13px; color:var(--text-muted);">Follower share vs set</div>
+          <div style="font-size:26px; font-weight:700; color:var(--teal-800); margin:6px 0 10px;">14%</div>
+          <div style="display:flex; gap:4px;"><span style="flex:1; height:6px; border-radius:3px; background:var(--amber-400);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span></div>
+        </div>
+        <div>
+          <div style="font-size:13px; color:var(--text-muted);">Content cadence</div>
+          <div style="font-size:26px; font-weight:700; color:var(--teal-800); margin:6px 0 10px;">2×/wk</div>
+          <div style="display:flex; gap:4px;"><span style="flex:1; height:6px; border-radius:3px; background:var(--mint-500);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--mint-500);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span></div>
+        </div>
+        <div>
+          <div style="font-size:13px; color:var(--text-muted);">Engagement rate</div>
+          <div style="font-size:26px; font-weight:700; color:var(--teal-800); margin:6px 0 10px;">1.2%</div>
+          <div style="display:flex; gap:4px;"><span style="flex:1; height:6px; border-radius:3px; background:var(--mint-500);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span><span style="flex:1; height:6px; border-radius:3px; background:var(--cloud-300);"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOCIAL & CONTENT ===== -->
+<section id="social" class="sect" style="padding:64px 0;">
+  <div class="wrap">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-500);">Social & Content</div>
+    <div style="font-size:38px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:8px; max-width:760px; line-height:1.08;">Posting twice a week into a feed that <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">rewards twice a day.</span></div>
+    <div style="font-size:16px; color:var(--text-muted); margin-top:12px; max-width:660px;">Your social presence is the cheapest acquisition channel you have — and right now it's running at a fraction of its potential.</div>
+
+    <!-- their social stats -->
+    <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:12px; margin-top:36px;">
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:14px; padding:18px;"><div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Followers</div><div style="font-size:26px; font-weight:700; color:var(--teal-800); margin-top:6px;">3.4K</div></div>
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:14px; padding:18px;"><div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Posts / wk</div><div style="font-size:26px; font-weight:700; color:var(--amber-600); margin-top:6px;">2</div></div>
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:14px; padding:18px;"><div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Reels / mo</div><div style="font-size:26px; font-weight:700; color:var(--amber-600); margin-top:6px;">1</div></div>
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:14px; padding:18px;"><div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Engagement</div><div style="font-size:26px; font-weight:700; color:var(--teal-800); margin-top:6px;">1.2%</div></div>
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:14px; padding:18px;"><div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Reach / mo</div><div style="font-size:26px; font-weight:700; color:var(--teal-800); margin-top:6px;">8K</div></div>
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:14px; padding:18px;"><div style="font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">Saves / post</div><div style="font-size:26px; font-weight:700; color:var(--amber-600); margin-top:6px;">4</div></div>
+    </div>
+
+    <!-- current content grid -->
+    <div style="margin-top:30px;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:14px;">
+        <div style="font-size:13px; font-weight:700; color:var(--teal-800);">Their last posts</div>
+        <div style="font-size:13px; color:var(--text-muted);">Mostly static food photos · no Reels rhythm · no offers</div>
+      </div>
+      <div style="display:flex; justify-content:center; align-items:center; gap:0; padding:18px 0 26px;">
+        <div style="background:#fff; padding:10px 10px 14px; border-radius:16px; box-shadow:0 18px 40px -16px rgba(7,47,52,.42); transform:rotate(-7deg); margin-right:-26px; transition:transform .35s cubic-bezier(.22,.61,.36,1); position:relative; z-index:1;" onMouseenter="this.style.transform='rotate(-7deg) translateY(-10px)'; this.style.zIndex=5;" onMouseleave="this.style.transform='rotate(-7deg)'; this.style.zIndex=1;">
+          <image-slot id="social-1" style="width:165px; height:165px;" shape="rounded" radius="10" placeholder="Post"></image-slot>
+        </div>
+        <div style="background:#fff; padding:10px 10px 14px; border-radius:16px; box-shadow:0 22px 48px -16px rgba(7,47,52,.46); transform:rotate(3deg); margin-right:-26px; transition:transform .35s cubic-bezier(.22,.61,.36,1); position:relative; z-index:2;" onMouseenter="this.style.transform='rotate(3deg) translateY(-10px)'; this.style.zIndex=5;" onMouseleave="this.style.transform='rotate(3deg)'; this.style.zIndex=2;">
+          <image-slot id="social-2" style="width:165px; height:165px;" shape="rounded" radius="10" placeholder="Post"></image-slot>
+        </div>
+        <div style="background:#fff; padding:10px 10px 14px; border-radius:16px; box-shadow:0 24px 52px -16px rgba(7,47,52,.5); transform:rotate(-3deg); margin-right:-26px; transition:transform .35s cubic-bezier(.22,.61,.36,1); position:relative; z-index:3;" onMouseenter="this.style.transform='rotate(-3deg) translateY(-10px)'; this.style.zIndex=5;" onMouseleave="this.style.transform='rotate(-3deg)'; this.style.zIndex=3;">
+          <image-slot id="social-3" style="width:165px; height:165px;" shape="rounded" radius="10" placeholder="Post"></image-slot>
+        </div>
+        <div style="background:#fff; padding:10px 10px 14px; border-radius:16px; box-shadow:0 18px 40px -16px rgba(7,47,52,.42); transform:rotate(8deg); transition:transform .35s cubic-bezier(.22,.61,.36,1); position:relative; z-index:2;" onMouseenter="this.style.transform='rotate(8deg) translateY(-10px)'; this.style.zIndex=5;" onMouseleave="this.style.transform='rotate(8deg)'; this.style.zIndex=2;">
+          <image-slot id="social-4" style="width:165px; height:165px;" shape="rounded" radius="10" placeholder="Post"></image-slot>
+        </div>
+      </div>
+    </div>
+
+    <!-- share of voice + goals -->
+    <div style="margin-top:40px; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+      <!-- share of social voice donut -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:30px;">
+        <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Share of social voice</div>
+        <div style="font-size:14px; color:var(--text-muted); margin-top:6px; margin-bottom:20px;">By posts published in your trade area, last 30 days.</div>
+        <div style="display:flex; align-items:center; gap:26px;">
+          <div style="position:relative; width:168px; height:168px; flex-shrink:0; border-radius:50%; background:conic-gradient(var(--teal-800) 0 42%, var(--teal-500) 42% 67%, var(--mint-500) 67% 84%, var(--amber-500) 84% 100%);">
+            <div style="position:absolute; inset:42px; background:var(--cloud-100); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+              <div style="font-size:24px; font-weight:700; color:var(--teal-800); line-height:1;">53</div>
+              <div style="font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted);">posts / mo</div>
+            </div>
+          </div>
+          <div style="flex:1; display:flex; flex-direction:column; gap:11px;">
+            <div style="display:flex; align-items:center; gap:10px; font-size:13px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--teal-800);"></span><span style="flex:1; color:var(--teal-800); font-weight:600;">Taqueria Norte</span><span style="color:var(--text-muted);">22 · 42%</span></div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:13px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--teal-500);"></span><span style="flex:1; color:var(--teal-800); font-weight:600;">Casa Verde</span><span style="color:var(--text-muted);">13 · 25%</span></div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:13px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--mint-500);"></span><span style="flex:1; color:var(--teal-800); font-weight:600;">El Mercado</span><span style="color:var(--text-muted);">9 · 17%</span></div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:13px;"><span style="width:10px; height:10px; border-radius:3px; background:var(--amber-500);"></span><span style="flex:1; color:var(--amber-600); font-weight:700;">El Camino — you</span><span style="color:var(--amber-600); font-weight:600;">9 · 16%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- goals radial -->
+      <div style="background:var(--teal-800); color:var(--cloud-300); border-radius:18px; padding:30px;">
+        <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-300); font-weight:700;">What a social engine drives</div>
+        <div style="font-size:14px; color:var(--mint-400); margin-top:6px; margin-bottom:18px;">Top goals operators report from active social.</div>
+        <div style="display:flex; align-items:center; gap:24px;">
+          <svg width="180" height="180" viewBox="0 0 200 200" style="flex-shrink:0;">
+            <g fill="none" stroke-linecap="round">
+              <circle cx="100" cy="100" r="82" stroke="#0e3a40" stroke-width="11"></circle>
+              <circle cx="100" cy="100" r="70" stroke="#0e3a40" stroke-width="11"></circle>
+              <circle cx="100" cy="100" r="58" stroke="#0e3a40" stroke-width="11"></circle>
+              <circle cx="100" cy="100" r="46" stroke="#0e3a40" stroke-width="11"></circle>
+              <circle cx="100" cy="100" r="34" stroke="#0e3a40" stroke-width="11"></circle>
+              <circle cx="100" cy="100" r="82" stroke="#B5F2DB" stroke-width="11" stroke-dasharray="360 515" transform="rotate(-90 100 100)"></circle>
+              <circle cx="100" cy="100" r="70" stroke="#8fe6c2" stroke-width="11" stroke-dasharray="260 440" transform="rotate(-90 100 100)"></circle>
+              <circle cx="100" cy="100" r="58" stroke="#2c6168" stroke-width="11" stroke-dasharray="175 364" transform="rotate(-90 100 100)"></circle>
+              <circle cx="100" cy="100" r="46" stroke="#F7A823" stroke-width="11" stroke-dasharray="133 289" transform="rotate(-90 100 100)"></circle>
+              <circle cx="100" cy="100" r="34" stroke="#ffc21f" stroke-width="11" stroke-dasharray="96 214" transform="rotate(-90 100 100)"></circle>
+            </g>
+          </svg>
+          <div style="flex:1; display:flex; flex-direction:column; gap:10px; font-size:13px;">
+            <div style="display:flex; align-items:center; gap:9px;"><span style="font-weight:700; color:var(--mint-400); width:38px;">70%</span><span style="color:var(--cloud-300);">Brand awareness</span></div>
+            <div style="display:flex; align-items:center; gap:9px;"><span style="font-weight:700; color:var(--mint-400); width:38px;">59%</span><span style="color:var(--cloud-300);">Sales & lead gen</span></div>
+            <div style="display:flex; align-items:center; gap:9px;"><span style="font-weight:700; color:var(--mint-400); width:38px;">48%</span><span style="color:var(--cloud-300);">Community engagement</span></div>
+            <div style="display:flex; align-items:center; gap:9px;"><span style="font-weight:700; color:var(--amber-400); width:38px;">46%</span><span style="color:var(--cloud-300);">Grow the audience</span></div>
+            <div style="display:flex; align-items:center; gap:9px;"><span style="font-weight:700; color:var(--amber-400); width:38px;">45%</span><span style="color:var(--cloud-300);">Web & order traffic</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- the reporting solution -->
+    <div style="margin-top:18px; background:var(--cloud-100); border:1px dashed var(--teal-500); border-radius:18px; padding:26px 30px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;">
+      <div style="max-width:560px;">
+        <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">The solution</div>
+        <div style="font-size:18px; color:var(--teal-800); margin-top:7px; line-height:1.45;">Atrium tracks share of voice, cadence, and engagement <span style="font-family:var(--font-serif); font-style:italic;">every week</span> — and sends you the report. No dashboards to check.</div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="border:1.5px solid var(--teal-800); color:var(--teal-800); font-size:13px; font-weight:600; padding:8px 16px; border-radius:999px;">Weekly</span>
+        <span style="border:1.5px solid var(--teal-800); color:var(--teal-800); font-size:13px; font-weight:600; padding:8px 16px; border-radius:999px;">PDF · PPT</span>
+        <span style="background:var(--teal-800); color:var(--mint-400); font-size:13px; font-weight:600; padding:8px 16px; border-radius:999px;">To your inbox</span>
+      </div>
+    </div>
+
+    <!-- cadence benchmark by restaurant type -->
+    <div style="margin-top:40px; background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:30px;">
+      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Posting volume · what each format demands</div>
+      <div style="font-size:15px; color:var(--text-muted); margin-top:6px; margin-bottom:24px;">Healthy cadence rises with how visual and competitive the category is. You sit below every benchmark.</div>
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:7px;"><span style="font-weight:600; color:var(--teal-800);">Fast Casual / QSR</span><span style="color:var(--text-muted);">5–7 posts/wk · Reels-led</span></div>
+          <div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:90%; height:100%; background:var(--teal-800); border-radius:999px;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:7px;"><span style="font-weight:600; color:var(--teal-800);">Casual Dining <span style="font-size:12px; background:var(--amber-400); color:var(--teal-800); padding:2px 8px; border-radius:999px; margin-left:6px;">YOUR CATEGORY</span></span><span style="color:var(--text-muted);">4–5 posts/wk · food + events</span></div>
+          <div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:65%; height:100%; background:var(--teal-800); border-radius:999px;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:7px;"><span style="font-weight:600; color:var(--teal-800);">Fine Dining</span><span style="color:var(--text-muted);">3–4 posts/wk · cinematic, chef-led</span></div>
+          <div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:48%; height:100%; background:var(--teal-800); border-radius:999px;"></div></div>
+        </div>
+        <div style="border-top:1px dashed var(--cloud-400); padding-top:18px;">
+          <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:7px;"><span style="font-weight:700; color:var(--amber-600);">El Camino Cantina — today</span><span style="color:var(--amber-600); font-weight:600;">2 posts/wk</span></div>
+          <div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:26%; height:100%; background:var(--amber-500); border-radius:999px;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- content levers by type -->
+    <div style="margin-top:24px;">
+      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700; margin-bottom:6px;">What top restaurants leverage</div>
+      <div style="font-size:15px; color:var(--text-muted); margin-bottom:22px; max-width:640px;">The content engines that actually move covers — and which ones you should run for a casual Mexican concept.</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+        <!-- casual -->
+        <div style="background:var(--teal-800); color:var(--cloud-300); border-radius:18px; padding:28px;">
+          <div style="font-size:18px; font-weight:700; color:var(--mint-400);">Casual & Fast Casual</div>
+          <div style="font-size:13px; color:var(--teal-300); margin-top:4px; margin-bottom:18px;">Volume, personality, craveability</div>
+          <div style="display:flex; flex-direction:column; gap:12px; font-size:14px;">
+            <div style="display:flex; gap:10px;"><span style="color:var(--mint-400); font-weight:700;">→</span>Short-form Reels — dish close-ups, "make it with me", trending audio</div>
+            <div style="display:flex; gap:10px;"><span style="color:var(--mint-400); font-weight:700;">→</span>User-generated content — repost guests, run photo prompts</div>
+            <div style="display:flex; gap:10px;"><span style="color:var(--mint-400); font-weight:700;">→</span>Limited-time offers & specials in-feed and Stories</div>
+            <div style="display:flex; gap:10px;"><span style="color:var(--mint-400); font-weight:700;">→</span>Staff & personality features — the people behind the counter</div>
+            <div style="display:flex; gap:10px;"><span style="color:var(--mint-400); font-weight:700;">→</span>Local & community moments — events, partnerships, neighborhood</div>
+          </div>
+        </div>
+        <!-- fine dining -->
+        <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:28px;">
+          <div style="font-size:18px; font-weight:700; color:var(--teal-800);">Fine Dining</div>
+          <div style="font-size:13px; color:var(--text-muted); margin-top:4px; margin-bottom:18px;">Craft, story, scarcity</div>
+          <div style="display:flex; flex-direction:column; gap:12px; font-size:14px; color:var(--ink-700);">
+            <div style="display:flex; gap:10px;"><span style="color:var(--amber-500); font-weight:700;">→</span>Cinematic plating Reels — slow, textural, editorial</div>
+            <div style="display:flex; gap:10px;"><span style="color:var(--amber-500); font-weight:700;">→</span>Chef's story & technique — credibility and craft</div>
+            <div style="display:flex; gap:10px;"><span style="color:var(--amber-500); font-weight:700;">→</span>Seasonal & tasting-menu reveals — scarcity drives reservations</div>
+            <div style="display:flex; gap:10px;"><span style="color:var(--amber-500); font-weight:700;">→</span>Wine pairings & sommelier picks</div>
+            <div style="display:flex; gap:10px;"><span style="color:var(--amber-500); font-weight:700;">→</span>Private dining & events — high-margin booking driver</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- the social opportunity -->
+    <div style="margin-top:24px; background:var(--mint-400); color:var(--teal-800); border-radius:18px; padding:28px 32px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;">
+      <div style="font-size:17px; line-height:1.5; max-width:620px;">A Branded Content Engine — <span style="font-family:var(--font-serif); font-style:italic;">3 Reels + 2 posts + daily Stories a week</span> — is what closes the gap with Taqueria Norte. It's the top of your whole acquisition funnel.</div>
+      <div style="text-align:right; white-space:nowrap;"><div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; font-weight:600;">Target cadence</div><div style="font-size:40px; font-weight:700; letter-spacing:-0.02em;">12+/wk</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SYSTEMS INVENTORY ===== -->
+<section id="systems" class="sect" style="padding:64px 0;">
+  <div class="wrap">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-500);">What's Running · What's Not</div>
+    <div style="font-size:38px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:8px; max-width:720px; line-height:1.08;">The growth stack, <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">audited.</span></div>
+    <div style="font-size:16px; color:var(--text-muted); margin-top:12px; max-width:640px;">Every lever a modern restaurant should be pulling — and the status of each one today. The amber and outlined rows are money left on the table.</div>
+
+    <!-- legend -->
+    <div style="display:flex; gap:22px; margin-top:24px; font-size:13px; color:var(--text-muted);">
+      <span style="display:inline-flex; align-items:center; gap:7px;"><span style="width:10px; height:10px; border-radius:50%; background:var(--mint-500);"></span>Active</span>
+      <span style="display:inline-flex; align-items:center; gap:7px;"><span style="width:10px; height:10px; border-radius:50%; background:var(--amber-400);"></span>Weak / underused</span>
+      <span style="display:inline-flex; align-items:center; gap:7px;"><span style="width:10px; height:10px; border-radius:50%; border:2px solid var(--cloud-400); background:transparent;"></span>Not in use</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:26px;">
+      <!-- Acquisition stack -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px;">
+        <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700; margin-bottom:16px;">Acquisition</div>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--mint-500);"></span>Organic social</span><span style="font-size:13px; color:var(--text-muted);">Posting 2×/wk</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; border:2px solid var(--cloud-400);"></span>Meta ads</span><span style="font-size:13px; color:var(--amber-600); font-weight:600;">Not running</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; border:2px solid var(--cloud-400);"></span>Google ads</span><span style="font-size:13px; color:var(--amber-600); font-weight:600;">Not running</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0;"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--amber-400);"></span>Offer / coupon system</span><span style="font-size:13px; color:var(--text-muted);">Ad hoc only</span></div>
+        </div>
+      </div>
+      <!-- Retention stack -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px;">
+        <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700; margin-bottom:16px;">Retention</div>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--amber-400);"></span>Email list</span><span style="font-size:13px; color:var(--text-muted);">Exists, rarely sent</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; border:2px solid var(--cloud-400);"></span>SMS program</span><span style="font-size:13px; color:var(--amber-600); font-weight:600;">None</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; border:2px solid var(--cloud-400);"></span>Automated flows</span><span style="font-size:13px; color:var(--amber-600); font-weight:600;">None</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0;"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--amber-400);"></span>Loyalty program</span><span style="font-size:13px; color:var(--text-muted);">Basic stamp card</span></div>
+        </div>
+      </div>
+      <!-- Visibility stack -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px;">
+        <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700; margin-bottom:16px;">Visibility</div>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--amber-400);"></span>Google Business Profile</span><span style="font-size:13px; color:var(--text-muted);">Stale, no posts</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--mint-500);"></span>NAP citations</span><span style="font-size:13px; color:var(--text-muted);">Mostly consistent</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0;"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--amber-400);"></span>Maps ranking</span><span style="font-size:13px; color:var(--text-muted);">Page 1, not top-3</span></div>
+        </div>
+      </div>
+      <!-- Infra stack -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px;">
+        <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700; margin-bottom:16px;">Infrastructure</div>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--mint-500);"></span>POS (Toast)</span><span style="font-size:13px; color:var(--text-muted);">Capturing data</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; background:var(--amber-400);"></span>Website</span><span style="font-size:13px; color:var(--text-muted);">Outdated, slow</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0; border-bottom:1px solid var(--cloud-300);"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; border:2px solid var(--cloud-400);"></span>Tracking & pixels</span><span style="font-size:13px; color:var(--amber-600); font-weight:600;">Not installed</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:11px 0;"><span style="display:flex; align-items:center; gap:10px; font-size:14px; color:var(--teal-800);"><span style="width:10px; height:10px; border-radius:50%; border:2px solid var(--cloud-400);"></span>Reporting</span><span style="font-size:13px; color:var(--amber-600); font-weight:600;">No idea what works</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BUSINESS IMPACT ===== -->
+<section id="impact" class="sect" style="background:radial-gradient(120% 90% at 15% 0%, #0a3a41 0%, var(--teal-800) 55%, #052327 100%), var(--teal-800); color:var(--cloud-300); padding:64px 0; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.05; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+&quot;); background-size:170px 170px;"></div>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-300);">What it's costing you</div>
+    <div style="font-size:48px; font-weight:700; color:var(--cloud-100); letter-spacing:-0.025em; margin-top:10px; max-width:780px; line-height:1.02;">You're losing <span style="font-family:var(--font-serif); font-style:italic; font-weight:400; color:var(--amber-400);" data-count>$424K</span> a year. Quietly.</div>
+    <div style="font-size:18px; color:var(--mint-400); margin-top:14px; max-width:600px;">Not in one big hit — in small leaks, every single month. Here's where it's going.</div>
+
+    <!-- timeline of leaks -->
+    <div style="margin-top:46px; display:flex; flex-direction:column; gap:0;">
+
+      <!-- leak 1 -->
+      <div style="display:grid; grid-template-columns:46px 1fr; gap:22px;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:22px; height:22px; border-radius:50%; border:3px solid var(--amber-400); background:var(--teal-800);"></div>
+          <div style="flex:1; width:3px; margin:6px 0; background:linear-gradient(180deg, var(--teal-500) 0%, var(--mint-400) 45%, var(--amber-400) 55%, var(--teal-500) 100%); background-size:100% 200%; animation:om-flowy 1.6s linear infinite;"></div>
+        </div>
+        <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:20px; padding:26px 30px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; gap:24px;">
+          <div>
+            <div style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber-400); font-weight:600;">Your reviews are turning guests away</div>
+            <div style="font-size:22px; color:var(--cloud-100); margin-top:8px; line-height:1.3; max-width:480px;">At 4.1★, roughly <strong style="color:var(--mint-400);">1,800 people a year</strong> pick a higher-rated spot before they ever try you.</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;"><div style="font-size:40px; font-weight:700; color:var(--amber-400); letter-spacing:-0.02em;" data-count>−$104K</div><div style="font-size:13px; color:var(--teal-300);">per year</div></div>
+        </div>
+      </div>
+
+      <!-- leak 2 -->
+      <div style="display:grid; grid-template-columns:46px 1fr; gap:22px;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:22px; height:22px; border-radius:50%; border:3px solid var(--amber-400); background:var(--teal-800);"></div>
+          <div style="flex:1; width:3px; margin:6px 0; background:linear-gradient(180deg, var(--teal-500) 0%, var(--mint-400) 45%, var(--amber-400) 55%, var(--teal-500) 100%); background-size:100% 200%; animation:om-flowy 1.6s linear infinite;"></div>
+        </div>
+        <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:20px; padding:26px 30px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; gap:24px;">
+          <div>
+            <div style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber-400); font-weight:600;">New guests can't find you</div>
+            <div style="font-size:22px; color:var(--cloud-100); margin-top:8px; line-height:1.3; max-width:480px;">No ads, not in the Maps top-3. You're invisible to <strong style="color:var(--mint-400);">89% of local searches.</strong></div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;"><div style="font-size:40px; font-weight:700; color:var(--amber-400); letter-spacing:-0.02em;" data-count>−$120K</div><div style="font-size:13px; color:var(--teal-300);">per year</div></div>
+        </div>
+      </div>
+
+      <!-- leak 3 -->
+      <div style="display:grid; grid-template-columns:46px 1fr; gap:22px;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:22px; height:22px; border-radius:50%; border:3px solid var(--amber-400); background:var(--teal-800);"></div>
+          <div style="flex:1; width:3px; margin:6px 0; background:linear-gradient(180deg, var(--teal-500) 0%, var(--mint-400) 45%, var(--amber-400) 55%, var(--teal-500) 100%); background-size:100% 200%; animation:om-flowy 1.6s linear infinite;"></div>
+        </div>
+        <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:20px; padding:26px 30px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; gap:24px;">
+          <div>
+            <div style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber-400); font-weight:600;">Guests come once and vanish</div>
+            <div style="font-size:22px; color:var(--cloud-100); margin-top:8px; line-height:1.3; max-width:480px;">Only <strong style="color:var(--mint-400);">17% come back</strong> — half the KC average. Your email list sits unused.</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;"><div style="font-size:40px; font-weight:700; color:var(--amber-400); letter-spacing:-0.02em;" data-count>−$148K</div><div style="font-size:13px; color:var(--teal-300);">per year</div></div>
+        </div>
+      </div>
+
+      <!-- leak 4 -->
+      <div style="display:grid; grid-template-columns:46px 1fr; gap:22px;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:22px; height:22px; border-radius:50%; border:3px solid var(--amber-400); background:var(--teal-800);"></div>
+          <div style="flex:1; width:3px; margin:6px 0; background:linear-gradient(180deg, var(--mint-400) 0%, var(--amber-400) 50%, var(--mint-400) 100%); background-size:100% 200%; animation:om-flowy 1.6s linear infinite;"></div>
+        </div>
+        <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:20px; padding:26px 30px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; gap:24px;">
+          <div>
+            <div style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber-400); font-weight:600;">Slow days stay empty</div>
+            <div style="font-size:22px; color:var(--cloud-100); margin-top:8px; line-height:1.3; max-width:480px;">Tuesday and Wednesday run soft with <strong style="color:var(--mint-400);">~60 empty covers a week</strong> and no offer to fill them.</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;"><div style="font-size:40px; font-weight:700; color:var(--amber-400); letter-spacing:-0.02em;" data-count>−$52K</div><div style="font-size:13px; color:var(--teal-300);">per year</div></div>
+        </div>
+      </div>
+
+      <!-- total / good news -->
+      <div style="display:grid; grid-template-columns:46px 1fr; gap:22px;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <div style="width:22px; height:22px; border-radius:50%; background:var(--mint-400); box-shadow:0 0 0 5px rgba(181,242,219,0.2);"></div>
+        </div>
+        <div style="background:var(--mint-400); color:var(--teal-800); border-radius:22px; padding:34px 38px; display:flex; justify-content:space-between; align-items:center; gap:30px; box-shadow:0 24px 60px -22px rgba(181,242,219,.5);">
+          <div>
+            <div style="font-size:13px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700;">The good news</div>
+            <div style="font-size:26px; font-weight:700; margin-top:8px; line-height:1.2; max-width:480px;">Every one of these is fixable. That's <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">$424K</span> you can get back.</div>
+          </div>
+          <div style="text-align:right; white-space:nowrap;"><div style="font-size:60px; font-weight:700; letter-spacing:-0.03em; line-height:1;" data-count>+$424K</div><div style="font-size:14px; font-weight:600;">recoverable / year</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LTV ENGINE ===== -->
+<section class="sect" style="padding:64px 0;">
+  <div class="wrap">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-500);">The LTV Engine</div>
+    <div style="font-size:38px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:8px; max-width:720px; line-height:1.08;">Same guests, worth <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">$96</span> instead of $58.</div>
+    <div style="font-size:16px; color:var(--text-muted); margin-top:12px; max-width:640px;">You don't need more guests to grow first — you need each one to come back more often. Here's the path from current to potential lifetime value.</div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:38px; align-items:center;">
+      <!-- before/after -->
+      <div style="display:flex; gap:18px;">
+        <div style="flex:1; background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:16px; padding:24px; text-align:center;">
+          <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted);">Today</div>
+          <div style="font-size:44px; font-weight:700; color:var(--teal-800); margin-top:10px; letter-spacing:-0.02em;">$58</div>
+          <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">annual guest value</div>
+          <div style="height:1px; background:var(--cloud-300); margin:18px 0;"></div>
+          <div style="font-size:13px; color:var(--text-body);">2.7 visits / yr</div>
+          <div style="font-size:13px; color:var(--text-body); margin-top:4px;">17% come back</div>
+        </div>
+        <div style="display:flex; align-items:center; font-size:28px; color:var(--amber-500); font-weight:700;">→</div>
+        <div style="flex:1; background:var(--mint-200); border:1px solid var(--mint-400); border-radius:16px; padding:24px; text-align:center;">
+          <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-800);">With Atrium</div>
+          <div style="font-size:44px; font-weight:700; color:var(--teal-800); margin-top:10px; letter-spacing:-0.02em;">$96</div>
+          <div style="font-size:13px; color:var(--teal-800); margin-top:4px;">annual guest value</div>
+          <div style="height:1px; background:var(--mint-400); margin:18px 0;"></div>
+          <div style="font-size:13px; color:var(--teal-800);">4.1 visits / yr</div>
+          <div style="font-size:13px; color:var(--teal-800); margin-top:4px;">32% come back</div>
+        </div>
+      </div>
+      <!-- levers -->
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <div style="display:flex; align-items:center; gap:16px;"><div style="width:130px; font-size:14px; color:var(--text-body);">Email flows</div><div style="flex:1; height:10px; background:var(--cloud-300); border-radius:999px;"><div style="width:70%; height:100%; background:var(--teal-800); border-radius:999px;"></div></div><div style="width:48px; text-align:right; font-size:14px; font-weight:700; color:var(--teal-800);">+$16</div></div>
+        <div style="display:flex; align-items:center; gap:16px;"><div style="width:130px; font-size:14px; color:var(--text-body);">SMS campaigns</div><div style="flex:1; height:10px; background:var(--cloud-300); border-radius:999px;"><div style="width:50%; height:100%; background:var(--teal-700); border-radius:999px;"></div></div><div style="width:48px; text-align:right; font-size:14px; font-weight:700; color:var(--teal-800);">+$11</div></div>
+        <div style="display:flex; align-items:center; gap:16px;"><div style="width:130px; font-size:14px; color:var(--text-body);">Loyalty / VIP</div><div style="flex:1; height:10px; background:var(--cloud-300); border-radius:999px;"><div style="width:38%; height:100%; background:var(--teal-500); border-radius:999px;"></div></div><div style="width:48px; text-align:right; font-size:14px; font-weight:700; color:var(--teal-800);">+$8</div></div>
+        <div style="display:flex; align-items:center; gap:16px;"><div style="width:130px; font-size:14px; color:var(--text-body);">Win-back / birthday</div><div style="flex:1; height:10px; background:var(--cloud-300); border-radius:999px;"><div style="width:14%; height:100%; background:var(--amber-500); border-radius:999px;"></div></div><div style="width:48px; text-align:right; font-size:14px; font-weight:700; color:var(--teal-800);">+$3</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT YOU GET / OUTCOMES ===== -->
+<section id="delivers" class="sect" style="background:radial-gradient(120% 90% at 80% 0%, #0a3a41 0%, var(--teal-800) 55%, #052327 100%), var(--teal-800); color:var(--cloud-300); padding:64px 0; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.05; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+&quot;); background-size:170px 170px;"></div>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-300);">What you actually get</div>
+    <div style="font-size:44px; font-weight:700; color:var(--cloud-100); letter-spacing:-0.025em; margin-top:10px; max-width:760px; line-height:1.04;">Not a strategy deck — <span style="font-family:var(--font-serif); font-style:italic; font-weight:400; color:var(--mint-400);">working machines.</span></div>
+    <div style="font-size:18px; color:var(--mint-400); margin-top:14px; max-width:620px;">Real campaigns and automations, live in your account — running while you run the restaurant.</div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:42px;">
+
+      <!-- Offer email -->
+      <div style="background:var(--cloud-100); border-radius:20px; padding:16px; color:var(--ink-700);">
+        <div style="border:1px solid var(--cloud-400); border-radius:12px; overflow:hidden;">
+          <div style="background:var(--cloud-200); padding:10px 14px; border-bottom:1px solid var(--cloud-400); display:flex; align-items:center; gap:8px;">
+            <span style="width:26px; height:26px; border-radius:50%; background:var(--teal-800); color:var(--mint-400); font-size:13px; font-weight:700; display:flex; align-items:center; justify-content:center;">E</span>
+            <div><div style="font-size:12px; font-weight:700; color:var(--teal-800); line-height:1.1;">El Camino Cantina</div><div style="font-size:11px; color:var(--text-muted);">to you · now</div></div>
+          </div>
+          <div style="padding:14px;">
+            <div style="font-size:14px; font-weight:700; color:var(--teal-800);">🌮 Tuesday just got better — 20% off</div>
+            <div style="margin-top:12px; background:var(--teal-800); border-radius:10px; padding:16px; text-align:center;">
+              <div style="font-family:var(--font-serif); font-style:italic; font-size:24px; color:var(--mint-400);">20% off, this week only</div>
+              <div style="margin-top:12px; display:inline-block; background:var(--amber-500); color:var(--teal-800); font-size:12px; font-weight:700; padding:9px 18px; border-radius:999px;">Claim my offer</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding:0 4px;">
+          <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Offer Email</div>
+          <div style="font-size:12px; color:var(--text-muted);">28% open · drives visits</div>
+        </div>
+      </div>
+
+      <!-- Birthday automation -->
+      <div style="background:var(--cloud-100); border-radius:20px; padding:18px; color:var(--ink-700);">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <span style="font-size:11px; background:var(--mint-200); color:var(--teal-800); font-weight:700; padding:5px 10px; border-radius:999px; display:inline-flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:var(--teal-800);"></span>Automated</span>
+          <span style="font-size:12px; color:var(--text-muted);">fires on guest birthday</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <div style="align-self:flex-start; max-width:88%; background:var(--cloud-300); color:var(--teal-800); padding:11px 14px; border-radius:14px 14px 14px 4px; font-size:13px; line-height:1.4;">Happy Birthday, Maria! 🎉 Your free entrée is waiting all week — just show this text.</div>
+          <div style="align-self:flex-end; max-width:70%; background:var(--teal-800); color:var(--cloud-100); padding:11px 14px; border-radius:14px 14px 4px 14px; font-size:13px;">On my way 🙌</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding:0 2px;">
+          <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Birthday Campaign</div>
+          <div style="font-size:12px; color:var(--text-muted);">32% redeem</div>
+        </div>
+      </div>
+
+      <!-- Win-back flow -->
+      <div style="background:var(--cloud-100); border-radius:20px; padding:22px; color:var(--ink-700);">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+          <span style="font-size:11px; background:var(--mint-200); color:var(--teal-800); font-weight:700; padding:5px 10px; border-radius:999px; display:inline-flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:var(--teal-800);"></span>Automated flow</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; align-items:center; gap:12px;"><div style="width:34px; height:34px; flex-shrink:0; border-radius:10px; background:var(--amber-200); border:1px solid var(--amber-500); display:flex; align-items:center; justify-content:center; font-size:15px;">⏳</div><div style="font-size:13px; font-weight:600; color:var(--teal-800);">No visit in 60 days</div></div>
+          <div style="width:2px; height:14px; background:var(--teal-500); margin-left:16px;"></div>
+          <div style="display:flex; align-items:center; gap:12px;"><div style="width:34px; height:34px; flex-shrink:0; border-radius:10px; background:var(--mint-200); border:1px solid var(--mint-400); display:flex; align-items:center; justify-content:center; font-size:15px;">💬</div><div style="font-size:13px; font-weight:600; color:var(--teal-800);">SMS: "We miss you — here's 15% off"</div></div>
+          <div style="width:2px; height:14px; background:var(--teal-500); margin-left:16px;"></div>
+          <div style="display:flex; align-items:center; gap:12px;"><div style="width:34px; height:34px; flex-shrink:0; border-radius:10px; background:var(--teal-800); display:flex; align-items:center; justify-content:center; font-size:15px;">✅</div><div style="font-size:13px; font-weight:700; color:var(--teal-800);">Guest comes back</div></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid var(--cloud-300);">
+          <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Win-Back Engine</div>
+          <div style="font-size:12px; color:var(--text-muted);">5–15% return</div>
+        </div>
+      </div>
+
+      <!-- Review request -->
+      <div style="background:var(--cloud-100); border-radius:20px; padding:18px; color:var(--ink-700);">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <span style="font-size:11px; background:var(--mint-200); color:var(--teal-800); font-weight:700; padding:5px 10px; border-radius:999px; display:inline-flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:var(--teal-800);"></span>Automated</span>
+          <span style="font-size:12px; color:var(--text-muted);">2 hrs after a visit</span>
+        </div>
+        <div style="align-self:flex-start; background:var(--cloud-300); color:var(--teal-800); padding:12px 14px; border-radius:14px 14px 14px 4px; font-size:13px; line-height:1.4;">Thanks for coming in! 🌟 Mind leaving a quick review? Takes 10 seconds → <span style="color:var(--teal-500); text-decoration:underline;">g.page/elcamino</span></div>
+        <div style="display:flex; gap:3px; margin-top:12px; font-size:16px;">⭐⭐⭐⭐⭐</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding:0 2px;">
+          <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Review Engine</div>
+          <div style="font-size:12px; color:var(--text-muted);">4.1★ → 4.6★</div>
+        </div>
+      </div>
+
+      <!-- Slow-day offer -->
+      <div style="background:var(--cloud-100); border-radius:20px; padding:18px; color:var(--ink-700);">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <span style="font-size:11px; background:var(--mint-200); color:var(--teal-800); font-weight:700; padding:5px 10px; border-radius:999px; display:inline-flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:var(--teal-800);"></span>Targeted</span>
+          <span style="font-size:12px; color:var(--text-muted);">soft Tue / Wed only</span>
+        </div>
+        <div style="background:var(--teal-800); border-radius:14px; padding:18px; color:var(--cloud-100);">
+          <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--mint-400);">Tonight only</div>
+          <div style="font-size:20px; font-weight:700; margin-top:6px; line-height:1.15;">Taco Tuesday — 2-for-1 til 9pm 🌮</div>
+          <div style="margin-top:12px; display:inline-block; background:var(--amber-500); color:var(--teal-800); font-size:12px; font-weight:700; padding:8px 16px; border-radius:999px;">Reserve a table</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding:0 2px;">
+          <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Slow-Day Recovery</div>
+          <div style="font-size:12px; color:var(--text-muted);">fills empty covers</div>
+        </div>
+      </div>
+
+      <!-- Acquisition ad -->
+      <div style="background:var(--cloud-100); border-radius:20px; padding:18px; color:var(--ink-700);">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <span style="font-size:11px; background:var(--mint-200); color:var(--teal-800); font-weight:700; padding:5px 10px; border-radius:999px; display:inline-flex; align-items:center; gap:5px;"><span style="width:7px; height:7px; border-radius:50%; background:var(--teal-800);"></span>Paid</span>
+          <span style="font-size:12px; color:var(--text-muted);">Meta · 5-mi radius</span>
+        </div>
+        <div style="border:1px solid var(--cloud-400); border-radius:12px; overflow:hidden;">
+          <div style="height:96px; background:linear-gradient(135deg, var(--amber-400), var(--amber-600)); display:flex; align-items:center; justify-content:center; font-size:34px;">🌮</div>
+          <div style="padding:12px;">
+            <div style="font-size:13px; font-weight:700; color:var(--teal-800);">New to the neighborhood? First taco's on us.</div>
+            <div style="margin-top:8px; display:flex; justify-content:space-between; align-items:center;"><span style="font-size:11px; color:var(--text-muted);">elcaminocantina.com</span><span style="font-size:11px; font-weight:700; background:var(--cloud-300); color:var(--teal-800); padding:5px 10px; border-radius:6px;">Order now</span></div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding:0 2px;">
+          <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Guest Acquisition</div>
+          <div style="font-size:12px; color:var(--text-muted);">+170 guests/mo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- monthly report strip -->
+    <div style="margin-top:18px; background:var(--mint-400); color:var(--teal-800); border-radius:20px; padding:26px 32px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;">
+      <div style="max-width:560px;">
+        <div style="font-size:12px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700;">And every month</div>
+        <div style="font-size:20px; margin-top:7px; line-height:1.4;">One simple report shows exactly what every campaign earned — <span style="font-family:var(--font-serif); font-style:italic;">revenue, not vanity metrics.</span></div>
+      </div>
+      <div style="text-align:right; white-space:nowrap;"><div style="font-size:40px; font-weight:700; letter-spacing:-0.02em;">+$8.4K</div><div style="font-size:13px; font-weight:600;">attributed last month</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE PROJECTION ===== -->
+<section id="projection" class="sect" style="background:radial-gradient(120% 90% at 20% 0%, #0a3a41 0%, var(--teal-800) 55%, #052327 100%), var(--teal-800); color:var(--cloud-300); padding:64px 0; position:relative; overflow:hidden;">
+  <div style="position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.05; mix-blend-mode:overlay; background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+&quot;); background-size:170px 170px;"></div>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-300);">The potential · next 90 days</div>
+    <div style="font-size:46px; font-weight:700; color:var(--cloud-100); letter-spacing:-0.025em; margin-top:10px; max-width:780px; line-height:1.04;">Here's where you could be by <span style="font-family:var(--font-serif); font-style:italic; font-weight:400; color:var(--mint-400);">September.</span></div>
+    <div style="font-size:18px; color:var(--mint-400); margin-top:14px; max-width:620px;">Conservative projections, built on your numbers and the KC benchmarks we track across every client.</div>
+
+    <!-- four projection curves -->
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:42px;">
+      <!-- reviews -->
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:18px; padding:22px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-300);">Google rating</div>
+        <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;"><span style="font-size:18px; color:var(--teal-300);">4.1★</span><span style="color:var(--mint-400);">→</span><span style="font-size:34px; font-weight:700; color:var(--mint-400); letter-spacing:-0.02em;">4.6★</span></div>
+        <svg viewBox="0 0 200 70" style="width:100%; height:56px; margin-top:12px; overflow:visible;"><polyline points="0,55 50,50 100,38 150,22 200,12" fill="none" stroke="var(--mint-400)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="200" cy="12" r="4" fill="var(--mint-400)"></circle></svg>
+        <div style="font-size:12px; color:var(--teal-300); margin-top:8px;">6 → 45 new reviews / mo</div>
+      </div>
+      <!-- followers -->
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:18px; padding:22px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-300);">IG followers</div>
+        <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;"><span style="font-size:18px; color:var(--teal-300);">3.4K</span><span style="color:var(--mint-400);">→</span><span style="font-size:34px; font-weight:700; color:var(--mint-400); letter-spacing:-0.02em;">7.1K</span></div>
+        <svg viewBox="0 0 200 70" style="width:100%; height:56px; margin-top:12px; overflow:visible;"><polyline points="0,58 50,52 100,40 150,24 200,8" fill="none" stroke="var(--mint-400)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="200" cy="8" r="4" fill="var(--mint-400)"></circle></svg>
+        <div style="font-size:12px; color:var(--teal-300); margin-top:8px;">+109% in 90 days</div>
+      </div>
+      <!-- impressions -->
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:18px; padding:22px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-300);">Monthly reach</div>
+        <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;"><span style="font-size:18px; color:var(--teal-300);">8K</span><span style="color:var(--mint-400);">→</span><span style="font-size:34px; font-weight:700; color:var(--mint-400); letter-spacing:-0.02em;">95K</span></div>
+        <svg viewBox="0 0 200 70" style="width:100%; height:56px; margin-top:12px; overflow:visible;"><polyline points="0,60 50,54 100,42 150,26 200,6" fill="none" stroke="var(--mint-400)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="200" cy="6" r="4" fill="var(--mint-400)"></circle></svg>
+        <div style="font-size:12px; color:var(--teal-300); margin-top:8px;">organic + paid combined</div>
+      </div>
+      <!-- repeat rate -->
+      <div style="background:var(--teal-700); border:1px solid var(--teal-500); border-radius:18px; padding:22px;">
+        <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-300);">Repeat rate</div>
+        <div style="display:flex; align-items:baseline; gap:8px; margin-top:8px;"><span style="font-size:18px; color:var(--teal-300);">17%</span><span style="color:var(--mint-400);">→</span><span style="font-size:34px; font-weight:700; color:var(--mint-400); letter-spacing:-0.02em;">28%</span></div>
+        <svg viewBox="0 0 200 70" style="width:100%; height:56px; margin-top:12px; overflow:visible;"><polyline points="0,56 50,48 100,38 150,28 200,16" fill="none" stroke="var(--mint-400)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline><circle cx="200" cy="16" r="4" fill="var(--mint-400)"></circle></svg>
+        <div style="font-size:12px; color:var(--teal-300); margin-top:8px;">on the way to KC avg 35%</div>
+      </div>
+    </div>
+
+    <!-- cross-format orchestration -->
+    <div style="margin-top:40px; background:var(--cloud-100); color:var(--ink-700); border-radius:22px; padding:34px;">
+      <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">One offer, every channel</div>
+      <div style="font-size:24px; font-weight:700; color:var(--teal-800); letter-spacing:-0.01em; margin-top:6px;">How a single Taco Tuesday push compounds.</div>
+      <div style="font-size:14px; color:var(--text-muted); margin-top:6px; max-width:600px;">We run the same offer across formats so it reinforces itself — then track it all the way to revenue and new opt-ins.</div>
+
+      <!-- flow -->
+      <div style="display:flex; align-items:stretch; gap:0; margin-top:26px; flex-wrap:wrap;">
+        <!-- channels -->
+        <div style="flex:1; min-width:150px; display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Goes out as</div>
+          <div style="background:var(--cloud-200); border-radius:12px; padding:12px 14px; font-size:13px; font-weight:600; color:var(--teal-800);">📷 Instagram Reel + Story</div>
+          <div style="background:var(--cloud-200); border-radius:12px; padding:12px 14px; font-size:13px; font-weight:600; color:var(--teal-800);">✉️ Email to 4,200 guests</div>
+          <div style="background:var(--cloud-200); border-radius:12px; padding:12px 14px; font-size:13px; font-weight:600; color:var(--teal-800);">💬 SMS to 1,800 VIPs</div>
+          <div style="background:var(--cloud-200); border-radius:12px; padding:12px 14px; font-size:13px; font-weight:600; color:var(--teal-800);">🎯 Meta ad · 5-mi radius</div>
+        </div>
+        <!-- arrow -->
+        <div style="display:flex; align-items:center; padding:0 18px; color:var(--amber-500); font-size:26px; font-weight:700;">→</div>
+        <!-- funnel metrics -->
+        <div style="flex:1.4; min-width:240px; display:flex; flex-direction:column; gap:8px;">
+          <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Produces</div>
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--teal-800); color:var(--cloud-100); border-radius:10px; padding:13px 16px;"><span style="font-size:13px;">Impressions</span><span style="font-size:20px; font-weight:700;" data-count>112,000</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--teal-700); color:var(--cloud-100); border-radius:10px; padding:13px 16px;"><span style="font-size:13px;">Email opens · 31%</span><span style="font-size:20px; font-weight:700;" data-count>1,302</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--teal-600,#0e3a40); color:var(--cloud-100); border-radius:10px; padding:13px 16px; background:var(--teal-500);"><span style="font-size:13px;">Reservations + orders</span><span style="font-size:20px; font-weight:700;" data-count>240</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; background:var(--mint-400); color:var(--teal-800); border-radius:10px; padding:13px 16px;"><span style="font-size:13px; font-weight:600;">New opt-ins captured</span><span style="font-size:20px; font-weight:700;" data-count>185</span></div>
+        </div>
+        <!-- arrow -->
+        <div style="display:flex; align-items:center; padding:0 18px; color:var(--amber-500); font-size:26px; font-weight:700;">→</div>
+        <!-- revenue -->
+        <div style="flex:1; min-width:150px; display:flex; flex-direction:column; justify-content:center; background:var(--amber-400); border-radius:16px; padding:22px; text-align:center;">
+          <div style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-800); font-weight:700;">Extra revenue</div>
+          <div style="font-size:42px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:6px;" data-count>$5,760</div>
+          <div style="font-size:12px; color:var(--teal-800); margin-top:4px;">from one week, one offer</div>
+        </div>
+      </div>
+      <div style="margin-top:20px; padding-top:18px; border-top:1px solid var(--cloud-300); font-size:14px; color:var(--text-muted);">Plus <strong style="color:var(--teal-800);">185 new contacts</strong> added to the list — so next month's offer reaches more people for free. That's the compounding.</div>
+    </div>
+
+    <!-- brand penetration overtake -->
+    <div style="margin-top:18px; background:var(--cloud-100); color:var(--ink-700); border-radius:22px; padding:34px;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px;">
+        <div>
+          <div style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Brand penetration</div>
+          <div style="font-size:24px; font-weight:700; color:var(--teal-800); letter-spacing:-0.01em; margin-top:6px;">Catching — then passing — Taqueria Norte.</div>
+        </div>
+        <div style="font-size:13px; color:var(--text-muted);">Share of local social voice · projected</div>
+      </div>
+
+      <!-- bars: now vs projected -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:26px;">
+        <div>
+          <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-bottom:14px;">Today</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div><div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px;"><span style="color:var(--text-body);">Taqueria Norte</span><span style="color:var(--text-muted);">42%</span></div><div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:42%; height:100%; background:var(--teal-800); border-radius:999px;"></div></div></div>
+            <div><div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px;"><span style="color:var(--text-body);">Casa Verde</span><span style="color:var(--text-muted);">25%</span></div><div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:25%; height:100%; background:var(--teal-500); border-radius:999px;"></div></div></div>
+            <div><div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px;"><span style="color:var(--amber-600); font-weight:700;">El Camino — you</span><span style="color:var(--amber-600); font-weight:600;">16%</span></div><div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:16%; height:100%; background:var(--amber-500); border-radius:999px;"></div></div></div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-800); font-weight:700; margin-bottom:14px;">In 90 days</div>
+          <div style="display:flex; flex-direction:column; gap:11px;">
+            <div><div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px;"><span style="color:var(--teal-800); font-weight:700;">El Camino — you</span><span style="color:var(--teal-800); font-weight:700;">38%</span></div><div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:38%; height:100%; background:var(--mint-500); border-radius:999px;"></div></div></div>
+            <div><div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px;"><span style="color:var(--text-body);">Taqueria Norte</span><span style="color:var(--text-muted);">34%</span></div><div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:34%; height:100%; background:var(--teal-800); border-radius:999px;"></div></div></div>
+            <div><div style="display:flex; justify-content:space-between; font-size:13px; margin-bottom:5px;"><span style="color:var(--text-body);">Casa Verde</span><span style="color:var(--text-muted);">19%</span></div><div style="height:12px; background:var(--cloud-300); border-radius:999px;"><div style="width:19%; height:100%; background:var(--teal-500); border-radius:999px;"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- disclaimer -->
+    <div style="margin-top:18px; font-size:13px; color:var(--teal-300); max-width:680px;">Projections are conservative estimates based on your current baseline and aggregated outcomes across comparable KC restaurants. We verify against your POS before committing to targets.</div>
+  </div>
+</section>
+
+<!-- ===== THE PLAN / PRESCRIPTION ===== -->
+<section id="plan" class="sect" style="background:var(--cloud-300); padding:64px 0;">
+  <div class="wrap">
+    <div style="font-size:12px; letter-spacing:0.22em; text-transform:uppercase; color:var(--teal-500);">The Prescription</div>
+    <div style="font-size:38px; font-weight:700; color:var(--teal-800); letter-spacing:-0.02em; margin-top:8px; max-width:720px; line-height:1.08;">Where Atrium would start — <span style="font-family:var(--font-serif); font-style:italic; font-weight:400;">in order.</span></div>
+    <div style="font-size:16px; color:var(--text-muted); margin-top:12px; max-width:640px;">Sequenced by impact-per-dollar. Fix the bleeding first, then build the engine, then scale.</div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:38px;">
+      <!-- phase 1 -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:26px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;"><span style="background:var(--teal-800); color:var(--mint-400); font-weight:700; font-size:13px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center;">1</span><span style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Stop the bleed</span></div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">Review Generation Engine</div>
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">Reputation Management</div>
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">GBP optimization + weekly posts</div>
+        </div>
+        <div style="margin-top:18px; padding-top:16px; border-top:1px solid var(--cloud-300); font-size:13px; color:var(--text-muted);">Recovers <strong style="color:var(--teal-800);">~$104K</strong> · fastest payback</div>
+      </div>
+      <!-- phase 2 -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:26px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;"><span style="background:var(--teal-800); color:var(--mint-400); font-weight:700; font-size:13px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center;">2</span><span style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Build the engine</span></div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">Email + SMS Communication</div>
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">Customer Relationship Engine</div>
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">VIP Club + Win-Back flows</div>
+        </div>
+        <div style="margin-top:18px; padding-top:16px; border-top:1px solid var(--cloud-300); font-size:13px; color:var(--text-muted);">Unlocks <strong style="color:var(--teal-800);">+$148K</strong> · biggest lever</div>
+      </div>
+      <!-- phase 3 -->
+      <div style="background:var(--cloud-100); border:1px solid var(--cloud-400); border-radius:18px; padding:26px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;"><span style="background:var(--teal-800); color:var(--mint-400); font-weight:700; font-size:13px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center;">3</span><span style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal-500); font-weight:700;">Scale acquisition</span></div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">Meta + Google paid engine</div>
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">Branded Content + Reels</div>
+          <div style="font-size:14px; color:var(--teal-800); font-weight:600;">Landing pages + tracking</div>
+        </div>
+        <div style="margin-top:18px; padding-top:16px; border-top:1px solid var(--cloud-300); font-size:13px; color:var(--text-muted);">Adds <strong style="color:var(--teal-800);">+$172K</strong> · compounding</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="margin-top:34px; background:var(--amber-500); color:var(--teal-800); border-radius:22px; padding:46px; text-align:center;">
+      <div style="font-size:34px; font-weight:700; letter-spacing:-0.02em; line-height:1.1; max-width:680px; margin:0 auto;">Ready to turn this $424K into a plan?</div>
+      <div style="font-size:17px; margin-top:14px; max-width:560px; margin-left:auto; margin-right:auto; line-height:1.5;">We'll walk through this diagnostic live, verify the numbers against your POS, and build the exact roadmap to close the gaps.</div>
+      <div class="screen-only" style="margin-top:28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="#overview" style="background:var(--teal-800); color:var(--mint-400); text-decoration:none; padding:15px 32px; border-radius:999px; font-size:16px; font-weight:700;">Book your strategy call</a>
+        <button onClick="window.print()" style="background:transparent; color:var(--teal-800); border:1.5px solid var(--teal-800); padding:15px 30px; border-radius:999px; font-size:16px; font-weight:700; cursor:pointer;">Download this report</button>
+      </div>
+      <div style="font-family:var(--font-script); font-size:30px; margin-top:26px; color:var(--teal-800);">we're the team you call when you need help yesterday</div>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer style="background:var(--teal-900,#042024); color:var(--teal-300); padding:34px 0;">
+  <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+    <span style="font-family:var(--font-display); font-size:22px; color:var(--mint-400);">atrium</span>
+    <span style="font-size:12px; letter-spacing:0.04em;">Restaurant Growth Diagnostic · Kansas City · Confidential · Figures are estimates pending full POS verification</span>
+  </div>
+</footer>
+
+<template id="__bundler_thumbnail" data-bg-color="#072F34">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#072F34"/>
+    <circle cx="600" cy="400" r="150" fill="none" stroke="#0e3a40" stroke-width="34"/>
+    <circle cx="600" cy="400" r="150" fill="none" stroke="#F7A823" stroke-width="34" stroke-linecap="round" stroke-dasharray="610 943" transform="rotate(-90 600 400)"/>
+    <text x="600" y="395" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="120" font-weight="700" fill="#E4EEF0">248</text>
+    <text x="600" y="455" text-anchor="middle" font-family="Inter Tight, sans-serif" font-size="30" letter-spacing="6" fill="#6fa39f">GROWTH SCORE</text>
+  </svg>
+</template></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    requestAnimationFrame(() => requestAnimationFrame(() => this.enhance()));
+  }
+  enhance() {
+    if (this._done) return; this._done = true;
+    const d = document;
+    const sel = '[style*="border-radius:14px"],[style*="border-radius:16px"],[style*="border-radius:18px"],[style*="border-radius:20px"],[style*="border-radius:22px"]';
+    const cards = Array.prototype.slice.call(d.querySelectorAll('section ' + sel));
+    cards.forEach((c) => {
+      c.style.boxShadow = '0 1px 2px rgba(7,47,52,.05), 0 10px 26px -10px rgba(7,47,52,.20), 0 28px 56px -28px rgba(7,47,52,.24)';
+      c.style.opacity = '0';
+      c.style.transform = 'translateY(28px)';
+      c.style.transition = 'opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease';
+      c.style.willChange = 'opacity, transform';
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        const delay = (e.target.__stagger || 0) * 85;
+        setTimeout(() => { e.target.style.opacity = '1'; e.target.style.transform = 'none'; }, delay);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+    d.querySelectorAll('section').forEach((s) => {
+      cards.filter((c) => s.contains(c)).forEach((c, i) => { c.__stagger = i; io.observe(c); });
+    });
+    // hover lift
+    cards.forEach((c) => {
+      c.addEventListener('mouseenter', () => { c.style.transform = 'translateY(-4px)'; c.style.boxShadow = '0 2px 4px rgba(7,47,52,.06), 0 16px 36px -12px rgba(7,47,52,.26), 0 40px 70px -30px rgba(7,47,52,.30)'; });
+      c.addEventListener('mouseleave', () => { c.style.transform = 'none'; c.style.boxShadow = '0 1px 2px rgba(7,47,52,.05), 0 10px 26px -10px rgba(7,47,52,.20), 0 28px 56px -28px rgba(7,47,52,.24)'; });
+    });
+    // gauge draw
+    const rings = d.querySelectorAll('section svg circle[stroke-linecap="round"][stroke-dasharray]');
+    rings.forEach((r) => {
+      const full = r.getAttribute('stroke-dasharray');
+      const gap = full.split(/\s+/)[1] || '9999';
+      r.style.transition = 'stroke-dasharray 1.5s cubic-bezier(.22,.61,.36,1)';
+      r.setAttribute('stroke-dasharray', '0 ' + gap);
+      r.__full = full;
+    });
+    const gio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (!e.isIntersecting) return; gio.unobserve(e.target); setTimeout(() => e.target.setAttribute('stroke-dasharray', e.target.__full), 140); });
+    }, { threshold: 0.4 });
+    rings.forEach((r) => gio.observe(r));
+    // count-up
+    const self = this;
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (!e.isIntersecting) return; cio.unobserve(e.target); self.countUp(e.target); });
+    }, { threshold: 0.6 });
+    d.querySelectorAll('[data-count]').forEach((n) => cio.observe(n));
+  }
+  countUp(el) {
+    const raw = (el.textContent || '').trim();
+    const m = raw.match(/^(−|\+|-)?([^\d]*)([\d,]+(?:\.\d+)?)(.*)$/);
+    if (!m) return;
+    const sign = m[1] || '', pre = m[2] || '', numStr = m[3], suf = m[4] || '';
+    const target = parseFloat(numStr.replace(/,/g, ''));
+    const hasComma = numStr.indexOf(',') >= 0;
+    const dec = (numStr.split('.')[1] || '').length;
+    const dur = 1300, t0 = performance.now();
+    const fmt = (v) => {
+      let s = dec ? v.toFixed(dec) : String(Math.round(v));
+      if (hasComma) s = Number(s).toLocaleString('en-US', dec ? { minimumFractionDigits: dec, maximumFractionDigits: dec } : {});
+      return sign + pre + s + suf;
+    };
+    const tick = (t) => {
+      let p = Math.min(1, (t - t0) / dur);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * p);
+      if (p < 1) requestAnimationFrame(tick); else el.textContent = sign + pre + numStr + suf;
+    };
+    requestAnimationFrame(tick);
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!-- @dsCard group="Flat Edition" viewport="1440x1100" subtitle="Flagship homepage — full Superside layout, reskinned to Atrium (hero, rail, bento, dark stats, steps, team, FAQ, footer)" name="Homepage · Flagship" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atrium — Your creative team's creative team</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../assets/social/image-slot.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  :root{
+    --teal-900:#042024;--teal-800:#072f34;--teal-700:#0e3a40;--teal-600:#16464c;--teal-500:#2c6168;--teal-300:#6fa39f;
+    --mint-500:#8fe6c2;--mint-400:#b5f2db;--mint-300:#cdf6e6;--mint-200:#e4faf1;
+    --amber-500:#f7a823;--amber-400:#ffc21f;--amber-200:#ffe6a8;
+    --cloud-100:#fff;--cloud-200:#f4f8f8;--cloud-300:#e4eef0;--cloud-400:#cfdcdd;--ink-700:#1c2b2c;
+    --fsans:"Inter Tight",system-ui,-apple-system,sans-serif;
+    --fdisp:"Nimora","Inter Tight",sans-serif;
+    --fserif:"Instrument Serif",Georgia,serif;
+    --fscript:"Nothing You Could Do",cursive;
+    --rad:24px;--rad-sm:16px;--maxw:1280px;--pad:48px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cloud-100);color:var(--teal-900);font-family:var(--fsans);-webkit-font-smoothing:antialiased;line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+  .ser{font-family:var(--fserif);font-style:italic;font-weight:400}
+  .script{font-family:var(--fscript)}
+  .grain{position:absolute;inset:0;background-image:url("../assets/social/grain.svg");background-size:520px;opacity:.15;mix-blend-mode:soft-light;pointer-events:none;z-index:0}
+  .mark{display:inline-block;background:currentColor;-webkit-mask:url("../assets/logos/atrium-mark.svg") center/contain no-repeat;mask:url("../assets/logos/atrium-mark.svg") center/contain no-repeat}
+  .wordmark{display:inline-block;background:currentColor;-webkit-mask:url("../assets/logos/atrium-wordmark.svg") left center/contain no-repeat;mask:url("../assets/logos/atrium-wordmark.svg") left center/contain no-repeat}
+  .hl{background-image:linear-gradient(var(--amber-400),var(--amber-400));background-repeat:no-repeat;background-size:100% 42%;background-position:0 82%;padding:0 .04em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+  .eb{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-500)}
+  .eb::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber-500)}
+  .eb.on-dark{color:var(--mint-400)}.eb.on-dark::before{background:var(--amber-400)}
+
+  .btn{display:inline-flex;align-items:center;gap:11px;font-size:16px;font-weight:600;padding:13px 12px 13px 24px;border-radius:999px;transition:transform .15s ease,background .15s ease;cursor:pointer;border:0}
+  .btn .dot{width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-size:16px}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-amber{background:var(--amber-400);color:var(--teal-900)} .btn-amber .dot{background:var(--teal-900);color:var(--amber-400)}
+  .btn-ink{background:var(--teal-900);color:var(--cloud-100)} .btn-ink .dot{background:var(--amber-400);color:var(--teal-900)}
+  .btn-ghost{background:transparent;border:1.5px solid currentColor;padding:13px 24px;color:var(--teal-900)} .btn-ghost.on-dark{color:var(--cloud-300)}
+
+  h1,h2,h3{margin:0;letter-spacing:-.03em;font-weight:800;line-height:1.0}
+  .lede{font-size:19px;line-height:1.55;color:var(--ink-700)}
+
+  /* NAV */
+  nav.bar{position:sticky;top:0;z-index:60;background:rgba(228,250,241,.82);backdrop-filter:blur(12px)}
+  nav.bar .row{display:flex;align-items:center;justify-content:space-between;height:70px;gap:24px}
+  nav.bar .links{display:flex;gap:28px;font-size:15px;font-weight:500}
+  nav.bar .links a:hover{color:var(--teal-500)}
+  nav.bar .right{display:flex;align-items:center;gap:16px}
+  nav.bar .signin{font-size:15px;font-weight:600}
+
+  /* HERO (light, airy) */
+  .hero{position:relative;overflow:hidden;background:
+    radial-gradient(120% 120% at 12% 0%, var(--mint-200), transparent 55%),
+    radial-gradient(120% 120% at 100% 30%, var(--mint-300), transparent 60%),
+    var(--cloud-300)}
+  .hero .inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:76px 0 70px}
+  .hero h1{font-size:clamp(48px,6.6vw,104px);color:var(--teal-900)}
+  .hero .lede{max-width:42ch;margin-top:26px;font-size:19px;color:var(--ink-700)}
+  .hero .cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+  /* hero collage */
+  .collage{position:relative;aspect-ratio:1/.86}
+  .collage .card{position:absolute;border-radius:var(--rad-sm);overflow:hidden;box-shadow:0 18px 44px rgba(7,47,52,.16)}
+  .collage image-slot{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .c1{inset:0 38% 30% 0;background:var(--teal-700)}
+  .c2{inset:42% 8% 0 30%;background:var(--teal-800)}
+  .note{position:absolute;padding:14px 16px;border-radius:12px;font-weight:700;font-size:18px;box-shadow:0 12px 28px rgba(7,47,52,.18);transform:rotate(-5deg)}
+  .note.a{top:-4%;right:6%;background:var(--amber-400);color:var(--teal-900)}
+  .note.b{bottom:8%;left:-3%;background:var(--mint-400);color:var(--teal-900);transform:rotate(4deg)}
+  .note .s{font-family:var(--fserif);font-style:italic;font-weight:400;display:block;font-size:14px}
+
+  /* THUMBNAIL RAIL */
+  .rail{background:var(--teal-900);overflow:hidden;padding:14px 0}
+  .rail-track{display:flex;gap:12px;width:max-content;animation:rail 38s linear infinite;padding:0 6px}
+  @keyframes rail{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.rail-track{animation:none}}
+  .rail .t{width:190px;height:74px;border-radius:10px;overflow:hidden;position:relative;flex:none;background:var(--teal-700)}
+  .rail .t image-slot{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .rail .t span{position:absolute;left:10px;bottom:8px;z-index:2;color:#fff;font-size:11px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+
+  /* TRUST */
+  .trust{padding:42px 0;background:var(--cloud-100);border-bottom:1px solid var(--cloud-300)}
+  .trust .lbl{text-align:center;font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-500);margin-bottom:22px}
+  .trust .logos{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 44px;align-items:center}
+  .trust .logos span{font-family:var(--fserif);font-style:italic;font-size:25px;color:var(--teal-700);opacity:.66}
+
+  section{position:relative}
+  .sec{padding:92px 0}
+  .head-xl{font-size:clamp(32px,4.4vw,58px)}
+  .head-lg{font-size:clamp(28px,3.4vw,44px)}
+
+  /* SPLIT INTRO + VIDEO */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .split .ttl{margin-top:14px}
+  .split .body{font-size:17px;line-height:1.62;color:var(--ink-700)}
+  .split .body p{margin:0 0 16px}
+  .video{position:relative;aspect-ratio:16/11;border-radius:var(--rad);overflow:hidden;background:var(--amber-400);display:flex;align-items:center;justify-content:center}
+  .video image-slot{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .video .play{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;background:var(--cloud-100);color:var(--teal-900);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px rgba(7,47,52,.3)}
+  .video .here{position:absolute;left:22px;top:20px;z-index:2;font-family:var(--fserif);font-style:italic;font-size:24px;color:var(--teal-900)}
+
+  /* AUTOMATE + BENTO */
+  .center{text-align:center;max-width:24ch;margin:0 auto}
+  .bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:300px;gap:16px;margin-top:48px}
+  .cell{position:relative;border-radius:var(--rad);overflow:hidden;background:var(--teal-700)}
+  .cell image-slot{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .cell .ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,32,36,.1) 30%,rgba(4,32,36,.82));z-index:2}
+  .cell .tx{position:absolute;left:22px;right:22px;bottom:20px;z-index:3;color:var(--cloud-100)}
+  .cell .tx h4{margin:0 0 6px;font-size:20px;font-weight:800;letter-spacing:-.02em}
+  .cell .tx p{margin:0;font-size:13.5px;line-height:1.5;color:var(--mint-300);max-width:32ch}
+  .cell.big{grid-column:span 1;grid-row:span 1}
+  .cell .badge{position:absolute;top:16px;left:16px;z-index:3;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--amber-400);color:var(--teal-900);padding:6px 12px;border-radius:999px}
+
+  /* DARK STATS */
+  .stats-sec{background:var(--teal-900);color:var(--cloud-100);overflow:hidden}
+  .stats-sec .grain{opacity:.12}
+  .stats-sec .inner{position:relative;z-index:2;text-align:center}
+  .stats-sec h2{font-size:clamp(30px,4vw,52px);color:var(--cloud-100)}
+  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:56px;text-align:left}
+  .stats-row .st{padding-left:22px;border-left:2px solid var(--amber-400)}
+  .stats-row .n{font-size:clamp(56px,7vw,96px);font-weight:800;letter-spacing:-.045em;line-height:.86}
+  .stats-row .n em{font-family:var(--fserif);font-style:italic;font-weight:400;color:var(--amber-400)}
+  .stats-row .l{font-size:15px;color:var(--teal-300);margin-top:14px;max-width:30ch}
+
+  /* INFRASTRUCTURE STEPS */
+  .infra{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:start}
+  .infra h2{margin-top:14px}
+  .infra h2 .ser{display:block}
+  .steps{display:flex;flex-direction:column}
+  .step{display:grid;grid-template-columns:46px 1fr;gap:20px;padding:24px 0;border-top:1px solid var(--cloud-300);align-items:start}
+  .step:first-child{border-top:0}
+  .step .num{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--teal-800);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--teal-800)}
+  .step h4{margin:0 0 6px;font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--teal-900)}
+  .step p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-700);max-width:54ch}
+
+  /* TEAM */
+  .team-sec{background:var(--cloud-200)}
+  .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .member{position:relative;border-radius:var(--rad);overflow:hidden;aspect-ratio:3/3.5;background:var(--teal-700)}
+  .member image-slot{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .member .name{position:absolute;left:16px;bottom:16px;z-index:3;background:var(--cloud-100);color:var(--teal-900);padding:9px 18px;border-radius:999px;font-family:var(--fserif);font-style:italic;font-size:19px}
+  .member.amber .name{background:var(--amber-400)}
+  .member.mint .name{background:var(--mint-400)}
+
+  /* FAQ */
+  .faq{max-width:960px;margin:42px auto 0}
+  .faq details{border-bottom:1px solid var(--cloud-400);padding:6px 0}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 4px;font-size:18px;font-weight:600;color:var(--teal-900)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .pl{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--teal-500);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--teal-700);transition:transform .2s ease}
+  .faq details[open] summary .pl{transform:rotate(45deg);background:var(--teal-900);color:var(--cloud-100);border-color:var(--teal-900)}
+  .faq .ans{padding:0 4px 22px;font-size:15.5px;line-height:1.6;color:var(--ink-700);max-width:74ch}
+
+  /* BIG FOOTER */
+  .foot-hero{position:relative;overflow:hidden;background:var(--teal-900);color:var(--cloud-100);padding:120px 0 80px;text-align:center}
+  .foot-hero image-slot{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0}
+  .foot-hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,32,36,.55),rgba(4,32,36,.82));z-index:1}
+  .foot-hero .inner{position:relative;z-index:3}
+  .foot-hero .big{font-family:var(--fserif);font-style:italic;font-size:clamp(40px,6.6vw,108px);line-height:.98;color:var(--cloud-100)}
+  .foot-hero .big .tm{font-family:var(--fsans);font-style:normal;font-weight:800;font-size:.42em;vertical-align:super}
+  .foot-hero .btn{margin-top:34px}
+  footer{background:var(--teal-900);color:var(--cloud-300);padding:64px 0 34px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;padding-bottom:44px;border-bottom:1px solid var(--teal-600)}
+  footer h5{margin:0 0 16px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-300)}
+  footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  footer ul a{font-size:15px;color:var(--cloud-300)} footer ul a:hover{color:var(--amber-400)}
+  .foot-bot{display:flex;justify-content:space-between;align-items:center;padding-top:24px;font-size:14px;color:var(--teal-300);flex-wrap:wrap;gap:14px}
+
+  @media(max-width:980px){
+    :root{--pad:28px}
+    nav.bar .links{display:none}
+    .hero .inner,.split,.infra{grid-template-columns:1fr;gap:40px}
+    .collage{max-width:460px}
+    .bento,.stats-row,.team-grid{grid-template-columns:1fr}
+    .bento{grid-auto-rows:260px}
+    .foot-top{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="bar">
+  <div class="wrap row">
+    <span class="wordmark" style="width:120px;height:26px;color:var(--teal-900)"></span>
+    <div class="links">
+      <a href="#services">Services</a><a href="#work">Our work</a><a href="#how">Why us</a><a href="#team">Studio</a><a href="#faq">Journal</a>
+    </div>
+    <div class="right">
+      <a href="#contact" class="signin">Sign in</a>
+      <a href="#contact" class="btn btn-ink">Book a call <span class="dot">&rarr;</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="inner">
+      <div>
+        <span class="eb">Creative &amp; marketing — at scale</span>
+        <h1 style="margin-top:20px">Your partner for <span class="ser">high-quality creative</span> at scale</h1>
+        <p class="lede">We're a human creative team for restaurants, hotels &amp; food brands. Atrium takes the menial work off your plate — so your team gets to stop firing fires and actually move the brand forward.</p>
+        <div class="cta">
+          <a href="#contact" class="btn btn-amber">Book a call <span class="dot">&rarr;</span></a>
+          <a href="#work" class="btn btn-ghost">See our work</a>
+        </div>
+      </div>
+      <div class="collage">
+        <div class="card c1"><image-slot id="hp-c1" shape="rect" src="../assets/placeholders/art-1.png" placeholder="photo"></image-slot></div>
+        <div class="card c2"><image-slot id="hp-c2" shape="rect" src="../assets/placeholders/hero.png" placeholder="photo"></image-slot></div>
+        <div class="note a">Fully booked<span class="s">three Fridays running</span></div>
+        <div class="note b">+212%<span class="s">organic traffic</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- THUMBNAIL RAIL -->
+<div class="rail">
+  <div class="rail-track" aria-hidden="true">
+    <div class="t"><image-slot id="r1" src="../assets/placeholders/flow-1.png" shape="rect"></image-slot><span>Brand systems</span></div>
+    <div class="t"><image-slot id="r2" src="../assets/placeholders/flow-2.png" shape="rect"></image-slot><span>Motion &amp; video</span></div>
+    <div class="t"><image-slot id="r3" src="../assets/placeholders/flow-3.png" shape="rect"></image-slot><span>Menu &amp; print</span></div>
+    <div class="t"><image-slot id="r4" src="../assets/placeholders/flow-4.png" shape="rect"></image-slot><span>Email design</span></div>
+    <div class="t"><image-slot id="r5" src="../assets/placeholders/flow-5.png" shape="rect"></image-slot><span>Web &amp; landing</span></div>
+    <div class="t"><image-slot id="r6" src="../assets/placeholders/flow-6.png" shape="rect"></image-slot><span>Social content</span></div>
+    <div class="t"><image-slot id="r1b" src="../assets/placeholders/flow-1.png" shape="rect"></image-slot><span>Brand systems</span></div>
+    <div class="t"><image-slot id="r2b" src="../assets/placeholders/flow-2.png" shape="rect"></image-slot><span>Motion &amp; video</span></div>
+    <div class="t"><image-slot id="r3b" src="../assets/placeholders/flow-3.png" shape="rect"></image-slot><span>Menu &amp; print</span></div>
+    <div class="t"><image-slot id="r4b" src="../assets/placeholders/flow-4.png" shape="rect"></image-slot><span>Email design</span></div>
+    <div class="t"><image-slot id="r5b" src="../assets/placeholders/flow-5.png" shape="rect"></image-slot><span>Web &amp; landing</span></div>
+    <div class="t"><image-slot id="r6b" src="../assets/placeholders/flow-6.png" shape="rect"></image-slot><span>Social content</span></div>
+  </div>
+</div>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="wrap">
+    <div class="lbl">Trusted by the rooms people remember</div>
+    <div class="logos">
+      <span>Saigon Social</span><span>The Greenhouse</span><span>Marrow &amp; Co.</span><span>Hotel Lavande</span><span>Pearl District</span><span>Field Notes Coffee</span>
+    </div>
+  </div>
+</div>
+
+<!-- SPLIT INTRO + VIDEO -->
+<section class="sec">
+  <div class="wrap split">
+    <div>
+      <span class="eb">The Atrium difference</span>
+      <h2 class="head-xl ttl">Move fast <span class="ser">without compromising craft</span></h2>
+      <div class="body" style="margin-top:22px">
+        <p>Marketing and creative teams are under pressure to do more with less. Without the right systems, quality suffers and burnout follows.</p>
+        <p>Atrium brings structure to the chaos with a real team and brand systems that take the busywork off your plate — so you can keep your standards high and your focus on impact.</p>
+      </div>
+      <div style="margin-top:8px"><a href="#how" class="btn btn-ink">How it works <span class="dot">&rarr;</span></a></div>
+    </div>
+    <div class="video">
+      <image-slot id="hp-video" shape="rect" src="../assets/placeholders/art-2.png" placeholder="Drop a studio video still"></image-slot>
+      <span class="here" style="color:var(--cloud-100)">Here's how &darr;</span>
+      <span class="play"><i data-lucide="play"></i></span>
+    </div>
+  </div>
+</section>
+
+<!-- AUTOMATE + BENTO -->
+<section class="sec" id="services" style="background:var(--cloud-200);border-top:1px solid var(--cloud-300)">
+  <div class="wrap">
+    <div style="text-align:center"><span class="eb" style="justify-content:center;display:inline-flex">Built for consistency</span></div>
+    <h2 class="head-xl center" style="margin-top:16px">We handle what slows you down, without compromising <span class="ser">what sets you apart</span></h2>
+    <div class="bento">
+      <div class="cell"><image-slot id="b1" src="../assets/placeholders/flow-1.png" shape="rect"></image-slot><div class="ov"></div><div class="tx"><h4>Brand &amp; identity</h4><p>Logo, packaging, and design systems that carry your whole visual story.</p></div></div>
+      <div class="cell"><image-slot id="b2" src="../assets/placeholders/flow-2.png" shape="rect"></image-slot><div class="ov"></div><span class="badge">Stop the scroll</span><div class="tx"><h4>Motion &amp; video</h4><p>Reels, ads, and brand films shot and edited in-house.</p></div></div>
+      <div class="cell"><image-slot id="b3" src="../assets/placeholders/flow-3.png" shape="rect"></image-slot><div class="ov"></div><div class="tx"><h4>Menu &amp; print</h4><p>Menus, signage, and packaging that align the physical table.</p></div></div>
+      <div class="cell"><image-slot id="b4" src="../assets/placeholders/flow-4.png" shape="rect"></image-slot><div class="ov"></div><div class="tx"><h4>Email &amp; CRM</h4><p>Lifecycle campaigns that bring guests back, on brand every time.</p></div></div>
+      <div class="cell"><image-slot id="b5" src="../assets/placeholders/flow-5.png" shape="rect"></image-slot><div class="ov"></div><div class="tx"><h4>Web &amp; landing</h4><p>Fast, reservation-ready sites built on a living design system.</p></div></div>
+      <div class="cell"><image-slot id="b6" src="../assets/placeholders/flow-6.png" shape="rect"></image-slot><div class="ov"></div><span class="badge">SEO</span><div class="tx"><h4>Search &amp; social</h4><p>Get found first, and stay first — high-intent search and content.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DARK STATS -->
+<section class="sec stats-sec" id="work">
+  <div class="grain"></div>
+  <div class="wrap inner">
+    <span class="eb on-dark" style="justify-content:center;display:inline-flex">Measurable impact</span>
+    <h2 style="margin-top:16px">The impact of <span class="ser">working smarter</span></h2>
+    <div class="stats-row">
+      <div class="st"><div class="n"><em>2.7&times;</em></div><div class="l">more covers booked for partner restaurants in their first 90 days.</div></div>
+      <div class="st"><div class="n">84<span style="color:var(--amber-400)">%</span></div><div class="l">of diners check you online before they ever taste the food.</div></div>
+      <div class="st"><div class="n">3&times;<span class="ser" style="color:var(--amber-400);font-size:.5em"></span></div><div class="l">faster creative execution once the brand system is in place.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFRASTRUCTURE STEPS -->
+<section class="sec" id="how">
+  <div class="wrap infra">
+    <div>
+      <span class="eb">Craft and speed</span>
+      <h2 class="head-lg">The infrastructure for <span class="ser">your best work</span></h2>
+      <p class="lede" style="margin-top:18px;max-width:40ch">A real team, smart systems, and tight feedback loops — so you ship more, on brand, without the agency drag.</p>
+      <div style="margin-top:26px"><a href="#contact" class="btn btn-amber">Start a project <span class="dot">&rarr;</span></a></div>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="num">1</span><div><h4>Scale without brand sacrifice</h4><p>Our systems keep menus, ads, and socials consistent while your output grows.</p></div></div>
+      <div class="step"><span class="num">2</span><div><h4>Higher output, lighter lift</h4><p>We handle production end-to-end so your team can stay focused on the guests.</p></div></div>
+      <div class="step"><span class="num">3</span><div><h4>Production that respects craft</h4><p>Templates and a living design system speed the work without flattening it.</p></div></div>
+      <div class="step"><span class="num">4</span><div><h4>Built for growth</h4><p>From a single location to a multi-venue group — the system flexes with you.</p></div></div>
+      <div class="step"><span class="num">5</span><div><h4>Creative scale, human oversight</h4><p>Real designers shape every asset, tuned to your goals — never on autopilot.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec team-sec" id="team">
+  <div class="wrap">
+    <div style="text-align:center"><span class="eb" style="justify-content:center;display:inline-flex">The studio</span></div>
+    <h2 class="head-lg center" style="margin-top:16px">Meet the <span class="ser">humans</span> behind the work</h2>
+    <div class="team-grid">
+      <div class="member"><image-slot id="hp-t1" shape="rect" src="../assets/placeholders/team-1.png" placeholder="Drop a portrait"></image-slot><span class="name">Carlos Aldana</span></div>
+      <div class="member amber"><image-slot id="hp-t2" shape="rect" src="../assets/placeholders/team-2.png" placeholder="Drop a portrait"></image-slot><span class="name">Armine Austria</span></div>
+      <div class="member mint"><image-slot id="hp-t3" shape="rect" src="../assets/placeholders/team-3.png" placeholder="Drop a portrait"></image-slot><span class="name">Lucy Gonzalez</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div style="text-align:center"><span class="eb" style="justify-content:center;display:inline-flex">Good questions</span></div>
+    <h2 class="head-lg center" style="margin-top:16px">Frequently asked <span class="ser">questions</span></h2>
+    <div class="faq">
+      <details open><summary>What does Atrium actually do?<span class="pl">+</span></summary><div class="ans">We're a full creative &amp; marketing studio for hospitality — brand, design, photography, web, email, SEO, and social. One human team, one cohesive brand, everywhere your guests find you.</div></details>
+      <details><summary>How is this different from a traditional agency?<span class="pl">+</span></summary><div class="ans">No bloated retainers or slow rounds. We embed with your team, work from a living design system, and turn brand guidelines into real assets fast — menus, ads, films, and full campaigns.</div></details>
+      <details><summary>Do you only work with restaurants?<span class="pl">+</span></summary><div class="ans">Restaurants are our home, but we work across hospitality — hotels, cafés, bars, and food brands. If guests experience it, we can brand and grow it.</div></details>
+      <details><summary>How do we get started?<span class="pl">+</span></summary><div class="ans">Book a call. We'll run a short brand teardown, align on goals, and propose a scope — whether that's a single project or an embedded creative partnership.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- BIG FOOTER HERO -->
+<section class="foot-hero" id="contact">
+  <image-slot id="hp-foot" shape="rect" src="../assets/placeholders/art-3.png" placeholder="Drop an atmospheric photo"></image-slot>
+  <div class="veil"></div>
+  <div class="wrap inner">
+    <span class="eb on-dark" style="justify-content:center;display:inline-flex">We're humans</span>
+    <div class="big" style="margin-top:18px">Your creative team's<br>creative team<span class="tm">™</span></div>
+    <a href="#" class="btn btn-amber">Book a call <span class="dot">&rarr;</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <span class="wordmark" style="width:150px;height:32px;color:var(--cloud-100)"></span>
+        <p style="margin:20px 0 0;max-width:34ch;color:var(--teal-300);font-size:15px">A human creative &amp; marketing studio for restaurants, hotels, and food brands. Kansas City, MO.</p>
+      </div>
+      <div><h5>Services</h5><ul><li><a href="#">Branding</a></li><li><a href="#">Marketing</a></li><li><a href="#">Photography</a></li><li><a href="#">Web &amp; email</a></li><li><a href="#">SEO &amp; social</a></li></ul></div>
+      <div><h5>Studio</h5><ul><li><a href="#">Our work</a></li><li><a href="#">Why us</a></li><li><a href="#">Journal</a></li><li><a href="#">Careers</a></li></ul></div>
+      <div><h5>Get in touch</h5><ul><li><a href="#">hello@atrium.studio</a></li><li><a href="#">Book a call</a></li><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Atrium Studio · We're humans.</span>
+      <span class="script" style="font-size:22px;color:var(--mint-400)">Together is more fun.</span>
+    </div>
+  </div>
+</footer>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

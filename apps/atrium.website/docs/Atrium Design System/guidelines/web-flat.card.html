@@ -1,0 +1,304 @@
+<!-- @dsCard group="Flat Edition" viewport="1440x920" subtitle="Superside-adapted flat/minimal landing — oversized tight type, flat blocks, marquee, notched corners, grain" name="Flat · Landing" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atrium — Flat Edition</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../assets/social/image-slot.js"></script>
+<style>
+  :root{
+    --teal-900:#042024;--teal-800:#072f34;--teal-700:#0e3a40;--teal-500:#2c6168;--teal-300:#6fa39f;
+    --mint-500:#8fe6c2;--mint-400:#b5f2db;--mint-300:#cdf6e6;--mint-200:#e4faf1;
+    --amber-500:#f7a823;--amber-400:#ffc21f;--amber-200:#ffe6a8;
+    --cloud-100:#fff;--cloud-200:#f4f8f8;--cloud-300:#e4eef0;--cloud-400:#cfdcdd;--ink-700:#1c2b2c;
+    --fsans:"Inter Tight",system-ui,sans-serif;
+    --fdisp:"Nimora","Inter Tight",sans-serif;
+    --fserif:"Instrument Serif",Georgia,serif;
+    --fscript:"Nothing You Could Do",cursive;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cloud-200);color:var(--teal-900);font-family:var(--fsans);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+  .eb{font-size:13px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-500)}
+  .ser{font-family:var(--fserif);font-style:italic;font-weight:400}
+  .script{font-family:var(--fscript)}
+  .grain{position:absolute;inset:0;background-image:url("../assets/social/grain.svg");background-size:520px;opacity:.16;mix-blend-mode:soft-light;pointer-events:none}
+  /* flat geometric motif: notched top-right corner */
+  .notch{clip-path:polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%)}
+  .notch-lg{clip-path:polygon(0 0, calc(100% - 44px) 0, 100% 44px, 100% 100%, 0 100%)}
+  .mark{display:block;background:currentColor;-webkit-mask:url("../assets/logos/atrium-mark.svg") center/contain no-repeat;mask:url("../assets/logos/atrium-mark.svg") center/contain no-repeat}
+  .wordmark{display:block;background:currentColor;-webkit-mask:url("../assets/logos/atrium-wordmark.svg") left/contain no-repeat;mask:url("../assets/logos/atrium-wordmark.svg") left/contain no-repeat}
+
+  /* buttons — flat, sharp, confident */
+  .btn{display:inline-flex;align-items:center;gap:12px;font-size:16px;font-weight:600;padding:15px 26px;border-radius:0;transition:transform .14s ease, background .14s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-ink{background:var(--teal-900);color:var(--cloud-100)}
+  .btn-ink .dot{width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;background:var(--amber-400);color:var(--teal-900);border-radius:50%;font-size:15px}
+  .btn-out{background:transparent;border:1.6px solid var(--teal-900);color:var(--teal-900)}
+  .btn-amber{background:var(--amber-500);color:var(--teal-900)}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:var(--cloud-200);border-bottom:1px solid var(--cloud-400)}
+  nav .row{display:flex;align-items:center;justify-content:space-between;height:74px}
+  nav .links{display:flex;gap:34px;font-size:15px;font-weight:500}
+  nav .links a:hover{color:var(--teal-500)}
+  nav .links sup{font-size:10px;color:var(--teal-300)}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;padding:88px 0 72px}
+  .hero h1{font-size:clamp(64px,9vw,150px);font-weight:800;letter-spacing:-.045em;line-height:.9;margin:26px 0 0;color:var(--teal-900)}
+  .hero h1 .mk{background-image:linear-gradient(var(--amber-400),var(--amber-400));background-repeat:no-repeat;background-size:100% 46%;background-position:0 78%;padding:0 .04em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .hero-grid{display:grid;grid-template-columns:1.5fr .9fr;gap:48px;align-items:end}
+  .hero p.lede{font-size:21px;line-height:1.5;color:var(--ink-700);max-width:40ch;margin:34px 0 0}
+  .hero .cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+  .hero-right{position:relative}
+  .hero-photo{position:relative;aspect-ratio:3/4;background:var(--teal-700);overflow:hidden}
+  .hero-photo image-slot{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .hero-badge{position:absolute;left:-24px;bottom:34px;z-index:3;background:var(--amber-400);color:var(--teal-900);padding:14px 20px;transform:rotate(-4deg);font-weight:700;font-size:18px;box-shadow:0 14px 30px rgba(7,47,52,.18)}
+  .hero-badge .s{font-family:var(--fserif);font-style:italic;font-weight:400}
+  .tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:40px}
+  .tag{font-size:14px;font-weight:600;padding:8px 16px;border:1.4px solid var(--cloud-400);border-radius:999px;color:var(--teal-800);background:var(--cloud-100)}
+  .tag.on{background:var(--teal-900);color:var(--mint-400);border-color:var(--teal-900)}
+  .corner-accent{position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 150px 150px 0;border-color:transparent var(--mint-400) transparent transparent;opacity:.9}
+
+  /* MARQUEE */
+  .marquee{position:relative;background:var(--teal-900);color:var(--cloud-100);overflow:hidden;padding:26px 0}
+  .mq-track{display:flex;white-space:nowrap;width:max-content;animation:atr-mq 30s linear infinite}
+  .mq-track span{display:inline-flex;align-items:center;gap:30px;font-size:34px;font-weight:700;letter-spacing:-.02em;padding-right:30px}
+  .mq-track .a{width:22px;height:22px;background:var(--amber-400);-webkit-mask:url("../assets/logos/atrium-mark.svg") center/contain no-repeat;mask:url("../assets/logos/atrium-mark.svg") center/contain no-repeat;flex:none}
+  @keyframes atr-mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){.mq-track{animation:none}}
+
+  /* BENTO (flat) */
+  .bento-sec{padding:96px 0}
+  .bento-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:40px}
+  .bento-head h2{font-size:clamp(38px,5vw,68px);font-weight:800;letter-spacing:-.03em;line-height:.98;margin:14px 0 0}
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:230px;gap:18px}
+  .cell{position:relative;overflow:hidden;padding:28px;display:flex;flex-direction:column;justify-content:space-between}
+  .cell .ct{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
+  .cell .cd{font-size:15px;line-height:1.5;margin-top:10px}
+  .c-span2{grid-column:span 2}
+  .c-row2{grid-row:span 2}
+  .c-ink{background:var(--teal-900);color:var(--cloud-300)}
+  .c-mint{background:var(--mint-400);color:var(--teal-900)}
+  .c-amber{background:var(--amber-500);color:var(--teal-900)}
+  .c-cloud{background:var(--cloud-100);color:var(--teal-900);border:1px solid var(--cloud-400)}
+  .c-teal{background:var(--teal-700);color:var(--cloud-300)}
+  .cell .num{font-family:var(--fserif);font-style:italic;font-size:96px;line-height:.8}
+  .cell .photo{position:absolute;inset:0}
+  .cell .photo image-slot{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .cell .pov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(4,32,36,.66));z-index:2}
+  .cell .plabel{position:relative;z-index:3;margin-top:auto;color:var(--cloud-100)}
+  .ico{width:34px;height:34px}
+
+  /* STATEMENT */
+  .statement{background:var(--mint-400);position:relative;overflow:hidden;padding:120px 0}
+  .statement .big{font-size:clamp(40px,6.2vw,96px);font-weight:800;letter-spacing:-.035em;line-height:.98;color:var(--teal-900);max-width:18ch}
+  .statement .big .ser{font-weight:400}
+
+  /* STATS */
+  .stats{padding:96px 0;background:var(--cloud-200)}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--teal-900)}
+  .stat{padding:40px 28px 0;border-right:1px solid var(--cloud-400)}
+  .stat:last-child{border-right:0}
+  .stat .n{font-size:clamp(64px,8vw,118px);font-weight:800;letter-spacing:-.04em;line-height:.86;color:var(--teal-900)}
+  .stat .n em{font-family:var(--fserif);font-style:normal;color:var(--amber-500)}
+  .stat .l{font-size:16px;line-height:1.5;color:var(--ink-700);margin:18px 0 0;max-width:26ch}
+
+  /* CTA */
+  .cta-sec{position:relative;overflow:hidden;background:var(--teal-900);color:var(--cloud-100);padding:120px 0 50px;margin-top:0}
+  .cta-sec h2{font-size:clamp(48px,7vw,118px);font-weight:800;letter-spacing:-.04em;line-height:.92;margin:0;max-width:16ch}
+  .cta-sec h2 .mk{color:var(--amber-400)}
+  .cta-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:64px;gap:30px;flex-wrap:wrap}
+  .cta-foot .em{font-size:clamp(22px,2.6vw,34px);font-weight:700;letter-spacing:-.02em}
+  .cta-mark{position:absolute;right:-80px;top:-60px;width:420px;height:420px;color:var(--teal-700);opacity:.55}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-right{display:none}
+    .bento{grid-template-columns:repeat(2,1fr)}
+    .c-span2{grid-column:span 2}
+    .stat-grid{grid-template-columns:1fr}
+    .stat{border-right:0;border-bottom:1px solid var(--cloud-400)}
+    nav .links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap row">
+    <span class="wordmark" style="width:128px;height:30px;color:var(--teal-900)"></span>
+    <div class="links">
+      <a href="#work">Work <sup>(15)</sup></a>
+      <a href="#services">Services</a>
+      <a href="#studio">Studio</a>
+      <a href="#contact">Journal</a>
+    </div>
+    <a class="btn btn-ink notch" href="#contact">Let's talk <span class="dot">&rarr;</span></a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="grain"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eb">Creative &amp; marketing studio — Kansas City</div>
+      <h1>Growth,<br>served<br><span class="mk">fresh.</span></h1>
+      <p class="lede">Strategy, design, and media for restaurants, hotels &amp; food brands. One human team — no fluff, no vanity metrics.</p>
+      <div class="cta">
+        <a class="btn btn-ink notch" href="#contact">Start a project <span class="dot">&rarr;</span></a>
+        <a class="btn btn-out" href="#work">See the work</a>
+      </div>
+      <div class="tags">
+        <span class="tag on">SEO</span>
+        <span class="tag">Marketing</span>
+        <span class="tag">Graphic Design</span>
+        <span class="tag">Photography</span>
+        <span class="tag">Branding</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo notch-lg">
+        <image-slot id="flat-hero" shape="rect" placeholder="Drop a hero photo — room, plate, or team"></image-slot>
+        <span class="corner-accent"></span>
+      </div>
+      <div class="hero-badge">2.7&times; <span class="s">more covers</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="grain" style="opacity:.18"></div>
+  <div class="mq-track" aria-hidden="true">
+    <span>SEO <i class="a"></i> Marketing <i class="a"></i> Graphic Design <i class="a"></i> Photography <i class="a"></i> Branding <i class="a"></i> Social <i class="a"></i></span>
+    <span>SEO <i class="a"></i> Marketing <i class="a"></i> Graphic Design <i class="a"></i> Photography <i class="a"></i> Branding <i class="a"></i> Social <i class="a"></i></span>
+  </div>
+</div>
+
+<!-- BENTO -->
+<section class="bento-sec" id="services">
+  <div class="wrap">
+    <div class="bento-head">
+      <div>
+        <div class="eb">What we do</div>
+        <h2>Everything you need<br>to grow — <span class="ser">nothing you don't.</span></h2>
+      </div>
+      <a class="btn btn-out" href="#contact">All services &rarr;</a>
+    </div>
+    <div class="bento">
+
+      <!-- big ink statement -->
+      <div class="cell c-ink c-span2 c-row2 notch-lg">
+        <span class="mark" style="width:40px;height:40px;color:var(--mint-400)"></span>
+        <div>
+          <div class="ct" style="font-size:40px;line-height:.98;color:var(--cloud-300)">We build growth engines, <span class="ser" style="color:var(--amber-400)">not just ads.</span></div>
+          <div class="cd" style="color:var(--teal-300);max-width:42ch">Media &amp; advertising tuned to revenue. We obsess over your ROI — never vanity metrics — from first audit to launch day.</div>
+        </div>
+      </div>
+
+      <!-- stat -->
+      <div class="cell c-amber">
+        <div class="eb" style="color:var(--teal-700)">The receipts</div>
+        <div>
+          <div class="num">+212%</div>
+          <div class="cd" style="color:var(--teal-700)">organic traffic, first 6 months.</div>
+        </div>
+      </div>
+
+      <!-- mint service -->
+      <div class="cell c-mint">
+        <div class="eb" style="color:var(--teal-700)">SEO</div>
+        <div>
+          <div class="ct">Get found first.</div>
+          <div class="cd" style="color:var(--teal-700)">High-intent search that compounds.</div>
+        </div>
+      </div>
+
+      <!-- photo -->
+      <div class="cell c-row2 notch">
+        <div class="photo">
+          <image-slot id="flat-bento-photo" shape="rect" placeholder="Drop a dish / room photo"></image-slot>
+          <div class="pov"></div>
+        </div>
+        <div class="plabel">
+          <div class="eb" style="color:var(--mint-300)">Photography</div>
+          <div class="ct" style="margin-top:8px">Show the room.</div>
+        </div>
+      </div>
+
+      <!-- cloud design -->
+      <div class="cell c-cloud">
+        <div class="eb">Graphic Design</div>
+        <div>
+          <div class="ct">Identity with craft.</div>
+          <div class="cd" style="color:var(--teal-500)">Brand systems &amp; packaging.</div>
+        </div>
+      </div>
+
+      <!-- teal monogram -->
+      <div class="cell c-teal" style="align-items:center;justify-content:center;text-align:center">
+        <span class="mark" style="width:46px;height:46px;color:var(--mint-400);margin:0 auto"></span>
+        <div class="script" style="font-size:30px;color:var(--mint-400);margin-top:6px">we're humans.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement" id="studio">
+  <div class="grain"></div>
+  <div class="wrap">
+    <div class="eb" style="color:var(--teal-700);margin-bottom:30px">The Experience Era</div>
+    <div class="big">Branding is what they say when you're <span class="ser">not in the room.</span></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="work">
+  <div class="wrap">
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="n"><em>2.7&times;</em></div>
+        <div class="l">more covers booked for partner restaurants in their first 90 days.</div>
+      </div>
+      <div class="stat">
+        <div class="n">84<span style="color:var(--amber-500)">%</span></div>
+        <div class="l">of diners check you online before they ever taste the food.</div>
+      </div>
+      <div class="stat">
+        <div class="n">4.6<span class="ser" style="color:var(--amber-500);font-size:.5em">★</span></div>
+        <div class="l">average rating across the brands we've launched and grown.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="contact">
+  <span class="mark cta-mark" aria-hidden="true"></span>
+  <div class="grain" style="opacity:.2"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="eb" style="color:var(--mint-300);margin-bottom:26px">We're humans</div>
+    <h2>The team you call when you needed help <span class="mk">yesterday.</span></h2>
+    <div class="cta-foot">
+      <a class="btn btn-amber notch" href="#" style="font-size:18px;padding:18px 30px">Start a project <span style="margin-left:4px">&rarr;</span></a>
+      <div style="text-align:right">
+        <div class="em">hello@atrium.studio</div>
+        <div style="color:var(--teal-300);margin-top:8px;font-size:16px">atrium.studio · Kansas City, MO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

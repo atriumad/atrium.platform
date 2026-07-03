@@ -1,0 +1,58 @@
+/* ============================================================
+   Atrium — Typography tokens
+   FOUR typefaces, all bundled (no CDN):
+     Inter Tight        → body + ALL UI/headline sans (the primary face)
+     Instrument Serif   → editorial serif, used ITALIC for emphasis words
+                          ("grow restaurants, hotels, and food brands")
+     Nimora             → the "atrium" wordmark / logo lockup only
+     Nothing You Could Do → handwriting script for accent callouts
+   ============================================================ */
+:root {
+  /* ---- Families ---- */
+  --font-display: "Nimora", "Inter Tight", system-ui, sans-serif;
+  --font-sans: "Inter Tight", system-ui, -apple-system, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-accent: var(--font-serif); /* alias — emphasis serif (italic) */
+  --font-script: "Nothing You Could Do", "Segoe Script", cursive;
+
+  /* ---- Fluid display scale (clamps for hero statements) ---- */
+  --text-display-xl: clamp(3.5rem, 9vw, 7.5rem); /* 120px wordmark/hero */
+  --text-display-lg: clamp(2.75rem, 6vw, 5rem);  /* 80px */
+  --text-display-md: clamp(2.25rem, 4.5vw, 3.5rem);
+
+  /* ---- Static type ramp ---- */
+  --text-6xl: 4.5rem;   /* 72 */
+  --text-5xl: 3.5rem;   /* 56 */
+  --text-4xl: 2.75rem;  /* 44 */
+  --text-3xl: 2rem;     /* 32 */
+  --text-2xl: 1.5rem;   /* 24 */
+  --text-xl: 1.25rem;   /* 20 */
+  --text-lg: 1.125rem;  /* 18 */
+  --text-base: 1rem;    /* 16 */
+  --text-sm: 0.875rem;  /* 14 */
+  --text-xs: 0.75rem;   /* 12 */
+
+  /* ---- Weights ---- */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  /* ---- Line heights ---- */
+  --leading-tight: 0.95;   /* stacked display lockups */
+  --leading-snug: 1.1;
+  --leading-heading: 1.15;
+  --leading-body: 1.6;
+  --leading-relaxed: 1.75;
+
+  /* ---- Letter spacing ----
+     The brand leans on WIDE letterspaced caps for sub-labels
+     (e.g. "MEDIA  AND  ADVERTISING"). */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.18em;   /* the signature spread-caps label */
+  --tracking-widest: 0.32em;
+}

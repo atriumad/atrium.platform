@@ -1,0 +1,33 @@
+<!-- @dsCard group="Posts" viewport="1080x1920" subtitle="9:16 story · solid teal field · grain · grotesk announcement · serif support" name="Story · Fully booked" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box}html,body{margin:0}
+  body{font-family:var(--font-sans)}
+  .story{width:1080px;height:1920px;position:relative;overflow:hidden;background:var(--teal-800)}
+  .grain{position:absolute;inset:0;background-image:var(--surface-grain);background-size:560px auto;opacity:.16;mix-blend-mode:soft-light;pointer-events:none;z-index:2}
+  .top{position:absolute;top:40px;left:40px;right:40px;z-index:4}
+  .bars{display:flex;gap:8px;margin-bottom:22px}
+  .bars span{flex:1;height:5px;border-radius:3px;background:rgba(181,242,219,.35)}
+  .bars span.on{background:var(--mint-400)}
+  .who{display:flex;align-items:center;gap:14px;color:var(--cloud-300);font-size:24px}
+  .av{width:48px;height:48px;border-radius:50%;background:var(--amber-500);color:var(--teal-800);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:24px}
+  .center{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 80px}
+  .mono{font-family:var(--font-display);color:var(--amber-500);font-size:80px;margin-bottom:40px}
+  .big{font-weight:800;font-size:130px;letter-spacing:-.03em;line-height:.92;color:var(--amber-500)}
+  .sub{font-family:var(--font-serif);font-style:italic;font-size:40px;line-height:1.32;color:var(--mint-300);margin-top:36px}
+  .reply{position:absolute;left:40px;right:40px;bottom:48px;z-index:4;display:flex;align-items:center;gap:12px;border:1.5px solid rgba(228,238,240,.45);border-radius:999px;padding:22px 30px;color:rgba(228,238,240,.7);font-size:24px}
+</style></head><body>
+  <div class="story">
+    <div class="grain"></div>
+    <div class="top">
+      <div class="bars"><span></span><span class="on"></span><span></span></div>
+      <div class="who"><span class="av">α</span><b style="font-weight:600">atrium</b><span style="opacity:.7">· 1h</span><span style="margin-left:auto;opacity:.8">✕</span></div>
+    </div>
+    <div class="center">
+      <div class="mono">α</div>
+      <div class="big">FULLY<br>BOOKED</div>
+      <div class="sub">Three Fridays running.<br>That's not luck — it's a system.</div>
+    </div>
+    <div class="reply">Send message<span style="margin-left:auto">➤</span></div>
+  </div>
+</body></html>

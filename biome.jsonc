@@ -7,7 +7,19 @@
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"includes": ["**", "!bun.lock", "!docs/superpowers", "!graphify-out"]
+		"includes": [
+			"**",
+			"!bun.lock",
+			"!.claude",
+			"!.codex",
+			"!.superpowers",
+			"!docs/design-system",
+			"!docs/superpowers",
+			"!apps/atrium.website/docs",
+			"!apps/atrium.website/public",
+			"!apps/atrium.grader/public",
+			"!graphify-out"
+		]
 	},
 	"formatter": {
 		"enabled": false,
@@ -27,6 +39,11 @@
 		"formatter": {
 			"quoteStyle": "double",
 			"semicolons": "asNeeded"
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
 		}
 	},
 	"assist": {

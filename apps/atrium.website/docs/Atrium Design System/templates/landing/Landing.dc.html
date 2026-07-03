@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Atrium Landing" description="Deep-teal marketing hero + services strip, built from Atrium primitives" -->
+<helmet>
+  <script src="./ds-base.js"></script>
+  <link rel="preconnect" href="https://unpkg.com">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</helmet>
+
+<main style="font-family:var(--font-sans);background:var(--cloud-200);min-height:100vh">
+
+  <!-- Header -->
+  <header style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:18px 32px">
+    <x-import component-from-global-scope="AtriumDesignSystem_31d170.Logo" variant="lockup" color="var(--teal-800)" height="26" asset-base="../../assets/logos" hint-size="150px,28px"></x-import>
+    <nav style="display:flex;gap:28px;align-items:center">
+      <a href="#services" style="font-size:15px;font-weight:500;color:var(--text-strong);text-decoration:none">Services</a>
+      <a href="#work" style="font-size:15px;font-weight:500;color:var(--text-strong);text-decoration:none">Work</a>
+      <x-import component-from-global-scope="AtriumDesignSystem_31d170.Button" variant="primary" size="sm" hint-size="150px,40px">Start a project</x-import>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section style="position:relative;background:var(--teal-800);overflow:hidden">
+    <span aria-hidden="true" style="position:absolute;right:-4%;bottom:-18%;width:min(46vw,560px);height:min(46vw,560px);background:var(--teal-700);-webkit-mask:url(../../assets/logos/atrium-mark.svg) center/contain no-repeat;mask:url(../../assets/logos/atrium-mark.svg) center/contain no-repeat;pointer-events:none"></span>
+    <div style="position:relative;max-width:1200px;margin:0 auto;padding:88px 32px 72px">
+      <x-import component-from-global-scope="AtriumDesignSystem_31d170.Eyebrow" tone="amber" hint-size="320px,18px">Kansas City · Creative &amp; Marketing Studio</x-import>
+      <h1 style="font-family:var(--font-display);color:var(--cloud-300);margin:22px 0 0;font-size:clamp(2.6rem,6.4vw,5.4rem);line-height:1.04;font-weight:700;letter-spacing:-0.01em;max-width:16ch">
+        We're
+        <x-import component-from-global-scope="AtriumDesignSystem_31d170.ScriptAccent" color="var(--mint-400)" hint-size="160px,1em">humans.</x-import>
+        Simple software for
+        <x-import component-from-global-scope="AtriumDesignSystem_31d170.Highlight" color="amber" hint-size="220px,1em">better Business.</x-import>
+      </h1>
+      <p style="font-family:var(--font-sans);color:var(--teal-300);font-size:clamp(1rem,1.6vw,1.25rem);line-height:1.6;max-width:44ch;margin:26px 0 0">
+        Congratulations — you've found your people. We don't just create ads; we build growth engines.
+      </p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin:32px 0 34px">
+        <x-import component-from-global-scope="AtriumDesignSystem_31d170.Button" variant="mint" size="lg" hint-size="190px,56px">Start a project</x-import>
+        <x-import component-from-global-scope="AtriumDesignSystem_31d170.Button" variant="outline" size="lg" style="color:var(--mint-400);border-color:var(--teal-500)" hint-size="160px,56px">See our work</x-import>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <x-import component-from-global-scope="AtriumDesignSystem_31d170.Chip" variant="outline-light" hint-size="70px,40px">Seo</x-import>
+        <x-import component-from-global-scope="AtriumDesignSystem_31d170.Chip" variant="outline-light" hint-size="110px,40px">Marketing</x-import>
+        <x-import component-from-global-scope="AtriumDesignSystem_31d170.Chip" variant="outline-light" hint-size="150px,40px">Graphic Design</x-import>
+        <x-import component-from-global-scope="AtriumDesignSystem_31d170.Chip" variant="mint" hint-size="130px,40px">Photography</x-import>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" style="max-width:1200px;margin:0 auto;padding:72px 32px">
+    <x-import component-from-global-scope="AtriumDesignSystem_31d170.Eyebrow" tone="amber" hint-size="120px,18px">What we do</x-import>
+    <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;color:var(--text-strong);letter-spacing:-0.01em;line-height:1.05;margin:16px 0 36px;max-width:20ch">
+      Four ways we make your brand impossible to ignore
+    </h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px">
+      <x-import component-from-global-scope="AtriumDesignSystem_31d170.Card" tone="light" bordered="true" padding="26px" hint-size="260px,200px">
+        <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin:0 0 10px;color:var(--teal-800)">SEO</h3>
+        <p style="font-size:14.5px;line-height:1.6;margin:0;color:var(--text-body)">Get found by high-intent customers with SEO that compounds.</p>
+      </x-import>
+      <x-import component-from-global-scope="AtriumDesignSystem_31d170.Card" tone="mint" padding="26px" hint-size="260px,200px">
+        <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin:0 0 10px;color:var(--teal-800)">Marketing</h3>
+        <p style="font-size:14.5px;line-height:1.6;margin:0;color:var(--teal-700)">Media &amp; advertising that builds growth engines, not vanity metrics.</p>
+      </x-import>
+      <x-import component-from-global-scope="AtriumDesignSystem_31d170.Card" tone="amber" padding="26px" hint-size="260px,200px">
+        <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin:0 0 10px;color:var(--teal-800)">Photography</h3>
+        <p style="font-size:14.5px;line-height:1.6;margin:0;color:var(--teal-700)">Brand photography that makes people stop scrolling.</p>
+      </x-import>
+    </div>
+  </section>
+</main>
+
+</x-dc>
+</body>
+</html>
