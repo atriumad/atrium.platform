@@ -1,10 +1,10 @@
 import type { RestaurantGrowthProfile } from "@atrium/application"
 import { gradeRestaurantGrowth } from "@atrium/application"
 import { NextResponse } from "next/server"
+import type { GooglePlaceMeta } from "@/lib/google-places-client"
 import type { ManualReputationInput } from "@/lib/open-data-places"
 import { getRestaurantGrowthProfileFromPlace, OpenDataPlacesLookupError } from "@/lib/open-data-places"
 import { runPageSpeedWebsiteAudit } from "@/lib/pagespeed-client"
-import type { GooglePlaceMeta } from "@/lib/google-places-client"
 
 export type ReportMeta = {
   readonly profile: RestaurantGrowthProfile
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
     })
 
     // PageSpeed is optional — 5s cap so Step 1 stays fast
-    const lighthouseResult = Boolean(process.env.PAGESPEED_API_KEY?.trim()) && profile.websiteUrl
+    const lighthouseResult = process.env.PAGESPEED_API_KEY?.trim() && profile.websiteUrl
       ? await pagespeedWithTimeout(profile.websiteUrl)
       : null
 

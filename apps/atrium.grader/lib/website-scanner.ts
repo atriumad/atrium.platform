@@ -1,4 +1,5 @@
 import type { RestaurantWebsiteSignals } from "@atrium/application"
+import { safeFetch } from "./safe-fetch"
 
 export function emptyWebsiteSignals(): RestaurantWebsiteSignals {
   return {
@@ -31,10 +32,10 @@ async function scanBasicWebsiteSignals(
   const startedAt = Date.now()
 
   try {
-    const res = await fetcher(websiteUrl, {
+    const res = await safeFetch(websiteUrl, {
       method: "GET",
       signal: AbortSignal.timeout(4_000),
-    })
+    }, fetcher)
     const loadTimeMs = Date.now() - startedAt
 
     if (!res.ok) {
