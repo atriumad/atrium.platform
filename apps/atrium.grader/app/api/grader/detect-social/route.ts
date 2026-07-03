@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { getWebsiteUrlForPlace } from "@/lib/open-data-places"
+import { safeFetch } from "@/lib/safe-fetch"
 import { detectSocialHandles } from "@/lib/social-detector"
 
 const EMPTY_HANDLES = { instagram: null, facebook: null, tiktok: null, confidence: "manual" as const }
@@ -19,7 +20,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const res = await fetch(websiteUrl, {
+    const res = await safeFetch(websiteUrl, {
       method: "GET",
       signal: AbortSignal.timeout(4_000),
     })

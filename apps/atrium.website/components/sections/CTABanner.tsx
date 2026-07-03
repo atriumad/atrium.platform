@@ -11,11 +11,12 @@ type Props = {
   body: string
   cta: string
   ctaHref: string
+  ctaExternal?: boolean
   coverAlt: string
   bg?: string
 }
 
-export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, coverAlt }: Props) {
+export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaExternal, coverAlt }: Props) {
   const decorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -43,7 +44,15 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, cover
           {eyebrow && <Eyebrow style={{ color: 'var(--color-text-light)' } as React.CSSProperties}>{eyebrow}</Eyebrow>}
           <h2 className="text-3xl md:text-5xl font-medium leading-tight" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
           <p className="text-base leading-relaxed max-w-md" style={{ color: 'var(--color-text-light)', opacity: 0.7 }}>{body}</p>
-          <div className="mt-2"><Button href={ctaHref} variant="ghostLight">{cta}</Button></div>
+          <div className="mt-2">
+            <Button
+              href={ctaHref}
+              variant="ghostLight"
+              {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {cta}
+            </Button>
+          </div>
         </div>
         <div ref={decorRef} className="flex-1 flex justify-center">
           <div className="relative w-64 h-80 md:w-80 md:h-96">

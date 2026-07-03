@@ -169,12 +169,12 @@ function extractFirstJsonObject(text: string): string | null {
 
   let depth = 0
   let inString = false
-  let escape = false
+  let escaping = false
 
   for (let i = start; i < text.length; i++) {
     const ch = text[i]!
-    if (escape) { escape = false; continue }
-    if (ch === "\\") { escape = true; continue }
+    if (escaping) { escaping = false; continue }
+    if (ch === "\\") { escaping = true; continue }
     if (ch === '"') { inString = !inString; continue }
     if (inString) continue
     if (ch === "{") depth++
@@ -189,7 +189,7 @@ function extractFirstJsonObject(text: string): string | null {
 export async function generateReportNarrative(ctx: AgentContext): Promise<NarrativeData | null> {
   const provider = process.env.GRADER_AI_PROVIDER?.trim().toLowerCase() ?? "openrouter"
 
-  let model
+  let model: ReturnType<typeof resolveModel> | undefined
   try {
     model = resolveModel(provider)
   } catch (e) {

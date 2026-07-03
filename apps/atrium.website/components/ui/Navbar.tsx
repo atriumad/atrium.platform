@@ -128,7 +128,7 @@ function ServiceItem({
     <Link
       href={svc.href}
       onClick={onClose}
-      className="flex items-start gap-3 group rounded-lg px-2 py-2 -mx-2 transition-colors hover:bg-white/5"
+      className="flex gap-3 items-start px-2 py-2 -mx-2 rounded-lg transition-colors group hover:bg-white/5"
       style={{ color: 'var(--color-surface)' }}
     >
       <span
@@ -141,7 +141,7 @@ function ServiceItem({
         {icons[svc.icon]}
       </span>
       <span className="flex flex-col gap-0.5 min-w-0">
-        <span className="text-sm font-medium leading-tight group-hover:opacity-70 transition-opacity">
+        <span className="text-sm font-medium leading-tight transition-opacity group-hover:opacity-70">
           {svc.label}
         </span>
         <span className="text-xs leading-tight" style={{ color: 'var(--color-surface)', opacity: 0.4 }}>
@@ -155,6 +155,7 @@ function ServiceItem({
 // ─── Navbar ────────────────────────────────────────────────────────────────────
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const [bgOpacity, setBgOpacity] = useState(0)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const rafRef = useRef<number>(0)
@@ -174,6 +175,11 @@ export default function Navbar() {
     }
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
+
   const onEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     setOpen(true)
@@ -182,10 +188,11 @@ export default function Navbar() {
     timeoutRef.current = setTimeout(() => setOpen(false), 140)
   }
   const close = () => setOpen(false)
+  const closeMobile = () => setMobileOpen(false)
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 h-14 transition-shadow duration-300"
+      className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-12 h-14 transition-shadow duration-300"
       style={{
         background: `rgba(7,47,52,${bgOpacity})`,
         backdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
@@ -195,7 +202,7 @@ export default function Navbar() {
       }}
     >
       {/* Logo */}
-      <Link href="/" className="flex items-center">
+      <Link href="/" className="flex justify-self-start items-center">
         <img
           src="/logos/atrium-wordmark.svg"
           alt="Atrium"
@@ -203,8 +210,8 @@ export default function Navbar() {
         />
       </Link>
 
-      {/* Nav links */}
-      <nav className="hidden md:flex items-center gap-8">
+      {/* Nav links — centered column */}
+      <nav className="hidden gap-8 justify-self-center items-center md:flex">
         <button
           type="button"
           aria-expanded={open}
@@ -213,7 +220,7 @@ export default function Navbar() {
           onBlur={onLeave}
           onMouseEnter={onEnter}
           onMouseLeave={onLeave}
-          className="flex items-center gap-1 text-sm font-medium transition-opacity hover:opacity-70"
+          className="flex gap-1 items-center text-sm font-medium transition-opacity hover:opacity-70"
           style={{ color: 'var(--color-surface)' }}
         >
           Services
@@ -240,9 +247,50 @@ export default function Navbar() {
         ))}
       </nav>
 
-      <Button href="/contact" variant="primary" className="text-xs px-4 py-2">
-        Let&apos;s Talk
-      </Button>
+      {/* Right column — CTA on desktop, menu toggle on mobile */}
+      <div className="flex gap-4 justify-end justify-self-end items-center">
+        <Button href="/contact" variant="ghostLight" className="hidden px-4 py-2 text-xs md:inline-flex">
+          Let&apos;s Talk
+        </Button>
+
+        {/* Mobile menu toggle — icon-only, morphs into an X when open */}
+        <button
+          type="button"
+          aria-expanded={mobileOpen}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+          onClick={() => setMobileOpen((v) => !v)}
+          className="flex justify-center items-center -mr-1 w-9 h-9 md:hidden"
+          style={{ color: 'var(--color-surface)' }}
+        >
+          <span
+            className="relative flex-shrink-0 w-4 h-4"
+            style={{ color: 'var(--color-accent)' }}
+          >
+            <span
+              className={`absolute left-0 top-1/2 w-full h-px transition-transform duration-200 ${mobileOpen ? 'rotate-45' : '-translate-y-[3px]'}`}
+              style={{ background: 'currentColor' }}
+            />
+            <span
+              className={`absolute left-0 top-1/2 w-full h-px transition-transform duration-200 ${mobileOpen ? '-rotate-45' : 'translate-y-[3px]'}`}
+              style={{ background: 'currentColor' }}
+            />
+          </span>
+        </button>
+      </div>
+
+      {/* Backdrop — dims and blurs the page while the services mega menu is open */}
+      <div
+        aria-hidden="true"
+        onMouseEnter={close}
+        className={`fixed inset-0 -z-10 transition-opacity duration-300 ease-out ${
+          open ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        style={{
+          background: 'rgba(4,32,36,0.55)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+        }}
+      />
 
       {/* ── Mega menu — absolute child of fixed header = full-width ── */}
       <div
@@ -257,14 +305,14 @@ export default function Navbar() {
       >
         <div className="flex justify-center px-6 pt-2 pb-6">
           <div
-            className="w-full max-w-5xl rounded-2xl overflow-hidden flex shadow-2xl border"
+            className="flex overflow-hidden w-full max-w-5xl rounded-2xl border shadow-2xl"
             style={{
               background: 'var(--color-primary)',
               borderColor: 'var(--color-border-subtle)',
               boxShadow: '0 24px 80px rgba(4,32,36,0.7)',
             }}
           >
-            {/* Left feature panel */}
+            {/* Left feature panel — Growth Grader promo */}
             <div
               className="flex flex-col justify-between p-8 w-[248px] flex-shrink-0"
               style={{ background: 'var(--color-primary-900)' }}
@@ -274,42 +322,44 @@ export default function Navbar() {
                   className="text-[10px] uppercase tracking-widest font-semibold"
                   style={{ color: 'var(--color-accent)', opacity: 0.65 }}
                 >
-                  11 disciplines
+                  Free tool
                 </span>
                 <h2
                   className="mt-4 text-[1.6rem] font-medium leading-snug"
                   style={{ color: 'var(--color-surface)' }}
                 >
-                  Smart creative.{' '}
+                  Know your score.{' '}
                   <em style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-accent)', fontStyle: 'italic' }}>
-                    Full spectrum.
+                    In 2 minutes.
                   </em>
                 </h2>
                 <p
                   className="mt-4 text-xs leading-relaxed"
                   style={{ color: 'var(--color-surface)', opacity: 0.4 }}
                 >
-                  From brand strategy to CRM — one team, no hand-offs, no explaining yourself twice.
+                  The Atrium Growth Grader scores your Google presence, website, and social — then shows you exactly what&apos;s leaking revenue.
                 </p>
               </div>
 
-              <Link
-                href="/services"
+              <a
+                href="https://atrium-grader.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={close}
-                className="mt-8 inline-flex items-center gap-2 text-xs font-medium transition-opacity hover:opacity-70 w-fit"
+                className="inline-flex gap-2 items-center mt-8 text-xs font-medium transition-opacity hover:opacity-70 w-fit"
                 style={{ color: 'var(--color-accent)' }}
               >
-                Explore all services
+                Try the Growth Grader
                 <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </Link>
+              </a>
             </div>
 
             {/* Right columns */}
             <div className="flex flex-1 divide-x" style={{ borderColor: 'var(--color-border-subtle)' }}>
               {/* Generate Demand */}
-              <div className="flex-1 p-6 flex flex-col gap-1">
+              <div className="flex flex-col flex-1 gap-1 p-6">
                 <p
                   className="text-[10px] uppercase tracking-widest font-semibold mb-4"
                   style={{ color: 'var(--color-accent)', opacity: 0.55 }}
@@ -322,7 +372,7 @@ export default function Navbar() {
               </div>
 
               {/* Convert + Retain stacked */}
-              <div className="flex-1 p-6 flex flex-col">
+              <div className="flex flex-col flex-1 p-6">
                 {rightGroups.map((group, gi) => (
                   <div
                     key={group.label}
@@ -345,6 +395,64 @@ export default function Navbar() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Mobile full-screen panel */}
+      <div
+        className={`md:hidden fixed inset-0 top-14 overflow-y-auto transition-opacity duration-200 ease-out ${
+          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        style={{ background: 'var(--color-primary)' }}
+        role="menu"
+      >
+        <div className="flex flex-col gap-8 px-6 pt-8 pb-10">
+          <div
+            className="flex flex-col gap-4 pb-6 border-b"
+            style={{ borderColor: 'var(--color-border-subtle)' }}
+          >
+            {otherLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMobile}
+                className="text-lg font-medium"
+                style={{ color: 'var(--color-surface)' }}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <p
+              className="text-[10px] uppercase tracking-widest font-semibold mb-3"
+              style={{ color: 'var(--color-accent)', opacity: 0.55 }}
+            >
+              {leftGroup.label}
+            </p>
+            {leftGroup.services.map((svc) => (
+              <ServiceItem key={svc.href} svc={svc} onClose={closeMobile} />
+            ))}
+          </div>
+
+          {rightGroups.map((group) => (
+            <div key={group.label} className="flex flex-col gap-1">
+              <p
+                className="text-[10px] uppercase tracking-widest font-semibold mb-3"
+                style={{ color: 'var(--color-accent)', opacity: 0.55 }}
+              >
+                {group.label}
+              </p>
+              {group.services.map((svc) => (
+                <ServiceItem key={svc.href} svc={svc} onClose={closeMobile} />
+              ))}
+            </div>
+          ))}
+
+          <Button href="/contact" variant="primary" onClick={closeMobile} className="justify-center px-4 py-3 w-full text-xs">
+            Let&apos;s Talk
+          </Button>
         </div>
       </div>
     </header>

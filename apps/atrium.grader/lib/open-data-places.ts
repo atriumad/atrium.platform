@@ -5,9 +5,9 @@ import { parseGooglePlaceId } from "./place-id"
 import type { ManualReputationInput } from "./place-utils"
 import { BusinessProviderConfigError, configuredBusinessProviderMode } from "./providers/business-provider"
 
+export type { GooglePlaceMeta } from "./google-places-client"
 export type { PlaceSuggestion } from "./osm-client"
 export type { ManualReputationInput } from "./place-utils"
-export type { GooglePlaceMeta } from "./google-places-client"
 
 export class OpenDataPlacesLookupError extends Error {}
 

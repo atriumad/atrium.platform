@@ -1,4 +1,5 @@
 import type { SocialHandles } from "@atrium/application"
+import { safeFetch } from "./safe-fetch"
 import { detectSocialHandles } from "./social-detector"
 import { searchFacebookByName, searchInstagramByName, searchTikTokByName } from "./social-name-search"
 
@@ -10,13 +11,13 @@ type SocialDetectionContext = {
 
 async function scrapeWebsite(url: string, fetcher: typeof fetch): Promise<SocialHandles> {
   try {
-    const res = await fetcher(url, {
+    const res = await safeFetch(url, {
       signal: AbortSignal.timeout(4_500),
       headers: {
         "User-Agent": "Mozilla/5.0 (compatible; AtriumGrader/0.1)",
         "Accept": "text/html",
       },
-    })
+    }, fetcher)
     if (!res.ok) return EMPTY
     const html = await res.text()
     return detectSocialHandles(html)
