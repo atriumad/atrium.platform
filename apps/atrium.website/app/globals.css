@@ -52,3 +52,5 @@ h1 em, h2 em, h3 em, h4 em {
   80%  { transform: translate(-15%,0); }
   90%  { transform: translate(10%,5%); }
 }
+
+/* service-detail CSS removed — components now use Tailwind + design tokens */

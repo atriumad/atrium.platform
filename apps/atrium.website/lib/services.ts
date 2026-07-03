@@ -8,6 +8,7 @@ export type Service = {
   name: string
   category: string
   hero: { eyebrow: string; headline: string; body: string; coverAlt: string }
+  thesis: { eyebrow: string; headline: string; body: string }
   perks: IconItem[]
   bentoCards: BentoCard[]
   stats: StatItem[]
@@ -25,6 +26,11 @@ export const services: Service[] = [
       headline: 'Before anyone sees your content, *they need to feel your brand*',
       body: 'We define how you look, sound, and position — so everything else works harder.',
       coverAlt: 'Mood board flat lay — colors, type samples, reference images',
+    },
+    thesis: {
+      eyebrow: 'BUILDING BRAND IDENTITY',
+      headline: 'Your brand is the first thing people *feel* before they taste anything.',
+      body: "When your Instagram, your Google, your menu, and your email all feel like different restaurants, you're losing trust at every touchpoint — before anyone even orders.",
     },
     perks: [
       { title: 'Visual identity',         description: 'Colors, typography, photo style, brand marks — your complete visual system.' },
@@ -63,6 +69,11 @@ export const services: Service[] = [
       body: 'On-location production built around your menu, your space, your people.',
       coverAlt: 'Wide BTS — camera rig, chef plating, restaurant interior',
     },
+    thesis: {
+      eyebrow: 'PRODUCTION, NOT A STUDIO',
+      headline: 'Great food deserves to *look* like great food.',
+      body: 'Most restaurant photos are shot once, used everywhere, and forgotten. We build a library that keeps working long after the shoot day ends.',
+    },
     perks: [
       { title: 'On-location photo',    description: 'Shot inside your restaurant with your actual food and team. No studio.' },
       { title: 'Reels & video',        description: 'Short-form content built for social performance — hooks, pacing, music.' },
@@ -94,6 +105,11 @@ export const services: Service[] = [
       body: 'Platform-native content built around business goals, not trending audio.',
       coverAlt: 'Phone showing archetype-driven IG feed with labels',
     },
+    thesis: {
+      eyebrow: 'CONTENT WITH A JOB',
+      headline: 'Every post should be *working* toward something.',
+      body: 'We build content around archetypes — crave, vibe, chef POV, proof — so nothing you post is just filler between campaigns.',
+    },
     perks: [
       { title: 'Content archetypes',      description: 'Crave, vibe, chef POV, social proof, education, culture — strategic variety.' },
       { title: 'Platform-native strategy', description: 'IG, TikTok, Facebook, YouTube — each treated as its own channel.' },
@@ -124,6 +140,11 @@ export const services: Service[] = [
       body: 'Daily engagement, community management, and the small interactions that build real followings.',
       coverAlt: 'Comment thread showing thoughtful brand reply',
     },
+    thesis: {
+      eyebrow: 'SHOWING UP, DAILY',
+      headline: 'The comments and DMs are *where trust is actually built.*',
+      body: 'Most restaurants post and disappear. We keep the conversation going — replying, listening, and showing up every single day.',
+    },
     perks: [
       { title: 'Community management', description: 'Comments, DMs, story replies — daily. Your brand talks back.' },
       { title: 'Calendar execution',   description: 'Scheduling, publishing, cross-posting — handled completely.' },
@@ -153,6 +174,11 @@ export const services: Service[] = [
       headline: "We don't boost posts. *We build campaigns.*",
       body: 'Budget behind creative that already proved it resonates. Every dollar tracked.',
       coverAlt: 'Organic post analytics → arrow → same post as ad with results',
+    },
+    thesis: {
+      eyebrow: 'PROOF BEFORE SPEND',
+      headline: 'We only put money behind what *already works.*',
+      body: 'Every ad starts as organic content with real signal — saves, shares, comments — then we amplify it with budget, not guesswork.',
     },
     perks: [
       { title: 'Proven creative first',  description: 'We only run ads on content with strong organic signal.' },
@@ -185,6 +211,11 @@ export const services: Service[] = [
       body: 'Your Google profile is the new front door. We make sure it converts.',
       coverAlt: 'Side-by-side GBP comparison — neglected vs. optimized',
     },
+    thesis: {
+      eyebrow: 'YOUR NEW FRONT DOOR',
+      headline: 'Being *findable* is the first job of your brand.',
+      body: 'A stale, incomplete Google profile loses the decision before you ever get the chance to make an impression.',
+    },
     perks: [
       { title: 'GBP optimization',          description: 'Every field, every location, always current.' },
       { title: 'Local search strategy',      description: 'Category + keyword targeting for local pack visibility.' },
@@ -214,6 +245,11 @@ export const services: Service[] = [
       headline: 'Your rating is your resume. *We manage it like one.*',
       body: 'Every review answered. Every rating tracked. Every location covered.',
       coverAlt: 'Review feed with response rate stats overlaid',
+    },
+    thesis: {
+      eyebrow: 'MANAGED LIKE A RESUME',
+      headline: 'Your star rating is doing *more selling* than you think.',
+      body: "Every unanswered review tells the next guest you don't care. We answer every one, in your voice, before it costs you the table.",
     },
     perks: [
       { title: 'Review response',          description: 'Every Google review answered within 24 hours, in your brand voice.' },
@@ -246,6 +282,11 @@ export const services: Service[] = [
       body: 'Creator partnerships, events, activations. Your brand in rooms you can\'t buy into.',
       coverAlt: 'Creator at restaurant table shooting content — natural, not staged',
     },
+    thesis: {
+      eyebrow: 'EARNED, NOT BOUGHT',
+      headline: 'The right creator can do what *ads can\'t.*',
+      body: "One authentic post from someone whose audience trusts their taste outperforms a month of paid media — if you find the right one.",
+    },
     perks: [
       { title: 'Creator matching',      description: 'We find creators who actually eat at places like yours, not just big follower counts.' },
       { title: 'Event activations',     description: 'One well-designed moment that generates content and foot traffic at the same time.' },
@@ -276,6 +317,11 @@ export const services: Service[] = [
       headline: 'The guest who already trusts you *is your most valuable audience.*',
       body: 'Direct communication. Not rented reach. $42 return per $1 spent.',
       coverAlt: 'Automated flow diagram with revenue tags per step',
+    },
+    thesis: {
+      eyebrow: 'THE HIGHEST-ROI CHANNEL',
+      headline: 'You already have their attention. *Use it well.*',
+      body: "Segmented, behavior-triggered email and SMS turns guests who've already said yes once into guests who keep coming back.",
     },
     perks: [
       { title: 'Automated flows',      description: 'Welcome, lapsed reactivation, birthday, post-visit follow-up, VIP recognition — triggered by real behavior.' },
@@ -308,6 +354,11 @@ export const services: Service[] = [
       body: 'Guest segmentation, lifecycle flows, VIP recognition. Relationships, not transactions.',
       coverAlt: 'Guest lifecycle funnel — visit 1 → silence → lost vs visit 1 → follow-up → regular',
     },
+    thesis: {
+      eyebrow: 'RELATIONSHIPS, NOT TRANSACTIONS',
+      headline: 'Most guests never come back. *Not because of the food.*',
+      body: 'Because nobody followed up. We build the systems that make the second visit feel inevitable — automatically, for every guest.',
+    },
     perks: [
       { title: 'Guest segmentation',      description: 'New, returning, VIP, at-risk, lapsed, big spenders — every guest tagged and treated differently.' },
       { title: 'Lifecycle automations',   description: 'Triggered by real behavior: 5th visit, 60-day absence, birthday, first order, big spend.' },
@@ -338,6 +389,11 @@ export const services: Service[] = [
       headline: "You can't fix *what you can't see.*",
       body: 'One dashboard. Sales, social, email, reviews, campaigns. Every dollar accounted for.',
       coverAlt: 'Direct + Influence ROI dashboard cards side by side',
+    },
+    thesis: {
+      eyebrow: 'EVERY DOLLAR, VISIBLE',
+      headline: "Marketing that *can't be measured* can't be trusted.",
+      body: "We connect every channel to real revenue — so you know exactly what's working, not just what feels like it is.",
     },
     perks: [
       { title: 'Direct + Influence ROI',   description: 'Email sent Tuesday, 14 orders by Friday, $658 attributed (direct). Plus influence revenue modeled. Both numbers.' },

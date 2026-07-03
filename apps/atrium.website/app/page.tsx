@@ -57,7 +57,14 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <LogoTicker clients={clients} />
+      <div className="pt-[3.25rem] pb-[3.75rem]" style={{ background: 'var(--surface-page)' }}>
+        <LogoTicker
+          clients={clients}
+          label="Trusted by hospitality brands building demand"
+          size="compact"
+          bg="var(--surface-page)"
+        />
+      </div>
       <BentoGrid items={bentoItems} />
       <WorkGrid projects={selectedWork} />
       <StatsStrip stats={homeStats} />
@@ -70,6 +77,15 @@ export default function HomePage() {
         ctaHref="/process"
         steps={processSteps}
         stats={processStats}
+      />
+      <CTABanner
+        eyebrow="Free tool"
+        headline={<>Know your growth score. <em>In 2 minutes.</em></>}
+        body="The Atrium Growth Grader scores your Google presence, website, and social — then shows you exactly what's leaking revenue. No signup required."
+        cta="Try the Growth Grader"
+        ctaHref="https://atrium-grader.vercel.app"
+        ctaExternal
+        coverAlt="Free restaurant marketing audit — Atrium Growth Grader"
       />
       <SplitSection
         eyebrow="Full-Stack Expertise"
