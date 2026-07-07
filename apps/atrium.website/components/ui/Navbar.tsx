@@ -192,15 +192,22 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-12 h-14 transition-shadow duration-300"
+      className="fixed top-0 left-0 right-0 w-full z-50 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-6 md:px-12 h-14"
       style={{
-        background: `rgba(7,47,52,${bgOpacity})`,
-        backdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
-        WebkitBackdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
         borderBottom: bgOpacity > 0.3 ? `1px solid rgba(228,238,240,${bgOpacity * 0.08})` : '1px solid transparent',
         boxShadow: bgOpacity > 0.6 ? `0 1px 24px rgba(4,32,36,${bgOpacity * 0.4})` : 'none',
       }}
     >
+      {/* Blur backdrop — separate element so it doesn't make header a fixed containing block */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 transition-opacity duration-300"
+        style={{
+          background: `rgba(7,47,52,${bgOpacity})`,
+          backdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
+          WebkitBackdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
+        }}
+      />
       {/* Logo */}
       <Link href="/" className="flex justify-self-start items-center">
         <img
@@ -249,9 +256,11 @@ export default function Navbar() {
 
       {/* Right column — CTA on desktop, menu toggle on mobile */}
       <div className="flex gap-4 justify-end justify-self-end items-center">
-        <Button href="/contact" variant="ghostLight" className="hidden px-4 py-2 text-xs md:inline-flex">
-          Let&apos;s Talk
-        </Button>
+        <div className="hidden md:flex">
+          <Button href="/contact" variant="ghostLight" className="px-4 py-2 text-xs">
+            Let&apos;s Talk
+          </Button>
+        </div>
 
         {/* Mobile menu toggle — icon-only, morphs into an X when open */}
         <button
