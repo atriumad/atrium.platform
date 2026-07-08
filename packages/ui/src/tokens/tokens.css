@@ -58,7 +58,7 @@
   --focus-ring:      var(--amber-500);
 
   /* ─── Typography — families ───────────────────────────────── */
-  --font-display: "Nimora", "Inter Tight", system-ui, sans-serif;
+  --font-display: var(--font-sans);
   --font-sans:    "Inter Tight", system-ui, -apple-system, sans-serif;
   --font-serif:   "Instrument Serif", Georgia, serif;
   --font-accent:  var(--font-serif);
