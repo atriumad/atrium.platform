@@ -468,8 +468,7 @@ button:disabled { cursor: not-allowed; }
 /* ============================================================
    Buttons — pill shape (DS spec)
    ============================================================ */
-.search-button,
-.secondary-cta {
+.search-button {
   min-height: 46px;
   border: var(--border-width) solid var(--ink);
   border-radius: var(--radius-pill);
@@ -505,22 +504,6 @@ button:disabled { cursor: not-allowed; }
 
 .search-button:disabled {
   opacity: 0.38;
-}
-
-.secondary-cta {
-  background: var(--surface);
-  color: var(--ink);
-  padding: 0 26px;
-}
-
-.secondary-cta:hover {
-  border-color: var(--teal-500);
-  background: var(--surface-soft);
-  transform: translateY(-2px);
-}
-
-.secondary-cta:active {
-  transform: scale(var(--press-scale)) translateY(0);
 }
 
 /* ============================================================
