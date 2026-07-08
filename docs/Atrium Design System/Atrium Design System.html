@@ -1,0 +1,164 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Atrium Design System — Specimen Book</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  @page{size:Letter portrait;margin:0.5in}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#e9ebe7}
+  body{font-family:var(--font-sans,system-ui);color:#0e1a16;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  iframe{border:0;transform-origin:top left;display:block;pointer-events:none;background:#fff}
+  /* Cover */
+  .cover{height:9.6in;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    padding:0 0.4in;background:radial-gradient(120% 90% at 80% 110%,#0f4a3a 0%,#0a2c25 45%,#072F34 100%);color:#E4EEF0;page-break-after:always}
+  .cover .wm{font-family:var(--font-display,serif);font-size:96px;line-height:1;color:#F7A823}
+  .cover .ct{font-size:40px;font-weight:700;letter-spacing:-.02em;margin:14px 0 0}
+  .cover .cs{font-family:var(--font-serif,serif);font-style:italic;font-size:21px;color:#9fe3c0;margin:18px 0 0;max-width:30ch;line-height:1.3}
+  .cover .cmeta{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#6FA39F;margin-top:40px}
+  /* Divider */
+  .divider{height:2.2in;display:flex;flex-direction:column;justify-content:center;padding:0 0.2in;border-top:3px solid #072F34;page-break-before:always}
+  .divider .dgrp{font-family:var(--font-display,serif);font-size:56px;color:#072F34;line-height:1}
+  .divider .dcount{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#6b756f;margin-top:10px}
+  /* Sheet of blocks */
+  .sheet{display:flex;flex-direction:column;gap:22px;padding-top:18px}
+  .block{break-inside:avoid;page-break-inside:avoid}
+  .block .lab{display:flex;align-items:baseline;gap:12px;margin:0 0 8px}
+  .block .grp{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0f4a3a}
+  .block .nm{font-size:14px;color:#46514c}
+  .block .frame{width:720px;overflow:hidden;border-radius:14px;box-shadow:0 2px 0 rgba(7,47,52,.06),0 14px 30px rgba(7,47,52,.10);border:1px solid rgba(7,47,52,.08);background:#fff}
+</style></head>
+<body><section class="cover">
+  <div class="wm">atrium</div>
+  <div class="ct">Design System</div>
+  <div class="cs">Brand · Color · Type · Spacing · Components · Web — the complete specimen book</div>
+  <div class="cmeta">25 specimens · Generated for print</div>
+</section><section class="divider"><div class="dgrp">Brand</div><div class="dcount">3 specimens</div></section><section class="sheet"><div class="block small">
+    <div class="lab"><span class="grp">Brand</span><span class="nm">Wordmark</span></div>
+    <div class="frame" style="height:226px">
+      <iframe src="guidelines/brand-wordmark.card.html" width="700" height="220" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Brand</span><span class="nm">α Monogram</span></div>
+    <div class="frame" style="height:226px">
+      <iframe src="guidelines/brand-mark.card.html" width="700" height="220" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Brand</span><span class="nm">Voice & Marker</span></div>
+    <div class="frame" style="height:237px">
+      <iframe src="guidelines/brand-voice.card.html" width="700" height="230" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div></section><section class="divider"><div class="dgrp">Colors</div><div class="dcount">5 specimens</div></section><section class="sheet"><div class="block small">
+    <div class="lab"><span class="grp">Colors</span><span class="nm">Brand Anchors</span></div>
+    <div class="frame" style="height:206px">
+      <iframe src="guidelines/color-anchors.card.html" width="700" height="200" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Colors</span><span class="nm">Teal Scale</span></div>
+    <div class="frame" style="height:154px">
+      <iframe src="guidelines/color-teal.card.html" width="700" height="150" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Colors</span><span class="nm">Warm Accent</span></div>
+    <div class="frame" style="height:154px">
+      <iframe src="guidelines/color-amber.card.html" width="700" height="150" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Colors</span><span class="nm">Mint & Tints</span></div>
+    <div class="frame" style="height:154px">
+      <iframe src="guidelines/color-mint.card.html" width="700" height="150" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Colors</span><span class="nm">Pairings</span></div>
+    <div class="frame" style="height:206px">
+      <iframe src="guidelines/color-pairings.card.html" width="700" height="200" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div></section><section class="divider"><div class="dgrp">Type</div><div class="dcount">8 specimens</div></section><section class="sheet"><div class="block small">
+    <div class="lab"><span class="grp">Type</span><span class="nm">Display · Nimora</span></div>
+    <div class="frame" style="height:206px">
+      <iframe src="guidelines/type-display.card.html" width="700" height="200" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Type</span><span class="nm">Sans · Inter Tight</span></div>
+    <div class="frame" style="height:237px">
+      <iframe src="guidelines/type-body.card.html" width="700" height="230" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Type</span><span class="nm">Serif · Instrument Serif</span></div>
+    <div class="frame" style="height:237px">
+      <iframe src="guidelines/type-serif.card.html" width="700" height="230" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Type</span><span class="nm">Serif · Italic emphasis</span></div>
+    <div class="frame" style="height:185px">
+      <iframe src="guidelines/type-accent.card.html" width="700" height="180" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Type</span><span class="nm">Script · Handwriting</span></div>
+    <div class="frame" style="height:175px">
+      <iframe src="guidelines/type-script.card.html" width="700" height="170" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Type</span><span class="nm">Spread Caps</span></div>
+    <div class="frame" style="height:154px">
+      <iframe src="guidelines/type-caps.card.html" width="700" height="150" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Type</span><span class="nm">Treatment · Stat figures</span></div>
+    <div class="frame" style="height:195px">
+      <iframe src="guidelines/type-figures.card.html" width="700" height="190" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Type</span><span class="nm">Treatment · Mixed voices</span></div>
+    <div class="frame" style="height:185px">
+      <iframe src="guidelines/type-voices2.card.html" width="700" height="180" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div></section><section class="divider"><div class="dgrp">Spacing</div><div class="dcount">2 specimens</div></section><section class="sheet"><div class="block small">
+    <div class="lab"><span class="grp">Spacing</span><span class="nm">Spacing Scale</span></div>
+    <div class="frame" style="height:206px">
+      <iframe src="guidelines/spacing-scale.card.html" width="700" height="200" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div><div class="block small">
+    <div class="lab"><span class="grp">Spacing</span><span class="nm">Radii</span></div>
+    <div class="frame" style="height:185px">
+      <iframe src="guidelines/spacing-radii.card.html" width="700" height="180" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div></section><section class="divider"><div class="dgrp">Components</div><div class="dcount">1 specimen</div></section><section class="sheet"><div class="block small">
+    <div class="lab"><span class="grp">Components</span><span class="nm">Core — buttons, chips, cards</span></div>
+    <div class="frame" style="height:555px">
+      <iframe src="components/core/core.card.html" width="700" height="540" style="transform:scale(1.0286)" loading="eager"></iframe>
+    </div>
+  </div></section><section class="divider"><div class="dgrp">Web Samples</div><div class="dcount">5 specimens</div></section><section class="sheet"><div class="block">
+    <div class="lab"><span class="grp">Web Samples</span><span class="nm">Site · Hero</span></div>
+    <div class="frame" style="height:405px">
+      <iframe src="guidelines/web-hero.card.html" width="1280" height="720" style="transform:scale(0.5625)" loading="eager"></iframe>
+    </div>
+  </div><div class="block">
+    <div class="lab"><span class="grp">Web Samples</span><span class="nm">Site · Concepts Bento</span></div>
+    <div class="frame" style="height:405px">
+      <iframe src="guidelines/web-formats.card.html" width="1280" height="720" style="transform:scale(0.5625)" loading="eager"></iframe>
+    </div>
+  </div><div class="block">
+    <div class="lab"><span class="grp">Web Samples</span><span class="nm">Site · By the Numbers</span></div>
+    <div class="frame" style="height:439px">
+      <iframe src="guidelines/web-numbers.card.html" width="1280" height="780" style="transform:scale(0.5625)" loading="eager"></iframe>
+    </div>
+  </div><div class="block">
+    <div class="lab"><span class="grp">Web Samples</span><span class="nm">Site · Case Study</span></div>
+    <div class="frame" style="height:405px">
+      <iframe src="guidelines/web-casestudy.card.html" width="1280" height="720" style="transform:scale(0.5625)" loading="eager"></iframe>
+    </div>
+  </div><div class="block">
+    <div class="lab"><span class="grp">Web Samples</span><span class="nm">Site · Membership</span></div>
+    <div class="frame" style="height:405px">
+      <iframe src="guidelines/web-membership.card.html" width="1280" height="720" style="transform:scale(0.5625)" loading="eager"></iframe>
+    </div>
+  </div></section><section class="divider"><div class="dgrp">Atrium Site</div><div class="dcount">1 specimen</div></section><section class="sheet"><div class="block">
+    <div class="lab"><span class="grp">Atrium Site</span><span class="nm">Marketing site</span></div>
+    <div class="frame" style="height:402px">
+      <iframe src="ui_kits/atrium-site/index.html" width="1360" height="760" style="transform:scale(0.5294)" loading="eager"></iframe>
+    </div>
+  </div></section>
+<script>
+  // keep iframes from being interactive in print; force eager load
+  document.querySelectorAll('iframe').forEach(f=>{f.setAttribute('scrolling','no');});
+</script>
+</body></html>

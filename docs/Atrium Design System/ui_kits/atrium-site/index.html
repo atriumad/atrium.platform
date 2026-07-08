@@ -1,0 +1,88 @@
+<!-- @dsCard group="Atrium Site" viewport="1360x760" name="Marketing site" subtitle="Interactive landing page built from Atrium primitives" -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atrium — We're humans</title>
+<meta name="ext-resource-dependency" content="../../assets/logos/atrium-mark.svg" data-resource-id="atriumMark" />
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../../assets/social/image-slot.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cloud-200);font-family:var(--font-sans)}
+  @keyframes atr-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){ [style*="atr-marquee"]{animation:none !important} }
+  .atr-burger{display:none}
+  image-slot{display:block}
+  /* ---- Bento ---- */
+  .atr-bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:206px;gap:16px}
+  .atr-bento .b-cell{position:relative;border-radius:var(--radius-lg);overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s;text-decoration:none}
+  .atr-bento a.b-cell:hover{transform:translateY(-5px);box-shadow:0 22px 48px rgba(7,47,52,.16)}
+  .b-gd{grid-column:span 2;grid-row:span 2}
+  .b-photo{grid-row:span 2}
+  .b-social{grid-column:span 2}
+  .b-grain{position:absolute;inset:0;background:url(../../assets/social/grain.svg);background-size:170px 170px;opacity:.12;mix-blend-mode:overlay;pointer-events:none;z-index:2}
+  @media (max-width: 1000px){
+    .atr-bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
+    .b-gd{grid-column:span 2;grid-row:span 2}
+    .b-photo{grid-row:span 2}
+    .b-social{grid-column:span 2}
+  }
+  @media (max-width: 600px){
+    .atr-bento{grid-template-columns:1fr;grid-auto-rows:auto}
+    .atr-bento .b-cell{min-height:230px;grid-column:auto !important;grid-row:auto !important}
+  }
+  @media (max-width: 860px){
+    .atr-desktop-nav{display:none !important}
+    .atr-burger{display:inline-flex !important}
+    .atr-footer-grid{grid-template-columns:1fr 1fr !important}
+    .atr-contact-grid{grid-template-columns:1fr !important}
+  }
+  @media (max-width: 520px){ .atr-footer-grid{grid-template-columns:1fr !important} }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#072F34">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#072F34"/>
+    <text x="600" y="470" font-family="Georgia, serif" font-size="360" fill="#B5F2DB" text-anchor="middle">a</text>
+    <circle cx="820" cy="300" r="34" fill="#F7A823"/>
+  </svg>
+</template>
+<div id="root"></div>
+<script type="text/babel" src="AtriumKit.jsx"></script>
+<script type="text/babel" src="AtriumSections.jsx"></script>
+<script type="text/babel">
+function App() {
+  const [filter, setFilter] = React.useState("All");
+  const [form, setForm] = React.useState({ name: "", email: "", interest: "", sent: false });
+  const onField = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+  const onSubmit = () => setForm((f) => ({ ...f, sent: true }));
+  React.useEffect(() => { if (window.lucide) window.lucide.createIcons(); });
+  return (
+    <React.Fragment>
+      <AtriumHeader />
+      <AtriumHero />
+      <AtriumServices />
+      <AtriumMarquee />
+      <AtriumWork filter={filter} setFilter={setFilter} />
+      <AtriumContact state={form} onSubmit={onSubmit} onField={onField} />
+      <AtriumFooter />
+    </React.Fragment>
+  );
+}
+function mount() {
+  if (!window.AtriumHeader || !window.AtriumServices || !window.AtriumDesignSystem_31d170) { return setTimeout(mount, 30); }
+  ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+}
+mount();
+</script>
+</body>
+</html>
