@@ -7,53 +7,27 @@
    Atrium Design System — Color tokens
    ============================================================ */
 :root {
-  --teal-900: #042024;
-  --teal-800: #072f34;
-  --teal-700: #0e3a40;
-  --teal-500: #2c6168;
-  --teal-300: #6fa39f;
-  --mint-500: #8fe6c2;
-  --mint-400: #b5f2db;
-  --mint-300: #cdf6e6;
-  --mint-200: #e4faf1;
-  --amber-600: #e0911a;
-  --amber-500: #f7a823;
-  --amber-400: #ffc21f;
-  --amber-200: #ffe6a8;
-  --cloud-100: #ffffff;
-  --cloud-200: #f4f8f8;
-  --cloud-300: #e4eef0;
-  --cloud-400: #cfdcdd;
-  --ink-700: #1c2b2c;
+  /* ============================================================
+     Grader-specific token additions
+     Everything already defined identically in
+     @atrium/ui/src/tokens/tokens.css (raw palette, radii, base
+     shadows, base easing/duration, marker colors, tracking-wide/
+     wider, space-1..6) has been REMOVED from this file — grader now
+     inherits those from the canonical import at the top of this file
+     instead of shadowing it with a stale copy. Only genuinely
+     grader-specific tokens (no canonical counterpart) remain below.
+     ============================================================ */
 
-  /* Semantic — surfaces */
-  --surface-page: var(--cloud-200);
-  --surface-card: var(--cloud-100);
-  --surface-sunken: var(--cloud-300);
-  --surface-dark: var(--teal-800);
-  --surface-dark-raised: var(--teal-700);
-  --surface-mint: var(--mint-400);
-  --surface-amber: var(--amber-500);
+  /* Font wiring — canonical tokens.css ships literal fallback names
+     only; each app must bridge its loaded next/font variables in. */
+  --font-sans: var(--font-inter-tight), "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-sans);
+  --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
+  --font-display: var(--font-sans);
+  --font-script: var(--font-handwriting), "Nothing You Could Do", cursive;
 
-  /* Semantic — text */
-  --text-strong: var(--teal-800);
-  --text-body: var(--ink-700);
-  --text-muted: var(--teal-500);
-  --text-on-dark: var(--cloud-300);
-  --text-on-dark-strong: var(--mint-400);
-  --text-on-mint: var(--teal-800);
-  --text-on-amber: var(--teal-800);
-
-  /* Semantic — lines */
-  --border-light: var(--cloud-400);
-  --border-strong: var(--teal-800);
-  --border-on-dark: var(--teal-500);
-  --accent: var(--mint-400);
-  --accent-warm: var(--amber-500);
-  --highlight: var(--amber-400);
-  --focus-ring: var(--amber-500);
-
-  /* Aliases */
+  /* Semantic alias layer — grader's own naming on top of canonical
+     surface/text tokens. No canonical equivalent for these names. */
   --canvas: var(--cloud-200);
   --surface: var(--cloud-100);
   --surface-soft: var(--cloud-300);
@@ -70,7 +44,7 @@
   --sky: var(--cloud-300);
   --butter: var(--amber-200);
 
-  /* Score tones */
+  /* Score tones — grader-only (diagnostic score bands) */
   --tone-low-bg: var(--amber-200);
   --tone-low-border: var(--amber-500);
   --tone-low-strong: var(--amber-600);
@@ -81,95 +55,33 @@
   --tone-high-border: var(--mint-500);
   --tone-high-strong: var(--mint-500);
 
-  /* ============================================================
-     Shadows
-     ============================================================ */
-  --shadow-none: none;
+  /* Extra shadow recipe — softer than canonical --shadow-soft, used
+     by grader's flat surface cards. Canonical --shadow-soft/-pop/-dark
+     now apply unmodified from the import above. */
   --shadow-card: 0 1px 2px rgb(7 47 52 / 5%), 0 8px 24px rgb(7 47 52 / 6%);
-  --shadow-pop: 0 12px 40px rgb(7 47 52 / 14%);
-  --shadow-dark: 0 18px 50px rgb(0 0 0 / 35%);
-  --shadow-soft: var(--shadow-card);
   --shadow-small: var(--shadow-card);
 
-  /* ============================================================
-     Motion — Atrium DS
-     ============================================================ */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  /* Extra easing curves — canonical --ease-out/--ease-in-out now
+     apply unmodified from the import above. */
   --ease-enter: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-exit: cubic-bezier(0.32, 0, 0.67, 0);
   --ease-float: cubic-bezier(0.45, 0, 0.55, 1);
   --ease-soft: var(--ease-out);
-  --dur-fast: 120ms;
-  --dur-base: 220ms;
-  --dur-slow: 420ms;
   --dur-enter: 760ms;
   --dur-exit: 520ms;
   --dur-float: 6800ms;
-  --press-scale: 0.97;
 
-  /* ============================================================
-     Typography — Atrium DS
-     Four faces, all bundled. Inter Tight = primary sans.
-     Instrument Serif = editorial serif (italic for emphasis).
-     ============================================================ */
-  --font-display: var(--font-inter-tight), "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-sans: var(--font-inter-tight), "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-body: var(--font-sans);
-  --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
-  --font-script: var(--font-handwriting), "Nothing You Could Do", cursive;
-
-  /* Tracking */
-  --tracking-tight: 0;
-  --tracking-wide: 0.08em;
-  --tracking-wider: 0.18em;
-
-  /* Highlight / marker */
-  --marker-amber: var(--amber-400);
-  --marker-mint: var(--mint-400);
-
-  /* ============================================================
-     Radius — DS shape language
-     Pill for chips/buttons · 14px cards · 22px big panels · 4px inputs
-     ============================================================ */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-xl: 32px;
-  --radius-pill: 999px;
-
-  /* Spacing scale — 4pt base */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
+  /* Extra spacing rungs — canonical tokens.css does not define these
+     step sizes (it has --space-8: 3rem/48px then jumps to --space-10:
+     4rem/64px). These values are grader-only and were previously
+     mislabeled as if they matched a shared --space-7/8/9 scale, which
+     they didn't (48px/64px/96px here vs canonical's 40px/48px at the
+     same names). TODO(design): reconcile with @atrium/ui — either
+     upstream these rungs into the canonical scale if other surfaces
+     need them, or move grader to the nearest canonical step. */
   --space-7: 48px;
   --space-8: 64px;
   --space-9: 96px;
-
-  /* Type scale */
-  --text-xs: 0.72rem;
-  --text-sm: 0.88rem;
-  --text-base: 1rem;
-  --text-lg: 1.12rem;
-  --text-xl: 1.28rem;
-  --text-2xl: 1.6rem;
-  --text-3xl: 2rem;
-  --text-display-md: clamp(2.18rem, 5vw, 4.25rem);
-  --text-6xl: clamp(4rem, 9vw, 6.75rem);
-
-  --weight-regular: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
-
-  --leading-tight: 0.92;
-  --leading-snug: 1.04;
-  --leading-heading: 1.14;
-  --leading-body: 1.58;
 
   --border-width: 1.5px;
 }
@@ -557,7 +469,6 @@ button:disabled { cursor: not-allowed; }
    Buttons — pill shape (DS spec)
    ============================================================ */
 .search-button,
-.primary-cta,
 .secondary-cta {
   min-height: 46px;
   border: var(--border-width) solid var(--ink);
@@ -596,28 +507,10 @@ button:disabled { cursor: not-allowed; }
   opacity: 0.38;
 }
 
-.primary-cta {
-  background: var(--surface-dark);
-  color: var(--cloud-300);
-  padding: 0 26px;
-  letter-spacing: 0.01em;
-}
-
 .secondary-cta {
   background: var(--surface);
   color: var(--ink);
   padding: 0 26px;
-}
-
-.primary-cta:hover {
-  background: var(--surface-dark-raised);
-  box-shadow: var(--shadow-pop);
-  transform: translateY(-2px);
-}
-
-.primary-cta:active {
-  transform: scale(var(--press-scale)) translateY(0);
-  box-shadow: none;
 }
 
 .secondary-cta:hover {
