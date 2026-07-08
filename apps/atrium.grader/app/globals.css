@@ -3962,7 +3962,6 @@ button:disabled { cursor: not-allowed; }
   }
 
   .search-button,
-  .primary-cta,
   .secondary-cta,
   .agency-cta-link,
   .diagnostic-cta-link,
@@ -3980,7 +3979,6 @@ button:disabled { cursor: not-allowed; }
     transition: none;
   }
 
-  .primary-cta:hover,
   .secondary-cta:hover,
   .agency-cta-link:hover,
   .diagnostic-cta-link:hover,
