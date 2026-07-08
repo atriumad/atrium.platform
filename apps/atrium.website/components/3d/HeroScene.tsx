@@ -22,6 +22,37 @@ float noise(vec2 p) {
 }
 `
 
+const FRAG_HOME = /* glsl */`${GLSL_COMMON}
+const vec3 LIT    = vec3(0.055, 0.285, 0.310);
+const vec3 SHADOW = vec3(0.006, 0.048, 0.060);
+const vec3 ACCENT = vec3(0.710, 0.949, 0.859);
+void main() {
+  vec2  uv = gl_FragCoord.xy / uRes;
+  float t  = uTime;
+  float cloud = 0.89 + sin(t * 0.113) * 0.11;
+  float angA  = 0.49 + sin(t * 0.173) * 0.010;
+  vec2  cA    = rot2(uv - 0.5, angA);
+  float driftA = t * 0.0015 + sin(t * 0.223) * 0.020;
+  float litA  = pow(clamp(0.5 + 0.5*cos((cA.x+driftA)/0.130*TAU), 0.0, 1.0), 0.70);
+  float angB  = -0.77 + cos(t * 0.131) * 0.009;
+  vec2  cB    = rot2(uv - 0.5, angB);
+  float driftB = t * 0.0012 + sin(t * 0.293) * 0.017;
+  float litB  = pow(clamp(0.5 + 0.5*cos((cB.x+driftB)/0.105*TAU), 0.0, 1.0), 0.70);
+  float light   = litA * litB;
+  float crossed = (1.0-litA) * (1.0-litB);
+  float fade    = clamp((1.0 - (uv.x*0.38 + (1.0-uv.y)*0.42)) * cloud, 0.28, 1.0);
+  float sh1  = noise(uv*7.5 + vec2( t*0.20, t*0.13));
+  float sh2  = noise(uv*3.8 + vec2(-t*0.09, t*0.25));
+  float atmos = sh1*0.55 + sh2*0.45;
+  vec3 col = mix(LIT, SHADOW, (1.0-light)*fade*0.85);
+  col += ACCENT * light * fade * (0.08 + atmos*0.045);
+  col  = mix(col, SHADOW*0.55, crossed*fade*0.55);
+  vec2 vc = uv - vec2(0.42, 0.50);
+  col *= clamp(1.0 - dot(vc,vc)*0.68, 0.20, 1.0);
+  gl_FragColor = vec4(clamp(col,0.0,1.0), 1.0);
+}
+`
+
 const FRAG_SERVICES = /* glsl */`${GLSL_COMMON}
 const vec3 LIT    = vec3(0.048, 0.255, 0.278);
 const vec3 SHADOW = vec3(0.006, 0.040, 0.052);
@@ -57,10 +88,10 @@ void main() {
 }
 `
 
-function ServicesLight() {
+function AtriumLight({ frag }: { frag: string }) {
   const { size } = useThree()
   const matRef   = useRef<THREE.ShaderMaterial>(null)
-  const uniforms  = useMemo(
+  const uniforms = useMemo(
     () => ({ uTime: { value: 0 }, uRes: { value: new THREE.Vector2() } }),
     [],
   )
@@ -73,7 +104,7 @@ function ServicesLight() {
   return (
     <mesh>
       <planeGeometry args={[2, 2]} />
-      <shaderMaterial ref={matRef} vertexShader={VERT} fragmentShader={FRAG_SERVICES}
+      <shaderMaterial ref={matRef} vertexShader={VERT} fragmentShader={frag}
         uniforms={uniforms} depthTest={false} depthWrite={false} />
     </mesh>
   )
@@ -83,26 +114,16 @@ function ServicesLight() {
 export type SceneVariant = 'home' | 'services'
 
 export default function HeroScene({ variant = 'home' }: { variant?: SceneVariant }) {
-  if (variant === 'services') {
-    return (
-      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 1], fov: 60, near: 0.1, far: 10 }}
-        style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
-        gl={{ alpha: false, antialias: false, powerPreference: 'high-performance' }}>
-        <ServicesLight />
-      </Canvas>
-    )
-  }
+  const frag = variant === 'services' ? FRAG_SERVICES : FRAG_HOME
 
   return (
     <Canvas
       dpr={[1, 1.5]}
-      camera={{ position: [-2.5, 0.5, 5.5], fov: 52, near: 0.1, far: 60 }}
+      camera={{ position: [0, 0, 1], fov: 60, near: 0.1, far: 10 }}
       style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
-      gl={{ antialias: true, powerPreference: 'high-performance' }}
-      shadows
-      onCreated={({ camera }) => camera.lookAt(2, -0.8, -2)}
+      gl={{ alpha: false, antialias: false, powerPreference: 'high-performance' }}
     >
-
+      <AtriumLight frag={frag} />
     </Canvas>
   )
 }
