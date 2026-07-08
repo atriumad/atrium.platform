@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atrium — Studio Deck</title>
+<style>
+  @font-face{font-family:"Nimora";src:url("assets/Nimora.woff") format("woff");font-weight:400;font-display:swap}
+  @font-face{font-family:"Inter Tight";src:url("assets/InterTight.ttf") format("truetype");font-weight:100 900;font-display:swap}
+  @font-face{font-family:"Inter Tight";src:url("assets/InterTight-Italic.ttf") format("truetype");font-weight:100 900;font-style:italic;font-display:swap}
+  @font-face{font-family:"Instrument Serif";src:url("assets/InstrumentSerif-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+  @font-face{font-family:"Instrument Serif";src:url("assets/InstrumentSerif-Italic.ttf") format("truetype");font-weight:400;font-style:italic;font-display:swap}
+  @font-face{font-family:"Nothing You Could Do";src:url("assets/NothingYouCouldDo.ttf") format("truetype");font-weight:400;font-display:swap}
+
+  :root{
+    --teal-900:#042024;--teal-800:#072f34;--teal-700:#0e3a40;--teal-500:#2c6168;--teal-300:#6fa39f;
+    --mint-500:#8fe6c2;--mint-400:#b5f2db;--mint-300:#cdf6e6;--mint-200:#e4faf1;
+    --amber-500:#f7a823;--amber-400:#ffc21f;--amber-200:#ffe6a8;
+    --cloud-100:#fff;--cloud-200:#f4f8f8;--cloud-300:#e4eef0;--cloud-400:#cfdcdd;--ink-700:#1c2b2c;
+    --font-display:"Nimora","Inter Tight",sans-serif;
+    --font-sans:"Inter Tight",system-ui,sans-serif;
+    --font-serif:"Instrument Serif",Georgia,serif;
+    --font-script:"Nothing You Could Do",cursive;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:#0a1512}
+
+  section{
+    width:100%;height:100%;position:relative;overflow:hidden;
+    font-family:var(--font-sans);color:var(--teal-800);
+    -webkit-font-smoothing:antialiased;
+    padding:104px 120px;display:flex;flex-direction:column;
+  }
+  .grain{position:absolute;inset:0;background-image:url("assets/grain.svg");background-size:600px;opacity:.14;mix-blend-mode:soft-light;pointer-events:none;z-index:1}
+  .wm{font-family:var(--font-display);line-height:1}
+  .eb{font-family:var(--font-sans);font-size:22px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted,var(--teal-500))}
+  .ser{font-family:var(--font-serif);font-style:italic;font-weight:400}
+  .script{font-family:var(--font-script)}
+  .mk{background-image:linear-gradient(var(--amber-400),var(--amber-400));background-repeat:no-repeat;background-size:100% 54%;background-position:0 72%;padding:0 .08em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .z{position:relative;z-index:2}
+
+  /* aurora field (palette-pure) */
+  .aurora{background-color:var(--mint-200);
+    background-image:
+      radial-gradient(120% 115% at 14% 16%, var(--mint-400) 0%, transparent 55%),
+      radial-gradient(110% 110% at 88% 10%, var(--amber-200) 0%, transparent 52%),
+      radial-gradient(120% 120% at 82% 94%, var(--mint-500) 0%, transparent 55%),
+      radial-gradient(130% 125% at 22% 100%, var(--amber-200) 0%, transparent 50%);}
+
+  .pill{display:inline-flex;align-items:center;gap:10px;border-radius:999px;font-size:21px;font-weight:600;padding:13px 26px}
+  .p-ink{background:var(--teal-800);color:var(--cloud-300)}
+  .p-out-d{background:transparent;border:1.5px solid var(--teal-500);color:var(--mint-400)}
+  .p-out-l{background:var(--cloud-100);border:1.5px solid var(--cloud-400);color:var(--teal-800)}
+  .p-mint{background:var(--mint-400);color:var(--teal-800)}
+  .p-amber{background:var(--amber-500);color:var(--teal-800)}
+
+  .mark{display:block;background:currentColor;-webkit-mask:url("assets/atrium-mark.svg") center/contain no-repeat;mask:url("assets/atrium-mark.svg") center/contain no-repeat}
+  .wordmark{display:block;background:currentColor;-webkit-mask:url("assets/atrium-wordmark.svg") left/contain no-repeat;mask:url("assets/atrium-wordmark.svg") left/contain no-repeat}
+
+  .foot{position:absolute;left:120px;right:120px;bottom:54px;z-index:2;display:flex;justify-content:space-between;align-items:center;font-size:18px;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<deck-stage data-deck width="1920" height="1080">
+
+  <!-- 1 · TITLE -->
+  <section data-label="Title" class="aurora" style="justify-content:space-between">
+    <div class="grain"></div>
+    <div class="z" style="display:flex;justify-content:space-between;align-items:center">
+      <span class="wordmark" style="width:200px;height:48px;color:var(--teal-800)"></span>
+      <span class="eb">Kansas City · Est. 2018</span>
+    </div>
+    <div class="z">
+      <div class="eb" style="margin-bottom:26px">Creative &amp; Marketing Studio</div>
+      <h1 style="margin:0;font-size:118px;line-height:.98;font-weight:800;letter-spacing:-.03em;color:var(--teal-800)">
+        We&rsquo;re <span class="script" style="font-weight:400;color:var(--teal-700);font-size:128px">humans.</span><br>
+        Growth for <span class="ser">food brands.</span>
+      </h1>
+      <p style="font-size:27px;line-height:1.5;color:var(--teal-700);max-width:30ch;margin:34px 0 0">
+        We don&rsquo;t just make ads — we build <span class="mk">growth engines</span> for restaurants, hotels &amp; hospitality.
+      </p>
+    </div>
+    <div class="z" style="display:flex;gap:13px">
+      <span class="pill p-ink">SEO</span>
+      <span class="pill p-out-l">Marketing</span>
+      <span class="pill p-out-l">Graphic Design</span>
+      <span class="pill p-amber">Photography</span>
+    </div>
+  </section>
+
+  <!-- 2 · WHO WE ARE -->
+  <section data-label="Who we are" style="background:var(--cloud-200);justify-content:center">
+    <div class="grain"></div>
+    <div class="z" style="max-width:24ch">
+      <div class="eb" style="margin-bottom:30px">Who we are</div>
+      <h2 style="margin:0;font-size:74px;line-height:1.05;font-weight:700;letter-spacing:-.02em;color:var(--teal-800)">
+        A studio that pairs <span class="ser">strategy</span> with bold creative — and obsesses over your <span class="mk">ROI.</span>
+      </h2>
+      <p style="font-size:26px;line-height:1.6;color:var(--ink-700);max-width:46ch;margin:36px 0 0">
+        From the first brand audit to launch day, we&rsquo;re the team you call when you need help <span class="ser" style="font-size:30px">yesterday</span> — and still want it done right.
+      </p>
+    </div>
+    <span class="mark" aria-hidden="true" style="position:absolute;right:-90px;bottom:-90px;width:520px;height:520px;color:var(--mint-400);opacity:.5;z-index:0"></span>
+    <div class="foot"><span class="wm" style="font-size:26px;color:var(--teal-800)">atrium</span><span style="color:var(--teal-500)">01</span></div>
+  </section>
+
+  <!-- 3 · SERVICES -->
+  <section data-label="Services" style="background:var(--teal-800);color:var(--cloud-300)">
+    <div class="grain" style="opacity:.2"></div>
+    <div class="z" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:50px">
+      <div>
+        <div class="eb" style="color:var(--mint-300);margin-bottom:18px">What we do</div>
+        <h2 style="margin:0;font-size:64px;font-weight:700;letter-spacing:-.02em;color:var(--cloud-300)">Four ways we make you <span class="ser" style="color:var(--amber-400)">impossible to ignore.</span></h2>
+      </div>
+    </div>
+    <div class="z" style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;flex:1">
+      <div style="background:var(--teal-700);border-radius:22px;padding:34px 28px;display:flex;flex-direction:column;justify-content:space-between">
+        <span class="mark" style="width:42px;height:42px;color:var(--mint-400)"></span>
+        <div><div style="font-size:30px;font-weight:700;color:var(--cloud-300);margin-bottom:12px">SEO</div><p style="font-size:18px;line-height:1.5;color:var(--teal-300);margin:0">Get found first by high-intent customers. Compounds over time.</p></div>
+      </div>
+      <div style="background:var(--mint-400);border-radius:22px;padding:34px 28px;display:flex;flex-direction:column;justify-content:space-between;color:var(--teal-800)">
+        <span class="mark" style="width:42px;height:42px;color:var(--teal-800)"></span>
+        <div><div style="font-size:30px;font-weight:700;margin-bottom:12px">Marketing</div><p style="font-size:18px;line-height:1.5;color:var(--teal-700);margin:0">Media &amp; advertising that builds growth engines, not vanity metrics.</p></div>
+      </div>
+      <div style="background:var(--teal-700);border-radius:22px;padding:34px 28px;display:flex;flex-direction:column;justify-content:space-between">
+        <span class="mark" style="width:42px;height:42px;color:var(--mint-400)"></span>
+        <div><div style="font-size:30px;font-weight:700;color:var(--cloud-300);margin-bottom:12px">Graphic Design</div><p style="font-size:18px;line-height:1.5;color:var(--teal-300);margin:0">Identity, packaging &amp; systems with real craft.</p></div>
+      </div>
+      <div style="background:var(--amber-500);border-radius:22px;padding:34px 28px;display:flex;flex-direction:column;justify-content:space-between;color:var(--teal-800)">
+        <span class="mark" style="width:42px;height:42px;color:var(--teal-800)"></span>
+        <div><div style="font-size:30px;font-weight:700;margin-bottom:12px">Photography</div><p style="font-size:18px;line-height:1.5;color:var(--teal-700);margin:0">Brand photography that makes people stop scrolling.</p></div>
+      </div>
+    </div>
+    <div class="foot" style="color:var(--teal-300)"><span class="wm" style="font-size:26px;color:var(--mint-400)">atrium</span><span>02</span></div>
+  </section>
+
+  <!-- 4 · THE EXPERIENCE ERA -->
+  <section data-label="The Experience Era" class="aurora" style="justify-content:center;align-items:center;text-align:center">
+    <div class="grain"></div>
+    <div class="z eb" style="margin-bottom:24px">The 2026 campaign</div>
+    <h2 class="z ser" style="margin:0;font-size:172px;line-height:.9;color:var(--teal-800);font-style:italic">The<br>Experience<br><span style="position:relative">Era<span style="position:absolute;left:0;right:0;bottom:14px;height:20px;background:var(--amber-400);z-index:-1"></span></span></h2>
+    <p class="z" style="font-family:var(--font-serif);font-style:italic;font-size:34px;color:var(--teal-700);margin:38px 0 0">together is more fun</p>
+    <div class="foot"><span class="wm" style="font-size:26px;color:var(--teal-800)">atrium</span><span style="color:var(--teal-500)">03</span></div>
+  </section>
+
+  <!-- 5 · PROOF / STAT -->
+  <section data-label="The receipts" style="background:var(--teal-900);color:var(--cloud-300)">
+    <div class="grain" style="opacity:.2"></div>
+    <div class="z" style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div class="eb" style="color:var(--mint-300)">The receipts — Q1 2026</div>
+      <span class="pill p-amber">ROI, not vanity</span>
+    </div>
+    <div class="z" style="flex:1;display:flex;flex-direction:column;justify-content:center">
+      <div style="font-family:var(--font-serif);font-style:italic;font-size:300px;line-height:.78;color:var(--amber-400)">2.7&times;</div>
+      <p style="font-size:38px;font-weight:500;line-height:1.3;color:var(--mint-400);max-width:24ch;margin:28px 0 0">more covers booked for partner restaurants in their first 90 days.</p>
+    </div>
+    <div class="foot" style="color:var(--teal-300)"><span class="wm" style="font-size:26px;color:var(--mint-400)">atrium</span><span>04</span></div>
+  </section>
+
+  <!-- 6 · CASE STUDY -->
+  <section data-label="Case study" style="background:var(--cloud-200)">
+    <div class="grain"></div>
+    <div class="z" style="display:flex;align-items:baseline;gap:18px;margin-bottom:50px">
+      <div class="eb">Case study</div>
+      <span class="ser" style="font-size:30px;color:var(--teal-500)">worth talking about</span>
+    </div>
+    <div class="z" style="display:grid;grid-template-columns:1.3fr 1fr;gap:40px;flex:1">
+      <div style="background:var(--teal-700);border-radius:24px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:44px">
+        <span class="mark" style="position:absolute;right:-60px;top:-60px;width:360px;height:360px;color:var(--mint-400);opacity:.22"></span>
+        <span class="pill p-out-l" style="position:absolute;left:30px;top:30px">Restaurant · Kansas City</span>
+        <div class="ser" style="font-size:78px;color:var(--cloud-100);line-height:1;position:relative">Saigon Social</div>
+        <div style="font-size:24px;color:var(--mint-200);margin-top:14px;position:relative">+2.7&times; covers booked in 90 days</div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:26px">
+        <p style="font-size:27px;line-height:1.55;color:var(--ink-700);margin:0">A sense of place — Vietnam, the Midwest, and everywhere between. We put that story in front of the <span class="mk">right rooms.</span></p>
+        <div style="display:flex;align-items:center;gap:14px"><span style="color:var(--amber-500);font-size:30px;letter-spacing:3px">★★★★★</span><span style="font-size:20px;color:var(--teal-500)">4.6 · 83 reviews</span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><span class="pill p-mint" style="font-size:18px;padding:10px 20px">+212% traffic</span><span class="pill p-out-l" style="font-size:18px;padding:10px 20px">sold-out Fridays</span></div>
+      </div>
+    </div>
+    <div class="foot"><span class="wm" style="font-size:26px;color:var(--teal-800)">atrium</span><span style="color:var(--teal-500)">05</span></div>
+  </section>
+
+  <!-- 7 · BIG QUOTE -->
+  <section data-label="Quote" style="background:var(--mint-400);color:var(--teal-800);justify-content:center">
+    <div class="grain"></div>
+    <div class="z eb" style="margin-bottom:40px">Why Atrium</div>
+    <blockquote class="z" style="margin:0;font-family:var(--font-serif);font-size:96px;line-height:1.06;font-style:italic;color:var(--teal-800);max-width:20ch">
+      &ldquo;Branding is what they say when you&rsquo;re not in the room.&rdquo;
+    </blockquote>
+    <p class="z" style="font-size:24px;font-weight:600;letter-spacing:.04em;color:var(--teal-700);margin:40px 0 0">We make sure the good ones win <span class="ser" style="font-size:28px">online too.</span></p>
+    <div class="foot"><span class="wm" style="font-size:26px;color:var(--teal-800)">atrium</span><span style="color:var(--teal-700)">06</span></div>
+  </section>
+
+  <!-- 8 · CTA -->
+  <section data-label="Let's talk" style="background:var(--amber-500);color:var(--teal-800);justify-content:space-between">
+    <div class="grain" style="opacity:.16"></div>
+    <div class="z" style="display:flex;justify-content:space-between;align-items:center">
+      <span class="eb" style="color:var(--teal-800)">We&rsquo;re humans</span>
+      <span class="mark" style="width:48px;height:48px;color:var(--teal-800)"></span>
+    </div>
+    <div class="z">
+      <h2 style="margin:0;font-size:100px;line-height:.98;font-weight:800;letter-spacing:-.03em;color:var(--teal-800);max-width:18ch">
+        The team you call when you needed help <span class="ser" style="font-weight:400">yesterday.</span>
+      </h2>
+    </div>
+    <div class="z" style="display:flex;justify-content:space-between;align-items:flex-end">
+      <span class="pill p-ink" style="font-size:26px;padding:18px 18px 18px 34px">Start a project <span style="width:38px;height:38px;border-radius:999px;background:var(--mint-400);color:var(--teal-800);display:inline-flex;align-items:center;justify-content:center">&rarr;</span></span>
+      <div style="text-align:right;font-size:22px;line-height:1.5;color:var(--teal-800)"><div style="font-weight:600">hello@atrium.studio</div><div>atrium.studio · Kansas City</div></div>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+<script type="application/json" id="speaker-notes">
+["Open warm. Atrium is a creative & marketing studio for hospitality — restaurants, hotels, food brands. The promise: we build growth engines, not just ads. Land the human, KC-rooted tone.",
+"Who we are: strategy + bold creative, obsessed with ROI. We're the full-stack team from brand audit to launch. Emphasize 'help, yesterday' — speed plus craft.",
+"Services: four offers — SEO (get found first), Marketing (growth engines), Graphic Design (identity & packaging), Photography (stop the scroll). Note the two-tone teal/mint with amber as the campaign accent.",
+"The Experience Era — our 2026 campaign line. Together is more fun. This is the brand at full voice: big Instrument Serif italic, amber marker underline.",
+"Proof. 2.7× more covers in the first 90 days for partner restaurants. Lead with the number, then the human payoff. ROI, never vanity metrics.",
+"Case study: Saigon Social. A sense of place put in front of the right rooms — +212% traffic, sold-out Fridays, 4.6 stars. Swap in a real client when presenting.",
+"The why. 'Branding is what they say when you're not in the room.' We make sure the good ones win online too.",
+"Close on the CTA. We're humans — the team you call when you needed help yesterday. Hand off contact: hello@atrium.studio."]
+</script>
+</body>
+</html>

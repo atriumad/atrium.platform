@@ -1,0 +1,50 @@
+<!-- @dsCard group="Web Samples" viewport="1280x780" subtitle="By the Numbers — card grid, sans titles with italic-serif emphasis" name="Site · By the Numbers" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<script src="../assets/social/image-slot.js"></script>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);background:var(--cloud-200);color:var(--text-strong);padding:48px 56px 56px}
+  .eyebrow{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--teal-800)}
+  h2{font-size:54px;font-weight:600;letter-spacing:-.02em;margin:16px 0 10px}
+  .lede{font-size:18px;color:var(--text-muted);margin:0 0 30px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{border-radius:18px;padding:26px;min-height:212px;display:flex;flex-direction:column;justify-content:space-between}
+  .light{background:var(--cloud-100);border:1px solid var(--cloud-300)}
+  .dark{background:linear-gradient(150deg,var(--teal-700),var(--teal-900));color:var(--mint-200);position:relative;overflow:hidden}
+  .dark::after{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;opacity:.14;
+    -webkit-mask:url(../assets/logos/atrium-mark.svg) center/contain no-repeat;mask:url(../assets/logos/atrium-mark.svg) center/contain no-repeat;background:var(--mint-400)}
+  .t{font-size:22px;font-weight:600;line-height:1.18;letter-spacing:-.01em;display:flex;justify-content:space-between;gap:12px}
+  .t em{font-family:var(--font-serif);font-style:italic;font-weight:400}
+  .t .x{font-size:18px;color:var(--amber-500);flex:none}
+  .dark .t{color:var(--mint-400)}
+  .b{font-size:14px;line-height:1.55;color:var(--text-muted);max-width:34ch}
+  .dark .b{color:var(--mint-300)}
+  .big{font-style:italic;font-family:var(--font-serif);color:var(--teal-700)}
+  image-slot{display:block}
+  .photocard{padding:0;overflow:hidden;position:relative;background:var(--teal-700)}
+  .photocard .lbl{position:absolute;left:18px;bottom:16px;z-index:2;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--cloud-100);text-shadow:0 1px 6px rgba(7,47,52,.5)}
+  .swatches{display:flex;gap:8px;margin:0 0 30px;align-items:center}
+  .swatches .sw{width:30px;height:30px;border-radius:8px;box-shadow:inset 0 0 0 1px rgba(7,47,52,.1)}
+  .swatches .hex{font-size:12px;color:var(--text-muted);letter-spacing:.02em;margin-left:6px}
+</style></head><body>
+  <div class="eyebrow">By the Numbers</div>
+  <h2>The Data Behind the Work</h2>
+  <p class="lede">We don't guess. We build around numbers that matter.</p>
+  <div class="swatches">
+    <span class="sw" style="background:var(--teal-800)"></span>
+    <span class="sw" style="background:var(--teal-700)"></span>
+    <span class="sw" style="background:var(--mint-400)"></span>
+    <span class="sw" style="background:var(--amber-500)"></span>
+    <span class="sw" style="background:var(--cloud-300)"></span>
+    <span class="hex">Teal · Forest · Mint · Amber · Cloud</span>
+  </div>
+  <div class="grid">
+    <div class="card photocard"><image-slot id="num-photo" style="position:absolute;inset:0;width:100%;height:100%" shape="rect" placeholder="Drop on-location photography"></image-slot><span class="lbl">Shot on location</span></div>
+    <div class="card light"><div class="t"><span>Brand consistency that <em>compounds</em></span><span class="x">✳</span></div><div class="b">Same voice, same look, same energy — across 3 platforms, 3 locations, or 30 posts. Consistency isn't boring. It's how you become the obvious choice.</div></div>
+    <div class="card dark"><div class="t">Reviews managed <em>before they go public</em></div><div class="b">Sales, social, email, reviews, campaigns — aggregated in one place, flagged before they ever reach the public.</div></div>
+    <div class="card light"><div class="t"><span>The guest who returns <em>is the business</em></span><span class="x">✳</span></div><div class="b"><span class="big">65%</span> of restaurant revenue comes from repeat customers. We build the email flows, SMS sequences, and loyalty systems that earn the next visit.</div></div>
+    <div class="card light"><div class="t"><span>Found when they're <em>ready to decide</em></span><span class="x">✳</span></div><div class="b"><span class="big">46%</span> of Google searches have local intent. When someone nearby is hungry, your profile is what they find — optimized and active.</div></div>
+    <div class="card light"><div class="t"><span>One dashboard. <em>Everything visible</em></span><span class="x">✳</span></div><div class="b">Sales, social, email, reviews, campaigns — aggregated in one clean interface you can check from your phone between services.</div></div>
+  </div>
+</body></html>

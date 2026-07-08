@@ -35,7 +35,7 @@ export default function HeroSection() {
     <section
       ref={containerRef}
       className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-14"
-      style={{ background: 'var(--teal-800)' }}
+      style={{ background: '#0a0806' }}
     >
       <HeroScene />
 

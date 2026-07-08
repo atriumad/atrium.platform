@@ -1,0 +1,2522 @@
+{
+  ".claude/settings.local.json": {
+    "mtime": 1783094483.5069025,
+    "ast_hash": "18624b22ebef7e19b7fdd7aeb4c26d92",
+    "semantic_hash": ""
+  },
+  ".codex/hooks.json": {
+    "mtime": 1782160481.3295121,
+    "ast_hash": "c98eb60f1072894e860772e464dcc3a4",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1782944253.3476088,
+    "ast_hash": "85eba3ebd4e57fe4731083806e1dfe96",
+    "semantic_hash": ""
+  },
+  "packages/application/package.json": {
+    "mtime": 1782159411.1260486,
+    "ast_hash": "79a8cdc469012d9eec4acab5c9093346",
+    "semantic_hash": ""
+  },
+  "packages/application/src/auth/auth-errors.ts": {
+    "mtime": 1782160084.8339286,
+    "ast_hash": "70211fb65ea1358eec94d556ffaf7dc7",
+    "semantic_hash": ""
+  },
+  "packages/application/src/auth/auth-normalization.ts": {
+    "mtime": 1782160086.4278564,
+    "ast_hash": "922c14810402b70f3b930b9c3b682c96",
+    "semantic_hash": ""
+  },
+  "packages/application/src/auth/auth-ports.ts": {
+    "mtime": 1782160085.6266968,
+    "ast_hash": "8e79c84891b26a4e1974c56e6dc9a678",
+    "semantic_hash": ""
+  },
+  "packages/application/src/auth/authenticate-user.test.ts": {
+    "mtime": 1782160089.5753548,
+    "ast_hash": "f8337c4206fc633c83f14201865babf7",
+    "semantic_hash": ""
+  },
+  "packages/application/src/auth/authenticate-user.ts": {
+    "mtime": 1782160087.9901795,
+    "ast_hash": "66cce13c2f7a85e8a8501bb7f8576358",
+    "semantic_hash": ""
+  },
+  "packages/application/src/auth/register-owner.test.ts": {
+    "mtime": 1782160090.3732557,
+    "ast_hash": "7c649ec7733569f8bda1c3520477bf90",
+    "semantic_hash": ""
+  },
+  "packages/application/src/auth/register-owner.ts": {
+    "mtime": 1782160088.804269,
+    "ast_hash": "915c8781d4d9342578ef0906c885681d",
+    "semantic_hash": ""
+  },
+  "packages/application/src/auth/system-segments.ts": {
+    "mtime": 1782160087.2070544,
+    "ast_hash": "063fffafb0c8c066a85043b2fa5271b9",
+    "semantic_hash": ""
+  },
+  "packages/application/src/crm/churn-risk-service.test.ts": {
+    "mtime": 1781875722.4965363,
+    "ast_hash": "eda956f3db6dc020365ac6e2c3d560f5",
+    "semantic_hash": ""
+  },
+  "packages/application/src/crm/churn-risk-service.ts": {
+    "mtime": 1781875704.513211,
+    "ast_hash": "0bba46f90c44eed3ce4ce123e6cfa23a",
+    "semantic_hash": ""
+  },
+  "packages/application/src/crm/compute-churn-risk.test.ts": {
+    "mtime": 1782159547.8348339,
+    "ast_hash": "833b812405e9f385ae1a264fb7349d84",
+    "semantic_hash": ""
+  },
+  "packages/application/src/crm/compute-churn-risk.ts": {
+    "mtime": 1782159547.0511518,
+    "ast_hash": "ed48729e253266f6eada53ee8aa82e4c",
+    "semantic_hash": ""
+  },
+  "packages/application/src/crm/get-customer-profile.test.ts": {
+    "mtime": 1782159548.6214232,
+    "ast_hash": "f06d0ed665177e11dad446a237009fb7",
+    "semantic_hash": ""
+  },
+  "packages/application/src/crm/get-customer-profile.ts": {
+    "mtime": 1782159454.196371,
+    "ast_hash": "47876e0778ac98e3aaa95a3da4a956d5",
+    "semantic_hash": ""
+  },
+  "packages/application/src/crm/list-customers.test.ts": {
+    "mtime": 1782159454.2021317,
+    "ast_hash": "57543738d86d9c782684f68de2adb9b2",
+    "semantic_hash": ""
+  },
+  "packages/application/src/crm/list-customers.ts": {
+    "mtime": 1782159454.2006068,
+    "ast_hash": "f2b07356c51109f161fb621501223e4b",
+    "semantic_hash": ""
+  },
+  "packages/application/src/health-score/health-score-service.test.ts": {
+    "mtime": 1782159656.6299243,
+    "ast_hash": "f1221ae4b47a6e80a8b8bc068af107f4",
+    "semantic_hash": ""
+  },
+  "packages/application/src/health-score/health-score-service.ts": {
+    "mtime": 1782159454.2165146,
+    "ast_hash": "2cd4289ee41e4c8a639c3e6e793897c2",
+    "semantic_hash": ""
+  },
+  "packages/application/src/health-score/recalculate-health-score.test.ts": {
+    "mtime": 1782159657.4885461,
+    "ast_hash": "1ef4854e91949e24031dd74f1e690fee",
+    "semantic_hash": ""
+  },
+  "packages/application/src/health-score/recalculate-health-score.ts": {
+    "mtime": 1782159454.2301579,
+    "ast_hash": "520bcc180df78e755ce526ffd702a0e5",
+    "semantic_hash": ""
+  },
+  "packages/application/src/index.ts": {
+    "mtime": 1782939138.9034526,
+    "ast_hash": "9666f988be2b093b754b13b51aa01e6f",
+    "semantic_hash": ""
+  },
+  "packages/application/tsconfig.json": {
+    "mtime": 1781813728.0771399,
+    "ast_hash": "7d22a2dc48bdea7554f0114c8a385b96",
+    "semantic_hash": ""
+  },
+  "packages/domain/package.json": {
+    "mtime": 1782159410.3430865,
+    "ast_hash": "efdaa3c3126b3f379525b71a20eee39f",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/alert.ts": {
+    "mtime": 1781811529.4708338,
+    "ast_hash": "6fd6ec08ffc66cef42c8a8997df92df4",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/campaign.ts": {
+    "mtime": 1781811524.3189318,
+    "ast_hash": "daaf85d4bd96b502673667f51cc5d74f",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/customer-activity.ts": {
+    "mtime": 1781811500.5167763,
+    "ast_hash": "51bb32e4a631a5c9c536a35453841e2a",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/customer-segment.ts": {
+    "mtime": 1781811495.5192206,
+    "ast_hash": "aec529c8e4cfefb00720bd8e8941531d",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/customer.test.ts": {
+    "mtime": 1782159454.2415931,
+    "ast_hash": "f196fda1e85c2cb6b863551a303a714f",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/customer.ts": {
+    "mtime": 1782159454.2306228,
+    "ast_hash": "5b01ee4588af952ed0c7eba846ba0623",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/location-health.test.ts": {
+    "mtime": 1782159454.2297568,
+    "ast_hash": "fa52134b743be93d5b98e03ab3a11872",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/location-health.ts": {
+    "mtime": 1781811518.7681487,
+    "ast_hash": "1f29eee4a5012edff96f2afca3ace21d",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/location.ts": {
+    "mtime": 1781811477.515069,
+    "ast_hash": "b372af9f252b21ad4fc07219f9170cb9",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/order.ts": {
+    "mtime": 1781811482.3804765,
+    "ast_hash": "534c56a51851233aac3b1b2af020ce3c",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/recommendation.ts": {
+    "mtime": 1781811535.6645327,
+    "ast_hash": "7cf79ce5c851a7e7ab23b553b99f1e91",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/revenue-snapshot.ts": {
+    "mtime": 1781811512.8204522,
+    "ast_hash": "7e8424b9263cf4fbcd576b5117da9ce9",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/review.ts": {
+    "mtime": 1781811508.2973628,
+    "ast_hash": "6f7136dada1abdf4a6f6cc66ec5517fe",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/tenant.ts": {
+    "mtime": 1781811474.403147,
+    "ast_hash": "0e20ee48b44622eea0e6ab38810e0a0c",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/traffic-snapshot.ts": {
+    "mtime": 1782155278.7573216,
+    "ast_hash": "ed859ee59ab1b399fc4fd24305dc2d88",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/entities/user.ts": {
+    "mtime": 1781882296.98561,
+    "ast_hash": "b5f51f916551edcf760332891efae65e",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/index.ts": {
+    "mtime": 1782159454.2559628,
+    "ast_hash": "030cc71d9ccd3dd1b56798e45c33f5f6",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/ports/alert-repository.ts": {
+    "mtime": 1781811571.164469,
+    "ast_hash": "17ac3c259bae8579cf903b01c757ca3e",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/ports/customer-repository.ts": {
+    "mtime": 1782159454.2507677,
+    "ast_hash": "1bcd2e3a36fe8f2cdf8f44cd25e4215e",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/ports/health-repository.ts": {
+    "mtime": 1781811567.1514847,
+    "ast_hash": "a11ba4f89adb32914d126cd44d9dba16",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/ports/order-repository.ts": {
+    "mtime": 1782159454.253925,
+    "ast_hash": "4c3b592897567d22a5ee46e12b2a29d9",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/ports/revenue-snapshot-repository.ts": {
+    "mtime": 1782159454.2598946,
+    "ast_hash": "f88f53e8cf7e6d11f6b524674487f3c4",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/ports/review-repository.ts": {
+    "mtime": 1781813985.7900622,
+    "ast_hash": "6f02487f8898c8006e1e704b462cc8b9",
+    "semantic_hash": ""
+  },
+  "packages/domain/src/ports/traffic-snapshot-repository.ts": {
+    "mtime": 1782155280.1057463,
+    "ast_hash": "1f66d963e695f35c1c1a288d24277b57",
+    "semantic_hash": ""
+  },
+  "packages/domain/tsconfig.json": {
+    "mtime": 1781811612.769941,
+    "ast_hash": "7d22a2dc48bdea7554f0114c8a385b96",
+    "semantic_hash": ""
+  },
+  "packages/events/package.json": {
+    "mtime": 1782159412.6860375,
+    "ast_hash": "5440911c786de2ed1812e37d68b9358a",
+    "semantic_hash": ""
+  },
+  "packages/events/src/ai.ts": {
+    "mtime": 1782159454.2609878,
+    "ast_hash": "aa2aafc126a3fbfe1e6752730422f425",
+    "semantic_hash": ""
+  },
+  "packages/events/src/analytics.ts": {
+    "mtime": 1782159454.2618442,
+    "ast_hash": "df90207b9dbe235ad67a847f288ce133",
+    "semantic_hash": ""
+  },
+  "packages/events/src/crm.ts": {
+    "mtime": 1781811655.5596776,
+    "ast_hash": "c66410c186121d170b8d9bf38c749a55",
+    "semantic_hash": ""
+  },
+  "packages/events/src/events.test.ts": {
+    "mtime": 1782159565.7122855,
+    "ast_hash": "56b7a62a71eb848191e7feb1bb38f4ae",
+    "semantic_hash": ""
+  },
+  "packages/events/src/index.ts": {
+    "mtime": 1782159454.268506,
+    "ast_hash": "d8e40d0d41ea37979565608d8ea14836",
+    "semantic_hash": ""
+  },
+  "packages/events/src/reputation.ts": {
+    "mtime": 1781811646.897766,
+    "ast_hash": "a9bc124787834bb6de07918f25e7e011",
+    "semantic_hash": ""
+  },
+  "packages/events/src/sales.ts": {
+    "mtime": 1781811642.0922396,
+    "ast_hash": "cd9aa16cf7886bb209ab5919e8939f2e",
+    "semantic_hash": ""
+  },
+  "packages/events/tsconfig.json": {
+    "mtime": 1781811711.739313,
+    "ast_hash": "7d22a2dc48bdea7554f0114c8a385b96",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/package.json": {
+    "mtime": 1782160143.1006103,
+    "ast_hash": "5d8513aff908656ff05e63a16767023e",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/prisma/migrations/20260618200447_init/migration.sql": {
+    "mtime": 1781813087.1105683,
+    "ast_hash": "5a3214c498bf8419ff800f7532623732",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/prisma/migrations/20260619000000_replace_clerk_with_email_auth/migration.sql": {
+    "mtime": 1781882481.2146714,
+    "ast_hash": "14b2463e18ca5525c198b4055cc85d13",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/prisma/migrations/20260622000000_scope_customer_identifiers/migration.sql": {
+    "mtime": 1782155173.1455207,
+    "ast_hash": "18830ee46a451829f1956df1bb21609c",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/scripts/seed-and-verify.ts": {
+    "mtime": 1782159658.3040836,
+    "ast_hash": "3d771b6b975571962290b5b5595d536c",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/auth/prisma-auth-repository.test.ts": {
+    "mtime": 1782160140.811546,
+    "ast_hash": "bfd49078ee17978267263b2dcdf5caee",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/auth/prisma-auth-repository.ts": {
+    "mtime": 1782160140.0361087,
+    "ast_hash": "7aad1f00323fa07164e41685c43468f6",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/client.ts": {
+    "mtime": 1781889965.3423967,
+    "ast_hash": "a55937c5b49b494b8f34a5cbce40430d",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/composition-root.ts": {
+    "mtime": 1782160141.57437,
+    "ast_hash": "3efe9bd4810d2b9c623707c2c6a2e6aa",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/index.ts": {
+    "mtime": 1782160251.1951401,
+    "ast_hash": "066464d4389e4490ded89f865471f479",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/alert-repository.test.ts": {
+    "mtime": 1782159602.2259386,
+    "ast_hash": "f52bb93e6f68f4dca78192493658a2f8",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/alert-repository.ts": {
+    "mtime": 1782159454.2758374,
+    "ast_hash": "2ef9a0a55cc7b3b0198d350a96e6da61",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/customer-repository.test.ts": {
+    "mtime": 1782159603.0280433,
+    "ast_hash": "4c7255797c5944f8fca7ca429c503b51",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/customer-repository.ts": {
+    "mtime": 1782159659.098447,
+    "ast_hash": "d6ffa41f2be4cab389d199b9160d9718",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/health-repository.test.ts": {
+    "mtime": 1782159603.8238235,
+    "ast_hash": "a696a94046af42c701eb4ebb049ebe74",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/health-repository.ts": {
+    "mtime": 1782159659.9669328,
+    "ast_hash": "376e7cc27fb874599254509b92842bcb",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/alert-mapper.test.ts": {
+    "mtime": 1781813205.3019304,
+    "ast_hash": "83c3999969b605b0cfb0263a573fc050",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/alert-mapper.ts": {
+    "mtime": 1782159675.9408083,
+    "ast_hash": "d2522d57a2d002835a82ddff26aa1650",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/customer-mapper.test.ts": {
+    "mtime": 1782159454.3076358,
+    "ast_hash": "7ff2de9b734d3664b36be3248453def9",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/customer-mapper.ts": {
+    "mtime": 1782159601.4050465,
+    "ast_hash": "e9759815c2ddf9862d75902f1222001d",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/health-mapper.test.ts": {
+    "mtime": 1781813201.762951,
+    "ast_hash": "6aa591ea5f1ad88c6e4319b3d7acec4d",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/health-mapper.ts": {
+    "mtime": 1782159675.9479747,
+    "ast_hash": "9ee5765873991109714b39c69b23204c",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/order-mapper.test.ts": {
+    "mtime": 1782159454.316305,
+    "ast_hash": "e2d6355f4032cf41b24a0de98c017416",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/order-mapper.ts": {
+    "mtime": 1782159675.9576735,
+    "ast_hash": "9eba4462426274bb02eb81afbc36af1a",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/revenue-snapshot-mapper.test.ts": {
+    "mtime": 1782159454.323122,
+    "ast_hash": "1b5a7e34075d58d3e5533f5242995602",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/revenue-snapshot-mapper.ts": {
+    "mtime": 1782159664.6967573,
+    "ast_hash": "3de8dc3b783f7121d84a1b0f288db61f",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/review-mapper.test.ts": {
+    "mtime": 1781814033.696878,
+    "ast_hash": "90d28be9eb18b6031b293ad6683d2eeb",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/review-mapper.ts": {
+    "mtime": 1782159665.669001,
+    "ast_hash": "cdd5cfc5a6ba433de957eb5b46028c15",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/traffic-snapshot-mapper.test.ts": {
+    "mtime": 1782155244.6334894,
+    "ast_hash": "31e5a41ede1d3da771f5eea13e8f7255",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/mappers/traffic-snapshot-mapper.ts": {
+    "mtime": 1782159666.457407,
+    "ast_hash": "c792846390c172b72fb66cee98bb5981",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/order-repository.test.ts": {
+    "mtime": 1782159604.636913,
+    "ast_hash": "419c6addbe41c649c82d034b4a23bdd8",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/order-repository.ts": {
+    "mtime": 1782159660.7593367,
+    "ast_hash": "ae27c55782f02849b3ec173102af1ca6",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/revenue-snapshot-repository.test.ts": {
+    "mtime": 1782159605.440535,
+    "ast_hash": "08aaeeb2021873a0a74f78063e48a52f",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/revenue-snapshot-repository.ts": {
+    "mtime": 1782159661.5495145,
+    "ast_hash": "0245d6488faf557035ec34703af1106f",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/review-repository.test.ts": {
+    "mtime": 1782159606.2439353,
+    "ast_hash": "4bd8576906a2455c9cb93b3813f5d16b",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/review-repository.ts": {
+    "mtime": 1782159550.1766057,
+    "ast_hash": "024ec3aa37f607475dc07ce3d7af361f",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/traffic-snapshot-repository.test.ts": {
+    "mtime": 1782159607.0539355,
+    "ast_hash": "70c207b48c1c5ee217d3e03c0e942d00",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/src/repositories/traffic-snapshot-repository.ts": {
+    "mtime": 1782159550.9928021,
+    "ast_hash": "791c2d6f1301d7872cbf8f22ecebe28d",
+    "semantic_hash": ""
+  },
+  "packages/infrastructure/tsconfig.json": {
+    "mtime": 1781813335.3432114,
+    "ast_hash": "85e73028f6facf26d5f4e65c613f74c8",
+    "semantic_hash": ""
+  },
+  "packages/shared/package.json": {
+    "mtime": 1782159413.4752676,
+    "ast_hash": "94b73106905214277e0ffae45bbd4cf1",
+    "semantic_hash": ""
+  },
+  "packages/shared/src/connector.ts": {
+    "mtime": 1781811392.038715,
+    "ast_hash": "8d05d7f21e7fdfdb52ff8b3b2e5b3dc4",
+    "semantic_hash": ""
+  },
+  "packages/shared/src/customer-identifier.ts": {
+    "mtime": 1781811377.4222383,
+    "ast_hash": "026955b2e6eb88dcf096ac146422eeeb",
+    "semantic_hash": ""
+  },
+  "packages/shared/src/date-range.ts": {
+    "mtime": 1781811381.694559,
+    "ast_hash": "4329a569a2b50383be8f5846a0fea796",
+    "semantic_hash": ""
+  },
+  "packages/shared/src/index.ts": {
+    "mtime": 1782159454.1860993,
+    "ast_hash": "47106f4dfdb5a36c5f4729e936e80583",
+    "semantic_hash": ""
+  },
+  "packages/shared/src/money.test.ts": {
+    "mtime": 1782159454.1744199,
+    "ast_hash": "9b4a413c2d7edf19bd6ab14b63902c66",
+    "semantic_hash": ""
+  },
+  "packages/shared/src/money.ts": {
+    "mtime": 1781811358.700314,
+    "ast_hash": "66467af76b89fae9f9d6398a363b2652",
+    "semantic_hash": ""
+  },
+  "packages/shared/src/result.ts": {
+    "mtime": 1781811385.998838,
+    "ast_hash": "f9435854b00ac1d46f8b1b9347a1a53d",
+    "semantic_hash": ""
+  },
+  "packages/shared/tsconfig.json": {
+    "mtime": 1781811438.8078961,
+    "ast_hash": "7d22a2dc48bdea7554f0114c8a385b96",
+    "semantic_hash": ""
+  },
+  "packages/ui/package.json": {
+    "mtime": 1782917723.7605085,
+    "ast_hash": "af9337fa3cb8850bf8aca208f81ffe46",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/index.ts": {
+    "mtime": 1782918537.983822,
+    "ast_hash": "ea328d2dd9aacbb38b85c6b92e4dd255",
+    "semantic_hash": ""
+  },
+  "packages/ui/tsconfig.json": {
+    "mtime": 1782917728.032668,
+    "ast_hash": "49e58e0b2f0e7683798f34da597c826f",
+    "semantic_hash": ""
+  },
+  "tooling/typescript/base.json": {
+    "mtime": 1781810923.2492547,
+    "ast_hash": "e9acc185747e1ab28675d80c600df421",
+    "semantic_hash": ""
+  },
+  "tooling/typescript/nextjs.json": {
+    "mtime": 1781810927.9581957,
+    "ast_hash": "d081dc7f8007e3e6bb6a8a876f84b663",
+    "semantic_hash": ""
+  },
+  "turbo.json": {
+    "mtime": 1782159408.7955115,
+    "ast_hash": "14f9a9d56d057a6018bd4fa8bc2d36e5",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1782160472.1625383,
+    "ast_hash": "62c05a2bf20bf036a0b2633478663e64",
+    "semantic_hash": ""
+  },
+  "ARCHITECTURE.md": {
+    "mtime": 1782160373.2097921,
+    "ast_hash": "04c94f8b28578f72844c42388ba2d294",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-06-18-plan-1-foundation.md": {
+    "mtime": 1781810384.3359628,
+    "ast_hash": "a509e1637741fa57541f5311b6dbdf7b",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-06-18-atrium-platform-design.md": {
+    "mtime": 1782155362.7097173,
+    "ast_hash": "55bab0ea4bea2eb72c089d3b2debd3aa",
+    "semantic_hash": ""
+  },
+  "packages/application/src/diagnostics/restaurant-growth-grader.test.ts": {
+    "mtime": 1782939138.9000945,
+    "ast_hash": "cefc43987d301880aad540ca7f2f7d78",
+    "semantic_hash": ""
+  },
+  "packages/application/src/diagnostics/restaurant-growth-grader.ts": {
+    "mtime": 1782939138.9009237,
+    "ast_hash": "c3dd74a7a7b103bc255ae2a815e42f31",
+    "semantic_hash": ""
+  },
+  "docs/plans/2026-06-26-restaurant-growth-grader-design.md": {
+    "mtime": 1782495926.2788112,
+    "ast_hash": "9fc1a51aaeee592031ffe4cc53b10274",
+    "semantic_hash": ""
+  },
+  "docs/plans/2026-06-26-restaurant-growth-grader-implementation.md": {
+    "mtime": 1782495927.4175699,
+    "ast_hash": "c8d6520d37e2efe8a65cbe15d213e97d",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-06-26-grader-ui-simplification.md": {
+    "mtime": 1782497218.352881,
+    "ast_hash": "be1ad5fb701fa8a516c8fa5a3645d485",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1782503436.8824134,
+    "ast_hash": "9f7038b3065678e5e1e3217c4f9d7c50",
+    "semantic_hash": ""
+  },
+  "packages/application/src/diagnostics/social-health-scorer.test.ts": {
+    "mtime": 1782939138.901697,
+    "ast_hash": "fe4446150546a24a3950b3f11f742fab",
+    "semantic_hash": ""
+  },
+  "packages/application/src/diagnostics/social-health-scorer.ts": {
+    "mtime": 1782742822.2536192,
+    "ast_hash": "531c9653f06630383c3fe69aadcba447",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-06-27-social-health-grader.md": {
+    "mtime": 1782541309.1013725,
+    "ast_hash": "d49c4a5f8fe7ca67a2cb4e27ead1fe4d",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-06-27-social-health-grader-design.md": {
+    "mtime": 1782540501.0793896,
+    "ast_hash": "117d47dc1526ec31a43b73fad02875c2",
+    "semantic_hash": ""
+  },
+  "docs/restaurant-growth-grader-analysis.md": {
+    "mtime": 1782752710.2177186,
+    "ast_hash": "27283b0433092c07c0770c8feb811265",
+    "semantic_hash": ""
+  },
+  "docs/plans/2026-06-29-grader-data-quality-action-plan.md": {
+    "mtime": 1782751214.31997,
+    "ast_hash": "75be2bf99f2328ddb584b6e509ee8ad9",
+    "semantic_hash": ""
+  },
+  "docs/grader-design-system-scope-map.md": {
+    "mtime": 1782752696.3216128,
+    "ast_hash": "2af4f158012bf1d1efb5de9de0856d68",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/detect-social/route.ts": {
+    "mtime": 1783093722.0176358,
+    "ast_hash": "0b45e6b6c96ab547d615c1a660997c42",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/route.test.ts": {
+    "mtime": 1783001010.553803,
+    "ast_hash": "c54015cd86f998fe64d82d5dfdfd3911",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/route.ts": {
+    "mtime": 1783094187.3489363,
+    "ast_hash": "13cb76277b2e68ff1467b00cf85e2bfc",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/search/route.test.ts": {
+    "mtime": 1783026259.4537787,
+    "ast_hash": "65d139d393a93cfedf338abd5c82c623",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/search/route.ts": {
+    "mtime": 1782495800.2514582,
+    "ast_hash": "48031e9f9fca387457c75fbba749352d",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/grader-client.tsx": {
+    "mtime": 1783102318.2474613,
+    "ast_hash": "94632810275531527999698e10b260e9",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/layout.tsx": {
+    "mtime": 1782926167.243654,
+    "ast_hash": "014a0613ae73c1431e52f447b508d75f",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/page.tsx": {
+    "mtime": 1782502917.7562056,
+    "ast_hash": "ca9d812463193fc823ccc95c5624b903",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/robots.ts": {
+    "mtime": 1782501927.4783673,
+    "ast_hash": "7b36414befa3d32095e2b353c462046b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/seo.ts": {
+    "mtime": 1782502883.0750036,
+    "ast_hash": "804d3e17c1f93a585984d7fa0f1efea0",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/sitemap.ts": {
+    "mtime": 1782501937.3937068,
+    "ast_hash": "0478656a6f993acfa1f056d8d55be526",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/auto-detect-social.ts": {
+    "mtime": 1783093683.2444808,
+    "ast_hash": "c20d48856cac1ac22fa0ad53f7294777",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/google-places-client.ts": {
+    "mtime": 1782941504.168064,
+    "ast_hash": "d5b4fba4fee71b2ae97b7805b577075b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/local-benchmark.ts": {
+    "mtime": 1782742398.0734122,
+    "ast_hash": "2bcfe5dfaaff3470cd7e84fc0b95c230",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/open-data-places.ts": {
+    "mtime": 1783094152.0631244,
+    "ast_hash": "96b9a51cbffa69652c45c4dc92d7fa8b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/osm-client.ts": {
+    "mtime": 1782941301.4746099,
+    "ast_hash": "a507e0016b886acf45a63454ebe6bd01",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/pagespeed-client.ts": {
+    "mtime": 1782752083.7691011,
+    "ast_hash": "c4f0a48cbe03686d6ed14f03b6f75e17",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/place-id.ts": {
+    "mtime": 1782742290.5389564,
+    "ast_hash": "aebc6f4877aec1c6f2905500bf8e09f1",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/place-utils.ts": {
+    "mtime": 1782742330.3410416,
+    "ast_hash": "71cb13075602db7ec9a67c8ea7c76248",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/providers/business-provider.ts": {
+    "mtime": 1782751769.3546038,
+    "ast_hash": "cca1fd8b8ffb8e949965afdee32520f8",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/scrape-creators.test.ts": {
+    "mtime": 1783008115.0534546,
+    "ast_hash": "164ca26a0da2490e03296a969c719fb7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/scrape-creators.ts": {
+    "mtime": 1783008104.510847,
+    "ast_hash": "6c3934e59ccd163fdd66e2b1bbe41916",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/social-detector.test.ts": {
+    "mtime": 1782743046.9287245,
+    "ast_hash": "7fd9131533314d7e671e321075d76cc2",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/social-detector.ts": {
+    "mtime": 1783006669.0420015,
+    "ast_hash": "d9ede8538d4221e2af84e3a5c21e7ca2",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/social-name-search.ts": {
+    "mtime": 1783007933.0718634,
+    "ast_hash": "9b64d309c23b5102eac6a7602e2ea77e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/website-scanner.test.ts": {
+    "mtime": 1783026257.040827,
+    "ast_hash": "3438db0b8ee033234a99cf4c55178830",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/website-scanner.ts": {
+    "mtime": 1783093641.255586,
+    "ast_hash": "35b9b44996567212bcc2498ac71faabb",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/next-env.d.ts": {
+    "mtime": 1782494982.799601,
+    "ast_hash": "ba64ff7d54714a8f64db89b1003207d8",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/next.config.ts": {
+    "mtime": 1782494981.0263195,
+    "ast_hash": "a9c3a042849625f0ec8db914e4e3cf88",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/package.json": {
+    "mtime": 1783024716.3248186,
+    "ast_hash": "7d957fc8043cfe572af7ac759c02eb25",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/postcss.config.js": {
+    "mtime": 1782494983.7228308,
+    "ast_hash": "78ac30f37ca7f3d9f197587cc98789f4",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/tailwind.config.js": {
+    "mtime": 1782494984.6537123,
+    "ast_hash": "f45d01fa186422d7a34f3b2505d7bcdd",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/tsconfig.json": {
+    "mtime": 1782494981.931794,
+    "ast_hash": "bbaee97dc48c5ae25b56f354589ee5ea",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.claude/settings.local.json": {
+    "mtime": 1782850722.8920166,
+    "ast_hash": "870ae844920a86f2c37dc32d154dfc9f",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/layout.tsx": {
+    "mtime": 1782921797.8132427,
+    "ast_hash": "b6b6cd7b034a59e34f8d55e63b137b54",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/page.tsx": {
+    "mtime": 1782921797.8171883,
+    "ast_hash": "0be21e5a64321478f2f6633c13b7edbe",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/services/[slug]/page.tsx": {
+    "mtime": 1782921840.5236552,
+    "ast_hash": "4bbb4c9c4a4d8db62c5e2deffe85f652",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/services/page.tsx": {
+    "mtime": 1782921839.5728614,
+    "ast_hash": "f540f6c2d0ee00d28c2300472bd6b76e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/3d/HeroScene.tsx": {
+    "mtime": 1782921843.838315,
+    "ast_hash": "52513a68a327e44ddcf30e07762d764b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/3d/SceneWrapper.tsx": {
+    "mtime": 1782915197.092097,
+    "ast_hash": "b5ed2d37cedf087ae22cb2b7f52c5d95",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/BentoGrid.tsx": {
+    "mtime": 1782921797.8295033,
+    "ast_hash": "3791d5bb75807526f67f2c35f86b95f7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/CTABanner.tsx": {
+    "mtime": 1782921797.8328226,
+    "ast_hash": "70999000f7efbadbae47f893ee98de2d",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/DarkProcess.tsx": {
+    "mtime": 1782921841.3365738,
+    "ast_hash": "1f7759d9b94ee14b1adc3e75cbc90fb4",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/HeroSection.tsx": {
+    "mtime": 1782921797.8423676,
+    "ast_hash": "3dab373bfdfa78ced0e383596dadacc7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/IconGrid.tsx": {
+    "mtime": 1782921842.1510925,
+    "ast_hash": "f5928474e6b114eb45381b692ce81ede",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/ServiceRow.tsx": {
+    "mtime": 1782851637.632917,
+    "ast_hash": "67d27013055ab9b07d88c3fcd9665857",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/ServiceTimeline.tsx": {
+    "mtime": 1782921842.9893155,
+    "ast_hash": "bf020f4fefce9c5b35adf061f74591c2",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/SplitSection.tsx": {
+    "mtime": 1782921797.8629978,
+    "ast_hash": "e04cf87d57aef6d4f121142b421dd9c0",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/StatsStrip.tsx": {
+    "mtime": 1782921876.4900298,
+    "ast_hash": "c8fb2e2084a644294f8b8d97ccb637f2",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/TestimonialBento.tsx": {
+    "mtime": 1782921797.8631392,
+    "ast_hash": "1470bc6309e48a3ed2bb4179393a0bcc",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/WorkGrid.tsx": {
+    "mtime": 1782921797.864046,
+    "ast_hash": "8835aeb66cea9cba2a3be7c6a5660437",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/ui/Button.tsx": {
+    "mtime": 1782919278.1875858,
+    "ast_hash": "70fcc7cd2e9466a4e6538ef912da09a4",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/ui/Eyebrow.tsx": {
+    "mtime": 1782919279.7699358,
+    "ast_hash": "0f76afc35a4265c172f807f83aa4e337",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/ui/Footer.tsx": {
+    "mtime": 1782496565.3938124,
+    "ast_hash": "f8a54e2c1002d6f8d82cdc51f20af2c9",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/ui/GSAPProvider.tsx": {
+    "mtime": 1782493233.9485266,
+    "ast_hash": "fc9a3c8e1a12837a326c1b24742d4799",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/ui/LogoTicker.tsx": {
+    "mtime": 1782921877.3399453,
+    "ast_hash": "c4dedaf641a1929d32c17b3e11009475",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/ui/Navbar.tsx": {
+    "mtime": 1782921922.5542903,
+    "ast_hash": "c9679101965228eb669d71fff3335f94",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/ui/NoiseOverlay.tsx": {
+    "mtime": 1782921875.5740066,
+    "ast_hash": "702a9f88f358cbafc2ef85cf5dbde688",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/fonts.ts": {
+    "mtime": 1782920945.8426454,
+    "ast_hash": "801f15715cf589e28fcf147b961a9f5e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/gsap.ts": {
+    "mtime": 1782493232.5281122,
+    "ast_hash": "12ce15d179556309de0c01b8cc48a826",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/services.ts": {
+    "mtime": 1782850171.560069,
+    "ast_hash": "7b38e0f9ba038e55d548040bfc35d12d",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/next-env.d.ts": {
+    "mtime": 1783091158.9551566,
+    "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/next.config.ts": {
+    "mtime": 1782485398.7731328,
+    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/package.json": {
+    "mtime": 1782919249.5006847,
+    "ast_hash": "05c1e4f72ac04e346db5dc8bf631d0e9",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/postcss.config.mjs": {
+    "mtime": 1782485398.7730763,
+    "ast_hash": "239f3ebf717465dc636818a1a619398d",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/tsconfig.json": {
+    "mtime": 1782915059.1831505,
+    "ast_hash": "2a843015f54c685558fbae7456ff961a",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/Badge.tsx": {
+    "mtime": 1782939138.9057424,
+    "ast_hash": "b99dbca10a62eb9ad818aad802a9671a",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/Button.tsx": {
+    "mtime": 1782921797.8479452,
+    "ast_hash": "f996597aa52ab0f21c3d283f0bafe9d4",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/Card.tsx": {
+    "mtime": 1782939138.9064133,
+    "ast_hash": "a2b2c584e5edc975768c878a4255f8f5",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/Chip.tsx": {
+    "mtime": 1782939138.907049,
+    "ast_hash": "4ec69a37ea2a4711698be0a749b0e3e6",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/Eyebrow.tsx": {
+    "mtime": 1782939138.907928,
+    "ast_hash": "c66063dbf7cbaab7b75d0627f46e0c50",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/Highlight.tsx": {
+    "mtime": 1782939138.9086013,
+    "ast_hash": "7ba7b52c0d9aa96932e7a8745dcf72a7",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/Input.tsx": {
+    "mtime": 1782939138.9095101,
+    "ast_hash": "c475f00511bc342817e3d5d4c1f8395e",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/Logo.tsx": {
+    "mtime": 1782918134.9328396,
+    "ast_hash": "6dd0807991194a60afcbf109f140ea8d",
+    "semantic_hash": ""
+  },
+  "packages/ui/src/components/ScriptAccent.tsx": {
+    "mtime": 1782939138.9126606,
+    "ast_hash": "4393af476014e9c04458b57fe4b83742",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/progress.md": {
+    "mtime": 1782919457.0440934,
+    "ast_hash": "08f1da3a498f6ae17f1a79e46a5de373",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-1-brief.md": {
+    "mtime": 1782917667.0668056,
+    "ast_hash": "2226f0e2b986cd4753bf74d694dfc72c",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-1-report.md": {
+    "mtime": 1782917770.8894358,
+    "ast_hash": "995df67ac99cb2713cb4bab607ef6d90",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-2-brief.md": {
+    "mtime": 1782917914.4309409,
+    "ast_hash": "8d2c885b6333b8ffce1a4a8ddbced954",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-2-report.md": {
+    "mtime": 1782917986.938906,
+    "ast_hash": "317345be5c2af575a86d9c4eec3835d8",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-3-brief.md": {
+    "mtime": 1782918067.7367995,
+    "ast_hash": "dcedc50718ba248e2cec66f962f084a1",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-3-report.md": {
+    "mtime": 1782918162.7494762,
+    "ast_hash": "60fc537134762680652bc867765850cd",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-4-brief.md": {
+    "mtime": 1782918328.6215806,
+    "ast_hash": "f0bff9c7267eebda2a309e000209a18c",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-4-report.md": {
+    "mtime": 1782918417.8023515,
+    "ast_hash": "08b8e532aa7ec4fad0533148f42414b5",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-5-brief.md": {
+    "mtime": 1782918512.8649712,
+    "ast_hash": "12bcb01f54a598043bf0d6a7e537b4c4",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-5-report.md": {
+    "mtime": 1782918561.9775004,
+    "ast_hash": "dd1415ec5a45a0df88e4aea31328e6cf",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-6-brief.md": {
+    "mtime": 1782918677.1547487,
+    "ast_hash": "43c1ed06673a4aa88157c5b05f35d5dc",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-6-report.md": {
+    "mtime": 1782918801.8065407,
+    "ast_hash": "d4ad189463800ad3f6007690a390f9cc",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-7-brief.md": {
+    "mtime": 1782919143.2911503,
+    "ast_hash": "5165907734ac565b8832eed6ef3e5297",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-7-report.md": {
+    "mtime": 1782919354.3653855,
+    "ast_hash": "665736640aebf2c40f5dff9920d52b24",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/progress.md": {
+    "mtime": 1782489999.3204105,
+    "ast_hash": "b4ad34a965641e73cdb5e3faeeecbf28",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-1-brief.md": {
+    "mtime": 1782487901.0420444,
+    "ast_hash": "f00bdb991b2ab434275d7ba9209dc6e7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-1-report.md": {
+    "mtime": 1782488007.279657,
+    "ast_hash": "5af7ced90c49b43453153c2de085f08d",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-10-brief.md": {
+    "mtime": 1782489515.778201,
+    "ast_hash": "f5ed771d76f6e7e2201e72b9373db934",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-11-brief.md": {
+    "mtime": 1782489515.8827116,
+    "ast_hash": "5cb47b64c878f3954f230ea8701cfe64",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-12-brief.md": {
+    "mtime": 1782489515.9805834,
+    "ast_hash": "de8dd5ca7dcfc410e00682464767ae9d",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-13-16-report.md": {
+    "mtime": 1782490584.3296125,
+    "ast_hash": "691446cb6bb81a7d693e4a7eb970c641",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-13-brief.md": {
+    "mtime": 1782490083.2880316,
+    "ast_hash": "ba70f0c8e5c30a9832a00292d19f1d56",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-14-brief.md": {
+    "mtime": 1782490083.4387658,
+    "ast_hash": "e7e23719caf74951db8e37bfe8d186b5",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-15-brief.md": {
+    "mtime": 1782490083.5818152,
+    "ast_hash": "ce2532e26df9590c09fb738ba08f8581",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-16-brief.md": {
+    "mtime": 1782490083.718267,
+    "ast_hash": "2cc71559ae1ec2347922bdeadc5c90c8",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-2-brief.md": {
+    "mtime": 1782488119.8139083,
+    "ast_hash": "ceeece90954a9372a94d5f3b78469254",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-2-report.md": {
+    "mtime": 1782488212.5485723,
+    "ast_hash": "f787f2689928d4c715057cf524038a43",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-3-4-report.md": {
+    "mtime": 1782488479.6837878,
+    "ast_hash": "0589b188c5694e2cdb53378ffacdd073",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-3-brief.md": {
+    "mtime": 1782488297.5259728,
+    "ast_hash": "5e549edb00a5f70c5df83a00ad50a358",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-4-brief.md": {
+    "mtime": 1782488297.6282315,
+    "ast_hash": "b4daf3163c0ae7634f4a177cc6bd48b0",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-5-6-report.md": {
+    "mtime": 1782488969.5551243,
+    "ast_hash": "77b78c121b454861d08a2c4419a3fa3a",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-5-brief.md": {
+    "mtime": 1782488570.5416763,
+    "ast_hash": "4d407d5cbdaa476472a53a255b7ae100",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-6-brief.md": {
+    "mtime": 1782488570.6362646,
+    "ast_hash": "1adcccdbb6309b2c1ecd39f09a7f88c6",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-7-8-report.md": {
+    "mtime": 1782489462.971114,
+    "ast_hash": "4164987733667a73a6ccd74b4ace0c12",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-7-brief.md": {
+    "mtime": 1782489093.3368335,
+    "ast_hash": "8361c714fea5495d8f7e204a736e552d",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-8-brief.md": {
+    "mtime": 1782489093.4451308,
+    "ast_hash": "59a82aa5376661de282d6ef8ed1bdcfe",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-9-12-report.md": {
+    "mtime": 1782489767.2421982,
+    "ast_hash": "219e9fb3a81ae5e3952ab2a42bcc1dfa",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/.superpowers/sdd/task-9-brief.md": {
+    "mtime": 1782489515.681339,
+    "ast_hash": "c3eb8a3ca7036004b1a1e4722f8c78dc",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/AGENTS.md": {
+    "mtime": 1782485409.4951181,
+    "ast_hash": "9e09241799026ac05be315a2f0b50055",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/CLAUDE.md": {
+    "mtime": 1782485409.495314,
+    "ast_hash": "5c27369b226fcf2be8a6cfe52224e767",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/README.md": {
+    "mtime": 1782485398.7721093,
+    "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/docs/Atrium_Website-V1.md": {
+    "mtime": 1782486888.9208133,
+    "ast_hash": "721ffda4655de6618ed1158f5263c4f9",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/docs/superpowers/plans/2026-06-26-atrium-v1-homepage.md": {
+    "mtime": 1782487557.064453,
+    "ast_hash": "f0f65c5d154be8b5309c96c3eaad5de4",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/docs/superpowers/specs/2026-06-26-atrium-website-v1-design.md": {
+    "mtime": 1782486890.2288182,
+    "ast_hash": "f031e875504c80bf9d4d4cec79f309dc",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-07-01-packages-ui-design-system.md": {
+    "mtime": 1782917447.1636727,
+    "ast_hash": "ea3fe40e43f476c8bf35e7aff9f1d694",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/README.md": {
+    "mtime": 1782918715.559846,
+    "ast_hash": "e5a3b84643b473d296a9269748a0e459",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/Badge.md": {
+    "mtime": 1782918754.0995057,
+    "ast_hash": "d122ae310ac091ca6801f2eb0f22c1b8",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/Button.md": {
+    "mtime": 1782918742.212274,
+    "ast_hash": "b115f4cae44cac26076e74ff70fd1c09",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/Card.md": {
+    "mtime": 1782918783.9672546,
+    "ast_hash": "c0ff77afcbae4d4a007bc04d3f7abb86",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/Chip.md": {
+    "mtime": 1782918760.2465427,
+    "ast_hash": "6a393b4b6aa1ea0ad97c0973f4e5a8fc",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/Eyebrow.md": {
+    "mtime": 1782918748.936374,
+    "ast_hash": "bddf085aa575f7e5fce71432fa78a52b",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/Highlight.md": {
+    "mtime": 1782918765.5893092,
+    "ast_hash": "7d32a45963f5c729c739ec3df66bdbb3",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/Input.md": {
+    "mtime": 1782918790.2508583,
+    "ast_hash": "c3747bd60747c77e6703369f407b7a9e",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/Logo.md": {
+    "mtime": 1782918777.0696204,
+    "ast_hash": "38dad37704a8684c583e8508fc6fbbc2",
+    "semantic_hash": ""
+  },
+  "packages/ui/docs/components/ScriptAccent.md": {
+    "mtime": 1782918770.7227027,
+    "ast_hash": "928fdefdc29af0d7c28f75eb13fef993",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/Atrium Works -08.png": {
+    "mtime": 1782501703.465188,
+    "ast_hash": "cf422a22fdc1d0d6f0639a281613d065",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/metaphoto.jpg": {
+    "mtime": 1782502714.0911431,
+    "ast_hash": "090d556ef91b823b83d56f5087aca751",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/file.svg": {
+    "mtime": 1782485398.7746053,
+    "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/globe.svg": {
+    "mtime": 1782485398.7743893,
+    "ast_hash": "2aaafa6a49b6563925fe440891e32717",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/atrium-mark.svg": {
+    "mtime": 1782835985.9582114,
+    "ast_hash": "3047f69dbfaba2ad0dcb9284b327226a",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/atrium-wordmark.svg": {
+    "mtime": 1782835985.979775,
+    "ast_hash": "6cdfec4990d8c0faceaea4a36db0df68",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/next.svg": {
+    "mtime": 1782485398.772136,
+    "ast_hash": "8e061864f388b47f33a1c3780831193e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/textures/gradient-charcoal-sage.png": {
+    "mtime": 1782835985.949294,
+    "ast_hash": "f9dcc22493bf4b2338b93549f1775b2e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/textures/gradient-forest-glow.png": {
+    "mtime": 1782835985.9329686,
+    "ast_hash": "f95f33159d6ba5bf2c99a4dc58d31de2",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/textures/grain-paper-silver.png": {
+    "mtime": 1782835985.9170399,
+    "ast_hash": "27467a2928bea2abe4f33654c0490c43",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/vercel.svg": {
+    "mtime": 1782485398.773887,
+    "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/window.svg": {
+    "mtime": 1782485398.7738788,
+    "ast_hash": "a2760511c65806022ad20adf74370ff3",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/place-photo/route.test.ts": {
+    "mtime": 1782924509.9427705,
+    "ast_hash": "ce338d073bd57f5c7e57e5a25e369633",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/place-photo/route.ts": {
+    "mtime": 1782924505.3084514,
+    "ast_hash": "049312cd52fcdf707439675620915468",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/fonts.ts": {
+    "mtime": 1782926230.9822147,
+    "ast_hash": "253739bb95d40292f55b8a1fee54fc12",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/logos/atrium-wordmark.svg": {
+    "mtime": 1782926131.7329493,
+    "ast_hash": "6cdfec4990d8c0faceaea4a36db0df68",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/textures/grain-paper-silver.png": {
+    "mtime": 1782926131.71989,
+    "ast_hash": "27467a2928bea2abe4f33654c0490c43",
+    "semantic_hash": ""
+  },
+  ".superpowers/sdd/task-fix-report.md": {
+    "mtime": 1782938248.1936486,
+    "ast_hash": "6efa21a496d148366b005df31206dc5b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/narrative/route.ts": {
+    "mtime": 1783004695.4582734,
+    "ast_hash": "aa9fb67915611e7f4f92e058d2c1c020",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/app/api/grader/social/route.ts": {
+    "mtime": 1783007975.4379117,
+    "ast_hash": "838ad9f8bd136c5b673ea433d8c872c7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/report-agent.ts": {
+    "mtime": 1783093892.9093115,
+    "ast_hash": "399b706d9117f699f3cb85c51f2788f7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/report-merger.ts": {
+    "mtime": 1783000713.728564,
+    "ast_hash": "0dfea5702b4979ad23bc370abaf0a605",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/social-name-search.test.ts": {
+    "mtime": 1783008003.9175382,
+    "ast_hash": "f4ae15754e3468cfd8528d61b6f3e0fa",
+    "semantic_hash": ""
+  },
+  "docs/loading-state/Pinterest Advertising Essentials badge.jpeg": {
+    "mtime": 1783014515.7951577,
+    "ast_hash": "ba033ac20f0569e3b647f63d7bd3d4d5",
+    "semantic_hash": ""
+  },
+  "docs/loading-state/WERQ.jpeg": {
+    "mtime": 1783014515.9205403,
+    "ast_hash": "b1f056d20a9b7a5fe6f1a703cd9f5f19",
+    "semantic_hash": ""
+  },
+  "docs/loading-state/_.jpeg": {
+    "mtime": 1783014515.779861,
+    "ast_hash": "807b42007aa58e07e9bcf5a8b8f4c167",
+    "semantic_hash": ""
+  },
+  "docs/loading-state/inBeat - #1 Creative Growth Agency in North America.jpeg": {
+    "mtime": 1783014515.8962762,
+    "ast_hash": "431cd9cf5d430de41e887b5320ddd638",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/.image-slots.state.json": {
+    "mtime": 1783017329.5665226,
+    "ast_hash": "4aaec773164e8c12c06961109e91ffb9",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/.obsidian/app.json": {
+    "mtime": 1783017329.5898447,
+    "ast_hash": "99914b932bd37a50b983c5e7c90ae93b",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/.obsidian/appearance.json": {
+    "mtime": 1783017329.6013014,
+    "ast_hash": "99914b932bd37a50b983c5e7c90ae93b",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/.obsidian/core-plugins.json": {
+    "mtime": 1783017329.6061494,
+    "ast_hash": "7c877bea49eaeabb100563bd157b9051",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/.obsidian/workspace.json": {
+    "mtime": 1783017329.607211,
+    "ast_hash": "2c0c360bcd87f37a28c3bd397a96fb53",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/_adherence.oxlintrc.json": {
+    "mtime": 1783017329.6203856,
+    "ast_hash": "dc17b31351d84c60a2ce5559f7384e7e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/_ds_bundle.js": {
+    "mtime": 1783017329.623662,
+    "ast_hash": "3173341be898529e62bdd3f5962485fe",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/_ds_manifest.json": {
+    "mtime": 1783017329.6253247,
+    "ast_hash": "d6fd6edae221b8f1f42831834a4a589e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/social/image-slot.js": {
+    "mtime": 1783017329.9172359,
+    "ast_hash": "ff60a935d4107941f0af74de742d57dc",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Badge.d.ts": {
+    "mtime": 1783017329.950805,
+    "ast_hash": "66614a2391ecb0f73ef46e40174c8e83",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Badge.jsx": {
+    "mtime": 1783017329.9520657,
+    "ast_hash": "55012a182cf739c09b126e316d960d30",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Button.d.ts": {
+    "mtime": 1783017329.9542425,
+    "ast_hash": "18237e1c67198ef5222213de92cabb48",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Button.jsx": {
+    "mtime": 1783017329.9552412,
+    "ast_hash": "93043b74dea8c54c08de119a963d6417",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Card.d.ts": {
+    "mtime": 1783017329.9603229,
+    "ast_hash": "35824e6929027813bed53accca664b7e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Card.jsx": {
+    "mtime": 1783017329.9614463,
+    "ast_hash": "b8f7322482ffe3c2f4bd58e5d9ffa665",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Chip.d.ts": {
+    "mtime": 1783017329.964354,
+    "ast_hash": "28ea579a7c592d1d4edf5093e7098ee8",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Chip.jsx": {
+    "mtime": 1783017329.9655025,
+    "ast_hash": "a7f76b42e603fa0cf5aeb51b5a1812f9",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Eyebrow.d.ts": {
+    "mtime": 1783017329.9676962,
+    "ast_hash": "7d885b5c5b0d0606ae444030deda1091",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Eyebrow.jsx": {
+    "mtime": 1783017329.9687476,
+    "ast_hash": "86beea7c00a64348ff16cbe9eb2b0210",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Highlight.d.ts": {
+    "mtime": 1783017329.9715996,
+    "ast_hash": "612451d02617b23a28d184104c69cc7e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Highlight.jsx": {
+    "mtime": 1783017329.9733074,
+    "ast_hash": "d808c3054250551ecb4971a54f6435e5",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Input.d.ts": {
+    "mtime": 1783017329.9815373,
+    "ast_hash": "d22f0ee91cb6debb1d8234b5df575711",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Input.jsx": {
+    "mtime": 1783017329.9833274,
+    "ast_hash": "e75378fa3a74473d25b8ff00a8170117",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Logo.d.ts": {
+    "mtime": 1783017329.9865088,
+    "ast_hash": "3dce9f9d3c6de36fd7125917f28284af",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Logo.jsx": {
+    "mtime": 1783017329.9875996,
+    "ast_hash": "fd50acf8bfddd9a195ec6b9c10b5d564",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/ScriptAccent.d.ts": {
+    "mtime": 1783017330.0013332,
+    "ast_hash": "ce3ecbb98dccd2b0abdcbab73bd34067",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/ScriptAccent.jsx": {
+    "mtime": 1783017330.0025647,
+    "ast_hash": "74dab41c81c54ce947654df67fa307f1",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/deck/deck-stage.js": {
+    "mtime": 1783017330.0524135,
+    "ast_hash": "88a5c843c825b1cec496af9e3aa80c33",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/landing/ds-base.js": {
+    "mtime": 1783017330.1909447,
+    "ast_hash": "a10629f1017f31cd686266e2fa942243",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/landing/support.js": {
+    "mtime": 1783017330.1923866,
+    "ast_hash": "ac3b4f23fe44d6331420d2046d23c409",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/social/deck-stage.js": {
+    "mtime": 1783017330.1977985,
+    "ast_hash": "88a5c843c825b1cec496af9e3aa80c33",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/social/ds-base.js": {
+    "mtime": 1783017330.199943,
+    "ast_hash": "a10629f1017f31cd686266e2fa942243",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/social/image-slot.js": {
+    "mtime": 1783017330.216228,
+    "ast_hash": "ff60a935d4107941f0af74de742d57dc",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/social/support.js": {
+    "mtime": 1783017330.2185793,
+    "ast_hash": "a37fec9897fb6afc571b15cfb0c5893f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/ui_kits/atrium-site/AtriumKit.jsx": {
+    "mtime": 1783017330.2350502,
+    "ast_hash": "528bac81b65af24e00b8296eeb11c808",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/ui_kits/atrium-site/AtriumSections.jsx": {
+    "mtime": 1783017330.236631,
+    "ast_hash": "d434c250fbe70a56cb5a0b028c11f6e8",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/Atrium Design System-print.html": {
+    "mtime": 1783017329.610437,
+    "ast_hash": "72722280f0bcff5359cff3bfe00d7ba5",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/Atrium Design System.html": {
+    "mtime": 1783017329.6175127,
+    "ast_hash": "5f1cc88fbee72bc5b9b86a0f84b1bc41",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/SKILL.md": {
+    "mtime": 1783017329.6188462,
+    "ast_hash": "d531c2b5f2a5be0ce2afac19fde1ed4d",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Badge.prompt.md": {
+    "mtime": 1783017329.9533474,
+    "ast_hash": "23a7f0800a3818d5d3b4f842e25f5e10",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Button.prompt.md": {
+    "mtime": 1783017329.9567761,
+    "ast_hash": "9593ad319977b74539f9817f18d17239",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Card.prompt.md": {
+    "mtime": 1783017329.9626265,
+    "ast_hash": "2be3e07c7d7cffede00ed1da1aaaefd1",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Chip.prompt.md": {
+    "mtime": 1783017329.96637,
+    "ast_hash": "9132ca446d01765c3399face527ac2d2",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Eyebrow.prompt.md": {
+    "mtime": 1783017329.9701533,
+    "ast_hash": "6e5e93719ec7b0bd9533177db2c528ca",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Highlight.prompt.md": {
+    "mtime": 1783017329.9747488,
+    "ast_hash": "bdaaa6c80ebe0ceeb63a721ab321de55",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Input.prompt.md": {
+    "mtime": 1783017329.9843419,
+    "ast_hash": "dd2a692be2a24491185034ffcc9d7d62",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/Logo.prompt.md": {
+    "mtime": 1783017329.98854,
+    "ast_hash": "9e26dd9b11836b1d883d5e1d1a3a24a5",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/ScriptAccent.prompt.md": {
+    "mtime": 1783017330.003505,
+    "ast_hash": "fa147cf1fe4678794a61706bff960f15",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/components/core/core.card.html": {
+    "mtime": 1783017330.004714,
+    "ast_hash": "c3a2346ed61d0f2ce2e311ae455b2489",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/deck/Atrium Studio Deck.html": {
+    "mtime": 1783017330.0075638,
+    "ast_hash": "bd57f2b192e1048fe91f67b051de6c3e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/brand-mark.card.html": {
+    "mtime": 1783017330.055906,
+    "ast_hash": "5ef71bbcca33fe03d42d865c6eef397e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/brand-voice.card.html": {
+    "mtime": 1783017330.0568662,
+    "ast_hash": "fb69a9bab254030a44043f3f59a136ff",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/brand-wordmark.card.html": {
+    "mtime": 1783017330.05795,
+    "ast_hash": "8ced06676b9d047da89299889b8010bb",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/color-amber.card.html": {
+    "mtime": 1783017330.0592074,
+    "ast_hash": "d61c0b6787390f485a7b126a1f34d44f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/color-anchors.card.html": {
+    "mtime": 1783017330.0602813,
+    "ast_hash": "8a373de7f460c28b7cc6d8beb357ab3c",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/color-mint.card.html": {
+    "mtime": 1783017330.0618298,
+    "ast_hash": "83a863f643a37cae7662f0aa945137e3",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/color-pairings.card.html": {
+    "mtime": 1783017330.0628448,
+    "ast_hash": "44cb0576dc94ee77f15b19f23c050247",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/color-teal.card.html": {
+    "mtime": 1783017330.0642703,
+    "ast_hash": "4ba78f690e132db7bb6984a8e3dc8db0",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/effects-bento.card.html": {
+    "mtime": 1783017330.06594,
+    "ast_hash": "ef685ac596b55f920af0f5255ddbabd3",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/gradients-aurora.card.html": {
+    "mtime": 1783017330.066936,
+    "ast_hash": "7be98c57b7ca0df36f664d16ff5f7bee",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/post-humans.card.html": {
+    "mtime": 1783017330.067843,
+    "ast_hash": "b910d158e005a01db66cbc075f8f4496",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/post-receipts.card.html": {
+    "mtime": 1783017330.0695136,
+    "ast_hash": "b54372a62a9eeb998285f736f1249b94",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/post-seo.card.html": {
+    "mtime": 1783017330.0717165,
+    "ast_hash": "e88488a92fa5ca083a0cc7970d14ec73",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/spacing-radii.card.html": {
+    "mtime": 1783017330.073372,
+    "ast_hash": "86f48ab568588b9a14d43cc6c05eb364",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/spacing-scale.card.html": {
+    "mtime": 1783017330.0744872,
+    "ast_hash": "475a56c71bb43dc25ed2916391384a3d",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/story-booked.card.html": {
+    "mtime": 1783017330.0754113,
+    "ast_hash": "caa729f4ff89017f6f17ba8cb4693c67",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/story-era.card.html": {
+    "mtime": 1783017330.077018,
+    "ast_hash": "8a793d8b184c0a3bd7d7860c2a16e41f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/story-room.card.html": {
+    "mtime": 1783017330.0784528,
+    "ast_hash": "e1d985c6c12c5ae63be0ca10de0e22bd",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/texture-atmospheric.card.html": {
+    "mtime": 1783017330.0802867,
+    "ast_hash": "c2379c52db77e8e394170a87bcddbfbb",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/texture-grain.card.html": {
+    "mtime": 1783017330.0824676,
+    "ast_hash": "57123bb79d82a498549c89b19927a745",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/texture-in-use.card.html": {
+    "mtime": 1783017330.083933,
+    "ast_hash": "84e9cd76748aa6801289b6f08987f308",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/type-accent.card.html": {
+    "mtime": 1783017330.0862768,
+    "ast_hash": "6d0875c6425020b0351322f74d77670b",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/type-body.card.html": {
+    "mtime": 1783017330.0874217,
+    "ast_hash": "2dc3c7ea944e2ef23563512ca6850cb4",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/type-caps.card.html": {
+    "mtime": 1783017330.089212,
+    "ast_hash": "bd22adc0a96b49f2dee979bddec63ae6",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/type-display.card.html": {
+    "mtime": 1783017330.090338,
+    "ast_hash": "1a67f6a3ab13756e27c388403bb02d12",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/type-figures.card.html": {
+    "mtime": 1783017330.0913472,
+    "ast_hash": "be237ddfc9097ad90e2b941f2769f449",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/type-script.card.html": {
+    "mtime": 1783017330.092238,
+    "ast_hash": "80690124f23caa4a7abde59f5cf1227f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/type-serif.card.html": {
+    "mtime": 1783017330.093081,
+    "ast_hash": "6bb7ab49c2bd589eb2c7b8b8e289cc52",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/type-voices2.card.html": {
+    "mtime": 1783017330.0940952,
+    "ast_hash": "e0f205e228319c81f299f213255e229e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/web-branding.card.html": {
+    "mtime": 1783017330.0951307,
+    "ast_hash": "9aac44992181734dfbb2d6e229713128",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/web-casestudy.card.html": {
+    "mtime": 1783017330.0960808,
+    "ast_hash": "47982a5d9280f36a21f053fe5be975b1",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/web-flat.card.html": {
+    "mtime": 1783017330.0972555,
+    "ast_hash": "819891c8e5f9de5d28bbe7c111241d04",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/web-formats.card.html": {
+    "mtime": 1783017330.098287,
+    "ast_hash": "cfc224a833fc8a4d0e49c45740bcbba2",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/web-hero.card.html": {
+    "mtime": 1783017330.0992463,
+    "ast_hash": "45f92a6c6cea761b7a6f38e4db9fe0e6",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/web-homepage.card.html": {
+    "mtime": 1783017330.1004677,
+    "ast_hash": "a5b409c685da5efa1e7a2d13324ec3fa",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/web-membership.card.html": {
+    "mtime": 1783017330.1013935,
+    "ast_hash": "3fcd1193cf43bc54e23e4ae85196a495",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/guidelines/web-numbers.card.html": {
+    "mtime": 1783017330.102438,
+    "ast_hash": "7fc51ce7d5265a7a180bbaf93cc3dc0f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/readme.md": {
+    "mtime": 1783017330.1035917,
+    "ast_hash": "e30b8cf34375689d0a8d075d3be72fb7",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/landing/Landing.dc.html": {
+    "mtime": 1783017330.1896548,
+    "ast_hash": "3f74777a453505c913d581b99263192b",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/social/AtriumSocial.dc.html": {
+    "mtime": 1783017330.196743,
+    "ast_hash": "a40f486919045082cf71ff72361a7f36",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/ui_kits/atrium-site/README.md": {
+    "mtime": 1783017330.2381928,
+    "ast_hash": "e355194ea22bf21815419ab592c9a917",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/ui_kits/atrium-site/index.html": {
+    "mtime": 1783017330.2409804,
+    "ast_hash": "09b1401f0560949eaec1cc2103a74996",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Branding Services for Teams That Need Impact at Scale.html": {
+    "mtime": 1783017330.2638836,
+    "ast_hash": "c3b1ec70211825aef8987eed58f128c8",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Creative automation services that free your team to think bigger.html": {
+    "mtime": 1783017330.2713907,
+    "ast_hash": "97aa669d50c50a11490be7ebcbe45f00",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/HOW TO DOWNLOAD AN HTML ON CHROME - Google Search-d2eb3640.html": {
+    "mtime": 1783017330.2896192,
+    "ast_hash": "b5ec6811b075b9b19165a4e4ff1e47a0",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/HOW TO DOWNLOAD AN HTML ON CHROME - Google Search.html": {
+    "mtime": 1783017330.3130946,
+    "ast_hash": "b5ec6811b075b9b19165a4e4ff1e47a0",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Presentation Design Services for Powerful, High-Impact Slides.html": {
+    "mtime": 1783017330.416774,
+    "ast_hash": "2fad1e3c94e702c83347c57db21ac197",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Web Design & Webflow Development Services For Top Brands.html": {
+    "mtime": 1783017330.435241,
+    "ast_hash": "0b36f0207d30baa3bdf79d40c51be3c5",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Typography treatments and Color  .pdf": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/textures/gradient-charcoal-sage.png": {
+    "mtime": 1783017418.8373222,
+    "ast_hash": "f9dcc22493bf4b2338b93549f1775b2e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/textures/gradient-forest-glow.png": {
+    "mtime": 1783017426.461704,
+    "ast_hash": "f95f33159d6ba5bf2c99a4dc58d31de2",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/images/deep-teal-transparency.png": {
+    "mtime": 1783017329.677986,
+    "ast_hash": "9c1950fa1fda21b246f21c9dad84ea01",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/artboard-10.svg": {
+    "mtime": 1783017329.6824384,
+    "ast_hash": "aef9e0ed06039313d65f2fbdd6ddbd11",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/artboard-3.svg": {
+    "mtime": 1783017329.683855,
+    "ast_hash": "03ba98688a5653f99143a1d0b4adfc96",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/artboard-4.svg": {
+    "mtime": 1783017329.685481,
+    "ast_hash": "d0864a5fda8928af141763a0fb850003",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/artboard-5.svg": {
+    "mtime": 1783017329.686558,
+    "ast_hash": "d90446d1b97305aed61d59472564ec5f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/artboard-6.svg": {
+    "mtime": 1783017329.687585,
+    "ast_hash": "ac38b7e2997dae1f59e9e5c70ad853ab",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/artboard-7.svg": {
+    "mtime": 1783017329.6890228,
+    "ast_hash": "e9f13d81595ee65c4f3ec1912b487ef9",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/artboard-8.svg": {
+    "mtime": 1783017329.6902418,
+    "ast_hash": "aef9e0ed06039313d65f2fbdd6ddbd11",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/artboard-9.svg": {
+    "mtime": 1783017329.691616,
+    "ast_hash": "a5824149750499ed9c20abb4493c6b71",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/atrium-mark.svg": {
+    "mtime": 1783017329.6935031,
+    "ast_hash": "3047f69dbfaba2ad0dcb9284b327226a",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/atrium-wordmark.svg": {
+    "mtime": 1783017329.694873,
+    "ast_hash": "6cdfec4990d8c0faceaea4a36db0df68",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/logos/atrium-works.svg": {
+    "mtime": 1783017329.6974366,
+    "ast_hash": "aee7bbca90148405b4a6b21581c8eb76",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/art-1.png": {
+    "mtime": 1783017329.7359886,
+    "ast_hash": "248d541d5f433524e752d8d24334b2a5",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/art-2.png": {
+    "mtime": 1783017329.7649672,
+    "ast_hash": "1c5f99d19714ce87902dee7af7280b11",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/art-3.png": {
+    "mtime": 1783017329.7851503,
+    "ast_hash": "78bd2cf0b87b9f752eb0b59e4e0ce540",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/flow-1.png": {
+    "mtime": 1783017329.7965548,
+    "ast_hash": "a24bb9c9fedd99ef720e4f2ae42ff7e7",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/flow-2.png": {
+    "mtime": 1783017329.8046935,
+    "ast_hash": "cbb4a3089a959cf64bc5e241bfe3ecf2",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/flow-3.png": {
+    "mtime": 1783017329.813362,
+    "ast_hash": "d9f8e06661e09dc96d5d35ba1a1996f5",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/flow-4.png": {
+    "mtime": 1783017329.820517,
+    "ast_hash": "13292c71c31f0b29997c7d6a87b63894",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/flow-5.png": {
+    "mtime": 1783017329.827428,
+    "ast_hash": "e412691b4398a096c17d406a65719759",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/flow-6.png": {
+    "mtime": 1783017329.8394835,
+    "ast_hash": "874d4a0fc3ae60af3bc11fe430e7d94f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/hero.png": {
+    "mtime": 1783017329.8612506,
+    "ast_hash": "c0b99b7a8844ac12ab8c982cde22f684",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/team-1.png": {
+    "mtime": 1783017329.8772056,
+    "ast_hash": "d3d71df31cdb38dd89974269c43092ad",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/team-2.png": {
+    "mtime": 1783017329.8982105,
+    "ast_hash": "ef21e1a34b49fedfb65c6fefa240bfd8",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/placeholders/team-3.png": {
+    "mtime": 1783017329.907179,
+    "ast_hash": "c813c4b1d5b4c41ff25c2c542d38df04",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/social/grain.svg": {
+    "mtime": 1783017329.915862,
+    "ast_hash": "0096ebd7c1dd0c908df8e8d7ca33bdd4",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/textures/gradient-charcoal-sage.png": {
+    "mtime": 1783017329.924167,
+    "ast_hash": "f9dcc22493bf4b2338b93549f1775b2e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/textures/gradient-forest-glow.png": {
+    "mtime": 1783017329.934084,
+    "ast_hash": "f95f33159d6ba5bf2c99a4dc58d31de2",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/assets/textures/grain-paper-silver.png": {
+    "mtime": 1783017329.9440405,
+    "ast_hash": "27467a2928bea2abe4f33654c0490c43",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/deck/assets/atrium-mark.svg": {
+    "mtime": 1783017330.0478923,
+    "ast_hash": "3047f69dbfaba2ad0dcb9284b327226a",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/deck/assets/atrium-wordmark.svg": {
+    "mtime": 1783017330.0492613,
+    "ast_hash": "6cdfec4990d8c0faceaea4a36db0df68",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/deck/assets/grain.svg": {
+    "mtime": 1783017330.0504103,
+    "ast_hash": "0096ebd7c1dd0c908df8e8d7ca33bdd4",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/01-book-cover.png": {
+    "mtime": 1783017330.1140425,
+    "ast_hash": "17637a6b2966409265f94c9813924957",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/02-book-cover.png": {
+    "mtime": 1783017330.1169887,
+    "ast_hash": "ce7c6f4012aedc060516540413f025b9",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/bento.png": {
+    "mtime": 1783017330.121085,
+    "ast_hash": "d00c7ba77e99dd3a5b0be8d8c9933c8d",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/bento2.png": {
+    "mtime": 1783017330.1241944,
+    "ast_hash": "d00c7ba77e99dd3a5b0be8d8c9933c8d",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/bento3.png": {
+    "mtime": 1783017330.126744,
+    "ast_hash": "fad192d3caf6d1cb200a4b21f76ae04e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/bento4.png": {
+    "mtime": 1783017330.1291146,
+    "ast_hash": "071ff2a371816e74e1ce0865a56678d0",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/bento5.png": {
+    "mtime": 1783017330.1305327,
+    "ast_hash": "02f850e4cc6c6b567f150af2369446b8",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/bento6.png": {
+    "mtime": 1783017330.1350293,
+    "ast_hash": "7f2eae9ba9179c0d22be4ab2bb279ac0",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/branding-full.png": {
+    "mtime": 1783017330.13886,
+    "ast_hash": "760357c93e91036a0540d0614e3916e8",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/branding-hero-filled.png": {
+    "mtime": 1783017330.1420407,
+    "ast_hash": "4a869d110ac6b9fa2bbe6022670e26c3",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/branding-hero.png": {
+    "mtime": 1783017330.1463463,
+    "ast_hash": "294a5e60f759e969a5a38f6039a17382",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/branding-imgs.png": {
+    "mtime": 1783017330.1492178,
+    "ast_hash": "352ef1e03d0918d3bd43cef068978052",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/branding-lower.png": {
+    "mtime": 1783017330.1528594,
+    "ast_hash": "cb83fcd8c9d4a70fa8397d13e6024101",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/check-hero.png": {
+    "mtime": 1783017330.1564014,
+    "ast_hash": "25eba41d433f5ec1d1826212f1c71af0",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/cs-final.png": {
+    "mtime": 1783017330.158619,
+    "ast_hash": "6038291089710c13d2c9f526b486c63d",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/cs-fixed.png": {
+    "mtime": 1783017330.1603441,
+    "ast_hash": "7668805b232d167b8afdfb2c06e4c7f3",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/cs-full.png": {
+    "mtime": 1783017330.1631684,
+    "ast_hash": "91df083f21e59d554ade50c8e3f43a40",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/cs-grid.png": {
+    "mtime": 1783017330.1653805,
+    "ast_hash": "2950b824da2324244f57a453d054ca0a",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/feed-humans.png": {
+    "mtime": 1783017330.1665475,
+    "ast_hash": "0c14ddfa7f167d3ab2ee562b66613f3a",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/flat-full.png": {
+    "mtime": 1783017330.1678143,
+    "ast_hash": "3847af2b4240b709c84d68243babe4cb",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/flat-lower.png": {
+    "mtime": 1783017330.1725051,
+    "ast_hash": "e179210c21979823522df61e6a916272",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/hero-full.png": {
+    "mtime": 1783017330.1754396,
+    "ast_hash": "2ba47f9d5e1433585ed0011297372a8b",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/svc-board.png": {
+    "mtime": 1783017330.177426,
+    "ast_hash": "05dd02eb8655af8143f0a4893b3e3da8",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/screenshots/svc-grid.png": {
+    "mtime": 1783017330.1811185,
+    "ast_hash": "f439dd9efe27ff965792165636bab38e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/templates/social/grain.svg": {
+    "mtime": 1783017330.2126718,
+    "ast_hash": "0096ebd7c1dd0c908df8e8d7ca33bdd4",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium - Quick Visual Guide.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -01.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -02.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -03.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -04.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -05.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -06.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -07.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -08.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -09.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -10.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -11.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -12.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium Works -13.png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/Atrium_Deep Teal Transparency .png": {
+    "mtime": 1782834765.0,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/dbg-board.png": {
+    "mtime": 1783017330.4392762,
+    "ast_hash": "c937856ebc83ffb6fdc464f854ab539d",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/dbg-board2.png": {
+    "mtime": 1783017330.4412644,
+    "ast_hash": "c937856ebc83ffb6fdc464f854ab539d",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/dbg-board3.png": {
+    "mtime": 1783017330.4448752,
+    "ast_hash": "db1b68cfd1c1fcae71a025f68f9602f2",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/dbg-ref1.png": {
+    "mtime": 1783017330.4546268,
+    "ast_hash": "00689709e66384ecaee1d2dc5ca5b41c",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782260270905-0.png": {
+    "mtime": 1783017330.689653,
+    "ast_hash": "3bfca51731b5b2bbcd9d0478cbf19b9c",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782260282119-0.png": {
+    "mtime": 1783017330.6986828,
+    "ast_hash": "9a75dc1c2caaa0176c9d8c89ba408f25",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782261874585-0.png": {
+    "mtime": 1783017330.7589319,
+    "ast_hash": "6f5d77bf59ec3f6256e443d4c3520009",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782261910031-0.png": {
+    "mtime": 1783017330.7988887,
+    "ast_hash": "b29e089e748e133a77c5cef8dd378d66",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782261963748-0.png": {
+    "mtime": 1783017330.81333,
+    "ast_hash": "382bdc7762f4fb02eede77394a9c8d23",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782261979249-0.png": {
+    "mtime": 1783017330.8489504,
+    "ast_hash": "bbbb97f84b6a7f099ae00f9360ddbc40",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782261989661-0.png": {
+    "mtime": 1783017330.8839762,
+    "ast_hash": "ebc38a868d4a1abad740458b486a215c",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782321382907-0.png": {
+    "mtime": 1783017331.0015187,
+    "ast_hash": "79ca95c00aec0a6951f9766420b016d0",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782321391893-0.png": {
+    "mtime": 1783017331.0639808,
+    "ast_hash": "513f0ee3f0e969c0becba4f8bec0c12a",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782321890780-0.png": {
+    "mtime": 1783017331.1500258,
+    "ast_hash": "b8ea66863fb6167b1451b4c389d77301",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782321941579-0.png": {
+    "mtime": 1783017331.1787477,
+    "ast_hash": "472386c49e7fc73b039bc66c54d4fc70",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782321982560-0.png": {
+    "mtime": 1783017331.2179964,
+    "ast_hash": "cfff6ce83eb65d90256bce0e6aa88206",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782350587024-0.png": {
+    "mtime": 1783017331.2668824,
+    "ast_hash": "25fbdc1f73725d8806d300cd5e2a9d65",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782350618376-0.png": {
+    "mtime": 1783017331.3125918,
+    "ast_hash": "a2cf7d410e076b3ef2bb1c11e635ad6c",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782350635153-0.png": {
+    "mtime": 1783017331.37555,
+    "ast_hash": "6dfa2fc723866d8edbea6647eb3e7eaf",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782350659773-0.png": {
+    "mtime": 1783017331.466637,
+    "ast_hash": "7c380da6e9d1f956c7e62e612bf86e8a",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782687482716-0.png": {
+    "mtime": 1783017331.49084,
+    "ast_hash": "27467a2928bea2abe4f33654c0490c43",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782687496439-0.png": {
+    "mtime": 1783017331.501539,
+    "ast_hash": "f95f33159d6ba5bf2c99a4dc58d31de2",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782687511430-0.png": {
+    "mtime": 1783017331.5098336,
+    "ast_hash": "f9dcc22493bf4b2338b93549f1775b2e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782687688634-0.png": {
+    "mtime": 1783017331.5174754,
+    "ast_hash": "44a1b1f08dd7d8d5b418892c22777488",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782689706281-0.png": {
+    "mtime": 1783017331.5376797,
+    "ast_hash": "8ffb9a3ab8f5e8d41fc1cca9161d64ae",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782690124944-0.png": {
+    "mtime": 1783017331.5503457,
+    "ast_hash": "29252d73bdaa6e1894a05950bad3b59f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782690202471-0.png": {
+    "mtime": 1783017331.5991158,
+    "ast_hash": "296352d554d437def2b10eed2d10f57e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782690222827-0.png": {
+    "mtime": 1783017332.0479505,
+    "ast_hash": "296352d554d437def2b10eed2d10f57e",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782708726806-0.png": {
+    "mtime": 1783017332.0887861,
+    "ast_hash": "e6c92fa27ffefcb59e2172e6dee04e81",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/pasted-1782830156515-0.png": {
+    "mtime": 1783017332.101319,
+    "ast_hash": "ed4005dd0d9306b0e3842ebe298bd2c2",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/screencapture-superside-copywriting-2026-06-30-10_40_09.jpg": {
+    "mtime": 1783017332.1155088,
+    "ast_hash": "a538f3d979a6cbade014bd058c2fe0ba",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/screencapture-superside-email-design-services-2026-06-30-10_39_26.jpg": {
+    "mtime": 1783017332.1419952,
+    "ast_hash": "6f2b043b34c8b032db72457dde86758f",
+    "semantic_hash": ""
+  },
+  "docs/Atrium Design System/uploads/screencapture-superside-service-automation-2026-06-30-10_39_02.jpg": {
+    "mtime": 1783017332.1667025,
+    "ast_hash": "a30fe7cfbba5cb5a618ad2964b2e6374",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/safe-fetch.ts": {
+    "mtime": 1783094373.9862278,
+    "ast_hash": "c22e7394218bae6ff85ada37506f562c",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/middleware.ts": {
+    "mtime": 1783094091.6262305,
+    "ast_hash": "a07d0e4fab9d36dfa41cff3c7db0b192",
+    "semantic_hash": ""
+  },
+  "docs/plans/2026-07-03-loading-scenes-redesign-design.md": {
+    "mtime": 1783097313.886526,
+    "ast_hash": "d55829d1b6b963c05a8b3f73016e0e44",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/slide-1.png": {
+    "mtime": 1783099951.9559305,
+    "ast_hash": "79dafcdbe06a3842a9836ff0d224aef8",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/slide-2.png": {
+    "mtime": 1783099951.8000789,
+    "ast_hash": "c36652ba5f9c0e45678e432ad79bb5d1",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/slide-3.png": {
+    "mtime": 1783099951.7790134,
+    "ast_hash": "b1a97ce1b56ba9723573ab90bb570058",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/slide-4.png": {
+    "mtime": 1783099951.6775534,
+    "ast_hash": "bc5896fea4fa4118b4944d34caab4360",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/public/slide-5.png": {
+    "mtime": 1783099951.5690532,
+    "ast_hash": "dbc2781bae975c855c9389d9f159728b",
+    "semantic_hash": ""
+  }
+}

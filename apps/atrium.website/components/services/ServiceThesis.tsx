@@ -7,7 +7,7 @@ export default function ServiceThesis({ svc }: { svc: Service }) {
       className="px-(--gutter) pt-20 pb-26 max-sm:px-(--gutter)"
       style={{ background: 'var(--cloud-100)' }}
     >
-      <div className="grid md:grid-cols-[minmax(0,0.9fr)_minmax(80rem,0.76fr)] items-center gap-20 max-w-272 mx-auto max-md:grid-cols-1 max-md:gap-10">
+      <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] items-center gap-16 max-w-6xl mx-auto max-md:grid-cols-1 max-md:gap-10">
         <div className="flex flex-col gap-[1.2rem]">
           <span
             className="text-[0.78rem] font-semibold tracking-widest uppercase"
