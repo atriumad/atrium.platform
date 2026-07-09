@@ -1,0 +1,21 @@
+<!-- @dsCard group="Textures" viewport="700x190" subtitle="Silver paper grain — as a solid surface and as a blend overlay" name="Paper grain" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);background:var(--cloud-100);padding:20px;display:flex;gap:18px}
+  .sw{flex:1;height:150px;border-radius:14px;overflow:hidden;position:relative;display:flex;align-items:flex-end;box-shadow:inset 0 0 0 1px rgba(7,47,52,.08)}
+  .sw .t{position:relative;z-index:2;padding:14px 16px}
+  .sw .t b{display:block;font-size:14px;font-weight:600;letter-spacing:.01em}
+  .sw .t span{font-size:11px;letter-spacing:.04em;opacity:.65}
+  /* paper as surface */
+  .paper{background-color:var(--cloud-200);background-image:var(--surface-grain);background-size:300px auto;background-blend-mode:multiply}
+  .paper .t b,.paper .t span{color:#0e1a16}
+  /* grain overlay over teal */
+  .over{background:var(--teal-800)}
+  .over::after{content:"";position:absolute;inset:0;background-image:var(--surface-grain);background-size:300px auto;opacity:.14;mix-blend-mode:overlay;pointer-events:none}
+  .over .t b{color:#fff}
+  .over .t span{color:rgba(255,255,255,.7)}
+</style></head><body>
+  <div class="sw paper"><div class="t"><b>Grain · surface</b><span>.atr-bg-grain</span></div></div>
+  <div class="sw over"><div class="t"><b>Grain · overlay on teal</b><span>.atr-grain-overlay</span></div></div>
+</body></html>

@@ -1,0 +1,71 @@
+<!-- @dsCard group="Web Samples" viewport="1280x720" subtitle="Hero — aurora field, floating photo card, soft shadows, outline pills (soft-bento)" name="Site · Hero" -->
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<script src="../assets/social/image-slot.js"></script>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--teal-800)}
+  image-slot{display:block}
+  .hero{position:relative;width:1280px;height:720px;overflow:hidden;background:var(--grad-aurora);padding:0 56px}
+  .grain{position:absolute;inset:0;background-image:var(--surface-grain);background-size:520px auto;opacity:.08;mix-blend-mode:overlay;pointer-events:none;z-index:1}
+  nav{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:28px 0}
+  .wm{font-family:var(--font-display);font-size:32px;line-height:1;color:var(--teal-800)}
+  .links{display:flex;gap:34px;font-size:16px;font-weight:500;color:var(--teal-700)}
+  .links sup{font-size:11px;color:var(--text-muted);margin-left:2px}
+  .navpill{display:inline-flex;align-items:center;gap:11px;background:var(--teal-800);color:var(--cloud-300);border-radius:999px;padding:9px 9px 9px 20px;font-size:15px;font-weight:600}
+  .navpill .dot{width:30px;height:30px;border-radius:999px;background:var(--mint-400);color:var(--teal-800);display:flex;align-items:center;justify-content:center}
+  .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:40px;align-items:center;height:calc(100% - 92px)}
+  .eb{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+  h1{font-size:62px;line-height:1.02;font-weight:800;letter-spacing:-.025em;margin:16px 0 0}
+  h1 em{font-family:var(--font-serif);font-style:italic;font-weight:400;letter-spacing:0}
+  .sub{font-size:18px;line-height:1.5;color:var(--text-body);margin:22px 0 0;max-width:42ch}
+  .cta{display:flex;align-items:center;gap:14px;margin-top:30px}
+  .pill{display:inline-flex;align-items:center;gap:12px;border-radius:999px;font-size:16px;font-weight:600;padding:13px 14px 13px 26px}
+  .p-ink{background:var(--teal-800);color:var(--cloud-300)}
+  .p-ink .dot{width:34px;height:34px;border-radius:999px;background:var(--mint-400);color:var(--teal-800);display:flex;align-items:center;justify-content:center}
+  .p-out{background:var(--cloud-100);border:1.5px solid var(--cloud-400);color:var(--teal-800);padding:13px 24px}
+  .chips{display:flex;gap:9px;margin-top:26px;flex-wrap:wrap}
+  .chip{background:var(--cloud-100);border:1.5px solid var(--cloud-400);color:var(--teal-800);border-radius:999px;padding:8px 17px;font-size:14px;font-weight:600}
+  .chip.mint{background:var(--mint-300);border-color:transparent}
+  /* floating photo card */
+  .photo{position:relative;height:520px;border-radius:var(--radius-bento);overflow:hidden;background:var(--teal-700);box-shadow:var(--shadow-float);border:1px solid rgba(255,255,255,.5)}
+  .photo .ov{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(7,47,52,0) 52%,rgba(7,47,52,.55))}
+  .badge{position:absolute;left:18px;top:18px;z-index:3;background:var(--cloud-100);color:var(--teal-800);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:8px 16px;white-space:nowrap;box-shadow:var(--shadow-soft)}
+  .qt{position:absolute;left:22px;right:22px;bottom:22px;z-index:3;font-family:var(--font-serif);font-style:italic;font-size:28px;line-height:1.1;color:#fff}
+  /* floating stat sub-card overlapping photo */
+  .statcard{position:absolute;right:20px;top:74px;z-index:4;background:var(--cloud-100);border-radius:var(--radius-float);box-shadow:var(--shadow-inset-card);padding:16px 18px;width:148px}
+  .statcard .n{font-family:var(--font-serif);font-style:italic;font-size:42px;line-height:.9;color:var(--teal-800)}
+  .statcard .t{font-size:12px;color:var(--text-muted);margin-top:6px;line-height:1.3}
+</style></head><body>
+  <div class="hero">
+    <div class="grain"></div>
+    <nav>
+      <div class="wm">atrium</div>
+      <div class="links"><span>About</span><span>Work<sup>(15)</sup></span><span>Services</span><span>Resources</span></div>
+      <span class="navpill">Let's Talk <span class="dot">→</span></span>
+    </nav>
+    <div class="wrap">
+      <div class="col-l">
+        <div class="eb">Kansas City · Creative &amp; Marketing Studio</div>
+        <h1>Grow restaurants, hotels &amp; <em>food brands.</em></h1>
+        <p class="sub">One team for strategy, creative, and data. We don't just make ads — we build growth engines.</p>
+        <div class="cta">
+          <span class="pill p-ink">Start a project <span class="dot">→</span></span>
+          <span class="pill p-out">See our work</span>
+        </div>
+        <div class="chips">
+          <span class="chip mint">SEO</span>
+          <span class="chip">Marketing</span>
+          <span class="chip">Graphic Design</span>
+          <span class="chip">Photography</span>
+        </div>
+      </div>
+      <div class="photo">
+        <image-slot id="hero-photo" style="position:absolute;inset:0;width:100%;height:100%" shape="rect" placeholder="Drop a hero photo — room, plate, or team"></image-slot>
+        <div class="ov"></div>
+        <span class="badge">Atrium · Hospitality</span>
+        <div class="statcard"><div class="n">2.7×</div><div class="t">more covers in 90 days</div></div>
+        <div class="qt">Together is more fun.</div>
+      </div>
+    </div>
+  </div>
+</body></html>

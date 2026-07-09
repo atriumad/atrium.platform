@@ -12,7 +12,7 @@ If the user invokes this skill without any other guidance, ask them what they wa
 - `readme.md` — the full design guide: brand context, voice, visual foundations, iconography, manifest.
 - `styles.css` — single global entry point (link this). `@import`s all tokens in `tokens/`.
 - `tokens/` — `fonts.css`, `colors.css`, `typography.css`, `spacing.css`, `effects.css`.
-- `assets/fonts` — Inter Tight (sans + display), Instrument Serif (serif), Nothing You Could Do (script). All bundled.
+
 - `assets/logos` — `atrium-mark.svg` (α), `atrium-wordmark.svg` (recolorable via CSS mask).
 - `components/core/` — React primitives (Button, Chip, Card, Badge, Logo, Highlight, Eyebrow, ScriptAccent, Input). Each has a `.prompt.md`.
 - `ui_kits/atrium-site/` — full marketing-site recreation built from the primitives.
@@ -20,8 +20,7 @@ If the user invokes this skill without any other guidance, ask them what they wa
 
 ## Brand in one breath
 Deep Teal `#072F34` + Mint `#B5F2DB` + Cloud `#E4EEF0`, with Amber `#F7A823` for
-campaigns. Voice is warm, human, confident ("We're humans"). Body and display
-type are both **Inter Tight**; **Instrument Serif** (used italic) for
+
 emphasis, and **Nothing You Could Do** handwriting for highlighted words.
 Signature moves: the **amber marker highlight**, **wide
 letter-spaced caps** eyebrows, **stadium pills**, and flat **color-led** layouts

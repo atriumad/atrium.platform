@@ -13,5 +13,7 @@ yarn-debug.log*
 yarn-error.log*
 bun.lockb
 pnpm-lock.yaml
+graphify-out
+docs
 
 .worktrees/

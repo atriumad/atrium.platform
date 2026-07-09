@@ -1,0 +1,118 @@
+/* ============================================================
+   Atrium — Gradients & bento surfaces
+   PALETTE-PURE: every stop is a brand hue (teal / mint / amber / cloud).
+   No off-palette colors.
+
+   GRAIN FIRST: Atrium's depth comes primarily from the silver paper
+   GRAIN (tokens/textures.css). The aurora washes below are a SECONDARY,
+   quiet tint — always pair an aurora field with .atr-grain-overlay so the
+   surface reads as photographed paper, not a digital gradient.
+
+   The identity is flat (elevation via color, not blur), so auroras stay
+   PALE and low-contrast. Always set dark type (--text-strong) on top.
+   ============================================================ */
+:root {
+  /* ---- Aurora mesh recipes (assign to background-image) ----
+     Several large radial-gradients at different corners over a pale
+     mint/cloud base. Each blob fades to transparent; overlaps blend into
+     soft secondary greens — the "aurora". Built only from mint + amber. */
+
+  /* Balanced — mint-led with a warm amber corner. The default tile wash. */
+  --grad-aurora:
+    radial-gradient(120% 115% at 14% 16%, var(--mint-400) 0%, transparent 55%),
+    radial-gradient(110% 110% at 88% 10%, var(--amber-200) 0%, transparent 52%),
+    radial-gradient(120% 120% at 82% 94%, var(--mint-500) 0%, transparent 55%),
+    radial-gradient(130% 125% at 22% 100%, var(--amber-200) 0%, transparent 50%),
+    var(--mint-200);
+
+  /* Warm — amber-led, marigold campaign energy (still over mint base). */
+  --grad-aurora-warm:
+    radial-gradient(120% 115% at 16% 16%, var(--amber-200) 0%, transparent 55%),
+    radial-gradient(115% 110% at 90% 12%, var(--mint-400) 0%, transparent 50%),
+    radial-gradient(125% 120% at 78% 92%, var(--mint-500) 0%, transparent 55%),
+    radial-gradient(130% 125% at 24% 100%, var(--amber-200) 0%, transparent 50%),
+    var(--mint-200);
+
+  /* Cool — all-green, calm/editorial (mint scale only, no amber). */
+  --grad-aurora-cool:
+    radial-gradient(120% 115% at 12% 14%, var(--mint-500) 0%, transparent 55%),
+    radial-gradient(115% 110% at 86% 16%, var(--mint-400) 0%, transparent 52%),
+    radial-gradient(125% 120% at 82% 92%, var(--mint-300) 0%, transparent 55%),
+    var(--mint-200);
+
+  /* Deep — for dark tiles: teal field with mint/amber glow. Light type. */
+  --grad-aurora-deep:
+    radial-gradient(120% 120% at 16% 18%, rgba(143,230,194,0.30) 0%, transparent 55%),
+    radial-gradient(120% 115% at 86% 84%, rgba(247,168,35,0.20) 0%, transparent 55%),
+    radial-gradient(140% 140% at 50% 50%, var(--teal-700) 0%, var(--teal-800) 70%);
+
+  /* ---- Back-compat aliases (Card component / earlier cards) ---- */
+  --grad-aurora-mint: var(--grad-aurora-cool);
+  --grad-aurora-amber: var(--grad-aurora-warm);
+
+  /* ---- Bento radii ---- */
+  --radius-bento: 24px; /* @kind other */
+  --radius-float: 18px; /* @kind other */
+}
+
+/* ----------------------------------------------------------
+   Aurora utility classes — pale base + mesh + grain on top.
+   .atr-aurora already layers the grain via ::after so the
+   "grain first" rule is the default, not an extra step.
+   ---------------------------------------------------------- */
+.atr-aurora,
+.atr-aurora--warm,
+.atr-aurora--cool,
+.atr-aurora--deep { position: relative; }
+.atr-aurora        { background-color: var(--mint-200); background-image: var(--grad-aurora); }
+.atr-aurora--warm  { background-color: var(--mint-200); background-image: var(--grad-aurora-warm); }
+.atr-aurora--cool  { background-color: var(--mint-200); background-image: var(--grad-aurora-cool); }
+.atr-aurora--deep  { background-color: var(--teal-800); background-image: var(--grad-aurora-deep); color: var(--text-on-dark); }
+
+/* grain layer, on by default for all aurora fields */
+.atr-aurora::after,
+.atr-aurora--warm::after,
+.atr-aurora--cool::after,
+.atr-aurora--deep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--surface-grain);
+  background-size: 320px auto;
+  opacity: 0.16;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Soft / Bento surfaces
+   Large-radius cards on the aurora field, with crisp white sub-cards
+   floating on top. Grain rides on the aurora via the rule above.
+   ============================================================ */
+.atr-bento-card {
+  position: relative;
+  border-radius: var(--radius-bento);
+  background-color: var(--mint-200);
+  background-image: var(--grad-aurora);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.atr-bento-card--mint { background-image: var(--grad-aurora-cool); }
+.atr-bento-card--amber { background-image: var(--grad-aurora-warm); }
+.atr-bento-card--teal { background-color: var(--teal-800); background-image: var(--grad-aurora-deep); color: var(--text-on-dark); box-shadow: var(--shadow-float); }
+
+/* Floating crisp white sub-card that sits ON an aurora tile. */
+.atr-float-card {
+  background: var(--cloud-100);
+  border-radius: var(--radius-float);
+  box-shadow: var(--shadow-inset-card);
+}
+
+/* Interactive lift — for clickable bento tiles. */
+.atr-lift {
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.atr-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-float);
+}
