@@ -314,7 +314,7 @@ export default function Navbar() {
       >
         <div className="flex justify-center px-6 pt-2 pb-6">
           <div
-            className="flex overflow-hidden w-full max-w-5xl rounded-2xl border shadow-2xl"
+            className="flex overflow-hidden w-full max-w-5xl rounded-[var(--radius-lg)] border"
             style={{
               background: 'var(--color-primary)',
               borderColor: 'var(--color-border-subtle)',
