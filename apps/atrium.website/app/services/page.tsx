@@ -10,25 +10,34 @@ export const metadata: Metadata = {
   description: 'Full-stack hospitality marketing across brand, content, paid media, SEO, email, CRM, and analytics.',
 }
 
+// Single source of truth for the three pillar accent colors, shared by the
+// PILLARS data and the hero headline. #B5F2DB is the brand mint token; the
+// other two are deliberate page-specific accents with no brand-token equivalent.
+const PILLAR_COLORS = {
+  generate: 'var(--mint-400)',
+  convert: '#D69445',
+  retain: '#5ABABC',
+} as const
+
 const PILLARS = [
   {
     num: '01',
     id: 'Generate Demand',
-    color: '#B5F2DB',
+    color: PILLAR_COLORS.generate,
     tagline: 'Create awareness and desire.',
     services: ['Brand Strategy', 'Film & Photo', 'Social Content', 'Social Management', 'Paid Media'],
   },
   {
     num: '02',
     id: 'Convert Demand',
-    color: '#D69445',
+    color: PILLAR_COLORS.convert,
     tagline: 'Turn interest into reservations.',
     services: ['Google & Local SEO', 'Reputation Management', 'Experiential & Collabs'],
   },
   {
     num: '03',
     id: 'Retain Demand',
-    color: '#5ABABC',
+    color: PILLAR_COLORS.retain,
     tagline: 'Keep guests coming back.',
     services: ['Email & SMS', 'CRM & Loyalty', 'Analytics & Reporting'],
   },
@@ -58,9 +67,9 @@ export default function ServicesPage() {
               className="font-medium leading-none tracking-tight"
               style={{ fontSize: 'clamp(2.8rem, 7vw, 6rem)', color: 'var(--text-on-dark)' }}
             >
-              <span style={{ color: '#B5F2DB' }}>Generate.</span>{' '}
-              <span style={{ color: '#D69445' }}>Convert.</span>{' '}
-              <span style={{ color: '#5ABABC' }}>Retain.</span>
+              <span style={{ color: PILLAR_COLORS.generate }}>Generate.</span>{' '}
+              <span style={{ color: PILLAR_COLORS.convert }}>Convert.</span>{' '}
+              <span style={{ color: PILLAR_COLORS.retain }}>Retain.</span>
             </h1>
             <p
               className="mt-6 max-w-xl text-base leading-relaxed"
@@ -81,7 +90,7 @@ export default function ServicesPage() {
               key={p.id}
               className="px-6 md:px-10 py-8 flex flex-col gap-4 relative"
               style={{
-                borderLeft: i > 0 ? '1px solid rgba(228,238,240,0.08)' : undefined,
+                borderLeft: i > 0 ? '1px solid color-mix(in srgb, var(--cloud-300) 8%, transparent)' : undefined,
               }}
             >
               {/* faint large number */}
