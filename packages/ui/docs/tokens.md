@@ -52,7 +52,7 @@ Import via: `@import "@atrium/ui/src/tokens/tokens.css";`
 
 | Token | Value |
 |-------|-------|
-| `--font-display` | `"Nimora", "Inter Tight", system-ui` |
+| `--font-display` | `var(--font-sans)` |
 | `--font-sans` | `"Inter Tight", system-ui` |
 | `--font-serif` | `"Instrument Serif", Georgia` |
 | `--font-script` | `"Nothing You Could Do"` |
