@@ -517,8 +517,8 @@ button:disabled { cursor: not-allowed; }
   border-radius: var(--radius-lg);
   background: rgb(228 238 240 / 8%);
   box-shadow: var(--shadow-dark);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
   text-align: left;
   animation: suggestion-drop 560ms var(--ease-enter) both;
 }
@@ -634,8 +634,8 @@ button:disabled { cursor: not-allowed; }
   box-shadow: var(--shadow-dark);
   padding: var(--space-4);
   text-align: left;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(var(--blur-lg));
+  -webkit-backdrop-filter: blur(var(--blur-lg));
   animation: panel-enter 620ms var(--ease-enter) both;
 }
 
@@ -1248,7 +1248,7 @@ button:disabled { cursor: not-allowed; }
   border-radius: var(--radius-float);
   background: rgb(255 255 255 / 88%);
   padding: var(--space-3);
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(var(--blur-md));
 }
 
 .loading-card span,

@@ -57,6 +57,11 @@
   --highlight:       var(--amber-400);
   --focus-ring:      var(--amber-500);
 
+  /* ─── Effects — blur scale (used lightly; avoid heavy glassmorphism) ─ */
+  --blur-sm: 4px;
+  --blur-md: 10px;
+  --blur-lg: 18px;
+
   /* ─── Semantic — status ───────────────────────────────────── */
   --danger-500:      #C0392B;
   --danger-bg:        #FFF5F4;

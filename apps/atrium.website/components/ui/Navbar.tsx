@@ -204,6 +204,7 @@ export default function Navbar() {
         className="absolute inset-0 -z-10 transition-opacity duration-300"
         style={{
           background: `color-mix(in srgb, var(--teal-800) ${bgOpacity * 100}%, transparent)`,
+          /* Intentionally dynamic (animates 0→14px with scroll); peak tracks --blur-lg (18px) loosely. Kept literal because it's scroll-driven, not a static tier. */
           backdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
           WebkitBackdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
         }}
@@ -296,8 +297,8 @@ export default function Navbar() {
         }`}
         style={{
           background: 'color-mix(in srgb, var(--teal-900) 55%, transparent)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
+          backdropFilter: 'blur(var(--blur-md))',
+          WebkitBackdropFilter: 'blur(var(--blur-md))',
         }}
       />
 
