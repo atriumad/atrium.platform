@@ -6,6 +6,8 @@
   --color-background: var(--cloud-200);
   --color-foreground: var(--ink-700);
   --font-sans: var(--font-sans);
+  --spacing-4-5: 1.65rem;
+  --spacing-3-5: 0.9rem;
 }
 
 /* ─── Font wiring ─────────────────────────────────────────────────────────
