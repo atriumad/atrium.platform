@@ -764,7 +764,7 @@ button:disabled { cursor: not-allowed; }
 }
 
 .social-handle-field input {
-  min-height: 38px;
+  min-height: 44px;
   border: var(--border-width) solid var(--control-border);
   border-radius: var(--radius-xs);
   background: var(--cloud-200);

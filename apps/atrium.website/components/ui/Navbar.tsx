@@ -268,7 +268,7 @@ export default function Navbar() {
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex justify-center items-center -mr-1 w-9 h-9 md:hidden"
+          className="flex justify-center items-center -mr-1.5 w-11 h-11 md:hidden"
           style={{ color: 'var(--color-surface)' }}
         >
           <span
