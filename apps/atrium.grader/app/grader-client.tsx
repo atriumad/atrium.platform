@@ -1,6 +1,7 @@
 "use client"
 
 import type { RestaurantGrowthReport } from "@atrium/application"
+import { Button } from "@atrium/ui"
 import { gsap } from "gsap"
 import type { CSSProperties, FormEvent, SVGProps } from "react"
 import { useEffect, useId, useMemo, useRef, useState } from "react"
@@ -848,9 +849,9 @@ function ReportStage({
       </div>
 
       <div className="result-actions">
-        <button className="secondary-cta" onClick={onReset} type="button">
+        <Button variant="outline" onClick={onReset} type="button">
           Scan another restaurant
-        </button>
+        </Button>
       </div>
     </section>
   )

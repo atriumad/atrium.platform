@@ -70,9 +70,8 @@ Four typefaces — all bundled or loaded via Next.js font loader:
 
 | Face | Token | Role |
 |------|-------|------|
-| Inter Tight | `--font-sans` | Primary — all body, UI, labels, buttons, headlines |
+| Inter Tight | `--font-sans` | Primary — all body, UI, labels, buttons, headlines. Also backs `--font-display` |
 | Instrument Serif | `--font-serif` | Editorial serif, used **italic** for emphasis words |
-| Nimora | `--font-display` | Wordmark / logo lockup only |
 | Nothing You Could Do | `--font-script` | Handwriting accent callouts |
 
 ---

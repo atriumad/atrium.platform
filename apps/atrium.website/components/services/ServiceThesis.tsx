@@ -33,7 +33,7 @@ export default function ServiceThesis({ svc }: { svc: Service }) {
           className="overflow-hidden relative min-h-124 max-md:min-h-112"
           style={{
             borderRadius: 'var(--radius-bento)',
-            background: 'linear-gradient(180deg, rgba(255,255,255,0.2), rgba(4,32,36,0.24)), var(--surface-atmos)',
+            background: 'linear-gradient(180deg, color-mix(in srgb, var(--cloud-100) 20%, transparent), color-mix(in srgb, var(--teal-900) 24%, transparent)), var(--surface-atmos)',
             backgroundSize: 'cover',
             boxShadow: 'var(--shadow-soft)',
           }}
@@ -52,9 +52,9 @@ export default function ServiceThesis({ svc }: { svc: Service }) {
           <div
             className="absolute inset-[9%_11%] p-4"
             style={{
-              border: '1px solid rgba(255,255,255,0.48)',
-              borderRadius: '1.8rem',
-              background: 'rgba(255,255,255,0.76)',
+              border: '1px solid color-mix(in srgb, var(--cloud-100) 48%, transparent)',
+              borderRadius: '1.8rem', /* intentionally larger than --radius-lg (22px) for this floating-card effect; nearest token --radius-xl (32px) also overshoots — kept literal pending visual review */
+              background: 'color-mix(in srgb, var(--cloud-100) 76%, transparent)',
               boxShadow: 'var(--shadow-pop)',
               transform: 'rotate(5deg)',
             }}
@@ -71,8 +71,8 @@ export default function ServiceThesis({ svc }: { svc: Service }) {
                   className="aspect-1 rounded-3.6"
                   style={{
                     background: index % 2 === 1
-                      ? 'linear-gradient(180deg, rgba(255,255,255,0.06), rgba(7,47,52,0.58)), var(--surface-atmos-deep)'
-                      : 'linear-gradient(180deg, rgba(255,255,255,0.05), rgba(7,47,52,0.38)), var(--grad-aurora)',
+                      ? 'linear-gradient(180deg, color-mix(in srgb, var(--cloud-100) 6%, transparent), color-mix(in srgb, var(--teal-800) 58%, transparent)), var(--surface-atmos-deep)'
+                      : 'linear-gradient(180deg, color-mix(in srgb, var(--cloud-100) 5%, transparent), color-mix(in srgb, var(--teal-800) 38%, transparent)), var(--grad-aurora)',
                     backgroundSize: index % 2 === 1 ? 'cover' : undefined,
                   }}
                 />
