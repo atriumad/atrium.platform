@@ -39,6 +39,7 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
       className="relative flex flex-col justify-between gap-[1rem] overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
       style={{ background: 'var(--cloud-400)', color: 'var(--teal-800)' }}
     >
+      <div className="flex flex-col gap-[0.9rem]">
         <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
         <h3
           className="font-bold leading-[1.05] m-0 max-w-[11ch] max-sm:text-[2.55rem] max-lg:text-[3.2rem]"

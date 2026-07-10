@@ -209,7 +209,9 @@ export default function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 w-full z-50 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-6 md:px-12 h-14"
       style={{
-
+        background: isEditorialCase ? 'var(--surface-page)' : `rgba(4,32,36,${bgOpacity * 0.82})`,
+        borderBottom: headerBorder,
+        boxShadow: headerShadow,
       }}
     >
       {/* Blur backdrop — separate element so it doesn't make header a fixed containing block */}
@@ -217,7 +219,9 @@ export default function Navbar() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 transition-opacity duration-300"
         style={{
-
+          opacity: isEditorialCase ? 1 : bgOpacity,
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
         }}
       />
       {/* Logo */}
@@ -284,7 +288,8 @@ export default function Navbar() {
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen((v) => !v)}
-<<
+          className="flex justify-center items-center -mr-1 w-9 h-9 md:hidden"
+          style={{ color: navTextColor }}
         >
           <span
             className="relative flex-shrink-0 w-4 h-4"
