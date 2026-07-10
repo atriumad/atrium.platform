@@ -1,7 +1,8 @@
 import type { RestaurantGrowthProfile } from "@atrium/application"
-import type { PlaceSuggestion } from "./osm-client"
 import { toGooglePlaceId } from "./place-id"
+import type { PlaceSuggestion } from "./place-suggestion"
 import { buildConversionSignals, estimateNegativeReviews, normalizeUrl, readableType } from "./place-utils"
+import { recordGooglePlacesUsage } from "./providers/business-provider"
 import { scanRestaurantWebsite } from "./website-scanner"
 
 const GOOGLE_PLACES_BASE_URL = "https://places.googleapis.com/v1"
@@ -18,43 +19,93 @@ const GOOGLE_SUGGESTION_DETAILS_FIELD_MASK = [
   "id",
   "displayName",
   "formattedAddress",
-  "shortFormattedAddress",
-  "photos",
+  "types",
+].join(",")
+
+const GOOGLE_WEBSITE_FIELD_MASK = [
+  "websiteUri",
 ].join(",")
 
 const GOOGLE_PLACE_DETAILS_FIELD_MASK = [
   "id",
   "displayName",
   "formattedAddress",
-  "shortFormattedAddress",
   "types",
+  "primaryType",
   "primaryTypeDisplayName",
   "websiteUri",
   "nationalPhoneNumber",
+  "googleMapsUri",
   "currentOpeningHours",
   "regularOpeningHours",
+  "priceLevel",
   "rating",
   "userRatingCount",
-  "reviews",
   "location",
-  "photos",
-  "editorialSummary",
   "businessStatus",
-  "priceLevel",
-  "reservable",
+  "dineIn",
   "takeout",
   "delivery",
-  "dineIn",
+  "reservable",
+  "outdoorSeating",
+  "servesBreakfast",
+  "servesLunch",
+  "servesDinner",
+  "servesCoffee",
+  "servesDessert",
+  "servesBeer",
+  "servesWine",
+  "paymentOptions",
+].join(",")
+
+const GOOGLE_NEARBY_SEARCH_FIELD_MASK = [
+  "places.id",
+  "places.displayName",
+  "places.rating",
+  "places.userRatingCount",
+  "places.types",
+  "places.websiteUri",
 ].join(",")
 
 export type GooglePlaceMeta = {
   readonly priceLevel?: string
+  readonly primaryType?: string
+  readonly primaryTypeDisplayName?: string
+  readonly googleMapsUri?: string
   readonly reservable?: boolean
   readonly takeout?: boolean
   readonly delivery?: boolean
   readonly dineIn?: boolean
+  readonly outdoorSeating?: boolean
+  readonly servesBreakfast?: boolean
+  readonly servesLunch?: boolean
+  readonly servesDinner?: boolean
+  readonly servesCoffee?: boolean
+  readonly servesDessert?: boolean
+  readonly servesBeer?: boolean
+  readonly servesWine?: boolean
+  readonly acceptsCreditCards?: boolean
+  readonly acceptsDebitCards?: boolean
+  readonly acceptsCashOnly?: boolean
+  readonly acceptsNfc?: boolean
   readonly openingHoursPublished: boolean
+  readonly regularHoursPublished: boolean
   readonly hasEditorialSummary: boolean
+}
+
+export type GoogleLocalBenchmark = {
+  readonly localRank: number | null
+  readonly competitorCount: number
+  readonly averageRating: number | null
+  readonly averageReviewCount: number | null
+  readonly relativeRatingPosition: "above" | "near" | "below" | "unknown"
+  readonly competitors: ReadonlyArray<{
+    readonly placeId: string
+    readonly name: string
+    readonly rating: number | null
+    readonly reviewCount: number | null
+    readonly websiteUrl: string | null
+  }>
 }
 
 const DEFAULT_PHOTO_WIDTH = 420
@@ -64,46 +115,43 @@ type GoogleLocalizedText = {
   readonly text?: string
 }
 
-type GoogleAuthorAttribution = {
-  readonly displayName?: string
-  readonly uri?: string
-}
-
-type GooglePlacePhoto = {
-  readonly name?: string
-  readonly authorAttributions?: GoogleAuthorAttribution[]
-}
-
-type GooglePlaceReview = {
-  readonly rating?: number
-  readonly publishTime?: string
-  readonly text?: GoogleLocalizedText
-  readonly authorAttribution?: GoogleAuthorAttribution
-}
-
 type GooglePlace = {
   readonly id?: string
   readonly displayName?: GoogleLocalizedText
-  readonly primaryTypeDisplayName?: GoogleLocalizedText
   readonly formattedAddress?: string
   readonly shortFormattedAddress?: string
   readonly types?: string[]
+  readonly primaryType?: string
+  readonly primaryTypeDisplayName?: GoogleLocalizedText
   readonly websiteUri?: string
   readonly nationalPhoneNumber?: string
+  readonly googleMapsUri?: string
   readonly currentOpeningHours?: { readonly weekdayDescriptions?: string[] }
   readonly regularOpeningHours?: { readonly weekdayDescriptions?: string[] }
   readonly rating?: number
   readonly userRatingCount?: number
-  readonly reviews?: GooglePlaceReview[]
   readonly location?: { readonly latitude?: number; readonly longitude?: number }
-  readonly photos?: GooglePlacePhoto[]
-  readonly editorialSummary?: GoogleLocalizedText
   readonly businessStatus?: "OPERATIONAL" | "CLOSED_TEMPORARILY" | "CLOSED_PERMANENTLY"
-  readonly priceLevel?: "PRICE_LEVEL_FREE" | "PRICE_LEVEL_INEXPENSIVE" | "PRICE_LEVEL_MODERATE" | "PRICE_LEVEL_EXPENSIVE" | "PRICE_LEVEL_VERY_EXPENSIVE"
-  readonly reservable?: boolean
+  readonly priceLevel?: string
+  readonly dineIn?: boolean
   readonly takeout?: boolean
   readonly delivery?: boolean
-  readonly dineIn?: boolean
+  readonly reservable?: boolean
+  readonly outdoorSeating?: boolean
+  readonly servesBreakfast?: boolean
+  readonly servesLunch?: boolean
+  readonly servesDinner?: boolean
+  readonly servesCoffee?: boolean
+  readonly servesDessert?: boolean
+  readonly servesBeer?: boolean
+  readonly servesWine?: boolean
+  readonly paymentOptions?: {
+    readonly acceptsCreditCards?: boolean
+    readonly acceptsDebitCards?: boolean
+    readonly acceptsCashOnly?: boolean
+    readonly acceptsNfc?: boolean
+  }
+  readonly editorialSummary?: GoogleLocalizedText
 }
 
 type GooglePlacePrediction = {
@@ -123,6 +171,10 @@ type GoogleAutocompleteResponse = {
   }>
 }
 
+type GoogleNearbySearchResponse = {
+  readonly places?: GooglePlace[]
+}
+
 type GooglePhotoMediaResponse = {
   readonly photoUri?: string
 }
@@ -132,9 +184,10 @@ export function getGooglePlacesApiKey(): string | null {
   return value && value.length > 0 ? value : null
 }
 
-function googlePlacesHeaders(fieldMask: string): HeadersInit {
+function googlePlacesHeaders(fieldMask: string, operation: string): HeadersInit {
   const apiKey = getGooglePlacesApiKey()
   if (!apiKey) throw new Error("GOOGLE_PLACES_API_KEY is required")
+  recordGooglePlacesUsage(operation)
 
   return {
     "Content-Type": "application/json",
@@ -145,25 +198,6 @@ function googlePlacesHeaders(fieldMask: string): HeadersInit {
 
 function googlePlaceDetailsUrl(placeId: string): string {
   return `${GOOGLE_PLACES_BASE_URL}/places/${encodeURIComponent(placeId)}`
-}
-
-function googlePhotoAttribution(photo: GooglePlacePhoto | undefined): string | null {
-  const attribution = photo?.authorAttributions?.find((item) => item.displayName || item.uri)
-  return attribution?.displayName ?? attribution?.uri ?? null
-}
-
-function firstPhoto(place: GooglePlace | null): GooglePlacePhoto | null {
-  return place?.photos?.find((photo) => photo.name && photo.name.trim().length > 0) ?? null
-}
-
-function photoProxyUrl(photoName: string, width = DEFAULT_PHOTO_WIDTH, height = DEFAULT_PHOTO_HEIGHT): string {
-  const params = new URLSearchParams({
-    name: photoName,
-    maxWidthPx: String(width),
-    maxHeightPx: String(height),
-  })
-
-  return `/api/grader/place-photo?${params.toString()}`
 }
 
 function placeIdFromPrediction(prediction: GooglePlacePrediction): string | null {
@@ -193,7 +227,7 @@ async function getGoogleSuggestionDetails(
 ): Promise<GooglePlace | null> {
   const res = await fetcher(googlePlaceDetailsUrl(googlePlaceId), {
     method: "GET",
-    headers: googlePlacesHeaders(GOOGLE_SUGGESTION_DETAILS_FIELD_MASK),
+    headers: googlePlacesHeaders(GOOGLE_SUGGESTION_DETAILS_FIELD_MASK, "places.details.search"),
   })
 
   if (!res.ok) return null
@@ -201,10 +235,7 @@ async function getGoogleSuggestionDetails(
 }
 
 function computeProfileCompleteness(place: GooglePlace, websiteUrl: string | null): number {
-  const hasHours = Boolean(
-    place.regularOpeningHours?.weekdayDescriptions?.length
-    ?? place.currentOpeningHours?.weekdayDescriptions?.length,
-  )
+  const hasHours = Boolean(place.currentOpeningHours?.weekdayDescriptions?.length)
   const checks = [
     place.displayName?.text,
     place.formattedAddress,
@@ -212,16 +243,9 @@ function computeProfileCompleteness(place: GooglePlace, websiteUrl: string | nul
     websiteUrl,
     place.nationalPhoneNumber,
     hasHours ? "hours" : null,
-    place.editorialSummary?.text,
-    place.photos?.length ? "photos" : null,
   ]
 
   return checks.filter(Boolean).length / checks.length
-}
-
-function realNegativeReviewCount(reviews: GooglePlaceReview[] | undefined): number {
-  if (!reviews?.length) return 0
-  return reviews.filter((r) => typeof r.rating === "number" && r.rating <= 2).length
 }
 
 export async function searchGooglePlaces(
@@ -230,7 +254,7 @@ export async function searchGooglePlaces(
 ): Promise<PlaceSuggestion[]> {
   const res = await fetcher(`${GOOGLE_PLACES_BASE_URL}/places:autocomplete`, {
     method: "POST",
-    headers: googlePlacesHeaders(GOOGLE_AUTOCOMPLETE_FIELD_MASK),
+    headers: googlePlacesHeaders(GOOGLE_AUTOCOMPLETE_FIELD_MASK, "places.autocomplete"),
     body: JSON.stringify({
       input: query,
       includeQueryPredictions: false,
@@ -248,7 +272,6 @@ export async function searchGooglePlaces(
   return await Promise.all(predictions.map(async (prediction) => {
     const googlePlaceId = placeIdFromPrediction(prediction) ?? ""
     const details = await getGoogleSuggestionDetails(googlePlaceId, fetcher).catch(() => null)
-    const photo = firstPhoto(details)
     const address = suggestionAddress(prediction, details)
 
     return {
@@ -257,19 +280,138 @@ export async function searchGooglePlaces(
       address,
       description: address,
       source: "google" as const,
-      photoUrl: photo?.name ? photoProxyUrl(photo.name) : null,
-      photoAttribution: googlePhotoAttribution(photo ?? undefined),
     }
   }))
+}
+
+function nearbySearchType(category: string): string {
+  const value = category.toLowerCase()
+  if (value.includes("cafe") || value.includes("coffee")) return "cafe"
+  if (value.includes("bar")) return "bar"
+  if (value.includes("bakery")) return "bakery"
+  return "restaurant"
+}
+
+function finiteNumberOrNull(value: number | null | undefined): number | null {
+  return typeof value === "number" && Number.isFinite(value) ? value : null
+}
+
+function integerOrNull(value: number | null | undefined): number | null {
+  return typeof value === "number" && Number.isFinite(value) ? Math.max(0, Math.round(value)) : null
+}
+
+function average(values: ReadonlyArray<number | null>): number | null {
+  const numeric = values.filter((value): value is number => typeof value === "number")
+  if (numeric.length === 0) return null
+  return Math.round((numeric.reduce((sum, value) => sum + value, 0) / numeric.length) * 10) / 10
+}
+
+function relativeRatingPosition(
+  targetRating: number | null,
+  averageRating: number | null,
+): GoogleLocalBenchmark["relativeRatingPosition"] {
+  if (targetRating === null || averageRating === null) return "unknown"
+  const delta = targetRating - averageRating
+  if (delta >= 0.15) return "above"
+  if (delta <= -0.15) return "below"
+  return "near"
+}
+
+function estimateRatingRank(input: {
+  readonly targetRating: number | null
+  readonly targetReviewCount: number | null
+  readonly competitors: GoogleLocalBenchmark["competitors"]
+}): number | null {
+  if (input.targetRating === null) return null
+
+  const ranked = [
+    {
+      placeId: "__target__",
+      rating: input.targetRating,
+      reviewCount: input.targetReviewCount,
+    },
+    ...input.competitors,
+  ].sort((a, b) => {
+    const ratingDelta = (b.rating ?? -1) - (a.rating ?? -1)
+    if (ratingDelta !== 0) return ratingDelta
+    return (b.reviewCount ?? -1) - (a.reviewCount ?? -1)
+  })
+
+  const index = ranked.findIndex((place) => place.placeId === "__target__")
+  return index >= 0 ? index + 1 : null
+}
+
+export async function getGoogleLocalBenchmark(
+  input: {
+    readonly googlePlaceId: string
+    readonly location: { readonly latitude: number; readonly longitude: number } | null
+    readonly category: string
+    readonly targetRating?: number | null
+    readonly targetReviewCount?: number | null
+  },
+  fetcher: typeof fetch = fetch,
+): Promise<GoogleLocalBenchmark | null> {
+  if (!input.location) return null
+
+  const res = await fetcher(`${GOOGLE_PLACES_BASE_URL}/places:searchNearby`, {
+    method: "POST",
+    headers: googlePlacesHeaders(GOOGLE_NEARBY_SEARCH_FIELD_MASK, "places.nearby.benchmark"),
+    body: JSON.stringify({
+      includedTypes: [nearbySearchType(input.category)],
+      maxResultCount: 10,
+      rankPreference: "POPULARITY",
+      locationRestriction: {
+        circle: {
+          center: {
+            latitude: input.location.latitude,
+            longitude: input.location.longitude,
+          },
+          radius: 1_500,
+        },
+      },
+    }),
+  })
+
+  if (!res.ok) return null
+
+  const data = await res.json() as GoogleNearbySearchResponse
+  const places = data.places ?? []
+  const targetPlace = places.find((place) => place.id === input.googlePlaceId)
+  const competitors = places
+    .filter((place) => place.id && place.id !== input.googlePlaceId)
+    .map((place) => ({
+      placeId: place.id ?? "",
+      name: place.displayName?.text ?? "Nearby restaurant",
+      rating: finiteNumberOrNull(place.rating),
+      reviewCount: integerOrNull(place.userRatingCount),
+      websiteUrl: normalizeUrl(place.websiteUri ?? null),
+    }))
+    .filter((place) => place.placeId.length > 0)
+
+  if (competitors.length < 3) return null
+
+  const averageRating = average(competitors.map((place) => place.rating))
+  const averageReviewCount = average(competitors.map((place) => place.reviewCount))
+  const targetRating = finiteNumberOrNull(input.targetRating ?? targetPlace?.rating)
+  const targetReviewCount = integerOrNull(input.targetReviewCount ?? targetPlace?.userRatingCount)
+
+  return {
+    localRank: estimateRatingRank({ targetRating, targetReviewCount, competitors }),
+    competitorCount: competitors.length,
+    averageRating,
+    averageReviewCount,
+    relativeRatingPosition: relativeRatingPosition(targetRating, averageRating),
+    competitors,
+  }
 }
 
 export async function getGoogleRestaurantProfile(
   googlePlaceId: string,
   fetcher: typeof fetch = fetch,
-): Promise<{ profile: RestaurantGrowthProfile; googleMeta: GooglePlaceMeta }> {
+): Promise<{ profile: RestaurantGrowthProfile; googleMeta: GooglePlaceMeta; localBenchmark: GoogleLocalBenchmark | null }> {
   const res = await fetcher(googlePlaceDetailsUrl(googlePlaceId), {
     method: "GET",
-    headers: googlePlacesHeaders(GOOGLE_PLACE_DETAILS_FIELD_MASK),
+    headers: googlePlacesHeaders(GOOGLE_PLACE_DETAILS_FIELD_MASK, "places.details.profile"),
   })
 
   if (res.status === 404) throw new Error("Business not found")
@@ -288,34 +430,51 @@ export async function getGoogleRestaurantProfile(
     ? Math.max(0, Math.round(place.userRatingCount))
     : 0
   const hasPhone = Boolean(place.nationalPhoneNumber)
-  const photo = firstPhoto(place)
 
-  // Google attributes override website HTML scan when available — more reliable
-  const enrichedWebsite = {
-    ...website,
-    hasReservations: place.reservable ?? website.hasReservations,
-    hasOnlineOrdering: (place.takeout === true || place.delivery === true) ? true : website.hasOnlineOrdering,
-  }
-
-  // Use real review data for negative count when available, fall back to estimate
-  const negativeCount = place.reviews?.length
-    ? realNegativeReviewCount(place.reviews)
-    : estimateNegativeReviews(rating, reviewCount)
-
-  // Use primary type display name if available (cleaner than raw type key)
-  const category = place.primaryTypeDisplayName?.text
-    ?? readableType(place.types?.[0] ?? "restaurant")
+  const negativeCount = estimateNegativeReviews(rating, reviewCount)
+  const category = readableType(place.types?.[0] ?? "restaurant")
+  const location = typeof place.location?.latitude === "number" && typeof place.location.longitude === "number"
+    ? { latitude: place.location.latitude, longitude: place.location.longitude }
+    : null
+  const localBenchmark = await getGoogleLocalBenchmark({
+    googlePlaceId,
+    location,
+    category,
+    targetRating: rating,
+    targetReviewCount: reviewCount,
+  }, fetcher).catch(() => null)
 
   const googleMeta: GooglePlaceMeta = {
-    ...(place.priceLevel !== undefined && { priceLevel: place.priceLevel }),
-    ...(place.reservable !== undefined && { reservable: place.reservable }),
-    ...(place.takeout !== undefined && { takeout: place.takeout }),
-    ...(place.delivery !== undefined && { delivery: place.delivery }),
-    ...(place.dineIn !== undefined && { dineIn: place.dineIn }),
-    openingHoursPublished: Boolean(
-      place.regularOpeningHours?.weekdayDescriptions?.length
-      ?? place.currentOpeningHours?.weekdayDescriptions?.length,
-    ),
+    ...(place.priceLevel !== undefined ? { priceLevel: place.priceLevel } : {}),
+    ...(place.primaryType !== undefined ? { primaryType: place.primaryType } : {}),
+    ...(place.primaryTypeDisplayName?.text !== undefined ? { primaryTypeDisplayName: place.primaryTypeDisplayName.text } : {}),
+    ...(place.googleMapsUri !== undefined ? { googleMapsUri: place.googleMapsUri } : {}),
+    ...(typeof place.dineIn === "boolean" ? { dineIn: place.dineIn } : {}),
+    ...(typeof place.takeout === "boolean" ? { takeout: place.takeout } : {}),
+    ...(typeof place.delivery === "boolean" ? { delivery: place.delivery } : {}),
+    ...(typeof place.reservable === "boolean" ? { reservable: place.reservable } : {}),
+    ...(typeof place.outdoorSeating === "boolean" ? { outdoorSeating: place.outdoorSeating } : {}),
+    ...(typeof place.servesBreakfast === "boolean" ? { servesBreakfast: place.servesBreakfast } : {}),
+    ...(typeof place.servesLunch === "boolean" ? { servesLunch: place.servesLunch } : {}),
+    ...(typeof place.servesDinner === "boolean" ? { servesDinner: place.servesDinner } : {}),
+    ...(typeof place.servesCoffee === "boolean" ? { servesCoffee: place.servesCoffee } : {}),
+    ...(typeof place.servesDessert === "boolean" ? { servesDessert: place.servesDessert } : {}),
+    ...(typeof place.servesBeer === "boolean" ? { servesBeer: place.servesBeer } : {}),
+    ...(typeof place.servesWine === "boolean" ? { servesWine: place.servesWine } : {}),
+    ...(typeof place.paymentOptions?.acceptsCreditCards === "boolean"
+      ? { acceptsCreditCards: place.paymentOptions.acceptsCreditCards }
+      : {}),
+    ...(typeof place.paymentOptions?.acceptsDebitCards === "boolean"
+      ? { acceptsDebitCards: place.paymentOptions.acceptsDebitCards }
+      : {}),
+    ...(typeof place.paymentOptions?.acceptsCashOnly === "boolean"
+      ? { acceptsCashOnly: place.paymentOptions.acceptsCashOnly }
+      : {}),
+    ...(typeof place.paymentOptions?.acceptsNfc === "boolean"
+      ? { acceptsNfc: place.paymentOptions.acceptsNfc }
+      : {}),
+    openingHoursPublished: Boolean(place.currentOpeningHours?.weekdayDescriptions?.length),
+    regularHoursPublished: Boolean(place.regularOpeningHours?.weekdayDescriptions?.length),
     hasEditorialSummary: Boolean(place.editorialSummary?.text),
   }
 
@@ -325,21 +484,35 @@ export async function getGoogleRestaurantProfile(
     category,
     address: place.formattedAddress ?? "Address unavailable",
     websiteUrl,
-    photoUrl: photo?.name ? photoProxyUrl(photo.name, 900, 540) : null,
-    photoAttribution: googlePhotoAttribution(photo ?? undefined),
     googleRating: rating,
     googleReviewCount: reviewCount,
     recentNegativeReviewCount: negativeCount,
     unansweredReviewCount: 0,
-    reputationDataSource: rating > 0 || reviewCount > 0 ? "google" : "unavailable",
+    reputationDataSource: "google",
     profileCompleteness: computeProfileCompleteness(place, websiteUrl),
-    localRank: null,
-    competitorAverageRating: null,
-    website: enrichedWebsite,
-    conversion: buildConversionSignals(enrichedWebsite, hasPhone),
+    localRank: localBenchmark?.localRank ?? null,
+    competitorAverageRating: localBenchmark?.averageRating ?? null,
+    website,
+    conversion: buildConversionSignals(website, hasPhone),
   }
 
-  return { profile, googleMeta }
+  return { profile, googleMeta, localBenchmark }
+}
+
+export async function getGoogleWebsiteUrl(
+  googlePlaceId: string,
+  fetcher: typeof fetch = fetch,
+): Promise<string | null> {
+  const res = await fetcher(googlePlaceDetailsUrl(googlePlaceId), {
+    method: "GET",
+    headers: googlePlacesHeaders(GOOGLE_WEBSITE_FIELD_MASK, "places.details.website"),
+  })
+
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error("Unable to load Google Place website")
+
+  const place = await res.json() as GooglePlace
+  return normalizeUrl(place.websiteUri ?? null)
 }
 
 export async function getGooglePlacePhotoUri(
@@ -349,6 +522,7 @@ export async function getGooglePlacePhotoUri(
 ): Promise<string | null> {
   const apiKey = getGooglePlacesApiKey()
   if (!apiKey) throw new Error("GOOGLE_PLACES_API_KEY is required")
+  recordGooglePlacesUsage("places.photo")
 
   const url = new URL(`${GOOGLE_PLACES_BASE_URL}/${photoName.replace(/^\/+/, "")}/media`)
   url.searchParams.set("key", apiKey)

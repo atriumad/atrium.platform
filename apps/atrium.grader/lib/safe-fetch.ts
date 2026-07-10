@@ -42,9 +42,8 @@ function isPrivateIp(ip: string): boolean {
  * schemes, IP-literal hosts in private/loopback/link-local ranges (including
  * cloud metadata IPs like 169.254.169.254), and hostnames that DNS-resolve
  * to a private address. This is the gate for any outbound fetch whose
- * target URL originates from crowd-sourced or user-supplied data (OSM tags,
- * Google-listed business websites, request bodies) rather than a hardcoded
- * API host.
+ * target URL originates from Google-listed business websites or user-supplied
+ * request bodies rather than a hardcoded API host.
  *
  * A hostname that fails to resolve is let through rather than blocked —
  * that's not a spoofing attempt, and the real fetch will fail on its own.
@@ -81,8 +80,8 @@ export async function assertSafeExternalUrl(rawUrl: string): Promise<URL> {
 
 /**
  * Fetch wrapper for external URLs that don't come from a hardcoded, trusted
- * API host (e.g. a restaurant's website pulled from OSM/Google data, or a
- * URL supplied directly in a request body). Validates the target isn't a
+ * API host (e.g. a restaurant's website pulled from Google Places data, or
+ * a URL supplied directly in a request body). Validates the target isn't a
  * private/internal address before requesting, and caps the response body
  * size to avoid unbounded downloads.
  */

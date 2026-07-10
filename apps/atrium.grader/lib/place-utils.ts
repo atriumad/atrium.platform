@@ -62,7 +62,7 @@ export function deriveLocalRank(hasWebsite: boolean, benchmark: LocalBenchmark):
   return 8
 }
 
-// Unified conversion builder — used by both OSM and Google paths to ensure identical scoring.
+// Unified conversion builder for Google-sourced profile and website evidence.
 export function buildConversionSignals(
   website: RestaurantWebsiteSignals,
   hasPhone: boolean,

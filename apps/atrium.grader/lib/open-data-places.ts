@@ -1,15 +1,20 @@
-import type { GooglePlaceMeta } from "./google-places-client"
-import { getGooglePlacesApiKey, getGoogleRestaurantProfile, searchGooglePlaces } from "./google-places-client"
-import { getOsmRestaurantProfile, getOsmWebsiteUrl, searchOsmPlaces } from "./osm-client"
+import type { GoogleLocalBenchmark, GooglePlaceMeta } from "./google-places-client"
+import { getGooglePlacesApiKey, getGoogleRestaurantProfile, getGoogleWebsiteUrl, searchGooglePlaces } from "./google-places-client"
 import { parseGooglePlaceId } from "./place-id"
 import type { ManualReputationInput } from "./place-utils"
-import { BusinessProviderConfigError, configuredBusinessProviderMode } from "./providers/business-provider"
+import { BusinessProviderConfigError } from "./providers/business-provider"
 
-export type { GooglePlaceMeta } from "./google-places-client"
-export type { PlaceSuggestion } from "./osm-client"
+export type { GoogleLocalBenchmark, GooglePlaceMeta } from "./google-places-client"
+export type { PlaceSuggestion } from "./place-suggestion"
 export type { ManualReputationInput } from "./place-utils"
 
 export class OpenDataPlacesLookupError extends Error {}
+
+function googlePlaceIdOrThrow(placeId: string): string {
+  const googlePlaceId = parseGooglePlaceId(placeId)
+  if (!googlePlaceId) throw new Error("placeId is required")
+  return googlePlaceId
+}
 
 function toLookupError(error: unknown): OpenDataPlacesLookupError {
   if (error instanceof BusinessProviderConfigError) {
@@ -19,26 +24,10 @@ function toLookupError(error: unknown): OpenDataPlacesLookupError {
   return new OpenDataPlacesLookupError(error instanceof Error ? error.message : String(error))
 }
 
-function shouldUseGoogleForSearch(): boolean {
-  const mode = configuredBusinessProviderMode()
-  const hasKey = Boolean(getGooglePlacesApiKey())
-
-  if (mode === "google" && !hasKey) {
-    throw new BusinessProviderConfigError("GOOGLE_PLACES_API_KEY is required when GRADER_BUSINESS_PROVIDER=google")
+function assertGoogleProviderConfigured(): void {
+  if (!getGooglePlacesApiKey()) {
+    throw new BusinessProviderConfigError("GOOGLE_PLACES_API_KEY is required for Google Places restaurant data")
   }
-
-  return mode === "google" || (mode === "auto" && hasKey)
-}
-
-function shouldUseGoogleForProfile(placeId: string): boolean {
-  const mode = configuredBusinessProviderMode()
-  const hasKey = Boolean(getGooglePlacesApiKey())
-
-  if (mode === "google" && !hasKey) {
-    throw new BusinessProviderConfigError("GOOGLE_PLACES_API_KEY is required when GRADER_BUSINESS_PROVIDER=google")
-  }
-
-  return Boolean(parseGooglePlaceId(placeId)) && (mode === "google" || (mode === "auto" && hasKey))
 }
 
 export async function searchRestaurantPlaces(
@@ -48,46 +37,35 @@ export async function searchRestaurantPlaces(
   const input = query.trim()
   if (input.length < 3) return []
 
-  let useGoogle: boolean
   try {
-    useGoogle = shouldUseGoogleForSearch()
+    assertGoogleProviderConfigured()
   } catch (e) {
     throw toLookupError(e)
   }
 
-  if (useGoogle) {
-    return searchGooglePlaces(input, fetcher).catch((e) => {
-      throw toLookupError(e)
-    })
-  }
-
-  return searchOsmPlaces(input, fetcher).catch((e) => {
+  return searchGooglePlaces(input, fetcher).catch((e) => {
     throw toLookupError(e)
   })
 }
 
 export async function getRestaurantGrowthProfileFromPlace(
   placeId: string,
-  reputation: ManualReputationInput | undefined,
+  _reputation: ManualReputationInput | undefined,
   fetcher: typeof fetch = fetch,
-): Promise<{ profile: import("@atrium/application").RestaurantGrowthProfile; googleMeta: GooglePlaceMeta | null }> {
-  let useGoogle: boolean
+): Promise<{
+  profile: import("@atrium/application").RestaurantGrowthProfile
+  googleMeta: GooglePlaceMeta | null
+  localBenchmark: GoogleLocalBenchmark | null
+}> {
+  let googlePlaceId: string
   try {
-    useGoogle = shouldUseGoogleForProfile(placeId)
+    assertGoogleProviderConfigured()
+    googlePlaceId = googlePlaceIdOrThrow(placeId)
   } catch (e) {
     throw toLookupError(e)
   }
 
-  if (useGoogle) {
-    const googlePlaceId = parseGooglePlaceId(placeId)
-    if (googlePlaceId) {
-      return getGoogleRestaurantProfile(googlePlaceId, fetcher).catch((e) => {
-        throw toLookupError(e)
-      })
-    }
-  }
-
-  return getOsmRestaurantProfile(placeId, reputation, fetcher).catch((e) => {
+  return getGoogleRestaurantProfile(googlePlaceId, fetcher).catch((e) => {
     // Preserve original error messages for HTTP status mapping in route.ts
     throw toLookupError(e)
   })
@@ -97,5 +75,15 @@ export async function getWebsiteUrlForPlace(
   placeId: string,
   fetcher: typeof fetch = fetch,
 ): Promise<string | null> {
-  return getOsmWebsiteUrl(placeId, fetcher)
+  let googlePlaceId: string
+  try {
+    assertGoogleProviderConfigured()
+    googlePlaceId = googlePlaceIdOrThrow(placeId)
+  } catch (e) {
+    throw toLookupError(e)
+  }
+
+  return getGoogleWebsiteUrl(googlePlaceId, fetcher).catch((e) => {
+    throw toLookupError(e)
+  })
 }
