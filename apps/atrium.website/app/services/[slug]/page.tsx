@@ -4,12 +4,10 @@ import CTABanner from '@/components/sections/CTABanner'
 import ServiceBento from '@/components/services/ServiceBento'
 import ServiceEditorialHero from '@/components/services/ServiceEditorialHero'
 import ServiceMarquee from '@/components/services/ServiceMarquee'
-import ServicePerksRail from '@/components/services/ServicePerksRail'
 import ServiceProofStrip from '@/components/services/ServiceProofStrip'
 import ServiceStatsEditorial from '@/components/services/ServiceStatsEditorial'
 import ServiceThesis from '@/components/services/ServiceThesis'
 import ServiceTimelineEditorial from '@/components/services/ServiceTimelineEditorial'
-import SiblingServices from '@/components/services/SiblingServices'
 import { getService, services } from '@/lib/services'
 
 export async function generateStaticParams() {

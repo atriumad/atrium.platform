@@ -2,6 +2,14 @@ export type CaseMetric = { number: string; label: string }
 export type HowStep = { title: string; body: string }
 export type ScopeGroup = { label: string; items: string[] }
 export type CaseQuote = { text: string; name: string; role: string; placeholder?: boolean }
+export type CaseGalleryImage = {
+  src: string
+  srcSet?: string
+  sizes?: string
+  alt: string
+  width?: number
+  height?: number
+}
 
 export type CaseStudy = {
   slug: string
@@ -17,6 +25,7 @@ export type CaseStudy = {
   scope?: ScopeGroup[]
   quote?: CaseQuote
   takeaway?: string
+  gallery?: CaseGalleryImage[]
   order: number
 }
 

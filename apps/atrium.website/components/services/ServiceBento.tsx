@@ -12,15 +12,6 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
       }}
     >
       <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'var(--surface-grain)',
-          backgroundSize: '360px auto',
-          mixBlendMode: 'overlay',
-          opacity: 0.14,
-        }}
-      />
-      <div
         className="relative z-1 max-w-[15rem] rounded-full px-[0.85rem] py-[0.62rem] text-[0.75rem] leading-[1.25]"
         style={{
           background: 'rgba(255,255,255,0.17)',
@@ -48,15 +39,6 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
       className="relative flex flex-col justify-between gap-[1rem] overflow-hidden rounded-[var(--radius-bento)] p-[1.65rem] max-sm:p-[1.25rem]"
       style={{ background: 'var(--cloud-400)', color: 'var(--teal-800)' }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'var(--surface-grain)',
-          backgroundSize: '360px auto',
-          mixBlendMode: 'overlay',
-          opacity: 0.14,
-        }}
-      />
       <div className="flex flex-col gap-[0.9rem]">
         <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
         <h3

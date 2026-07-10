@@ -41,15 +41,6 @@ export default function ServiceThesis({ svc }: { svc: Service }) {
           role="img"
         >
           <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backgroundImage: 'var(--surface-grain)',
-              backgroundSize: '360px auto',
-              mixBlendMode: 'overlay',
-              opacity: 0.14,
-            }}
-          />
-          <div
             className="absolute inset-[9%_11%] p-4"
             style={{
               border: '1px solid rgba(255,255,255,0.48)',

@@ -7,9 +7,10 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
   const listRef = useRef<HTMLOListElement>(null)
 
   useEffect(() => {
-    if (!listRef.current) return
+    const list = listRef.current
+    if (!list) return
     const ctx = gsap.context(() => {
-      const items = listRef.current!.querySelectorAll('.tl-step')
+      const items = list.querySelectorAll('.tl-step')
       for (const el of items) {
         const num = el.querySelector('.tl-num')
         const content = el.querySelector('.tl-content')
@@ -33,7 +34,7 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
           tl.fromTo(content, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, '-=0.2')
         }
       }
-    })
+    }, list)
     return () => ctx.revert()
   }, [])
 

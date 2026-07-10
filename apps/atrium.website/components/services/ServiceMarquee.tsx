@@ -68,15 +68,6 @@ export default function ServiceMarquee({ svc }: Props) {
       className="overflow-hidden relative py-6"
       style={{ background: 'var(--teal-900)' }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'var(--surface-grain)',
-          backgroundSize: '380px auto',
-          opacity: 0.05,
-          mixBlendMode: 'overlay',
-        }}
-      />
       <div ref={trackRef} className="flex gap-4 w-max">
         {items.concat(items).map((item) => {
           const key = keyCounter++
