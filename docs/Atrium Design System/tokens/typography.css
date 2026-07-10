@@ -1,15 +1,6 @@
-/* ============================================================
-   Atrium — Typography tokens
-   FOUR typefaces, all bundled (no CDN):
-     Inter Tight        → body + ALL UI/headline sans (the primary face)
-     Instrument Serif   → editorial serif, used ITALIC for emphasis words
-                          ("grow restaurants, hotels, and food brands")
-     Nimora             → the "atrium" wordmark / logo lockup only
-     Nothing You Could Do → handwriting script for accent callouts
-   ============================================================ */
 :root {
   /* ---- Families ---- */
-  --font-display: "Nimora", "Inter Tight", system-ui, sans-serif;
+  
   --font-sans: "Inter Tight", system-ui, -apple-system, sans-serif;
   --font-serif: "Instrument Serif", Georgia, "Times New Roman", serif;
   --font-accent: var(--font-serif); /* alias — emphasis serif (italic) */

@@ -4,7 +4,7 @@ import { parseHeadline } from './utils'
 function BentoCardPhoto({ card }: { card: BentoCard }) {
   return (
     <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-[1.65rem] max-sm:p-[1.25rem] md:row-span-2 min-h-[37rem] max-md:min-h-[30rem]"
+      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem] md:row-span-2 min-h-[37rem] max-md:min-h-[30rem]"
       style={{
         background: 'linear-gradient(180deg, rgba(4,32,36,0.04) 20%, rgba(4,32,36,0.82)), var(--surface-atmos-deep)',
         backgroundSize: 'cover',
@@ -20,7 +20,7 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
       >
         {card.coverAlt}
       </div>
-      <div className="relative z-1 grid gap-[0.9rem]">
+      <div className="relative z-1 grid gap-3-5">
         <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
         <h3 className="text-[2rem] font-semibold leading-[0.98] m-0 max-sm:text-[1.7rem]" style={{ color: 'inherit' }}>
           {parseHeadline(card.title)}
@@ -36,10 +36,9 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
 function BentoCardStatement({ card }: { card: BentoCard }) {
   return (
     <article
-      className="relative flex flex-col justify-between gap-[1rem] overflow-hidden rounded-[var(--radius-bento)] p-[1.65rem] max-sm:p-[1.25rem]"
+      className="relative flex flex-col justify-between gap-[1rem] overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
       style={{ background: 'var(--cloud-400)', color: 'var(--teal-800)' }}
     >
-      <div className="flex flex-col gap-[0.9rem]">
         <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
         <h3
           className="font-bold leading-[1.05] m-0 max-w-[11ch] max-sm:text-[2.55rem] max-lg:text-[3.2rem]"
@@ -58,7 +57,7 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
 function BentoCardPosition({ card }: { card: BentoCard }) {
   return (
     <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-[1.65rem] max-sm:p-[1.25rem]"
+      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
       style={{ background: 'var(--teal-300)', color: 'var(--teal-900)' }}
     >
       <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
@@ -75,7 +74,7 @@ function BentoCardPosition({ card }: { card: BentoCard }) {
 function BentoCardMini({ card }: { card: BentoCard }) {
   return (
     <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-[1.65rem] max-sm:p-[1.25rem]"
+      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
       style={{ background: 'var(--mint-300)', color: 'var(--teal-800)' }}
     >
       <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
@@ -92,7 +91,7 @@ function BentoCardMini({ card }: { card: BentoCard }) {
 function BentoCardNeutral({ card }: { card: BentoCard }) {
   return (
     <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-[1.65rem] gap-[0.9rem]"
+      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 gap-3-5"
       style={{ background: 'var(--mint-300)', color: 'var(--teal-800)' }}
     >
       <h3 className="text-[2rem] font-semibold leading-[0.98] m-0 max-sm:text-[1.7rem]">

@@ -134,9 +134,9 @@ function ServiceItem({
       style={{ color: 'var(--color-surface)' }}
     >
       <span
-        className="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[rgba(181,242,219,0.18)]"
+        className="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[color-mix(in_srgb,var(--mint-400)_18%,transparent)]"
         style={{
-          background: 'rgba(181,242,219,0.09)',
+          background: 'color-mix(in srgb, var(--mint-400) 9%, transparent)',
           color: 'var(--color-accent)',
         }}
       >
@@ -209,8 +209,7 @@ export default function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 w-full z-50 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-6 md:px-12 h-14"
       style={{
-        borderBottom: headerBorder,
-        boxShadow: headerShadow,
+
       }}
     >
       {/* Blur backdrop — separate element so it doesn't make header a fixed containing block */}
@@ -218,9 +217,7 @@ export default function Navbar() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 transition-opacity duration-300"
         style={{
-          background: isEditorialCase ? 'rgba(247,249,242,0.94)' : `rgba(7,47,52,${bgOpacity})`,
-          backdropFilter: isEditorialCase || bgOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(bgOpacity * 14)}px)` : 'none',
-          WebkitBackdropFilter: isEditorialCase || bgOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(bgOpacity * 14)}px)` : 'none',
+
         }}
       />
       {/* Logo */}
@@ -287,8 +284,7 @@ export default function Navbar() {
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex justify-center items-center -mr-1 w-9 h-9 md:hidden"
-          style={{ color: navTextColor }}
+<<
         >
           <span
             className="relative flex-shrink-0 w-4 h-4"
@@ -314,9 +310,9 @@ export default function Navbar() {
           open ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         style={{
-          background: 'rgba(4,32,36,0.55)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
+          background: 'color-mix(in srgb, var(--teal-900) 55%, transparent)',
+          backdropFilter: 'blur(var(--blur-md))',
+          WebkitBackdropFilter: 'blur(var(--blur-md))',
         }}
       />
 
@@ -333,11 +329,11 @@ export default function Navbar() {
       >
         <div className="flex justify-center px-6 pt-2 pb-6">
           <div
-            className="flex overflow-hidden w-full max-w-5xl rounded-2xl border shadow-2xl"
+            className="flex overflow-hidden w-full max-w-5xl rounded-[var(--radius-lg)] border"
             style={{
               background: 'var(--color-primary)',
               borderColor: 'var(--color-border-subtle)',
-              boxShadow: '0 24px 80px rgba(4,32,36,0.7)',
+              boxShadow: 'var(--shadow-dark)',
             }}
           >
             {/* Left feature panel — Growth Grader promo */}

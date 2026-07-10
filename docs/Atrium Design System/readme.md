@@ -35,7 +35,6 @@ site UI kit built from them.
   - `Typography/` — **Nimora** (experimental display sans, single weight),
     **Spectral** (serif family), **Swarsh Daisy** (elegant display serif,
     roman + italic), **Nothing You Could Do** (Google handwriting script).
-    *(Current system trims to 4 faces: Nimora, General Sans, Instrument Serif,
     Nothing You Could Do.)*
   - `LOGO SVG/SVG/` — `Artboard 3–10.svg` (α mark + horizontal wordmark).
   - `Exportables/` — `Atrium Works -01…13.png` brand applications,
@@ -135,9 +134,6 @@ posts, web, slides.
   for stats/tags (ROI · rank #1 · high-intent). `.atr-lift` adds the hover lift.
 
 ### Type
-The live site (**atriummm.framer.website**) runs on **four typefaces, nothing
-more**: a clean geometric **sans** for everything, a high-contrast **serif used
-in italic** for emphasis words and big stat figures, the **Nimora** wordmark, and
 a **handwriting script** for accent callouts.
 - **Inter Tight** — *the primary face* (bundled). All body, UI, labels, buttons
   and headlines (*"We use strategy, creative, and data…"*, *"The Data Behind the
@@ -146,8 +142,7 @@ a **handwriting script** for accent callouts.
   emphasis phrase inside a sans headline (*"grow restaurants, hotels, and food
   brands"*, *"Keynote, PowerPoint, Slides & Figma"*) and for big stat figures
   (*“$44”, “70%”, “2.7x”*). `--font-serif` / `--font-accent` (alias).
-- **Nimora** — reserved for the **atrium wordmark / logo lockup** (`--font-display`).
-  Distinctive curled **u**; one weight.
+
 - **Nothing You Could Do** — handwriting script for accent callouts (`--font-script`).
 
 Signature treatment: **sans headline with one italic-serif emphasis phrase**
@@ -208,11 +203,6 @@ Atrium's identity is **typographic, not icon-heavy** — the brand leans on the
 - `readme.md` — this guide.
 - `SKILL.md` — Agent-Skills wrapper.
 
-**`tokens/`** — `fonts.css` (4 @font-face/imports), `colors.css`,
-`typography.css`, `spacing.css`, `effects.css`.
-
-**`assets/`**
-- `fonts/` — all 4 faces bundled: Nimora (logo), Inter Tight (sans, roman+italic),
   Instrument Serif (serif, roman+italic), Nothing You Could Do (script). No CDN.
 - `logos/` — `atrium-mark.svg`, `atrium-wordmark.svg`, original `artboard-*.svg`, `atrium-works.svg`.
 - `images/` — `deep-teal-transparency.png`.
@@ -240,11 +230,4 @@ tokens, voice and two-tone palette — fork it for a month of branded content.
 ---
 
 ## 6. Caveats / substitutions
-- **Text faces are final & bundled.** **Inter Tight** (sans) and **Instrument
-  Serif** (serif, roman+italic) ship as local `.ttf` files — no CDN, fully
-  offline. **Nimora** (logo) and **Nothing You Could Do** (script) are bundled too.
-- **UI icon set is a substitution** — **Lucide** via CDN (see Iconography).
-- **Amber** `#F7A823` was read from the campaign poster (the PDF color spec is
-  outlined/encrypted); confirm the exact brand amber if a value sheet exists.
-- **Nimora is single-weight** — bold/thin display effects come from size +
-  tracking, not real weight axes.
+
