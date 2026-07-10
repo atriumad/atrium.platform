@@ -34,30 +34,19 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-14"
+      className="flex overflow-hidden relative flex-col justify-center pt-14 min-h-screen"
       style={{ background: '#0a0806' }}
     >
       <HeroScene />
 
-      {/* static grain layer */}
-      <div
-        className="absolute inset-0 z-[1] pointer-events-none"
-        style={{
-          backgroundImage: 'var(--surface-grain)',
-          backgroundSize: '380px auto',
-          opacity: 0.07,
-          mixBlendMode: 'overlay',
-        }}
-      />
-
-      <div className="relative z-10 px-6 md:px-16 max-w-7xl mx-auto w-full py-20">
+      <div className="relative z-10 px-6 py-20 mx-auto w-full max-w-7xl md:px-16">
         <div ref={textRef} className="max-w-4xl">
           <Eyebrow className="mb-6" tone="onDark">
             Smart Creative for Hospitality
           </Eyebrow>
 
           <h1
-            className="font-medium mb-6"
+            className="mb-6 font-medium"
             style={{
               fontSize: 'var(--text-display-lg)',
               lineHeight: 'var(--leading-tight)',
@@ -95,7 +84,7 @@ export default function HeroSection() {
           {tags.map((tag) => (
             <div
               key={tag}
-              className="rounded-full px-5 py-2 text-sm font-medium"
+              className="px-5 py-2 text-sm font-medium rounded-full"
               style={{
                 background: 'rgba(228,238,240,0.07)',
                 color: 'var(--mint-400)',

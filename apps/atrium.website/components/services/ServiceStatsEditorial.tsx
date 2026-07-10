@@ -7,9 +7,10 @@ export default function ServiceStatsEditorial({ stats }: { stats: StatItem[] }) 
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!containerRef.current) return
+    const container = containerRef.current
+    if (!container) return
     const ctx = gsap.context(() => {
-      const numbers = containerRef.current!.querySelectorAll('.stat-number')
+      const numbers = container.querySelectorAll('.stat-number')
       for (const el of numbers) {
         gsap.fromTo(
           el as HTMLElement,
@@ -19,16 +20,16 @@ export default function ServiceStatsEditorial({ stats }: { stats: StatItem[] }) 
           }
         )
       }
-      const labels = containerRef.current!.querySelectorAll('.stat-label')
+      const labels = container.querySelectorAll('.stat-label')
       if (labels) {
         gsap.fromTo(labels,
           { y: 12, opacity: 0 },
           { y: 0, opacity: 0.7, duration: 0.5, stagger: 0.15, delay: 0.3, ease: 'power2.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 85%', once: true },
+            scrollTrigger: { trigger: container, start: 'top 85%', once: true },
           }
         )
       }
-    })
+    }, container)
     return () => ctx.revert()
   }, [])
 
@@ -38,15 +39,6 @@ export default function ServiceStatsEditorial({ stats }: { stats: StatItem[] }) 
       className="relative px-[var(--gutter)] py-24 md:py-32"
       style={{ background: 'var(--teal-900)' }}
     >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'var(--surface-grain)',
-          backgroundSize: '380px auto',
-          opacity: 0.05,
-          mixBlendMode: 'overlay',
-        }}
-      />
       <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 max-w-[var(--container-max)] mx-auto">
         {stats.map(stat => (
           <div key={`${stat.number}-${stat.label}`} className="flex flex-col gap-3">

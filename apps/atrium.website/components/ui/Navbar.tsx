@@ -1,5 +1,7 @@
 'use client'
+import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import Button from './Button'
 
@@ -154,6 +156,7 @@ function ServiceItem({
 
 // ─── Navbar ────────────────────────────────────────────────────────────────────
 export default function Navbar() {
+  const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [bgOpacity, setBgOpacity] = useState(0)
@@ -189,13 +192,24 @@ export default function Navbar() {
   }
   const close = () => setOpen(false)
   const closeMobile = () => setMobileOpen(false)
+  const isEditorialCase = pathname.startsWith('/work/')
+  const navTextColor = isEditorialCase ? 'var(--text-strong)' : 'var(--color-surface)'
+  const headerBorder = isEditorialCase
+    ? '1px solid rgba(7,47,52,0.08)'
+    : bgOpacity > 0.3
+      ? `1px solid rgba(228,238,240,${bgOpacity * 0.08})`
+      : '1px solid transparent'
+  const headerShadow = isEditorialCase
+    ? '0 1px 24px rgba(7,47,52,0.05)'
+    : bgOpacity > 0.6
+      ? `0 1px 24px rgba(4,32,36,${bgOpacity * 0.4})`
+      : 'none'
 
   return (
     <header
       className="fixed top-0 left-0 right-0 w-full z-50 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-6 md:px-12 h-14"
       style={{
-        borderBottom: bgOpacity > 0.3 ? `1px solid color-mix(in srgb, var(--cloud-300) ${bgOpacity * 8}%, transparent)` : '1px solid transparent',
-        boxShadow: bgOpacity > 0.6 ? `0 1px 24px color-mix(in srgb, var(--teal-900) ${bgOpacity * 40}%, transparent)` : 'none',
+
       }}
     >
       {/* Blur backdrop — separate element so it doesn't make header a fixed containing block */}
@@ -203,18 +217,19 @@ export default function Navbar() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 transition-opacity duration-300"
         style={{
-          background: `color-mix(in srgb, var(--teal-800) ${bgOpacity * 100}%, transparent)`,
-          /* Intentionally dynamic (animates 0→14px with scroll); peak tracks --blur-lg (18px) loosely. Kept literal because it's scroll-driven, not a static tier. */
-          backdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
-          WebkitBackdropFilter: bgOpacity > 0.05 ? `blur(${Math.round(bgOpacity * 14)}px)` : 'none',
+
         }}
       />
       {/* Logo */}
       <Link href="/" className="flex justify-self-start items-center">
-        <img
+        <Image
           src="/logos/atrium-wordmark.svg"
           alt="Atrium"
-          style={{ height: '24px', width: 'auto', filter: 'brightness(0) invert(1)' }}
+          width={88}
+          height={24}
+          priority
+          unoptimized
+          style={{ height: '24px', width: 'auto', filter: isEditorialCase ? 'brightness(0)' : 'brightness(0) invert(1)' }}
         />
       </Link>
 
@@ -229,7 +244,7 @@ export default function Navbar() {
           onMouseEnter={onEnter}
           onMouseLeave={onLeave}
           className="flex gap-1 items-center text-sm font-medium transition-opacity hover:opacity-70"
-          style={{ color: 'var(--color-surface)' }}
+          style={{ color: navTextColor }}
         >
           Services
           <svg
@@ -248,7 +263,7 @@ export default function Navbar() {
             key={link.href}
             href={link.href}
             className="relative text-sm font-medium transition-opacity hover:opacity-70 after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[var(--color-accent)] after:transition-all after:duration-300 hover:after:w-full"
-            style={{ color: 'var(--color-surface)' }}
+            style={{ color: navTextColor }}
           >
             {link.label}
           </Link>
@@ -258,7 +273,7 @@ export default function Navbar() {
       {/* Right column — CTA on desktop, menu toggle on mobile */}
       <div className="flex gap-4 justify-end justify-self-end items-center">
         <div className="hidden md:flex">
-          <Button href="/contact" variant="ghostLight" className="px-4 py-2 text-xs">
+          <Button href="/contact" variant={isEditorialCase ? 'ghost' : 'ghostLight'} className="px-4 py-2 text-xs">
             Let&apos;s Talk
           </Button>
         </div>
@@ -269,8 +284,7 @@ export default function Navbar() {
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex justify-center items-center -mr-1.5 w-11 h-11 md:hidden"
-          style={{ color: 'var(--color-surface)' }}
+<<
         >
           <span
             className="relative flex-shrink-0 w-4 h-4"

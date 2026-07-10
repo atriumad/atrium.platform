@@ -54,10 +54,6 @@ export default function ServicesPage() {
         style={{ background: 'var(--teal-800)' }}
       >
         <SceneWrapper variant="services" />
-        <div
-          className="absolute inset-0 z-[1] pointer-events-none"
-          style={{ backgroundImage: 'var(--surface-grain)', backgroundSize: '380px auto', opacity: 0.07, mixBlendMode: 'overlay' }}
-        />
 
         {/* top area — headline */}
         <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-16 pt-28 pb-12">
