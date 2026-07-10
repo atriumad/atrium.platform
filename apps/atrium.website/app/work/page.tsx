@@ -1,5 +1,6 @@
-import { Button, Chip, Highlight } from '@atrium/ui'
+import { Highlight } from '@atrium/ui'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
@@ -43,10 +44,12 @@ export default function WorkPage() {
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {sortedCases.map((item) => (
-              <article
+              <Link
                 key={item.slug}
-                className="group block overflow-hidden rounded-[var(--radius-bento)] border transition-transform duration-200 ease-out hover:-translate-y-1 active:scale-[0.99]"
+                href={`/work/${item.slug}`}
+                className="group block overflow-hidden rounded-[var(--radius-bento)] border no-underline transition-transform duration-200 ease-out hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2 active:scale-[0.99]"
                 style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}
+                aria-label={`Read case study: ${item.client}`}
               >
                 <div
                   className="relative flex min-h-56 items-end overflow-hidden p-6"
@@ -63,9 +66,16 @@ export default function WorkPage() {
                     {String(item.order).padStart(2, '0')}
                   </p>
                   <div className="absolute right-5 top-5">
-                    <Chip variant={item.order % 3 === 0 || item.order % 2 === 0 ? 'ink' : 'mint'} size="sm">
+                    <span
+                      className="inline-flex rounded-[var(--radius-pill)] px-[14px] py-[5px] text-[13px] font-medium leading-none"
+                      style={{
+                        background: item.order % 3 === 0 || item.order % 2 === 0 ? 'var(--teal-800)' : 'var(--mint-400)',
+                        color: item.order % 3 === 0 || item.order % 2 === 0 ? 'var(--mint-400)' : 'var(--teal-800)',
+                        border: item.order % 3 === 0 || item.order % 2 === 0 ? '1.5px solid var(--teal-800)' : '1.5px solid var(--mint-400)',
+                      }}
+                    >
                       {String(item.order).padStart(2, '0')}
-                    </Chip>
+                    </span>
                   </div>
                   <div>
                     <p className="text-xs font-semibold uppercase" style={{ opacity: 0.72, letterSpacing: 'var(--tracking-wide)' }}>
@@ -80,16 +90,27 @@ export default function WorkPage() {
                   <p className="text-xl font-medium leading-snug">{item.resultHeadline}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     {item.serviceTags.slice(0, 4).map((tag) => (
-                      <Chip key={tag} variant="outline-soft" size="sm">
+                      <span
+                        key={tag}
+                        className="inline-flex rounded-[var(--radius-pill)] px-[14px] py-[5px] text-[13px] font-medium leading-none"
+                        style={{
+                          background: 'var(--cloud-100)',
+                          color: 'var(--teal-800)',
+                          border: '1.5px solid var(--cloud-400)',
+                        }}
+                      >
                         {tag}
-                      </Chip>
+                      </span>
                     ))}
                   </div>
-                  <Button href={`/work/${item.slug}`} variant="outline" size="sm" className="mt-6">
+                  <span
+                    className="mt-6 inline-flex rounded-[var(--radius-pill)] px-[18px] py-[8px] text-[14px] font-medium leading-none transition-colors duration-200 ease-out group-hover:bg-[var(--teal-800)] group-hover:text-[var(--mint-400)]"
+                    style={{ border: '1.5px solid var(--teal-800)', color: 'var(--teal-800)' }}
+                  >
                     Read case study
-                  </Button>
+                  </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
