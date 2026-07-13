@@ -218,9 +218,7 @@ export default function Navbar() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 transition-opacity duration-300"
         style={{
-          background: isEditorialCase ? 'rgba(247,249,242,0.94)' : `rgba(7,47,52,${bgOpacity})`,
-          backdropFilter: isEditorialCase || bgOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(bgOpacity * 14)}px)` : 'none',
-          WebkitBackdropFilter: isEditorialCase || bgOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(bgOpacity * 14)}px)` : 'none',
+
         }}
       />
       {/* Logo */}
