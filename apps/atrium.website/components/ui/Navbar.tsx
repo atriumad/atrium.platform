@@ -347,13 +347,13 @@ export default function Navbar() {
             >
               <div>
                 <span
-                  className="text-[10px] uppercase tracking-widest font-semibold"
+                  className="type-eyebrow"
                   style={{ color: 'var(--color-accent)', opacity: 0.65 }}
                 >
                   Free tool
                 </span>
                 <h2
-                  className="mt-4 text-[1.6rem] font-medium leading-snug"
+                  className="type-card-title mt-4"
                   style={{ color: 'var(--color-surface)' }}
                 >
                   Know your score.{' '}
@@ -362,8 +362,8 @@ export default function Navbar() {
                   </em>
                 </h2>
                 <p
-                  className="mt-4 text-xs leading-relaxed"
-                  style={{ color: 'var(--color-surface)', opacity: 0.4 }}
+                  className="type-caption mt-4"
+                  style={{ color: 'var(--color-surface)', opacity: 0.58 }}
                 >
                   The Atrium Growth Grader scores your Google presence, website, and social — then shows you exactly what&apos;s leaking revenue.
                 </p>
@@ -389,7 +389,7 @@ export default function Navbar() {
               {/* Generate Demand */}
               <div className="flex flex-col flex-1 gap-1 p-6">
                 <p
-                  className="text-[10px] uppercase tracking-widest font-semibold mb-4"
+                  className="type-eyebrow mb-4"
                   style={{ color: 'var(--color-accent)', opacity: 0.55 }}
                 >
                   {leftGroup.label}
@@ -408,7 +408,7 @@ export default function Navbar() {
                     style={{ borderColor: 'var(--color-border-subtle)' }}
                   >
                     <p
-                      className="text-[10px] uppercase tracking-widest font-semibold mb-4"
+                      className="type-eyebrow mb-4"
                       style={{ color: 'var(--color-accent)', opacity: 0.55 }}
                     >
                       {group.label}
@@ -454,7 +454,7 @@ export default function Navbar() {
 
           <div className="flex flex-col gap-1">
             <p
-              className="text-[10px] uppercase tracking-widest font-semibold mb-3"
+              className="type-eyebrow mb-3"
               style={{ color: 'var(--color-accent)', opacity: 0.55 }}
             >
               {leftGroup.label}
@@ -467,7 +467,7 @@ export default function Navbar() {
           {rightGroups.map((group) => (
             <div key={group.label} className="flex flex-col gap-1">
               <p
-                className="text-[10px] uppercase tracking-widest font-semibold mb-3"
+                className="type-eyebrow mb-3"
                 style={{ color: 'var(--color-accent)', opacity: 0.55 }}
               >
                 {group.label}

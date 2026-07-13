@@ -32,23 +32,23 @@ export default function Footer() {
           <div className="max-w-sm">
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full" style={{ background: 'var(--color-accent)' }} />
-              <p className="text-2xl font-medium">Atrium</p>
+              <p className="type-card-title">Atrium</p>
             </div>
-            <p className="text-sm leading-relaxed" style={{ opacity: 0.65 }}>
+            <p className="type-caption" style={{ opacity: 0.72 }}>
               Smart creative for restaurants, hotels, and food brands. Hospitality is all we do.
             </p>
-            <p className="text-sm mt-6 font-medium" style={{ color: 'var(--color-accent)' }}>
+            <p className="type-caption mt-6 font-medium" style={{ color: 'var(--color-accent)' }}>
               Kansas City, MO · Cuba
             </p>
           </div>
           <div className="flex gap-16">
             {columns.map((col) => (
               <div key={col.label}>
-                <p className="text-xs font-medium tracking-widest uppercase mb-4" style={{ opacity: 0.4, color: 'var(--color-accent)' }}>{col.label}</p>
+                <p className="type-eyebrow mb-4" style={{ opacity: 0.52, color: 'var(--color-accent)' }}>{col.label}</p>
                 <ul className="flex flex-col gap-3">
                   {col.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="text-sm transition-all duration-200 hover:pl-2" style={{ opacity: 0.65 }}>
+                      <Link href={link.href} className="type-caption transition-all duration-200 hover:pl-2" style={{ opacity: 0.72 }}>
                         {link.label}
                       </Link>
                     </li>
@@ -59,7 +59,7 @@ export default function Footer() {
           </div>
         </div>
         <div
-          className="pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs"
+          className="type-caption flex flex-col items-start justify-between gap-4 pt-8 md:flex-row md:items-center"
           style={{ borderTop: '1px solid var(--color-border-subtle)', opacity: 0.4 }}
         >
           <p>© 2026 Atrium. All rights reserved.</p>

@@ -39,31 +39,31 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <Eyebrow className="mb-5">Direct line</Eyebrow>
-            <h2 className="text-3xl font-medium leading-tight md:text-5xl">
+            <h2 className="type-section-title">
               Start with the messy version.
             </h2>
-            <p className="mt-6 max-w-md text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+            <p className="type-body mt-6 max-w-md" style={{ color: 'var(--text-muted)' }}>
               You do not need a perfect brief. Send the business context, the current pressure, and the outcome you want to make visible.
             </p>
-            <a href={`mailto:${email}`} className="mt-8 inline-flex text-2xl font-medium" style={{ color: 'var(--teal-800)' }}>
+            <a href={`mailto:${email}`} className="type-card-title mt-8 inline-flex" style={{ color: 'var(--teal-800)' }}>
               {email}
             </a>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
             <div className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
-              <h3 className="text-2xl font-medium">Include this</h3>
+              <h3 className="type-card-title">Include this</h3>
               <ul className="mt-6 space-y-4">
                 {briefItems.map((item) => (
-                  <li key={item} className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  <li key={item} className="type-caption" style={{ color: 'var(--text-muted)' }}>
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
             <div className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
-              <h3 className="text-2xl font-medium">Good reasons to reach out</h3>
-              <div className="mt-6 space-y-4 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              <h3 className="type-card-title">Good reasons to reach out</h3>
+              <div className="type-caption mt-6 space-y-4" style={{ color: 'var(--text-muted)' }}>
                 <p>Your content has activity but no clear system.</p>
                 <p>Your restaurant has more locations than your current process can support.</p>
                 <p>Your reporting does not explain what marketing actually changed.</p>

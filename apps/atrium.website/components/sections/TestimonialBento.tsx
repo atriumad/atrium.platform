@@ -38,18 +38,18 @@ export default function TestimonialBento({ items, eyebrow }: Props) {
               return (
                 <div key={key} className="tb-card rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[260px]" style={{ background: bg, opacity: 0 }}>
                   <p className="text-6xl md:text-7xl font-medium leading-none" style={{ color: 'var(--color-accent)' }}>{card.stat}</p>
-                  <p className="text-sm leading-relaxed mt-4" style={{ color: 'var(--color-text-light)', opacity: 0.8 }}>{card.statLabel}</p>
+                  <p className="type-caption mt-4" style={{ color: 'var(--color-text-light)', opacity: 0.8 }}>{card.statLabel}</p>
                 </div>
               )
             }
             return (
               <div key={key} className="tb-card rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[260px] md:col-span-2" style={{ background: bg, opacity: 0 }}>
-                <p className="text-lg md:text-xl leading-relaxed italic" style={{ color: 'var(--color-text-light)', fontFamily: 'var(--font-serif)' }}>
+                <p className="type-lead italic" style={{ color: 'var(--color-text-light)', fontFamily: 'var(--font-serif)' }}>
                   &ldquo;{card.quote}&rdquo;
                 </p>
                 <div className="mt-8 pt-6" style={{ borderTop: '1px solid rgba(228,238,240,0.1)' }}>
-                  <p className="text-sm font-medium" style={{ color: 'var(--color-accent)' }}>{card.author}</p>
-                  <p className="text-xs opacity-60 mt-1" style={{ color: 'var(--color-text-light)' }}>{card.role} · {card.company}</p>
+                  <p className="type-caption font-medium" style={{ color: 'var(--color-accent)' }}>{card.author}</p>
+                  <p className="type-eyebrow mt-1 opacity-60" style={{ color: 'var(--color-text-light)' }}>{card.role} · {card.company}</p>
                 </div>
               </div>
             )

@@ -39,7 +39,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
         <div className="flex justify-between items-end mb-14">
           <div>
             <Eyebrow className="mb-3">Selected Work</Eyebrow>
-            <h2 className="text-3xl md:text-5xl font-medium leading-tight">Results that speak.</h2>
+            <h2 className="type-section-title">Results that speak.</h2>
           </div>
           <Button href="/work" variant="ghost" className="hidden md:flex">See all work →</Button>
         </div>
@@ -60,8 +60,8 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
                 </span>
               </div>
               <div className="p-6">
-                <p className="text-lg font-medium mb-1">{project.client}</p>
-                <p className="text-sm" style={{ opacity: 0.6 }}>{project.result}</p>
+                <p className="type-card-title mb-1">{project.client}</p>
+                <p className="type-caption" style={{ opacity: 0.72 }}>{project.result}</p>
               </div>
             </Link>
           ))}

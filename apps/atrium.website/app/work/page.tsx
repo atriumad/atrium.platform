@@ -1,9 +1,9 @@
-import { Button, Chip, Highlight } from '@atrium/ui'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
-import { caseStudies } from '@/lib/work'
+import { type CaseStudy, caseStudies, getCaseSummary } from '@/lib/work'
 
 export const metadata: Metadata = {
   title: 'Our Work - Atrium',
@@ -12,85 +12,134 @@ export const metadata: Metadata = {
 
 const sortedCases = [...caseStudies].sort((a, b) => a.order - b.order)
 
+const defaultVisualTheme = { background: 'var(--teal-900)' }
+
+const visualThemes = [
+  defaultVisualTheme,
+  { background: 'var(--amber-500)' },
+  { background: 'var(--mint-400)' },
+  { background: 'var(--teal-700)' },
+  { background: 'var(--cloud-300)' },
+]
+
+function CaseVisual({ study, index, featured = false }: { study: CaseStudy; index: number; featured?: boolean }) {
+  const theme = visualThemes[index % visualThemes.length] ?? defaultVisualTheme
+
+  return (
+    <div
+      className={`relative h-full overflow-hidden rounded-[var(--radius-bento)] transition-transform duration-500 ease-out group-hover:scale-[1.012] lg:aspect-auto ${featured ? 'aspect-[16/10] min-h-[24rem] lg:min-h-[32rem]' : index % 2 === 0 ? 'aspect-[16/10] lg:min-h-[30rem]' : 'aspect-[4/3] lg:min-h-[30rem]'}`}
+      style={{ background: theme.background }}
+      role="img"
+      aria-label={`Media placeholder for ${study.client}`}
+    />
+  )
+}
+
+function ServiceList({ services }: { services: string[] }) {
+  return (
+    <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0" aria-label="Services">
+      {services.map((service, index) => (
+        <li key={service} className="type-caption flex items-center gap-3" style={{ color: 'var(--text-muted)' }}>
+          {index > 0 && <span aria-hidden="true">/</span>}
+          {service}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function CaseText({ study }: { study: CaseStudy }) {
+  return (
+    <div className="flex h-full flex-col justify-between gap-14 border-t pt-8" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+      <h3 className="type-section-title" style={{ color: 'var(--text-strong)' }}>
+        {study.client}
+      </h3>
+
+      <div>
+        <p className="type-lead" style={{ color: 'var(--text-body)' }}>
+          {getCaseSummary(study)}
+        </p>
+        <div className="mt-8 border-t pt-6" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
+          <ServiceList services={study.serviceTags} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function WorkPage() {
+  const [featuredCase, ...archiveCases] = sortedCases
+
   return (
     <>
       <PageHero
         eyebrow="OUR WORK"
         title={<>Hospitality only. <em>Results first.</em></>}
-        body="A working library of restaurant, hotel, and food brand case studies. Every story is tied to a business outcome, not a vanity metric."
-        actions={[{ label: 'Start a project', href: '/contact' }, { label: 'Explore services', href: '/services', variant: 'ghostLight' }]}
-        stats={[
-          { value: String(sortedCases.length), label: 'case studies currently online' },
-          { value: '11', label: 'marketing disciplines represented' },
-          { value: '3', label: 'demand pillars: generate, convert, retain' },
-        ]}
+        body="A visual archive of restaurant, hotel, and food brands built around measurable outcomes — not vanity metrics."
+        actions={[{ label: 'Start a project', href: '/contact' }]}
       />
 
-      <section className="px-6 py-20 md:px-12 md:py-28" style={{ background: 'var(--surface-page)' }}>
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <Eyebrow className="mb-4">Case study index</Eyebrow>
-              <h2 className="max-w-2xl text-3xl font-medium leading-tight md:text-5xl">
-                Work with enough detail to make a <Highlight>decision.</Highlight>
-              </h2>
+      {featuredCase && (
+        <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
+          <div className="mx-auto max-w-[var(--container-max)]">
+            <div className="mb-12 border-t pt-8 md:mb-16" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+              <Eyebrow className="mb-6">Featured case</Eyebrow>
+              <div className="grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16">
+                <h2 className="type-section-title lg:col-span-8">
+                  The work should look good. <em>The outcome should look better.</em>
+                </h2>
+                <p className="type-body max-w-md lg:col-span-4 lg:pb-2" style={{ color: 'var(--text-muted)' }}>
+                  Strategy, creative, and operating systems documented with the proof behind them.
+                </p>
+              </div>
             </div>
-            <p className="max-w-sm text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-              The full V1 plan calls for 15 case studies. The data-backed set currently ready in the codebase is live here.
-            </p>
+
+            <Link
+              href={`/work/${featuredCase.slug}`}
+              className="group grid grid-cols-1 gap-10 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
+              aria-label={`Read featured case study: ${featuredCase.client}`}
+            >
+              <div className="h-full lg:col-span-8">
+                <CaseVisual study={featuredCase} index={0} featured />
+              </div>
+              <div className="h-full lg:col-span-4">
+                <CaseText study={featuredCase} />
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+        <div className="mx-auto max-w-[var(--container-max)]">
+          <div className="mb-20 border-t pt-8 md:mb-28" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+            <Eyebrow className="mb-5">Case study archive</Eyebrow>
+            <h2 className="type-section-title max-w-[14ch]">
+              Different challenges. <em>Evidence in every story.</em>
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {sortedCases.map((item) => (
-              <article
-                key={item.slug}
-                className="group block overflow-hidden rounded-[var(--radius-bento)] border transition-transform duration-200 ease-out hover:-translate-y-1 active:scale-[0.99]"
-                style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}
-              >
-                <div
-                  className="relative flex min-h-56 items-end overflow-hidden p-6"
-                  style={{
-                    background: item.order % 3 === 0 ? 'var(--surface-mint)' : item.order % 2 === 0 ? 'var(--surface-amber)' : 'var(--surface-dark)',
-                    color: item.order % 3 === 0 || item.order % 2 === 0 ? 'var(--text-strong)' : 'var(--text-on-dark)',
-                  }}
+          <div className="space-y-24 md:space-y-36">
+            {archiveCases.map((study, index) => {
+              const visualOnRight = index % 2 === 1
+              return (
+                <Link
+                  key={study.slug}
+                  href={`/work/${study.slug}`}
+                  className="group grid grid-cols-1 gap-9 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
+                  style={{ borderColor: 'rgba(7,47,52,0.18)' }}
+                  aria-label={`Read case study: ${study.client}`}
                 >
-                  <p
-                    aria-hidden="true"
-                    className="absolute -right-2 bottom-2 select-none text-[9rem] font-medium uppercase leading-none opacity-10"
-                    style={{ letterSpacing: 0 }}
-                  >
-                    {String(item.order).padStart(2, '0')}
-                  </p>
-                  <div className="absolute right-5 top-5">
-                    <Chip variant={item.order % 3 === 0 || item.order % 2 === 0 ? 'ink' : 'mint'} size="sm">
-                      {String(item.order).padStart(2, '0')}
-                    </Chip>
+                  <div className={`h-full lg:col-span-7 ${visualOnRight ? 'lg:order-2' : ''}`}>
+                    <CaseVisual study={study} index={index + 1} />
                   </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase" style={{ opacity: 0.72, letterSpacing: 'var(--tracking-wide)' }}>
-                      {item.category}
-                    </p>
-                    <h3 className="mt-3 text-3xl font-medium leading-tight">
-                      {item.client}
-                    </h3>
+
+                  <div className={`h-full lg:col-span-5 ${visualOnRight ? 'lg:order-1' : ''}`}>
+                    <CaseText study={study} />
                   </div>
-                </div>
-                <div className="p-6">
-                  <p className="text-xl font-medium leading-snug">{item.resultHeadline}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {item.serviceTags.slice(0, 4).map((tag) => (
-                      <Chip key={tag} variant="outline-soft" size="sm">
-                        {tag}
-                      </Chip>
-                    ))}
-                  </div>
-                  <Button href={`/work/${item.slug}`} variant="outline" size="sm" className="mt-6">
-                    Read case study
-                  </Button>
-                </div>
-              </article>
-            ))}
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>

@@ -60,7 +60,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
 <div class="container">
 
 <h1>atrium.platform — Complete Call Flow &amp; Architecture Documentation</h1>
-<p class="subtitle">Generated from graphify knowledge graph: 2173 nodes, 2858 edges, 207 communities. Commit: e1f0d76</p>
+<p class="subtitle">Generated from graphify knowledge graph: 2205 nodes, 2900 edges, 215 communities. Commit: 224bc68</p>
 
 <div class="nav">
     <a href="#overview">Architecture Overview</a>
@@ -71,13 +71,13 @@ hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
     <a href="#ingest-cache-update">Ingestion &amp; Updates</a>
     <a href="#serve-api">Serving API</a>
     <a href="#tests-fixtures">Tests &amp; Fixtures</a>
-    <a href="#community-53">Community 53</a>
-    <a href="#community-70">Community 70</a>
-    <a href="#community-9">Community 9</a>
     <a href="#community-3">Community 3</a>
     <a href="#community-39">Community 39</a>
     <a href="#community-51">Community 51</a>
+    <a href="#community-70">Community 70</a>
     <a href="#community-4">Community 4</a>
+    <a href="#community-55">Community 55</a>
+    <a href="#community-59">Community 59</a>
     <a href="#other">Other</a>
 </div>
 
@@ -92,44 +92,44 @@ flowchart LR
     class BUILD_GRAPH_321CBB04 module;
     ANALYSIS_CLUSTERING_C79796DA("Analysis &amp; Clustering<br/><small>42 nodes</small>")
     class ANALYSIS_CLUSTERING_C79796DA module;
-    OUTPUTS_DOCS_ED82387C("Outputs &amp; Docs<br/><small>218 nodes</small>")
+    OUTPUTS_DOCS_ED82387C("Outputs &amp; Docs<br/><small>217 nodes</small>")
     class OUTPUTS_DOCS_ED82387C module;
     CLI_SKILLS_9964CBB8("CLI &amp; Skill Installers<br/><small>4 nodes</small>")
     class CLI_SKILLS_9964CBB8 module;
-    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>56 nodes</small>")
+    INGEST_CACHE_UPDATE_FF457338("Ingestion &amp; Updates<br/><small>63 nodes</small>")
     class INGEST_CACHE_UPDATE_FF457338 module;
-    SERVE_API_35EC8E86("Serving API<br/><small>121 nodes</small>")
+    SERVE_API_35EC8E86("Serving API<br/><small>123 nodes</small>")
     class SERVE_API_35EC8E86 module;
-    TESTS_FIXTURES_B84B1DCC("Tests &amp; Fixtures<br/><small>402 nodes</small>")
+    TESTS_FIXTURES_B84B1DCC("Tests &amp; Fixtures<br/><small>401 nodes</small>")
     class TESTS_FIXTURES_B84B1DCC module;
-    COMMUNITY_53_42E523C6("Community 53<br/><small>48 nodes</small>")
-    class COMMUNITY_53_42E523C6 module;
-    COMMUNITY_70_FC11E880("Community 70<br/><small>43 nodes</small>")
-    class COMMUNITY_70_FC11E880 module;
-    COMMUNITY_9_1D55D1EE("Community 9<br/><small>39 nodes</small>")
-    class COMMUNITY_9_1D55D1EE module;
     COMMUNITY_3_D8DFCEA7("Community 3<br/><small>36 nodes</small>")
     class COMMUNITY_3_D8DFCEA7 module;
     COMMUNITY_39_0A1375C5("Community 39<br/><small>35 nodes</small>")
     class COMMUNITY_39_0A1375C5 module;
     COMMUNITY_51_1B89DE6B("Community 51<br/><small>34 nodes</small>")
     class COMMUNITY_51_1B89DE6B module;
+    COMMUNITY_70_FC11E880("Community 70<br/><small>34 nodes</small>")
+    class COMMUNITY_70_FC11E880 module;
     COMMUNITY_4_AC2DC2A9("Community 4<br/><small>33 nodes</small>")
     class COMMUNITY_4_AC2DC2A9 module;
-    OTHER_D0941E68("Other<br/><small>749 nodes</small>")
+    COMMUNITY_55_5424675B("Community 55<br/><small>31 nodes</small>")
+    class COMMUNITY_55_5424675B module;
+    COMMUNITY_59_96123F92("Community 59<br/><small>30 nodes</small>")
+    class COMMUNITY_59_96123F92 module;
+    OTHER_D0941E68("Other<br/><small>809 nodes</small>")
     class OTHER_D0941E68 module;
     COMMUNITY_51_1B89DE6B -->|contains x28| OTHER_D0941E68
-    INGEST_CACHE_UPDATE_FF457338 -->|imports x18| SERVE_API_35EC8E86
-    OTHER_D0941E68 -->|imports x13| COMMUNITY_9_1D55D1EE
-    INGEST_CACHE_UPDATE_FF457338 -->|imports x10| OTHER_D0941E68
-    COMMUNITY_9_1D55D1EE -->|imports x10| OTHER_D0941E68
-    COMMUNITY_70_FC11E880 -->|imports x7| OTHER_D0941E68
-    COMMUNITY_53_42E523C6 -->|imports x6| OTHER_D0941E68
-    COMMUNITY_9_1D55D1EE -->|imports x6| COMMUNITY_70_FC11E880
-    OTHER_D0941E68 -->|re exports x6| TESTS_FIXTURES_B84B1DCC
-    TESTS_FIXTURES_B84B1DCC -->|re exports x5| OTHER_D0941E68
-    SERVE_API_35EC8E86 -->|re exports x4| OTHER_D0941E68
-    INGEST_CACHE_UPDATE_FF457338 -->|contains x4| OUTPUTS_DOCS_ED82387C
+    INGEST_CACHE_UPDATE_FF457338 -->|calls x22| SERVE_API_35EC8E86
+    OTHER_D0941E68 -->|imports x17| TESTS_FIXTURES_B84B1DCC
+    OTHER_D0941E68 -->|imports x15| COMMUNITY_59_96123F92
+    COMMUNITY_70_FC11E880 -->|imports x11| OTHER_D0941E68
+    SERVE_API_35EC8E86 -->|imports x7| INGEST_CACHE_UPDATE_FF457338
+    COMMUNITY_70_FC11E880 -->|imports x6| COMMUNITY_59_96123F92
+    TESTS_FIXTURES_B84B1DCC -->|imports x6| OTHER_D0941E68
+    OUTPUTS_DOCS_ED82387C -->|imports x3| SERVE_API_35EC8E86
+    SERVE_API_35EC8E86 -->|imports x3| TESTS_FIXTURES_B84B1DCC
+    TESTS_FIXTURES_B84B1DCC -->|imports x3| SERVE_API_35EC8E86
+    INGEST_CACHE_UPDATE_FF457338 -->|imports x3| OUTPUTS_DOCS_ED82387C
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -146,20 +146,20 @@ flowchart LR
     <h4>Architecture Layers</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>Layer</th><th>Nodes</th><th>Communities</th></tr>
-      <tr><td>Graph Build</td><td>313</td><td><code>2, 52, 7, 71, 18, 10, 11, 13, 15, 23, 105, 106, 28, 38, 30, 31, 33, 34, 35, 172, 174, 47, 48</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>42</td><td><code>99, 134, 140</code></td></tr><tr><td>Outputs &amp; Docs</td><td>218</td><td><code>67, 6, 108, 74, 109, 110, 116, 117, 121, 122, 123, 124, 127, 128, 150, 165, 254</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>4</td><td><code>173, 232</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>56</td><td><code>87, 92, 146</code></td></tr><tr><td>Serving API</td><td>121</td><td><code>104, 64, 69, 247</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>402</td><td><code>0, 49, 1, 8, 5, 29, 81, 60, 12, 14, 16, 17, 19, 20, 21, 25, 26, 93, 94, 58, 248</code></td></tr><tr><td>Community 53</td><td>48</td><td><code>53</code></td></tr><tr><td>Community 70</td><td>43</td><td><code>70</code></td></tr><tr><td>Community 9</td><td>39</td><td><code>9</code></td></tr><tr><td>Community 3</td><td>36</td><td><code>3</code></td></tr><tr><td>Community 39</td><td>35</td><td><code>39</code></td></tr><tr><td>Community 51</td><td>34</td><td><code>51</code></td></tr><tr><td>Community 4</td><td>33</td><td><code>4</code></td></tr><tr><td>Other</td><td>749</td><td><code>55, 59, 65, 83, 24, 102, 73, 85, 97, 88, 100, 22, 90, 98, 107, 175, 27, 114, 115, 126, 61, 118, 119, 120, 129, 75, 46, 95, 130, 131, 132, 133, 153, 157, 159, 32, 137, 138, 139, 141, 142, 143, 144, 145, 147, 148, 149, 169, 182, 36, 37, 54, 63, 76, 82, 152, 154, 155, 156, 158, 160, 161, 162, 163, 164, 167, 40, 41, 79, 168, 170, 171, 249, 250, 42, 43, 44, 45, 177, 178, 179, 180, 181, 219, 220, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 228, 50, 62, 229, 230, 231, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 57</code></td></tr>
+      <tr><td>Graph Build</td><td>313</td><td><code>2, 52, 7, 71, 18, 10, 11, 13, 15, 23, 105, 106, 28, 38, 30, 31, 33, 34, 35, 172, 174, 47, 48</code></td></tr><tr><td>Analysis &amp; Clustering</td><td>42</td><td><code>99, 134, 140</code></td></tr><tr><td>Outputs &amp; Docs</td><td>217</td><td><code>67, 6, 108, 74, 109, 110, 116, 117, 121, 122, 123, 124, 127, 128, 150, 165, 254</code></td></tr><tr><td>CLI &amp; Skill Installers</td><td>4</td><td><code>173, 232</code></td></tr><tr><td>Ingestion &amp; Updates</td><td>63</td><td><code>87, 92, 146</code></td></tr><tr><td>Serving API</td><td>123</td><td><code>104, 69, 64, 46, 247</code></td></tr><tr><td>Tests &amp; Fixtures</td><td>401</td><td><code>0, 49, 1, 8, 5, 29, 81, 60, 12, 14, 16, 17, 19, 20, 21, 25, 26, 93, 94, 58, 248</code></td></tr><tr><td>Community 3</td><td>36</td><td><code>3</code></td></tr><tr><td>Community 39</td><td>35</td><td><code>39</code></td></tr><tr><td>Community 51</td><td>34</td><td><code>51</code></td></tr><tr><td>Community 70</td><td>34</td><td><code>70</code></td></tr><tr><td>Community 4</td><td>33</td><td><code>4</code></td></tr><tr><td>Community 55</td><td>31</td><td><code>55</code></td></tr><tr><td>Community 59</td><td>30</td><td><code>59</code></td></tr><tr><td>Other</td><td>809</td><td><code>9, 53, 65, 83, 66, 24, 102, 85, 97, 88, 100, 22, 72, 90, 98, 107, 68, 175, 27, 114, 115, 126, 61, 118, 119, 120, 129, 75, 84, 95, 130, 131, 132, 133, 153, 157, 159, 32, 77, 80, 86, 89, 137, 138, 139, 141, 142, 143, 144, 145, 147, 148, 149, 169, 182, 36, 37, 54, 56, 63, 76, 82, 152, 154, 155, 156, 158, 160, 161, 162, 163, 164, 167, 40, 41, 79, 168, 170, 171, 249, 250, 42, 43, 44, 45, 177, 178, 179, 180, 181, 219, 220, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 212, 213, 214, 215, 216, 217, 218, 221, 222, 223, 224, 225, 226, 227, 228, 50, 62, 229, 230, 231, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 57</code></td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Core Flow</h4>
-    <div class="arrow-chain">Graph Build -&gt; Analysis &amp; Clustering -&gt; Outputs &amp; Docs -&gt; Serving API -&gt; Other -&gt; Community 9 -&gt; Community 70</div>
+    <div class="arrow-chain">Graph Build -&gt; Analysis &amp; Clustering -&gt; Outputs &amp; Docs -&gt; Serving API -&gt; Ingestion &amp; Updates -&gt; Other -&gt; Tests &amp; Fixtures</div>
   </div>
 </div>
 <div class="grid">
   <div class="card">
     <h4>Graph Report Highlights</h4>
     <ul>
-      <li>2173 nodes · 2858 edges · 207 communities (171 shown, 36 thin omitted)</li>
-      <li>Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)</li>
+      <li>2205 nodes · 2900 edges · 215 communities (177 shown, 38 thin omitted)</li>
+      <li>Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 12 edges (avg confidence: 0.8)</li>
       <li>Token cost: 0 input · 0 output</li>
       <li>1. `gradeRestaurantGrowth()` - 26 edges</li>
       <li>2. `Restaurant Growth Grader - analisis actual del servicio` - 20 edges</li>
@@ -850,12 +850,12 @@ flowchart LR
 
 <!-- ====== 4. Outputs & Docs ====== -->
 <h2 id="outputs-docs">4. Outputs &amp; Docs</h2>
-<p>Outputs &amp; Docs groups implementation around task, reportmd, superpowers, sdd, mostly in atrium.grader/app/grader-client.tsx, .superpowers/sdd/task-1-report.md, .superpowers/sdd/task-1-report.md. This section covers 218 nodes and 254 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Outputs &amp; Docs groups implementation around task, reportmd, superpowers, sdd, mostly in atrium.grader/app/grader-client.tsx, .superpowers/sdd/task-1-report.md, .superpowers/sdd/task-1-report.md. This section covers 217 nodes and 253 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Outputs &amp; Docs (218 nodes, 254 edges)
+    %% Section: Outputs &amp; Docs (217 nodes, 253 edges)
     subgraph outputs_docs_atrium_grader_app_grader_client_tsx_4965011b["atrium.grader/app/grader-client.tsx"]
         app_grader_client_reportstage_f58a999c("ReportStage()<br/><small>atrium.grader/app/grader-client.tsx</small>")
         app_grader_client_diagnosticevidencecard_d013d8b2("DiagnosticEvidenceCard()<br/><small>atrium.grader/app/grader-client.tsx</small>")
@@ -896,7 +896,7 @@ flowchart LR
     narrative_route_37992f0d -->|imports| lib_report_agent_0b95950b
     narrative_route_37992f0d -->|imports| lib_report_agent_generatereportnarrative_444e565d
     narrative_route_37992f0d -->|imports| lib_report_evidence_buildagentevidencecontext_e56b8e69
-    %% Omitted for readability: 200 nodes, 0 edges
+    %% Omitted for readability: 199 nodes, 0 edges
     class app_grader_client_reportstage_f58a999c ui;
     class app_grader_client_diagnosticevidencecard_d013d8b2 ui;
     class app_grader_client_3a4a6d3b entry;
@@ -1195,7 +1195,7 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x198, calls x34, imports x14, imports x7. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x198, calls x34, imports x13, imports x7. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -1293,27 +1293,27 @@ flowchart LR
 
 <!-- ====== 6. Ingestion & Updates ====== -->
 <h2 id="ingest-cache-update">6. Ingestion &amp; Updates</h2>
-<p>Ingestion &amp; Updates groups implementation around google, apps, places, atriumgrader, mostly in atrium.grader/lib/google-places-client.ts, superpowers/plans/2026-06-27-social-health-grader.md, atrium.website/docs/Atrium_Website-V1.md. This section covers 56 nodes and 77 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Ingestion &amp; Updates groups implementation around apps, google, atriumgrader, places, mostly in atrium.grader/lib/google-places-client.ts, superpowers/plans/2026-06-27-social-health-grader.md, atrium.grader/lib/place-utils.ts. This section covers 63 nodes and 88 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Ingestion &amp; Updates (56 nodes, 77 edges)
+    %% Section: Ingestion &amp; Updates (63 nodes, 88 edges)
     subgraph ingest_cache_update_atrium_grader_lib_google_pla_a09c0cfb["atrium.grader/lib/google-places-client.ts"]
+        lib_google_places_client_e24a79c7("google-places-client.ts")
         lib_google_places_client_googleplacesheaders_5aa24971("googlePlacesHeaders()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
+        lib_google_places_client_getgooglerestaurantprof_8b0dfb6d("getGoogleRestaurantProfile()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_googleplacedetailsurl_10d139ad("googlePlaceDetailsUrl()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_average_c169d361("average()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
-        lib_google_places_client_computeprofilecompleten_670e66ea("computeProfileCompleteness()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
-        lib_google_places_client_estimateratingrank_9e2d88ba("estimateRatingRank()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_getgooglelocalbenchmark_766f8d3b("getGoogleLocalBenchmark()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
-        lib_google_places_client_getgooglerestaurantprof_8b0dfb6d("getGoogleRestaurantProfile()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_getgooglesuggestiondeta_459f3d90("getGoogleSuggestionDetails()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
-        lib_google_places_client_getgooglewebsiteurl_e86fb821("getGoogleWebsiteUrl()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_searchgoogleplaces_ba4a5192("searchGooglePlaces()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
+        lib_google_places_client_computeprofilecompleten_670e66ea("computeProfileCompleteness()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_nearbysearchtype_d9c845c7("nearbySearchType()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_finitenumberornull_849e7705("finiteNumberOrNull()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_integerornull_77804a4c("integerOrNull()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_relativeratingposition_af907348("relativeRatingPosition()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
+        lib_google_places_client_estimateratingrank_9e2d88ba("estimateRatingRank()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_firstphoto_32b5b002("firstPhoto()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_googlephotoattribution_894a64e8("googlePhotoAttribution()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
         lib_google_places_client_photoproxyurl_5d13dbb0("photoProxyUrl()<br/><small>atrium.grader/lib/google-places-client.ts</small>")
@@ -1322,11 +1322,9 @@ flowchart LR
     lib_google_places_client_googleplacesheaders_5aa24971 -->|calls| lib_google_places_client_getgooglelocalbenchmark_766f8d3b
     lib_google_places_client_googleplacesheaders_5aa24971 -->|calls| lib_google_places_client_getgooglerestaurantprof_8b0dfb6d
     lib_google_places_client_googleplacesheaders_5aa24971 -->|calls| lib_google_places_client_getgooglesuggestiondeta_459f3d90
-    lib_google_places_client_googleplacesheaders_5aa24971 -->|calls| lib_google_places_client_getgooglewebsiteurl_e86fb821
     lib_google_places_client_googleplacesheaders_5aa24971 -->|calls| lib_google_places_client_searchgoogleplaces_ba4a5192
     lib_google_places_client_googleplacedetailsurl_10d139ad -->|calls| lib_google_places_client_getgooglerestaurantprof_8b0dfb6d
     lib_google_places_client_googleplacedetailsurl_10d139ad -->|calls| lib_google_places_client_getgooglesuggestiondeta_459f3d90
-    lib_google_places_client_googleplacedetailsurl_10d139ad -->|calls| lib_google_places_client_getgooglewebsiteurl_e86fb821
     lib_google_places_client_computeprofilecompleten_670e66ea -->|calls| lib_google_places_client_getgooglerestaurantprof_8b0dfb6d
     lib_google_places_client_nearbysearchtype_d9c845c7 -->|calls| lib_google_places_client_getgooglelocalbenchmark_766f8d3b
     lib_google_places_client_finitenumberornull_849e7705 -->|calls| lib_google_places_client_getgooglelocalbenchmark_766f8d3b
@@ -1338,23 +1336,24 @@ flowchart LR
     lib_google_places_client_getgooglerestaurantprof_8b0dfb6d -->|calls| lib_google_places_client_firstphoto_32b5b002
     lib_google_places_client_getgooglerestaurantprof_8b0dfb6d -->|calls| lib_google_places_client_googlephotoattribution_894a64e8
     lib_google_places_client_getgooglerestaurantprof_8b0dfb6d -->|calls| lib_google_places_client_photoproxyurl_5d13dbb0
+    lib_google_places_client_test_c82a12ee -->|imports| lib_google_places_client_e24a79c7
     lib_google_places_client_test_c82a12ee -->|imports| lib_google_places_client_getgooglelocalbenchmark_766f8d3b
     lib_google_places_client_test_c82a12ee -->|imports| lib_google_places_client_getgooglerestaurantprof_8b0dfb6d
-    %% Omitted for readability: 38 nodes, 0 edges
+    %% Omitted for readability: 45 nodes, 0 edges
+    class lib_google_places_client_e24a79c7 entry;
     class lib_google_places_client_googleplacesheaders_5aa24971 function;
+    class lib_google_places_client_getgooglerestaurantprof_8b0dfb6d function;
     class lib_google_places_client_googleplacedetailsurl_10d139ad function;
     class lib_google_places_client_average_c169d361 function;
-    class lib_google_places_client_computeprofilecompleten_670e66ea function;
-    class lib_google_places_client_estimateratingrank_9e2d88ba function;
     class lib_google_places_client_getgooglelocalbenchmark_766f8d3b function;
-    class lib_google_places_client_getgooglerestaurantprof_8b0dfb6d function;
     class lib_google_places_client_getgooglesuggestiondeta_459f3d90 function;
-    class lib_google_places_client_getgooglewebsiteurl_e86fb821 function;
     class lib_google_places_client_searchgoogleplaces_ba4a5192 function;
+    class lib_google_places_client_computeprofilecompleten_670e66ea function;
     class lib_google_places_client_nearbysearchtype_d9c845c7 function;
     class lib_google_places_client_finitenumberornull_849e7705 function;
     class lib_google_places_client_integerornull_77804a4c function;
     class lib_google_places_client_relativeratingposition_af907348 function;
+    class lib_google_places_client_estimateratingrank_9e2d88ba function;
     class lib_google_places_client_firstphoto_32b5b002 function;
     class lib_google_places_client_googlephotoattribution_894a64e8 function;
     class lib_google_places_client_photoproxyurl_5d13dbb0 function;
@@ -1393,7 +1392,7 @@ flowchart LR
   <td><code>google-places-client.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
   <td><code>google-places-client.test.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.test.ts</small></td>
-  <td><code>normalizeUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small></td>
+  <td><code>buildConversionSignals()</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small><br><code>estimateNegativeReviews()</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small><br><code>normalizeUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small><br>+2 more</td>
   <td>Module file in atrium.grader/lib/google-places-client.ts.</td>
 </tr>
 <tr>
@@ -1489,7 +1488,7 @@ flowchart LR
   <td><code>googlePlacesHeaders()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>getGoogleLocalBenchmark()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>getGoogleRestaurantProfile()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>getGoogleSuggestionDetails()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br>+2 more</td>
+  <td><code>getGoogleLocalBenchmark()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>getGoogleRestaurantProfile()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>getGoogleSuggestionDetails()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br>+1 more</td>
   <td>googlePlacesHeaders() node in atrium.grader/lib/google-places-client.ts.</td>
 </tr>
 <tr>
@@ -1497,7 +1496,7 @@ flowchart LR
   <td><code>googlePlaceDetailsUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
-  <td><code>getGoogleRestaurantProfile()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>getGoogleSuggestionDetails()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>getGoogleWebsiteUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
+  <td><code>getGoogleRestaurantProfile()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>getGoogleSuggestionDetails()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
   <td>googlePlaceDetailsUrl() node in atrium.grader/lib/google-places-client.ts.</td>
 </tr>
 <tr>
@@ -1609,16 +1608,16 @@ flowchart LR
   <td><code>getGoogleRestaurantProfile()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>computeProfileCompleteness()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>getGoogleLocalBenchmark()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>google-places-client.test.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.test.ts</small><br>+2 more</td>
-  <td><code>firstPhoto()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>googlePhotoAttribution()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>normalizeUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small><br>+2 more</td>
+  <td><code>buildConversionSignals()</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small><br><code>estimateNegativeReviews()</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small><br><code>firstPhoto()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br>+5 more</td>
   <td>getGoogleRestaurantProfile() node in atrium.grader/lib/google-places-client.ts.</td>
 </tr>
 <tr>
   <td>30</td>
-  <td><code>getGoogleWebsiteUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>googlePlaceDetailsUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small><br><code>googlePlacesHeaders()</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
-  <td><code>normalizeUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small></td>
-  <td>getGoogleWebsiteUrl() node in atrium.grader/lib/google-places-client.ts.</td>
+  <td><code>place-utils.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/place-utils.ts</small></td>
+  <td><span class="tag tag-class">Module</span></td>
+  <td><code>google-places-client.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/google-places-client.ts</small></td>
+  <td>No direct outbound edge</td>
+  <td>Module file in atrium.grader/lib/place-utils.ts.</td>
 </tr>
 </table>
 
@@ -1627,28 +1626,28 @@ flowchart LR
     <h4>Key Files</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>atrium.grader/lib/google-places-client.ts</code></td><td>38 nodes</td></tr>
+      <tr><td><code>atrium.grader/lib/google-places-client.ts</code></td><td>37 nodes</td></tr>
 <tr><td><code>superpowers/plans/2026-06-27-social-health-grader.md</code></td><td>10 nodes</td></tr>
+<tr><td><code>atrium.grader/lib/place-utils.ts</code></td><td>9 nodes</td></tr>
 <tr><td><code>atrium.website/docs/Atrium_Website-V1.md</code></td><td>6 nodes</td></tr>
 <tr><td><code>atrium.grader/lib/google-places-client.test.ts</code></td><td>1 nodes</td></tr>
-<tr><td><code>atrium.grader/lib/place-utils.ts</code></td><td>1 nodes</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x51, calls x22, imports x3, imports x1. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x58, calls x22, imports x6, imports x2. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
 <!-- ====== 7. Serving API ====== -->
 <h2 id="serve-api">7. Serving API</h2>
-<p>Serving API groups implementation around apps, atriumgrader, social, name, mostly in atrium.grader/lib/social-name-search.ts, atrium.grader/lib/open-data-places.ts, lib/providers/business-provider.ts. This section covers 121 nodes and 267 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Serving API groups implementation around apps, atriumgrader, social, name, mostly in atrium.grader/lib/social-name-search.ts, atrium.grader/lib/open-data-places.ts, lib/providers/business-provider.ts. This section covers 123 nodes and 271 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Serving API (121 nodes, 267 edges)
+    %% Section: Serving API (123 nodes, 271 edges)
     subgraph serve_api_api_grader_route_ts_afa04ffa["api/grader/route.ts"]
         grader_route_3a8395f6("route.ts")
         grader_route_post_e3c56ae3("POST()<br/><small>api/grader/route.ts</small>")
@@ -1693,7 +1692,7 @@ flowchart LR
     grader_route_3a8395f6 -->|imports| lib_pagespeed_client_runpagespeedwebsiteaudit_f7250a8f
     lib_auto_detect_social_d6421002 -->|imports| lib_safe_fetch_safefetch_ff557577
     lib_auto_detect_social_d6421002 -->|imports| lib_social_detector_detectsocialhandles_601d0747
-    %% Omitted for readability: 103 nodes, 0 edges
+    %% Omitted for readability: 105 nodes, 0 edges
     class grader_route_3a8395f6 api;
     class grader_route_post_e3c56ae3 function;
     class grader_route_pagespeedwithtimeout_0c0e4bea function;
@@ -1759,38 +1758,6 @@ flowchart LR
 </tr>
 <tr>
   <td>4</td>
-  <td><code>route.ts</code><br><small style="color:var(--muted)">api/grader/route.ts</small></td>
-  <td><span class="tag tag-endpoint">API</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>auto-detect-social.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small><br><code>autoDetectSocial()</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small><br><code>createScanId()</code><br><small style="color:var(--muted)">atrium.grader/lib/scan-store.ts</small><br>+8 more</td>
-  <td>Module file in api/grader/route.ts.</td>
-</tr>
-<tr>
-  <td>5</td>
-  <td><code>ReportMeta</code><br><small style="color:var(--muted)">api/grader/route.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ReportMeta node in api/grader/route.ts.</td>
-</tr>
-<tr>
-  <td>6</td>
-  <td><code>pagespeedWithTimeout()</code><br><small style="color:var(--muted)">api/grader/route.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>POST()</code><br><small style="color:var(--muted)">api/grader/route.ts</small><br><code>runPageSpeedWebsiteAudit()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
-  <td>Organizes documentation pages, navigation, or content lookup.</td>
-</tr>
-<tr>
-  <td>7</td>
-  <td><code>POST()</code><br><small style="color:var(--muted)">api/grader/route.ts</small></td>
-  <td><span class="tag tag-func">Function</span></td>
-  <td><code>pagespeedWithTimeout()</code><br><small style="color:var(--muted)">api/grader/route.ts</small></td>
-  <td><code>autoDetectSocial()</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small><br><code>buildSocialDetails()</code><br><small style="color:var(--muted)">api/grader/route.ts</small><br><code>buildSocialInterpretation()</code><br><small style="color:var(--muted)">api/grader/route.ts</small><br>+4 more</td>
-  <td>POST() node in api/grader/route.ts.</td>
-</tr>
-<tr>
-  <td>8</td>
   <td><code>auto-detect-social.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small></td>
   <td><span class="tag tag-class">Module</span></td>
   <td><code>route.ts</code><br><small style="color:var(--muted)">api/grader/route.ts</small></td>
@@ -1798,7 +1765,7 @@ flowchart LR
   <td>Module file in atrium.grader/lib/auto-detect-social.ts.</td>
 </tr>
 <tr>
-  <td>9</td>
+  <td>5</td>
   <td><code>EMPTY</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1806,7 +1773,7 @@ flowchart LR
   <td>EMPTY node in atrium.grader/lib/auto-detect-social.ts.</td>
 </tr>
 <tr>
-  <td>10</td>
+  <td>6</td>
   <td><code>SocialDetectionContext</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1814,7 +1781,7 @@ flowchart LR
   <td>SocialDetectionContext node in atrium.grader/lib/auto-detect-social.ts.</td>
 </tr>
 <tr>
-  <td>11</td>
+  <td>7</td>
   <td><code>scrapeWebsite()</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -1822,7 +1789,7 @@ flowchart LR
   <td>scrapeWebsite() node in atrium.grader/lib/auto-detect-social.ts.</td>
 </tr>
 <tr>
-  <td>12</td>
+  <td>8</td>
   <td><code>autoDetectSocial()</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>POST()</code><br><small style="color:var(--muted)">api/grader/route.ts</small><br><code>route.ts</code><br><small style="color:var(--muted)">api/grader/route.ts</small><br><code>scrapeWebsite()</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small></td>
@@ -1830,7 +1797,7 @@ flowchart LR
   <td>autoDetectSocial() node in atrium.grader/lib/auto-detect-social.ts.</td>
 </tr>
 <tr>
-  <td>13</td>
+  <td>9</td>
   <td><code>pagespeed-client.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-cmd">Entry</span></td>
   <td><code>route.ts</code><br><small style="color:var(--muted)">api/grader/route.ts</small></td>
@@ -1838,7 +1805,7 @@ flowchart LR
   <td>Module file in atrium.grader/lib/pagespeed-client.ts.</td>
 </tr>
 <tr>
-  <td>14</td>
+  <td>10</td>
   <td><code>CATEGORIES</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1846,7 +1813,7 @@ flowchart LR
   <td>CATEGORIES node in atrium.grader/lib/pagespeed-client.ts.</td>
 </tr>
 <tr>
-  <td>15</td>
+  <td>11</td>
   <td><code>PageSpeedResponse</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1854,7 +1821,7 @@ flowchart LR
   <td>Organizes documentation pages, navigation, or content lookup.</td>
 </tr>
 <tr>
-  <td>16</td>
+  <td>12</td>
   <td><code>PageSpeedCategories</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1862,7 +1829,7 @@ flowchart LR
   <td>Organizes documentation pages, navigation, or content lookup.</td>
 </tr>
 <tr>
-  <td>17</td>
+  <td>13</td>
   <td><code>PageSpeedAudits</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1870,7 +1837,7 @@ flowchart LR
   <td>Organizes documentation pages, navigation, or content lookup.</td>
 </tr>
 <tr>
-  <td>18</td>
+  <td>14</td>
   <td><code>runPageSpeedWebsiteAudit()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>pagespeedWithTimeout()</code><br><small style="color:var(--muted)">api/grader/route.ts</small><br><code>route.ts</code><br><small style="color:var(--muted)">api/grader/route.ts</small></td>
@@ -1878,7 +1845,7 @@ flowchart LR
   <td>Organizes documentation pages, navigation, or content lookup.</td>
 </tr>
 <tr>
-  <td>19</td>
+  <td>15</td>
   <td><code>runPageSpeedStrategy()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>runPageSpeedWebsiteAudit()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
@@ -1886,7 +1853,7 @@ flowchart LR
   <td>Organizes documentation pages, navigation, or content lookup.</td>
 </tr>
 <tr>
-  <td>20</td>
+  <td>16</td>
   <td><code>failedSummary()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>runPageSpeedStrategy()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
@@ -1894,7 +1861,7 @@ flowchart LR
   <td>failedSummary() node in atrium.grader/lib/pagespeed-client.ts.</td>
 </tr>
 <tr>
-  <td>21</td>
+  <td>17</td>
   <td><code>categoryScore()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>runPageSpeedStrategy()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
@@ -1902,7 +1869,7 @@ flowchart LR
   <td>categoryScore() node in atrium.grader/lib/pagespeed-client.ts.</td>
 </tr>
 <tr>
-  <td>22</td>
+  <td>18</td>
   <td><code>numericAudit()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>runPageSpeedStrategy()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
@@ -1910,7 +1877,7 @@ flowchart LR
   <td>numericAudit() node in atrium.grader/lib/pagespeed-client.ts.</td>
 </tr>
 <tr>
-  <td>23</td>
+  <td>19</td>
   <td><code>auditOpportunityTitles()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>runPageSpeedStrategy()</code><br><small style="color:var(--muted)">atrium.grader/lib/pagespeed-client.ts</small></td>
@@ -1918,7 +1885,7 @@ flowchart LR
   <td>auditOpportunityTitles() node in atrium.grader/lib/pagespeed-client.ts.</td>
 </tr>
 <tr>
-  <td>24</td>
+  <td>20</td>
   <td><code>safe-fetch.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td><span class="tag tag-class">Module</span></td>
   <td><code>auto-detect-social.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small><br><code>route.ts</code><br><small style="color:var(--muted)">grader/detect-social/route.ts</small></td>
@@ -1926,7 +1893,7 @@ flowchart LR
   <td>Module file in atrium.grader/lib/safe-fetch.ts.</td>
 </tr>
 <tr>
-  <td>25</td>
+  <td>21</td>
   <td><code>ALLOWED_PROTOCOLS</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1934,7 +1901,7 @@ flowchart LR
   <td>ALLOWED_PROTOCOLS node in atrium.grader/lib/safe-fetch.ts.</td>
 </tr>
 <tr>
-  <td>26</td>
+  <td>22</td>
   <td><code>UnsafeUrlError</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td><span class="tag tag-class">Class</span></td>
   <td>External entry / no inbound edge</td>
@@ -1942,7 +1909,7 @@ flowchart LR
   <td>UnsafeUrlError node in atrium.grader/lib/safe-fetch.ts.</td>
 </tr>
 <tr>
-  <td>27</td>
+  <td>23</td>
   <td><code>isPrivateIPv4()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td>External entry / no inbound edge</td>
@@ -1950,7 +1917,7 @@ flowchart LR
   <td>isPrivateIPv4() node in atrium.grader/lib/safe-fetch.ts.</td>
 </tr>
 <tr>
-  <td>28</td>
+  <td>24</td>
   <td><code>isPrivateIPv6()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>isPrivateIPv4()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
@@ -1958,7 +1925,7 @@ flowchart LR
   <td>isPrivateIPv6() node in atrium.grader/lib/safe-fetch.ts.</td>
 </tr>
 <tr>
-  <td>29</td>
+  <td>25</td>
   <td><code>isPrivateIp()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td><span class="tag tag-func">Function</span></td>
   <td><code>isPrivateIPv4()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small><br><code>isPrivateIPv6()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
@@ -1966,12 +1933,44 @@ flowchart LR
   <td>isPrivateIp() node in atrium.grader/lib/safe-fetch.ts.</td>
 </tr>
 <tr>
-  <td>30</td>
+  <td>26</td>
   <td><code>assertSafeExternalUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td><span class="tag tag-async">Async</span></td>
   <td><code>isPrivateIp()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td><code>safeFetch()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
   <td>assertSafeExternalUrl() node in atrium.grader/lib/safe-fetch.ts.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><code>safeFetch()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>assertSafeExternalUrl()</code><br><small style="color:var(--muted)">atrium.grader/lib/safe-fetch.ts</small><br><code>auto-detect-social.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small><br><code>POST()</code><br><small style="color:var(--muted)">grader/detect-social/route.ts</small><br>+2 more</td>
+  <td><code>scanBasicWebsiteSignals()</code><br><small style="color:var(--muted)">atrium.grader/lib/website-scanner.ts</small><br><code>website-scanner.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/website-scanner.ts</small></td>
+  <td>safeFetch() node in atrium.grader/lib/safe-fetch.ts.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><code>social-detector.test.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/social-detector.test.ts</small></td>
+  <td><span class="tag tag-func">Test</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>detectSocialHandles()</code><br><small style="color:var(--muted)">atrium.grader/lib/social-detector.ts</small><br><code>social-detector.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/social-detector.ts</small></td>
+  <td>Module file in atrium.grader/lib/social-detector.test.ts.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><code>social-detector.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/social-detector.ts</small></td>
+  <td><span class="tag tag-class">Module</span></td>
+  <td><code>auto-detect-social.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small><br><code>route.ts</code><br><small style="color:var(--muted)">grader/detect-social/route.ts</small><br><code>social-detector.test.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/social-detector.test.ts</small></td>
+  <td>No direct outbound edge</td>
+  <td>Module file in atrium.grader/lib/social-detector.ts.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><code>detectSocialHandles()</code><br><small style="color:var(--muted)">atrium.grader/lib/social-detector.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>auto-detect-social.ts</code><br><small style="color:var(--muted)">atrium.grader/lib/auto-detect-social.ts</small><br><code>POST()</code><br><small style="color:var(--muted)">grader/detect-social/route.ts</small><br><code>route.ts</code><br><small style="color:var(--muted)">grader/detect-social/route.ts</small><br>+2 more</td>
+  <td><code>extractHrefs()</code><br><small style="color:var(--muted)">atrium.grader/lib/social-detector.ts</small></td>
+  <td>detectSocialHandles() node in atrium.grader/lib/social-detector.ts.</td>
 </tr>
 </table>
 
@@ -1992,19 +1991,19 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: calls x109, contains x98, imports x36, imports x21. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: calls x110, contains x98, imports x38, imports x21. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
 <!-- ====== 8. Tests & Fixtures ====== -->
 <h2 id="tests-fixtures">8. Tests &amp; Fixtures</h2>
-<p>Tests &amp; Fixtures groups implementation around packages, application, infrastructure, repositories, mostly in src/diagnostics/restaurant-growth-grader.ts, src/diagnostics/social-health-scorer.ts, atrium.grader/lib/scrape-creators.ts. This section covers 402 nodes and 728 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<p>Tests &amp; Fixtures groups implementation around packages, application, infrastructure, repositories, mostly in src/diagnostics/restaurant-growth-grader.ts, src/diagnostics/social-health-scorer.ts, atrium.grader/lib/scrape-creators.ts. This section covers 401 nodes and 713 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Tests &amp; Fixtures (402 nodes, 728 edges)
+    %% Section: Tests &amp; Fixtures (401 nodes, 713 edges)
     subgraph tests_fixtures_atrium_grader_lib_scrape_creators_90448d89["atrium.grader/lib/scrape-creators.ts"]
         lib_scrape_creators_fetchinstagram_dd80f8a2("fetchInstagram()<br/><small>atrium.grader/lib/scrape-creators.ts</small>")
         lib_scrape_creators_scansocialprofiles_78e2d7ec("scanSocialProfiles()<br/><small>atrium.grader/lib/scrape-creators.ts</small>")
@@ -2019,8 +2018,8 @@ flowchart LR
         lib_scrape_creators_tonumber_ea1636f3("toNumber()<br/><small>atrium.grader/lib/scrape-creators.ts</small>")
         lib_scrape_creators_tostr_fcdbaf30("toStr()<br/><small>atrium.grader/lib/scrape-creators.ts</small>")
     end
+    src_events_test_cf49e918("events.test.ts")
     social_route_post_fac73d1c("POST()<br/><small>grader/social/route.ts</small>")
-    src_composition_root_a8db54c9("composition-root.ts")
     diagnostics_restaurant_growth_grader_graderestau_d064b2ac("gradeRestaurantGrowth()<br/><small>src/diagnostics/restaurant-growth-grader.ts</small>")
     diagnostics_social_health_scorer_scoreplatform_db99766f("scorePlatform()<br/><small>src/diagnostics/social-health-scorer.ts</small>")
     health_score_health_score_service_test_dfddfbc5("health-score-service.test.ts")
@@ -2047,7 +2046,7 @@ flowchart LR
     lib_scrape_creators_fetchtiktok_3dff18fe -->|calls| lib_scrape_creators_tonumber_ea1636f3
     lib_scrape_creators_fetchtiktok_3dff18fe -->|calls| lib_scrape_creators_tostr_fcdbaf30
     lib_scrape_creators_instagramtimelineitems_70f007f9 -->|calls| lib_scrape_creators_instagramresponseitems_159c75f5
-    %% Omitted for readability: 384 nodes, 0 edges
+    %% Omitted for readability: 383 nodes, 0 edges
     class lib_scrape_creators_fetchinstagram_dd80f8a2 function;
     class lib_scrape_creators_scansocialprofiles_78e2d7ec function;
     class lib_scrape_creators_absent_e756afec function;
@@ -2060,8 +2059,8 @@ flowchart LR
     class lib_scrape_creators_scrapeget_2c16a523 function;
     class lib_scrape_creators_tonumber_ea1636f3 function;
     class lib_scrape_creators_tostr_fcdbaf30 function;
+    class src_events_test_cf49e918 test;
     class social_route_post_fac73d1c function;
-    class src_composition_root_a8db54c9 module;
     class diagnostics_restaurant_growth_grader_graderestau_d064b2ac function;
     class diagnostics_social_health_scorer_scoreplatform_db99766f function;
     class health_score_health_score_service_test_dfddfbc5 test;
@@ -2346,1084 +2345,13 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x268, calls x122, re exports x119, imports x97. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x268, calls x122, re exports x118, imports x90. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
 
-<!-- ====== 9. Community 53 ====== -->
-<h2 id="community-53">9. Community 53</h2>
-<p>Community 53 groups implementation around apps, atriumwebsite, work, pagetsx, mostly in work/[slug]/page.tsx, components/work/CaseGallery.tsx, atrium.website/lib/work.ts. This section covers 48 nodes and 61 internal edges; the diagram shows only representative relationships to stay readable.</p>
-
-<div class="mermaid">
-%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
-flowchart LR
-    %% Section: Community 53 (48 nodes, 61 edges)
-    subgraph community_53_work_slug_page_tsx_8069ef79["work/[slug]/page.tsx"]
-        apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358("page.tsx")
-        slug_page_casehero_4fa06f32("CaseHero()<br/><small>work/[slug]/page.tsx</small>")
-        slug_page_getcasebody_b48c9bed("getCaseBody()<br/><small>work/[slug]/page.tsx</small>")
-        slug_page_getcaseintro_f13f7a5e("getCaseIntro()<br/><small>work/[slug]/page.tsx</small>")
-        slug_page_getcasetheme_5ba33f2d("getCaseTheme()<br/><small>work/[slug]/page.tsx</small>")
-        slug_page_casestudypage_77bf6ff3("CaseStudyPage()<br/><small>work/[slug]/page.tsx</small>")
-        slug_page_getnextstudy_e79f744b("getNextStudy()<br/><small>work/[slug]/page.tsx</small>")
-    end
-    subgraph community_53_atrium_website_lib_work_ts_b281e0f7["atrium.website/lib/work.ts"]
-        lib_work_97b17eec("work.ts")
-        lib_work_casemetric_edee6335("CaseMetric<br/><small>atrium.website/lib/work.ts</small>")
-        lib_work_casestudies_fd3a4142("caseStudies<br/><small>atrium.website/lib/work.ts</small>")
-        lib_work_casestudy_1d2ff667("CaseStudy<br/><small>atrium.website/lib/work.ts</small>")
-        lib_work_getcasestudy_deb0f87c("getCaseStudy()<br/><small>atrium.website/lib/work.ts</small>")
-        lib_work_casegalleryimage_fa07257c("CaseGalleryImage<br/><small>atrium.website/lib/work.ts</small>")
-    end
-    subgraph community_53_components_work_CaseGallery_tsx_9b8e6f52["components/work/CaseGallery.tsx"]
-        work_casegallery_3f323dbb("CaseGallery.tsx")
-        work_casegallery_clamp_dd6aa297("clamp()<br/><small>components/work/CaseGallery.tsx</small>")
-        work_casegallery_getimageratio_462fcf14("getImageRatio()<br/><small>components/work/CaseGallery.tsx</small>")
-    end
-    subgraph community_53_app_work_page_tsx_fe50df18["app/work/page.tsx"]
-        work_page_87a9eafb("page.tsx")
-        work_page_workpage_de062823("WorkPage()<br/><small>app/work/page.tsx</small>")
-    end
-    slug_page_casehero_4fa06f32 -->|calls| slug_page_getcasetheme_5ba33f2d
-    slug_page_getcaseintro_f13f7a5e -->|calls| slug_page_casestudypage_77bf6ff3
-    slug_page_getcasebody_b48c9bed -->|calls| slug_page_casestudypage_77bf6ff3
-    slug_page_getnextstudy_e79f744b -->|calls| slug_page_casestudypage_77bf6ff3
-    work_casegallery_clamp_dd6aa297 -->|calls| work_casegallery_getimageratio_462fcf14
-    apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358 -->|imports| lib_work_97b17eec
-    apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358 -->|imports| lib_work_casemetric_edee6335
-    apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358 -->|imports| lib_work_casestudies_fd3a4142
-    apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358 -->|imports| lib_work_casestudy_1d2ff667
-    apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358 -->|imports| lib_work_getcasestudy_deb0f87c
-    apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358 -->|imports| work_casegallery_3f323dbb
-    work_page_87a9eafb -->|imports| lib_work_97b17eec
-    work_page_87a9eafb -->|imports| lib_work_casestudies_fd3a4142
-    work_casegallery_3f323dbb -->|imports| lib_work_97b17eec
-    work_casegallery_3f323dbb -->|imports| lib_work_casegalleryimage_fa07257c
-    %% Omitted for readability: 30 nodes, 0 edges
-    class apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358 ui;
-    class slug_page_casehero_4fa06f32 ui;
-    class slug_page_getcasebody_b48c9bed ui;
-    class slug_page_getcaseintro_f13f7a5e ui;
-    class slug_page_getcasetheme_5ba33f2d ui;
-    class slug_page_casestudypage_77bf6ff3 ui;
-    class slug_page_getnextstudy_e79f744b ui;
-    class lib_work_97b17eec module;
-    class lib_work_casemetric_edee6335 klass;
-    class lib_work_casestudies_fd3a4142 function;
-    class lib_work_casestudy_1d2ff667 klass;
-    class lib_work_getcasestudy_deb0f87c function;
-    class lib_work_casegalleryimage_fa07257c klass;
-    class work_casegallery_3f323dbb ui;
-    class work_casegallery_clamp_dd6aa297 ui;
-    class work_casegallery_getimageratio_462fcf14 ui;
-    class work_page_87a9eafb ui;
-    class work_page_workpage_de062823 ui;
-    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
-    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
-    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
-    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
-    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
-    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
-    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
-    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
-    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
-</div>
-
-<h3>Call Details</h3>
-<table class="call-table">
-<tr>
-  <th style="width:5%">#</th>
-  <th style="width:28%">Node</th>
-  <th style="width:10%">Type</th>
-  <th style="width:17%">Caller</th>
-  <th style="width:20%">Callees</th>
-  <th style="width:20%">Description</th>
-</tr>
-<tr>
-  <td>1</td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>CaseGallery.tsx</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small><br><code>CaseMetric</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small><br><code>caseStudies</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small><br>+3 more</td>
-  <td>Module file in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>2</td>
-  <td><code>generateStaticParams()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Verifies imports, entry points, or version behavior.</td>
-</tr>
-<tr>
-  <td>3</td>
-  <td><code>generateMetadata()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>getCaseStudy()</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small></td>
-  <td>generateMetadata() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>4</td>
-  <td><code>fallbackMetric</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>fallbackMetric node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>5</td>
-  <td><code>storyStageLabels</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>storyStageLabels node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>6</td>
-  <td><code>CaseHero()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>getCaseTheme()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td>CaseHero() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>7</td>
-  <td><code>StorySection()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>StorySection() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>8</td>
-  <td><code>ScopeSection()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ScopeSection() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>9</td>
-  <td><code>ResultsSection()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-async">Async</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ResultsSection() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>10</td>
-  <td><code>NextCaseBand()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>NextCaseBand() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>11</td>
-  <td><code>getCaseIntro()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>CaseStudyPage()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td>getCaseIntro() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>12</td>
-  <td><code>getCaseBody()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>CaseStudyPage()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td>getCaseBody() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>13</td>
-  <td><code>getNextStudy()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>CaseStudyPage()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td>getNextStudy() node in work/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>14</td>
-  <td><code>CaseStudyPage()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>getCaseBody()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small><br><code>getCaseIntro()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small><br><code>getNextStudy()</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><code>getCaseStudy()</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small></td>
-  <td>Organizes documentation pages, navigation, or content lookup.</td>
-</tr>
-<tr>
-  <td>15</td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/work/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>caseStudies</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small><br><code>work.ts</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small></td>
-  <td>Module file in app/work/page.tsx.</td>
-</tr>
-<tr>
-  <td>16</td>
-  <td><code>metadata</code><br><small style="color:var(--muted)">app/work/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>metadata node in app/work/page.tsx.</td>
-</tr>
-<tr>
-  <td>17</td>
-  <td><code>sortedCases</code><br><small style="color:var(--muted)">app/work/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>sortedCases node in app/work/page.tsx.</td>
-</tr>
-<tr>
-  <td>18</td>
-  <td><code>WorkPage()</code><br><small style="color:var(--muted)">app/work/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Organizes documentation pages, navigation, or content lookup.</td>
-</tr>
-<tr>
-  <td>19</td>
-  <td><code>CaseGallery.tsx</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td><code>CaseGalleryImage</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small><br><code>work.ts</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small></td>
-  <td>Module file in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>20</td>
-  <td><code>CaseGalleryProps</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>CaseGalleryProps node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>21</td>
-  <td><code>LayoutItem</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>LayoutItem node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>22</td>
-  <td><code>Point</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Point node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>23</td>
-  <td><code>fallbackImages</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>fallbackImages node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>24</td>
-  <td><code>cloneOffsets</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Turns a local path or remote repository into analysis context.</td>
-</tr>
-<tr>
-  <td>25</td>
-  <td><code>clamp()</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>getImageRatio()</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td>clamp() node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>26</td>
-  <td><code>wrap()</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>wrap() node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>27</td>
-  <td><code>getImageRatio()</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>clamp()</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>getImageRatio() node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>28</td>
-  <td><code>resolveAlt()</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>resolveAlt() node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>29</td>
-  <td><code>CaseGallery()</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>CaseGallery() node in components/work/CaseGallery.tsx.</td>
-</tr>
-<tr>
-  <td>30</td>
-  <td><code>work.ts</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small></td>
-  <td><span class="tag tag-class">Module</span></td>
-  <td><code>CaseGallery.tsx</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/work/page.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>Module file in atrium.website/lib/work.ts.</td>
-</tr>
-</table>
-
-<div class="grid">
-  <div class="card">
-    <h4>Key Files</h4>
-    <table style="width:100%;font-size:0.85rem;">
-      <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>work/[slug]/page.tsx</code></td><td>24 nodes</td></tr>
-<tr><td><code>components/work/CaseGallery.tsx</code></td><td>11 nodes</td></tr>
-<tr><td><code>atrium.website/lib/work.ts</code></td><td>9 nodes</td></tr>
-<tr><td><code>app/work/page.tsx</code></td><td>4 nodes</td></tr>
-    </table>
-  </div>
-  <div class="card">
-    <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x44, imports x6, calls x5, imports x4. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
-  </div>
-</div>
-<hr>
-
-<!-- ====== 10. Community 70 ====== -->
-<h2 id="community-70">10. Community 70</h2>
-<p>Community 70 groups implementation around apps, atriumwebsite, components, sections, mostly in atrium.website/app/page.tsx, components/sections/BentoGrid.tsx, components/sections/DarkProcess.tsx. This section covers 43 nodes and 58 internal edges; the diagram shows only representative relationships to stay readable.</p>
-
-<div class="mermaid">
-%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
-flowchart LR
-    %% Section: Community 70 (43 nodes, 58 edges)
-    subgraph community_70_components_sections_DarkProcess_tsx_0881f381["components/sections/DarkProcess.tsx"]
-        sections_darkprocess_1350a2d5("DarkProcess.tsx")
-        sections_darkprocess_processstat_bee126d5("ProcessStat<br/><small>components/sections/DarkProcess.tsx</small>")
-        sections_darkprocess_processstep_cf2ce1c7("ProcessStep<br/><small>components/sections/DarkProcess.tsx</small>")
-    end
-    subgraph community_70_atrium_website_app_page_tsx_f4f5f3a8["atrium.website/app/page.tsx"]
-        apps_atrium_website_app_page_tsx_app_page_ae932582("page.tsx")
-        app_page_homepage_3744d325("HomePage()<br/><small>atrium.website/app/page.tsx</small>")
-    end
-    subgraph community_70_components_sections_BentoGrid_tsx_9262b26c["components/sections/BentoGrid.tsx"]
-        sections_bentogrid_53140a0b("BentoGrid.tsx")
-        sections_bentogrid_bentoitem_118bbd63("BentoItem<br/><small>components/sections/BentoGrid.tsx</small>")
-    end
-    subgraph community_70_components_sections_StatsStrip_tsx_1d8982e3["components/sections/StatsStrip.tsx"]
-        sections_statsstrip_02ac7c10("StatsStrip.tsx")
-        sections_statsstrip_stat_8c64b0ec("Stat<br/><small>components/sections/StatsStrip.tsx</small>")
-    end
-    subgraph community_70_components_sections_TestimonialBent_1ef28bed["components/sections/TestimonialBento.tsx"]
-        sections_testimonialbento_5f30247c("TestimonialBento.tsx")
-        sections_testimonialbento_bentocard_e74629a8("BentoCard<br/><small>components/sections/TestimonialBento.tsx</small>")
-    end
-    subgraph community_70_components_sections_WorkGrid_tsx_9b1cee55["components/sections/WorkGrid.tsx"]
-        sections_workgrid_6be4a04a("WorkGrid.tsx")
-        sections_workgrid_project_25748b7e("Project<br/><small>components/sections/WorkGrid.tsx</small>")
-    end
-    lib_gsap_6484b591("gsap.ts")
-    sections_herosection_d6eaf510("HeroSection.tsx")
-    sections_splitsection_b42434b1("SplitSection.tsx")
-    ui_button_fad8ac47("Button.tsx")
-    ui_logoticker_eb6ea57a("LogoTicker.tsx")
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_bentogrid_53140a0b
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_bentogrid_bentoitem_118bbd63
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_darkprocess_1350a2d5
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_darkprocess_processstat_bee126d5
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_darkprocess_processstep_cf2ce1c7
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_herosection_d6eaf510
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_splitsection_b42434b1
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_statsstrip_02ac7c10
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_statsstrip_stat_8c64b0ec
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_testimonialbento_5f30247c
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_testimonialbento_bentocard_e74629a8
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_workgrid_6be4a04a
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_workgrid_project_25748b7e
-    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| ui_logoticker_eb6ea57a
-    sections_bentogrid_53140a0b -->|imports| lib_gsap_6484b591
-    sections_darkprocess_1350a2d5 -->|imports| lib_gsap_6484b591
-    sections_darkprocess_1350a2d5 -->|imports| ui_button_fad8ac47
-    sections_herosection_d6eaf510 -->|imports| lib_gsap_6484b591
-    sections_herosection_d6eaf510 -->|imports| ui_button_fad8ac47
-    sections_splitsection_b42434b1 -->|imports| lib_gsap_6484b591
-    sections_splitsection_b42434b1 -->|imports| ui_button_fad8ac47
-    sections_statsstrip_02ac7c10 -->|imports| lib_gsap_6484b591
-    sections_testimonialbento_5f30247c -->|imports| lib_gsap_6484b591
-    sections_workgrid_6be4a04a -->|imports| lib_gsap_6484b591
-    %% Omitted for readability: 25 nodes, 2 edges
-    class sections_darkprocess_1350a2d5 ui;
-    class sections_darkprocess_processstat_bee126d5 ui;
-    class sections_darkprocess_processstep_cf2ce1c7 ui;
-    class apps_atrium_website_app_page_tsx_app_page_ae932582 ui;
-    class app_page_homepage_3744d325 ui;
-    class sections_bentogrid_53140a0b ui;
-    class sections_bentogrid_bentoitem_118bbd63 ui;
-    class sections_statsstrip_02ac7c10 ui;
-    class sections_statsstrip_stat_8c64b0ec ui;
-    class sections_testimonialbento_5f30247c test;
-    class sections_testimonialbento_bentocard_e74629a8 test;
-    class sections_workgrid_6be4a04a ui;
-    class sections_workgrid_project_25748b7e ui;
-    class lib_gsap_6484b591 module;
-    class sections_herosection_d6eaf510 ui;
-    class sections_splitsection_b42434b1 ui;
-    class ui_button_fad8ac47 ui;
-    class ui_logoticker_eb6ea57a ui;
-    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
-    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
-    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
-    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
-    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
-    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
-    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
-    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
-    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
-</div>
-
-<h3>Call Details</h3>
-<table class="call-table">
-<tr>
-  <th style="width:5%">#</th>
-  <th style="width:28%">Node</th>
-  <th style="width:10%">Type</th>
-  <th style="width:17%">Caller</th>
-  <th style="width:20%">Callees</th>
-  <th style="width:20%">Description</th>
-</tr>
-<tr>
-  <td>1</td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>BentoCard</code><br><small style="color:var(--muted)">components/sections/TestimonialBento.tsx</small><br><code>BentoGrid.tsx</code><br><small style="color:var(--muted)">components/sections/BentoGrid.tsx</small><br><code>BentoItem</code><br><small style="color:var(--muted)">components/sections/BentoGrid.tsx</small><br>+11 more</td>
-  <td>Module file in atrium.website/app/page.tsx.</td>
-</tr>
-<tr>
-  <td>2</td>
-  <td><code>bentoItems</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>bentoItems node in atrium.website/app/page.tsx.</td>
-</tr>
-<tr>
-  <td>3</td>
-  <td><code>selectedWork</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>selectedWork node in atrium.website/app/page.tsx.</td>
-</tr>
-<tr>
-  <td>4</td>
-  <td><code>processSteps</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>processSteps node in atrium.website/app/page.tsx.</td>
-</tr>
-<tr>
-  <td>5</td>
-  <td><code>processStats</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>processStats node in atrium.website/app/page.tsx.</td>
-</tr>
-<tr>
-  <td>6</td>
-  <td><code>testimonialCards</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Verifies imports, entry points, or version behavior.</td>
-</tr>
-<tr>
-  <td>7</td>
-  <td><code>clients</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-cmd">Entry</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>clients node in atrium.website/app/page.tsx.</td>
-</tr>
-<tr>
-  <td>8</td>
-  <td><code>homeStats</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>homeStats node in atrium.website/app/page.tsx.</td>
-</tr>
-<tr>
-  <td>9</td>
-  <td><code>HomePage()</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Organizes documentation pages, navigation, or content lookup.</td>
-</tr>
-<tr>
-  <td>10</td>
-  <td><code>BentoGrid.tsx</code><br><small style="color:var(--muted)">components/sections/BentoGrid.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small></td>
-  <td>Module file in components/sections/BentoGrid.tsx.</td>
-</tr>
-<tr>
-  <td>11</td>
-  <td><code>BentoItem</code><br><small style="color:var(--muted)">components/sections/BentoGrid.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>BentoItem node in components/sections/BentoGrid.tsx.</td>
-</tr>
-<tr>
-  <td>12</td>
-  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/BentoGrid.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Props node in components/sections/BentoGrid.tsx.</td>
-</tr>
-<tr>
-  <td>13</td>
-  <td><code>sizeClass</code><br><small style="color:var(--muted)">components/sections/BentoGrid.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>sizeClass node in components/sections/BentoGrid.tsx.</td>
-</tr>
-<tr>
-  <td>14</td>
-  <td><code>BentoGrid()</code><br><small style="color:var(--muted)">components/sections/BentoGrid.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>BentoGrid() node in components/sections/BentoGrid.tsx.</td>
-</tr>
-<tr>
-  <td>15</td>
-  <td><code>DarkProcess.tsx</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><code>Button.tsx</code><br><small style="color:var(--muted)">components/ui/Button.tsx</small><br><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small></td>
-  <td>Module file in components/sections/DarkProcess.tsx.</td>
-</tr>
-<tr>
-  <td>16</td>
-  <td><code>ProcessStep</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>ProcessStep node in components/sections/DarkProcess.tsx.</td>
-</tr>
-<tr>
-  <td>17</td>
-  <td><code>ProcessStat</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>ProcessStat node in components/sections/DarkProcess.tsx.</td>
-</tr>
-<tr>
-  <td>18</td>
-  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Props node in components/sections/DarkProcess.tsx.</td>
-</tr>
-<tr>
-  <td>19</td>
-  <td><code>DarkProcess()</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>DarkProcess() node in components/sections/DarkProcess.tsx.</td>
-</tr>
-<tr>
-  <td>20</td>
-  <td><code>HeroSection.tsx</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><code>Button.tsx</code><br><small style="color:var(--muted)">components/ui/Button.tsx</small><br><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small></td>
-  <td>Module file in components/sections/HeroSection.tsx.</td>
-</tr>
-<tr>
-  <td>21</td>
-  <td><code>HeroScene</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>HeroScene node in components/sections/HeroSection.tsx.</td>
-</tr>
-<tr>
-  <td>22</td>
-  <td><code>tags</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>tags node in components/sections/HeroSection.tsx.</td>
-</tr>
-<tr>
-  <td>23</td>
-  <td><code>HeroSection()</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>HeroSection() node in components/sections/HeroSection.tsx.</td>
-</tr>
-<tr>
-  <td>24</td>
-  <td><code>SplitSection.tsx</code><br><small style="color:var(--muted)">components/sections/SplitSection.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><code>Button.tsx</code><br><small style="color:var(--muted)">components/ui/Button.tsx</small><br><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small></td>
-  <td>Module file in components/sections/SplitSection.tsx.</td>
-</tr>
-<tr>
-  <td>25</td>
-  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/SplitSection.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Props node in components/sections/SplitSection.tsx.</td>
-</tr>
-<tr>
-  <td>26</td>
-  <td><code>SplitSection()</code><br><small style="color:var(--muted)">components/sections/SplitSection.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>SplitSection() node in components/sections/SplitSection.tsx.</td>
-</tr>
-<tr>
-  <td>27</td>
-  <td><code>StatsStrip.tsx</code><br><small style="color:var(--muted)">components/sections/StatsStrip.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small></td>
-  <td>Module file in components/sections/StatsStrip.tsx.</td>
-</tr>
-<tr>
-  <td>28</td>
-  <td><code>Stat</code><br><small style="color:var(--muted)">components/sections/StatsStrip.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>Stat node in components/sections/StatsStrip.tsx.</td>
-</tr>
-<tr>
-  <td>29</td>
-  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/StatsStrip.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Props node in components/sections/StatsStrip.tsx.</td>
-</tr>
-<tr>
-  <td>30</td>
-  <td><code>StatsStrip()</code><br><small style="color:var(--muted)">components/sections/StatsStrip.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>StatsStrip() node in components/sections/StatsStrip.tsx.</td>
-</tr>
-</table>
-
-<div class="grid">
-  <div class="card">
-    <h4>Key Files</h4>
-    <table style="width:100%;font-size:0.85rem;">
-      <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>atrium.website/app/page.tsx</code></td><td>9 nodes</td></tr>
-<tr><td><code>components/sections/BentoGrid.tsx</code></td><td>5 nodes</td></tr>
-<tr><td><code>components/sections/DarkProcess.tsx</code></td><td>5 nodes</td></tr>
-<tr><td><code>components/sections/HeroSection.tsx</code></td><td>4 nodes</td></tr>
-<tr><td><code>components/sections/StatsStrip.tsx</code></td><td>4 nodes</td></tr>
-<tr><td><code>components/sections/TestimonialBento.tsx</code></td><td>4 nodes</td></tr>
-<tr><td><code>components/sections/WorkGrid.tsx</code></td><td>4 nodes</td></tr>
-<tr><td><code>components/sections/SplitSection.tsx</code></td><td>3 nodes</td></tr>
-    </table>
-  </div>
-  <div class="card">
-    <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x32, imports x20, imports x6. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
-  </div>
-</div>
-<hr>
-
-<!-- ====== 11. Community 9 ====== -->
-<h2 id="community-9">11. Community 9</h2>
-<p>Community 9 groups implementation around apps, atriumwebsite, services, components, mostly in services/[slug]/page.tsx, atrium.website/lib/services.ts, components/sections/IconGrid.tsx. This section covers 39 nodes and 67 internal edges; the diagram shows only representative relationships to stay readable.</p>
-
-<div class="mermaid">
-%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
-flowchart LR
-    %% Section: Community 9 (39 nodes, 67 edges)
-    subgraph community_9_services_slug_page_tsx_6243805e["services/[slug]/page.tsx"]
-        apps_atrium_website_app_services_slug_page_tsx_s_2430c71a("page.tsx")
-        slug_page_servicepage_a73ed897("ServicePage()<br/><small>services/[slug]/page.tsx</small>")
-        slug_page_parseheadline_499fbcfd("parseHeadline()<br/><small>services/[slug]/page.tsx</small>")
-        slug_page_generatemetadata_1ee4f040("generateMetadata()<br/><small>services/[slug]/page.tsx</small>")
-        slug_page_siblingservices_72b201a8("SiblingServices()<br/><small>services/[slug]/page.tsx</small>")
-    end
-    subgraph community_9_atrium_website_lib_services_ts_1ab3a997["atrium.website/lib/services.ts"]
-        lib_services_getservice_1af59db5("getService()<br/><small>atrium.website/lib/services.ts</small>")
-        lib_services_getsiblingservices_3d30f459("getSiblingServices()<br/><small>atrium.website/lib/services.ts</small>")
-        lib_services_a720e5ba("services.ts")
-        lib_services_iconitem_15c300d2("IconItem<br/><small>atrium.website/lib/services.ts</small>")
-    end
-    subgraph community_9_components_services_SiblingServices_7580ec1c["components/services/SiblingServices.tsx"]
-        services_siblingservices_f5965271("SiblingServices.tsx")
-        services_siblingservices_siblingservices_26085cae("SiblingServices()<br/><small>components/services/SiblingServices.tsx</small>")
-    end
-    sections_icongrid_98afe83f("IconGrid.tsx")
-    sections_servicetimeline_dd75a943("ServiceTimeline.tsx")
-    services_servicemarquee_db5cd499("ServiceMarquee.tsx")
-    services_serviceperksrail_47c7ce8b("ServicePerksRail.tsx")
-    services_serviceproofstrip_2ce758fd("ServiceProofStrip.tsx")
-    services_servicestatseditorial_0619c5ee("ServiceStatsEditorial.tsx")
-    services_servicetimelineeditorial_51a08ba2("ServiceTimelineEditorial.tsx")
-    slug_page_servicepage_a73ed897 -->|calls| lib_services_getservice_1af59db5
-    slug_page_servicepage_a73ed897 -->|calls| slug_page_parseheadline_499fbcfd
-    services_siblingservices_siblingservices_26085cae -->|calls| lib_services_getsiblingservices_3d30f459
-    lib_services_getservice_1af59db5 -->|calls| slug_page_generatemetadata_1ee4f040
-    lib_services_getsiblingservices_3d30f459 -->|calls| slug_page_siblingservices_72b201a8
-    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| lib_services_a720e5ba
-    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| lib_services_getservice_1af59db5
-    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| services_servicemarquee_db5cd499
-    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| services_serviceproofstrip_2ce758fd
-    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| services_servicestatseditorial_0619c5ee
-    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| services_servicetimelineeditorial_51a08ba2
-    sections_icongrid_98afe83f -->|imports| lib_services_a720e5ba
-    sections_icongrid_98afe83f -->|imports| lib_services_iconitem_15c300d2
-    sections_servicetimeline_dd75a943 -->|imports| lib_services_a720e5ba
-    services_servicemarquee_db5cd499 -->|imports| lib_services_a720e5ba
-    services_serviceperksrail_47c7ce8b -->|imports| lib_services_a720e5ba
-    services_servicestatseditorial_0619c5ee -->|imports| lib_services_a720e5ba
-    services_servicetimelineeditorial_51a08ba2 -->|imports| lib_services_a720e5ba
-    services_siblingservices_f5965271 -->|imports| lib_services_a720e5ba
-    services_siblingservices_f5965271 -->|imports| lib_services_getsiblingservices_3d30f459
-    %% Omitted for readability: 21 nodes, 0 edges
-    class apps_atrium_website_app_services_slug_page_tsx_s_2430c71a ui;
-    class slug_page_servicepage_a73ed897 ui;
-    class slug_page_parseheadline_499fbcfd ui;
-    class slug_page_generatemetadata_1ee4f040 ui;
-    class slug_page_siblingservices_72b201a8 ui;
-    class lib_services_getservice_1af59db5 function;
-    class lib_services_getsiblingservices_3d30f459 function;
-    class lib_services_a720e5ba module;
-    class lib_services_iconitem_15c300d2 klass;
-    class services_siblingservices_f5965271 ui;
-    class services_siblingservices_siblingservices_26085cae ui;
-    class sections_icongrid_98afe83f ui;
-    class sections_servicetimeline_dd75a943 ui;
-    class services_servicemarquee_db5cd499 ui;
-    class services_serviceperksrail_47c7ce8b ui;
-    class services_serviceproofstrip_2ce758fd ui;
-    class services_servicestatseditorial_0619c5ee ui;
-    class services_servicetimelineeditorial_51a08ba2 ui;
-    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
-    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
-    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
-    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
-    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
-    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
-    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
-    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
-    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
-</div>
-
-<h3>Call Details</h3>
-<table class="call-table">
-<tr>
-  <th style="width:5%">#</th>
-  <th style="width:28%">Node</th>
-  <th style="width:10%">Type</th>
-  <th style="width:17%">Caller</th>
-  <th style="width:20%">Callees</th>
-  <th style="width:20%">Description</th>
-</tr>
-<tr>
-  <td>1</td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>getService()</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>ServiceMarquee.tsx</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small><br><code>ServiceProofStrip.tsx</code><br><small style="color:var(--muted)">components/services/ServiceProofStrip.tsx</small><br>+3 more</td>
-  <td>Module file in services/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>2</td>
-  <td><code>generateStaticParams()</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Verifies imports, entry points, or version behavior.</td>
-</tr>
-<tr>
-  <td>3</td>
-  <td><code>generateMetadata()</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>getService()</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>generateMetadata() node in services/[slug]/page.tsx.</td>
-</tr>
-<tr>
-  <td>4</td>
-  <td><code>ServicePage()</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>getService()</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>parseHeadline()</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td>Organizes documentation pages, navigation, or content lookup.</td>
-</tr>
-<tr>
-  <td>5</td>
-  <td><code>IconGrid.tsx</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>IconItem</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>Module file in components/sections/IconGrid.tsx.</td>
-</tr>
-<tr>
-  <td>6</td>
-  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Props node in components/sections/IconGrid.tsx.</td>
-</tr>
-<tr>
-  <td>7</td>
-  <td><code>IconGrid()</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>IconGrid() node in components/sections/IconGrid.tsx.</td>
-</tr>
-<tr>
-  <td>8</td>
-  <td><code>ServiceTimeline.tsx</code><br><small style="color:var(--muted)">components/sections/ServiceTimeline.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>TimelineStep</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>Module file in components/sections/ServiceTimeline.tsx.</td>
-</tr>
-<tr>
-  <td>9</td>
-  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/ServiceTimeline.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Props node in components/sections/ServiceTimeline.tsx.</td>
-</tr>
-<tr>
-  <td>10</td>
-  <td><code>ServiceTimeline()</code><br><small style="color:var(--muted)">components/sections/ServiceTimeline.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ServiceTimeline() node in components/sections/ServiceTimeline.tsx.</td>
-</tr>
-<tr>
-  <td>11</td>
-  <td><code>ServiceMarquee.tsx</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>Service</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>Module file in components/services/ServiceMarquee.tsx.</td>
-</tr>
-<tr>
-  <td>12</td>
-  <td><code>Props</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>Props node in components/services/ServiceMarquee.tsx.</td>
-</tr>
-<tr>
-  <td>13</td>
-  <td><code>ServiceMarquee()</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ServiceMarquee() node in components/services/ServiceMarquee.tsx.</td>
-</tr>
-<tr>
-  <td>14</td>
-  <td><code>ServicePerksRail.tsx</code><br><small style="color:var(--muted)">components/services/ServicePerksRail.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>Service</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>Module file in components/services/ServicePerksRail.tsx.</td>
-</tr>
-<tr>
-  <td>15</td>
-  <td><code>ServicePerksRail()</code><br><small style="color:var(--muted)">components/services/ServicePerksRail.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ServicePerksRail() node in components/services/ServicePerksRail.tsx.</td>
-</tr>
-<tr>
-  <td>16</td>
-  <td><code>ServiceProofStrip.tsx</code><br><small style="color:var(--muted)">components/services/ServiceProofStrip.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td>Module file in components/services/ServiceProofStrip.tsx.</td>
-</tr>
-<tr>
-  <td>17</td>
-  <td><code>brands</code><br><small style="color:var(--muted)">components/services/ServiceProofStrip.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>brands node in components/services/ServiceProofStrip.tsx.</td>
-</tr>
-<tr>
-  <td>18</td>
-  <td><code>ServiceProofStrip()</code><br><small style="color:var(--muted)">components/services/ServiceProofStrip.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ServiceProofStrip() node in components/services/ServiceProofStrip.tsx.</td>
-</tr>
-<tr>
-  <td>19</td>
-  <td><code>ServiceStatsEditorial.tsx</code><br><small style="color:var(--muted)">components/services/ServiceStatsEditorial.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>StatItem</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>Module file in components/services/ServiceStatsEditorial.tsx.</td>
-</tr>
-<tr>
-  <td>20</td>
-  <td><code>ServiceStatsEditorial()</code><br><small style="color:var(--muted)">components/services/ServiceStatsEditorial.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ServiceStatsEditorial() node in components/services/ServiceStatsEditorial.tsx.</td>
-</tr>
-<tr>
-  <td>21</td>
-  <td><code>ServiceTimelineEditorial.tsx</code><br><small style="color:var(--muted)">components/services/ServiceTimelineEditorial.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>TimelineStep</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>Module file in components/services/ServiceTimelineEditorial.tsx.</td>
-</tr>
-<tr>
-  <td>22</td>
-  <td><code>ServiceTimelineEditorial()</code><br><small style="color:var(--muted)">components/services/ServiceTimelineEditorial.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td>No direct outbound edge</td>
-  <td>ServiceTimelineEditorial() node in components/services/ServiceTimelineEditorial.tsx.</td>
-</tr>
-<tr>
-  <td>23</td>
-  <td><code>SiblingServices.tsx</code><br><small style="color:var(--muted)">components/services/SiblingServices.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>getSiblingServices()</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>Module file in components/services/SiblingServices.tsx.</td>
-</tr>
-<tr>
-  <td>24</td>
-  <td><code>SiblingServices()</code><br><small style="color:var(--muted)">components/services/SiblingServices.tsx</small></td>
-  <td><span class="tag tag-hook">UI</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>getSiblingServices()</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td>SiblingServices() node in components/services/SiblingServices.tsx.</td>
-</tr>
-<tr>
-  <td>25</td>
-  <td><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td><span class="tag tag-class">Module</span></td>
-  <td><code>IconGrid.tsx</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>ServiceMarquee.tsx</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small><br>+5 more</td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td>Module file in atrium.website/lib/services.ts.</td>
-</tr>
-<tr>
-  <td>26</td>
-  <td><code>IconItem</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td><code>IconGrid.tsx</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>IconItem node in atrium.website/lib/services.ts.</td>
-</tr>
-<tr>
-  <td>27</td>
-  <td><code>BentoCard</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td>External entry / no inbound edge</td>
-  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
-  <td>BentoCard node in atrium.website/lib/services.ts.</td>
-</tr>
-<tr>
-  <td>28</td>
-  <td><code>TimelineStep</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td><code>ServiceTimeline.tsx</code><br><small style="color:var(--muted)">components/sections/ServiceTimeline.tsx</small><br><code>ServiceTimelineEditorial.tsx</code><br><small style="color:var(--muted)">components/services/ServiceTimelineEditorial.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>TimelineStep node in atrium.website/lib/services.ts.</td>
-</tr>
-<tr>
-  <td>29</td>
-  <td><code>StatItem</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td><code>ServiceStatsEditorial.tsx</code><br><small style="color:var(--muted)">components/services/ServiceStatsEditorial.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>StatItem node in atrium.website/lib/services.ts.</td>
-</tr>
-<tr>
-  <td>30</td>
-  <td><code>Service</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
-  <td><span class="tag tag-class">Class</span></td>
-  <td><code>ServiceMarquee.tsx</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small><br><code>ServicePerksRail.tsx</code><br><small style="color:var(--muted)">components/services/ServicePerksRail.tsx</small></td>
-  <td>No direct outbound edge</td>
-  <td>Service node in atrium.website/lib/services.ts.</td>
-</tr>
-</table>
-
-<div class="grid">
-  <div class="card">
-    <h4>Key Files</h4>
-    <table style="width:100%;font-size:0.85rem;">
-      <tr><th>File</th><th>Coverage</th></tr>
-      <tr><td><code>services/[slug]/page.tsx</code></td><td>11 nodes</td></tr>
-<tr><td><code>atrium.website/lib/services.ts</code></td><td>8 nodes</td></tr>
-<tr><td><code>components/sections/IconGrid.tsx</code></td><td>3 nodes</td></tr>
-<tr><td><code>components/sections/ServiceTimeline.tsx</code></td><td>3 nodes</td></tr>
-<tr><td><code>components/services/ServiceMarquee.tsx</code></td><td>3 nodes</td></tr>
-<tr><td><code>components/services/ServiceProofStrip.tsx</code></td><td>3 nodes</td></tr>
-<tr><td><code>components/services/ServicePerksRail.tsx</code></td><td>2 nodes</td></tr>
-<tr><td><code>components/services/ServiceStatsEditorial.tsx</code></td><td>2 nodes</td></tr>
-    </table>
-  </div>
-  <div class="card">
-    <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x29, imports x21, imports x11, calls x5. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
-  </div>
-</div>
-<hr>
-
-<!-- ====== 12. Community 3 ====== -->
-<h2 id="community-3">12. Community 3</h2>
+<!-- ====== 9. Community 3 ====== -->
+<h2 id="community-3">9. Community 3</h2>
 <p>Community 3 groups implementation around atrium, platform, 2026, designmd, mostly in superpowers/specs/2026-06-18-atrium-platform-design.md. This section covers 36 nodes and 35 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
@@ -3762,8 +2690,8 @@ flowchart LR
 </div>
 <hr>
 
-<!-- ====== 13. Community 39 ====== -->
-<h2 id="community-39">13. Community 39</h2>
+<!-- ====== 10. Community 39 ====== -->
+<h2 id="community-39">10. Community 39</h2>
 <p>Community 39 groups implementation around apps, app, atriumwebsite, atriumgrader, mostly in components/ui/Navbar.tsx, atrium.grader/app/layout.tsx, atrium.grader/app/seo.ts. This section covers 35 nodes and 47 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
@@ -4121,8 +3049,8 @@ flowchart LR
 </div>
 <hr>
 
-<!-- ====== 14. Community 51 ====== -->
-<h2 id="community-51">14. Community 51</h2>
+<!-- ====== 11. Community 51 ====== -->
+<h2 id="community-51">11. Community 51</h2>
 <p>Community 51 groups implementation around atrium, website, v1md, apps, mostly in atrium.website/docs/Atrium_Website-V1.md. This section covers 34 nodes and 33 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
@@ -4461,8 +3389,363 @@ flowchart LR
 </div>
 <hr>
 
-<!-- ====== 15. Community 4 ====== -->
-<h2 id="community-4">15. Community 4</h2>
+<!-- ====== 12. Community 70 ====== -->
+<h2 id="community-70">12. Community 70</h2>
+<p>Community 70 groups implementation around apps, atriumwebsite, components, sections, mostly in atrium.website/app/page.tsx, components/sections/DarkProcess.tsx, components/sections/HeroSection.tsx. This section covers 34 nodes and 41 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Community 70 (34 nodes, 41 edges)
+    subgraph community_70_atrium_website_app_page_tsx_f4f5f3a8["atrium.website/app/page.tsx"]
+        apps_atrium_website_app_page_tsx_app_page_ae932582("page.tsx")
+        app_page_homepage_3744d325("HomePage()<br/><small>atrium.website/app/page.tsx</small>")
+        app_page_bentoitems_e5ac430a("bentoItems<br/><small>atrium.website/app/page.tsx</small>")
+        app_page_clients_bc94b5c6("clients<br/><small>atrium.website/app/page.tsx</small>")
+        app_page_homestats_9812285a("homeStats<br/><small>atrium.website/app/page.tsx</small>")
+        app_page_processstats_05ef93f5("processStats<br/><small>atrium.website/app/page.tsx</small>")
+    end
+    subgraph community_70_components_sections_DarkProcess_tsx_0881f381["components/sections/DarkProcess.tsx"]
+        sections_darkprocess_1350a2d5("DarkProcess.tsx")
+        sections_darkprocess_processstat_bee126d5("ProcessStat<br/><small>components/sections/DarkProcess.tsx</small>")
+        sections_darkprocess_processstep_cf2ce1c7("ProcessStep<br/><small>components/sections/DarkProcess.tsx</small>")
+    end
+    subgraph community_70_components_sections_StatsStrip_tsx_1d8982e3["components/sections/StatsStrip.tsx"]
+        sections_statsstrip_02ac7c10("StatsStrip.tsx")
+        sections_statsstrip_stat_8c64b0ec("Stat<br/><small>components/sections/StatsStrip.tsx</small>")
+    end
+    subgraph community_70_components_sections_TestimonialBent_1ef28bed["components/sections/TestimonialBento.tsx"]
+        sections_testimonialbento_5f30247c("TestimonialBento.tsx")
+        sections_testimonialbento_bentocard_e74629a8("BentoCard<br/><small>components/sections/TestimonialBento.tsx</small>")
+    end
+    subgraph community_70_components_sections_WorkGrid_tsx_9b1cee55["components/sections/WorkGrid.tsx"]
+        sections_workgrid_6be4a04a("WorkGrid.tsx")
+        sections_workgrid_project_25748b7e("Project<br/><small>components/sections/WorkGrid.tsx</small>")
+    end
+    sections_herosection_d6eaf510("HeroSection.tsx")
+    sections_splitsection_b42434b1("SplitSection.tsx")
+    ui_button_fad8ac47("Button.tsx")
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_darkprocess_1350a2d5
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_darkprocess_processstat_bee126d5
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_darkprocess_processstep_cf2ce1c7
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_herosection_d6eaf510
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_splitsection_b42434b1
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_statsstrip_02ac7c10
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_statsstrip_stat_8c64b0ec
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_testimonialbento_5f30247c
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_testimonialbento_bentocard_e74629a8
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_workgrid_6be4a04a
+    apps_atrium_website_app_page_tsx_app_page_ae932582 -->|imports| sections_workgrid_project_25748b7e
+    sections_darkprocess_1350a2d5 -->|imports| ui_button_fad8ac47
+    sections_herosection_d6eaf510 -->|imports| ui_button_fad8ac47
+    sections_splitsection_b42434b1 -->|imports| ui_button_fad8ac47
+    sections_workgrid_6be4a04a -->|imports| ui_button_fad8ac47
+    %% Omitted for readability: 16 nodes, 0 edges
+    class apps_atrium_website_app_page_tsx_app_page_ae932582 ui;
+    class app_page_homepage_3744d325 ui;
+    class app_page_bentoitems_e5ac430a ui;
+    class app_page_clients_bc94b5c6 entry;
+    class app_page_homestats_9812285a ui;
+    class app_page_processstats_05ef93f5 ui;
+    class sections_darkprocess_1350a2d5 ui;
+    class sections_darkprocess_processstat_bee126d5 ui;
+    class sections_darkprocess_processstep_cf2ce1c7 ui;
+    class sections_statsstrip_02ac7c10 ui;
+    class sections_statsstrip_stat_8c64b0ec ui;
+    class sections_testimonialbento_5f30247c test;
+    class sections_testimonialbento_bentocard_e74629a8 test;
+    class sections_workgrid_6be4a04a ui;
+    class sections_workgrid_project_25748b7e ui;
+    class sections_herosection_d6eaf510 ui;
+    class sections_splitsection_b42434b1 ui;
+    class ui_button_fad8ac47 ui;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>BentoCard</code><br><small style="color:var(--muted)">components/sections/TestimonialBento.tsx</small><br><code>DarkProcess.tsx</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small><br><code>HeroSection.tsx</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small><br>+8 more</td>
+  <td>Module file in atrium.website/app/page.tsx.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>bentoItems</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>bentoItems node in atrium.website/app/page.tsx.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>selectedWork</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>selectedWork node in atrium.website/app/page.tsx.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>processSteps</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>processSteps node in atrium.website/app/page.tsx.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>processStats</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>processStats node in atrium.website/app/page.tsx.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>testimonialCards</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Verifies imports, entry points, or version behavior.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>clients</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-cmd">Entry</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>clients node in atrium.website/app/page.tsx.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>homeStats</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>homeStats node in atrium.website/app/page.tsx.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>HomePage()</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Organizes documentation pages, navigation, or content lookup.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>DarkProcess.tsx</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><code>Button.tsx</code><br><small style="color:var(--muted)">components/ui/Button.tsx</small></td>
+  <td>Module file in components/sections/DarkProcess.tsx.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>ProcessStep</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>ProcessStep node in components/sections/DarkProcess.tsx.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>ProcessStat</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>ProcessStat node in components/sections/DarkProcess.tsx.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/sections/DarkProcess.tsx.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>DarkProcess()</code><br><small style="color:var(--muted)">components/sections/DarkProcess.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>DarkProcess() node in components/sections/DarkProcess.tsx.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>HeroSection.tsx</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><code>Button.tsx</code><br><small style="color:var(--muted)">components/ui/Button.tsx</small></td>
+  <td>Module file in components/sections/HeroSection.tsx.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>HeroScene</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>HeroScene node in components/sections/HeroSection.tsx.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>tags</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>tags node in components/sections/HeroSection.tsx.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>HeroSection()</code><br><small style="color:var(--muted)">components/sections/HeroSection.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>HeroSection() node in components/sections/HeroSection.tsx.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>SplitSection.tsx</code><br><small style="color:var(--muted)">components/sections/SplitSection.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><code>Button.tsx</code><br><small style="color:var(--muted)">components/ui/Button.tsx</small></td>
+  <td>Module file in components/sections/SplitSection.tsx.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/SplitSection.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/sections/SplitSection.tsx.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>SplitSection()</code><br><small style="color:var(--muted)">components/sections/SplitSection.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>SplitSection() node in components/sections/SplitSection.tsx.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>StatsStrip.tsx</code><br><small style="color:var(--muted)">components/sections/StatsStrip.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>Module file in components/sections/StatsStrip.tsx.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>Stat</code><br><small style="color:var(--muted)">components/sections/StatsStrip.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>Stat node in components/sections/StatsStrip.tsx.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/StatsStrip.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/sections/StatsStrip.tsx.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><code>StatsStrip()</code><br><small style="color:var(--muted)">components/sections/StatsStrip.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>StatsStrip() node in components/sections/StatsStrip.tsx.</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td><code>TestimonialBento.tsx</code><br><small style="color:var(--muted)">components/sections/TestimonialBento.tsx</small></td>
+  <td><span class="tag tag-func">Test</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>Module file in components/sections/TestimonialBento.tsx.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><code>BentoCard</code><br><small style="color:var(--muted)">components/sections/TestimonialBento.tsx</small></td>
+  <td><span class="tag tag-func">Test</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>BentoCard node in components/sections/TestimonialBento.tsx.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/TestimonialBento.tsx</small></td>
+  <td><span class="tag tag-func">Test</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/sections/TestimonialBento.tsx.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><code>TestimonialBento()</code><br><small style="color:var(--muted)">components/sections/TestimonialBento.tsx</small></td>
+  <td><span class="tag tag-func">Test</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Verifies imports, entry points, or version behavior.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><code>WorkGrid.tsx</code><br><small style="color:var(--muted)">components/sections/WorkGrid.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">atrium.website/app/page.tsx</small></td>
+  <td><code>Button.tsx</code><br><small style="color:var(--muted)">components/ui/Button.tsx</small></td>
+  <td>Module file in components/sections/WorkGrid.tsx.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>atrium.website/app/page.tsx</code></td><td>9 nodes</td></tr>
+<tr><td><code>components/sections/DarkProcess.tsx</code></td><td>5 nodes</td></tr>
+<tr><td><code>components/sections/HeroSection.tsx</code></td><td>4 nodes</td></tr>
+<tr><td><code>components/sections/StatsStrip.tsx</code></td><td>4 nodes</td></tr>
+<tr><td><code>components/sections/TestimonialBento.tsx</code></td><td>4 nodes</td></tr>
+<tr><td><code>components/sections/WorkGrid.tsx</code></td><td>4 nodes</td></tr>
+<tr><td><code>components/sections/SplitSection.tsx</code></td><td>3 nodes</td></tr>
+<tr><td><code>components/ui/Button.tsx</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x26, imports x10, imports x5. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 13. Community 4 ====== -->
+<h2 id="community-4">13. Community 4</h2>
 <p>Community 4 groups implementation around architecturemd, packages, monorepo, arquitectura, mostly in ARCHITECTURE.md. This section covers 33 nodes and 32 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
@@ -4801,64 +4084,68 @@ flowchart LR
 </div>
 <hr>
 
-<!-- ====== 16. Other ====== -->
-<h2 id="other">16. Other</h2>
-<p>Other groups implementation around docs, apps, atriumwebsite, atrium, mostly in atrium.website/docs/Atrium_Website-V1.md, superpowers/specs/2026-06-26-atrium-website-v1-design.md, superpowers/plans/2026-06-26-atrium-v1-homepage.md. This section covers 749 nodes and 718 internal edges; the diagram shows only representative relationships to stay readable.</p>
+<!-- ====== 14. Community 55 ====== -->
+<h2 id="community-55">14. Community 55</h2>
+<p>Community 55 groups implementation around atrium, website, 2026, designmd, mostly in superpowers/specs/2026-06-26-atrium-website-v1-design.md. This section covers 31 nodes and 30 internal edges; the diagram shows only representative relationships to stay readable.</p>
 
 <div class="mermaid">
 %%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
 flowchart LR
-    %% Section: Other (749 nodes, 718 edges)
-    subgraph other_components_services_ServiceBento_tsx_79fb67d1["components/services/ServiceBento.tsx"]
-        services_servicebento_bentocardphoto_ec1313cb("BentoCardPhoto()<br/><small>components/services/ServiceBento.tsx</small>")
-        services_servicebento_bentocardstatement_8522ef03("BentoCardStatement()<br/><small>components/services/ServiceBento.tsx</small>")
-        services_servicebento_bentocardposition_a71c87ab("BentoCardPosition()<br/><small>components/services/ServiceBento.tsx</small>")
-        services_servicebento_bentocardmini_a8472d7c("BentoCardMini()<br/><small>components/services/ServiceBento.tsx</small>")
-        services_servicebento_bentocardneutral_b5684400("BentoCardNeutral()<br/><small>components/services/ServiceBento.tsx</small>")
-    end
-    subgraph other_apps_atrium_grader_middleware_ts_90c75253["apps/atrium.grader/middleware.ts"]
-        atrium_grader_middleware_pruneexpired_b2dae09e("pruneExpired()<br/><small>apps/atrium.grader/middleware.ts</small>")
-        atrium_grader_middleware_middleware_2b70dce2("middleware()<br/><small>apps/atrium.grader/middleware.ts</small>")
-        atrium_grader_middleware_clientkey_d3d967c0("clientKey()<br/><small>apps/atrium.grader/middleware.ts</small>")
-    end
-    about_page_3a8d867b("page.tsx")
-    contact_page_0c1ca3bd("page.tsx")
-    pricing_page_cf89a569("page.tsx")
-    process_page_b763b879("page.tsx")
-    resources_page_899430ee("page.tsx")
-    services_page_aaa8e203("page.tsx")
-    services_serviceeditorialhero_serviceeditorialhe_622977a4("ServiceEditorialHero()<br/><small>components/services/ServiceEditorialHero.tsx</small>")
-    services_servicethesis_servicethesis_77bf3e88("ServiceThesis()<br/><small>components/services/ServiceThesis.tsx</small>")
-    services_utils_parseheadline_ee0e4c4f("parseHeadline()<br/><small>components/services/utils.tsx</small>")
-    ui_marquee_marquee_a624d52a("Marquee()<br/><small>components/ui/Marquee.tsx</small>")
-    atrium_grader_middleware_pruneexpired_b2dae09e -->|calls| atrium_grader_middleware_middleware_2b70dce2
-    atrium_grader_middleware_clientkey_d3d967c0 -->|calls| atrium_grader_middleware_middleware_2b70dce2
-    services_servicebento_bentocardphoto_ec1313cb -->|calls| services_utils_parseheadline_ee0e4c4f
-    services_servicebento_bentocardstatement_8522ef03 -->|calls| services_utils_parseheadline_ee0e4c4f
-    services_servicebento_bentocardposition_a71c87ab -->|calls| services_utils_parseheadline_ee0e4c4f
-    services_servicebento_bentocardmini_a8472d7c -->|calls| services_utils_parseheadline_ee0e4c4f
-    services_servicebento_bentocardneutral_b5684400 -->|calls| services_utils_parseheadline_ee0e4c4f
-    services_serviceeditorialhero_serviceeditorialhe_622977a4 -->|calls| services_utils_parseheadline_ee0e4c4f
-    services_servicethesis_servicethesis_77bf3e88 -->|calls| services_utils_parseheadline_ee0e4c4f
-    %% Omitted for readability: 731 nodes, 0 edges
-    class services_servicebento_bentocardphoto_ec1313cb ui;
-    class services_servicebento_bentocardstatement_8522ef03 ui;
-    class services_servicebento_bentocardposition_a71c87ab ui;
-    class services_servicebento_bentocardmini_a8472d7c ui;
-    class services_servicebento_bentocardneutral_b5684400 ui;
-    class atrium_grader_middleware_pruneexpired_b2dae09e function;
-    class atrium_grader_middleware_middleware_2b70dce2 function;
-    class atrium_grader_middleware_clientkey_d3d967c0 entry;
-    class about_page_3a8d867b ui;
-    class contact_page_0c1ca3bd ui;
-    class pricing_page_cf89a569 ui;
-    class process_page_b763b879 ui;
-    class resources_page_899430ee ui;
-    class services_page_aaa8e203 ui;
-    class services_serviceeditorialhero_serviceeditorialhe_622977a4 ui;
-    class services_servicethesis_servicethesis_77bf3e88 ui;
-    class services_utils_parseheadline_ee0e4c4f ui;
-    class ui_marquee_marquee_a624d52a ui;
+    %% Section: Community 55 (31 nodes, 30 edges)
+    specs_2026_06_26_atrium_website_v1_design_atrium_8a0f3806("Atrium Website — V1 Design Spec<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2("Component Library<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_progre_c959e6ef("Progress Tracker<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_294339ed("2026-06-26-atrium-website-v1-design.md")
+    specs_2026_06_26_atrium_website_v1_design_additi_6b9bf47c("Additional Components<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_design_b363619d("Design Tokens<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_3d_0d2fce67("3D<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c1_ben_5c69cfc8("C1 — Bento Grid<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c10_gl_cd20fff3("C10 — Global/Team Hero<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c11_he_20106833("C11 — Hero with 3-Card Strip<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c2_ico_d3387101("C2 — Icon Grid<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c3_num_1db5a831("C3 — Numbered Timeline<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c4_sta_50c30807("C4 — Stats Strip<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c5_ful_e1cef025("C5 — Full-Width CTA Banner<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c6_tea_53ee3be6("C6 — Team Bento<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c7_spl_c0022024("C7 — Split Section<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c8_dar_7aeb3c2b("C8 — Dark Process<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_c9_tes_21097e94("C9 — Testimonial + Stat Bento<br/><small>superpowers/specs/2026-06-26-atrium-website-v1-design.md</small>")
+    specs_2026_06_26_atrium_website_v1_design_294339ed -->|contains| specs_2026_06_26_atrium_website_v1_design_atrium_8a0f3806
+    specs_2026_06_26_atrium_website_v1_design_atrium_8a0f3806 -->|contains| specs_2026_06_26_atrium_website_v1_design_additi_6b9bf47c
+    specs_2026_06_26_atrium_website_v1_design_atrium_8a0f3806 -->|contains| specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2
+    specs_2026_06_26_atrium_website_v1_design_atrium_8a0f3806 -->|contains| specs_2026_06_26_atrium_website_v1_design_design_b363619d
+    specs_2026_06_26_atrium_website_v1_design_atrium_8a0f3806 -->|contains| specs_2026_06_26_atrium_website_v1_design_progre_c959e6ef
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c10_gl_cd20fff3
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c11_he_20106833
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c1_ben_5c69cfc8
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c2_ico_d3387101
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c3_num_1db5a831
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c4_sta_50c30807
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c5_ful_e1cef025
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c6_tea_53ee3be6
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c7_spl_c0022024
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c8_dar_7aeb3c2b
+    specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 -->|contains| specs_2026_06_26_atrium_website_v1_design_c9_tes_21097e94
+    specs_2026_06_26_atrium_website_v1_design_progre_c959e6ef -->|contains| specs_2026_06_26_atrium_website_v1_design_3d_0d2fce67
+    %% Omitted for readability: 13 nodes, 0 edges
+    class specs_2026_06_26_atrium_website_v1_design_atrium_8a0f3806 concept;
+    class specs_2026_06_26_atrium_website_v1_design_compon_1cb4bbc2 concept;
+    class specs_2026_06_26_atrium_website_v1_design_progre_c959e6ef concept;
+    class specs_2026_06_26_atrium_website_v1_design_294339ed concept;
+    class specs_2026_06_26_atrium_website_v1_design_additi_6b9bf47c concept;
+    class specs_2026_06_26_atrium_website_v1_design_design_b363619d concept;
+    class specs_2026_06_26_atrium_website_v1_design_3d_0d2fce67 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c1_ben_5c69cfc8 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c10_gl_cd20fff3 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c11_he_20106833 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c2_ico_d3387101 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c3_num_1db5a831 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c4_sta_50c30807 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c5_ful_e1cef025 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c6_tea_53ee3be6 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c7_spl_c0022024 concept;
+    class specs_2026_06_26_atrium_website_v1_design_c8_dar_7aeb3c2b concept;
+    class specs_2026_06_26_atrium_website_v1_design_c9_tes_21097e94 concept;
     classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
     classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
     classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
@@ -5127,8 +4414,694 @@ flowchart LR
     <h4>Key Files</h4>
     <table style="width:100%;font-size:0.85rem;">
       <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>superpowers/specs/2026-06-26-atrium-website-v1-design.md</code></td><td>31 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x30. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 15. Community 59 ====== -->
+<h2 id="community-59">15. Community 59</h2>
+<p>Community 59 groups implementation around apps, atriumwebsite, pagetsx, app, mostly in app/pricing/page.tsx, components/pages/PageHero.tsx, app/contact/page.tsx. This section covers 30 nodes and 37 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Community 59 (30 nodes, 37 edges)
+    subgraph community_59_app_pricing_page_tsx_96e86208["app/pricing/page.tsx"]
+        pricing_page_cf89a569("page.tsx")
+        pricing_page_engagementmodels_92c13752("EngagementModels()<br/><small>app/pricing/page.tsx</small>")
+        pricing_page_pricingoffers_1c120b4d("PricingOffers()<br/><small>app/pricing/page.tsx</small>")
+        pricing_page_pricingpage_d16d61e1("PricingPage()<br/><small>app/pricing/page.tsx</small>")
+        pricing_page_scopesection_c9349019("ScopeSection()<br/><small>app/pricing/page.tsx</small>")
+        pricing_page_tierservices_d35deb05("TierServices()<br/><small>app/pricing/page.tsx</small>")
+        pricing_page_metadata_76bd2c8a("metadata<br/><small>app/pricing/page.tsx</small>")
+        pricing_page_scopeprinciples_ea2da7cd("scopePrinciples<br/><small>app/pricing/page.tsx</small>")
+        pricing_page_tiers_e7b37a7f("tiers<br/><small>app/pricing/page.tsx</small>")
+    end
+    subgraph community_59_app_contact_page_tsx_9e890333["app/contact/page.tsx"]
+        contact_page_0c1ca3bd("page.tsx")
+        contact_page_contactpage_3d831cf0("ContactPage()<br/><small>app/contact/page.tsx</small>")
+        contact_page_briefitems_78ee0a82("briefItems<br/><small>app/contact/page.tsx</small>")
+        contact_page_metadata_7900df6e("metadata<br/><small>app/contact/page.tsx</small>")
+    end
+    process_page_b763b879("page.tsx")
+    resources_page_899430ee("page.tsx")
+    pages_pagehero_a8cebf08("PageHero.tsx")
+    sections_ctabanner_8f97713c("CTABanner.tsx")
+    ui_eyebrow_2cc02def("Eyebrow.tsx")
+    contact_page_0c1ca3bd -->|imports| pages_pagehero_a8cebf08
+    contact_page_0c1ca3bd -->|imports| sections_ctabanner_8f97713c
+    contact_page_0c1ca3bd -->|imports| ui_eyebrow_2cc02def
+    pricing_page_cf89a569 -->|imports| pages_pagehero_a8cebf08
+    pricing_page_cf89a569 -->|imports| sections_ctabanner_8f97713c
+    pricing_page_cf89a569 -->|imports| ui_eyebrow_2cc02def
+    process_page_b763b879 -->|imports| pages_pagehero_a8cebf08
+    process_page_b763b879 -->|imports| sections_ctabanner_8f97713c
+    process_page_b763b879 -->|imports| ui_eyebrow_2cc02def
+    resources_page_899430ee -->|imports| pages_pagehero_a8cebf08
+    resources_page_899430ee -->|imports| sections_ctabanner_8f97713c
+    resources_page_899430ee -->|imports| ui_eyebrow_2cc02def
+    pages_pagehero_a8cebf08 -->|imports| ui_eyebrow_2cc02def
+    sections_ctabanner_8f97713c -->|imports| ui_eyebrow_2cc02def
+    %% Omitted for readability: 12 nodes, 0 edges
+    class pricing_page_cf89a569 ui;
+    class pricing_page_engagementmodels_92c13752 ui;
+    class pricing_page_pricingoffers_1c120b4d ui;
+    class pricing_page_pricingpage_d16d61e1 ui;
+    class pricing_page_scopesection_c9349019 ui;
+    class pricing_page_tierservices_d35deb05 ui;
+    class pricing_page_metadata_76bd2c8a ui;
+    class pricing_page_scopeprinciples_ea2da7cd ui;
+    class pricing_page_tiers_e7b37a7f ui;
+    class contact_page_0c1ca3bd ui;
+    class contact_page_contactpage_3d831cf0 ui;
+    class contact_page_briefitems_78ee0a82 ui;
+    class contact_page_metadata_7900df6e ui;
+    class process_page_b763b879 ui;
+    class resources_page_899430ee ui;
+    class pages_pagehero_a8cebf08 ui;
+    class sections_ctabanner_8f97713c ui;
+    class ui_eyebrow_2cc02def ui;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/contact/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>CTABanner.tsx</code><br><small style="color:var(--muted)">components/sections/CTABanner.tsx</small><br><code>Eyebrow.tsx</code><br><small style="color:var(--muted)">components/ui/Eyebrow.tsx</small><br><code>PageHero.tsx</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td>Module file in app/contact/page.tsx.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>metadata</code><br><small style="color:var(--muted)">app/contact/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>metadata node in app/contact/page.tsx.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>briefItems</code><br><small style="color:var(--muted)">app/contact/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>briefItems node in app/contact/page.tsx.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>ContactPage()</code><br><small style="color:var(--muted)">app/contact/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Organizes documentation pages, navigation, or content lookup.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>CTABanner.tsx</code><br><small style="color:var(--muted)">components/sections/CTABanner.tsx</small><br><code>Eyebrow.tsx</code><br><small style="color:var(--muted)">components/ui/Eyebrow.tsx</small><br><code>PageHero.tsx</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td>Module file in app/pricing/page.tsx.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>metadata</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>metadata node in app/pricing/page.tsx.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>tiers</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>tiers node in app/pricing/page.tsx.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>scopePrinciples</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>scopePrinciples node in app/pricing/page.tsx.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>TierServices()</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>TierServices() node in app/pricing/page.tsx.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>PricingOffers()</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>PricingOffers() node in app/pricing/page.tsx.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>ScopeSection()</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ScopeSection() node in app/pricing/page.tsx.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>PricingPage()</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Organizes documentation pages, navigation, or content lookup.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/process/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>CTABanner.tsx</code><br><small style="color:var(--muted)">components/sections/CTABanner.tsx</small><br><code>Eyebrow.tsx</code><br><small style="color:var(--muted)">components/ui/Eyebrow.tsx</small><br><code>PageHero.tsx</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td>Module file in app/process/page.tsx.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>metadata</code><br><small style="color:var(--muted)">app/process/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>metadata node in app/process/page.tsx.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>steps</code><br><small style="color:var(--muted)">app/process/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>steps node in app/process/page.tsx.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>ProcessPage()</code><br><small style="color:var(--muted)">app/process/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Organizes documentation pages, navigation, or content lookup.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/resources/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>CTABanner.tsx</code><br><small style="color:var(--muted)">components/sections/CTABanner.tsx</small><br><code>Eyebrow.tsx</code><br><small style="color:var(--muted)">components/ui/Eyebrow.tsx</small><br><code>PageHero.tsx</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td>Module file in app/resources/page.tsx.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>metadata</code><br><small style="color:var(--muted)">app/resources/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>metadata node in app/resources/page.tsx.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>resourceGroups</code><br><small style="color:var(--muted)">app/resources/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>resourceGroups node in app/resources/page.tsx.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>ResourcesPage()</code><br><small style="color:var(--muted)">app/resources/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Organizes documentation pages, navigation, or content lookup.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>PageHero.tsx</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/contact/page.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/resources/page.tsx</small><br>+1 more</td>
+  <td><code>Eyebrow.tsx</code><br><small style="color:var(--muted)">components/ui/Eyebrow.tsx</small></td>
+  <td>Module file in components/pages/PageHero.tsx.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>HeroAction</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>HeroAction node in components/pages/PageHero.tsx.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>HeroStat</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>HeroStat node in components/pages/PageHero.tsx.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><code>PageHeroProps</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Organizes documentation pages, navigation, or content lookup.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><code>PageHero()</code><br><small style="color:var(--muted)">components/pages/PageHero.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Organizes documentation pages, navigation, or content lookup.</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td><code>CTABanner.tsx</code><br><small style="color:var(--muted)">components/sections/CTABanner.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/contact/page.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/resources/page.tsx</small><br>+1 more</td>
+  <td><code>Eyebrow.tsx</code><br><small style="color:var(--muted)">components/ui/Eyebrow.tsx</small></td>
+  <td>Module file in components/sections/CTABanner.tsx.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/CTABanner.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/sections/CTABanner.tsx.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><code>CTABanner()</code><br><small style="color:var(--muted)">components/sections/CTABanner.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>CTABanner() node in components/sections/CTABanner.tsx.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><code>Eyebrow.tsx</code><br><small style="color:var(--muted)">components/ui/Eyebrow.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>CTABanner.tsx</code><br><small style="color:var(--muted)">components/sections/CTABanner.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/resources/page.tsx</small><br>+3 more</td>
+  <td>No direct outbound edge</td>
+  <td>Module file in components/ui/Eyebrow.tsx.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><code>EngagementModels()</code><br><small style="color:var(--muted)">app/pricing/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>EngagementModels() node in app/pricing/page.tsx.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
+      <tr><td><code>app/pricing/page.tsx</code></td><td>9 nodes</td></tr>
+<tr><td><code>components/pages/PageHero.tsx</code></td><td>5 nodes</td></tr>
+<tr><td><code>app/contact/page.tsx</code></td><td>4 nodes</td></tr>
+<tr><td><code>app/process/page.tsx</code></td><td>4 nodes</td></tr>
+<tr><td><code>app/resources/page.tsx</code></td><td>4 nodes</td></tr>
+<tr><td><code>components/sections/CTABanner.tsx</code></td><td>3 nodes</td></tr>
+<tr><td><code>components/ui/Eyebrow.tsx</code></td><td>1 nodes</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Design Notes</h4>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x23, imports x14. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+  </div>
+</div>
+<hr>
+
+<!-- ====== 16. Other ====== -->
+<h2 id="other">16. Other</h2>
+<p>Other groups implementation around apps, atriumwebsite, docs, atrium, mostly in atrium.website/docs/Atrium_Website-V1.md, work/[slug]/page.tsx, superpowers/plans/2026-06-26-atrium-v1-homepage.md. This section covers 809 nodes and 844 internal edges; the diagram shows only representative relationships to stay readable.</p>
+
+<div class="mermaid">
+%%{init: {"theme": "dark", "themeVariables": {"fontSize": "15.0px", "fontFamily": "Segoe UI, system-ui, sans-serif", "primaryColor": "#1e293b", "primaryTextColor": "#e2e8f0", "primaryBorderColor": "#38bdf8", "secondaryColor": "#0f172a", "tertiaryColor": "#334155", "lineColor": "#64748b", "textColor": "#e2e8f0"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 48, "rankSpacing": 64, "padding": 14, "diagramPadding": 10, "useMaxWidth": true}}}%%
+flowchart LR
+    %% Section: Other (809 nodes, 844 edges)
+    subgraph other_work_slug_page_tsx_59895b16["work/[slug]/page.tsx"]
+        apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358("page.tsx")
+        slug_page_getvisualcolor_f834f597("getVisualColor()<br/><small>work/[slug]/page.tsx</small>")
+        slug_page_casemedia_ef4dd759("CaseMedia()<br/><small>work/[slug]/page.tsx</small>")
+        slug_page_photogallerysection_7f3fadc8("PhotoGallerySection()<br/><small>work/[slug]/page.tsx</small>")
+        slug_page_casehero_4fa06f32("CaseHero()<br/><small>work/[slug]/page.tsx</small>")
+        slug_page_getcasetheme_5ba33f2d("getCaseTheme()<br/><small>work/[slug]/page.tsx</small>")
+        slug_page_getstoryparagraphs_e5de8be5("getStoryParagraphs()<br/><small>work/[slug]/page.tsx</small>")
+    end
+    subgraph other_apps_atrium_grader_middleware_ts_90c75253["apps/atrium.grader/middleware.ts"]
+        atrium_grader_middleware_pruneexpired_b2dae09e("pruneExpired()<br/><small>apps/atrium.grader/middleware.ts</small>")
+        atrium_grader_middleware_middleware_2b70dce2("middleware()<br/><small>apps/atrium.grader/middleware.ts</small>")
+        atrium_grader_middleware_clientkey_d3d967c0("clientKey()<br/><small>apps/atrium.grader/middleware.ts</small>")
+    end
+    subgraph other_services_slug_page_tsx_091313fe["services/[slug]/page.tsx"]
+        apps_atrium_website_app_services_slug_page_tsx_s_2430c71a("page.tsx")
+        slug_page_servicepage_a73ed897("ServicePage()<br/><small>services/[slug]/page.tsx</small>")
+        slug_page_parseheadline_499fbcfd("parseHeadline()<br/><small>services/[slug]/page.tsx</small>")
+    end
+    lib_services_getservice_1af59db5("getService()<br/><small>atrium.website/lib/services.ts</small>")
+    sections_icongrid_98afe83f("IconGrid.tsx")
+    services_servicebento_c8656f2c("ServiceBento.tsx")
+    services_servicethesis_bc2fa451("ServiceThesis.tsx")
+    services_siblingservices_f5965271("SiblingServices.tsx")
+    atrium_grader_middleware_pruneexpired_b2dae09e -->|calls| atrium_grader_middleware_middleware_2b70dce2
+    atrium_grader_middleware_clientkey_d3d967c0 -->|calls| atrium_grader_middleware_middleware_2b70dce2
+    slug_page_servicepage_a73ed897 -->|calls| lib_services_getservice_1af59db5
+    slug_page_servicepage_a73ed897 -->|calls| slug_page_parseheadline_499fbcfd
+    slug_page_getvisualcolor_f834f597 -->|calls| slug_page_casemedia_ef4dd759
+    slug_page_getvisualcolor_f834f597 -->|calls| slug_page_photogallerysection_7f3fadc8
+    slug_page_casehero_4fa06f32 -->|calls| slug_page_getcasetheme_5ba33f2d
+    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| lib_services_getservice_1af59db5
+    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| services_servicebento_c8656f2c
+    apps_atrium_website_app_services_slug_page_tsx_s_2430c71a -->|imports| services_servicethesis_bc2fa451
+    %% Omitted for readability: 791 nodes, 0 edges
+    class apps_atrium_website_app_work_slug_page_tsx_slug_f9a2e358 ui;
+    class slug_page_getvisualcolor_f834f597 ui;
+    class slug_page_casemedia_ef4dd759 ui;
+    class slug_page_photogallerysection_7f3fadc8 ui;
+    class slug_page_casehero_4fa06f32 ui;
+    class slug_page_getcasetheme_5ba33f2d ui;
+    class slug_page_getstoryparagraphs_e5de8be5 ui;
+    class atrium_grader_middleware_pruneexpired_b2dae09e function;
+    class atrium_grader_middleware_middleware_2b70dce2 function;
+    class atrium_grader_middleware_clientkey_d3d967c0 entry;
+    class apps_atrium_website_app_services_slug_page_tsx_s_2430c71a ui;
+    class slug_page_servicepage_a73ed897 ui;
+    class slug_page_parseheadline_499fbcfd ui;
+    class lib_services_getservice_1af59db5 function;
+    class sections_icongrid_98afe83f ui;
+    class services_servicebento_c8656f2c ui;
+    class services_servicethesis_bc2fa451 ui;
+    class services_siblingservices_f5965271 ui;
+    classDef entry fill:#422006,stroke:#fbbf24,color:#fde68a,stroke-width:1px;
+    classDef api fill:#450a0a,stroke:#f87171,color:#fee2e2,stroke-width:1px;
+    classDef async fill:#2e1065,stroke:#a78bfa,color:#ede9fe,stroke-width:1px;
+    classDef klass fill:#064e3b,stroke:#34d399,color:#d1fae5,stroke-width:1px;
+    classDef ui fill:#831843,stroke:#f472b6,color:#fce7f3,stroke-width:1px;
+    classDef module fill:#172554,stroke:#60a5fa,color:#dbeafe,stroke-width:1px;
+    classDef test fill:#3f3f46,stroke:#a1a1aa,color:#f4f4f5,stroke-width:1px;
+    classDef concept fill:#292524,stroke:#a8a29e,color:#fafaf9,stroke-dasharray:4 3;
+    classDef function fill:#0f172a,stroke:#38bdf8,color:#e0f2fe,stroke-width:1px;
+</div>
+
+<h3>Call Details</h3>
+<table class="call-table">
+<tr>
+  <th style="width:5%">#</th>
+  <th style="width:28%">Node</th>
+  <th style="width:10%">Type</th>
+  <th style="width:17%">Caller</th>
+  <th style="width:20%">Callees</th>
+  <th style="width:20%">Description</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/services/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>SceneWrapper.tsx</code><br><small style="color:var(--muted)">components/3d/SceneWrapper.tsx</small><br><code>ServiceRow.tsx</code><br><small style="color:var(--muted)">components/sections/ServiceRow.tsx</small><br><code>services</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br>+1 more</td>
+  <td>Module file in app/services/page.tsx.</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td><code>metadata</code><br><small style="color:var(--muted)">app/services/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>metadata node in app/services/page.tsx.</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td><code>PILLARS</code><br><small style="color:var(--muted)">app/services/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>PILLARS node in app/services/page.tsx.</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>ServicesPage()</code><br><small style="color:var(--muted)">app/services/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Organizes documentation pages, navigation, or content lookup.</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>IconGrid.tsx</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small><br><code>IconItem</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br>+1 more</td>
+  <td>Module file in components/sections/IconGrid.tsx.</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/sections/IconGrid.tsx.</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td><code>IconGrid()</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>IconGrid() node in components/sections/IconGrid.tsx.</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>ServiceRow.tsx</code><br><small style="color:var(--muted)">components/sections/ServiceRow.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">app/services/page.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>Module file in components/sections/ServiceRow.tsx.</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/ServiceRow.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/sections/ServiceRow.tsx.</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>ServiceRow()</code><br><small style="color:var(--muted)">components/sections/ServiceRow.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ServiceRow() node in components/sections/ServiceRow.tsx.</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>ServiceTimeline.tsx</code><br><small style="color:var(--muted)">components/sections/ServiceTimeline.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br>+1 more</td>
+  <td>Module file in components/sections/ServiceTimeline.tsx.</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/sections/ServiceTimeline.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/sections/ServiceTimeline.tsx.</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>ServiceTimeline()</code><br><small style="color:var(--muted)">components/sections/ServiceTimeline.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ServiceTimeline() node in components/sections/ServiceTimeline.tsx.</td>
+</tr>
+<tr>
+  <td>14</td>
+  <td><code>ServiceMarquee.tsx</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
+  <td><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>Service</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br>+1 more</td>
+  <td>Module file in components/services/ServiceMarquee.tsx.</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>Props</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>Props node in components/services/ServiceMarquee.tsx.</td>
+</tr>
+<tr>
+  <td>16</td>
+  <td><code>ServiceMarquee()</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ServiceMarquee() node in components/services/ServiceMarquee.tsx.</td>
+</tr>
+<tr>
+  <td>17</td>
+  <td><code>ServicePerksRail.tsx</code><br><small style="color:var(--muted)">components/services/ServicePerksRail.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>Service</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
+  <td>Module file in components/services/ServicePerksRail.tsx.</td>
+</tr>
+<tr>
+  <td>18</td>
+  <td><code>ServicePerksRail()</code><br><small style="color:var(--muted)">components/services/ServicePerksRail.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ServicePerksRail() node in components/services/ServicePerksRail.tsx.</td>
+</tr>
+<tr>
+  <td>19</td>
+  <td><code>ServiceStatsEditorial.tsx</code><br><small style="color:var(--muted)">components/services/ServiceStatsEditorial.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
+  <td><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br>+1 more</td>
+  <td>Module file in components/services/ServiceStatsEditorial.tsx.</td>
+</tr>
+<tr>
+  <td>20</td>
+  <td><code>ServiceStatsEditorial()</code><br><small style="color:var(--muted)">components/services/ServiceStatsEditorial.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ServiceStatsEditorial() node in components/services/ServiceStatsEditorial.tsx.</td>
+</tr>
+<tr>
+  <td>21</td>
+  <td><code>ServiceTimelineEditorial.tsx</code><br><small style="color:var(--muted)">components/services/ServiceTimelineEditorial.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
+  <td><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small><br>+1 more</td>
+  <td>Module file in components/services/ServiceTimelineEditorial.tsx.</td>
+</tr>
+<tr>
+  <td>22</td>
+  <td><code>ServiceTimelineEditorial()</code><br><small style="color:var(--muted)">components/services/ServiceTimelineEditorial.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td>No direct outbound edge</td>
+  <td>ServiceTimelineEditorial() node in components/services/ServiceTimelineEditorial.tsx.</td>
+</tr>
+<tr>
+  <td>23</td>
+  <td><code>gsap.ts</code><br><small style="color:var(--muted)">atrium.website/lib/gsap.ts</small></td>
+  <td><span class="tag tag-class">Module</span></td>
+  <td><code>BentoGrid.tsx</code><br><small style="color:var(--muted)">components/sections/BentoGrid.tsx</small><br><code>IconGrid.tsx</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small><br><code>LogoTicker.tsx</code><br><small style="color:var(--muted)">components/ui/LogoTicker.tsx</small><br>+4 more</td>
+  <td>No direct outbound edge</td>
+  <td>Module file in atrium.website/lib/gsap.ts.</td>
+</tr>
+<tr>
+  <td>24</td>
+  <td><code>services.ts</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
+  <td><span class="tag tag-class">Module</span></td>
+  <td><code>IconGrid.tsx</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/services/page.tsx</small><br>+9 more</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
+  <td>Module file in atrium.website/lib/services.ts.</td>
+</tr>
+<tr>
+  <td>25</td>
+  <td><code>IconItem</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td><code>IconGrid.tsx</code><br><small style="color:var(--muted)">components/sections/IconGrid.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>IconItem node in atrium.website/lib/services.ts.</td>
+</tr>
+<tr>
+  <td>26</td>
+  <td><code>TimelineStep</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td><code>ServiceTimeline.tsx</code><br><small style="color:var(--muted)">components/sections/ServiceTimeline.tsx</small><br><code>ServiceTimelineEditorial.tsx</code><br><small style="color:var(--muted)">components/services/ServiceTimelineEditorial.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>TimelineStep node in atrium.website/lib/services.ts.</td>
+</tr>
+<tr>
+  <td>27</td>
+  <td><code>StatItem</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td><code>ServiceStatsEditorial.tsx</code><br><small style="color:var(--muted)">components/services/ServiceStatsEditorial.tsx</small></td>
+  <td>No direct outbound edge</td>
+  <td>StatItem node in atrium.website/lib/services.ts.</td>
+</tr>
+<tr>
+  <td>28</td>
+  <td><code>Service</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
+  <td><span class="tag tag-class">Class</span></td>
+  <td><code>ServiceEditorialHero.tsx</code><br><small style="color:var(--muted)">components/services/ServiceEditorialHero.tsx</small><br><code>ServiceMarquee.tsx</code><br><small style="color:var(--muted)">components/services/ServiceMarquee.tsx</small><br><code>ServicePerksRail.tsx</code><br><small style="color:var(--muted)">components/services/ServicePerksRail.tsx</small><br>+1 more</td>
+  <td>No direct outbound edge</td>
+  <td>Service node in atrium.website/lib/services.ts.</td>
+</tr>
+<tr>
+  <td>29</td>
+  <td><code>services</code><br><small style="color:var(--muted)">atrium.website/lib/services.ts</small></td>
+  <td><span class="tag tag-func">Function</span></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small><br><code>page.tsx</code><br><small style="color:var(--muted)">app/services/page.tsx</small></td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">services/[slug]/page.tsx</small></td>
+  <td>services node in atrium.website/lib/services.ts.</td>
+</tr>
+<tr>
+  <td>30</td>
+  <td><code>page.tsx</code><br><small style="color:var(--muted)">work/[slug]/page.tsx</small></td>
+  <td><span class="tag tag-hook">UI</span></td>
+  <td>External entry / no inbound edge</td>
+  <td><code>CaseGallery.tsx</code><br><small style="color:var(--muted)">components/work/CaseGallery.tsx</small><br><code>CaseMetric</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small><br><code>caseStudies</code><br><small style="color:var(--muted)">atrium.website/lib/work.ts</small><br>+4 more</td>
+  <td>Module file in work/[slug]/page.tsx.</td>
+</tr>
+</table>
+
+<div class="grid">
+  <div class="card">
+    <h4>Key Files</h4>
+    <table style="width:100%;font-size:0.85rem;">
+      <tr><th>File</th><th>Coverage</th></tr>
       <tr><td><code>atrium.website/docs/Atrium_Website-V1.md</code></td><td>174 nodes</td></tr>
-<tr><td><code>superpowers/specs/2026-06-26-atrium-website-v1-design.md</code></td><td>31 nodes</td></tr>
+<tr><td><code>work/[slug]/page.tsx</code></td><td>34 nodes</td></tr>
 <tr><td><code>superpowers/plans/2026-06-26-atrium-v1-homepage.md</code></td><td>23 nodes</td></tr>
 <tr><td><code>superpowers/specs/2026-06-27-social-health-grader-design.md</code></td><td>21 nodes</td></tr>
 <tr><td><code>docs/Atrium Design System/readme.md</code></td><td>15 nodes</td></tr>
@@ -5139,7 +5112,7 @@ flowchart LR
   </div>
   <div class="card">
     <h4>Design Notes</h4>
-    <p>This section comes from graphify community clustering. Relationship summary: contains x621, re exports x35, imports x34, calls x15. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
+    <p>This section comes from graphify community clustering. Relationship summary: contains x674, imports x61, imports x39, re exports x35. The diagram prioritizes high-confidence calls or usage relationships; the table keeps the broader node inventory.</p>
   </div>
 </div>
 <hr>
@@ -5150,18 +5123,18 @@ flowchart LR
   <div class="card">
     <h4>Graph</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>Nodes</td><td>2173</td></tr>
-      <tr><td>Edges</td><td>2858</td></tr>
+      <tr><td>Nodes</td><td>2205</td></tr>
+      <tr><td>Edges</td><td>2900</td></tr>
       <tr><td>Hyperedges</td><td>0</td></tr>
-      <tr><td>Communities</td><td>207</td></tr>
+      <tr><td>Communities</td><td>215</td></tr>
       <tr><td>Documented Sections</td><td>15</td></tr>
     </table>
   </div>
   <div class="card">
     <h4>Edge Confidence</h4>
     <table style="width:100%;font-size:0.85rem;">
-      <tr><td>EXTRACTED</td><td>2849</td></tr>
-      <tr><td>INFERRED</td><td>9</td></tr>
+      <tr><td>EXTRACTED</td><td>2888</td></tr>
+      <tr><td>INFERRED</td><td>12</td></tr>
       <tr><td>AMBIGUOUS</td><td>0</td></tr>
     </table>
   </div>
@@ -5169,7 +5142,7 @@ flowchart LR
 
 <div style="text-align:center; padding:40px 0; color: var(--muted); font-size:0.9rem;">
   <p>atrium.platform — Architecture Documentation</p>
-  <p>Generated: 2026-07-10 19:43 UTC · graphify callflow-html</p>
+  <p>Generated: 2026-07-13 21:04 UTC · graphify callflow-html</p>
 </div>
 
 </div><!-- .container -->

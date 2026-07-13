@@ -42,8 +42,8 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaEx
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
         <div className="flex-1 flex flex-col gap-6">
           {eyebrow && <Eyebrow style={{ color: 'var(--color-text-light)' } as React.CSSProperties}>{eyebrow}</Eyebrow>}
-          <h2 className="text-3xl md:text-5xl font-medium leading-tight" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
-          <p className="text-base leading-relaxed max-w-md" style={{ color: 'var(--color-text-light)', opacity: 0.7 }}>{body}</p>
+          <h2 className="type-section-title" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
+          <p className="type-body max-w-md" style={{ color: 'var(--color-text-light)', opacity: 0.76 }}>{body}</p>
           <div className="mt-2">
             <Button
               href={ctaHref}
@@ -65,7 +65,7 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaEx
               style={{ background: 'rgba(7,47,52,0.5)', backdropFilter: 'blur(4px)' }}
             >
               <span className="text-6xl font-serif italic leading-none" style={{ color: 'var(--color-accent)' }}>&</span>
-              <p className="text-sm leading-relaxed max-w-[180px]" style={{ color: 'rgba(228,238,240,0.5)' }}>
+              <p className="type-caption max-w-[180px]" style={{ color: 'rgba(228,238,240,0.62)' }}>
                 {coverAlt}
               </p>
               <div className="w-8 h-px" style={{ background: 'var(--color-accent)' }} />

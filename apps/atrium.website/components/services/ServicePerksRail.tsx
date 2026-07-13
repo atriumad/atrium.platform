@@ -31,13 +31,13 @@ export default function ServicePerksRail({ svc }: { svc: Service }) {
             </span>
             <div>
               <h3
-                className="text-[1rem] font-semibold leading-[1.1] m-0 mb-[0.55rem]"
+                className="type-card-title m-0 mb-[0.55rem]"
                 style={{ color: 'var(--text-strong)' }}
               >
                 {perk.title}
               </h3>
               <p
-                className="text-[0.9rem] leading-[1.45] m-0"
+                className="type-caption m-0"
                 style={{ color: 'var(--text-muted)' }}
               >
                 {perk.description}

@@ -10,25 +10,18 @@ export default function ServiceStatsEditorial({ stats }: { stats: StatItem[] }) 
     const container = containerRef.current
     if (!container) return
     const ctx = gsap.context(() => {
-      const numbers = container.querySelectorAll('.stat-number')
-      for (const el of numbers) {
-        gsap.fromTo(
-          el as HTMLElement,
-          { y: 24, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out',
-            scrollTrigger: { trigger: el as HTMLElement, start: 'top 85%', once: true },
-          }
-        )
-      }
-      const labels = container.querySelectorAll('.stat-label')
-      if (labels) {
-        gsap.fromTo(labels,
-          { y: 12, opacity: 0 },
-          { y: 0, opacity: 0.7, duration: 0.5, stagger: 0.15, delay: 0.3, ease: 'power2.out',
-            scrollTrigger: { trigger: container, start: 'top 85%', once: true },
-          }
-        )
-      }
+      gsap.fromTo(
+        container.querySelectorAll('.metric-reveal'),
+        { y: 32, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: container, start: 'top 78%', once: true },
+        }
+      )
     }, container)
     return () => ctx.revert()
   }, [])
@@ -36,26 +29,41 @@ export default function ServiceStatsEditorial({ stats }: { stats: StatItem[] }) 
   return (
     <section
       ref={containerRef}
-      className="relative px-[var(--gutter)] py-24 md:py-32"
+      className="relative px-[var(--gutter)] py-24 md:py-36"
       style={{ background: 'var(--teal-900)' }}
     >
-      <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10 max-w-[var(--container-max)] mx-auto">
-        {stats.map(stat => (
-          <div key={`${stat.number}-${stat.label}`} className="flex flex-col gap-3">
-            <strong
-              className="stat-number text-6xl md:text-7xl font-medium italic tracking-tight leading-none"
-              style={{ color: 'var(--mint-400)', fontFamily: 'var(--font-serif)', opacity: 0 }}
+      <div className="relative mx-auto max-w-[var(--container-max)]">
+        <div className="metric-reveal max-w-4xl pb-14 md:pb-20">
+          <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
+            The business case
+          </p>
+          <h2 className="type-section-title m-0 mt-5" style={{ color: 'var(--text-on-dark)' }}>
+            Not more activity.<br />
+            <em style={{ fontFamily: 'var(--font-serif)' }}>More momentum.</em>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-24">
+          {stats.map(stat => (
+            <article
+              key={`${stat.number}-${stat.label}`}
+              className="metric-reveal grid min-h-[15rem] grid-cols-1 items-center gap-7 border-t py-10 md:min-h-[17rem] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-8 md:py-12"
+              style={{ borderColor: 'rgba(181,242,219,0.22)' }}
             >
-              {stat.number}
-            </strong>
-            <p
-              className="stat-label text-sm leading-relaxed max-w-xs m-0"
-              style={{ color: 'var(--text-on-dark)', opacity: 0 }}
-            >
-              {stat.label}
-            </p>
-          </div>
-        ))}
+              <strong
+                className="stat-number m-0 text-[clamp(5rem,13vw,11.5rem)] font-normal italic leading-[0.72] tracking-[-0.055em] md:order-2 md:text-right md:text-[clamp(4.5rem,7.5vw,8.5rem)]"
+                style={{ color: 'var(--mint-400)', fontFamily: 'var(--font-serif)' }}
+              >
+                {stat.number}
+              </strong>
+              <div className="md:order-1">
+                <p className="stat-label type-body m-0 max-w-sm" style={{ color: 'var(--text-on-dark)', opacity: 0.76 }}>
+                  {stat.label}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   )

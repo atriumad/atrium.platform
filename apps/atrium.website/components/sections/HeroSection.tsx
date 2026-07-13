@@ -46,11 +46,8 @@ export default function HeroSection() {
           </Eyebrow>
 
           <h1
-            className="mb-6 font-medium"
+            className="type-page-title mb-6"
             style={{
-              fontSize: 'var(--text-display-lg)',
-              lineHeight: 'var(--leading-tight)',
-              letterSpacing: 'var(--tracking-tight)',
               color: 'var(--text-on-dark)',
             }}
           >
@@ -61,12 +58,10 @@ export default function HeroSection() {
           </h1>
 
           <p
-            className="mb-10 max-w-xl"
+            className="type-lead mb-10 max-w-xl"
             style={{
-              fontSize: 'var(--text-lg)',
-              lineHeight: 'var(--leading-relaxed)',
               color: 'var(--text-on-dark)',
-              opacity: 0.7,
+              opacity: 0.78,
             }}
           >
             One team. Full-stack. Hospitality is all we do.
@@ -84,7 +79,7 @@ export default function HeroSection() {
           {tags.map((tag) => (
             <div
               key={tag}
-              className="px-5 py-2 text-sm font-medium rounded-full"
+              className="type-caption rounded-full px-5 py-2 font-medium"
               style={{
                 background: 'rgba(228,238,240,0.07)',
                 color: 'var(--mint-400)',

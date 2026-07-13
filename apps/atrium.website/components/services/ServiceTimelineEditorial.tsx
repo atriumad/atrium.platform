@@ -44,16 +44,16 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
       style={{ background: 'var(--cloud-100)' }}
     >
       <div className="grid md:grid-cols-[minmax(0,0.68fr)_minmax(25rem,1fr)] gap-[5rem] max-w-[var(--container-max)] mx-auto max-md:grid-cols-1 max-md:gap-[2.5rem]">
-        <div className="md:sticky md:top-[8rem] md:self-start">
+        <div className="md:sticky md:top-[50vh] md:self-start">
           <h2
-            className="text-[3rem] font-medium leading-[0.98] m-0 mb-[1.2rem] max-sm:text-[2.45rem]"
+            className="type-section-title m-0 mb-[1.2rem]"
             style={{ color: 'var(--text-strong)' }}
           >
             Your plug-in brand team, <em>from kickoff to rollout.</em>
           </h2>
           <p
-            className="max-w-[22rem] text-[1rem] m-0"
-            style={{ color: 'var(--text-muted)', lineHeight: 'var(--leading-body)' }}
+            className="type-body m-0 max-w-[22rem]"
+            style={{ color: 'var(--text-muted)' }}
           >
             We work side-by-side with your team to shape, evolve, and scale your brand
             without the slowdowns of traditional agencies.
@@ -62,7 +62,7 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
 
         <ol
           ref={listRef}
-          className="relative grid gap-[3.5rem] list-none m-0 p-0 max-sm:gap-[2.5rem]"
+          className="relative grid gap-[6.5rem] list-none m-0 p-0 max-sm:gap-[3.5rem]"
           style={{ counterReset: 'step' }}
         >
           <div
@@ -91,13 +91,13 @@ export default function ServiceTimelineEditorial({ steps }: { steps: TimelineSte
               </div>
               <div className="tl-content">
                 <h3
-                  className="text-[1.15rem] font-semibold leading-[1.1] m-0 mb-[0.55rem]"
+                  className="type-card-title m-0 mb-[0.55rem]"
                   style={{ color: 'var(--text-strong)' }}
                 >
                   {step.title}
                 </h3>
                 <p
-                  className="max-w-[32rem] text-[0.95rem] leading-[1.6] m-0"
+                  className="type-body m-0 max-w-[32rem]"
                   style={{ color: 'var(--text-muted)' }}
                 >
                   {step.body}

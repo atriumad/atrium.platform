@@ -1,101 +1,93 @@
-import { Button, Chip } from '@atrium/ui'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
-import CaseGallery from '@/components/work/CaseGallery'
-import { type CaseMetric, type CaseStudy, caseStudies, getCaseStudy } from '@/lib/work'
+import Eyebrow from '@/components/ui/Eyebrow'
+import { type CaseMetric, type CaseStudy, caseStudies, getCaseStudy, getCaseSummary } from '@/lib/work'
 
 export async function generateStaticParams() {
-  return caseStudies.map((study) => ({ slug: study.slug }))
+  return caseStudies.map(study => ({ slug: study.slug }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const study = getCaseStudy(slug)
   if (!study) return {}
+
   return {
     title: `${study.client} - Atrium Work`,
-    description: study.resultHeadline,
+    description: getCaseSummary(study),
   }
 }
 
-const fallbackMetric: CaseMetric = {
-  number: 'TBD',
-  label: 'Result details pending final media package',
-}
-const storyStageLabels = ['Starting point', 'System built', 'Proof of growth', 'What changed', 'Takeaway']
+const visualThemes = [
+  'var(--teal-900)',
+  'var(--amber-500)',
+  'var(--mint-400)',
+  'var(--teal-700)',
+  'var(--cloud-300)',
+]
 
-function CaseHero({ study, metrics }: { study: CaseStudy; metrics: CaseMetric[] }) {
+const reelSlots = ['reel-one', 'reel-two', 'reel-three', 'reel-four', 'reel-five', 'reel-six']
+
+function getVisualColor(study: CaseStudy, offset = 0) {
+  return visualThemes[(study.order - 1 + offset) % visualThemes.length] ?? 'var(--teal-900)'
+}
+
+function ServiceList({ services, dark = false }: { services: string[]; dark?: boolean }) {
   return (
-    <PageHero
-      eyebrow={`Case ${String(study.order).padStart(2, '0')} / ${study.category}`}
-      title={study.client}
-      body={study.resultHeadline}
-      actions={[
-        { label: 'Read the story', href: '#story' },
-        { label: 'View results', href: '#results', variant: 'ghostLight' },
-      ]}
-      stats={metrics.slice(0, 3).map((metric) => ({ value: metric.number, label: metric.label }))}
+    <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0" aria-label="Services">
+      {services.map((service, index) => (
+        <li
+          key={service}
+          className="type-caption flex items-center gap-3"
+          style={{ color: dark ? 'var(--mint-300)' : 'var(--text-muted)' }}
+        >
+          {index > 0 && <span aria-hidden="true">/</span>}
+          {service}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function CaseMedia({ study, offset = 0, compact = false }: { study: CaseStudy; offset?: number; compact?: boolean }) {
+  return (
+    <div
+      className={`h-full w-full rounded-[var(--radius-bento)] ${compact ? 'min-h-[20rem] md:min-h-[32rem]' : 'aspect-[4/3] min-h-[25rem] lg:aspect-auto lg:min-h-[38rem]'}`}
+      style={{ background: getVisualColor(study, offset) }}
+      role="img"
+      aria-label={`Media placeholder for ${study.client}`}
     />
   )
 }
 
-function StorySection({ study, intro, storyBody }: { study: CaseStudy; intro: string; storyBody: string[] }) {
-  const paragraphs = [intro, ...storyBody].filter((paragraph, index, all) => all.indexOf(paragraph) === index)
-
+function CaseHero({ study }: { study: CaseStudy }) {
   return (
-    <section id="story" className="px-[var(--gutter)] py-20 md:py-28" style={{ background: 'var(--cloud-100)' }}>
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-16">
-        <div className="min-w-0">
-          <h2
-            className="m-0 max-w-[13ch] text-[2.65rem] font-medium leading-[0.98] md:text-[3.45rem]"
-            style={{ color: 'var(--text-strong)', letterSpacing: 0 }}
-          >
-            The problem, the operating system, the proof.
-          </h2>
-          <p className="m-0 mt-6 max-w-sm text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            {study.client} did not need more disconnected activity. The work was to make the brand easier to recognize, manage, and measure.
-          </p>
-        </div>
+    <section className="px-[var(--gutter)] pb-24 pt-32 md:pb-36 md:pt-40" style={{ background: 'var(--surface-page)' }}>
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-16">
+          <div className="h-full lg:col-span-8">
+            <CaseMedia study={study} />
+          </div>
 
-        <div className="min-w-0 border-t" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
-          {paragraphs.map((paragraph, index) => (
-            <article
-              key={paragraph}
-              className="grid grid-cols-1 gap-5 border-b py-7 md:grid-cols-[minmax(10rem,0.42fr)_minmax(0,1fr)] md:gap-10"
-              style={{ borderColor: 'rgba(7,47,52,0.14)' }}
-            >
-              <div className="flex min-w-0 items-center gap-3 md:items-start">
-                <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold"
-                  style={{ background: 'var(--mint-300)', color: 'var(--teal-800)' }}
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="m-0 text-sm font-semibold uppercase" style={{ color: 'var(--teal-500)', letterSpacing: 'var(--tracking-wider)' }}>
-                  {storyStageLabels[index] ?? `Layer ${index + 1}`}
-                </h3>
-              </div>
-              <p
-                className={index === 0 ? 'm-0 max-w-2xl text-xl font-medium leading-snug md:text-2xl' : 'm-0 max-w-2xl text-base leading-relaxed md:text-lg'}
-                style={{ color: index === 0 ? 'var(--text-strong)' : 'var(--text-muted)' }}
-              >
-                {paragraph}
+          <div className="flex h-full flex-col justify-between gap-16 border-t pt-8 lg:col-span-4" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+            <div>
+              <p className="type-eyebrow m-0 mb-6" style={{ color: 'var(--teal-500)' }}>
+                Case {String(study.order).padStart(2, '0')} / {study.category}
               </p>
-            </article>
-          ))}
+              <h1 className="type-section-title" style={{ color: 'var(--text-strong)' }}>
+                {study.client}
+              </h1>
+            </div>
 
-          <div className="grid grid-cols-1 gap-5 py-7 md:grid-cols-[minmax(10rem,0.42fr)_minmax(0,1fr)] md:gap-10">
-            <p className="m-0 text-sm font-semibold uppercase" style={{ color: 'var(--teal-500)', letterSpacing: 'var(--tracking-wider)' }}>
-              Services
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {study.serviceTags.map((tag) => (
-                <Chip key={tag} variant="outline-soft" size="sm">
-                  {tag}
-                </Chip>
-              ))}
+            <div>
+              <p className="type-lead" style={{ color: 'var(--text-body)' }}>
+                {getCaseSummary(study)}
+              </p>
+              <div className="mt-8 border-t pt-6" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
+                <ServiceList services={study.serviceTags} />
+              </div>
             </div>
           </div>
         </div>
@@ -104,41 +96,155 @@ function StorySection({ study, intro, storyBody }: { study: CaseStudy; intro: st
   )
 }
 
-function ScopeSection({ study }: { study: CaseStudy }) {
+function StorySection({ paragraphs }: { paragraphs: string[] }) {
+  return (
+    <section id="story" className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="grid gap-10 border-t pt-8 lg:grid-cols-12 lg:gap-16" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          <div className="lg:col-span-5">
+            <Eyebrow className="mb-6">The story</Eyebrow>
+            <h2 className="type-section-title max-w-[12ch]">
+              From challenge to <em>working system.</em>
+            </h2>
+          </div>
+
+          <div className="lg:col-span-7 lg:pt-14">
+            {paragraphs.map((paragraph, index) => (
+              <p
+                key={paragraph}
+                className={`${index === 0 ? 'type-lead' : 'type-body'} m-0 border-b py-7 first:pt-0 last:border-b-0`}
+                style={{
+                  borderColor: 'rgba(7,47,52,0.14)',
+                  color: index === 0 ? 'var(--text-strong)' : 'var(--text-muted)',
+                }}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  )
+}
+
+function PhotoGallerySection({ study }: { study: CaseStudy }) {
+  return (
+    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="mb-14 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          <div className="lg:col-span-7">
+            <Eyebrow className="mb-6">Photo gallery</Eyebrow>
+            <h2 className="type-section-title">
+              The brand, <em>in frame.</em>
+            </h2>
+          </div>
+          <p className="type-body m-0 max-w-md lg:col-span-5" style={{ color: 'var(--text-muted)' }}>
+            A visual record of the atmosphere, details, people, and moments that made the work recognizable.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-12">
+          <div
+            className="aspect-[4/3] rounded-[var(--radius-bento)] lg:col-span-8 lg:row-span-2"
+            style={{ background: getVisualColor(study, 1) }}
+            role="img"
+            aria-label={`Primary gallery placeholder for ${study.client}`}
+          />
+          <div
+            className="aspect-[4/3] rounded-[var(--radius-bento)] lg:col-span-4"
+            style={{ background: getVisualColor(study, 2) }}
+            role="img"
+            aria-label={`Secondary gallery placeholder for ${study.client}`}
+          />
+          <div
+            className="aspect-[4/3] rounded-[var(--radius-bento)] lg:col-span-4"
+            style={{ background: getVisualColor(study, 3) }}
+            role="img"
+            aria-label={`Detail gallery placeholder for ${study.client}`}
+          />
+          <div
+            className="aspect-[16/7] rounded-[var(--radius-bento)] lg:col-span-12"
+            style={{ background: getVisualColor(study, 4) }}
+            role="img"
+            aria-label={`Wide gallery placeholder for ${study.client}`}
+          />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ApproachSection({ study }: { study: CaseStudy }) {
   const approach = study.howWeDidIt ?? []
   if (approach.length === 0) return null
 
   return (
-    <section id="approach" className="px-[var(--gutter)] py-20 md:py-28" style={{ background: 'var(--surface-page)' }}>
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:gap-16">
-        <div className="min-w-0">
-          <h2 className="m-0 max-w-[13ch] text-[2.5rem] font-medium leading-none md:text-[3.25rem]" style={{ color: 'var(--text-strong)', letterSpacing: 0 }}>
-            How we built it.
-          </h2>
-          <p className="m-0 mt-6 max-w-sm text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            Each case breaks down the strategic moves behind the result. No generic service menu, just the operating decisions that mattered.
+    <section id="approach" className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-4">
+            <Eyebrow className="mb-6">The approach</Eyebrow>
+            <h2 className="type-section-title max-w-[10ch]">
+              What we <em>changed.</em>
+            </h2>
+          </div>
+
+          <div className="border-t lg:col-span-8" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+            {approach.map((step, index) => (
+              <article
+                key={step.title}
+                className="grid gap-6 border-b py-9 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-8 md:py-11"
+                style={{ borderColor: 'rgba(7,47,52,0.18)' }}
+              >
+                <p className="type-eyebrow m-0" style={{ color: 'var(--teal-500)' }}>
+                  {String(index + 1).padStart(2, '0')}
+                </p>
+                <div>
+                  <h3 className="type-card-title max-w-[22ch]" style={{ color: 'var(--text-strong)' }}>
+                    {step.title}
+                  </h3>
+                  <p className="type-body mt-5 max-w-3xl" style={{ color: 'var(--text-muted)' }}>
+                    {step.body}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ReelsSection({ study }: { study: CaseStudy }) {
+  return (
+    <section className="overflow-hidden py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+      <div className="mx-auto mb-14 max-w-[var(--container-max)] px-[var(--gutter)] md:mb-20">
+        <div className="grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          <div className="lg:col-span-7">
+            <Eyebrow className="mb-6">Reels and short-form video</Eyebrow>
+            <h2 className="type-section-title">
+              Built to move. <em>Made to repeat.</em>
+            </h2>
+          </div>
+          <p className="type-body m-0 max-w-md lg:col-span-5" style={{ color: 'var(--text-muted)' }}>
+            A continuous stream of vertical stories designed for attention, consistency, and everyday brand recall.
           </p>
         </div>
+      </div>
 
-        <div className="min-w-0 border-t" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
-          {approach.map((step, index) => (
-            <article
-              key={step.title}
-              className="grid grid-cols-1 gap-5 border-b py-7 md:grid-cols-[minmax(4rem,0.2fr)_minmax(0,1fr)] md:gap-10"
-              style={{ borderColor: 'rgba(7,47,52,0.14)' }}
-            >
-              <p className="m-0 text-sm font-semibold" style={{ color: 'var(--teal-500)' }}>
-                {String(index + 1).padStart(2, '0')}
-              </p>
-              <div className="min-w-0">
-                <h3 className="m-0 text-2xl font-medium leading-tight" style={{ color: 'var(--text-strong)' }}>
-                  {step.title}
-                </h3>
-                <p className="m-0 mt-4 max-w-3xl text-base leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  {step.body}
-                </p>
-              </div>
-            </article>
+      <div className="mx-auto max-w-[var(--container-max)] overflow-hidden px-[var(--gutter)]">
+        <div className="flex w-max gap-4 md:gap-6">
+          {reelSlots.map((slot, index) => (
+            <div
+              key={slot}
+              className="aspect-[9/16] w-[clamp(13rem,18vw,19rem)] shrink-0 rounded-[var(--radius-bento)]"
+              style={{ background: getVisualColor(study, index + 1) }}
+              role="img"
+              aria-label={`Vertical video placeholder ${index + 1} for ${study.client}`}
+            />
           ))}
         </div>
       </div>
@@ -147,71 +253,125 @@ function ScopeSection({ study }: { study: CaseStudy }) {
 }
 
 function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: CaseMetric[] }) {
+  if (metrics.length === 0) return null
+
+  const getMetricFontSize = (value: string) => {
+    if (value.length >= 8) return 'clamp(4rem, 5vw, 6rem)'
+    if (value.length >= 6) return 'clamp(4.5rem, 5.8vw, 7rem)'
+    return 'clamp(5rem, 6.5vw, 8rem)'
+  }
+
   return (
-    <section id="results" className="px-[var(--gutter)] py-20 md:py-28" style={{ background: 'var(--teal-900)' }}>
-      <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] md:items-end">
-          <div>
-            <h2 className="m-0 max-w-[12ch] text-[2.75rem] font-medium leading-none md:text-[4rem]" style={{ color: 'var(--text-on-dark)', letterSpacing: 0 }}>
-              Proof, not decoration.
+    <section id="results" className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--teal-900)' }}>
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="grid gap-10 pb-16 lg:grid-cols-12 lg:gap-16 lg:pb-24">
+          <div className="lg:col-span-7">
+            <p className="type-eyebrow m-0 mb-6" style={{ color: 'var(--mint-400)' }}>
+              Measurable growth
+            </p>
+            <h2 className="type-section-title" style={{ color: 'var(--text-on-dark)' }}>
+              The work, <em>in numbers.</em>
             </h2>
           </div>
-          <p className="m-0 max-w-2xl text-lg font-medium leading-snug md:text-2xl" style={{ color: 'var(--text-on-dark)', opacity: 0.76 }}>
-            {study.takeaway ?? `${study.client} moved from scattered marketing activity to a clearer brand system built around measurable outcomes.`}
+          <p className="type-lead m-0 lg:col-span-5 lg:self-end" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
+            {study.resultHeadline}
           </p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-8 border-t pt-10 md:grid-cols-3" style={{ borderColor: 'rgba(181,242,219,0.16)' }}>
-          {metrics.map((metric) => (
-            <div key={`${metric.number}-${metric.label}`} className="min-w-0">
-              <p className="m-0 text-6xl italic font-medium leading-none md:text-7xl" style={{ color: 'var(--mint-400)', fontFamily: 'var(--font-serif)' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-24">
+          {metrics.map(metric => (
+            <article
+              key={`${metric.number}-${metric.label}`}
+              className="grid min-h-[14rem] grid-cols-1 items-center gap-7 border-t py-10 md:min-h-[17rem] md:grid-cols-[minmax(8rem,0.55fr)_minmax(0,1.45fr)] md:gap-8 md:py-12"
+              style={{ borderColor: 'rgba(181,242,219,0.22)' }}
+            >
+              <p
+                className="m-0 whitespace-nowrap font-normal italic leading-[0.76] tracking-[-0.065em] md:order-2 md:text-right"
+                style={{
+                  color: 'var(--mint-400)',
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: getMetricFontSize(metric.number),
+                  fontVariantNumeric: 'lining-nums tabular-nums',
+                }}
+              >
                 {metric.number}
               </p>
-              <p className="m-0 mt-4 max-w-xs text-sm leading-relaxed" style={{ color: 'var(--text-on-dark)', opacity: 0.68 }}>
+              <p className="type-body m-0 max-w-md md:order-1" style={{ color: 'var(--text-on-dark)', opacity: 0.78 }}>
                 {metric.label}
               </p>
-            </div>
+            </article>
           ))}
         </div>
-      </div>
-    </section>
-  )
-}
 
-function NextCaseBand({ nextStudy }: { nextStudy: CaseStudy }) {
-  return (
-    <section className="px-[var(--gutter)] py-16" style={{ background: 'var(--surface-page)' }}>
-      <div
-        className="flex flex-col gap-5 pt-10 mx-auto max-w-6xl border-t md:flex-row md:items-center md:justify-between"
-        style={{ borderColor: 'rgba(7,47,52,0.10)' }}
-      >
-        <div>
-          <p className="m-0 text-sm" style={{ color: 'var(--text-muted)' }}>
-            Next case study
+        {study.takeaway && (
+          <p
+            className="type-lead m-0 mt-8 max-w-5xl border-t pt-10 md:mt-12 md:pt-14"
+            style={{ borderColor: 'rgba(181,242,219,0.22)', color: 'var(--text-on-dark)', opacity: 0.78 }}
+          >
+            {study.takeaway}
           </p>
-          <h2 className="mt-2 text-3xl font-medium" style={{ color: 'var(--text-strong)' }}>
-            {nextStudy.client}
-          </h2>
-        </div>
-        <Button href={`/work/${nextStudy.slug}`} variant="outline">
-          Read next case
-        </Button>
+        )}
       </div>
     </section>
   )
 }
 
-function getCaseIntro(study: CaseStudy) {
-  return study.intro ?? study.story[0] ?? study.resultHeadline
+function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
+  return (
+    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="mb-12 border-t pt-8 md:mb-16" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          <Eyebrow>Continue exploring</Eyebrow>
+        </div>
+
+        <Link
+          href={`/work/${nextStudy.slug}`}
+          className="group grid grid-cols-1 gap-10 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
+          aria-label={`Read next case study: ${nextStudy.client}`}
+        >
+          <div className="h-full lg:col-span-7">
+            <CaseMedia study={nextStudy} compact />
+          </div>
+
+          <div className="flex h-full flex-col justify-between gap-14 border-t pt-8 lg:col-span-5" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+            <div>
+              <p className="type-eyebrow m-0 mb-5" style={{ color: 'var(--teal-500)' }}>
+                Next case study
+              </p>
+              <h2 className="type-section-title" style={{ color: 'var(--text-strong)' }}>
+                {nextStudy.client}
+              </h2>
+            </div>
+
+            <div>
+              <p className="type-lead" style={{ color: 'var(--text-body)' }}>
+                {getCaseSummary(nextStudy)}
+              </p>
+              <div className="mt-8 border-t pt-6" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
+                <ServiceList services={nextStudy.serviceTags} />
+              </div>
+              <span className="type-caption mt-8 inline-flex items-center gap-3 font-medium" style={{ color: 'var(--teal-800)' }}>
+                View case study
+                <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
+                  →
+                </span>
+              </span>
+            </div>
+          </div>
+        </Link>
+      </div>
+    </section>
+  )
 }
 
-function getCaseBody(study: CaseStudy, intro: string) {
-  return study.intro ? study.story : study.story.filter((paragraph) => paragraph !== intro)
+function getStoryParagraphs(study: CaseStudy) {
+  const intro = study.intro ?? study.story[0] ?? study.resultHeadline
+  return [intro, ...study.story].filter((paragraph, index, all) => all.indexOf(paragraph) === index)
 }
 
 function getNextStudy(study: CaseStudy) {
   const sortedCases = [...caseStudies].sort((a, b) => a.order - b.order)
-  const currentIndex = sortedCases.findIndex((item) => item.slug === study.slug)
+  const currentIndex = sortedCases.findIndex(item => item.slug === study.slug)
   return sortedCases[(currentIndex + 1) % sortedCases.length]
 }
 
@@ -223,17 +383,15 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const nextStudy = getNextStudy(study)
   if (!nextStudy) notFound()
 
-  const intro = getCaseIntro(study)
-  const storyBody = getCaseBody(study, intro)
-  const metrics = study.metrics.length > 0 ? study.metrics : [fallbackMetric]
-
   return (
     <article style={{ background: 'var(--surface-page)', color: 'var(--text-strong)' }}>
-      <CaseHero study={study} metrics={metrics} />
-      <StorySection study={study} intro={intro} storyBody={storyBody} />
-      <ScopeSection study={study} />
-      {study.gallery && study.gallery.length > 0 ? <CaseGallery client={study.client} images={study.gallery} /> : null}
-      <ResultsSection study={study} metrics={metrics} />
+      <CaseHero study={study} />
+      <StorySection paragraphs={getStoryParagraphs(study)} />
+      <PhotoGallerySection study={study} />
+      <ApproachSection study={study} />
+      <ReelsSection study={study} />
+      <ResultsSection study={study} metrics={study.metrics} />
+      <NextCasePreview nextStudy={nextStudy} />
       <CTABanner
         eyebrow="JOIN 15+ HOSPITALITY BRANDS"
         headline={<>Get marketing support <em>you can trust</em></>}
@@ -242,7 +400,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         ctaHref="/contact"
         coverAlt="Team at table in restaurant — natural, warm, working together"
       />
-      <NextCaseBand nextStudy={nextStudy} />
     </article>
   )
 }

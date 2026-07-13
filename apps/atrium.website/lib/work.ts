@@ -333,6 +333,23 @@ export const caseStudies: CaseStudy[] = [
   },
 ]
 
+const caseSummaries: Record<string, string> = {
+  'taco-naco': 'A unified content and growth system built to make three locations feel like one unmistakable brand.',
+  taha: 'An organic campaign system that turned culinary prestige into sold-out experiences and sustained demand.',
+  aahaa: 'A premium repositioning that moved the conversation from Indian cuisine to a complete fine-dining experience.',
+  'don-chuys': 'A multi-location strategy that made the atmosphere, bar program, and weekly rituals the engine of growth.',
+  'old-shawnee-pizza': 'A modern digital presence designed to carry a 55-year local legacy into its next generation of customers.',
+  'chick-in-waffle': 'A connected acquisition and retention system built to create demand, repeat visits, and measurable revenue.',
+  'jerusalem-cafe': 'Consistent storytelling and owned-channel marketing that kept a Kansas City staple visible and relevant.',
+  'grand-coffee': 'A lifestyle-led brand world connecting coffee, wellness, and community through a cohesive creative system.',
+  'hotel-kc': 'Cinematic storytelling that translated a historic property into a contemporary hospitality destination.',
+  'town-company': 'A culinary story shaped around the people, craft, and thoughtful details behind the guest experience.',
+}
+
+export function getCaseSummary(study: CaseStudy) {
+  return caseSummaries[study.slug] ?? study.resultHeadline
+}
+
 export function getCaseStudy(slug: string): CaseStudy | undefined {
   return caseStudies.find((c) => c.slug === slug)
 }

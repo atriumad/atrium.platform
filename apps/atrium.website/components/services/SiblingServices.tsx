@@ -17,16 +17,16 @@ export default function SiblingServices({ current }: { current: string }) {
               className="group flex flex-col gap-4 rounded-2xl p-8 no-underline"
               style={{ background: 'var(--cloud-100)', border: '1px solid var(--border-light)' }}
             >
-              <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: CATEGORY_COLOR[svc.category] }}>
+              <span className="type-eyebrow" style={{ color: CATEGORY_COLOR[svc.category] }}>
                 {svc.category}
               </span>
-              <h3 className="font-medium text-lg leading-snug" style={{ color: 'var(--text-strong)' }}>
+              <h3 className="type-card-title" style={{ color: 'var(--text-strong)' }}>
                 {svc.name}
               </h3>
-              <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--text-strong)', opacity: 0.55 }}>
+              <p className="type-caption flex-1" style={{ color: 'var(--text-strong)', opacity: 0.7 }}>
                 {svc.hero.body}
               </p>
-              <span className="text-sm font-semibold" style={{ color: 'var(--teal-700)' }}>
+              <span className="type-caption font-semibold" style={{ color: 'var(--teal-700)' }}>
                 Learn more &rarr;
               </span>
             </Link>

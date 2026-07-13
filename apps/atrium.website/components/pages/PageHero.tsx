@@ -33,10 +33,10 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
           <Eyebrow tone="onDark" className="mb-7">
             {eyebrow}
           </Eyebrow>
-          <h1 className="max-w-4xl text-5xl font-medium leading-none md:text-7xl" style={{ letterSpacing: 0 }}>
+          <h1 className="type-page-title max-w-4xl">
             {title}
           </h1>
-          <p className="mt-8 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: 'var(--text-on-dark)', opacity: 0.68 }}>
+          <p className="type-lead mt-8 max-w-2xl" style={{ color: 'var(--text-on-dark)', opacity: 0.76 }}>
             {body}
           </p>
           {actions && actions.length > 0 && (
@@ -56,17 +56,17 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
         </div>
 
         {stats && stats.length > 0 && (
-          <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-1">
+          <div className="border-t md:grid md:grid-cols-3 lg:block" style={{ borderColor: 'rgba(181,242,219,0.28)' }}>
             {stats.map((stat) => (
               <div
                 key={`${stat.value}-${stat.label}`}
-                className="rounded-[var(--radius-bento)] border p-5"
-                style={{ borderColor: 'rgba(181,242,219,0.16)', background: 'rgba(181,242,219,0.05)' }}
+                className="grid min-h-32 grid-cols-[minmax(5rem,0.72fr)_minmax(0,1fr)] items-center gap-5 border-b py-6 md:block md:px-5 lg:grid lg:px-0"
+                style={{ borderColor: 'rgba(181,242,219,0.28)' }}
               >
-                <p className="text-3xl font-medium leading-none md:text-4xl" style={{ color: 'var(--mint-400)' }}>
+                <p className="m-0 text-[clamp(3.25rem,5vw,5.75rem)] font-normal italic leading-none tracking-[-0.04em]" style={{ color: 'var(--mint-400)', fontFamily: 'var(--font-serif)' }}>
                   {stat.value}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed" style={{ color: 'var(--text-on-dark)', opacity: 0.62 }}>
+                <p className="type-caption m-0 md:mt-4 lg:mt-0" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
                   {stat.label}
                 </p>
               </div>

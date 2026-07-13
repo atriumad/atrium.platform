@@ -51,16 +51,16 @@ export default function ServicesPage() {
           <div className="max-w-6xl mx-auto w-full">
             <Eyebrow tone="onDark" className="mb-8">HOSPITALITY MARKETING</Eyebrow>
             <h1
-              className="font-medium leading-none tracking-tight"
-              style={{ fontSize: 'clamp(2.8rem, 7vw, 6rem)', color: 'var(--text-on-dark)' }}
+              className="type-page-title"
+              style={{ color: 'var(--text-on-dark)' }}
             >
               <span style={{ color: '#B5F2DB' }}>Generate.</span>{' '}
               <span style={{ color: '#D69445' }}>Convert.</span>{' '}
               <span style={{ color: '#5ABABC' }}>Retain.</span>
             </h1>
             <p
-              className="mt-6 max-w-xl text-base leading-relaxed"
-              style={{ color: 'var(--text-on-dark)', opacity: 0.5 }}
+              className="type-lead mt-6 max-w-xl"
+              style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}
             >
               The complete hospitality marketing engine — one team across all 11 disciplines, no handoffs, no briefing from scratch.
             </p>
@@ -91,7 +91,7 @@ export default function ServicesPage() {
 
               {/* category label */}
               <span
-                className="text-xs font-semibold tracking-widest uppercase"
+                className="type-eyebrow"
                 style={{ color: p.color }}
               >
                 {p.id}
@@ -102,7 +102,7 @@ export default function ServicesPage() {
                 {p.services.map((s) => (
                   <span
                     key={s}
-                    className="text-xs leading-tight"
+                    className="type-eyebrow leading-tight"
                     style={{ color: 'var(--text-on-dark)', opacity: 0.45 }}
                   >
                     {s}
@@ -112,7 +112,7 @@ export default function ServicesPage() {
 
               {/* tagline */}
               <p
-                className="text-sm font-medium mt-auto pt-4"
+                className="type-caption mt-auto pt-4 font-medium"
                 style={{ color: 'var(--text-on-dark)', opacity: 0.7, borderTop: `1px solid ${p.color}22` }}
               >
                 {p.tagline}
@@ -134,7 +134,7 @@ export default function ServicesPage() {
                 style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }}
               >
                 <span
-                  className="text-xs font-semibold tracking-widest uppercase"
+                  className="type-eyebrow"
                   style={{ color: cat.color, opacity: 0.7 }}
                 >
                   {cat.id}
@@ -183,7 +183,7 @@ export default function ServicesPage() {
               >
                 {s.n}
               </span>
-              <span className="text-sm leading-relaxed" style={{ color: 'var(--text-on-dark)', opacity: 0.5 }}>
+              <span className="type-caption" style={{ color: 'var(--text-on-dark)', opacity: 0.64 }}>
                 {s.l}
               </span>
             </div>

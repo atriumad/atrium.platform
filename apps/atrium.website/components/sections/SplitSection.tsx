@@ -48,13 +48,13 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
       <div className={`max-w-6xl mx-auto flex flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}>
         <div ref={textRef} className="flex-1 flex flex-col gap-6 max-w-lg" style={{ opacity: 0 }}>
           {eyebrow && <Eyebrow style={{ color: textColor } as React.CSSProperties}>{eyebrow}</Eyebrow>}
-          <h2 className="text-3xl md:text-5xl font-medium leading-tight" style={{ color: textColor }}>{headline}</h2>
-          <p className="text-base leading-relaxed" style={{ color: textColor, opacity: 0.7 }}>{body}</p>
+          <h2 className="type-section-title" style={{ color: textColor }}>{headline}</h2>
+          <p className="type-body" style={{ color: textColor, opacity: 0.76 }}>{body}</p>
           <div className="mt-2"><Button href={ctaHref} variant={isDark ? 'primary' : 'ghost'}>{cta}</Button></div>
         </div>
         <div ref={visualRef} className="flex-1 w-full" style={{ opacity: 0 }}>
           <div
-            className="rounded-3xl aspect-[4/3] flex items-center justify-center text-sm text-center p-10"
+            className="type-caption flex aspect-[4/3] items-center justify-center rounded-3xl p-10 text-center"
             style={{
               background: isDark ? 'rgba(228,238,240,0.06)' : 'var(--color-surface-alt)',
               color: isDark ? 'rgba(228,238,240,0.3)' : 'rgba(7,47,52,0.3)',

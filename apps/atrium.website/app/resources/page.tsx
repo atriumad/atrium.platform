@@ -51,7 +51,7 @@ export default function ResourcesPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-3xl">
             <Eyebrow className="mb-5">Library</Eyebrow>
-            <h2 className="text-3xl font-medium leading-tight md:text-5xl">
+            <h2 className="type-section-title">
               Organized by the decisions restaurant teams keep making.
             </h2>
           </div>
@@ -59,16 +59,16 @@ export default function ResourcesPage() {
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
             {resourceGroups.map((group) => (
               <div key={group.label} className="rounded-2xl border p-7" style={{ borderColor: 'rgba(7,47,52,0.10)', background: 'var(--surface-card)' }}>
-                <p className="text-sm font-medium" style={{ color: 'var(--accent)' }}>
+                <p className="type-eyebrow" style={{ color: 'var(--accent)' }}>
                   {group.label}
                 </p>
-                <p className="mt-4 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                <p className="type-caption mt-4" style={{ color: 'var(--text-muted)' }}>
                   {group.description}
                 </p>
                 <div className="mt-8 space-y-3">
                   {group.items.map((item) => (
                     <div key={item} className="rounded-xl px-4 py-3" style={{ background: 'rgba(7,47,52,0.05)' }}>
-                      <p className="text-sm font-medium">{item}</p>
+                      <p className="type-caption font-medium">{item}</p>
                     </div>
                   ))}
                 </div>
@@ -82,11 +82,11 @@ export default function ResourcesPage() {
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center">
           <div>
             <Eyebrow tone="onDark" className="mb-5">Editorial stance</Eyebrow>
-            <h2 className="text-3xl font-medium leading-tight md:text-5xl">
+            <h2 className="type-section-title">
               No generic marketing advice.
             </h2>
           </div>
-          <p className="text-base leading-relaxed" style={{ opacity: 0.66 }}>
+          <p className="type-body" style={{ opacity: 0.74 }}>
             Every resource should help an operator make one sharper decision: what to shoot, what to fix, what to measure, what to send, or what to stop doing.
           </p>
         </div>

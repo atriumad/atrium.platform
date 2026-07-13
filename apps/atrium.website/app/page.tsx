@@ -57,14 +57,12 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      <div className="pt-[3.25rem] pb-[3.75rem]" style={{ background: 'var(--surface-page)' }}>
-        <LogoTicker
-          clients={clients}
-          label="Trusted by hospitality brands building demand"
-          size="compact"
-          bg="var(--surface-page)"
-        />
-      </div>
+      <LogoTicker
+        clients={clients}
+        label="Trusted by hospitality brands building demand"
+        size="compact"
+        bg="var(--surface-page)"
+      />
       <BentoGrid items={bentoItems} />
       <WorkGrid projects={selectedWork} />
       <StatsStrip stats={homeStats} />

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import PageHero from '@/components/pages/PageHero'
+import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
 
@@ -29,87 +29,160 @@ const tiers = [
   },
 ]
 
+const scopePrinciples = [
+  {
+    title: 'Scope first',
+    body: 'We confirm location count, channel gaps, production needs, and internal capacity before recommending a model.',
+  },
+  {
+    title: 'A monthly operating rhythm',
+    body: 'The cadence is built around content production, campaign launches, reporting, and continuous optimization.',
+  },
+  {
+    title: 'No generic bundle',
+    body: 'A coffee shop, a fine-dining concept, and a multi-location group should not buy the same marketing package.',
+  },
+]
+
+function TierServices({ services, index, highlighted = false }: { services: string[]; index: number; highlighted?: boolean }) {
+  return (
+    <ul className="m-0 list-none p-0" aria-label={`Services included in model ${index + 1}`}>
+      {services.map(service => (
+        <li
+          key={service}
+          className="type-caption border-t py-3"
+          style={{
+            borderColor: highlighted ? 'rgba(181,242,219,0.22)' : 'rgba(7,47,52,0.14)',
+            color: highlighted ? 'var(--text-on-dark)' : 'var(--text-muted)',
+            opacity: highlighted ? 0.76 : 1,
+          }}
+        >
+          {service}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function PricingOffers() {
+  return (
+    <section className="px-[var(--gutter)] pb-24 pt-36 md:pb-36 md:pt-44" style={{ background: 'var(--surface-page)' }}>
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="mb-14 grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
+          <div className="lg:col-span-7">
+            <Eyebrow className="mb-6">Pricing</Eyebrow>
+            <h1 className="type-section-title max-w-[13ch]">
+              Three ways to build the <em>right operating system.</em>
+            </h1>
+          </div>
+          <div className="border-t pt-7 lg:col-span-5" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+            <p className="type-body m-0 max-w-md" style={{ color: 'var(--text-muted)' }}>
+              Compare the operating level first. We adapt the final scope to your locations, production volume, active channels, and internal team.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 border-y lg:grid-cols-3" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          {tiers.map((tier, index) => (
+            <article
+              key={tier.name}
+              className={`flex min-h-[42rem] flex-col border-t px-0 py-10 first:border-t-0 lg:border-t-0 lg:px-8 lg:py-12 first:lg:pl-0 last:lg:pr-0 ${index > 0 ? 'lg:border-l' : ''}`}
+              style={{
+                background: index === 1 ? 'var(--teal-800)' : 'transparent',
+                color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-strong)',
+                borderColor: 'rgba(7,47,52,0.18)',
+              }}
+            >
+              <div className={index === 1 ? 'px-6 lg:px-0' : ''}>
+                <p className="type-eyebrow m-0 mb-6" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-500)' }}>
+                  Model {String(index + 1).padStart(2, '0')}
+                </p>
+                <h2 className="type-card-title" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-strong)' }}>
+                  {tier.name}
+                </h2>
+                <p className="type-lead mt-6" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-body)' }}>
+                  {tier.tagline}
+                </p>
+                <p className="type-body mt-5" style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-muted)', opacity: index === 1 ? 0.68 : 1 }}>
+                  {tier.fit}
+                </p>
+              </div>
+
+              <div className={`mt-12 ${index === 1 ? 'px-6 lg:px-0' : ''}`}>
+                <p className="type-eyebrow m-0 mb-5" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-500)' }}>
+                  Included
+                </p>
+                <TierServices services={tier.includes} index={index} highlighted={index === 1} />
+              </div>
+
+              <div className={`mt-auto pt-10 ${index === 1 ? 'px-6 lg:px-0' : ''}`}>
+                <p className="type-caption m-0 font-medium" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-800)' }}>
+                  Custom pricing after discovery
+                </p>
+                <Link
+                  href="/contact"
+                  className="type-caption group mt-6 inline-flex items-center gap-3 font-medium no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+                  style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--teal-800)' }}
+                >
+                  Request this scope
+                  <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ScopeSection() {
+  return (
+    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--teal-900)', color: 'var(--text-on-dark)' }}>
+      <div className="mx-auto grid max-w-[var(--container-max)] gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <Eyebrow tone="onDark" className="mb-6">How scope works</Eyebrow>
+          <h2 className="type-section-title max-w-[11ch]">
+            The number follows <em>the diagnosis.</em>
+          </h2>
+          <p className="type-body mt-7 max-w-md" style={{ opacity: 0.68 }}>
+            We recommend the smallest complete system capable of solving the actual operating problem.
+          </p>
+        </div>
+
+        <div className="border-t lg:col-span-7" style={{ borderColor: 'rgba(181,242,219,0.22)' }}>
+          {scopePrinciples.map((principle, index) => (
+            <article
+              key={principle.title}
+              className="grid gap-6 border-b py-10 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-8 md:py-12"
+              style={{ borderColor: 'rgba(181,242,219,0.22)' }}
+            >
+              <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
+                {String(index + 1).padStart(2, '0')}
+              </p>
+              <div>
+                <h3 className="type-card-title" style={{ color: 'var(--text-on-dark)' }}>
+                  {principle.title}
+                </h3>
+                <p className="type-body mt-5 max-w-2xl" style={{ color: 'var(--text-on-dark)', opacity: 0.68 }}>
+                  {principle.body}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function PricingPage() {
   return (
     <>
-      <PageHero
-        eyebrow="PRICING"
-        title={<>Custom scope. <em>Clear operating model.</em></>}
-        body="Atrium pricing is built around the restaurant's stage, channel mix, location count, and internal team capacity. We start with the system you need, then scope the monthly rhythm around it."
-        actions={[{ label: 'Request a scope', href: '/contact' }, { label: 'Compare services', href: '/services', variant: 'ghostLight' }]}
-        stats={[
-          { value: '3', label: 'engagement models' },
-          { value: '28d', label: 'monthly engine cycle' },
-          { value: 'Custom', label: 'pricing after scope, not before context' },
-        ]}
-      />
-
-      <section className="px-6 py-20 md:px-12 md:py-28" style={{ background: 'var(--surface-page)' }}>
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 max-w-3xl">
-            <Eyebrow className="mb-5">Engagement models</Eyebrow>
-            <h2 className="text-3xl font-medium leading-tight md:text-5xl">
-              Pick the level of operating support your restaurant actually needs.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
-            {tiers.map((tier, index) => (
-              <div
-                key={tier.name}
-                className="flex min-h-[520px] flex-col rounded-2xl border p-7"
-                style={{
-                  borderColor: index === 1 ? 'rgba(181,242,219,0.42)' : 'rgba(7,47,52,0.10)',
-                  background: index === 1 ? 'var(--teal-800)' : 'var(--surface-card)',
-                  color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-strong)',
-                }}
-              >
-                <p className="text-sm font-medium" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--accent)' }}>
-                  0{index + 1}
-                </p>
-                <h3 className="mt-5 text-3xl font-medium">{tier.name}</h3>
-                <p className="mt-4 text-base leading-relaxed" style={{ opacity: 0.72 }}>
-                  {tier.tagline}
-                </p>
-                <p className="mt-6 text-sm leading-relaxed" style={{ opacity: 0.58 }}>
-                  {tier.fit}
-                </p>
-                <div className="mt-8 border-t pt-6" style={{ borderColor: index === 1 ? 'rgba(228,238,240,0.12)' : 'rgba(7,47,52,0.10)' }}>
-                  <p className="text-xs font-medium" style={{ opacity: 0.58 }}>
-                    Includes
-                  </p>
-                  <ul className="mt-5 space-y-3">
-                    {tier.includes.map((item) => (
-                      <li key={item} className="text-sm leading-relaxed" style={{ opacity: 0.74 }}>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <p className="mt-auto pt-8 text-sm font-medium" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-800)' }}>
-                  Custom pricing after discovery
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-20 md:px-12 md:py-24" style={{ background: 'var(--surface-page)' }}>
-        <div className="mx-auto grid max-w-6xl gap-8 border-t pt-12 md:grid-cols-3" style={{ borderColor: 'rgba(7,47,52,0.10)' }}>
-          {[
-            ['Scope first', 'We confirm your location count, channel gaps, production needs, and internal capacity before recommending a model.'],
-            ['Month-to-month rhythm', 'The operating cadence is built around content production, campaign launches, reporting, and optimization cycles.'],
-            ['No generic bundle', 'A coffee shop, a fine-dining concept, and a multi-location group should not buy the same marketing package.'],
-          ].map(([title, body]) => (
-            <div key={title}>
-              <h3 className="text-2xl font-medium">{title}</h3>
-              <p className="mt-4 text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                {body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <PricingOffers />
+      <ScopeSection />
 
       <CTABanner
         eyebrow="SCOPE THE WORK"

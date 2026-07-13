@@ -28,7 +28,7 @@ export default function ServiceTimeline({ steps }: Props) {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
         <div className="md:w-64 flex-shrink-0">
           <Eyebrow tone="onDark" className="mb-4">HOW IT WORKS</Eyebrow>
-          <h2 className="text-3xl font-medium leading-tight" style={{ color: 'var(--text-on-dark)' }}>
+          <h2 className="type-section-title" style={{ color: 'var(--text-on-dark)' }}>
             A process built for hospitality
           </h2>
         </div>
@@ -54,10 +54,10 @@ export default function ServiceTimeline({ steps }: Props) {
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div className="flex flex-col gap-1.5">
-                <p className="font-semibold text-base" style={{ color: 'var(--text-on-dark)' }}>
+                <p className="type-card-title" style={{ color: 'var(--text-on-dark)' }}>
                   {step.title}
                 </p>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-on-dark)', opacity: 0.6 }}>
+                <p className="type-caption" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
                   {step.body}
                 </p>
               </div>

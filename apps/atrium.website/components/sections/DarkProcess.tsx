@@ -40,14 +40,14 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
         <div className="flex-1 flex flex-col gap-6">
           {eyebrow && <Eyebrow style={{ color: 'var(--color-surface)' } as React.CSSProperties}>{eyebrow}</Eyebrow>}
-          <h2 className="text-3xl md:text-5xl font-medium leading-tight max-w-lg" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
-          <p className="text-sm leading-relaxed max-w-sm" style={{ color: 'var(--color-text-light)', opacity: 0.65 }}>{body}</p>
+          <h2 className="type-section-title max-w-lg" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
+          <p className="type-body max-w-sm" style={{ color: 'var(--color-text-light)', opacity: 0.74 }}>{body}</p>
           <div className="mt-2"><Button href={ctaHref} variant="ghostLight">{cta}</Button></div>
           <div className="flex gap-10 mt-8 pt-8" style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }}>
             {stats.map((s) => (
               <div key={`${s.number}-${s.label}`}>
                 <p className="text-4xl font-medium" style={{ color: 'var(--color-accent)' }}>{s.number}</p>
-                <p className="text-xs leading-relaxed mt-1 max-w-[120px]" style={{ color: 'var(--color-text-light)', opacity: 0.55 }}>{s.label}</p>
+                <p className="type-caption mt-1 max-w-[120px]" style={{ color: 'var(--color-text-light)', opacity: 0.68 }}>{s.label}</p>
               </div>
             ))}
           </div>
@@ -63,9 +63,9 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
                 {i + 1}
               </div>
               <div className="space-y-1.5">
-                <p className="text-xs font-medium tracking-[0.15em] uppercase" style={{ color: 'var(--color-accent)', opacity: 0.8 }}>{step.eyebrow}</p>
-                <p className="text-base font-medium" style={{ color: 'var(--color-text-light)' }}>{step.title}</p>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--color-text-light)', opacity: 0.6 }}>{step.body}</p>
+                <p className="type-eyebrow" style={{ color: 'var(--color-accent)', opacity: 0.8 }}>{step.eyebrow}</p>
+                <p className="type-card-title" style={{ color: 'var(--color-text-light)' }}>{step.title}</p>
+                <p className="type-caption" style={{ color: 'var(--color-text-light)', opacity: 0.72 }}>{step.body}</p>
               </div>
             </div>
           ))}

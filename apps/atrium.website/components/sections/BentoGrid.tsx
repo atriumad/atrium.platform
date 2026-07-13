@@ -25,6 +25,18 @@ const sizeClass: Record<BentoItem['size'], string> = {
   small:  'md:col-span-1 md:row-span-1',
 }
 
+const titleClass: Record<BentoItem['size'], string> = {
+  large: 'text-[1.75rem] leading-[0.98] tracking-[-0.035em] md:text-[clamp(2.4rem,3vw,3.5rem)] md:leading-[0.94]',
+  medium: 'text-[1.75rem] leading-[0.98] tracking-[-0.03em] md:text-[clamp(2rem,2.4vw,2.75rem)] md:leading-[0.96]',
+  small: 'text-[1.75rem] leading-[0.98] tracking-[-0.025em] md:text-[clamp(1.7rem,1.8vw,2.1rem)]',
+}
+
+const copyWidthClass: Record<BentoItem['size'], string> = {
+  large: 'max-w-3xl',
+  medium: 'max-w-sm',
+  small: 'max-w-xs',
+}
+
 export default function BentoGrid({ items, eyebrow, headline }: Props) {
   const gridRef = useRef<HTMLDivElement>(null)
 
@@ -51,7 +63,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
           <div className="mb-16 max-w-3xl">
             {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
             {headline && (
-              <h2 className="text-3xl md:text-5xl font-medium leading-tight">
+              <h2 className="type-section-title">
                 {headline}
               </h2>
             )}
@@ -78,13 +90,13 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
 
                 <div>
                   <h3
-                    className="text-xl md:text-2xl font-medium leading-snug mb-3"
+                    className={`${titleClass[item.size]} mb-3 font-normal`}
                     style={{ color: isDark ? 'var(--mint-400)' : 'var(--teal-800)' }}
                   >
                     {item.title}
                   </h3>
                   <p
-                    className="text-sm leading-relaxed"
+                    className={`text-sm leading-relaxed ${copyWidthClass[item.size]}`}
                     style={{ color: isDark ? 'var(--cloud-300)' : 'var(--ink-700)', opacity: 0.75 }}
                   >
                     {item.body}
@@ -93,7 +105,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
 
                 <div className="mt-4 text-xs">
                   <span
-                    className="inline-block px-3 py-1.5 rounded-full"
+                    className="inline-block max-w-full rounded-full px-3 py-1.5 text-[0.68rem] font-medium uppercase leading-[1.25] tracking-[0.16em]"
                     style={{
                       background: isDark ? 'rgba(228,238,240,0.07)' : 'rgba(7,47,52,0.06)',
                       border: isDark ? '1px solid rgba(228,238,240,0.12)' : '1px solid rgba(7,47,52,0.10)',

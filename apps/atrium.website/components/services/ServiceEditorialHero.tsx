@@ -12,15 +12,15 @@ export default function ServiceEditorialHero({ svc }: { svc: Service }) {
         <CategoryBadge category={svc.category} />
 
         <h1
-          className="max-w-[13ch] font-sans text-[4.5rem] leading-[0.93] font-medium m-0 max-lg:text-[3.8rem] max-md:text-[3.2rem] max-sm:text-[2.6rem]"
+          className="type-page-title m-0 max-w-[13ch]"
           style={{ color: 'var(--text-on-dark)' }}
         >
           {parseHeadline(svc.hero.headline)}
         </h1>
 
         <p
-          className="max-w-[38rem] text-[1.05rem] m-0 max-sm:text-[0.95rem]"
-          style={{ color: 'var(--text-on-dark)', opacity: 0.6, lineHeight: 'var(--leading-body)' }}
+          className="type-lead m-0 max-w-[38rem]"
+          style={{ color: 'var(--text-on-dark)', opacity: 0.74 }}
         >
           {svc.hero.body}
         </p>
