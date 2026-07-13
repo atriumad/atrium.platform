@@ -6,6 +6,17 @@
   --color-background: var(--cloud-200);
   --color-foreground: var(--ink-700);
   --font-sans: var(--font-sans);
+  --spacing-4-5: 1.65rem;
+  --spacing-3-5: 0.9rem;
+}
+
+/* ─── Font wiring ─────────────────────────────────────────────────────────
+   packages/ui/tokens.css ships literal fallback family names (it can't know
+   the hashed names next/font/local generates). Each consuming app must wire
+   its actual loaded font variables into the semantic --font-* tokens. */
+:root {
+  --font-sans: var(--font-inter-tight), "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
 }
 
 /* Legacy website aliases retained for sections still authored against the

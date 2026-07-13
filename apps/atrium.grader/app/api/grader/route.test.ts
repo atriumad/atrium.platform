@@ -154,7 +154,7 @@ describe.serial("POST /api/grader", () => {
     }))
     expect(body.report.providerVersions).toEqual(expect.objectContaining({
       businessData: "google-places-business-v1",
-      website: "website-html-v1",
+      website: "pagespeed-v1+website-html-v1",
       benchmark: "google-nearby-benchmark-v1",
       reputation: "google-places-reputation-v1",
       social: "not-scanned",

@@ -1,6 +1,7 @@
 "use client"
 
 import type { DiagnosticStepResult, RestaurantGrowthReport } from "@atrium/application"
+import { Button } from "@atrium/ui"
 import { gsap } from "gsap"
 import type { FormEvent, SVGProps } from "react"
 import { useEffect, useId, useMemo, useRef, useState } from "react"
@@ -961,14 +962,10 @@ function ReportStage({
         {missingCriticalData.length ? <span>Missing: {missingCriticalData.slice(0, 2).map(publicReportText).join(", ")}</span> : null}
       </div>
 
-      <div className="flex w-full justify-center pt-1">
-        <button
-          className="rounded-full border border-[rgb(7_47_52_/_18%)] bg-white px-5 py-3 text-sm font-bold text-[var(--text-strong)] shadow-[0_1px_2px_rgb(7_47_52_/_5%),0_8px_24px_rgb(7_47_52_/_6%)] transition-[transform,box-shadow,border-color] duration-150 ease-out hover:-translate-y-0.5 hover:border-[rgb(111_163_159_/_55%)] active:scale-[0.97] motion-reduce:transform-none motion-reduce:transition-none"
-          onClick={onReset}
-          type="button"
-        >
+      <div className="result-actions">
+        <Button variant="outline" onClick={onReset} type="button">
           Scan another restaurant
-        </button>
+        </Button>
       </div>
     </section>
   )
