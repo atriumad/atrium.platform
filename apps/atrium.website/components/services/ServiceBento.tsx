@@ -40,7 +40,6 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
       style={{ background: 'var(--cloud-400)', color: 'var(--teal-800)' }}
     >
       <div className="flex flex-col gap-[0.9rem]">
-        <span className="type-eyebrow opacity-56">{card.size}</span>
         <h3
           className="type-card-title m-0 max-w-[11ch]"
           style={{ color: 'var(--amber-400)' }}
