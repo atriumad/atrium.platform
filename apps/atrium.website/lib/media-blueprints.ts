@@ -27,7 +27,12 @@ export type RealMediaBlueprint = BlueprintBase & {
 export type MediaBlueprint = PlannedMediaBlueprint | RealMediaBlueprint
 
 export function isRealMedia(item: MediaBlueprint): item is RealMediaBlueprint {
-  return typeof item.src === 'string' && item.src.length > 0
+  return (
+    typeof item.src === 'string' &&
+    item.src.trim().length > 0 &&
+    typeof item.alt === 'string' &&
+    item.alt.trim().length > 0
+  )
 }
 
 export function blueprintLabel(item: MediaBlueprint) {
