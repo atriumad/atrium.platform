@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
+import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import Eyebrow from '@/components/ui/Eyebrow'
 
 export const metadata: Metadata = {
@@ -86,11 +87,13 @@ function PricingOffers() {
           {tiers.map((tier, index) => (
             <article
               key={tier.name}
+              id={tier.name.toLowerCase().replaceAll(' ', '-')}
               className={`flex min-h-[42rem] flex-col border-t px-0 py-10 first:border-t-0 lg:border-t-0 lg:px-8 lg:py-12 first:lg:pl-0 last:lg:pr-0 ${index > 0 ? 'lg:border-l' : ''}`}
               style={{
                 background: index === 1 ? 'var(--teal-800)' : 'transparent',
                 color: index === 1 ? 'var(--text-on-dark)' : 'var(--text-strong)',
                 borderColor: 'rgba(7,47,52,0.18)',
+                scrollMarginTop: '8rem',
               }}
             >
               <div className={index === 1 ? 'px-6 lg:px-0' : ''}>
@@ -183,12 +186,13 @@ export default function PricingPage() {
     <>
       <PricingOffers />
       <ScopeSection />
+      <PurchaseFAQ />
 
       <CTABanner
         eyebrow="SCOPE THE WORK"
         headline={<>The right number comes <em>after the right diagnosis.</em></>}
         body="Tell us what you are trying to grow, what channels are already active, and what has stopped working. We will map the practical scope."
-        cta="Let's Talk"
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="Engagement model notes for a hospitality marketing plan"
       />

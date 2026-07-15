@@ -1,16 +1,16 @@
-# Graph Report - atrium.platform  (2026-07-13)
+# Graph Report - atrium.platform  (2026-07-15)
 
 ## Corpus Check
-- 277 files · ~784,262 words
+- 298 files · ~790,638 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2205 nodes · 2900 edges · 215 communities (177 shown, 38 thin omitted)
+- 2326 nodes · 3086 edges · 224 communities (187 shown, 37 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS · INFERRED: 12 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `224bc68a`
+- Built from commit: `b0fb961e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -87,10 +87,12 @@
 - [[_COMMUNITY_Community 70|Community 70]]
 - [[_COMMUNITY_Community 71|Community 71]]
 - [[_COMMUNITY_Community 72|Community 72]]
+- [[_COMMUNITY_Community 73|Community 73]]
 - [[_COMMUNITY_Community 74|Community 74]]
 - [[_COMMUNITY_Community 75|Community 75]]
 - [[_COMMUNITY_Community 76|Community 76]]
 - [[_COMMUNITY_Community 77|Community 77]]
+- [[_COMMUNITY_Community 78|Community 78]]
 - [[_COMMUNITY_Community 79|Community 79]]
 - [[_COMMUNITY_Community 80|Community 80]]
 - [[_COMMUNITY_Community 81|Community 81]]
@@ -103,15 +105,19 @@
 - [[_COMMUNITY_Community 88|Community 88]]
 - [[_COMMUNITY_Community 89|Community 89]]
 - [[_COMMUNITY_Community 90|Community 90]]
+- [[_COMMUNITY_Community 91|Community 91]]
 - [[_COMMUNITY_Community 92|Community 92]]
 - [[_COMMUNITY_Community 93|Community 93]]
 - [[_COMMUNITY_Community 94|Community 94]]
 - [[_COMMUNITY_Community 95|Community 95]]
+- [[_COMMUNITY_Community 96|Community 96]]
 - [[_COMMUNITY_Community 97|Community 97]]
 - [[_COMMUNITY_Community 98|Community 98]]
 - [[_COMMUNITY_Community 99|Community 99]]
 - [[_COMMUNITY_Community 100|Community 100]]
+- [[_COMMUNITY_Community 101|Community 101]]
 - [[_COMMUNITY_Community 102|Community 102]]
+- [[_COMMUNITY_Community 103|Community 103]]
 - [[_COMMUNITY_Community 104|Community 104]]
 - [[_COMMUNITY_Community 105|Community 105]]
 - [[_COMMUNITY_Community 106|Community 106]]
@@ -119,6 +125,9 @@
 - [[_COMMUNITY_Community 108|Community 108]]
 - [[_COMMUNITY_Community 109|Community 109]]
 - [[_COMMUNITY_Community 110|Community 110]]
+- [[_COMMUNITY_Community 111|Community 111]]
+- [[_COMMUNITY_Community 112|Community 112]]
+- [[_COMMUNITY_Community 113|Community 113]]
 - [[_COMMUNITY_Community 114|Community 114]]
 - [[_COMMUNITY_Community 115|Community 115]]
 - [[_COMMUNITY_Community 116|Community 116]]
@@ -233,15 +242,15 @@
   apps/atrium.grader/app/api/grader/route.ts → packages/application/src/diagnostics/social-health-scorer.ts
 - `POST()` --calls--> `scoreSocialHealth()`  [INFERRED]
   apps/atrium.grader/app/api/grader/social/route.ts → packages/application/src/diagnostics/social-health-scorer.ts
+- `ContactPage()` --calls--> `getService()`  [EXTRACTED]
+  apps/atrium.website/app/contact/page.tsx → apps/atrium.website/lib/services.ts
 - `generateMetadata()` --calls--> `getService()`  [INFERRED]
   apps/atrium.website/app/services/[slug]/page.tsx → apps/atrium.website/lib/services.ts
-- `generateMetadata()` --calls--> `getCaseSummary()`  [INFERRED]
-  apps/atrium.website/app/work/[slug]/page.tsx → apps/atrium.website/lib/work.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (215 total, 38 thin omitted)
+## Communities (224 total, 37 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.07
@@ -264,24 +273,24 @@ Cohesion: 0.06
 Nodes (32): 10) IA y automatización, 11) Reglas para el agente de código, 12) Convenciones de implementación, 13) Referentes y documentación, 14) Decisión final, 1) Visión del sistema, 2) Objetivo arquitectónico, 3) Patrones elegidos (+24 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.18
-Nodes (9): clamp(), computeReputationScore(), computeRetentionScore(), computeRevenueScore(), computeTrafficScore(), computeTrend(), mean(), RecalculateHealthScore (+1 more)
+Cohesion: 0.26
+Nodes (17): absent(), extractFacebookPosts(), extractInstagramPosts(), extractTikTokPosts(), fetchFacebook(), fetchInstagram(), fetchTikTok(), getScrapeCreatorsApiKey() (+9 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.16
-Nodes (21): GooglePlaceMeta, AgentContext, buildPrompt(), extractFirstJsonObject(), generateReportNarrative(), NarrativeSchema, resolveModel(), AgentEvidenceContext (+13 more)
+Cohesion: 0.15
+Nodes (22): GoogleLocalBenchmark, GooglePlaceMeta, AgentContext, buildPrompt(), extractFirstJsonObject(), generateReportNarrative(), NarrativeSchema, resolveModel() (+14 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.08
 Nodes (24): dependencies, @atrium/application, @atrium/domain, @atrium/shared, bcryptjs, @prisma/client, devDependencies, prisma (+16 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.11
-Nodes (15): Connector, ConnectorCredentials, ConnectorStatus, SyncResult, CustomerIdentifier, dateRange, lastNDays(), addMoney() (+7 more)
+Cohesion: 0.07
+Nodes (24): clamp(), computeReputationScore(), computeRetentionScore(), computeRevenueScore(), computeTrafficScore(), computeTrend(), mean(), RecalculateHealthScore (+16 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.10
-Nodes (11): IconItem, Service, services, StatItem, TimelineStep, Props, Props, Props (+3 more)
+Cohesion: 0.15
+Nodes (7): services, STAGE_COLORS, stages, Props, metadata, PILLAR_COLORS, PILLARS
 
 ### Community 10 - "Community 10"
 Cohesion: 0.12
@@ -340,8 +349,8 @@ Cohesion: 0.15
 Nodes (12): devDependencies, typescript, main, name, private, scripts, build, lint (+4 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.23
-Nodes (9): BentoCardMini(), BentoCardNeutral(), BentoCardPhoto(), BentoCardPosition(), BentoCardStatement(), ServiceEditorialHero(), ServiceThesis(), CATEGORY_COLOR (+1 more)
+Cohesion: 0.21
+Nodes (10): BentoCard, BentoCardMini(), BentoCardNeutral(), BentoCardPhoto(), BentoCardPosition(), BentoCardStatement(), ServiceEditorialHero(), ServiceThesis() (+2 more)
 
 ### Community 26 - "Community 26"
 Cohesion: 0.33
@@ -356,8 +365,8 @@ Cohesion: 0.18
 Nodes (10): compilerOptions, allowJs, jsx, lib, module, moduleResolution, plugins, target (+2 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.23
-Nodes (18): absent(), extractFacebookPosts(), extractInstagramPosts(), extractTikTokPosts(), fetchFacebook(), fetchInstagram(), fetchTikTok(), getScrapeCreatorsApiKey() (+10 more)
+Cohesion: 0.09
+Nodes (24): BlueprintAssetType, BlueprintBase, BlueprintKind, blueprintLabel(), BlueprintRatio, BlueprintStaticAssetType, BlueprintVideoAssetType, isRealMedia() (+16 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.29
@@ -396,8 +405,8 @@ Cohesion: 0.25
 Nodes (7): compilerOptions, jsx, lib, outDir, rootDir, extends, include
 
 ### Community 39 - "Community 39"
-Cohesion: 0.08
-Nodes (16): GraderClient(), viewport, structuredData, metaImage, seoKeywords, siteUrl, metadata, metadata (+8 more)
+Cohesion: 0.17
+Nodes (7): viewport, metadata, metadata, instrumentSerif, interTight, nothingYouCouldDo, columns
 
 ### Community 40 - "Community 40"
 Cohesion: 0.50
@@ -420,8 +429,8 @@ Cohesion: 0.50
 Nodes (3): DEFAULT_LOYALTY_CONFIG, LoyaltyConfig, Tenant
 
 ### Community 46 - "Community 46"
-Cohesion: 0.22
-Nodes (13): buildSocialDetails(), buildSocialInterpretation(), pagespeedWithTimeout(), POST(), ReportMeta, GoogleLocalBenchmark, createScanId(), logFailedScan() (+5 more)
+Cohesion: 0.21
+Nodes (13): auditOpportunityTitles(), CATEGORIES, categoryScore(), failedSummary(), numericAudit(), PageSpeedAudits, PageSpeedCategories, PageSpeedResponse (+5 more)
 
 ### Community 49 - "Community 49"
 Cohesion: 0.09
@@ -436,8 +445,8 @@ Cohesion: 0.06
 Nodes (31): dependencies, @atrium/ui, gsap, @gsap/react, next, react, react-dom, @react-three/drei (+23 more)
 
 ### Community 53 - "Community 53"
-Cohesion: 0.08
-Nodes (15): CaseHero(), CaseMedia(), CaseTheme, caseThemes, defaultCaseTheme, defaultHeroTone, fallbackMetric, gallerySlots (+7 more)
+Cohesion: 0.09
+Nodes (13): CaseMedia(), CaseTheme, caseThemes, defaultCaseTheme, defaultHeroTone, fallbackMetric, gallerySlots, getVisualColor() (+5 more)
 
 ### Community 54 - "Community 54"
 Cohesion: 0.40
@@ -452,8 +461,8 @@ Cohesion: 0.32
 Nodes (5): computeOverallScore(), HealthDimensions, HealthTrend, LocationHealth, HealthRepository
 
 ### Community 59 - "Community 59"
-Cohesion: 0.09
-Nodes (13): briefItems, metadata, HeroAction, HeroStat, PageHeroProps, metadata, scopePrinciples, tiers (+5 more)
+Cohesion: 0.08
+Nodes (15): metadata, principles, teamCards, briefItems, ContactPage(), metadata, HeroAction, HeroStat (+7 more)
 
 ### Community 60 - "Community 60"
 Cohesion: 0.17
@@ -476,32 +485,36 @@ Cohesion: 0.09
 Nodes (22): Atrium V1 — Homepage Implementation Plan, File Map, Global Constraints, Plan Progress Tracker, Task 10: Work Grid, Task 11: Stats Strip (C4), Task 12: Split Section (C7), Task 13: Logo Ticker (+14 more)
 
 ### Community 66 - "Community 66"
-Cohesion: 0.16
-Nodes (11): generateMetadata(), BentoCard, getService(), getSiblingServices(), brands, SiblingServices(), CATEGORY_COLOR, generateMetadata() (+3 more)
+Cohesion: 0.07
+Nodes (22): generateMetadata(), getService(), getSiblingServices(), IconItem, relatedCaseBySlug, Service, StatItem, TimelineStep (+14 more)
 
 ### Community 67 - "Community 67"
-Cohesion: 0.06
-Nodes (35): buildAgencyContactHref(), confidenceCopy(), dataQualityCopy(), DiagnosticEvidenceCard(), diagnosticStatusCopy(), diagnosticStepFix(), diagnosticStepLimitation(), diagnosticStepTitle() (+27 more)
+Cohesion: 0.08
+Nodes (23): buildAgencyContactHref(), confidenceCopy(), dataQualityCopy(), DotPatternProps, GraderResponse, growthCanvasCards, loadingActionCopy(), loadingScenes (+15 more)
 
 ### Community 68 - "Community 68"
-Cohesion: 0.18
-Nodes (8): CaseGalleryImage, CaseGalleryProps, clamp(), cloneOffsets, fallbackImages, getImageRatio(), LayoutItem, Point
+Cohesion: 0.20
+Nodes (7): CaseGalleryProps, clamp(), cloneOffsets, fallbackImages, getImageRatio(), LayoutItem, Point
 
 ### Community 69 - "Community 69"
 Cohesion: 0.26
-Nodes (19): getGooglePlacesApiKey(), getGoogleWebsiteUrl(), assertGoogleProviderConfigured(), getGoogleProfileLookup(), getRestaurantGrowthProfileFromPlace(), getWebsiteUrlForPlace(), googleBusinessDataProvider, googlePlaceIdOrThrow() (+11 more)
+Nodes (19): getGooglePlacesApiKey(), searchGooglePlaces(), assertGoogleProviderConfigured(), getGoogleProfileLookup(), getRestaurantGrowthProfileFromPlace(), getWebsiteUrlForPlace(), googleBusinessDataProvider, googlePlaceIdOrThrow() (+11 more)
 
 ### Community 70 - "Community 70"
 Cohesion: 0.07
-Nodes (19): bentoItems, clients, homeStats, processStats, processSteps, selectedWork, testimonialCards, ProcessStat (+11 more)
+Nodes (22): bentoItems, clients, homeStats, processStats, processSteps, selectedWork, testimonialCards, BentoItem (+14 more)
 
 ### Community 71 - "Community 71"
 Cohesion: 0.09
 Nodes (22): dependencies, @atrium/application, @atrium/ui, gsap, next, react, react-dom, devDependencies (+14 more)
 
 ### Community 72 - "Community 72"
-Cohesion: 0.17
-Nodes (9): CaseStudy, getCaseSummary(), NextCasePreview(), caseDescriptions, CaseText(), defaultVisualTheme, metadata, sortedCases (+1 more)
+Cohesion: 0.20
+Nodes (6): CaseStudy, caseDescriptions, defaultVisualTheme, metadata, sortedCases, visualThemes
+
+### Community 73 - "Community 73"
+Cohesion: 0.14
+Nodes (6): metadata, scopePrinciples, tiers, FAQItem, Props, purchaseQuestions
 
 ### Community 74 - "Community 74"
 Cohesion: 0.15
@@ -515,13 +528,21 @@ Nodes (8): Content, Data model change, Goals, Informative (3) — cards unchange
 Cohesion: 0.47
 Nodes (5): clientKey(), config, hits, middleware(), pruneExpired()
 
+### Community 77 - "Community 77"
+Cohesion: 0.24
+Nodes (12): buildSocialDetails(), buildSocialInterpretation(), pagespeedWithTimeout(), POST(), ReportMeta, createScanId(), logFailedScan(), ScanEvidence (+4 more)
+
+### Community 78 - "Community 78"
+Cohesion: 0.20
+Nodes (14): EMPTY_HANDLES, POST(), EMPTY, scrapeWebsite(), SocialDetectionContext, ALLOWED_PROTOCOLS, assertSafeExternalUrl(), isPrivateIp() (+6 more)
+
 ### Community 79 - "Community 79"
 Cohesion: 0.40
 Nodes (4): Goal, Grader UI simplification, Scope, Steps
 
 ### Community 80 - "Community 80"
-Cohesion: 0.29
-Nodes (7): generateMetadata(), getCaseStudy(), CaseStudyPage(), getCaseBody(), getCaseIntro(), getNextStudy(), getStoryParagraphs()
+Cohesion: 0.40
+Nodes (5): CaseStudyPage(), getCaseBody(), getCaseIntro(), getNextStudy(), getStoryParagraphs()
 
 ### Community 81 - "Community 81"
 Cohesion: 0.15
@@ -535,17 +556,13 @@ Nodes (3): OsmPrefix, OsmType, toGooglePlaceId()
 Cohesion: 0.10
 Nodes (20): Acceptance Criteria, Activity (25 pts) — posts in last 30 days, Aggregation, Architecture, Completeness (25 pts), Credit Cost, Data Flow, Engagement (25 pts) — avg (likes + comments) / followers across recent posts (+12 more)
 
-### Community 84 - "Community 84"
-Cohesion: 0.22
-Nodes (3): metadata, principles, teamCards
-
 ### Community 85 - "Community 85"
 Cohesion: 0.13
 Nodes (14): 1. Brand & product context, 2. Content fundamentals (voice & copy), 3. Visual foundations, 4. Iconography, 5. Index / manifest, 6. Caveats / substitutions, Atrium — Design System, Backgrounds & textures (+6 more)
 
 ### Community 86 - "Community 86"
-Cohesion: 0.29
-Nodes (6): CaseMetric, CaseQuote, caseStudies, caseSummaries, HowStep, ScopeGroup
+Cohesion: 0.25
+Nodes (7): CaseGalleryImage, CaseMetric, CaseQuote, caseStudies, caseSummaries, HowStep, ScopeGroup
 
 ### Community 87 - "Community 87"
 Cohesion: 0.07
@@ -556,12 +573,16 @@ Cohesion: 0.14
 Nodes (13): 1. Add the dependency, 2. Import tokens in your global CSS, 3. Import components, 4. Logo SVGs, Atrium Design System, Brand Identity, Color System, Components (+5 more)
 
 ### Community 89 - "Community 89"
-Cohesion: 0.29
-Nodes (5): BentoItem, copyWidthClass, Props, sizeClass, titleClass
+Cohesion: 0.33
+Nodes (6): generateMetadata(), getCaseSummary(), CaseHero(), getCaseTheme(), NextCasePreview(), CaseText()
 
 ### Community 90 - "Community 90"
 Cohesion: 0.15
 Nodes (12): 1. Brand & product context, 2. Content fundamentals (voice & copy), 3. Visual foundations, 4. Iconography, 5. Index / manifest, 6. Caveats / substitutions, Atrium — Design System, Color (+4 more)
+
+### Community 91 - "Community 91"
+Cohesion: 0.40
+Nodes (3): columns, Row, rows
 
 ### Community 92 - "Community 92"
 Cohesion: 0.20
@@ -579,6 +600,10 @@ Nodes (4): ListCustomers, ListCustomersInput, ListCustomersResult, sampleCustome
 Cohesion: 0.42
 Nodes (6): daysAgo(), main(), seed(), verify(), globalForPrisma, createUseCases()
 
+### Community 96 - "Community 96"
+Cohesion: 0.10
+Nodes (17): cldImageUrl(), cldVideoPoster(), cldVideoUrl(), cloudinaryConfigured, cloudinaryLoader(), ImageOpts, normalizeVideoPublicId(), CldImageProps (+9 more)
+
 ### Community 97 - "Community 97"
 Cohesion: 0.23
 Nodes (12): base, Button(), ButtonAsAnchor, ButtonAsButton, ButtonProps, ButtonSize, ButtonVariant, hoverBg (+4 more)
@@ -595,13 +620,21 @@ Nodes (28): Archivos principales, Conversion scan, Current scoring model, Growth
 Cohesion: 0.15
 Nodes (12): Created, File Map, Global Constraints, Modified, packages/ui — Design System & Component Library Implementation Plan, Task 1: Bootstrap `packages/ui`, Task 2: Unified Token File, Task 3: Stateless Primitives — Badge, Eyebrow, Highlight, ScriptAccent, Logo (+4 more)
 
+### Community 101 - "Community 101"
+Cohesion: 0.18
+Nodes (7): Cta, HeroScene, tags, icons, leftGroup, otherLinks, rightGroups
+
 ### Community 102 - "Community 102"
 Cohesion: 0.13
 Nodes (14): Acceptance Criteria, Grader Data Quality Implementation Plan, Phase 1: Diagnostic Step Contract, Phase 2: Provider Ports and Data Source Configuration, Phase 3: Lighthouse/PageSpeed Website Audit, Phase 4: Reputation and Business Data Recovery, Phase 5: Social Data Reliability, Phase 6: Persistence and Debuggability (+6 more)
 
+### Community 103 - "Community 103"
+Cohesion: 0.23
+Nodes (5): GraderClient(), structuredData, metaImage, seoKeywords, siteUrl
+
 ### Community 104 - "Community 104"
-Cohesion: 0.07
-Nodes (50): EMPTY_HANDLES, POST(), autoDetectSocial(), EMPTY, scrapeWebsite(), SocialDetectionContext, auditOpportunityTitles(), CATEGORIES (+42 more)
+Cohesion: 0.22
+Nodes (22): checkInstagramHandle(), checkTikTokHandle(), followerBoost(), getScrapeCreatorsKey(), handleCandidates(), IgTopSearchResponse, matchScore(), nameMatchScore() (+14 more)
 
 ### Community 105 - "Community 105"
 Cohesion: 0.17
@@ -616,8 +649,8 @@ Cohesion: 0.17
 Nodes (12): **1\. Sold The Experience Before The Food**, **2\. Made The Chef Part Of The Brand**, **3\. Elevated Every Dish Into A Visual Statement**, **4\. Shifted The Conversation From “Indian Food” To “Modern Dining”**, **5\. Built Consistency At Scale**, **AAHAA MODERN INDIAN CUISINE**, **HERO**, **HOW WE DID IT** (+4 more)
 
 ### Community 108 - "Community 108"
-Cohesion: 0.12
-Nodes (17): 1. Updated `packages/ui/package.json`, 2. Updated `packages/ui/tsconfig.json`, 3. Created Directory Structure, 4. Dependency Installation, 5. Type Checking Verification, Changes Made, Commit, Concerns for review (+9 more)
+Cohesion: 0.07
+Nodes (30): 1. Updated `packages/ui/package.json`, 2. Updated `packages/ui/tsconfig.json`, 3. Created Directory Structure, 4. Dependency Installation, 5. Type Checking Verification, Changes Made, Commit, Commit and scope (+22 more)
 
 ### Community 109 - "Community 109"
 Cohesion: 0.17
@@ -626,6 +659,14 @@ Nodes (11): Build Result, Button.tsx, Card.tsx, Chip.tsx, Commits Made, Componen
 ### Community 110 - "Community 110"
 Cohesion: 0.17
 Nodes (11): 1. Package Dependency (apps/atrium.website/package.json), 2. Token Import (apps/atrium.website/app/globals.css), 3. Component Re-exports, 4. Eyebrow Enhancement (packages/ui/src/components/Eyebrow.tsx), Changes Summary, Commits Made, Concerns, Status (+3 more)
+
+### Community 111 - "Community 111"
+Cohesion: 0.36
+Nodes (5): buildSocialDetails(), buildSocialInterpretation(), mergeNarrativeIntoReport(), mergeSocialIntoReport(), NarrativeData
+
+### Community 112 - "Community 112"
+Cohesion: 0.29
+Nodes (7): DiagnosticEvidenceCard(), diagnosticStatusCopy(), diagnosticStepFix(), diagnosticStepLimitation(), diagnosticStepTitle(), publicReportText(), stepConfidenceCopy()
 
 ### Community 114 - "Community 114"
 Cohesion: 0.20
@@ -636,8 +677,8 @@ Cohesion: 0.20
 Nodes (10): HOME, SECTION 1 — Hero \[C11\], SECTION 2 — Bento Value Props \[C1: Bento Grid\], SECTION 3 — Selected Work (5 featured) \[Project grid\], SECTION 4 — Services Overview \[C7: Split Section\], SECTION 5 — Stats Strip \[C4\], SECTION 6 — Testimonial \+ Stat Bento \[C9\], SECTION 7 — Client Logos (ticker) (+2 more)
 
 ### Community 116 - "Community 116"
-Cohesion: 0.20
-Nodes (9): Next Steps, Status, Step 1: File Creation, Step 2: Token Coverage, Summary, Task 2 Report: Unified Token File, Verification, Work Completed (+1 more)
+Cohesion: 0.12
+Nodes (17): Five planned variants, Implementation, Internal gallery, Next Steps, Responsive and accessibility review, Reusable renderer, Shared section wrapper, Status (+9 more)
 
 ### Community 117 - "Community 117"
 Cohesion: 0.20
@@ -668,8 +709,8 @@ Cohesion: 0.22
 Nodes (8): Build Summary, Commit Hashes, Concerns, Files Created, Files Modified, Status, Task 5 & 6 Implementation Report, Token Constraint Fix
 
 ### Community 124 - "Community 124"
-Cohesion: 0.25
-Nodes (7): Commit, Build Summary, Concerns, Files Changed, Interfaces Produced, Status: DONE, Task 2 Report: Design Tokens + Font System
+Cohesion: 0.20
+Nodes (9): Commit, Concerns, Build Summary, Commit, Concerns, Files Changed, Interfaces Produced, Status: DONE (+1 more)
 
 ### Community 126 - "Community 126"
 Cohesion: 0.31
@@ -864,8 +905,16 @@ Cohesion: 0.67
 Nodes (3): **Content & Execution**, **SCOPE OF WORK**, **Strategy**
 
 ### Community 182 - "Community 182"
-Cohesion: 0.40
-Nodes (5): Minor findings (for final review triage), SDD Progress — packages/ui Design System, SDD Progress — Website Pages Completion, Log, Tasks
+Cohesion: 0.25
+Nodes (8): Minor findings, Minor findings (for final review triage), SDD Progress — Media Blueprint System, SDD Progress — packages/ui Design System, SDD Progress — Website Pages Completion, Tasks, Log, Tasks
+
+### Community 219 - "Community 219"
+Cohesion: 0.50
+Nodes (3): Task 1: Bootstrap `packages/ui`, Task 1: Case-study data model + content (`lib/work.ts`), Task 1: Define the media contract and validation
+
+### Community 220 - "Community 220"
+Cohesion: 0.50
+Nodes (3): Task 2: Build the five blueprint variants, Task 2: Case-study detail section components, Task 2: Unified Token File
 
 ### Community 247 - "Community 247"
 Cohesion: 0.70
@@ -884,21 +933,21 @@ Cohesion: 0.40
 Nodes (4): Fix 1: Button.tsx — anchor branch drops rest props, Fix 2: Website integration files committed, Task Fix Report — 2026-07-01, Typecheck Output
 
 ## Knowledge Gaps
-- **1073 isolated node(s):** `allow`, `PreToolUse`, `EMPTY_HANDLES`, `NarrativeRequest`, `ReportMeta` (+1068 more)
+- **1131 isolated node(s):** `allow`, `PreToolUse`, `EMPTY_HANDLES`, `NarrativeRequest`, `ReportMeta` (+1126 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **38 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **37 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `POST()` connect `Community 46` to `Community 0`, `Community 69`, `Community 104`, `Community 81`, `Community 29`?**
-  _High betweenness centrality (0.074) - this node is a cross-community bridge._
-- **Why does `computeOverallScore()` connect `Community 58` to `Community 5`?**
-  _High betweenness centrality (0.042) - this node is a cross-community bridge._
-- **Why does `gradeRestaurantGrowth()` connect `Community 0` to `Community 49`, `Community 46`?**
-  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+- **Why does `POST()` connect `Community 77` to `Community 0`, `Community 5`, `Community 69`, `Community 81`, `Community 113`?**
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
+- **Why does `scoreSocialHealth()` connect `Community 81` to `Community 49`, `Community 77`, `Community 113`?**
+  _High betweenness centrality (0.037) - this node is a cross-community bridge._
+- **Why does `NarrativeData` connect `Community 111` to `Community 67`, `Community 6`?**
+  _High betweenness centrality (0.037) - this node is a cross-community bridge._
 - **What connects `allow`, `PreToolUse`, `EMPTY_HANDLES` to the rest of the system?**
-  _1073 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1131 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.07005649717514124 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**

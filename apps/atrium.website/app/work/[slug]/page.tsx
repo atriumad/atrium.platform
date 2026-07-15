@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import DragGallery from '@/components/work/DragGallery'
+import VideoMarquee from '@/components/work/VideoMarquee'
 import { type CaseMetric, type CaseStudy, caseStudies, getCaseStudy, getCaseSummary } from '@/lib/work'
 
 export async function generateStaticParams() {
@@ -27,8 +29,6 @@ const visualThemes = [
   'var(--teal-700)',
   'var(--cloud-300)',
 ]
-
-const reelSlots = ['reel-one', 'reel-two', 'reel-three', 'reel-four', 'reel-five', 'reel-six']
 
 function getVisualColor(study: CaseStudy, offset = 0) {
   return visualThemes[(study.order - 1 + offset) % visualThemes.length] ?? 'var(--teal-900)'
@@ -57,7 +57,7 @@ function CaseMedia({ study, offset = 0, compact = false }: { study: CaseStudy; o
       className={`h-full w-full rounded-[var(--radius-bento)] ${compact ? 'min-h-[20rem] md:min-h-[32rem]' : 'aspect-[4/3] min-h-[25rem] lg:aspect-auto lg:min-h-[38rem]'}`}
       style={{ background: getVisualColor(study, offset) }}
       role="img"
-      aria-label={`Media placeholder for ${study.client}`}
+      aria-label={`${study.client} campaign hero — final case study media to be supplied`}
     />
   )
 }
@@ -145,32 +145,11 @@ function PhotoGallerySection({ study }: { study: CaseStudy }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:gap-6 lg:grid-cols-12">
-          <div
-            className="aspect-[4/3] rounded-[var(--radius-bento)] lg:col-span-8 lg:row-span-2"
-            style={{ background: getVisualColor(study, 1) }}
-            role="img"
-            aria-label={`Primary gallery placeholder for ${study.client}`}
-          />
-          <div
-            className="aspect-[4/3] rounded-[var(--radius-bento)] lg:col-span-4"
-            style={{ background: getVisualColor(study, 2) }}
-            role="img"
-            aria-label={`Secondary gallery placeholder for ${study.client}`}
-          />
-          <div
-            className="aspect-[4/3] rounded-[var(--radius-bento)] lg:col-span-4"
-            style={{ background: getVisualColor(study, 3) }}
-            role="img"
-            aria-label={`Detail gallery placeholder for ${study.client}`}
-          />
-          <div
-            className="aspect-[16/7] rounded-[var(--radius-bento)] lg:col-span-12"
-            style={{ background: getVisualColor(study, 4) }}
-            role="img"
-            aria-label={`Wide gallery placeholder for ${study.client}`}
-          />
-        </div>
+      </div>
+
+      {/* Interactive draggable gallery — stock fillers until real assets land */}
+      <div className="mt-14 overflow-hidden rounded-[var(--radius-bento)] md:mt-20">
+        <DragGallery publicIds={study.galleryIds} images={study.gallery} />
       </div>
     </section>
   )
@@ -219,6 +198,8 @@ function ApproachSection({ study }: { study: CaseStudy }) {
 }
 
 function ReelsSection({ study }: { study: CaseStudy }) {
+  if (!study.videoIds?.length) return null
+
   return (
     <section className="overflow-hidden py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
       <div className="mx-auto mb-14 max-w-[var(--container-max)] px-[var(--gutter)] md:mb-20">
@@ -235,19 +216,7 @@ function ReelsSection({ study }: { study: CaseStudy }) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[var(--container-max)] overflow-hidden px-[var(--gutter)]">
-        <div className="flex w-max gap-4 md:gap-6">
-          {reelSlots.map((slot, index) => (
-            <div
-              key={slot}
-              className="aspect-[9/16] w-[clamp(13rem,18vw,19rem)] shrink-0 rounded-[var(--radius-bento)]"
-              style={{ background: getVisualColor(study, index + 1) }}
-              role="img"
-              aria-label={`Vertical video placeholder ${index + 1} for ${study.client}`}
-            />
-          ))}
-        </div>
-      </div>
+      <VideoMarquee publicIds={study.videoIds} />
     </section>
   )
 }
@@ -394,9 +363,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <NextCasePreview nextStudy={nextStudy} />
       <CTABanner
         eyebrow="JOIN 15+ HOSPITALITY BRANDS"
-        headline={<>Get marketing support <em>you can trust</em></>}
-        body="If you've outgrown freelancers, feel held back by generic agencies, or need a creative team that actually understands restaurants — we were built for you."
-        cta="Let's Talk"
+        headline={<>Been burned by an agency <em>before?</em></>}
+        body="If you've outgrown freelancers, been let down by generic agencies, or just want a team that reports revenue instead of vanity — we were built for you. See the system before you commit."
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="Team at table in restaurant — natural, warm, working together"
       />

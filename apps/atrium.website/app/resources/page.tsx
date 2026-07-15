@@ -96,7 +96,7 @@ export default function ResourcesPage() {
         eyebrow="NEED A READ ON YOUR SYSTEM?"
         headline={<>Bring the messy context. <em>We will sort it.</em></>}
         body="If a resource gets you part of the way there, a short conversation can turn the idea into the next operating move."
-        cta="Let's Talk"
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="Restaurant marketing notes organized into a clear next step"
       />

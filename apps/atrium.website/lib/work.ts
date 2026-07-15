@@ -26,6 +26,10 @@ export type CaseStudy = {
   quote?: CaseQuote
   takeaway?: string
   gallery?: CaseGalleryImage[]
+  /** Cloudinary public IDs for the draggable gallery (preferred over `gallery`). */
+  galleryIds?: string[]
+  /** Cloudinary public IDs for the case-study video marquee. */
+  videoIds?: string[]
   order: number
 }
 
@@ -79,6 +83,45 @@ export const caseStudies: CaseStudy[] = [
       { title: 'One offer. Every platform. Compounding reach.', body: 'The $1 Oysters Wednesday campaign generated 33K+ impressions on Instagram, 33K+ on TikTok, plus Facebook and Stories reach — compounding week over week into the Plaza’s most-anticipated weekly standing.' },
       { title: 'We built a brand creators want to belong to', body: 'Creators visited specifically to shoot content — drawn by the aesthetic and culinary prestige — generating an estimated 100K+ additional impressions at zero production cost.' },
       { title: 'We created the tagline — and it stuck', body: '“Crafting Mexican Excellence” was originated by Atrium and now appears across all channels, printed menus, event materials, and in-house signage.' },
+    ],
+    galleryIds: [
+      'v1784146186/TAHA_SP11_photo_drink_10_veok3h',
+      'v1784146182/TAHA_SP19_TAHA_x_BBBS_Saturday_nsjx1u',
+      'v1784146173/TAHA_NO22_thanksgiving_promo_twamsa',
+      'v1784146167/TAHA__MAY17_Slide_2_xsfkoe',
+      'v1784146172/TAHA_NO04_Game_Day_Margarita_jgl2qi',
+      'v1784146166/TAHA__MAY26_Bebida_Graphic_2_xb8fot',
+      'v1784146164/TAHA_JUN16_Memorial_day_discount_qpjuhr',
+      'v1784146164/TAHA_MAR21_Slide_1_b3zfhl',
+      'v1784146164/TAHA__MAY15_Slide_1_rn1svh',
+      'v1784146164/_TAHA__MAY16_Slide_1_q9yjw4',
+      'v1784146162/TAHA__JUN20_Slide_4_n4rhdo',
+      'v1784146161/3D062078-D6C5-40CA-B104-AEE2C971A4FC_bfu0pj',
+      'v1784146160/TAHA_JAN29_KCRW_Photo_menu__ag0zwg',
+      'v1784146159/TAHA_JAN16_MARGARITA_TUESDAY_SPECIALS_GRAPHIC_oiizjh',
+      'v1784146158/TAHA_JAN20_SLIDE_2_eauij2',
+      'v1784146158/TAHA_JAN31_SLIDE_2_fecpet',
+      'v1784146157/TAHA_FEB35_Photo_graphic_3_bwpbgz',
+      'v1784146156/TAHA_FEB28_Slide_1_v9n7x6',
+      'v1784146155/TAHA__APR35_Slide_1_rrhher',
+      'v1784146155/TAHA__APR39_VIP_Promo__i4dqef',
+    ],
+    videoIds: [
+      'v1784147621/TAHA__MAY25_Gift_card_giveaway_vtqzmq',
+      'v1784147616/TAHA_JL02_ICED_COFFE_jbqbkq',
+      'v1784147554/TAHA_FEB25_Josh_promo_hoozr9',
+      'v1784147396/ATRM__JUL01_Introduction_michelin_dinner_jlbsgv',
+      'v1784147290/TAHA_NO06_Friendsgiving_promo_qkueys',
+      'v1784147115/TAHA__APR_COMPILATION_1_SERVICE_ovynyy',
+      'v1784147104/TAHA__APR_COMPILATION_4_qppfsq',
+      'v1784147080/ATRM__JUL02_Recap_16-9_utfgli',
+      'v1784147063/TAHA__MAY30_Oysters_promo_video_2_qbfsk3',
+      'v1784147011/TAHA__MAR_Marg_Day_Reel_q5krgw',
+      'v1784147004/TAHA_DEC08_MAKING_VS_MADE_xsf95r',
+      'v1784146990/TAHA__MAR18_COMPILATION_2-_DRINKS_ntdduk',
+      'v1784146987/TAHA_FEB27_COMPILATION_FOD_SERVING_abzyve',
+      'v1784146922/TAHA_JAN05_CREATIVE_IDEA_1_REEL_gws4vz',
+      'v1784146327/TAHA_SP05_Creative_Pour_ykttyg',
     ],
     order: 2,
   },

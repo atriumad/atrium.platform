@@ -432,34 +432,6 @@ function SiteFooter() {
   )
 }
 
-function SignalStrip() {
-  const signals = [
-    { label: "Findability", value: "Can guests find you?" },
-    { label: "Action path", value: "Can they order or book?" },
-    { label: "Demand proof", value: "Do you look active?" },
-  ]
-
-  return (
-    <div className="mt-6 grid w-full max-w-[760px] grid-cols-1 gap-2 sm:grid-cols-3">
-      {signals.map((signal, index) => (
-        <div
-          className="group/signal relative overflow-hidden rounded-[14px] border border-[#cfdcdd] bg-white/76 px-4 py-3 shadow-[0_1px_2px_rgb(7_47_52_/_5%),0_8px_24px_rgb(7_47_52_/_6%)] transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-[#6fa39f] hover:shadow-[0_12px_40px_rgb(7_47_52_/_14%)]"
-          key={signal.label}
-          style={{ animationDelay: `${index * 90}ms` }}
-        >
-          <span className="absolute right-3 top-3 size-2 rounded-full bg-[#8fe6c2] shadow-[0_0_0_5px_rgb(143_230_194_/_18%)] transition-transform duration-200 ease-out group-hover/signal:scale-125" />
-          <p className="pr-5 text-[0.68rem] font-bold uppercase leading-none tracking-[0.18em] text-[#2c6168]">
-            {signal.label}
-          </p>
-          <strong className="mt-2 block text-sm font-semibold leading-tight text-[#072f34]">
-            {signal.value}
-          </strong>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 function SearchStage({
   compact,
   error,
@@ -508,7 +480,6 @@ function SearchStage({
         <h1 className="display-title">
           Find the <span className="title-serif">leaks</span> before <br /> <span className="title-serif title-serif--delayed">guests</span> do.
         </h1>
-        <SignalStrip />
       </div>
 
       <form className={`search-form group ${selectedPlace ? "search-form--ready" : ""}`} onSubmit={handleSubmit}>
@@ -588,7 +559,6 @@ function SearchStage({
 function LoadingStage() {
   const [sceneIndex, setSceneIndex] = useState(0)
   const [stepIndex, setStepIndex] = useState(0)
-  const [subIndex, setSubIndex] = useState(0)
   const collageRef = useRef<HTMLDivElement | null>(null)
   const scene = loadingScenes[sceneIndex] ?? loadingScenes[0]
   const step = scanSteps[stepIndex] ?? scanSteps[0]
@@ -663,27 +633,6 @@ function LoadingStage() {
     return () => context.revert()
   }, [scene.id])
 
-  // Cycle sub-steps within each main step
-  // Brief (last step) uses longer interval so it doesn't loop visibly
-  useEffect(() => {
-    const details = scanSteps[stepIndex]?.details
-    if (!details) return
-    const isBrief = stepIndex === scanSteps.length - 1
-    const interval = isBrief ? 2600 : 1700
-    let current = 0
-    let cancelled = false
-    const cycle = async () => {
-      while (!cancelled) {
-        await new Promise<void>((resolve) => window.setTimeout(resolve, interval))
-        if (cancelled) break
-        current = (current + 1) % details.length
-        setSubIndex(current)
-      }
-    }
-    void cycle()
-    return () => { cancelled = true }
-  }, [stepIndex])
-
   useEffect(() => {
     const durations = [4400, 4800, 4600, 4800, 5000, 5600]
     let current = 0
@@ -696,7 +645,6 @@ function LoadingStage() {
         if (cancelled) break
         if (current < scanSteps.length - 1) {
           current += 1
-          setSubIndex(0)
           setStepIndex(current)
         } else {
           break
@@ -726,24 +674,16 @@ function LoadingStage() {
             <>
               <div className="loading-card loading-card--text loading-card--a">
                 <span>{scene.cards[0]?.label}</span>
-                <p>{scene.cards[0]?.body}</p>
-              </div>
-
-              <div className="loading-card loading-card--text loading-card--c">
-                <span>{scene.cards[1]?.label}</span>
-                <p>{scene.cards[1]?.body}</p>
               </div>
 
               <div className="loading-card loading-card--text loading-card--e">
                 <span>{scene.cards[2]?.label}</span>
-                <p>{scene.cards[2]?.body}</p>
               </div>
             </>
           ) : (
             <>
               <div className="loading-card loading-card--text loading-card--client loading-card--a">
                 <span>{scene.client}</span>
-                <p>{scene.summary}</p>
               </div>
 
               <div className="loading-card loading-card--metric loading-card--b">
@@ -759,8 +699,12 @@ function LoadingStage() {
           )}
 
           <span className="loading-badge loading-badge--a">{scene.badges[0]}</span>
-          <span className="loading-badge loading-badge--b">{scene.badges[1]}</span>
         </div>
+      </div>
+
+      <div className="loading-visual-status" key={step.id}>
+        <span>{String(stepIndex + 1).padStart(2, "0")} / {String(scanSteps.length).padStart(2, "0")}</span>
+        <strong>{step.status}</strong>
       </div>
 
       <div className="loading-progress" aria-hidden="true">
@@ -771,15 +715,11 @@ function LoadingStage() {
               <div className="loading-step-dot">
                 {i < stepIndex && <span aria-hidden="true" className="loading-step-check" />}
               </div>
-              <span className="loading-step-label">{s.label}</span>
             </div>
           )
         })}
       </div>
-
-      <p className="loading-step-sub" key={`${stepIndex}-${subIndex}`}>
-        {scanSteps[stepIndex]?.details[subIndex]}
-      </p>
+      <span className="visually-hidden">{step.status}</span>
     </section>
   )
 }
@@ -818,146 +758,156 @@ function ReportStage({
   const displayFirstMove = publicReportText(firstMove)
 
   return (
-    <section className="diagnostic-stage diagnostic-stage--ready gap-4 md:gap-5">
-      <article className="w-full overflow-hidden rounded-[18px] border border-[rgb(7_47_52_/_12%)] bg-white/[0.94] shadow-[0_18px_60px_rgb(7_47_52_/_10%)]">
-        <div className="grid gap-0 lg:grid-cols-[220px_minmax(0,1fr)]">
-          <aside className="flex flex-col justify-between gap-6 border-b border-[rgb(7_47_52_/_10%)] bg-[var(--surface-dark)] p-5 text-white lg:border-b-0 lg:border-r lg:p-6">
+    <section className="diagnostic-stage diagnostic-stage--ready gap-12 md:gap-16">
+      <article className="w-full">
+        <header className="grid gap-10 border-t border-[rgb(7_47_52_/_18%)] pt-8 lg:grid-cols-12 lg:items-stretch lg:gap-16">
+          <div className="lg:col-span-8">
+            <p className="type-eyebrow text-[var(--teal-500)]">Growth diagnostic / {publicReportText(report.business.address)}</p>
+            <h1 className="type-section-title mt-6 text-[var(--text-strong)]">
+              {publicReportText(report.business.name)}
+            </h1>
+            <h2 className="mt-7 max-w-[18ch] font-[var(--font-serif)] text-[clamp(2rem,4vw,4rem)] font-normal italic leading-[0.98] text-[var(--teal-700)]">
+              {displayHeadline}
+            </h2>
+            <p className="type-lead mt-7 max-w-[48rem] text-[var(--text-body)]">
+              {displaySummary}
+            </p>
+          </div>
+
+          <aside className="flex min-h-[24rem] flex-col justify-between rounded-[var(--radius-bento)] bg-[var(--surface-dark)] p-7 text-white lg:col-span-4 lg:p-9">
             <div>
-              <div className="flex items-center gap-3 text-sm font-semibold text-[var(--mint-400)]">
+              <div className="flex items-center justify-between gap-4">
                 <span aria-label="Atrium" className="diagnostic-brand-wordmark" role="img" />
+                <span className="type-eyebrow text-[var(--mint-400)]">Growth score</span>
               </div>
-              <p className="mt-6 text-xs font-bold uppercase text-[var(--mint-300)]">Growth score</p>
-              <strong className="mt-2 block font-[var(--font-display)] text-[5rem] font-bold leading-none tabular-nums">
+              <strong className="mt-12 block whitespace-nowrap font-[var(--font-serif)] text-[clamp(7rem,13vw,11rem)] font-normal italic leading-[0.7] tracking-[-0.06em] text-[var(--mint-400)] tabular-nums">
                 {report.overallScore}
               </strong>
-              <small className="mt-2 block text-sm font-semibold text-[var(--mint-300)]">{scoreSignal}</small>
-              <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/[0.14]" aria-hidden="true">
-                <span className={`block h-full rounded-full ${scoreBarClass(tone)}`} style={{ width: scoreWidth }} />
+              <p className="type-lead mt-7 text-white/75">{scoreSignal}</p>
+              <div className="mt-7 h-px overflow-hidden bg-white/15" aria-hidden="true">
+                <span className={`block h-full ${scoreBarClass(tone)}`} style={{ width: scoreWidth }} />
               </div>
             </div>
-            <div className="grid gap-2 text-xs font-semibold text-[var(--cloud-300)]">
+            <div className="type-caption flex flex-wrap gap-x-3 gap-y-1 border-t border-white/15 pt-5 text-white/60">
               <span>{confidenceCopy(report.confidence)}</span>
-              <span>Free directional diagnostic</span>
+              <span aria-hidden="true">/</span>
+              <span>Directional diagnostic</span>
             </div>
           </aside>
+        </header>
 
-          <div className="p-5 md:p-7">
-            <header className="border-b border-[rgb(7_47_52_/_10%)] pb-6">
-              <p className="text-sm font-semibold text-[var(--teal-500)]">{publicReportText(report.business.address)}</p>
-              <h1 className="mt-2 text-balance font-[var(--font-display)] text-4xl font-bold leading-[1.02] text-[var(--text-strong)] md:text-6xl">
-                {publicReportText(report.business.name)}
-              </h1>
-              <h2 className="mt-5 max-w-[760px] text-balance font-[var(--font-serif)] text-3xl italic leading-[1.08] text-[var(--teal-700)] md:text-5xl">
-                {displayHeadline}
-              </h2>
-              <p className="mt-4 max-w-[720px] text-base leading-7 text-[var(--text-body)] md:text-lg">
-                {displaySummary}
-              </p>
-            </header>
-
-            <section className="grid gap-5 border-b border-[rgb(7_47_52_/_10%)] py-6 lg:grid-cols-[minmax(0,1fr)_310px]">
+        <section className="mt-24 grid gap-10 border-t border-[rgb(7_47_52_/_18%)] py-14 lg:grid-cols-12 lg:gap-16 md:mt-32 md:py-20">
+          <div className="lg:col-span-7">
+            <p className="type-eyebrow text-[var(--teal-500)]">Primary leak</p>
+            <h2 className="type-section-title mt-6 max-w-[13ch] text-[var(--text-strong)]">
+              {displayPrimaryLeak}
+            </h2>
+            <div className="mt-12 grid gap-8 border-t border-[rgb(7_47_52_/_14%)] pt-7 md:grid-cols-2">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--teal-500)]">Primary leak</p>
-                <h3 className="mt-3 text-balance font-[var(--font-display)] text-3xl font-bold leading-[1.06] text-[var(--text-strong)] md:text-4xl">
-                  {displayPrimaryLeak}
-                </h3>
-                <div className="mt-6 grid gap-4 md:grid-cols-2">
-                  <div>
-                    <span className="text-xs font-bold uppercase text-[var(--teal-500)]">Root cause</span>
-                    <p className="mt-2 text-base leading-7 text-[var(--text-body)]">{displayRootCause}</p>
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold uppercase text-[var(--teal-500)]">Why it matters</span>
-                    <p className="mt-2 text-base leading-7 text-[var(--text-body)]">{displayWhyItMatters}</p>
-                  </div>
-                </div>
+                <span className="type-eyebrow text-[var(--teal-500)]">Root cause</span>
+                <p className="type-body mt-4 text-[var(--text-body)]">{displayRootCause}</p>
               </div>
-
-              <aside className="rounded-[14px] border border-[rgb(247_168_35_/_34%)] bg-[var(--amber-200)] p-5 text-[var(--text-on-amber)]">
-                <p className="text-xs font-bold uppercase text-[var(--teal-700)]">First move</p>
-                <h3 className="mt-3 text-balance font-[var(--font-display)] text-2xl font-bold leading-[1.08]">
-                  {displayFirstMove}
-                </h3>
-                <a
-                  className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-[var(--surface-dark)] px-5 py-3 text-sm font-bold text-white shadow-[0_10px_28px_rgb(7_47_52_/_18%)] transition-[transform,box-shadow] duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] motion-reduce:transform-none motion-reduce:transition-none"
-                  href={contactHref}
-                  rel={opensNewTab ? "noreferrer" : undefined}
-                  target={opensNewTab ? "_blank" : undefined}
-                >
-                  Review the full plan
-                </a>
-              </aside>
-            </section>
-
-            <section className="grid gap-5 border-b border-[rgb(7_47_52_/_10%)] py-6 lg:grid-cols-[minmax(220px,0.45fr)_minmax(0,1fr)]">
               <div>
-                <p className="text-xs font-bold uppercase text-[var(--teal-500)]">30-day plan</p>
-                <h3 className="mt-3 text-balance font-[var(--font-display)] text-2xl font-bold leading-[1.08] text-[var(--text-strong)]">
-                  Fix the closest leak first.
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-[var(--text-muted)]">{publicReportText(report.estimatedLostOpportunity)}</p>
+                <span className="type-eyebrow text-[var(--teal-500)]">Why it matters</span>
+                <p className="type-body mt-4 text-[var(--text-body)]">{displayWhyItMatters}</p>
               </div>
-
-              <ol className="grid gap-2">
-                {thirtyDayPlan.map((step, index) => (
-                  <li className="grid grid-cols-[32px_minmax(0,1fr)] gap-3 border-t border-[rgb(7_47_52_/_10%)] py-3 first:border-t-0 first:pt-0" key={step}>
-                    <span className="flex size-8 items-center justify-center rounded-full bg-[var(--mint-300)] text-sm font-bold text-[var(--teal-800)]">
-                      {index + 1}
-                    </span>
-                    <p className="self-center text-base font-semibold leading-6 text-[var(--text-strong)]">{publicReportText(step)}</p>
-                  </li>
-                ))}
-              </ol>
-            </section>
-
-            <section className="grid gap-2 py-6 sm:grid-cols-2 lg:grid-cols-5">
-              {scoreEntries.map((insight) => (
-                <article className="rounded-[12px] bg-[var(--cloud-200)] p-3" key={insight.category}>
-                  <div className="flex items-start justify-between gap-3">
-                    <span className="text-sm font-bold text-[var(--text-strong)]">{insight.label}</span>
-                    <strong className="text-2xl font-bold leading-none text-[var(--teal-800)]">{insight.score}</strong>
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-[var(--text-body)]">{publicReportText(insight.businessImpact)}</p>
-                </article>
-              ))}
-            </section>
-
-            <details className="group border-t border-[rgb(7_47_52_/_10%)] pt-5">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-                <span className="font-[var(--font-display)] text-xl font-bold text-[var(--text-strong)]">Supporting evidence</span>
-                <span className="flex size-9 items-center justify-center rounded-full border border-[rgb(7_47_52_/_14%)] text-xl font-semibold text-[var(--teal-800)] transition-transform duration-150 ease-out group-open:rotate-45 motion-reduce:transition-none">
-                  +
-                </span>
-              </summary>
-
-              <div className="mt-5 grid gap-5">
-                <div className="grid gap-3 md:grid-cols-3">
-                  {evidenceHighlights.map((highlight) => (
-                    <div className="rounded-[12px] bg-[var(--mint-200)] p-4" key={highlight}>
-                      <span className="text-xs font-bold uppercase text-[var(--teal-500)]">Signal</span>
-                      <p className="mt-2 text-sm font-semibold leading-6 text-[var(--text-strong)]">{publicReportText(highlight)}</p>
-                    </div>
-                  ))}
-                  {missingDataWarning ? (
-                    <div className="rounded-[12px] bg-[var(--amber-200)] p-4">
-                      <span className="text-xs font-bold uppercase text-[var(--teal-700)]">Limitation</span>
-                      <p className="mt-2 text-sm font-semibold leading-6 text-[var(--text-strong)]">{publicReportText(missingDataWarning)}</p>
-                    </div>
-                  ) : null}
-                </div>
-
-                <div className="grid gap-3 lg:grid-cols-2">
-                  {report.diagnosticSteps.map((step) => (
-                    <DiagnosticEvidenceCard key={step.id} step={step} />
-                  ))}
-                </div>
-              </div>
-            </details>
+            </div>
           </div>
-        </div>
+
+          <aside className="flex flex-col justify-between rounded-[var(--radius-bento)] bg-[var(--amber-200)] p-7 text-[var(--text-on-amber)] lg:col-span-5 lg:p-9">
+            <div>
+              <p className="type-eyebrow text-[var(--teal-700)]">First move</p>
+              <h3 className="type-card-title mt-6">{displayFirstMove}</h3>
+            </div>
+            <a
+              className="type-caption group mt-12 inline-flex w-fit items-center gap-3 font-medium text-[var(--teal-800)] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--teal-800)]"
+              href={contactHref}
+              rel={opensNewTab ? "noreferrer" : undefined}
+              target={opensNewTab ? "_blank" : undefined}
+            >
+              Review the full plan
+              <span className="transition-transform duration-200 group-hover:translate-x-2" aria-hidden="true">→</span>
+            </a>
+          </aside>
+        </section>
+
+        <section className="grid gap-10 border-t border-[rgb(7_47_52_/_18%)] py-14 lg:grid-cols-12 lg:gap-16 md:py-20">
+          <div className="lg:col-span-4">
+            <p className="type-eyebrow text-[var(--teal-500)]">30-day plan</p>
+            <h2 className="type-card-title mt-6 text-[var(--text-strong)]">Fix the closest leak first.</h2>
+            <p className="type-body mt-6 text-[var(--text-muted)]">{publicReportText(report.estimatedLostOpportunity)}</p>
+          </div>
+
+          <ol className="m-0 list-none border-t border-[rgb(7_47_52_/_18%)] p-0 lg:col-span-8">
+            {thirtyDayPlan.map((step, index) => (
+              <li className="grid gap-5 border-b border-[rgb(7_47_52_/_18%)] py-8 md:grid-cols-[4rem_minmax(0,1fr)]" key={step}>
+                <span className="type-eyebrow text-[var(--teal-500)]">{String(index + 1).padStart(2, "0")}</span>
+                <p className="type-lead text-[var(--text-strong)]">{publicReportText(step)}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="rounded-[var(--radius-bento)] bg-[var(--surface-dark)] px-7 py-16 text-white md:px-10 md:py-20">
+          <div className="grid gap-8 pb-14 lg:grid-cols-12 lg:items-end lg:gap-16">
+            <div className="lg:col-span-7">
+              <p className="type-eyebrow text-[var(--mint-400)]">Signal by signal</p>
+              <h2 className="type-section-title mt-6">Where growth is <em>leaking.</em></h2>
+            </div>
+            <p className="type-body max-w-md text-white/65 lg:col-span-5">
+              Each score reflects a different part of the path from discovery to repeat business.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 md:gap-x-14 lg:gap-x-20">
+            {scoreEntries.map((insight) => (
+              <article className="grid min-h-[14rem] items-center gap-7 border-t border-[rgb(181_242_219_/_22%)] py-9 md:grid-cols-[minmax(0,1fr)_auto]" key={insight.category}>
+                <div>
+                  <span className="type-eyebrow text-[var(--mint-300)]">{insight.label}</span>
+                  <p className="type-caption mt-4 max-w-sm text-white/65">{publicReportText(insight.businessImpact)}</p>
+                </div>
+                <strong className="whitespace-nowrap font-[var(--font-serif)] text-[clamp(4.5rem,8vw,7rem)] font-normal italic leading-none tracking-[-0.055em] text-[var(--mint-400)] tabular-nums">
+                  {insight.score}
+                </strong>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <details className="group mt-20 border-t border-[rgb(7_47_52_/_18%)] pt-8 md:mt-28">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
+            <span className="type-card-title text-[var(--text-strong)]">Supporting evidence</span>
+            <span className="flex size-10 items-center justify-center border border-[rgb(7_47_52_/_18%)] text-2xl font-normal text-[var(--teal-800)] transition-transform duration-150 ease-out group-open:rotate-45 motion-reduce:transition-none">
+              +
+            </span>
+          </summary>
+
+          <div className="mt-10">
+            <div className="grid border-t border-[rgb(7_47_52_/_18%)] md:grid-cols-3">
+              {evidenceHighlights.map((highlight) => (
+                <div className="border-b border-[rgb(7_47_52_/_18%)] py-7 md:border-l md:px-6 md:first:border-l-0" key={highlight}>
+                  <span className="type-eyebrow text-[var(--teal-500)]">Signal</span>
+                  <p className="type-caption mt-4 text-[var(--text-strong)]">{publicReportText(highlight)}</p>
+                </div>
+              ))}
+              {missingDataWarning ? (
+                <div className="border-b border-[rgb(7_47_52_/_18%)] bg-[var(--amber-200)] p-7">
+                  <span className="type-eyebrow text-[var(--teal-700)]">Limitation</span>
+                  <p className="type-caption mt-4 text-[var(--text-strong)]">{publicReportText(missingDataWarning)}</p>
+                </div>
+              ) : null}
+            </div>
+
+            <div className="mt-12 grid gap-x-12 lg:grid-cols-2">
+              {report.diagnosticSteps.map((step) => (
+                <DiagnosticEvidenceCard key={step.id} step={step} />
+              ))}
+            </div>
+          </div>
+        </details>
       </article>
 
-      <div className="flex w-full flex-col gap-2 rounded-[12px] bg-white/60 p-4 text-sm leading-6 text-[var(--text-muted)] md:flex-row md:items-center md:justify-between">
+      <div className="type-caption flex w-full flex-col gap-2 border-t border-[rgb(7_47_52_/_18%)] pt-6 text-[var(--text-muted)] md:flex-row md:items-center md:justify-between">
         <span>Directional free scan. Confirm with first-party business data before major spend.</span>
         {missingCriticalData.length ? <span>Missing: {missingCriticalData.slice(0, 2).map(publicReportText).join(", ")}</span> : null}
       </div>
@@ -977,40 +927,40 @@ function DiagnosticEvidenceCard({ step }: { step: DiagnosticStepResult }) {
   const limitation = publicReportText(diagnosticStepLimitation(step))
 
   return (
-    <article className="rounded-[14px] border border-[rgb(7_47_52_/_10%)] bg-white/[0.82] p-4 shadow-[0_1px_2px_rgb(7_47_52_/_4%)]">
+    <article className="border-t border-[rgb(7_47_52_/_18%)] py-9">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase text-[var(--teal-500)]">{diagnosticStepTitle(step.id)}</p>
-          <strong className="mt-1 block text-base font-bold text-[var(--text-strong)]">{diagnosticStatusCopy(step.status)}</strong>
+          <p className="type-eyebrow text-[var(--teal-500)]">{diagnosticStepTitle(step.id)}</p>
+          <strong className="type-lead mt-3 block font-normal text-[var(--text-strong)]">{diagnosticStatusCopy(step.status)}</strong>
         </div>
-        <span className="rounded-full border border-[rgb(7_47_52_/_12%)] px-3 py-1 text-xs font-bold text-[var(--teal-700)]">
+        <span className="type-caption border border-[rgb(7_47_52_/_14%)] px-3 py-1 text-[var(--teal-700)]">
           {stepConfidenceCopy(step.confidence)}
         </span>
       </div>
 
-      <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+      <dl className="mt-7 grid gap-5 border-t border-[rgb(7_47_52_/_14%)] pt-5 sm:grid-cols-2">
         <div>
-          <dt className="text-xs font-bold uppercase text-[var(--teal-500)]">Signal group</dt>
-          <dd className="mt-1 text-sm leading-6 text-[var(--text-body)]">{diagnosticStepTitle(step.id)}</dd>
+          <dt className="type-eyebrow text-[var(--teal-500)]">Signal group</dt>
+          <dd className="type-caption mt-2 text-[var(--text-body)]">{diagnosticStepTitle(step.id)}</dd>
         </div>
         <div>
-          <dt className="text-xs font-bold uppercase text-[var(--teal-500)]">Checked</dt>
-          <dd className="mt-1 text-sm leading-6 text-[var(--text-body)]">{step.checked.slice(0, 3).map(publicReportText).join(", ")}</dd>
+          <dt className="type-eyebrow text-[var(--teal-500)]">Checked</dt>
+          <dd className="type-caption mt-2 text-[var(--text-body)]">{step.checked.slice(0, 3).map(publicReportText).join(", ")}</dd>
         </div>
       </dl>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-[12px] bg-[var(--mint-200)] p-3">
-          <span className="text-xs font-bold uppercase text-[var(--teal-500)]">Found</span>
-          <ul className="mt-2 grid gap-1 text-sm leading-6 text-[var(--text-body)]">
+      <div className="mt-7 grid gap-6 sm:grid-cols-2">
+        <div className="border-t border-[rgb(7_47_52_/_14%)] pt-5">
+          <span className="type-eyebrow text-[var(--teal-500)]">Found</span>
+          <ul className="type-caption mt-3 grid gap-1 text-[var(--text-body)]">
             {foundSignals.length > 0
               ? foundSignals.map((signal) => <li key={signal}>{signal}</li>)
               : <li>No confirmed signals in this step.</li>}
           </ul>
         </div>
-        <div className="rounded-[12px] bg-[var(--cloud-200)] p-3">
-          <span className="text-xs font-bold uppercase text-[var(--teal-500)]">Missing</span>
-          <ul className="mt-2 grid gap-1 text-sm leading-6 text-[var(--text-body)]">
+        <div className="border-t border-[rgb(7_47_52_/_14%)] pt-5">
+          <span className="type-eyebrow text-[var(--teal-500)]">Missing</span>
+          <ul className="type-caption mt-3 grid gap-1 text-[var(--text-body)]">
             {missingSignals.length > 0
               ? missingSignals.map((signal) => <li key={signal}>{signal}</li>)
               : <li>No major missing signal flagged.</li>}
@@ -1018,8 +968,8 @@ function DiagnosticEvidenceCard({ step }: { step: DiagnosticStepResult }) {
         </div>
       </div>
 
-      <p className="mt-4 text-sm leading-6 text-[var(--text-muted)]">{limitation}</p>
-      <p className="mt-3 text-sm leading-6 text-[var(--text-body)]">
+      <p className="type-caption mt-7 text-[var(--text-muted)]">{limitation}</p>
+      <p className="type-caption mt-4 text-[var(--text-body)]">
         <strong>What Atrium would fix:</strong> {publicReportText(diagnosticStepFix(step.id))}
       </p>
     </article>

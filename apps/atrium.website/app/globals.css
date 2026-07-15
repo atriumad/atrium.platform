@@ -104,7 +104,7 @@ main :where(p) {
   font-family: var(--font-sans);
   font-size: var(--type-page-title);
   font-weight: 400;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
   line-height: var(--leading-page-title);
   text-wrap: balance;
 }
@@ -113,7 +113,7 @@ main :where(p) {
   font-family: var(--font-sans);
   font-size: var(--type-section-title);
   font-weight: 400;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.028em;
   line-height: var(--leading-section-title);
   text-wrap: balance;
 }
@@ -122,7 +122,7 @@ main :where(p) {
   font-family: var(--font-sans);
   font-size: var(--type-card-title);
   font-weight: 400;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.018em;
   line-height: var(--leading-card-title);
   text-wrap: balance;
 }
@@ -205,3 +205,21 @@ main :where(p) {
 }
 
 /* service-detail CSS removed — components now use Tailwind + design tokens */
+
+/* ─── Reels marquee ────────────────────────────────────────────────────────── */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.reels-track {
+  animation: marquee-x var(--reels-duration, 40s) linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reels-track {
+    animation: none;
+  }
+}

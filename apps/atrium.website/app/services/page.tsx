@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import SceneWrapper from '@/components/3d/SceneWrapper'
 import CTABanner from '@/components/sections/CTABanner'
+import GrowthEngineDiagram from '@/components/sections/GrowthEngineDiagram'
 import ServiceRow from '@/components/sections/ServiceRow'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { services } from '@/lib/services'
@@ -131,6 +132,9 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* ── The system before the parts ──────────────────────────────── */}
+      <GrowthEngineDiagram />
+
       {/* ── Service index ────────────────────────────────────────────── */}
       <section style={{ background: 'var(--teal-900)' }}>
         {PILLARS.map((cat) => {
@@ -181,8 +185,8 @@ export default function ServicesPage() {
       >
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           {[
-            { n: '12', l: 'Disciplines under one roof — strategy to analytics' },
-            { n: '45+', l: 'Active hospitality brand partnerships' },
+            { n: '11', l: 'Disciplines under one roof — strategy to analytics' },
+            { n: '15+', l: 'Active hospitality brand partnerships' },
             { n: '28d', l: 'Engine cycle — first shoot to first report' },
           ].map((s) => (
             <div key={s.n} className="flex flex-col gap-2">
@@ -202,9 +206,9 @@ export default function ServicesPage() {
 
       <CTABanner
         eyebrow="JOIN 15+ HOSPITALITY BRANDS"
-        headline={<>Get marketing support <em>you can trust</em></>}
-        body="If you've outgrown freelancers, feel held back by generic agencies, or need a creative team that actually understands restaurants — we were built for you."
-        cta="Let's Talk"
+        headline={<>Been burned by an agency <em>before?</em></>}
+        body="If you've outgrown freelancers, been let down by generic agencies, or just want a team that reports revenue instead of vanity — we were built for you. See the system before you commit."
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="Team at table in restaurant — natural, warm, working together"
       />

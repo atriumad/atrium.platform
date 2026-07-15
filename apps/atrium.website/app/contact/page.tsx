@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { getService } from '@/lib/services'
 
 export const metadata: Metadata = {
   title: 'Contact - Atrium',
@@ -17,7 +18,12 @@ const briefItems = [
   'What you need to improve in the next 90 days',
 ]
 
-export default function ContactPage() {
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ service?: string }> }) {
+  const { service: serviceSlug } = await searchParams
+  const selectedService = serviceSlug ? getService(serviceSlug) : undefined
+  const subject = encodeURIComponent(selectedService ? `Atrium diagnostic — ${selectedService.name}` : 'New Atrium project')
+  const emailHref = `mailto:${email}?subject=${subject}`
+
   return (
     <>
       <PageHero
@@ -25,7 +31,7 @@ export default function ContactPage() {
         title={<>Tell us what needs <em>to grow.</em></>}
         body="The fastest first step is context: where the brand is now, what is already working, and what has become too hard for the team to manage alone."
         actions={[
-          { label: 'Email Atrium', href: `mailto:${email}?subject=New%20Atrium%20project` },
+          { label: 'Email Atrium', href: emailHref },
           { label: 'View pricing models', href: '/pricing', variant: 'ghostLight' },
         ]}
         stats={[
@@ -39,13 +45,18 @@ export default function ContactPage() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <Eyebrow className="mb-5">Direct line</Eyebrow>
+            {selectedService && (
+              <p className="type-eyebrow mb-5 inline-flex rounded-full px-4 py-2" style={{ color: 'var(--teal-800)', background: 'var(--mint-300)' }}>
+                Interest selected: {selectedService.name}
+              </p>
+            )}
             <h2 className="type-section-title">
               Start with the messy version.
             </h2>
             <p className="type-body mt-6 max-w-md" style={{ color: 'var(--text-muted)' }}>
               You do not need a perfect brief. Send the business context, the current pressure, and the outcome you want to make visible.
             </p>
-            <a href={`mailto:${email}`} className="type-card-title mt-8 inline-flex" style={{ color: 'var(--teal-800)' }}>
+            <a href={emailHref} className="type-card-title mt-8 inline-flex" style={{ color: 'var(--teal-800)' }}>
               {email}
             </a>
           </div>
@@ -79,7 +90,7 @@ export default function ContactPage() {
         headline={<>A short conversation, then <em>a practical scope.</em></>}
         body="We will look at the current system, identify the missing operating pieces, and recommend whether Foundation, Growth, or Full System makes sense."
         cta="Email Atrium"
-        ctaHref={`mailto:${email}?subject=New%20Atrium%20project`}
+        ctaHref={emailHref}
         coverAlt="Atrium contact path from project context to practical scope"
       />
     </>

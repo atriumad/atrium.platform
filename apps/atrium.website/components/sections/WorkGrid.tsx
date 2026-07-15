@@ -39,7 +39,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
         <div className="flex justify-between items-end mb-14">
           <div>
             <Eyebrow className="mb-3">Selected Work</Eyebrow>
-            <h2 className="type-section-title">Results that speak.</h2>
+            <h2 className="type-section-title">See what changed. <em>Not just what shipped.</em></h2>
           </div>
           <Button href="/work" variant="ghost" className="hidden md:flex">See all work →</Button>
         </div>

@@ -30,7 +30,7 @@ function CaseVisual({ study, index, featured = false }: { study: CaseStudy; inde
       className={`relative h-full overflow-hidden rounded-[var(--radius-bento)] transition-transform duration-500 ease-out group-hover:scale-[1.012] lg:aspect-auto ${featured ? 'aspect-[16/10] min-h-[24rem] lg:min-h-[32rem]' : index % 2 === 0 ? 'aspect-[16/10] lg:min-h-[30rem]' : 'aspect-[4/3] lg:min-h-[30rem]'}`}
       style={{ background: theme.background }}
       role="img"
-      aria-label={`Media placeholder for ${study.client}`}
+      aria-label={`${study.client} case study cover — restaurant campaign imagery to be supplied`}
     />
   )
 }
@@ -148,7 +148,7 @@ export default function WorkPage() {
         eyebrow="NEXT STEP"
         headline={<>Build the case study <em>your restaurant deserves.</em></>}
         body="If your marketing has activity but not a clear story of growth, Atrium can rebuild the system around outcomes."
-        cta="Let's Talk"
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="A restaurant marketing result sheet being reviewed by the team"
       />

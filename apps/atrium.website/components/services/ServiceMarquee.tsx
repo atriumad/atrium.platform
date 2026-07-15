@@ -87,7 +87,7 @@ export default function ServiceMarquee({ svc }: Props) {
   let keyCounter = 0
 
   return (
-    <section className="overflow-hidden relative py-6 bg-teal-900">
+    <section className="overflow-hidden relative py-4">
       <div ref={trackRef} className="flex w-max will-change-transform">
         {Array.from({ length: copies }).map((_, copyIndex) => (
           <div

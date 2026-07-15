@@ -48,7 +48,7 @@ export default function Footer() {
                 <ul className="flex flex-col gap-3">
                   {col.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="type-caption transition-all duration-200 hover:pl-2" style={{ opacity: 0.72 }}>
+                      <Link href={link.href} className="type-caption inline-block whitespace-nowrap transition-transform duration-200 hover:translate-x-1" style={{ opacity: 0.72 }}>
                         {link.label}
                       </Link>
                     </li>

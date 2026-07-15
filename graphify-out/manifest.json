@@ -1,7 +1,7 @@
 {
   ".claude/settings.local.json": {
-    "mtime": 1783970990.5378218,
-    "ast_hash": "618625fab4ac45c9d8b7bf4a0412c36c",
+    "mtime": 1784126998.1335087,
+    "ast_hash": "fbc2aa91b85fa8db38598f231d359d4d",
     "semantic_hash": ""
   },
   ".codex/hooks.json": {
@@ -665,8 +665,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/route.test.ts": {
-    "mtime": 1783624622.2411976,
-    "ast_hash": "06b69d9a79e90ef1dd3edecfa9a162fe",
+    "mtime": 1783977733.3463023,
+    "ast_hash": "2871e48218a94da2045e50ba4c237d01",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/route.ts": {
@@ -685,8 +685,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/grader-client.tsx": {
-    "mtime": 1783625782.4278102,
-    "ast_hash": "cdc36d646df60555e9d527283fb65d38",
+    "mtime": 1784038323.9659512,
+    "ast_hash": "139f17653390f9e9ab94e1f6fad8c03b",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/layout.tsx": {
@@ -825,18 +825,18 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/app/page.tsx": {
-    "mtime": 1783972728.0953813,
-    "ast_hash": "814b87445d4cd44b9e54f7218dc7c3ea",
+    "mtime": 1784140177.2240653,
+    "ast_hash": "ff1d1417eb99e3bf093c10546c7e3d1f",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/services/[slug]/page.tsx": {
-    "mtime": 1783704340.0743685,
-    "ast_hash": "e9a7e6ee4ad8b63750ae4e09d61e5140",
+    "mtime": 1784144567.2902994,
+    "ast_hash": "3d2f5246a9bf056b3b960381820cee11",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/services/page.tsx": {
-    "mtime": 1783973714.5197432,
-    "ast_hash": "2f8f572c136583b0a9e85aa56570d65e",
+    "mtime": 1784128125.412315,
+    "ast_hash": "e8520c8eb624c49295982838582b1cad",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/3d/HeroScene.tsx": {
@@ -865,8 +865,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/HeroSection.tsx": {
-    "mtime": 1783973713.2545736,
-    "ast_hash": "9c33fb2aa67443fe90155dbdcd55bbba",
+    "mtime": 1784127486.0868459,
+    "ast_hash": "ca109c737d613646197a4f10875b83d8",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/IconGrid.tsx": {
@@ -880,8 +880,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/ServiceTimeline.tsx": {
-    "mtime": 1783973497.853307,
-    "ast_hash": "83527bf0393fbc2b56689be4868803af",
+    "mtime": 1784144504.9216373,
+    "ast_hash": "6451cf0ce244b4216edc9423639dc3b5",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/SplitSection.tsx": {
@@ -890,8 +890,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/StatsStrip.tsx": {
-    "mtime": 1783973612.6576803,
-    "ast_hash": "3e58f551abe5af84258123f2d317623c",
+    "mtime": 1784140147.1115947,
+    "ast_hash": "e9b27989b4761143ba893984931a7a4e",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/TestimonialBento.tsx": {
@@ -900,8 +900,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/WorkGrid.tsx": {
-    "mtime": 1783973499.8441446,
-    "ast_hash": "0043c2e6ceb3e4c090c773881fd8db81",
+    "mtime": 1784140146.0134425,
+    "ast_hash": "cdb2a225f2f4e6b92978ce2e60565c56",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Button.tsx": {
@@ -915,8 +915,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Footer.tsx": {
-    "mtime": 1783973717.2008066,
-    "ast_hash": "51c7dfc9239f1cba97bbddf4aab2337f",
+    "mtime": 1784039497.8242302,
+    "ast_hash": "370c718aaac80f6fbf2cddfc97f8d198",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/GSAPProvider.tsx": {
@@ -930,8 +930,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Navbar.tsx": {
-    "mtime": 1783973667.1805124,
-    "ast_hash": "9a05f9b44560b3b4f8212dca0242f830",
+    "mtime": 1784125979.2955678,
+    "ast_hash": "fa27a8daad32e2056119ca21f29e4e6d",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/NoiseOverlay.tsx": {
@@ -950,18 +950,18 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/services.ts": {
-    "mtime": 1783113784.7814817,
-    "ast_hash": "333144f720dd73fd3078a3881527f5c9",
+    "mtime": 1784125896.2584143,
+    "ast_hash": "92e4ecc14bf5bd64ca79275e5900263a",
     "semantic_hash": ""
   },
   "apps/atrium.website/next-env.d.ts": {
-    "mtime": 1783971843.2578387,
-    "ast_hash": "2a74d3909800ca5467fa83b0ab4a4890",
+    "mtime": 1784145282.6563387,
+    "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
     "semantic_hash": ""
   },
   "apps/atrium.website/next.config.ts": {
-    "mtime": 1783113758.5555005,
-    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "mtime": 1784145276.586423,
+    "ast_hash": "10a4fbf5b647459e2d47b3bba60e41e5",
     "semantic_hash": ""
   },
   "apps/atrium.website/package.json": {
@@ -1025,28 +1025,28 @@
     "semantic_hash": ""
   },
   ".superpowers/sdd/progress.md": {
-    "mtime": 1783703082.2390466,
-    "ast_hash": "7cddd326d63b51769f2cc3ea11be2784",
+    "mtime": 1784143205.8279846,
+    "ast_hash": "b7d5716c01af2254e3d643548cbc14cc",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-1-brief.md": {
-    "mtime": 1783701816.939821,
-    "ast_hash": "338a806da4815dad7e20ff988b3d20aa",
+    "mtime": 1784142688.2850611,
+    "ast_hash": "7e9fe415a9547b9adb6344c25ae366f4",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-1-report.md": {
-    "mtime": 1783702414.8664377,
-    "ast_hash": "7a42db69e97f37d32ac822da8fb22461",
+    "mtime": 1784143133.0646694,
+    "ast_hash": "60b77db96c8ffd50b3f4385cc048b0c0",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-2-brief.md": {
-    "mtime": 1783703120.8306308,
-    "ast_hash": "50ada2253372a6704411d286b219c8ad",
+    "mtime": 1784143207.0306854,
+    "ast_hash": "4c3a6279a823a52f3fd14410d9442b69",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-2-report.md": {
-    "mtime": 1782917986.938906,
-    "ast_hash": "317345be5c2af575a86d9c4eec3835d8",
+    "mtime": 1784143969.7832947,
+    "ast_hash": "77352b97690401bd38685f0cc3fd031b",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-3-brief.md": {
@@ -2510,23 +2510,23 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/CategoryBadge.tsx": {
-    "mtime": 1783973708.6903465,
+    "mtime": 1783977656.4812062,
     "ast_hash": "3db087c2f473efe6787b74a6a96680d6",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceBento.tsx": {
-    "mtime": 1783973616.7761726,
-    "ast_hash": "c30368731e998c6d714aea3679e7f3c3",
+    "mtime": 1783977657.5639842,
+    "ast_hash": "d8b7c4900a4594d40d48b1df0ae6fd40",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceEditorialHero.tsx": {
-    "mtime": 1783972374.7103336,
-    "ast_hash": "0dcfde07f3d2ea32b914fa900028d2fc",
+    "mtime": 1784140237.6196969,
+    "ast_hash": "6d4d3f813383bb437175240ab3f99f78",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceMarquee.tsx": {
-    "mtime": 1783973709.61399,
-    "ast_hash": "23d92fc4ecbbd987385d2bdc4fa43ee6",
+    "mtime": 1784126370.773708,
+    "ast_hash": "5075b633c565b6210bff107e2e4169de",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServicePerksRail.tsx": {
@@ -2535,8 +2535,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceProofStrip.tsx": {
-    "mtime": 1783972735.062871,
-    "ast_hash": "f2240694da0b10826764d6aceb0e52ae",
+    "mtime": 1784141380.3515775,
+    "ast_hash": "b38f76d1b435239c1e07d05070610e0a",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceStatsEditorial.tsx": {
@@ -2545,8 +2545,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceThesis.tsx": {
-    "mtime": 1783973615.999614,
-    "ast_hash": "07d71cd523c6c42ced3c3409c23e89cf",
+    "mtime": 1783977591.6672904,
+    "ast_hash": "ab7eeeb2bd837a6bea7740f8550b35fc",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceTimelineEditorial.tsx": {
@@ -2610,38 +2610,38 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/app/about/page.tsx": {
-    "mtime": 1783975967.8543656,
-    "ast_hash": "552830c99a97148317d023c2982b8df2",
+    "mtime": 1784140148.9906929,
+    "ast_hash": "8078a7e60b81919e59a7528bfd831d4c",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/contact/page.tsx": {
-    "mtime": 1783973718.195705,
-    "ast_hash": "bdd5bd0c7484cdfbe6b3e1fa8989c2e5",
+    "mtime": 1784140270.1345472,
+    "ast_hash": "8c8ddcd82f0b42b21c286bb2f62c8b3b",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/pricing/page.tsx": {
-    "mtime": 1783976648.076343,
-    "ast_hash": "072a6ffdadc0f9e8eb77275d52277827",
+    "mtime": 1784140144.9467196,
+    "ast_hash": "71081c2c296e7be85cb8a418d444b831",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/process/page.tsx": {
-    "mtime": 1783973354.5376458,
-    "ast_hash": "562b8b789e48a13c6d124ff4d12f3884",
+    "mtime": 1784125441.096224,
+    "ast_hash": "3bebfdbcac795d9fdaafe6e75a06a8ae",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/resources/page.tsx": {
-    "mtime": 1783973663.3629463,
-    "ast_hash": "d4fa2f3acfd1fda9c5a581ee81f98d30",
+    "mtime": 1784125441.0133946,
+    "ast_hash": "1fe214d93d17d918efa0c5134c0b8fb7",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/work/[slug]/page.tsx": {
-    "mtime": 1783975670.7564783,
-    "ast_hash": "49ddf95f6ffbd406a0bde2a0b59096c5",
+    "mtime": 1784150520.4889016,
+    "ast_hash": "234ab57910bd9bc0137f6d7dfb1cfa73",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/work/page.tsx": {
-    "mtime": 1783975163.0544279,
-    "ast_hash": "3eef3a8f5d9098bc87adb5f6ee068708",
+    "mtime": 1784140147.9765651,
+    "ast_hash": "a5bc542d4e19f13f238b5cd4bb941853",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/pages/PageHero.tsx": {
@@ -2650,13 +2650,123 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/work.ts": {
-    "mtime": 1783975151.7329266,
-    "ast_hash": "59fee3daff4d52d54b781838675fc508",
+    "mtime": 1784150451.8733997,
+    "ast_hash": "6f7648ff1e90276bbe8940a17ea6be55",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/work/CaseGallery.tsx": {
     "mtime": 1783712510.5648882,
     "ast_hash": "31623968e22139e808bd6ceba5469586",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/AudiencePaths.tsx": {
+    "mtime": 1784140142.9385812,
+    "ast_hash": "ae0b17845cdc4cf06da412803c35b9b5",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/ComparisonMatrix.tsx": {
+    "mtime": 1784125576.234812,
+    "ast_hash": "e95581137061dadc1cf6c8047888fae9",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/GrowthEngineDiagram.tsx": {
+    "mtime": 1784128036.243066,
+    "ast_hash": "d4fbf67893b710e77bcb09360c948319",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/PurchaseFAQ.tsx": {
+    "mtime": 1784140062.3075306,
+    "ast_hash": "93564b7004da44cefd35f91990e665de",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/RelatedCase.tsx": {
+    "mtime": 1784125917.3718755,
+    "ast_hash": "ac9b7d3dd00a3d6896d573db237cfb50",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceDeliverables.tsx": {
+    "mtime": 1784140235.7702775,
+    "ast_hash": "aacb177e5013a9c717bbae144a4ef7e7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceEngagementModel.tsx": {
+    "mtime": 1784141495.9770963,
+    "ast_hash": "300c44215e5c5cc0f42d620f28bd6822",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceSystemMap.tsx": {
+    "mtime": 1784141460.6156635,
+    "ast_hash": "390e1df93269eb077ad5cc3ee28583aa",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/cta.ts": {
+    "mtime": 1784125345.8050003,
+    "ast_hash": "e89369ff6b9658bb15455399e6591e9e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/media-blueprints/page.tsx": {
+    "mtime": 1784143504.5854185,
+    "ast_hash": "5b7704b939a2695e217e0f92dcd84845",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/media/MediaBlueprint.tsx": {
+    "mtime": 1784144216.655464,
+    "ast_hash": "a0e84db1476ea00d702e753428b78c82",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/media/MediaBlueprintSection.tsx": {
+    "mtime": 1784143379.28176,
+    "ast_hash": "e4a030dbe74140970d75f0999b811682",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/media-blueprints.test.ts": {
+    "mtime": 1784144447.0138364,
+    "ast_hash": "6ab04c02b8ffd7e2570502bf08f61c35",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/media-blueprints.ts": {
+    "mtime": 1784144442.5427337,
+    "ast_hash": "ef0dc85edd8fe3171c72dd8aa9248e16",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/gallery-demo/page.tsx": {
+    "mtime": 1784149942.1686625,
+    "ast_hash": "c2173f04164f45f8b42a7f9f3da0610b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/media/CldImage.tsx": {
+    "mtime": 1784145308.0709493,
+    "ast_hash": "1d81434b6c78e1b0b5e9b4518de3f330",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/media/CldVideo.tsx": {
+    "mtime": 1784145452.8253698,
+    "ast_hash": "79be42578fe677133eca8333188e6466",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/work/DragGallery.tsx": {
+    "mtime": 1784148632.2724407,
+    "ast_hash": "e94c8043ad061929684e24ec3254709c",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/work/VideoMarquee.tsx": {
+    "mtime": 1784151032.5743725,
+    "ast_hash": "6cf0726fa83870d2d872fff07a04a3a6",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/cloudinary.test.ts": {
+    "mtime": 1784150427.1076562,
+    "ast_hash": "1039e172489834f0ea2e851d9f2692a3",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/cloudinary.ts": {
+    "mtime": 1784150436.9879172,
+    "ast_hash": "67118fed34c35b91cc9880b5c01b9e8b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/assets.txt": {
+    "mtime": 1784150391.2272453,
+    "ast_hash": "4901b61e4823c992f89b8db817d1a675",
     "semantic_hash": ""
   }
 }

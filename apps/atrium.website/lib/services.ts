@@ -420,6 +420,22 @@ export function getService(slug: string): Service | undefined {
   return services.find(s => s.slug === slug)
 }
 
+// Maps each service to the case study that best proves it (doc vs.md §1.6 / §9.7).
+// Chosen by matching serviceTags in lib/work.ts to the strongest outcome.
+export const relatedCaseBySlug: Record<string, string> = {
+  'brand-strategy': 'taco-naco',
+  'film-photo': 'hotel-kc',
+  'social-content': 'taha',
+  'social-management': 'aahaa',
+  'paid-media': 'chick-in-waffle',
+  'google-seo': 'taco-naco',
+  reputation: 'taco-naco',
+  experiential: 'taha',
+  'email-sms': 'taha',
+  'crm-loyalty': 'chick-in-waffle',
+  analytics: 'taco-naco',
+}
+
 export function getSiblingServices(current: string, count = 3): Service[] {
   const svc = services.find(s => s.slug === current)
   if (!svc) return services.slice(0, count)

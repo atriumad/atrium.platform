@@ -1,7 +1,11 @@
+import AudiencePaths from '@/components/sections/AudiencePaths'
 import BentoGrid, { type BentoItem } from '@/components/sections/BentoGrid'
+import ComparisonMatrix from '@/components/sections/ComparisonMatrix'
 import CTABanner from '@/components/sections/CTABanner'
 import DarkProcess, { type ProcessStat, type ProcessStep } from '@/components/sections/DarkProcess'
+import GrowthEngineDiagram from '@/components/sections/GrowthEngineDiagram'
 import HeroSection from '@/components/sections/HeroSection'
+import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import SplitSection from '@/components/sections/SplitSection'
 import StatsStrip, { type Stat } from '@/components/sections/StatsStrip'
 import TestimonialBento, { type BentoCard } from '@/components/sections/TestimonialBento'
@@ -31,7 +35,7 @@ const processSteps: ProcessStep[] = [
   { eyebrow: 'SYSTEMATIC', title: 'Activate every channel', body: 'Content goes live. Google optimized. Email flows activated. Ads launched on proven creative.' },
 ]
 const processStats: ProcessStat[] = [
-  { number: '45', label: 'Active hospitality brand partnerships' },
+  { number: '15+', label: 'Active hospitality brand partnerships' },
   { number: '28', label: 'Day engine cycle — shoot to report' },
 ]
 
@@ -48,7 +52,7 @@ const clients = [
 ]
 
 const homeStats: Stat[] = [
-  { number: '$44', label: 'return on every $1 spent on restaurant email. The highest-ROI channel in hospitality.' },
+  { number: '$42', label: 'return on every $1 spent on restaurant email. The highest-ROI channel in hospitality.' },
   { number: '70%', label: "of first-time diners never return. The problem isn't your food. It's the silence after they leave." },
   { number: '2.7x', label: 'more guests retained by brands using direct 1:1 engagement vs those relying on broad marketing.' },
 ]
@@ -63,14 +67,21 @@ export default function HomePage() {
         size="compact"
         bg="var(--surface-page)"
       />
-      <BentoGrid items={bentoItems} />
+      <AudiencePaths />
+      <BentoGrid
+        items={bentoItems}
+        eyebrow="One system, six leaks closed"
+        headline={<>What changes when every channel <em>shares a job.</em></>}
+      />
+      <GrowthEngineDiagram />
       <WorkGrid projects={selectedWork} />
+      <ComparisonMatrix />
       <StatsStrip stats={homeStats} />
-      <TestimonialBento items={testimonialCards} eyebrow="What our clients say" />
+      <TestimonialBento items={testimonialCards} eyebrow="Evidence from the operators" />
       <DarkProcess
         eyebrow="How We Work"
-        headline={<>Built for restaurants. <em>Designed to grow.</em></>}
-        body="We combine strategy, content, and technology into a single engine that runs your restaurant marketing — so you can focus on the food."
+        headline={<>A monthly engine. <em>Not random posts.</em></>}
+        body="Strategy, content, and technology run as one system on a 28-day cycle — so marketing stops being guesswork and you can focus on the food."
         cta="See the process"
         ctaHref="/process"
         steps={processSteps}
@@ -86,18 +97,19 @@ export default function HomePage() {
         coverAlt="Free restaurant marketing audit — Atrium Growth Grader"
       />
       <SplitSection
-        eyebrow="Full-Stack Expertise"
-        headline={<>Work with people who understand hospitality <em>across every discipline</em></>}
-        body="From brand strategy to CRM, from shoots to dashboards — our team covers 12 services across the full hospitality marketing spectrum. No hand-offs between agencies. No explaining your business twice."
+        eyebrow="One team, not five vendors"
+        headline={<>You don&apos;t need five vendors. <em>You need one system.</em></>}
+        body="Brand strategy to CRM, shoots to dashboards — 11 disciplines under one roof, run as a single system. No hand-offs. No briefing your business twice."
         cta="Explore services →"
         ctaHref="/services"
-        coverAlt="Icons representing the 12 services flowing into one output"
+        coverAlt="Icons representing the 11 services flowing into one output"
       />
+      <PurchaseFAQ limit={6} />
       <CTABanner
         eyebrow="Join 15+ Hospitality Brands"
-        headline={<>Get marketing support <em>you can trust</em></>}
-        body="If you've outgrown freelancers, feel held back by generic agencies, or need a creative team that actually understands restaurants — we were built for you."
-        cta="Let's Talk"
+        headline={<>Been burned by an agency <em>before?</em></>}
+        body="If you've outgrown freelancers, been let down by generic agencies, or just want a team that reports revenue instead of vanity — we were built for you. See the system before you commit."
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="Team at table in restaurant — natural, warm, working together"
       />

@@ -33,11 +33,11 @@ export default function StatsStrip({ stats, bg, textColor }: Props) {
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="metric-reveal max-w-4xl pb-14 md:pb-20">
           <p className="type-eyebrow m-0" style={{ color: 'var(--teal-500)' }}>
-            Proof in the numbers
+            Why the system matters
           </p>
           <h2 className="type-section-title m-0 mt-5" style={{ color: 'var(--text-strong)' }}>
-            Growth you can feel.<br />
-            <em style={{ fontFamily: 'var(--font-serif)' }}>Results you can prove.</em>
+            The first visit is expensive.<br />
+            <em style={{ fontFamily: 'var(--font-serif)' }}>The next one should not be.</em>
           </h2>
         </div>
 

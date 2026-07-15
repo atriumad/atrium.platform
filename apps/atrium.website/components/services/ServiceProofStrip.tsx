@@ -4,11 +4,13 @@ const brands = ['Taco Naco', "T'\u00c4H\u00c4", 'Aahaa', 'Hotel KC', 'Grand Coff
 
 export default function ServiceProofStrip() {
   return (
-    <LogoTicker
-      clients={brands}
-      label="Trusted by hospitality brands building demand"
-      size="compact"
-      bg="var(--cloud-100)"
-    />
+    <section style={{ background: 'var(--cloud-100)' }}>
+      <LogoTicker
+        clients={brands}
+        label="Trusted by hospitality brands building demand"
+        size="compact"
+        bg="var(--cloud-100)"
+      />
+    </section>
   )
 }

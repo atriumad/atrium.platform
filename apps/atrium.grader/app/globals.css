@@ -84,6 +84,19 @@
   --space-9: 96px;
 
   --border-width: 1.5px;
+
+  /* Shared editorial type roles from the website. */
+  --type-page-title: clamp(3.75rem, 6.8vw, 7rem);
+  --type-section-title: clamp(3rem, 5vw, 5.5rem);
+  --type-card-title: clamp(1.75rem, 2.4vw, 2.5rem);
+  --type-lead: clamp(1.125rem, 1.5vw, 1.375rem);
+  --type-body: 1rem;
+  --type-caption: 0.875rem;
+  --type-eyebrow: 0.75rem;
+  --leading-page-title: 0.9;
+  --leading-section-title: 0.92;
+  --leading-card-title: 1.02;
+  --leading-copy: 1.6;
 }
 
 /* ============================================================
@@ -107,6 +120,84 @@ body {
 button, input { font: inherit; letter-spacing: 0; }
 button { cursor: pointer; }
 button:disabled { cursor: not-allowed; }
+
+:where(h1, h2, h3, h4) {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+:where(h1, h2, h3, h4) em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+:where(p, li) {
+  letter-spacing: -0.008em;
+  text-wrap: pretty;
+}
+
+.type-page-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-page-title);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: var(--leading-page-title);
+  text-wrap: balance;
+}
+
+.type-section-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-section-title);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: var(--leading-section-title);
+  text-wrap: balance;
+}
+
+.type-card-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-card-title);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: var(--leading-card-title);
+  text-wrap: balance;
+}
+
+.type-lead {
+  font-size: var(--type-lead);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.type-body {
+  font-size: var(--type-body);
+  font-weight: 400;
+  letter-spacing: -0.008em;
+  line-height: var(--leading-copy);
+  text-wrap: pretty;
+}
+
+.type-caption {
+  font-size: var(--type-caption);
+  font-weight: 400;
+  letter-spacing: -0.004em;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.type-eyebrow {
+  font-size: var(--type-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
 
 .visually-hidden {
   position: absolute;
@@ -231,7 +322,7 @@ button:disabled { cursor: not-allowed; }
 }
 
 .grader-stage {
-  width: min(100%, 960px);
+  width: min(100%, 1200px);
   animation: stage-rise 900ms var(--ease-enter) both;
 }
 
@@ -1183,7 +1274,7 @@ button:disabled { cursor: not-allowed; }
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(54vw, 500px);
+  width: min(62vw, 620px);
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 40%);
@@ -1251,6 +1342,14 @@ button:disabled { cursor: not-allowed; }
   backdrop-filter: blur(var(--blur-md));
 }
 
+.loading-card--text {
+  width: auto;
+  max-width: min(240px, 32vw);
+  min-height: 52px;
+  align-content: center;
+  padding: 14px 18px;
+}
+
 .loading-card span,
 .loading-badge {
   color: var(--teal-500);
@@ -1291,7 +1390,8 @@ button:disabled { cursor: not-allowed; }
 }
 
 .loading-card--client {
-  width: min(320px, 34vw);
+  width: auto;
+  max-width: min(280px, 34vw);
   background: rgb(255 255 255 / 92%);
 }
 
@@ -1391,7 +1491,7 @@ button:disabled { cursor: not-allowed; }
   align-items: center;
   min-height: auto;
   padding: clamp(var(--space-7), 5vw, var(--space-9)) 0 var(--space-7);
-  gap: var(--space-5);
+  gap: var(--space-4);
 }
 
 .loading-collage-stage .loading-collage-media {
@@ -1399,7 +1499,7 @@ button:disabled { cursor: not-allowed; }
 }
 
 .loading-collage-stage .loading-collage {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-2);
 }
 
 @media (max-width: 760px) {
@@ -1408,12 +1508,40 @@ button:disabled { cursor: not-allowed; }
   }
 }
 
-/* Step progress strip */
+/* One concise status line; the collage carries the narrative. */
+.loading-visual-status {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: min(calc(100% - 40px), 560px);
+  align-items: baseline;
+  gap: var(--space-4);
+  border-top: 1px solid rgb(181 242 219 / 24%);
+  padding-top: var(--space-3);
+  animation: loading-status-in 560ms var(--ease-enter) both;
+}
+
+.loading-visual-status span {
+  color: var(--mint-400);
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-style: italic;
+  line-height: 1;
+}
+
+.loading-visual-status strong {
+  color: var(--cloud-100);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: 1.35;
+  text-align: right;
+}
+
+/* Dot-only progress strip */
 .loading-progress {
   display: flex;
   align-items: flex-start;
-  width: min(100%, 600px);
-  padding: 0 var(--space-5);
+  width: min(calc(100% - 80px), 420px);
+  padding: 0;
   animation: stage-rise 680ms 180ms var(--ease-enter) both;
 }
 
@@ -1423,7 +1551,7 @@ button:disabled { cursor: not-allowed; }
   flex: 1;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
+  gap: 0;
 }
 
 .loading-step::before,
@@ -3167,8 +3295,12 @@ button:disabled { cursor: not-allowed; }
   padding-top: clamp(18px, 2vw, 28px);
 }
 
+.grader-page--result {
+  background: var(--surface-page);
+}
+
 .grader-stage {
-  width: min(100%, 1120px);
+  width: min(100%, 1200px);
 }
 
 .workflow-stage {
@@ -3256,7 +3388,7 @@ button:disabled { cursor: not-allowed; }
 
 .diagnostic-stage {
   width: 100%;
-  max-width: 1120px;
+  max-width: 1200px;
   gap: var(--space-4);
   margin-inline: auto;
 }

@@ -4,6 +4,7 @@ import {
   type BlueprintRatio,
   blueprintLabel,
   type MediaBlueprint as MediaBlueprintItem,
+  type RealMediaBlueprint,
 } from '@/lib/media-blueprints'
 
 import styles from './MediaBlueprint.module.css'
@@ -47,28 +48,44 @@ function PlannedVisual() {
   )
 }
 
+function hasRealSource(item: MediaBlueprintItem): item is RealMediaBlueprint {
+  return typeof item.src === 'string' && item.src.trim().length > 0
+}
+
 export default function MediaBlueprint({ item, priority = false, showBrief = true }: Props) {
   const ratioClass = ratioClasses[item.ratio]
   const frameClassName = [styles.frame, styles[item.kind], styles[ratioClass], item.className]
     .filter(Boolean)
     .join(' ')
-  const hasSource = 'src' in item && typeof item.src === 'string' && item.src.trim().length > 0
-
-  if (hasSource) {
+  if (hasRealSource(item)) {
     const isVideo = item.assetType === 'video' || item.assetType === 'reel'
 
     return (
       <figure className={`${frameClassName} ${styles.realMedia}`}>
         <div className={styles.mediaVisual}>
-          {isVideo ? (
-            // Real media may be a silent reel or an audio-bearing video. The
-            // visible production brief supplies context; caption tracks remain
-            // an asset-level publishing responsibility because the blueprint
-            // contract intentionally carries no transcript source.
-            // biome-ignore lint/a11y/useMediaCaption: See production note above.
+          {isVideo && item.audio === 'speech' ? (
             <video
               className={styles.media}
               controls
+              playsInline
+              poster={item.poster}
+              preload="metadata"
+              aria-label={item.alt || undefined}
+            >
+              <source src={item.src} />
+              <track
+                default
+                kind="captions"
+                src={item.captionsSrc}
+                srcLang={item.captionsLanguage ?? 'en'}
+                label={item.captionsLabel ?? 'English'}
+              />
+            </video>
+          ) : isVideo ? (
+            <video
+              className={styles.media}
+              controls
+              muted
               playsInline
               poster={item.poster}
               preload="metadata"

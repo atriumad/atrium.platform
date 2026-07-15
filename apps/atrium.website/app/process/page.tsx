@@ -98,7 +98,7 @@ export default function ProcessPage() {
         eyebrow="READY FOR A CLEANER RHYTHM?"
         headline={<>Marketing feels better when <em>the system is visible.</em></>}
         body="We will map the first cycle, identify the missing inputs, and show what needs to happen before the first shoot."
-        cta="Let's Talk"
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="A monthly restaurant marketing cycle mapped on a wall"
       />

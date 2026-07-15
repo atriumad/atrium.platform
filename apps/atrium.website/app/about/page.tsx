@@ -192,7 +192,7 @@ function TeamSection() {
                 className="aspect-[4/3] rounded-[var(--radius-bento)]"
                 style={{ background: member.background }}
                 role="img"
-                aria-label={`Portrait placeholder for ${member.title}`}
+                aria-label={`${member.title} portrait — natural on-location team photography to be supplied`}
               />
               <div className="mt-7 grid gap-5 border-t pt-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]" style={{ borderColor: 'rgba(181,242,219,0.22)' }}>
                 <div>
@@ -215,7 +215,7 @@ function TeamSection() {
               className="aspect-[16/10] rounded-[var(--radius-bento)] lg:col-span-5 lg:aspect-auto lg:min-h-[24rem]"
               style={{ background: production.background }}
               role="img"
-              aria-label="Atrium distributed production team placeholder"
+              aria-label="Atrium production team working across restaurant locations — documentary team photography to be supplied"
             />
             <div className="flex flex-col justify-between gap-12 lg:col-span-7">
               <div>
@@ -250,7 +250,7 @@ export default function AboutPage() {
         eyebrow="START HERE"
         headline={<>Bring us the restaurant. <em>We will bring the system.</em></>}
         body="If your team needs senior creative, operational rhythm, and reporting in the same room, the next step is a short conversation."
-        cta="Let's Talk"
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="Atrium team planning a hospitality campaign"
       />

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import { CTA } from '@/lib/cta'
 import Button from './Button'
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -107,15 +108,22 @@ const rightGroups = [
     services: [
       { label: 'Email & SMS Marketing', href: '/services/email-sms', desc: 'Direct channels that retain guests', icon: 'mail' },
       { label: 'CRM & Loyalty', href: '/services/crm-loyalty', desc: 'Systems that bring guests back', icon: 'users' },
-      { label: 'Analytics & Reporting', href: '/services/analytics', desc: 'One dashboard. Everything visible.', icon: 'chart' },
+    ],
+  },
+  {
+    // Transversal layer — measures Generate, Convert and Retain (doc vs.md §2.3 / §6).
+    label: 'Measure & Optimize',
+    services: [
+      { label: 'Analytics & Reporting', href: '/services/analytics', desc: 'One dashboard across every stage', icon: 'chart' },
     ],
   },
 ]
 
 const otherLinks = [
   { label: 'Our Work', href: '/work' },
-  { label: 'About', href: '/about' },
+  { label: 'How It Works', href: '/process' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about' },
 ]
 
 // ─── Service item ──────────────────────────────────────────────────────────────
@@ -188,21 +196,25 @@ export default function Navbar() {
     setOpen(true)
   }
   const onLeave = () => {
-    timeoutRef.current = setTimeout(() => setOpen(false), 140)
+    timeoutRef.current = setTimeout(() => setOpen(false), 220)
   }
   const close = () => setOpen(false)
   const closeMobile = () => setMobileOpen(false)
   const isEditorialCase = pathname.startsWith('/work/')
+  // Only the home page animates the header from transparent → solid on scroll.
+  // Every other page shows a solid header from the start.
+  const isHome = pathname === '/'
+  const effOpacity = isHome ? bgOpacity : 1
   const navTextColor = isEditorialCase ? 'var(--text-strong)' : 'var(--color-surface)'
   const headerBorder = isEditorialCase
     ? '1px solid rgba(7,47,52,0.08)'
-    : bgOpacity > 0.3
-      ? `1px solid rgba(228,238,240,${bgOpacity * 0.08})`
+    : effOpacity > 0.3
+      ? `1px solid rgba(228,238,240,${effOpacity * 0.08})`
       : '1px solid transparent'
   const headerShadow = isEditorialCase
     ? '0 1px 24px rgba(7,47,52,0.05)'
-    : bgOpacity > 0.6
-      ? `0 1px 24px rgba(4,32,36,${bgOpacity * 0.4})`
+    : effOpacity > 0.6
+      ? `0 1px 24px rgba(4,32,36,${effOpacity * 0.4})`
       : 'none'
 
   return (
@@ -218,9 +230,9 @@ export default function Navbar() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 transition-opacity duration-300"
         style={{
-          background: isEditorialCase ? 'rgba(247,249,242,0.94)' : `rgba(7,47,52,${bgOpacity})`,
-          backdropFilter: isEditorialCase || bgOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(bgOpacity * 14)}px)` : 'none',
-          WebkitBackdropFilter: isEditorialCase || bgOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(bgOpacity * 14)}px)` : 'none',
+          background: isEditorialCase ? 'rgba(247,249,242,0.94)' : `rgba(7,47,52,${effOpacity})`,
+          backdropFilter: isEditorialCase || effOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(effOpacity * 14)}px)` : 'none',
+          WebkitBackdropFilter: isEditorialCase || effOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(effOpacity * 14)}px)` : 'none',
         }}
       />
       {/* Logo */}
@@ -238,28 +250,35 @@ export default function Navbar() {
 
       {/* Nav links — centered column */}
       <nav className="hidden gap-8 justify-self-center items-center md:flex">
-        <button
-          type="button"
-          aria-expanded={open}
-          aria-haspopup="menu"
-          onFocus={onEnter}
-          onBlur={onLeave}
+        {/* Full-height wrapper so hover persists across the whole header row down
+            to the menu edge — removes the dead zone below the trigger. */}
+        {/* biome-ignore lint/a11y/noStaticElementInteractions: hover-only bridge; keyboard handled by the button's focus/blur */}
+        <div
+          className="flex items-center h-14"
           onMouseEnter={onEnter}
           onMouseLeave={onLeave}
-          className="flex gap-1 items-center text-sm font-medium transition-opacity hover:opacity-70"
-          style={{ color: navTextColor }}
         >
-          Services
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            width="10" height="6" viewBox="0 0 10 6" fill="none"
-            className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-            style={{ opacity: 0.5 }}
+          <button
+            type="button"
+            aria-expanded={open}
+            aria-haspopup="menu"
+            onFocus={onEnter}
+            onBlur={onLeave}
+            className="flex gap-1 items-center text-sm font-medium transition-opacity hover:opacity-70"
+            style={{ color: navTextColor }}
           >
-            <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
+            Services
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              width="10" height="6" viewBox="0 0 10 6" fill="none"
+              className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+              style={{ opacity: 0.5 }}
+            >
+              <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
 
         {otherLinks.map((link) => (
           <Link
@@ -276,8 +295,8 @@ export default function Navbar() {
       {/* Right column — CTA on desktop, menu toggle on mobile */}
       <div className="flex gap-4 justify-end justify-self-end items-center">
         <div className="hidden md:flex">
-          <Button href="/contact" variant={isEditorialCase ? 'ghost' : 'ghostLight'} className="px-4 py-2 text-xs">
-            Let&apos;s Talk
+          <Button href={CTA.primary.href} variant={isEditorialCase ? 'ghost' : 'ghostLight'} className="px-4 py-2 text-xs">
+            {CTA.primary.label}
           </Button>
         </div>
 
@@ -476,8 +495,8 @@ export default function Navbar() {
             </div>
           ))}
 
-          <Button href="/contact" variant="primary" onClick={closeMobile} className="justify-center px-4 py-3 w-full text-xs">
-            Let&apos;s Talk
+          <Button href={CTA.primary.href} variant="primary" onClick={closeMobile} className="justify-center px-4 py-3 w-full text-xs">
+            {CTA.primary.label}
           </Button>
         </div>
       </div>
