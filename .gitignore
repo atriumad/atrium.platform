@@ -15,5 +15,6 @@ bun.lockb
 pnpm-lock.yaml
 graphify-out
 docs
+notas.md
 
 .worktrees/

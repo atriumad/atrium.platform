@@ -8,7 +8,13 @@ export type NarrativeData = {
   readonly headline: string
   readonly summary: string
   readonly priority: string
-  readonly atriumPlan: readonly string[]
+  readonly primaryLeak: string
+  readonly rootCause: string
+  readonly whyItMatters: string
+  readonly firstMove: string
+  readonly thirtyDayPlan: readonly string[]
+  readonly evidenceHighlights: readonly string[]
+  readonly atriumPlan?: readonly string[]
   readonly businessImpactHeadline: string
   readonly businessImpactExplanation: string
   readonly estimatedLostOpportunity: string
@@ -37,7 +43,14 @@ export function mergeNarrativeIntoReport(
       headline: narrative.headline,
       summary: narrative.summary,
       priority: narrative.priority,
-      atriumPlan: narrative.atriumPlan,
+      primaryLeak: narrative.primaryLeak,
+      rootCause: narrative.rootCause,
+      whyItMatters: narrative.whyItMatters,
+      firstMove: narrative.firstMove,
+      evidenceHighlights: narrative.evidenceHighlights,
+      atriumPlan: narrative.thirtyDayPlan.length > 0
+        ? narrative.thirtyDayPlan
+        : narrative.atriumPlan ?? report.executiveSummary.atriumPlan,
     },
     businessImpact: {
       ...report.businessImpact,
@@ -60,6 +73,10 @@ export function mergeSocialIntoReport(
     scores: { ...report.scores, social: socialHealth.score },
     scoreDetails: { ...report.scoreDetails, social: socialDetails },
     scoreInterpretation: [...report.scoreInterpretation, buildSocialInterpretation(socialHealth.score)],
+    providerVersions: {
+      ...report.providerVersions,
+      social: "scrapecreators-social-v1",
+    },
     diagnosticSteps: report.diagnosticSteps.map((step) =>
       step.id === "social" ? buildSocialDiagnosticStep(socialHealth, socialDetails) : step
     ),

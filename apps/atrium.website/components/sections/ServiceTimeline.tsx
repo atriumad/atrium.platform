@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useRef } from 'react'
-import Eyebrow from '@/components/ui/Eyebrow'
 import { gsap } from '@/lib/gsap'
 import type { TimelineStep } from '@/lib/services'
 
@@ -26,11 +25,14 @@ export default function ServiceTimeline({ steps }: Props) {
   return (
     <section className="px-6 md:px-12 py-20 md:py-28" style={{ background: 'var(--teal-800)' }}>
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
-        <div className="md:w-64 flex-shrink-0">
-          <Eyebrow tone="onDark" className="mb-4">HOW IT WORKS</Eyebrow>
-          <h2 className="text-3xl font-medium leading-tight" style={{ color: 'var(--text-on-dark)' }}>
-            A process built for hospitality
+        <div className="md:w-80 flex-shrink-0 md:sticky md:top-[8rem] md:self-start">
+          <h2 className="type-section-title" style={{ color: 'var(--text-on-dark)' }}>
+            Your plug-in brand team, <em>from kickoff to rollout.</em>
           </h2>
+          <p className="type-body mt-5 max-w-[22rem]" style={{ color: 'var(--text-on-dark)', opacity: 0.66 }}>
+            We work side-by-side with your team to shape, evolve, and scale your brand
+            without the slowdowns of traditional agencies.
+          </p>
         </div>
         <ol
           ref={listRef}
@@ -54,10 +56,10 @@ export default function ServiceTimeline({ steps }: Props) {
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div className="flex flex-col gap-1.5">
-                <p className="font-semibold text-base" style={{ color: 'var(--text-on-dark)' }}>
+                <p className="type-card-title" style={{ color: 'var(--text-on-dark)' }}>
                   {step.title}
                 </p>
-                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-on-dark)', opacity: 0.6 }}>
+                <p className="type-caption" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
                   {step.body}
                 </p>
               </div>

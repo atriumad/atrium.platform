@@ -20,12 +20,12 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
       >
         {card.coverAlt}
       </div>
-      <div className="relative z-1 grid gap-3-5">
-        <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
-        <h3 className="text-[2rem] font-semibold leading-[0.98] m-0 max-sm:text-[1.7rem]" style={{ color: 'inherit' }}>
+      <div className="relative z-1 grid gap-[0.9rem]">
+        <span className="type-eyebrow opacity-56">{card.size}</span>
+        <h3 className="type-card-title m-0" style={{ color: 'inherit' }}>
           {parseHeadline(card.title)}
         </h3>
-        <p className="text-[0.95rem] leading-[1.45] m-0 opacity-76" style={{ color: 'inherit' }}>
+        <p className="type-caption m-0 opacity-76" style={{ color: 'inherit' }}>
           {card.copy}
         </p>
       </div>
@@ -40,15 +40,14 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
       style={{ background: 'var(--cloud-400)', color: 'var(--teal-800)' }}
     >
       <div className="flex flex-col gap-[0.9rem]">
-        <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
         <h3
-          className="font-bold leading-[1.05] m-0 max-w-[11ch] max-sm:text-[2.55rem] max-lg:text-[3.2rem]"
-          style={{ color: 'var(--amber-400)', fontSize: '4rem' }}
+          className="type-card-title m-0 max-w-[11ch]"
+          style={{ color: 'var(--amber-400)' }}
         >
           {parseHeadline(card.title)}
         </h3>
       </div>
-      <p className="max-w-[31rem] text-[0.95rem] leading-[1.45] m-0 opacity-72" style={{ color: 'var(--teal-800)' }}>
+      <p className="type-caption m-0 max-w-[31rem] opacity-72" style={{ color: 'var(--teal-800)' }}>
         {card.copy}
       </p>
     </article>
@@ -61,11 +60,11 @@ function BentoCardPosition({ card }: { card: BentoCard }) {
       className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
       style={{ background: 'var(--teal-300)', color: 'var(--teal-900)' }}
     >
-      <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
-      <h3 className="max-w-[15ch] text-[2rem] font-semibold leading-[0.98] m-0 max-sm:text-[1.7rem]">
+      <span className="type-eyebrow opacity-56">{card.size}</span>
+      <h3 className="type-card-title m-0 max-w-[15ch]">
         {parseHeadline(card.title)}
       </h3>
-      <p className="text-[0.95rem] leading-[1.45] m-0 opacity-76">
+      <p className="type-caption m-0 opacity-76">
         {card.copy}
       </p>
     </article>
@@ -78,11 +77,11 @@ function BentoCardMini({ card }: { card: BentoCard }) {
       className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
       style={{ background: 'var(--mint-300)', color: 'var(--teal-800)' }}
     >
-      <span className="text-[0.68rem] font-semibold opacity-56 uppercase">{card.size}</span>
-      <h3 className="text-[2rem] font-semibold leading-[0.98] m-0 max-sm:text-[1.7rem]">
+      <span className="type-eyebrow opacity-56">{card.size}</span>
+      <h3 className="type-card-title m-0">
         {parseHeadline(card.title)}
       </h3>
-      <p className="text-[0.95rem] leading-[1.45] m-0 opacity-76">
+      <p className="type-caption m-0 opacity-76">
         {card.copy}
       </p>
     </article>
@@ -95,10 +94,10 @@ function BentoCardNeutral({ card }: { card: BentoCard }) {
       className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 gap-3-5"
       style={{ background: 'var(--mint-300)', color: 'var(--teal-800)' }}
     >
-      <h3 className="text-[2rem] font-semibold leading-[0.98] m-0 max-sm:text-[1.7rem]">
+      <h3 className="type-card-title m-0">
         {parseHeadline(card.title)}
       </h3>
-      <p className="text-[0.95rem] leading-[1.45] m-0 opacity-76">
+      <p className="type-caption m-0 opacity-76">
         {card.copy}
       </p>
     </article>

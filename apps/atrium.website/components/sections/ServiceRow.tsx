@@ -19,7 +19,7 @@ export default function ServiceRow({ slug, name, body, num, color }: Props) {
       onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent' }}
     >
       <span
-        className="flex-shrink-0 tabular-nums text-sm font-medium w-8 text-right"
+        className="type-caption w-8 flex-shrink-0 text-right font-medium tabular-nums"
         style={{ color: `${color}55` }}
       >
         {num}
@@ -33,7 +33,7 @@ export default function ServiceRow({ slug, name, body, num, color }: Props) {
       </span>
 
       <span
-        className="hidden lg:block flex-shrink-0 w-72 text-sm leading-relaxed text-right"
+        className="type-caption hidden w-72 flex-shrink-0 text-right lg:block"
         style={{ color: 'var(--text-on-dark)', opacity: 0.38 }}
       >
         {body}

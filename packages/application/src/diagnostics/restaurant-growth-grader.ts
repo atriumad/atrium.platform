@@ -1,6 +1,10 @@
 import { err, ok, type Result } from "@atrium/shared"
 import type { SocialHealthScore } from "./social-health-scorer"
 
+export const RESTAURANT_GROWTH_SCORING_VERSION = "restaurant-growth-v2" as const
+
+export type RestaurantGrowthScoringVersion = typeof RESTAURANT_GROWTH_SCORING_VERSION
+
 export type RestaurantGrowthProfile = {
   readonly id: string
   readonly name: string
@@ -125,6 +129,11 @@ export type RestaurantExecutiveSummary = {
   readonly summary: string
   readonly priority: string
   readonly atriumPlan: readonly string[]
+  readonly primaryLeak?: string
+  readonly rootCause?: string
+  readonly whyItMatters?: string
+  readonly firstMove?: string
+  readonly evidenceHighlights?: readonly string[]
 }
 
 export type DiagnosticStepId =
@@ -148,7 +157,7 @@ export type DiagnosticStepResult = {
 }
 
 export type RestaurantDataQuality = {
-  readonly provider: "osm" | "google" | "manual" | "mixed"
+  readonly provider: "google" | "manual" | "mixed"
   readonly hasWebsite: boolean
   readonly hasReputation: boolean
   readonly hasSocial: boolean
@@ -177,6 +186,8 @@ export type RestaurantGrowthReport = {
   readonly estimatedLostOpportunity: string
   readonly nextBestAction: string
   readonly confidence: "low" | "medium" | "high"
+  readonly scoringVersion: RestaurantGrowthScoringVersion
+  readonly providerVersions: Record<string, string>
   readonly diagnosticSteps: readonly DiagnosticStepResult[]
   readonly dataQuality: RestaurantDataQuality
   readonly socialHealth?: SocialHealthScore
@@ -245,6 +256,8 @@ export function gradeRestaurantGrowth(
     estimatedLostOpportunity: estimateLostOpportunity(overallScore, issues),
     nextBestAction: nextBestAction(overallScore, recommendations),
     confidence: reportConfidence(profile),
+    scoringVersion: RESTAURANT_GROWTH_SCORING_VERSION,
+    providerVersions: buildProviderVersions(profile, dataQuality),
     diagnosticSteps: buildDiagnosticSteps(profile, scoreDetails, issues, recommendations),
     dataQuality,
   })
@@ -676,8 +689,35 @@ function buildDataQuality(
 function dataQualityProvider(profile: RestaurantGrowthProfile): RestaurantDataQuality["provider"] {
   if (profile.reputationDataSource === "google") return "google"
   if (profile.reputationDataSource === "manual") return "mixed"
-  if (profile.reputationDataSource === "open-data") return "osm"
-  return "osm"
+  return "google"
+}
+
+function buildProviderVersions(
+  profile: RestaurantGrowthProfile,
+  dataQuality: RestaurantDataQuality,
+): Record<string, string> {
+  return {
+    businessData: dataQuality.provider === "google"
+      ? "google-places-business-v1"
+      : `${dataQuality.provider}-business-profile-v1`,
+    website: profile.website.lighthouse ? "pagespeed-v1+website-html-v1" : "website-html-v1",
+    benchmark: profile.localRank === null && profile.competitorAverageRating === null
+      ? "google-market-layer-not-connected-v1"
+      : "google-nearby-benchmark-v1",
+    reputation: reputationProviderVersion(profile),
+    social: "not-scanned",
+  }
+}
+
+function reputationProviderVersion(
+  profile: RestaurantGrowthProfile,
+): string {
+  const source = profile.reputationDataSource
+  if (source === "google") return "google-places-reputation-v1"
+  if (source === "manual") return "manual-reputation-v1"
+  if (source === "open-data") return "open-data-reputation-v1"
+  if (!isReputationUnknown(profile)) return "unattributed-reputation-v1"
+  return "unavailable"
 }
 
 function buildDiagnosticSteps(
@@ -795,12 +835,12 @@ function buildBenchmarkStep(profile: RestaurantGrowthProfile): DiagnosticStepRes
     return {
       id: "benchmark",
       status: "partial",
-      source: "OpenStreetMap nearby-place benchmark",
+      source: "Google local benchmark not connected",
       confidence: "low",
-      checked: ["Nearby food businesses", "Relative website availability", "Relative phone availability"],
+      checked: ["Nearby food businesses", "Relative visibility", "Competitor comparison"],
       found: [],
-      missing: ["Enough nearby benchmark data for a stronger local visibility read"],
-      assumptions: ["The local benchmark is a heuristic, not a Google Maps rank or sales comparison."],
+      missing: ["Google Nearby/Text Search benchmark data"],
+      assumptions: ["The local benchmark is not connected yet; this report does not claim a Google Maps rank."],
       errors: [],
     }
   }
@@ -808,9 +848,9 @@ function buildBenchmarkStep(profile: RestaurantGrowthProfile): DiagnosticStepRes
   return {
     id: "benchmark",
     status: "complete",
-    source: "OpenStreetMap nearby-place benchmark",
+    source: "Google local benchmark",
     confidence: "medium",
-    checked: ["Nearby food businesses", "Relative website availability", "Relative phone availability"],
+    checked: ["Nearby food businesses", "Relative visibility", "Competitor comparison"],
     found: [`Estimated visibility heuristic: ${profile.localRank}`],
     missing: [],
     assumptions: ["The local benchmark is directional and should not be treated as true rank tracking."],

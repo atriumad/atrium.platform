@@ -47,10 +47,10 @@ export default function IconGrid({ items, bg }: Props) {
               >
                 {String(i + 1).padStart(2, '0')}
               </div>
-              <p className="font-semibold text-base" style={{ color: 'var(--text-strong)' }}>
+              <p className="type-card-title" style={{ color: 'var(--text-strong)' }}>
                 {item.title}
               </p>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-strong)', opacity: 0.6 }}>
+              <p className="type-caption" style={{ color: 'var(--text-strong)', opacity: 0.72 }}>
                 {item.description}
               </p>
             </div>

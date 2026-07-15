@@ -1,9 +1,9 @@
 "use client"
 
-import type { RestaurantGrowthReport } from "@atrium/application"
+import type { DiagnosticStepResult, RestaurantGrowthReport } from "@atrium/application"
 import { Button } from "@atrium/ui"
 import { gsap } from "gsap"
-import type { CSSProperties, FormEvent, SVGProps } from "react"
+import type { FormEvent, SVGProps } from "react"
 import { useEffect, useId, useMemo, useRef, useState } from "react"
 import type { NarrativeData } from "@/lib/report-merger"
 import { mergeNarrativeIntoReport, mergeSocialIntoReport } from "@/lib/report-merger"
@@ -15,9 +15,11 @@ type ReportMeta = {
     [key: string]: unknown
   }
   googleMeta: unknown
+  localBenchmark?: unknown
 }
 
 type GraderResponse = {
+  scanId?: string
   report?: RestaurantGrowthReport
   meta?: ReportMeta
   error?: string
@@ -98,48 +100,57 @@ const loadingScenes = [
 
 const scanSteps = [
   {
-    id: "locate", label: "Business", status: "Locating your business on Google Maps",
+    id: "listing", label: "Listing", status: "Checking public listing",
     details: [
-      "Locating your business on Google Maps",
-      "Verifying listing status & ownership",
-      "Checking name, address & phone (NAP)",
-      "Matching category & attributes",
+      "Checking public listing",
+      "Reading business name, category, address, and website fields",
+      "Estimating listing completeness",
+      "Normalizing the business profile",
     ],
   },
   {
-    id: "google", label: "Google", status: "Pulling visibility, ratings & reviews",
+    id: "website", label: "Website", status: "Running website audit",
     details: [
-      "Reading star rating & review count",
-      "Measuring review velocity & recency",
-      "Checking local search visibility",
-      "Analyzing competitor positioning",
+      "Running website audit",
+      "Checking menu, ordering, reservation, and phone signals",
+      "Reading local schema and meta description",
+      "Capturing available speed signals",
     ],
   },
   {
-    id: "web", label: "Web", status: "Scanning website and local citations",
+    id: "benchmark", label: "Market", status: "Estimating local benchmark",
     details: [
-      "Testing page load speed",
-      "Scanning on-page SEO signals",
-      "Auditing local citation consistency",
-      "Checking mobile & Core Web Vitals",
+      "Preparing local benchmark layer",
+      "Keeping rank claims separate from directional signals",
+      "Flagging benchmark limitations",
+      "Marking missing market data clearly",
     ],
   },
   {
-    id: "social", label: "Social", status: "Checking Instagram, Facebook & TikTok",
+    id: "reputation", label: "Reviews", status: "Checking reputation availability",
     details: [
-      "Finding Instagram profile & followers",
-      "Checking Facebook page & engagement",
-      "Scanning TikTok presence & reach",
-      "Measuring post frequency & consistency",
+      "Checking reputation availability",
+      "Reading rating and review count when available",
+      "Applying a neutral baseline if reviews are unavailable",
+      "Separating verified data from assumptions",
     ],
   },
   {
-    id: "brief", label: "Brief", status: "Building your personalized growth brief",
+    id: "social", label: "Social", status: "Checking social handles",
     details: [
-      "Calculating overall growth score",
-      "Benchmarking against category average",
-      "Identifying highest-impact opportunities",
-      "Drafting personalized recommendations",
+      "Checking social handles",
+      "Looking for public Instagram, Facebook, and TikTok signals",
+      "Separating detected profiles from missing profiles",
+      "Capturing social data limitations",
+    ],
+  },
+  {
+    id: "brief", label: "Plan", status: "Building action plan",
+    details: [
+      "Building action plan",
+      "Calculating the growth score",
+      "Identifying the highest-risk leak",
+      "Translating findings into the first fix",
     ],
   },
 ] as const
@@ -152,7 +163,7 @@ type PlaceSuggestion = {
   name: string
   address: string
   description: string
-  source: "google" | "openstreetmap"
+  source: "google"
   photoUrl?: string | null
   photoAttribution?: string | null
 }
@@ -228,7 +239,7 @@ export function GraderClient() {
         if (controller.signal.aborted) return
 
         setSuggestions(result.suggestions)
-        setSearchError(result.error ?? (result.suggestions.length === 0 ? "No matching restaurants found in open data" : null))
+        setSearchError(result.error ?? (result.suggestions.length === 0 ? "No matching restaurant found" : null))
       } catch {
         if (!controller.signal.aborted) {
           setSuggestions([])
@@ -300,7 +311,7 @@ export function GraderClient() {
       const nextSuggestions = result.suggestions
       setSuggestions(nextSuggestions)
       if (nextSuggestions.length === 0) {
-        setSearchError("No matching restaurants found in open data")
+        setSearchError("No matching restaurant found")
       }
     } catch {
       setSuggestions([])
@@ -332,40 +343,37 @@ export function GraderClient() {
         return
       }
 
-      // Steps 2+3 run in parallel — keep loading until all resolve
+      // Social evidence must be merged before the agent writes the final narrative.
       let finalReport = body.report
 
       if (body.meta) {
-        const { profile, googleMeta } = body.meta
+        const { profile, googleMeta, localBenchmark } = body.meta
 
-        const [socialResult, narrativeResult] = await Promise.all([
-          fetch("/api/grader/social", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ websiteUrl: profile.websiteUrl, name: profile.name, address: profile.address }),
-          })
-            .then((r) => r.json() as Promise<SocialResponse>)
-            .catch(() => ({ socialHealth: undefined }) as SocialResponse),
-
-          fetch("/api/grader/narrative", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              profile,
-              googleMeta,
-              scores: finalReport.scores,
-              overallScore: finalReport.overallScore,
-              issues: finalReport.issues,
-              recommendations: finalReport.recommendations,
-            }),
-          })
-            .then((r) => r.json() as Promise<NarrativeResponse>)
-            .catch(() => ({ narrative: null }) as NarrativeResponse),
-        ])
+        const socialResult = await fetch("/api/grader/social", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ websiteUrl: profile.websiteUrl, name: profile.name, address: profile.address }),
+        })
+          .then((r) => r.json() as Promise<SocialResponse>)
+          .catch(() => ({ socialHealth: undefined }) as SocialResponse)
 
         if (socialResult.socialHealth) {
           finalReport = mergeSocialIntoReport(finalReport, socialResult.socialHealth)
         }
+
+        const narrativeResult = await fetch("/api/grader/narrative", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            profile,
+            googleMeta,
+            localBenchmark,
+            report: finalReport,
+          }),
+        })
+          .then((r) => r.json() as Promise<NarrativeResponse>)
+          .catch(() => ({ narrative: null }) as NarrativeResponse)
+
         if (narrativeResult.narrative) {
           finalReport = mergeNarrativeIntoReport(finalReport, narrativeResult.narrative)
         }
@@ -474,7 +482,7 @@ function SearchStage({
         </h1>
       </div>
 
-      <form className={`search-form ${selectedPlace ? "search-form--ready" : ""}`} onSubmit={handleSubmit}>
+      <form className={`search-form group ${selectedPlace ? "search-form--ready" : ""}`} onSubmit={handleSubmit}>
         <input
           aria-label="Restaurant"
           aria-autocomplete="list"
@@ -482,7 +490,7 @@ function SearchStage({
           aria-expanded={!compact && suggestions.length > 0}
           aria-haspopup="listbox"
           autoComplete="off"
-          className="search-input"
+          className="search-input transition-[border-color,box-shadow,transform] duration-200 ease-out focus-visible:scale-[1.01]"
           onChange={(event) => onQueryChange(event.target.value)}
           placeholder="Restaurant name and city"
           role="combobox"
@@ -490,7 +498,11 @@ function SearchStage({
           value={query}
         />
         {selectedPlace && (
-          <button className="search-button" disabled={loading || searching} type="submit">
+          <button
+            className="search-button transition-[transform,box-shadow,filter] duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] disabled:hover:translate-y-0 disabled:active:scale-100"
+            disabled={loading || searching}
+            type="submit"
+          >
             Scan
           </button>
         )}
@@ -500,7 +512,7 @@ function SearchStage({
         <div className="suggestion-list" id="restaurant-suggestions" role="listbox">
           {suggestions.map((suggestion) => (
             <button
-              className="suggestion-item"
+              className="suggestion-item transition-[transform,border-color,box-shadow] duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.985] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f7a823]"
               key={suggestion.placeId}
               onClick={() => onChooseSuggestion(suggestion)}
               role="option"
@@ -514,7 +526,7 @@ function SearchStage({
       )}
 
       {!compact && searching && suggestions.length === 0 && (
-        <p className="inline-message inline-message--neutral">Searching open restaurant data...</p>
+        <p className="inline-message inline-message--neutral">Searching restaurants...</p>
       )}
 
       {!compact && searchError && <p className="inline-message inline-message--error">{searchError}</p>}
@@ -532,6 +544,9 @@ function SearchStage({
           <div className="selected-place-copy">
             <strong>{selectedPlace.name}</strong>
             {selectedSummary && <small>{selectedSummary}</small>}
+            <span className="mt-2 inline-flex w-fit items-center rounded-full border border-[#6fa39f]/40 bg-[#e4faf1] px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-[#072f34]">
+              Restaurant match
+            </span>
           </div>
         </div>
       )}
@@ -544,7 +559,6 @@ function SearchStage({
 function LoadingStage() {
   const [sceneIndex, setSceneIndex] = useState(0)
   const [stepIndex, setStepIndex] = useState(0)
-  const [subIndex, setSubIndex] = useState(0)
   const collageRef = useRef<HTMLDivElement | null>(null)
   const scene = loadingScenes[sceneIndex] ?? loadingScenes[0]
   const step = scanSteps[stepIndex] ?? scanSteps[0]
@@ -619,29 +633,8 @@ function LoadingStage() {
     return () => context.revert()
   }, [scene.id])
 
-  // Cycle sub-steps within each main step
-  // Brief (last step) uses longer interval so it doesn't loop visibly
   useEffect(() => {
-    const details = scanSteps[stepIndex]?.details
-    if (!details) return
-    const isBrief = stepIndex === scanSteps.length - 1
-    const interval = isBrief ? 2600 : 1700
-    let current = 0
-    let cancelled = false
-    const cycle = async () => {
-      while (!cancelled) {
-        await new Promise<void>((resolve) => window.setTimeout(resolve, interval))
-        if (cancelled) break
-        current = (current + 1) % details.length
-        setSubIndex(current)
-      }
-    }
-    void cycle()
-    return () => { cancelled = true }
-  }, [stepIndex])
-
-  useEffect(() => {
-    const durations = [5200, 5400, 5400, 5600, 6000]
+    const durations = [4400, 4800, 4600, 4800, 5000, 5600]
     let current = 0
     let cancelled = false
 
@@ -652,7 +645,6 @@ function LoadingStage() {
         if (cancelled) break
         if (current < scanSteps.length - 1) {
           current += 1
-          setSubIndex(0)
           setStepIndex(current)
         } else {
           break
@@ -682,24 +674,16 @@ function LoadingStage() {
             <>
               <div className="loading-card loading-card--text loading-card--a">
                 <span>{scene.cards[0]?.label}</span>
-                <p>{scene.cards[0]?.body}</p>
-              </div>
-
-              <div className="loading-card loading-card--text loading-card--c">
-                <span>{scene.cards[1]?.label}</span>
-                <p>{scene.cards[1]?.body}</p>
               </div>
 
               <div className="loading-card loading-card--text loading-card--e">
                 <span>{scene.cards[2]?.label}</span>
-                <p>{scene.cards[2]?.body}</p>
               </div>
             </>
           ) : (
             <>
               <div className="loading-card loading-card--text loading-card--client loading-card--a">
                 <span>{scene.client}</span>
-                <p>{scene.summary}</p>
               </div>
 
               <div className="loading-card loading-card--metric loading-card--b">
@@ -715,8 +699,12 @@ function LoadingStage() {
           )}
 
           <span className="loading-badge loading-badge--a">{scene.badges[0]}</span>
-          <span className="loading-badge loading-badge--b">{scene.badges[1]}</span>
         </div>
+      </div>
+
+      <div className="loading-visual-status" key={step.id}>
+        <span>{String(stepIndex + 1).padStart(2, "0")} / {String(scanSteps.length).padStart(2, "0")}</span>
+        <strong>{step.status}</strong>
       </div>
 
       <div className="loading-progress" aria-hidden="true">
@@ -727,15 +715,11 @@ function LoadingStage() {
               <div className="loading-step-dot">
                 {i < stepIndex && <span aria-hidden="true" className="loading-step-check" />}
               </div>
-              <span className="loading-step-label">{s.label}</span>
             </div>
           )
         })}
       </div>
-
-      <p className="loading-step-sub" key={`${stepIndex}-${subIndex}`}>
-        {scanSteps[stepIndex]?.details[subIndex]}
-      </p>
+      <span className="visually-hidden">{step.status}</span>
     </section>
   )
 }
@@ -750,102 +734,182 @@ function ReportStage({
   const tone = scoreTone(report.overallScore)
   const planItems = report.executiveSummary.atriumPlan
   const primaryPlanItem = planItems[0] ?? "Validate the weakest leak with a deeper audit."
-  const nextPlanItems = planItems.slice(1, 4)
+  const thirtyDayPlan = planItems.slice(0, 3)
   const missingCriticalData = report.dataQuality?.missingCriticalData ?? []
   const contactHref = buildAgencyContactHref(report)
   const opensNewTab = !contactHref.startsWith("mailto:")
   const scoreSignal = scoreSignalCopy(tone)
+  const highestRiskLeak = report.issues[0]?.message ?? "No severe demand leak was found in this scan."
+  const primaryLeak = report.executiveSummary.primaryLeak ?? highestRiskLeak
+  const rootCause = report.executiveSummary.rootCause ?? report.executiveSummary.priority
+  const whyItMatters = report.executiveSummary.whyItMatters ?? report.businessImpact.explanation
+  const firstMove = report.executiveSummary.firstMove ?? primaryPlanItem
+  const evidenceHighlights = reportEvidenceHighlights(report)
+  const scoreEntries = topScoreEntries(report)
+  const scoreWidth = `${Math.max(0, Math.min(100, report.overallScore))}%`
+  const missingDataWarning = missingCriticalData.length > 0
+    ? `Missing data can change the read: ${missingCriticalData.slice(0, 3).join(", ")}.`
+    : null
+  const displayHeadline = publicReportText(report.executiveSummary.headline)
+  const displaySummary = publicReportText(report.executiveSummary.summary)
+  const displayPrimaryLeak = publicReportText(primaryLeak)
+  const displayRootCause = publicReportText(rootCause)
+  const displayWhyItMatters = publicReportText(whyItMatters)
+  const displayFirstMove = publicReportText(firstMove)
 
   return (
-    <section className="diagnostic-stage diagnostic-stage--ready">
-      <article className={`diagnostic-hero-panel diagnostic-hero-panel--${tone}`}>
-        <div className="diagnostic-brand-row">
-          <div className="diagnostic-brand-lockup">
-            <span aria-label="Atrium" className="diagnostic-brand-wordmark" role="img" />
-            <span>Growth Grader</span>
-          </div>
-          <div className="diagnostic-report-tags">
-            <span>Restaurant Growth Diagnostic</span>
-            <span>{confidenceCopy(report.confidence)}</span>
-          </div>
-        </div>
-
-        <div className="diagnostic-hero-grid">
-          <div className="diagnostic-score-block">
-            <span>Growth score</span>
-            <strong>{report.overallScore}</strong>
-            <small>{scoreSignal}</small>
-            <div aria-hidden="true" className="diagnostic-meter" style={{ "--diagnostic-progress": "100%" } as CSSProperties}>
-              <span />
-            </div>
+    <section className="diagnostic-stage diagnostic-stage--ready gap-12 md:gap-16">
+      <article className="w-full">
+        <header className="grid gap-10 border-t border-[rgb(7_47_52_/_18%)] pt-8 lg:grid-cols-12 lg:items-stretch lg:gap-16">
+          <div className="lg:col-span-8">
+            <p className="type-eyebrow text-[var(--teal-500)]">Growth diagnostic / {publicReportText(report.business.address)}</p>
+            <h1 className="type-section-title mt-6 text-[var(--text-strong)]">
+              {publicReportText(report.business.name)}
+            </h1>
+            <h2 className="mt-7 max-w-[18ch] font-[var(--font-serif)] text-[clamp(2rem,4vw,4rem)] font-normal italic leading-[0.98] text-[var(--teal-700)]">
+              {displayHeadline}
+            </h2>
+            <p className="type-lead mt-7 max-w-[48rem] text-[var(--text-body)]">
+              {displaySummary}
+            </p>
           </div>
 
-          <div className="diagnostic-summary-block">
-            <h1>{report.business.name}</h1>
-            <span>{report.business.address}</span>
-            <h2>{report.executiveSummary.headline}</h2>
-            <p>{report.executiveSummary.summary}</p>
-          </div>
-        </div>
-
-        <div className="diagnostic-truth-bar">
-          <span>Uses public discovery, website, reputation, and social signals.</span>
-          <span>No POS, ticket size, CAC, margin, CRM, or private analytics in the free scan.</span>
-          {missingCriticalData.length ? (
-            <span>Missing: {missingCriticalData.slice(0, 2).join(", ")}</span>
-          ) : null}
-        </div>
-      </article>
-
-      <div className="diagnostic-report-grid">
-        <section className={`diagnostic-panel diagnostic-panel--impact diagnostic-panel--${report.businessImpact.level}`}>
-          <p className="micro-label">What the score means</p>
-          <h2>{report.businessImpact.headline}</h2>
-          <p>{report.businessImpact.explanation}</p>
-          <strong>{report.estimatedLostOpportunity}</strong>
-        </section>
-
-        <section className="diagnostic-panel diagnostic-panel--translation">
-          <p className="micro-label">Score translation</p>
-          <h2>Where demand is leaking</h2>
-          <div className="score-translation-list">
-            {report.scoreInterpretation.slice(0, 5).map((insight) => (
-              <div className={`score-translation-row score-translation-row--${insight.status}`} key={insight.category}>
-                <div className="score-translation-metric">
-                  <span>{insight.label}</span>
-                  <strong>{insight.score}</strong>
-                </div>
-                <p>{insight.businessImpact}</p>
+          <aside className="flex min-h-[24rem] flex-col justify-between rounded-[var(--radius-bento)] bg-[var(--surface-dark)] p-7 text-white lg:col-span-4 lg:p-9">
+            <div>
+              <div className="flex items-center justify-between gap-4">
+                <span aria-label="Atrium" className="diagnostic-brand-wordmark" role="img" />
+                <span className="type-eyebrow text-[var(--mint-400)]">Growth score</span>
               </div>
-            ))}
+              <strong className="mt-12 block whitespace-nowrap font-[var(--font-serif)] text-[clamp(7rem,13vw,11rem)] font-normal italic leading-[0.7] tracking-[-0.06em] text-[var(--mint-400)] tabular-nums">
+                {report.overallScore}
+              </strong>
+              <p className="type-lead mt-7 text-white/75">{scoreSignal}</p>
+              <div className="mt-7 h-px overflow-hidden bg-white/15" aria-hidden="true">
+                <span className={`block h-full ${scoreBarClass(tone)}`} style={{ width: scoreWidth }} />
+              </div>
+            </div>
+            <div className="type-caption flex flex-wrap gap-x-3 gap-y-1 border-t border-white/15 pt-5 text-white/60">
+              <span>{confidenceCopy(report.confidence)}</span>
+              <span aria-hidden="true">/</span>
+              <span>Directional diagnostic</span>
+            </div>
+          </aside>
+        </header>
+
+        <section className="mt-24 grid gap-10 border-t border-[rgb(7_47_52_/_18%)] py-14 lg:grid-cols-12 lg:gap-16 md:mt-32 md:py-20">
+          <div className="lg:col-span-7">
+            <p className="type-eyebrow text-[var(--teal-500)]">Primary leak</p>
+            <h2 className="type-section-title mt-6 max-w-[13ch] text-[var(--text-strong)]">
+              {displayPrimaryLeak}
+            </h2>
+            <div className="mt-12 grid gap-8 border-t border-[rgb(7_47_52_/_14%)] pt-7 md:grid-cols-2">
+              <div>
+                <span className="type-eyebrow text-[var(--teal-500)]">Root cause</span>
+                <p className="type-body mt-4 text-[var(--text-body)]">{displayRootCause}</p>
+              </div>
+              <div>
+                <span className="type-eyebrow text-[var(--teal-500)]">Why it matters</span>
+                <p className="type-body mt-4 text-[var(--text-body)]">{displayWhyItMatters}</p>
+              </div>
+            </div>
           </div>
+
+          <aside className="flex flex-col justify-between rounded-[var(--radius-bento)] bg-[var(--amber-200)] p-7 text-[var(--text-on-amber)] lg:col-span-5 lg:p-9">
+            <div>
+              <p className="type-eyebrow text-[var(--teal-700)]">First move</p>
+              <h3 className="type-card-title mt-6">{displayFirstMove}</h3>
+            </div>
+            <a
+              className="type-caption group mt-12 inline-flex w-fit items-center gap-3 font-medium text-[var(--teal-800)] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--teal-800)]"
+              href={contactHref}
+              rel={opensNewTab ? "noreferrer" : undefined}
+              target={opensNewTab ? "_blank" : undefined}
+            >
+              Review the full plan
+              <span className="transition-transform duration-200 group-hover:translate-x-2" aria-hidden="true">→</span>
+            </a>
+          </aside>
         </section>
 
-        <section className="diagnostic-panel diagnostic-panel--plan">
-          <div className="diagnostic-plan-intro">
-            <div className="diagnostic-plan-head">
-              <p className="micro-label">How Atrium solves it</p>
-              <span>30-day start</span>
-            </div>
-            <h2>Stop the leak closest to revenue.</h2>
-            <div className="diagnostic-plan-focus">
-              <span>First move</span>
-              <strong>{primaryPlanItem}</strong>
-            </div>
-            <a className="diagnostic-cta-link" href={contactHref} rel={opensNewTab ? "noreferrer" : undefined} target={opensNewTab ? "_blank" : undefined}>
-              Get the complete plan
-            </a>
+        <section className="grid gap-10 border-t border-[rgb(7_47_52_/_18%)] py-14 lg:grid-cols-12 lg:gap-16 md:py-20">
+          <div className="lg:col-span-4">
+            <p className="type-eyebrow text-[var(--teal-500)]">30-day plan</p>
+            <h2 className="type-card-title mt-6 text-[var(--text-strong)]">Fix the closest leak first.</h2>
+            <p className="type-body mt-6 text-[var(--text-muted)]">{publicReportText(report.estimatedLostOpportunity)}</p>
           </div>
 
-          <ol className="diagnostic-plan-steps">
-            {nextPlanItems.map((step, index) => (
-              <li className="diagnostic-plan-step" key={step}>
-                <span>{index + 2}</span>
-                <p>{step}</p>
+          <ol className="m-0 list-none border-t border-[rgb(7_47_52_/_18%)] p-0 lg:col-span-8">
+            {thirtyDayPlan.map((step, index) => (
+              <li className="grid gap-5 border-b border-[rgb(7_47_52_/_18%)] py-8 md:grid-cols-[4rem_minmax(0,1fr)]" key={step}>
+                <span className="type-eyebrow text-[var(--teal-500)]">{String(index + 1).padStart(2, "0")}</span>
+                <p className="type-lead text-[var(--text-strong)]">{publicReportText(step)}</p>
               </li>
             ))}
           </ol>
         </section>
+
+        <section className="rounded-[var(--radius-bento)] bg-[var(--surface-dark)] px-7 py-16 text-white md:px-10 md:py-20">
+          <div className="grid gap-8 pb-14 lg:grid-cols-12 lg:items-end lg:gap-16">
+            <div className="lg:col-span-7">
+              <p className="type-eyebrow text-[var(--mint-400)]">Signal by signal</p>
+              <h2 className="type-section-title mt-6">Where growth is <em>leaking.</em></h2>
+            </div>
+            <p className="type-body max-w-md text-white/65 lg:col-span-5">
+              Each score reflects a different part of the path from discovery to repeat business.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 md:gap-x-14 lg:gap-x-20">
+            {scoreEntries.map((insight) => (
+              <article className="grid min-h-[14rem] items-center gap-7 border-t border-[rgb(181_242_219_/_22%)] py-9 md:grid-cols-[minmax(0,1fr)_auto]" key={insight.category}>
+                <div>
+                  <span className="type-eyebrow text-[var(--mint-300)]">{insight.label}</span>
+                  <p className="type-caption mt-4 max-w-sm text-white/65">{publicReportText(insight.businessImpact)}</p>
+                </div>
+                <strong className="whitespace-nowrap font-[var(--font-serif)] text-[clamp(4.5rem,8vw,7rem)] font-normal italic leading-none tracking-[-0.055em] text-[var(--mint-400)] tabular-nums">
+                  {insight.score}
+                </strong>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <details className="group mt-20 border-t border-[rgb(7_47_52_/_18%)] pt-8 md:mt-28">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
+            <span className="type-card-title text-[var(--text-strong)]">Supporting evidence</span>
+            <span className="flex size-10 items-center justify-center border border-[rgb(7_47_52_/_18%)] text-2xl font-normal text-[var(--teal-800)] transition-transform duration-150 ease-out group-open:rotate-45 motion-reduce:transition-none">
+              +
+            </span>
+          </summary>
+
+          <div className="mt-10">
+            <div className="grid border-t border-[rgb(7_47_52_/_18%)] md:grid-cols-3">
+              {evidenceHighlights.map((highlight) => (
+                <div className="border-b border-[rgb(7_47_52_/_18%)] py-7 md:border-l md:px-6 md:first:border-l-0" key={highlight}>
+                  <span className="type-eyebrow text-[var(--teal-500)]">Signal</span>
+                  <p className="type-caption mt-4 text-[var(--text-strong)]">{publicReportText(highlight)}</p>
+                </div>
+              ))}
+              {missingDataWarning ? (
+                <div className="border-b border-[rgb(7_47_52_/_18%)] bg-[var(--amber-200)] p-7">
+                  <span className="type-eyebrow text-[var(--teal-700)]">Limitation</span>
+                  <p className="type-caption mt-4 text-[var(--text-strong)]">{publicReportText(missingDataWarning)}</p>
+                </div>
+              ) : null}
+            </div>
+
+            <div className="mt-12 grid gap-x-12 lg:grid-cols-2">
+              {report.diagnosticSteps.map((step) => (
+                <DiagnosticEvidenceCard key={step.id} step={step} />
+              ))}
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <div className="type-caption flex w-full flex-col gap-2 border-t border-[rgb(7_47_52_/_18%)] pt-6 text-[var(--text-muted)] md:flex-row md:items-center md:justify-between">
+        <span>Directional free scan. Confirm with first-party business data before major spend.</span>
+        {missingCriticalData.length ? <span>Missing: {missingCriticalData.slice(0, 2).map(publicReportText).join(", ")}</span> : null}
       </div>
 
       <div className="result-actions">
@@ -854,6 +918,61 @@ function ReportStage({
         </Button>
       </div>
     </section>
+  )
+}
+
+function DiagnosticEvidenceCard({ step }: { step: DiagnosticStepResult }) {
+  const foundSignals = Array.from(new Set(step.found)).slice(0, 4).map(publicReportText)
+  const missingSignals = Array.from(new Set(step.missing)).slice(0, 4).map(publicReportText)
+  const limitation = publicReportText(diagnosticStepLimitation(step))
+
+  return (
+    <article className="border-t border-[rgb(7_47_52_/_18%)] py-9">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="type-eyebrow text-[var(--teal-500)]">{diagnosticStepTitle(step.id)}</p>
+          <strong className="type-lead mt-3 block font-normal text-[var(--text-strong)]">{diagnosticStatusCopy(step.status)}</strong>
+        </div>
+        <span className="type-caption border border-[rgb(7_47_52_/_14%)] px-3 py-1 text-[var(--teal-700)]">
+          {stepConfidenceCopy(step.confidence)}
+        </span>
+      </div>
+
+      <dl className="mt-7 grid gap-5 border-t border-[rgb(7_47_52_/_14%)] pt-5 sm:grid-cols-2">
+        <div>
+          <dt className="type-eyebrow text-[var(--teal-500)]">Signal group</dt>
+          <dd className="type-caption mt-2 text-[var(--text-body)]">{diagnosticStepTitle(step.id)}</dd>
+        </div>
+        <div>
+          <dt className="type-eyebrow text-[var(--teal-500)]">Checked</dt>
+          <dd className="type-caption mt-2 text-[var(--text-body)]">{step.checked.slice(0, 3).map(publicReportText).join(", ")}</dd>
+        </div>
+      </dl>
+
+      <div className="mt-7 grid gap-6 sm:grid-cols-2">
+        <div className="border-t border-[rgb(7_47_52_/_14%)] pt-5">
+          <span className="type-eyebrow text-[var(--teal-500)]">Found</span>
+          <ul className="type-caption mt-3 grid gap-1 text-[var(--text-body)]">
+            {foundSignals.length > 0
+              ? foundSignals.map((signal) => <li key={signal}>{signal}</li>)
+              : <li>No confirmed signals in this step.</li>}
+          </ul>
+        </div>
+        <div className="border-t border-[rgb(7_47_52_/_14%)] pt-5">
+          <span className="type-eyebrow text-[var(--teal-500)]">Missing</span>
+          <ul className="type-caption mt-3 grid gap-1 text-[var(--text-body)]">
+            {missingSignals.length > 0
+              ? missingSignals.map((signal) => <li key={signal}>{signal}</li>)
+              : <li>No major missing signal flagged.</li>}
+          </ul>
+        </div>
+      </div>
+
+      <p className="type-caption mt-7 text-[var(--text-muted)]">{limitation}</p>
+      <p className="type-caption mt-4 text-[var(--text-body)]">
+        <strong>What Atrium would fix:</strong> {publicReportText(diagnosticStepFix(step.id))}
+      </p>
+    </article>
   )
 }
 
@@ -898,6 +1017,36 @@ function DotPattern({
   )
 }
 
+function publicReportText(value: string): string {
+  return value
+    .replace(/\bGoogle listing\b/gi, "listing")
+    .replace(/\bGoogle Places\b/gi, "public listing")
+    .replace(/\bGoogle Maps\b/gi, "local map")
+    .replace(/\bGoogle\b/gi, "public listing")
+    .replace(/\bScrapeCreators\b/gi, "social scan")
+    .replace(/\bPageSpeed Insights\b/gi, "speed audit")
+    .replace(/\bPageSpeed\b/gi, "speed audit")
+    .replace(/\bLighthouse\b/gi, "speed audit")
+    .replace(/\bWebsite HTML fetch\b/gi, "website scan")
+    .replace(/\bHTML response\b/gi, "website response")
+    .replace(/\bpublic listing listing\b/gi, "listing")
+}
+
+function topScoreEntries(report: RestaurantGrowthReport) {
+  return report.scoreInterpretation.slice(0, 5)
+}
+
+function reportEvidenceHighlights(report: RestaurantGrowthReport): readonly string[] {
+  const agentHighlights = report.executiveSummary.evidenceHighlights
+  if (agentHighlights?.length) return agentHighlights.slice(0, 4)
+
+  return [
+    report.issues[0]?.message,
+    report.nextBestAction,
+    report.estimatedLostOpportunity,
+  ].filter((item): item is string => Boolean(item))
+}
+
 function confidenceCopy(confidence: RestaurantGrowthReport["confidence"]) {
   if (confidence === "high") return "High confidence"
   if (confidence === "medium") return "Medium confidence"
@@ -914,6 +1063,55 @@ function scoreSignalCopy(tone: ScoreTone) {
   if (tone === "high") return "Strong base"
   if (tone === "medium") return "Watch zone"
   return "Leak alert"
+}
+
+function scoreBarClass(tone: ScoreTone) {
+  if (tone === "high") return "bg-[var(--mint-500)]"
+  if (tone === "medium") return "bg-[var(--amber-400)]"
+  return "bg-[var(--amber-600)]"
+}
+
+function diagnosticStepTitle(id: DiagnosticStepResult["id"]) {
+  const titles: Record<DiagnosticStepResult["id"], string> = {
+    openData: "Business profile",
+    website: "Website path",
+    benchmark: "Market position",
+    reputation: "Reputation",
+    social: "Social presence",
+    brief: "Action plan",
+  }
+
+  return titles[id]
+}
+
+function diagnosticStatusCopy(status: DiagnosticStepResult["status"]) {
+  if (status === "complete") return "Complete"
+  if (status === "partial") return "Partial"
+  if (status === "skipped") return "Skipped"
+  return "Failed"
+}
+
+function stepConfidenceCopy(confidence: DiagnosticStepResult["confidence"]) {
+  if (confidence === "high") return "High confidence"
+  if (confidence === "medium") return "Medium confidence"
+  return "Low confidence"
+}
+
+function diagnosticStepLimitation(step: DiagnosticStepResult) {
+  return step.assumptions[0] ?? step.errors[0] ?? "This step is directional and should be confirmed with connected first-party data."
+}
+
+function diagnosticStepFix(id: DiagnosticStepResult["id"]) {
+  const fixes: Record<DiagnosticStepResult["id"], string> = {
+    openData: "Clean up listing fields, category coverage, and public profile completeness.",
+    website: "Repair the owned website path so guests can find menus, order, reserve, or call quickly.",
+    benchmark: "Connect a real local benchmark before making visibility or ranking claims.",
+    reputation: "Build review generation and response workflows around verified review data.",
+    social: "Find or create the core social profiles and tie content cadence to offers and local demand.",
+    brief: "Prioritize the first fix and sequence the next 30 days around the highest-risk leak.",
+  }
+
+  return fixes[id]
 }
 
 function buildAgencyContactHref(report: RestaurantGrowthReport) {

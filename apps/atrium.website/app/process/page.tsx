@@ -50,7 +50,7 @@ export default function ProcessPage() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-3xl">
             <Eyebrow className="mb-5">Operating rhythm</Eyebrow>
-            <h2 className="text-3xl font-medium leading-tight md:text-5xl">
+            <h2 className="type-section-title">
               Every stage creates the input for the next one.
             </h2>
           </div>
@@ -66,8 +66,8 @@ export default function ProcessPage() {
                   {step.label}
                 </p>
                 <div>
-                  <h3 className="text-2xl font-medium">{step.title}</h3>
-                  <p className="mt-4 max-w-2xl text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  <h3 className="type-card-title">{step.title}</h3>
+                  <p className="type-body mt-4 max-w-2xl" style={{ color: 'var(--text-muted)' }}>
                     {step.body}
                   </p>
                 </div>
@@ -85,8 +85,8 @@ export default function ProcessPage() {
             ['Performance', 'What changed after the market saw it?'],
           ].map(([title, body]) => (
             <div key={title} className="rounded-2xl border p-7" style={{ borderColor: 'rgba(228,238,240,0.10)', background: 'rgba(7,47,52,0.38)' }}>
-              <h3 className="text-3xl font-medium">{title}</h3>
-              <p className="mt-5 text-sm leading-relaxed" style={{ opacity: 0.64 }}>
+              <h3 className="type-card-title">{title}</h3>
+              <p className="type-caption mt-5" style={{ opacity: 0.72 }}>
                 {body}
               </p>
             </div>
@@ -98,7 +98,7 @@ export default function ProcessPage() {
         eyebrow="READY FOR A CLEANER RHYTHM?"
         headline={<>Marketing feels better when <em>the system is visible.</em></>}
         body="We will map the first cycle, identify the missing inputs, and show what needs to happen before the first shoot."
-        cta="Let's Talk"
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="A monthly restaurant marketing cycle mapped on a wall"
       />

@@ -22,6 +22,26 @@
 /* Legacy website aliases retained for sections still authored against the
    pre-@atrium/ui token names. Remove once those components use semantic tokens. */
 :root {
+  /* Editorial typography: bind the loaded local faces directly to the system
+     so every page uses the same sans/serif contrast as the reference. */
+  --font-display: var(--font-inter-tight), system-ui, sans-serif;
+  --font-sans: var(--font-inter-tight), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+
+  /* Editorial type system — semantic roles, shared by every page. */
+  --type-page-title: clamp(3.75rem, 6.8vw, 7rem);
+  --type-section-title: clamp(3rem, 5vw, 5.5rem);
+  --type-card-title: clamp(1.75rem, 2.4vw, 2.5rem);
+  --type-lead: clamp(1.125rem, 1.5vw, 1.375rem);
+  --type-body: 1rem;
+  --type-caption: 0.875rem;
+  --type-eyebrow: 0.75rem;
+
+  --leading-page-title: 0.9;
+  --leading-section-title: 0.92;
+  --leading-card-title: 1.02;
+  --leading-copy: 1.6;
+
   --color-primary: var(--teal-800);
   --color-primary-900: var(--teal-900);
   --color-surface: var(--surface-page);
@@ -45,10 +65,161 @@ body {
   overflow-x: hidden;
 }
 
-h1 em, h2 em, h3 em, h4 em {
+:where(h1, h2, h3, h4) {
+  color: inherit;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+:where(h1, h2) {
+  font-variation-settings: "wght" 400;
+}
+
+:where(h3, h4) {
+  letter-spacing: -0.022em;
+}
+
+:where(h1, h2, h3, h4) em {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+main :where(p, li) {
+  font-family: var(--font-sans);
+  letter-spacing: -0.008em;
+  text-wrap: pretty;
+}
+
+main :where(p) {
+  max-width: 72ch;
+}
+
+/* Semantic typography roles. Components opt into a role instead of choosing
+   one-off sizes, keeping hierarchy consistent across every route. */
+.type-page-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-page-title);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: var(--leading-page-title);
+  text-wrap: balance;
+}
+
+.type-section-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-section-title);
+  font-weight: 400;
+  letter-spacing: -0.028em;
+  line-height: var(--leading-section-title);
+  text-wrap: balance;
+}
+
+.type-card-title {
+  font-family: var(--font-sans);
+  font-size: var(--type-card-title);
+  font-weight: 400;
+  letter-spacing: -0.018em;
+  line-height: var(--leading-card-title);
+  text-wrap: balance;
+}
+
+.type-lead {
+  font-family: var(--font-sans);
+  font-size: var(--type-lead);
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.type-body {
+  font-family: var(--font-sans);
+  font-size: var(--type-body);
+  font-weight: 400;
+  letter-spacing: -0.008em;
+  line-height: var(--leading-copy);
+  text-wrap: pretty;
+}
+
+.type-caption {
+  font-family: var(--font-sans);
+  font-size: var(--type-caption);
+  font-weight: 400;
+  letter-spacing: -0.004em;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.type-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--type-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wider);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+@keyframes brand-marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+.brand-marquee-track {
+  animation: brand-marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.brand-marquee-track--reverse {
+  animation-direction: reverse;
+}
+
+.brand-marquee-window {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+.brand-marquee-set {
+  width: min(var(--container-max), calc(100vw - var(--gutter) - var(--gutter)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-marquee-track {
+    animation-play-state: paused;
+  }
 }
 
 /* service-detail CSS removed — components now use Tailwind + design tokens */
+
+/* ─── Reels marquee ────────────────────────────────────────────────────────── */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.reels-track {
+  animation: marquee-x var(--reels-duration, 40s) linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reels-track {
+    animation: none;
+  }
+}

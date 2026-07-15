@@ -11,6 +11,7 @@ const strongProfile: RestaurantGrowthProfile = {
   googleReviewCount: 420,
   recentNegativeReviewCount: 2,
   unansweredReviewCount: 8,
+  reputationDataSource: "google",
   profileCompleteness: 0.92,
   localRank: 3,
   competitorAverageRating: 4.4,
@@ -47,6 +48,14 @@ describe("gradeRestaurantGrowth", () => {
     expect(result.value.scores.conversion).toBeGreaterThanOrEqual(80)
     expect(result.value.executiveSummary.headline).toContain("Strong")
     expect(result.value.businessImpact.level).toBe("low")
+    expect(result.value.scoringVersion).toBe("restaurant-growth-v2")
+    expect(result.value.providerVersions).toEqual(expect.objectContaining({
+      businessData: "google-places-business-v1",
+      website: "website-html-v1",
+      benchmark: "google-nearby-benchmark-v1",
+      reputation: "google-places-reputation-v1",
+      social: "not-scanned",
+    }))
     expect(result.value.scoreInterpretation).toHaveLength(4)
     expect(result.value.scoreDetails.website.some((detail) =>
       detail.includes("website conversion signals")

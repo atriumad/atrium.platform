@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getWebsiteUrlForPlace } from "@/lib/open-data-places"
+import { getWebsiteUrlForPlace, OpenDataPlacesLookupError } from "@/lib/open-data-places"
 import { safeFetch } from "@/lib/safe-fetch"
 import { detectSocialHandles } from "@/lib/social-detector"
 
@@ -13,7 +13,17 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "placeId is required" }, { status: 400 })
   }
 
-  const websiteUrl = await getWebsiteUrlForPlace(placeId)
+  const websiteUrl = await getWebsiteUrlForPlace(placeId).catch((error: unknown) => {
+    if (error instanceof OpenDataPlacesLookupError) {
+      return error
+    }
+    return new OpenDataPlacesLookupError("Unable to load Google Place website")
+  })
+
+  if (websiteUrl instanceof OpenDataPlacesLookupError) {
+    const status = websiteUrl.message === "placeId is required" ? 400 : 502
+    return NextResponse.json({ error: websiteUrl.message }, { status })
+  }
 
   if (!websiteUrl) {
     return NextResponse.json({ socialHandles: EMPTY_HANDLES })

@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useEffect, useRef } from 'react'
 import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { CTA } from '@/lib/cta'
 import { gsap } from '@/lib/gsap'
 
 const HeroScene = dynamic(() => import('@/components/3d/HeroScene'), { ssr: false })
@@ -42,41 +43,35 @@ export default function HeroSection() {
       <div className="relative z-10 px-6 py-20 mx-auto w-full max-w-7xl md:px-16">
         <div ref={textRef} className="max-w-4xl">
           <Eyebrow className="mb-6" tone="onDark">
-            Smart Creative for Hospitality
+            The hospitality-only growth team
           </Eyebrow>
 
           <h1
-            className="mb-6 font-medium"
+            className="type-page-title mb-6"
             style={{
-              fontSize: 'var(--text-display-lg)',
-              lineHeight: 'var(--leading-tight)',
-              letterSpacing: 'var(--tracking-tight)',
               color: 'var(--text-on-dark)',
             }}
           >
-            We use strategy, creative, and data to grow{' '}
+            Turn attention into reservations. And first visits into{' '}
             <em style={{ color: 'var(--mint-400)' }}>
-              restaurants, hotels, and food brands.
+              regulars.
             </em>
           </h1>
 
           <p
-            className="mb-10 max-w-xl"
+            className="type-lead mb-10 max-w-xl"
             style={{
-              fontSize: 'var(--text-lg)',
-              lineHeight: 'var(--leading-relaxed)',
               color: 'var(--text-on-dark)',
-              opacity: 0.7,
+              opacity: 0.78,
             }}
           >
-            One team. Full-stack. Hospitality is all we do.
+            One accountable team — strategy, content, Google, retention and reporting
+            in a single system. Hospitality is all we do.
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <Button href="/work" variant="mint">See Our Work</Button>
-            <Button href="/contact" variant="ghostLight">
-              Let&apos;s Talk
-            </Button>
+            <Button href={CTA.primary.href} variant="mint">{CTA.primary.label}</Button>
+            <Button href={CTA.proof.href} variant="ghostLight">{CTA.proof.label}</Button>
           </div>
         </div>
 
@@ -84,7 +79,7 @@ export default function HeroSection() {
           {tags.map((tag) => (
             <div
               key={tag}
-              className="px-5 py-2 text-sm font-medium rounded-full"
+              className="type-caption rounded-full px-5 py-2 font-medium"
               style={{
                 background: 'rgba(228,238,240,0.07)',
                 color: 'var(--mint-400)',

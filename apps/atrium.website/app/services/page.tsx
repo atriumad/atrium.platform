@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import SceneWrapper from '@/components/3d/SceneWrapper'
 import CTABanner from '@/components/sections/CTABanner'
+import GrowthEngineDiagram from '@/components/sections/GrowthEngineDiagram'
 import ServiceRow from '@/components/sections/ServiceRow'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { services } from '@/lib/services'
@@ -60,16 +61,16 @@ export default function ServicesPage() {
           <div className="max-w-6xl mx-auto w-full">
             <Eyebrow tone="onDark" className="mb-8">HOSPITALITY MARKETING</Eyebrow>
             <h1
-              className="font-medium leading-none tracking-tight"
-              style={{ fontSize: 'clamp(2.8rem, 7vw, 6rem)', color: 'var(--text-on-dark)' }}
+              className="type-page-title"
+              style={{ color: 'var(--text-on-dark)' }}
             >
               <span style={{ color: PILLAR_COLORS.generate }}>Generate.</span>{' '}
               <span style={{ color: PILLAR_COLORS.convert }}>Convert.</span>{' '}
               <span style={{ color: PILLAR_COLORS.retain }}>Retain.</span>
             </h1>
             <p
-              className="mt-6 max-w-xl text-base leading-relaxed"
-              style={{ color: 'var(--text-on-dark)', opacity: 0.5 }}
+              className="type-lead mt-6 max-w-xl"
+              style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}
             >
               The complete hospitality marketing engine — one team across all 11 disciplines, no handoffs, no briefing from scratch.
             </p>
@@ -100,7 +101,7 @@ export default function ServicesPage() {
 
               {/* category label */}
               <span
-                className="text-xs font-semibold tracking-widest uppercase"
+                className="type-eyebrow"
                 style={{ color: p.color }}
               >
                 {p.id}
@@ -111,7 +112,7 @@ export default function ServicesPage() {
                 {p.services.map((s) => (
                   <span
                     key={s}
-                    className="text-xs leading-tight"
+                    className="type-eyebrow leading-tight"
                     style={{ color: 'var(--text-on-dark)', opacity: 0.45 }}
                   >
                     {s}
@@ -121,7 +122,7 @@ export default function ServicesPage() {
 
               {/* tagline */}
               <p
-                className="text-sm font-medium mt-auto pt-4"
+                className="type-caption mt-auto pt-4 font-medium"
                 style={{ color: 'var(--text-on-dark)', opacity: 0.7, borderTop: `1px solid ${p.color}22` }}
               >
                 {p.tagline}
@@ -130,6 +131,9 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
+
+      {/* ── The system before the parts ──────────────────────────────── */}
+      <GrowthEngineDiagram />
 
       {/* ── Service index ────────────────────────────────────────────── */}
       <section style={{ background: 'var(--teal-900)' }}>
@@ -143,7 +147,7 @@ export default function ServicesPage() {
                 style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }}
               >
                 <span
-                  className="text-xs font-semibold tracking-widest uppercase"
+                  className="type-eyebrow"
                   style={{ color: cat.color, opacity: 0.7 }}
                 >
                   {cat.id}
@@ -181,8 +185,8 @@ export default function ServicesPage() {
       >
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
           {[
-            { n: '12', l: 'Disciplines under one roof — strategy to analytics' },
-            { n: '45+', l: 'Active hospitality brand partnerships' },
+            { n: '11', l: 'Disciplines under one roof — strategy to analytics' },
+            { n: '15+', l: 'Active hospitality brand partnerships' },
             { n: '28d', l: 'Engine cycle — first shoot to first report' },
           ].map((s) => (
             <div key={s.n} className="flex flex-col gap-2">
@@ -192,7 +196,7 @@ export default function ServicesPage() {
               >
                 {s.n}
               </span>
-              <span className="text-sm leading-relaxed" style={{ color: 'var(--text-on-dark)', opacity: 0.5 }}>
+              <span className="type-caption" style={{ color: 'var(--text-on-dark)', opacity: 0.64 }}>
                 {s.l}
               </span>
             </div>
@@ -202,9 +206,9 @@ export default function ServicesPage() {
 
       <CTABanner
         eyebrow="JOIN 15+ HOSPITALITY BRANDS"
-        headline={<>Get marketing support <em>you can trust</em></>}
-        body="If you've outgrown freelancers, feel held back by generic agencies, or need a creative team that actually understands restaurants — we were built for you."
-        cta="Let's Talk"
+        headline={<>Been burned by an agency <em>before?</em></>}
+        body="If you've outgrown freelancers, been let down by generic agencies, or just want a team that reports revenue instead of vanity — we were built for you. See the system before you commit."
+        cta="Book a Growth Diagnostic"
         ctaHref="/contact"
         coverAlt="Team at table in restaurant — natural, warm, working together"
       />

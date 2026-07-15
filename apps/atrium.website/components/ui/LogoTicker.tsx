@@ -1,7 +1,3 @@
-'use client'
-import { useEffect, useRef } from 'react'
-import { gsap } from '@/lib/gsap'
-
 type Props = {
   clients: string[]
   bg?: string
@@ -9,84 +5,79 @@ type Props = {
   size?: 'default' | 'compact'
 }
 
-export default function LogoTicker({ clients, bg, label, size = 'default' }: Props) {
-  const trackRef = useRef<HTMLDivElement>(null)
-  const secondSetRef = useRef<HTMLSpanElement>(null)
-  const compact = size === 'compact'
+type BrandNameProps = {
+  name: string
+  index: number
+}
 
-  useEffect(() => {
-    if (!trackRef.current || !secondSetRef.current) return
-    // Measure the exact pixel offset to the first item of the duplicated
-    // set (not scrollWidth/2) so the loop point lines up perfectly — a
-    // width/2 estimate is off by half a gap whenever the item count is
-    // odd, which shows up as a visible stutter/gap at the seam.
-    const distance = secondSetRef.current.getBoundingClientRect().left - trackRef.current.getBoundingClientRect().left
-    const tween = gsap.to(trackRef.current, {
-      x: -distance, duration: compact ? 22 : 28, ease: 'none', repeat: -1,
-    })
-    return () => { tween.kill() }
-  }, [compact])
+function BrandName({ name, index }: BrandNameProps) {
+  return (
+    <span
+      className={`shrink-0 whitespace-nowrap text-[clamp(1.05rem,1.55vw,1.45rem)] leading-none ${index % 5 === 1 ? 'italic' : ''}`}
+      style={{
+        color: 'var(--text-strong)',
+        fontFamily: index % 5 === 1 ? 'var(--font-serif)' : 'var(--font-sans)',
+        fontWeight: index % 3 === 0 ? 600 : 500,
+        letterSpacing: index % 4 === 0 ? '-0.04em' : '-0.015em',
+        opacity: index % 7 === 0 ? 0.34 : index % 4 === 0 ? 0.52 : 0.82,
+      }}
+    >
+      {name}
+    </span>
+  )
+}
 
-  const doubled = [
-    ...clients.map((name) => ({ name, cycle: 'first' })),
-    ...clients.map((name) => ({ name, cycle: 'second' })),
-  ]
-
-  if (compact) {
-    return (
-      <div className="relative py-2" style={{ background: bg ?? 'var(--color-surface-alt)' }}>
-        <div className="max-w-[var(--container-max)] mx-auto px-[var(--gutter)]">
-          {label && (
-            <p className="m-0 mb-[1.4rem] text-center text-[0.82rem] font-semibold" style={{ color: 'var(--color-text-dark)' }}>
-              {label}
-            </p>
-          )}
-          <div className="overflow-hidden">
-            <div ref={trackRef} className="flex gap-10 whitespace-nowrap will-change-transform">
-              {doubled.map(({ name, cycle }, i) => (
-                <span
-                  key={`${cycle}-${name}`}
-                  ref={i === clients.length ? secondSetRef : undefined}
-                  className="text-sm font-semibold tracking-wide shrink-0"
-                  style={{ color: 'var(--color-text-dark)', opacity: 0.28 }}
-                >
-                  {name}
-                </span>
-              ))}
-            </div>
+function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: string[]; reverse?: boolean; indexOffset?: number }) {
+  return (
+    <div className="brand-marquee-window overflow-hidden">
+      <div className={`brand-marquee-track flex w-max ${reverse ? 'brand-marquee-track--reverse' : ''}`}>
+        {[0, 1].map(copyIndex => (
+          <div
+            key={copyIndex}
+            className="brand-marquee-set flex shrink-0 items-center justify-around gap-12 px-6 md:px-10"
+            aria-hidden={copyIndex > 0}
+          >
+            {brands.map((name, index) => (
+              <BrandName key={name} name={name} index={index + indexOffset} />
+            ))}
           </div>
-        </div>
+        ))}
       </div>
-    )
-  }
+    </div>
+  )
+}
+
+export default function LogoTicker({ clients, bg, label, size = 'default' }: Props) {
+  const splitAt = Math.ceil(clients.length / 2)
+  const firstRow = clients.slice(0, splitAt)
+  const secondRow = clients.slice(splitAt)
+  const sectionPadding = size === 'compact' ? 'py-20 md:py-28' : 'py-24 md:py-36'
 
   return (
-    <div className="relative overflow-hidden py-8" style={{ background: bg ?? 'var(--color-surface-alt)' }}>
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none"
-        style={{
-          backgroundImage: `radial-gradient(circle at 50% 50%, var(--color-accent) 0%, transparent 70%)`,
-        }}
-      />
+    <section
+      className={`relative overflow-hidden px-[var(--gutter)] ${sectionPadding}`}
+      style={{ background: bg ?? 'var(--surface-page)' }}
+      aria-label={label ?? 'Client brands'}
+    >
       {label && (
-        <p className="m-0 mb-6 text-center text-[0.82rem] font-semibold" style={{ color: 'var(--color-text-dark)' }}>
+        <p
+          className="type-lead m-0 mx-auto mb-14 text-center md:mb-20"
+          style={{ color: 'var(--text-strong)' }}
+        >
           {label}
         </p>
       )}
-      <div className="border-t border-b py-6" style={{ borderColor: 'rgba(7,47,52,0.06)' }}>
-        <div ref={trackRef} className="flex gap-16 whitespace-nowrap will-change-transform">
-          {doubled.map(({ name, cycle }, i) => (
-            <span
-              key={`${cycle}-${name}`}
-              ref={i === clients.length ? secondSetRef : undefined}
-              className="text-sm font-medium tracking-wide shrink-0"
-              style={{ color: 'var(--color-text-dark)', opacity: i % 3 === 0 ? 0.4 : 0.55 }}
-            >
-              {name}
-            </span>
-          ))}
+
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="hidden flex-col gap-14 md:flex md:gap-16">
+          <BrandRow brands={firstRow} />
+          <BrandRow brands={secondRow} reverse indexOffset={splitAt} />
+        </div>
+
+        <div className="md:hidden">
+          <BrandRow brands={clients} />
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, var(--color-accent), transparent)', opacity: 0.3 }} />
-    </div>
+    </section>
   )
 }

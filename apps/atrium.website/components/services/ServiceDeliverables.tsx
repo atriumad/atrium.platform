@@ -1,0 +1,32 @@
+import Eyebrow from '@/components/ui/Eyebrow'
+import type { Service } from '@/lib/services'
+
+export default function ServiceDeliverables({ svc }: { svc: Service }) {
+  return (
+    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
+      <div className="mx-auto grid max-w-[var(--container-max)] gap-14 lg:grid-cols-12 lg:gap-20">
+        <div className="self-start lg:sticky lg:top-32 lg:col-span-4">
+          <Eyebrow className="mb-6">What you receive</Eyebrow>
+          <h2 className="type-section-title max-w-[10ch]">Outputs with an <em>operating job.</em></h2>
+          <p className="type-body mt-7 max-w-sm" style={{ color: 'var(--text-muted)' }}>
+            Every output has an owner, a channel, and a place in the monthly reporting rhythm. Nothing ships as an orphaned asset.
+          </p>
+        </div>
+
+        <div className="border-t lg:col-span-8" style={{ borderColor: 'rgba(7,47,52,0.16)' }}>
+          {svc.perks.map((perk, index) => (
+            <article
+              key={perk.title}
+              className="grid gap-5 border-b py-8 sm:grid-cols-[4rem_minmax(0,0.7fr)_minmax(0,1.3fr)] sm:gap-8 md:py-10"
+              style={{ borderColor: 'rgba(7,47,52,0.16)' }}
+            >
+              <p className="type-eyebrow m-0" style={{ color: 'var(--teal-500)' }}>{String(index + 1).padStart(2, '0')}</p>
+              <h3 className="type-card-title" style={{ color: 'var(--text-strong)' }}>{perk.title}</h3>
+              <p className="type-body m-0 max-w-xl" style={{ color: 'var(--text-muted)' }}>{perk.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

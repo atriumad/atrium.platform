@@ -1,7 +1,7 @@
 {
   ".claude/settings.local.json": {
-    "mtime": 1783094483.5069025,
-    "ast_hash": "18624b22ebef7e19b7fdd7aeb4c26d92",
+    "mtime": 1784126998.1335087,
+    "ast_hash": "fbc2aa91b85fa8db38598f231d359d4d",
     "semantic_hash": ""
   },
   ".codex/hooks.json": {
@@ -10,7 +10,7 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1782944253.3476088,
+    "mtime": 1783113759.1813545,
     "ast_hash": "85eba3ebd4e57fe4731083806e1dfe96",
     "semantic_hash": ""
   },
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "packages/application/src/index.ts": {
-    "mtime": 1782939138.9034526,
-    "ast_hash": "9666f988be2b093b754b13b51aa01e6f",
+    "mtime": 1783620982.5458062,
+    "ast_hash": "4bbf0ad2e9a152da799f0b27cec4ed2a",
     "semantic_hash": ""
   },
   "packages/application/tsconfig.json": {
@@ -545,17 +545,17 @@
     "semantic_hash": ""
   },
   "packages/ui/package.json": {
-    "mtime": 1782917723.7605085,
+    "mtime": 1783113759.454926,
     "ast_hash": "af9337fa3cb8850bf8aca208f81ffe46",
     "semantic_hash": ""
   },
   "packages/ui/src/index.ts": {
-    "mtime": 1782918537.983822,
+    "mtime": 1783113759.4642537,
     "ast_hash": "ea328d2dd9aacbb38b85c6b92e4dd255",
     "semantic_hash": ""
   },
   "packages/ui/tsconfig.json": {
-    "mtime": 1782917728.032668,
+    "mtime": 1783113759.4674535,
     "ast_hash": "49e58e0b2f0e7683798f34da597c826f",
     "semantic_hash": ""
   },
@@ -595,13 +595,13 @@
     "semantic_hash": ""
   },
   "packages/application/src/diagnostics/restaurant-growth-grader.test.ts": {
-    "mtime": 1782939138.9000945,
-    "ast_hash": "cefc43987d301880aad540ca7f2f7d78",
+    "mtime": 1783624627.581773,
+    "ast_hash": "2c0ab49ef08021ac94e4f5619a4b8c54",
     "semantic_hash": ""
   },
   "packages/application/src/diagnostics/restaurant-growth-grader.ts": {
-    "mtime": 1782939138.9009237,
-    "ast_hash": "c3dd74a7a7b103bc255ae2a815e42f31",
+    "mtime": 1783624608.0458302,
+    "ast_hash": "d2d41231eda8803ba19305ad1078d425",
     "semantic_hash": ""
   },
   "docs/plans/2026-06-26-restaurant-growth-grader-design.md": {
@@ -625,12 +625,12 @@
     "semantic_hash": ""
   },
   "packages/application/src/diagnostics/social-health-scorer.test.ts": {
-    "mtime": 1782939138.901697,
+    "mtime": 1783113759.1855159,
     "ast_hash": "fe4446150546a24a3950b3f11f742fab",
     "semantic_hash": ""
   },
   "packages/application/src/diagnostics/social-health-scorer.ts": {
-    "mtime": 1782742822.2536192,
+    "mtime": 1783113759.189701,
     "ast_hash": "531c9653f06630383c3fe69aadcba447",
     "semantic_hash": ""
   },
@@ -660,167 +660,157 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/detect-social/route.ts": {
-    "mtime": 1783093722.0176358,
-    "ast_hash": "0b45e6b6c96ab547d615c1a660997c42",
+    "mtime": 1783622364.360226,
+    "ast_hash": "a3d910ef4be4f127ddf2132eb55356de",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/route.test.ts": {
-    "mtime": 1783001010.553803,
-    "ast_hash": "c54015cd86f998fe64d82d5dfdfd3911",
+    "mtime": 1783977733.3463023,
+    "ast_hash": "2871e48218a94da2045e50ba4c237d01",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/route.ts": {
-    "mtime": 1783094187.3489363,
-    "ast_hash": "13cb76277b2e68ff1467b00cf85e2bfc",
+    "mtime": 1783624577.6215806,
+    "ast_hash": "d1210527254264f1b513e64c66a88373",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/search/route.test.ts": {
-    "mtime": 1783026259.4537787,
-    "ast_hash": "65d139d393a93cfedf338abd5c82c623",
+    "mtime": 1783622171.5474586,
+    "ast_hash": "11bfbf07e7f1c8bfc4c68cdb623e940f",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/search/route.ts": {
-    "mtime": 1782495800.2514582,
+    "mtime": 1783113745.7282894,
     "ast_hash": "48031e9f9fca387457c75fbba749352d",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/grader-client.tsx": {
-    "mtime": 1783102318.2474613,
-    "ast_hash": "94632810275531527999698e10b260e9",
+    "mtime": 1784038323.9659512,
+    "ast_hash": "139f17653390f9e9ab94e1f6fad8c03b",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/layout.tsx": {
-    "mtime": 1782926167.243654,
+    "mtime": 1783113746.108954,
     "ast_hash": "014a0613ae73c1431e52f447b508d75f",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/page.tsx": {
-    "mtime": 1782502917.7562056,
+    "mtime": 1783113746.111524,
     "ast_hash": "ca9d812463193fc823ccc95c5624b903",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/robots.ts": {
-    "mtime": 1782501927.4783673,
+    "mtime": 1783113746.1186364,
     "ast_hash": "7b36414befa3d32095e2b353c462046b",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/seo.ts": {
-    "mtime": 1782502883.0750036,
+    "mtime": 1783113746.1198266,
     "ast_hash": "804d3e17c1f93a585984d7fa0f1efea0",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/sitemap.ts": {
-    "mtime": 1782501937.3937068,
+    "mtime": 1783113746.1234741,
     "ast_hash": "0478656a6f993acfa1f056d8d55be526",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/auto-detect-social.ts": {
-    "mtime": 1783093683.2444808,
+    "mtime": 1783113784.2249415,
     "ast_hash": "c20d48856cac1ac22fa0ad53f7294777",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/google-places-client.ts": {
-    "mtime": 1782941504.168064,
-    "ast_hash": "d5b4fba4fee71b2ae97b7805b577075b",
-    "semantic_hash": ""
-  },
-  "apps/atrium.grader/lib/local-benchmark.ts": {
-    "mtime": 1782742398.0734122,
-    "ast_hash": "2bcfe5dfaaff3470cd7e84fc0b95c230",
+    "mtime": 1783624560.1616468,
+    "ast_hash": "ec4b2d31202e1c5e1a55781b9efeba65",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/open-data-places.ts": {
-    "mtime": 1783094152.0631244,
-    "ast_hash": "96b9a51cbffa69652c45c4dc92d7fa8b",
-    "semantic_hash": ""
-  },
-  "apps/atrium.grader/lib/osm-client.ts": {
-    "mtime": 1782941301.4746099,
-    "ast_hash": "a507e0016b886acf45a63454ebe6bd01",
+    "mtime": 1783624571.205563,
+    "ast_hash": "2ac8b845f3b63374999b889994aa3765",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/pagespeed-client.ts": {
-    "mtime": 1782752083.7691011,
+    "mtime": 1783113746.2051923,
     "ast_hash": "c4f0a48cbe03686d6ed14f03b6f75e17",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/place-id.ts": {
-    "mtime": 1782742290.5389564,
-    "ast_hash": "aebc6f4877aec1c6f2905500bf8e09f1",
+    "mtime": 1783622086.0482779,
+    "ast_hash": "78a68d893befcfdf2d2e65edf085980c",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/place-utils.ts": {
-    "mtime": 1782742330.3410416,
-    "ast_hash": "71cb13075602db7ec9a67c8ea7c76248",
+    "mtime": 1783622645.0122411,
+    "ast_hash": "fdc42ab25566b307e5d4a8d51442c388",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/providers/business-provider.ts": {
-    "mtime": 1782751769.3546038,
-    "ast_hash": "cca1fd8b8ffb8e949965afdee32520f8",
+    "mtime": 1783622049.8608477,
+    "ast_hash": "6ae27277a98a3d806fdc4a622cae0252",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/scrape-creators.test.ts": {
-    "mtime": 1783008115.0534546,
+    "mtime": 1783113746.2332,
     "ast_hash": "164ca26a0da2490e03296a969c719fb7",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/scrape-creators.ts": {
-    "mtime": 1783008104.510847,
+    "mtime": 1783113746.2363563,
     "ast_hash": "6c3934e59ccd163fdd66e2b1bbe41916",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/social-detector.test.ts": {
-    "mtime": 1782743046.9287245,
+    "mtime": 1783113746.2436497,
     "ast_hash": "7fd9131533314d7e671e321075d76cc2",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/social-detector.ts": {
-    "mtime": 1783006669.0420015,
+    "mtime": 1783113746.2446976,
     "ast_hash": "d9ede8538d4221e2af84e3a5c21e7ca2",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/social-name-search.ts": {
-    "mtime": 1783007933.0718634,
+    "mtime": 1783113746.2560198,
     "ast_hash": "9b64d309c23b5102eac6a7602e2ea77e",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/website-scanner.test.ts": {
-    "mtime": 1783026257.040827,
+    "mtime": 1783113746.266753,
     "ast_hash": "3438db0b8ee033234a99cf4c55178830",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/website-scanner.ts": {
-    "mtime": 1783093641.255586,
+    "mtime": 1783113784.2306569,
     "ast_hash": "35b9b44996567212bcc2498ac71faabb",
     "semantic_hash": ""
   },
   "apps/atrium.grader/next-env.d.ts": {
-    "mtime": 1782494982.799601,
+    "mtime": 1783113746.277689,
     "ast_hash": "ba64ff7d54714a8f64db89b1003207d8",
     "semantic_hash": ""
   },
   "apps/atrium.grader/next.config.ts": {
-    "mtime": 1782494981.0263195,
+    "mtime": 1783113746.2781084,
     "ast_hash": "a9c3a042849625f0ec8db914e4e3cf88",
     "semantic_hash": ""
   },
   "apps/atrium.grader/package.json": {
-    "mtime": 1783024716.3248186,
+    "mtime": 1783113746.293234,
     "ast_hash": "7d957fc8043cfe572af7ac759c02eb25",
     "semantic_hash": ""
   },
   "apps/atrium.grader/postcss.config.js": {
-    "mtime": 1782494983.7228308,
+    "mtime": 1783113746.2937255,
     "ast_hash": "78ac30f37ca7f3d9f197587cc98789f4",
     "semantic_hash": ""
   },
   "apps/atrium.grader/tailwind.config.js": {
-    "mtime": 1782494984.6537123,
+    "mtime": 1783113747.4566753,
     "ast_hash": "f45d01fa186422d7a34f3b2505d7bcdd",
     "semantic_hash": ""
   },
   "apps/atrium.grader/tsconfig.json": {
-    "mtime": 1782494981.931794,
+    "mtime": 1783113747.4571788,
     "ast_hash": "bbaee97dc48c5ae25b56f354589ee5ea",
     "semantic_hash": ""
   },
@@ -830,233 +820,233 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/app/layout.tsx": {
-    "mtime": 1782921797.8132427,
+    "mtime": 1783113747.5318155,
     "ast_hash": "b6b6cd7b034a59e34f8d55e63b137b54",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/page.tsx": {
-    "mtime": 1782921797.8171883,
-    "ast_hash": "0be21e5a64321478f2f6633c13b7edbe",
+    "mtime": 1784140177.2240653,
+    "ast_hash": "ff1d1417eb99e3bf093c10546c7e3d1f",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/services/[slug]/page.tsx": {
-    "mtime": 1782921840.5236552,
-    "ast_hash": "4bbb4c9c4a4d8db62c5e2deffe85f652",
+    "mtime": 1784144567.2902994,
+    "ast_hash": "3d2f5246a9bf056b3b960381820cee11",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/services/page.tsx": {
-    "mtime": 1782921839.5728614,
-    "ast_hash": "f540f6c2d0ee00d28c2300472bd6b76e",
+    "mtime": 1784128125.412315,
+    "ast_hash": "e8520c8eb624c49295982838582b1cad",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/3d/HeroScene.tsx": {
-    "mtime": 1782921843.838315,
-    "ast_hash": "52513a68a327e44ddcf30e07762d764b",
+    "mtime": 1783526515.1869006,
+    "ast_hash": "1d1b764ae78af7ae11494b92e8dd83be",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/3d/SceneWrapper.tsx": {
-    "mtime": 1782915197.092097,
+    "mtime": 1783113747.536629,
     "ast_hash": "b5ed2d37cedf087ae22cb2b7f52c5d95",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/BentoGrid.tsx": {
-    "mtime": 1782921797.8295033,
-    "ast_hash": "3791d5bb75807526f67f2c35f86b95f7",
+    "mtime": 1783973930.846989,
+    "ast_hash": "2332ec5bed3dc78c41dae3c135ccfa74",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/CTABanner.tsx": {
-    "mtime": 1782921797.8328226,
-    "ast_hash": "70999000f7efbadbae47f893ee98de2d",
+    "mtime": 1783973668.1458163,
+    "ast_hash": "a69a6f3ba154eeb56b4a3765aaf14929",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/DarkProcess.tsx": {
-    "mtime": 1782921841.3365738,
-    "ast_hash": "1f7759d9b94ee14b1adc3e75cbc90fb4",
+    "mtime": 1783973541.8530831,
+    "ast_hash": "ba74d5166e99c41e60f70fb2a64e3289",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/HeroSection.tsx": {
-    "mtime": 1782921797.8423676,
-    "ast_hash": "3dab373bfdfa78ced0e383596dadacc7",
+    "mtime": 1784127486.0868459,
+    "ast_hash": "ca109c737d613646197a4f10875b83d8",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/IconGrid.tsx": {
-    "mtime": 1782921842.1510925,
-    "ast_hash": "f5928474e6b114eb45381b692ce81ede",
+    "mtime": 1783973498.8078,
+    "ast_hash": "97bc798aa1038a71fa4261be12fa6371",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/ServiceRow.tsx": {
-    "mtime": 1782851637.632917,
-    "ast_hash": "67d27013055ab9b07d88c3fcd9665857",
+    "mtime": 1783973712.078582,
+    "ast_hash": "e39023851fc4c6da51c194ad3b13fb41",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/ServiceTimeline.tsx": {
-    "mtime": 1782921842.9893155,
-    "ast_hash": "bf020f4fefce9c5b35adf061f74591c2",
+    "mtime": 1784144504.9216373,
+    "ast_hash": "6451cf0ce244b4216edc9423639dc3b5",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/SplitSection.tsx": {
-    "mtime": 1782921797.8629978,
-    "ast_hash": "e04cf87d57aef6d4f121142b421dd9c0",
+    "mtime": 1783973715.5869138,
+    "ast_hash": "f3e04638e658056810f36a40631ed88d",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/StatsStrip.tsx": {
-    "mtime": 1782921876.4900298,
-    "ast_hash": "c8fb2e2084a644294f8b8d97ccb637f2",
+    "mtime": 1784140147.1115947,
+    "ast_hash": "e9b27989b4761143ba893984931a7a4e",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/TestimonialBento.tsx": {
-    "mtime": 1782921797.8631392,
-    "ast_hash": "1470bc6309e48a3ed2bb4179393a0bcc",
+    "mtime": 1783973544.8130336,
+    "ast_hash": "ec1e47f6ed6123b0f446ca1edbf4ecf4",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/WorkGrid.tsx": {
-    "mtime": 1782921797.864046,
-    "ast_hash": "8835aeb66cea9cba2a3be7c6a5660437",
+    "mtime": 1784140146.0134425,
+    "ast_hash": "cdb2a225f2f4e6b92978ce2e60565c56",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Button.tsx": {
-    "mtime": 1782919278.1875858,
+    "mtime": 1783113747.5462508,
     "ast_hash": "70fcc7cd2e9466a4e6538ef912da09a4",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Eyebrow.tsx": {
-    "mtime": 1782919279.7699358,
+    "mtime": 1783113747.5466907,
     "ast_hash": "0f76afc35a4265c172f807f83aa4e337",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Footer.tsx": {
-    "mtime": 1782496565.3938124,
-    "ast_hash": "f8a54e2c1002d6f8d82cdc51f20af2c9",
+    "mtime": 1784039497.8242302,
+    "ast_hash": "370c718aaac80f6fbf2cddfc97f8d198",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/GSAPProvider.tsx": {
-    "mtime": 1782493233.9485266,
+    "mtime": 1783113747.5476239,
     "ast_hash": "fc9a3c8e1a12837a326c1b24742d4799",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/LogoTicker.tsx": {
-    "mtime": 1782921877.3399453,
-    "ast_hash": "c4dedaf641a1929d32c17b3e11009475",
+    "mtime": 1783973128.1714642,
+    "ast_hash": "dd2fc15a97fae7b7225ed73cde6a23a9",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Navbar.tsx": {
-    "mtime": 1782921922.5542903,
-    "ast_hash": "c9679101965228eb669d71fff3335f94",
+    "mtime": 1784125979.2955678,
+    "ast_hash": "fa27a8daad32e2056119ca21f29e4e6d",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/NoiseOverlay.tsx": {
-    "mtime": 1782921875.5740066,
+    "mtime": 1783113747.7794056,
     "ast_hash": "702a9f88f358cbafc2ef85cf5dbde688",
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/fonts.ts": {
-    "mtime": 1782920945.8426454,
+    "mtime": 1783113758.549523,
     "ast_hash": "801f15715cf589e28fcf147b961a9f5e",
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/gsap.ts": {
-    "mtime": 1782493232.5281122,
+    "mtime": 1783113758.5520275,
     "ast_hash": "12ce15d179556309de0c01b8cc48a826",
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/services.ts": {
-    "mtime": 1782850171.560069,
-    "ast_hash": "7b38e0f9ba038e55d548040bfc35d12d",
+    "mtime": 1784125896.2584143,
+    "ast_hash": "92e4ecc14bf5bd64ca79275e5900263a",
     "semantic_hash": ""
   },
   "apps/atrium.website/next-env.d.ts": {
-    "mtime": 1783091158.9551566,
+    "mtime": 1784145282.6563387,
     "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
     "semantic_hash": ""
   },
   "apps/atrium.website/next.config.ts": {
-    "mtime": 1782485398.7731328,
-    "ast_hash": "9b77af189a21a7a64e4bd7a426f64176",
+    "mtime": 1784145276.586423,
+    "ast_hash": "10a4fbf5b647459e2d47b3bba60e41e5",
     "semantic_hash": ""
   },
   "apps/atrium.website/package.json": {
-    "mtime": 1782919249.5006847,
+    "mtime": 1783113758.5562708,
     "ast_hash": "05c1e4f72ac04e346db5dc8bf631d0e9",
     "semantic_hash": ""
   },
   "apps/atrium.website/postcss.config.mjs": {
-    "mtime": 1782485398.7730763,
+    "mtime": 1783113758.5570662,
     "ast_hash": "239f3ebf717465dc636818a1a619398d",
     "semantic_hash": ""
   },
   "apps/atrium.website/tsconfig.json": {
-    "mtime": 1782915059.1831505,
+    "mtime": 1783113758.7409842,
     "ast_hash": "2a843015f54c685558fbae7456ff961a",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Badge.tsx": {
-    "mtime": 1782939138.9057424,
+    "mtime": 1783113759.4557426,
     "ast_hash": "b99dbca10a62eb9ad818aad802a9671a",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Button.tsx": {
-    "mtime": 1782921797.8479452,
+    "mtime": 1783113759.456703,
     "ast_hash": "f996597aa52ab0f21c3d283f0bafe9d4",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Card.tsx": {
-    "mtime": 1782939138.9064133,
+    "mtime": 1783113759.4574788,
     "ast_hash": "a2b2c584e5edc975768c878a4255f8f5",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Chip.tsx": {
-    "mtime": 1782939138.907049,
+    "mtime": 1783113759.4583263,
     "ast_hash": "4ec69a37ea2a4711698be0a749b0e3e6",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Eyebrow.tsx": {
-    "mtime": 1782939138.907928,
-    "ast_hash": "c66063dbf7cbaab7b75d0627f46e0c50",
+    "mtime": 1783972082.592726,
+    "ast_hash": "949f9ba39b7d36fd5e74e4ae4625af77",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Highlight.tsx": {
-    "mtime": 1782939138.9086013,
+    "mtime": 1783113759.460359,
     "ast_hash": "7ba7b52c0d9aa96932e7a8745dcf72a7",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Input.tsx": {
-    "mtime": 1782939138.9095101,
+    "mtime": 1783113759.4618108,
     "ast_hash": "c475f00511bc342817e3d5d4c1f8395e",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Logo.tsx": {
-    "mtime": 1782918134.9328396,
+    "mtime": 1783113759.462626,
     "ast_hash": "6dd0807991194a60afcbf109f140ea8d",
     "semantic_hash": ""
   },
   "packages/ui/src/components/ScriptAccent.tsx": {
-    "mtime": 1782939138.9126606,
+    "mtime": 1783113759.463311,
     "ast_hash": "4393af476014e9c04458b57fe4b83742",
     "semantic_hash": ""
   },
   ".superpowers/sdd/progress.md": {
-    "mtime": 1782919457.0440934,
-    "ast_hash": "08f1da3a498f6ae17f1a79e46a5de373",
+    "mtime": 1784143205.8279846,
+    "ast_hash": "b7d5716c01af2254e3d643548cbc14cc",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-1-brief.md": {
-    "mtime": 1782917667.0668056,
-    "ast_hash": "2226f0e2b986cd4753bf74d694dfc72c",
+    "mtime": 1784142688.2850611,
+    "ast_hash": "7e9fe415a9547b9adb6344c25ae366f4",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-1-report.md": {
-    "mtime": 1782917770.8894358,
-    "ast_hash": "995df67ac99cb2713cb4bab607ef6d90",
+    "mtime": 1784143133.0646694,
+    "ast_hash": "60b77db96c8ffd50b3f4385cc048b0c0",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-2-brief.md": {
-    "mtime": 1782917914.4309409,
-    "ast_hash": "8d2c885b6333b8ffce1a4a8ddbced954",
+    "mtime": 1784143207.0306854,
+    "ast_hash": "4c3a6279a823a52f3fd14410d9442b69",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-2-report.md": {
-    "mtime": 1782917986.938906,
-    "ast_hash": "317345be5c2af575a86d9c4eec3835d8",
+    "mtime": 1784143969.7832947,
+    "ast_hash": "77352b97690401bd38685f0cc3fd031b",
     "semantic_hash": ""
   },
   ".superpowers/sdd/task-3-brief.md": {
@@ -1230,17 +1220,17 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/AGENTS.md": {
-    "mtime": 1782485409.4951181,
+    "mtime": 1783113747.4582915,
     "ast_hash": "9e09241799026ac05be315a2f0b50055",
     "semantic_hash": ""
   },
   "apps/atrium.website/CLAUDE.md": {
-    "mtime": 1782485409.495314,
+    "mtime": 1783113747.458757,
     "ast_hash": "5c27369b226fcf2be8a6cfe52224e767",
     "semantic_hash": ""
   },
   "apps/atrium.website/README.md": {
-    "mtime": 1782485398.7721093,
+    "mtime": 1783113747.4604743,
     "ast_hash": "f15aaa42d5d299d091b1171097ea56ad",
     "semantic_hash": ""
   },
@@ -1315,87 +1305,87 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/Atrium Works -08.png": {
-    "mtime": 1782501703.465188,
+    "mtime": 1783113746.2943354,
     "ast_hash": "cf422a22fdc1d0d6f0639a281613d065",
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/metaphoto.jpg": {
-    "mtime": 1782502714.0911431,
+    "mtime": 1783113747.0217986,
     "ast_hash": "090d556ef91b823b83d56f5087aca751",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/file.svg": {
-    "mtime": 1782485398.7746053,
+    "mtime": 1783113758.5596178,
     "ast_hash": "d09f95206c3fa0bb9bd9fefabfd0ea71",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/globe.svg": {
-    "mtime": 1782485398.7743893,
+    "mtime": 1783113758.5622194,
     "ast_hash": "2aaafa6a49b6563925fe440891e32717",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/logos/atrium-mark.svg": {
-    "mtime": 1782835985.9582114,
+    "mtime": 1783113758.5668988,
     "ast_hash": "3047f69dbfaba2ad0dcb9284b327226a",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/logos/atrium-wordmark.svg": {
-    "mtime": 1782835985.979775,
+    "mtime": 1783113758.618443,
     "ast_hash": "6cdfec4990d8c0faceaea4a36db0df68",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/next.svg": {
-    "mtime": 1782485398.772136,
+    "mtime": 1783113758.6398947,
     "ast_hash": "8e061864f388b47f33a1c3780831193e",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/textures/gradient-charcoal-sage.png": {
-    "mtime": 1782835985.949294,
+    "mtime": 1783113758.6756818,
     "ast_hash": "f9dcc22493bf4b2338b93549f1775b2e",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/textures/gradient-forest-glow.png": {
-    "mtime": 1782835985.9329686,
+    "mtime": 1783113758.7161014,
     "ast_hash": "f95f33159d6ba5bf2c99a4dc58d31de2",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/textures/grain-paper-silver.png": {
-    "mtime": 1782835985.9170399,
+    "mtime": 1783113758.7361128,
     "ast_hash": "27467a2928bea2abe4f33654c0490c43",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/vercel.svg": {
-    "mtime": 1782485398.773887,
+    "mtime": 1783113758.7384467,
     "ast_hash": "c0af2f507b369b085b35ef4bbe3bcf1e",
     "semantic_hash": ""
   },
   "apps/atrium.website/public/window.svg": {
-    "mtime": 1782485398.7738788,
+    "mtime": 1783113758.7400916,
     "ast_hash": "a2760511c65806022ad20adf74370ff3",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/place-photo/route.test.ts": {
-    "mtime": 1782924509.9427705,
+    "mtime": 1783113745.667083,
     "ast_hash": "ce338d073bd57f5c7e57e5a25e369633",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/place-photo/route.ts": {
-    "mtime": 1782924505.3084514,
+    "mtime": 1783113745.6681554,
     "ast_hash": "049312cd52fcdf707439675620915468",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/fonts.ts": {
-    "mtime": 1782926230.9822147,
+    "mtime": 1783113746.160454,
     "ast_hash": "253739bb95d40292f55b8a1fee54fc12",
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/logos/atrium-wordmark.svg": {
-    "mtime": 1782926131.7329493,
+    "mtime": 1783113746.3033528,
     "ast_hash": "6cdfec4990d8c0faceaea4a36db0df68",
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/textures/grain-paper-silver.png": {
-    "mtime": 1782926131.71989,
+    "mtime": 1783113747.4554443,
     "ast_hash": "27467a2928bea2abe4f33654c0490c43",
     "semantic_hash": ""
   },
@@ -1405,27 +1395,27 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/narrative/route.ts": {
-    "mtime": 1783004695.4582734,
-    "ast_hash": "aa9fb67915611e7f4f92e058d2c1c020",
+    "mtime": 1783624734.207124,
+    "ast_hash": "8fe78e125ec8358aa104c0475cc4f9fc",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/social/route.ts": {
-    "mtime": 1783007975.4379117,
+    "mtime": 1783113745.729578,
     "ast_hash": "838ad9f8bd136c5b673ea433d8c872c7",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/report-agent.ts": {
-    "mtime": 1783093892.9093115,
-    "ast_hash": "399b706d9117f699f3cb85c51f2788f7",
+    "mtime": 1783625687.231295,
+    "ast_hash": "038b39b3ffdb2029a24cb60d0dcda382",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/report-merger.ts": {
-    "mtime": 1783000713.728564,
-    "ast_hash": "0dfea5702b4979ad23bc370abaf0a605",
+    "mtime": 1783624154.6532955,
+    "ast_hash": "74a954281279b3fbc63089e45f73e303",
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/social-name-search.test.ts": {
-    "mtime": 1783008003.9175382,
+    "mtime": 1783113746.2554455,
     "ast_hash": "f4ae15754e3468cfd8528d61b6f3e0fa",
     "semantic_hash": ""
   },
@@ -1945,12 +1935,12 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/textures/gradient-charcoal-sage.png": {
-    "mtime": 1783017418.8373222,
+    "mtime": 1783113747.2007656,
     "ast_hash": "f9dcc22493bf4b2338b93549f1775b2e",
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/textures/gradient-forest-glow.png": {
-    "mtime": 1783017426.461704,
+    "mtime": 1783113747.3681767,
     "ast_hash": "f95f33159d6ba5bf2c99a4dc58d31de2",
     "semantic_hash": ""
   },
@@ -2480,12 +2470,12 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/lib/safe-fetch.ts": {
-    "mtime": 1783094373.9862278,
-    "ast_hash": "c22e7394218bae6ff85ada37506f562c",
+    "mtime": 1783622643.7612195,
+    "ast_hash": "602f7ea5b65daa63aea5439c6560396d",
     "semantic_hash": ""
   },
   "apps/atrium.grader/middleware.ts": {
-    "mtime": 1783094091.6262305,
+    "mtime": 1783113784.2314668,
     "ast_hash": "a07d0e4fab9d36dfa41cff3c7db0b192",
     "semantic_hash": ""
   },
@@ -2495,28 +2485,288 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/slide-1.png": {
-    "mtime": 1783099951.9559305,
+    "mtime": 1783113784.2593038,
     "ast_hash": "79dafcdbe06a3842a9836ff0d224aef8",
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/slide-2.png": {
-    "mtime": 1783099951.8000789,
+    "mtime": 1783113784.3058448,
     "ast_hash": "c36652ba5f9c0e45678e432ad79bb5d1",
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/slide-3.png": {
-    "mtime": 1783099951.7790134,
+    "mtime": 1783113784.3445828,
     "ast_hash": "b1a97ce1b56ba9723573ab90bb570058",
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/slide-4.png": {
-    "mtime": 1783099951.6775534,
+    "mtime": 1783113784.3872304,
     "ast_hash": "bc5896fea4fa4118b4944d34caab4360",
     "semantic_hash": ""
   },
   "apps/atrium.grader/public/slide-5.png": {
-    "mtime": 1783099951.5690532,
+    "mtime": 1783113784.436463,
     "ast_hash": "dbc2781bae975c855c9389d9f159728b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/CategoryBadge.tsx": {
+    "mtime": 1783977656.4812062,
+    "ast_hash": "3db087c2f473efe6787b74a6a96680d6",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceBento.tsx": {
+    "mtime": 1783977657.5639842,
+    "ast_hash": "d8b7c4900a4594d40d48b1df0ae6fd40",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceEditorialHero.tsx": {
+    "mtime": 1784140237.6196969,
+    "ast_hash": "6d4d3f813383bb437175240ab3f99f78",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceMarquee.tsx": {
+    "mtime": 1784126370.773708,
+    "ast_hash": "5075b633c565b6210bff107e2e4169de",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServicePerksRail.tsx": {
+    "mtime": 1783973492.5823982,
+    "ast_hash": "9b9a8b81e0face547fb7acd820b4f7d3",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceProofStrip.tsx": {
+    "mtime": 1784141380.3515775,
+    "ast_hash": "b38f76d1b435239c1e07d05070610e0a",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceStatsEditorial.tsx": {
+    "mtime": 1783973613.4211967,
+    "ast_hash": "92598f57bf97f8268c54a40bd6bf4b39",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceThesis.tsx": {
+    "mtime": 1783977591.6672904,
+    "ast_hash": "ab7eeeb2bd837a6bea7740f8550b35fc",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceTimelineEditorial.tsx": {
+    "mtime": 1783973491.731307,
+    "ast_hash": "9589e00fb8b4f9fa06ff553bf0564b09",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/SiblingServices.tsx": {
+    "mtime": 1783973710.9058897,
+    "ast_hash": "02af6a705fa7cf45f7008246edd2f721",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/utils.tsx": {
+    "mtime": 1783113784.7756095,
+    "ast_hash": "c0348a91f036f81f70dc7b8939322856",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/ui/Marquee.tsx": {
+    "mtime": 1783704371.9578583,
+    "ast_hash": "51c9d472e16f11400261ee9d9195d352",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/utils.ts": {
+    "mtime": 1783704329.2360528,
+    "ast_hash": "4b0a07ac75708ef0af81c2c857d2d7b3",
+    "semantic_hash": ""
+  },
+  "notas.md": {
+    "mtime": 1783533555.7642298,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/scan-store.ts": {
+    "mtime": 1783621261.80157,
+    "ast_hash": "2640cfbb4b9105a34e8504331fb6074c",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/place-suggestion.ts": {
+    "mtime": 1783622037.1119218,
+    "ast_hash": "859f7b9e681ab36e1b0e58b6030c559f",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/google-places-client.test.ts": {
+    "mtime": 1783624501.7557385,
+    "ast_hash": "f677ede3deb2251b2fc2c9445ad6739e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/report-evidence.test.ts": {
+    "mtime": 1783624649.0400343,
+    "ast_hash": "f2106ec8848c3840000c591c5556faf6",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/report-evidence.ts": {
+    "mtime": 1783624010.6392698,
+    "ast_hash": "3e10e6e7e582a0496d2c90af0de15a61",
+    "semantic_hash": ""
+  },
+  "apps/atrium.grader/lib/report-merger.test.ts": {
+    "mtime": 1783624727.646145,
+    "ast_hash": "1cb9dcde57f53ca0ac075f30cab6c3a4",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/about/page.tsx": {
+    "mtime": 1784140148.9906929,
+    "ast_hash": "8078a7e60b81919e59a7528bfd831d4c",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/contact/page.tsx": {
+    "mtime": 1784140270.1345472,
+    "ast_hash": "8c8ddcd82f0b42b21c286bb2f62c8b3b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/pricing/page.tsx": {
+    "mtime": 1784140144.9467196,
+    "ast_hash": "71081c2c296e7be85cb8a418d444b831",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/process/page.tsx": {
+    "mtime": 1784125441.096224,
+    "ast_hash": "3bebfdbcac795d9fdaafe6e75a06a8ae",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/resources/page.tsx": {
+    "mtime": 1784125441.0133946,
+    "ast_hash": "1fe214d93d17d918efa0c5134c0b8fb7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/work/[slug]/page.tsx": {
+    "mtime": 1784150520.4889016,
+    "ast_hash": "234ab57910bd9bc0137f6d7dfb1cfa73",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/work/page.tsx": {
+    "mtime": 1784140147.9765651,
+    "ast_hash": "a5bc542d4e19f13f238b5cd4bb941853",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/pages/PageHero.tsx": {
+    "mtime": 1783973547.5255587,
+    "ast_hash": "7e959ac0da7efea4d91b13cf7e81c587",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/work.ts": {
+    "mtime": 1784150451.8733997,
+    "ast_hash": "6f7648ff1e90276bbe8940a17ea6be55",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/work/CaseGallery.tsx": {
+    "mtime": 1783712510.5648882,
+    "ast_hash": "31623968e22139e808bd6ceba5469586",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/AudiencePaths.tsx": {
+    "mtime": 1784140142.9385812,
+    "ast_hash": "ae0b17845cdc4cf06da412803c35b9b5",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/ComparisonMatrix.tsx": {
+    "mtime": 1784125576.234812,
+    "ast_hash": "e95581137061dadc1cf6c8047888fae9",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/GrowthEngineDiagram.tsx": {
+    "mtime": 1784128036.243066,
+    "ast_hash": "d4fbf67893b710e77bcb09360c948319",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/sections/PurchaseFAQ.tsx": {
+    "mtime": 1784140062.3075306,
+    "ast_hash": "93564b7004da44cefd35f91990e665de",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/RelatedCase.tsx": {
+    "mtime": 1784125917.3718755,
+    "ast_hash": "ac9b7d3dd00a3d6896d573db237cfb50",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceDeliverables.tsx": {
+    "mtime": 1784140235.7702775,
+    "ast_hash": "aacb177e5013a9c717bbae144a4ef7e7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceEngagementModel.tsx": {
+    "mtime": 1784141495.9770963,
+    "ast_hash": "300c44215e5c5cc0f42d620f28bd6822",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/services/ServiceSystemMap.tsx": {
+    "mtime": 1784141460.6156635,
+    "ast_hash": "390e1df93269eb077ad5cc3ee28583aa",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/cta.ts": {
+    "mtime": 1784125345.8050003,
+    "ast_hash": "e89369ff6b9658bb15455399e6591e9e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/media-blueprints/page.tsx": {
+    "mtime": 1784143504.5854185,
+    "ast_hash": "5b7704b939a2695e217e0f92dcd84845",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/media/MediaBlueprint.tsx": {
+    "mtime": 1784144216.655464,
+    "ast_hash": "a0e84db1476ea00d702e753428b78c82",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/media/MediaBlueprintSection.tsx": {
+    "mtime": 1784143379.28176,
+    "ast_hash": "e4a030dbe74140970d75f0999b811682",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/media-blueprints.test.ts": {
+    "mtime": 1784144447.0138364,
+    "ast_hash": "6ab04c02b8ffd7e2570502bf08f61c35",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/media-blueprints.ts": {
+    "mtime": 1784144442.5427337,
+    "ast_hash": "ef0dc85edd8fe3171c72dd8aa9248e16",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/app/gallery-demo/page.tsx": {
+    "mtime": 1784149942.1686625,
+    "ast_hash": "c2173f04164f45f8b42a7f9f3da0610b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/media/CldImage.tsx": {
+    "mtime": 1784145308.0709493,
+    "ast_hash": "1d81434b6c78e1b0b5e9b4518de3f330",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/media/CldVideo.tsx": {
+    "mtime": 1784145452.8253698,
+    "ast_hash": "79be42578fe677133eca8333188e6466",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/work/DragGallery.tsx": {
+    "mtime": 1784148632.2724407,
+    "ast_hash": "e94c8043ad061929684e24ec3254709c",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/work/VideoMarquee.tsx": {
+    "mtime": 1784151032.5743725,
+    "ast_hash": "6cf0726fa83870d2d872fff07a04a3a6",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/cloudinary.test.ts": {
+    "mtime": 1784150427.1076562,
+    "ast_hash": "1039e172489834f0ea2e851d9f2692a3",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/cloudinary.ts": {
+    "mtime": 1784150436.9879172,
+    "ast_hash": "67118fed34c35b91cc9880b5c01b9e8b",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/assets.txt": {
+    "mtime": 1784150391.2272453,
+    "ast_hash": "4901b61e4823c992f89b8db817d1a675",
     "semantic_hash": ""
   }
 }

@@ -20,14 +20,13 @@ const toneColor: Record<EyebrowTone, string> = {
 export function Eyebrow({ children, tone = 'default', style, className = '' }: EyebrowProps) {
   const color = toneColor[tone]
   return (
-    <div className={className} style={{ display: 'flex', alignItems: 'center', gap: '12px', ...style }}>
-      <span style={{ width: '24px', height: '1px', flexShrink: 0, background: color }} />
+    <div className={className} style={{ display: 'flex', alignItems: 'center', ...style }}>
       <p
         style={{
           margin: 0,
           fontFamily: 'var(--font-sans)',
-          fontWeight: 600,
-          fontSize: '0.8125rem',
+          fontWeight: 500,
+          fontSize: '0.75rem',
           letterSpacing: 'var(--tracking-wider)',
           textTransform: 'uppercase',
           color,

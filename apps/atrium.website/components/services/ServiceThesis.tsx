@@ -10,20 +10,20 @@ export default function ServiceThesis({ svc }: { svc: Service }) {
       <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] items-center gap-16 max-w-6xl mx-auto max-md:grid-cols-1 max-md:gap-10">
         <div className="flex flex-col gap-[1.2rem]">
           <span
-            className="text-[0.78rem] font-semibold tracking-widest uppercase"
+            className="type-eyebrow"
             style={{ color: 'var(--teal-500)' }}
           >
             {svc.thesis.eyebrow}
           </span>
           <h2
-            className="max-w-[17ch] text-[3rem] font-medium leading-[0.98] m-0 max-sm:text-[2.45rem]"
+            className="type-section-title m-0 max-w-[17ch]"
             style={{ color: 'var(--text-strong)' }}
           >
             {parseHeadline(svc.thesis.headline)}
           </h2>
           <p
-            className="max-w-120 text-[1rem] m-0"
-            style={{ color: 'var(--text-muted)', lineHeight: 'var(--leading-body)' }}
+            className="type-body m-0 max-w-120"
+            style={{ color: 'var(--text-muted)' }}
           >
             {svc.thesis.body}
           </p>

@@ -42,6 +42,7 @@ export type {
   RestaurantGrowthRecommendation,
   RestaurantGrowthReport,
   RestaurantGrowthScores,
+  RestaurantGrowthScoringVersion,
   RestaurantLighthouseAuditResult,
   RestaurantLighthouseAuditSummary,
   RestaurantLighthouseStrategy,
@@ -49,7 +50,10 @@ export type {
   RestaurantScoreInterpretation,
   RestaurantWebsiteSignals,
 } from "./diagnostics/restaurant-growth-grader"
-export { gradeRestaurantGrowth } from "./diagnostics/restaurant-growth-grader"
+export {
+  gradeRestaurantGrowth,
+  RESTAURANT_GROWTH_SCORING_VERSION,
+} from "./diagnostics/restaurant-growth-grader"
 
 // Social
 export type {

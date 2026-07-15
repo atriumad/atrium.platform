@@ -9,12 +9,12 @@ import type {
 } from "@atrium/application"
 import { generateText } from "ai"
 import { z } from "zod"
-import type { GooglePlaceMeta } from "./google-places-client"
+import type { AgentEvidenceContext } from "./report-evidence"
 import type { NarrativeData } from "./report-merger"
 
 export type AgentContext = {
   readonly profile: RestaurantGrowthProfile
-  readonly googleMeta: GooglePlaceMeta | null
+  readonly evidence: AgentEvidenceContext
   readonly scores: RestaurantGrowthScores
   readonly overallScore: number
   readonly issues: readonly RestaurantGrowthIssue[]
@@ -25,7 +25,12 @@ const NarrativeSchema = z.object({
   headline: z.string().describe("One sharp sentence — the key growth situation. Max 12 words."),
   summary: z.string().describe("2-3 sentences contextual to this specific restaurant and its actual data."),
   priority: z.string().describe("One sentence: what must be fixed first and why."),
-  atriumPlan: z.array(z.string()).length(4).describe("4 concrete actions ordered by priority — most impactful first."),
+  primaryLeak: z.string().describe("The single most important demand leak. One sentence."),
+  rootCause: z.string().describe("Why this leak is happening, tied only to available evidence."),
+  whyItMatters: z.string().describe("Operational consequence for orders, reservations, calls, or guest trust."),
+  firstMove: z.string().describe("The first action closest to revenue. One concrete sentence."),
+  thirtyDayPlan: z.array(z.string()).length(3).describe("3 concrete actions ordered by priority for the next 30 days."),
+  evidenceHighlights: z.array(z.string()).min(2).max(4).describe("2-4 evidence points that support the decision."),
   businessImpactHeadline: z.string().describe("One sentence: the business consequence of the current score."),
   businessImpactExplanation: z.string().describe("2 sentences: what this means in guests, orders, and revenue."),
   estimatedLostOpportunity: z.string().describe("One sentence: qualitative estimate of demand leaking."),
@@ -44,11 +49,15 @@ Tone: direct, expert, business-focused. Not motivational or salesy. Honest about
 The restaurant owner or operator will read this. Avoid jargon.
 Be specific — use the actual restaurant name, category, address, and real data points in your copy.
 Never invent data not present in the input. Never be vague when a number is available.
+Use enriched evidence for decision quality, not for exhaustive display.
+Pick one primary leak. Do not hedge with multiple equal priorities.
+Do not invent benchmark, social, traffic, revenue, POS, margin, or private analytics facts when evidence is missing.
+Never mention data providers, APIs, tools, or vendor names in customer-facing copy. Use neutral phrases like "public listing", "market signals", "website path", "review data", and "social presence".
 
 IMPORTANT: Respond ONLY with a valid JSON object. No markdown. No code fences. No explanation. Raw JSON only.`
 
 function buildPrompt(ctx: AgentContext): string {
-  const { profile, googleMeta, scores, overallScore, issues, recommendations } = ctx
+  const { profile, evidence, scores, overallScore, issues, recommendations } = ctx
 
   const scoreLines = (Object.entries(scores) as [keyof RestaurantGrowthScores, number | undefined][])
     .filter((e): e is [keyof RestaurantGrowthScores, number] => e[1] !== undefined)
@@ -68,23 +77,17 @@ function buildPrompt(ctx: AgentContext): string {
 
   const lighthouseInfo = profile.website.lighthouse
     ? `Mobile performance: ${profile.website.lighthouse.mobile?.performanceScore ?? "n/a"}/100, SEO: ${profile.website.lighthouse.mobile?.seoScore ?? "n/a"}/100`
-    : "Lighthouse: not available"
+    : "Speed audit: not available"
 
   const issueLines = issues.map((i) => `  [${i.severity}] ${i.category}: ${i.message}`).join("\n") || "  none"
   const recLines = recommendations.map((r) => `  ${r.category} (${r.effort}): ${r.action}`).join("\n") || "  none"
+  const evidenceContext = JSON.stringify(evidence, null, 2)
 
-  const priceCopy = googleMeta?.priceLevel
-    ? googleMeta.priceLevel.replace("PRICE_LEVEL_", "").toLowerCase()
+  const priceCopy = evidence.listing.priceLevel
+    ? evidence.listing.priceLevel.replace("PRICE_LEVEL_", "").toLowerCase()
     : "unknown"
 
-  const serviceModel = googleMeta
-    ? [
-      googleMeta.dineIn && "dine-in",
-      googleMeta.takeout && "takeout",
-      googleMeta.delivery && "delivery",
-      googleMeta.reservable && "reservations accepted",
-    ].filter(Boolean).join(", ") || "service model unknown"
-    : "service model unknown"
+  const serviceModel = evidence.listing.serviceModel.join(", ") || "service model unknown"
 
   return `RESTAURANT DIAGNOSTIC
 
@@ -94,8 +97,8 @@ Address: ${profile.address}
 Website: ${profile.websiteUrl ?? "none"}
 Price level: ${priceCopy}
 Service model: ${serviceModel}
-Hours published: ${googleMeta?.openingHoursPublished ? "yes" : "no"}
-Editorial summary on Google: ${googleMeta?.hasEditorialSummary ? "yes" : "no"}
+Hours published: ${evidence.listing.hours.currentPublished ? "yes" : "no"}
+Editorial summary on public listing: ${evidence.listing.hasEditorialSummary ? "yes" : "no"}
 
 REPUTATION
 Rating: ${profile.googleRating > 0 ? `${profile.googleRating}/5` : "unavailable"} (${profile.googleReviewCount} reviews)
@@ -120,12 +123,20 @@ ${issueLines}
 RECOMMENDATIONS
 ${recLines}
 
+EVIDENCE CONTEXT
+${evidenceContext}
+
 OUTPUT: Return ONLY this JSON object with these exact keys filled in (no other keys, no markdown):
 {
   "headline": "<one sharp sentence — the key growth situation, max 12 words>",
   "summary": "<2-3 sentences about this specific restaurant using its actual data>",
   "priority": "<one sentence: what must be fixed first and why>",
-  "atriumPlan": ["<action 1>", "<action 2>", "<action 3>", "<action 4>"],
+  "primaryLeak": "<single most important demand leak>",
+  "rootCause": "<why this leak is happening, grounded only in the evidence>",
+  "whyItMatters": "<what this costs operationally in guest action, trust, orders, reservations, or calls>",
+  "firstMove": "<first action closest to revenue>",
+  "thirtyDayPlan": ["<day 1-10 action>", "<day 11-20 action>", "<day 21-30 action>"],
+  "evidenceHighlights": ["<evidence point 1>", "<evidence point 2>"],
   "businessImpactHeadline": "<one sentence: business consequence of the current score>",
   "businessImpactExplanation": "<2 sentences: what this means in guests, orders, revenue>",
   "estimatedLostOpportunity": "<one sentence: qualitative estimate of demand leaking>",
@@ -172,7 +183,7 @@ function extractFirstJsonObject(text: string): string | null {
   let escaping = false
 
   for (let i = start; i < text.length; i++) {
-    const ch = text[i]!
+    const ch = text.charAt(i)
     if (escaping) { escaping = false; continue }
     if (ch === "\\") { escaping = true; continue }
     if (ch === '"') { inString = !inString; continue }
@@ -232,4 +243,3 @@ export async function generateReportNarrative(ctx: AgentContext): Promise<Narrat
     return null
   }
 }
-

@@ -1,15 +1,20 @@
 import { afterEach, describe, expect, mock, test } from "bun:test"
+import { resetGooglePlacesBudgetUsage } from "../../../../lib/providers/business-provider"
 
 const originalFetch = globalThis.fetch
-const originalBusinessProvider = process.env.GRADER_BUSINESS_PROVIDER
 const originalGoogleKey = process.env.GOOGLE_PLACES_API_KEY
+const originalGoogleDailyLimit = process.env.GRADER_GOOGLE_DAILY_LIMIT
+const originalGoogleMonthlyLimit = process.env.GRADER_GOOGLE_MONTHLY_LIMIT
 
 afterEach(() => {
   globalThis.fetch = originalFetch
-  if (originalBusinessProvider === undefined) delete process.env.GRADER_BUSINESS_PROVIDER
-  else process.env.GRADER_BUSINESS_PROVIDER = originalBusinessProvider
   if (originalGoogleKey === undefined) delete process.env.GOOGLE_PLACES_API_KEY
   else process.env.GOOGLE_PLACES_API_KEY = originalGoogleKey
+  if (originalGoogleDailyLimit === undefined) delete process.env.GRADER_GOOGLE_DAILY_LIMIT
+  else process.env.GRADER_GOOGLE_DAILY_LIMIT = originalGoogleDailyLimit
+  if (originalGoogleMonthlyLimit === undefined) delete process.env.GRADER_GOOGLE_MONTHLY_LIMIT
+  else process.env.GRADER_GOOGLE_MONTHLY_LIMIT = originalGoogleMonthlyLimit
+  resetGooglePlacesBudgetUsage()
 })
 
 function searchRequest(query: string): Request {
@@ -21,99 +26,20 @@ function searchRequest(query: string): Request {
 }
 
 describe.serial("POST /api/grader/search", () => {
-  test("returns OpenStreetMap restaurant suggestions", async () => {
-    process.env.GRADER_BUSINESS_PROVIDER = "osm"
+  test("returns an empty list for short queries without calling Google", async () => {
+    delete process.env.GOOGLE_PLACES_API_KEY
+    globalThis.fetch = mock(async () => Response.json({})) as unknown as typeof fetch
 
-    globalThis.fetch = mock(async () =>
-      Response.json([
-        {
-          osm_type: "node",
-          osm_id: 123,
-          category: "amenity",
-          type: "restaurant",
-          display_name: "Real Bistro, Miami Beach, FL",
-          namedetails: { name: "Real Bistro" },
-          address: {
-            road: "100 Ocean Dr",
-            city: "Miami Beach",
-            state: "Florida",
-          },
-        },
-        {
-          osm_type: "node",
-          osm_id: 456,
-          category: "shop",
-          type: "clothes",
-          display_name: "Real Boutique, Miami Beach, FL",
-          namedetails: { name: "Real Boutique" },
-        },
-      ]),
-    ) as unknown as typeof fetch
-
-    const { POST } = await import("./route")
-
-    const res = await POST(searchRequest("real bistro miami"))
-    const body = await res.json()
-
-    expect(res.status).toBe(200)
-    expect(body.suggestions).toEqual([
-      {
-        placeId: "osm:node:123",
-        name: "Real Bistro",
-        address: "100 Ocean Dr, Miami Beach, Florida",
-        description: "Real Bistro, Miami Beach, FL",
-        source: "openstreetmap",
-      },
-    ])
-  })
-
-  test("returns food places when cuisine tags are present", async () => {
-    process.env.GRADER_BUSINESS_PROVIDER = "osm"
-
-    globalThis.fetch = mock(async () =>
-      Response.json([
-        {
-          osm_type: "way",
-          osm_id: 789,
-          category: "tourism",
-          type: "attraction",
-          display_name: "Hidden Ramen, Orlando, FL",
-          namedetails: { name: "Hidden Ramen" },
-          extratags: {
-            cuisine: "ramen",
-          },
-        },
-      ]),
-    ) as unknown as typeof fetch
-
-    const { POST } = await import("./route")
-
-    const res = await POST(searchRequest("real bistro miami"))
-    const body = await res.json()
-
-    expect(res.status).toBe(200)
-    expect(body.suggestions).toEqual([
-      {
-        placeId: "osm:way:789",
-        name: "Hidden Ramen",
-        address: "Hidden Ramen, Orlando, FL",
-        description: "Hidden Ramen, Orlando, FL",
-        source: "openstreetmap",
-      },
-    ])
-  })
-
-  test("returns an empty list for short queries", async () => {
     const { POST } = await import("./route")
 
     const res = await POST(searchRequest("ab"))
 
     expect(res.status).toBe(200)
     expect(await res.json()).toEqual({ suggestions: [] })
+    expect(globalThis.fetch).not.toHaveBeenCalled()
   })
 
-  test("returns a provider configuration error when Google mode has no API key", async () => {
-    process.env.GRADER_BUSINESS_PROVIDER = "google"
+  test("requires Google Places API key", async () => {
     delete process.env.GOOGLE_PLACES_API_KEY
 
     const { POST } = await import("./route")
@@ -122,11 +48,10 @@ describe.serial("POST /api/grader/search", () => {
     const body = await res.json()
 
     expect(res.status).toBe(502)
-    expect(body.error).toBe("GOOGLE_PLACES_API_KEY is required when GRADER_BUSINESS_PROVIDER=google")
+    expect(body.error).toBe("GOOGLE_PLACES_API_KEY is required for Google Places restaurant data")
   })
 
-  test("uses Google Autocomplete and returns a photo when Google mode is configured", async () => {
-    process.env.GRADER_BUSINESS_PROVIDER = "google"
+  test("uses Google Autocomplete with minimal field masks", async () => {
     process.env.GOOGLE_PLACES_API_KEY = "test-google-key"
 
     globalThis.fetch = mock(async (input: string | URL | Request, init?: RequestInit) => {
@@ -134,6 +59,13 @@ describe.serial("POST /api/grader/search", () => {
 
       if (url.includes("places.googleapis.com/v1/places:autocomplete")) {
         expect(init?.method).toBe("POST")
+        expect(new Headers(init?.headers).get("X-Goog-FieldMask")).toBe([
+          "suggestions.placePrediction.place",
+          "suggestions.placePrediction.placeId",
+          "suggestions.placePrediction.text",
+          "suggestions.placePrediction.structuredFormat",
+          "suggestions.placePrediction.types",
+        ].join(","))
         expect(JSON.parse(String(init?.body))).toEqual({
           input: "chick in waffle",
           includeQueryPredictions: false,
@@ -158,17 +90,18 @@ describe.serial("POST /api/grader/search", () => {
       }
 
       if (url.includes("places.googleapis.com/v1/places/google-place-123")) {
+        expect(new Headers(init?.headers).get("X-Goog-FieldMask")).toBe([
+          "id",
+          "displayName",
+          "formattedAddress",
+          "types",
+        ].join(","))
+
         return Response.json({
           id: "google-place-123",
           displayName: { text: "Chick-In Waffle" },
           formattedAddress: "321 Biscayne Blvd, Miami, FL 33132, USA",
-          shortFormattedAddress: "321 Biscayne Blvd, Miami, FL",
-          photos: [
-            {
-              name: "places/google-place-123/photos/photo-abc",
-              authorAttributions: [{ displayName: "Google Maps contributor" }],
-            },
-          ],
+          types: ["restaurant"],
         })
       }
 
@@ -185,12 +118,23 @@ describe.serial("POST /api/grader/search", () => {
       {
         placeId: "google:google-place-123",
         name: "Chick-In Waffle",
-        address: "321 Biscayne Blvd, Miami, FL",
-        description: "321 Biscayne Blvd, Miami, FL",
+        address: "321 Biscayne Blvd, Miami, FL 33132, USA",
+        description: "321 Biscayne Blvd, Miami, FL 33132, USA",
         source: "google",
-        photoUrl: "/api/grader/place-photo?name=places%2Fgoogle-place-123%2Fphotos%2Fphoto-abc&maxWidthPx=420&maxHeightPx=260",
-        photoAttribution: "Google Maps contributor",
       },
     ])
+  })
+
+  test("returns a budget guard error when Google daily limit is exhausted", async () => {
+    process.env.GOOGLE_PLACES_API_KEY = "test-google-key"
+    process.env.GRADER_GOOGLE_DAILY_LIMIT = "0"
+
+    const { POST } = await import("./route")
+
+    const res = await POST(searchRequest("chick in waffle"))
+    const body = await res.json()
+
+    expect(res.status).toBe(502)
+    expect(body.error).toBe("Google Places daily budget limit reached for places.autocomplete")
   })
 })
