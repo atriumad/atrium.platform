@@ -35,7 +35,7 @@ const MIN_ITEMS = 8
 const MAX_ANGLE = 28 // degrees at the edges
 const DEPTH = 240 // px pulled toward the viewer at the edges
 
-export default function VideoMarquee({ publicIds, videos, height = 380, gap = 24, speed = 60 }: Props) {
+export default function VideoMarquee({ publicIds, videos, height = 460, gap = 24, speed = 60 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<HTMLDivElement[]>([])
