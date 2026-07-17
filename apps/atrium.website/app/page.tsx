@@ -11,6 +11,7 @@ import StatsStrip, { type Stat } from '@/components/sections/StatsStrip'
 import TestimonialBento, { type BentoCard } from '@/components/sections/TestimonialBento'
 import WorkGrid, { type Project } from '@/components/sections/WorkGrid'
 import LogoTicker from '@/components/ui/LogoTicker'
+import { type CaseStudy, caseStudies } from '@/lib/work'
 
 const bentoItems: BentoItem[] = [
   { size: 'large', title: <>Content from <em>your</em> kitchen</>, body: "We don't use stock. We shoot on location — your food, your team, your energy. Every frame has a job on the content calendar before we press record.", cover: 'BTS wide shot — camera, chef plating, warm restaurant lighting' },
@@ -21,13 +22,18 @@ const bentoItems: BentoItem[] = [
   { size: 'small', title: <>One dashboard. <em>Everything visible.</em></>, body: 'Sales, social, email, reviews, campaigns — aggregated in one clean interface.', cover: 'Dashboard mobile view, clean data' },
 ]
 
-const selectedWork: Project[] = [
-  { number: '01', client: 'Taco Naco KC', result: '3 locations. One brand. Full system activation.', cover: 'hero image', href: '/work/taco-naco', orientation: 'horizontal' },
-  { number: '02', client: "T'ÄHÄ Mexican Kitchen", result: 'Single campaign. Measurable revenue lift.', cover: 'hero image', href: '/work/taha', orientation: 'vertical' },
-  { number: '03', client: 'Aahaa Modern Indian', result: 'Visual identity that found its voice.', cover: 'hero image', href: '/work/aahaa', orientation: 'square' },
-  { number: '04', client: 'Hotel Kansas City', result: 'Two-part campaign storytelling.', cover: 'hero image', href: '/work/hotel-kc', orientation: 'horizontal' },
-  { number: '05', client: 'Grand Coffee', result: 'Brand system from the ground up.', cover: 'hero image', href: '/work/grand-coffee', orientation: 'vertical' },
-]
+const selectedWorkDetails = [
+  { slug: 'taco-naco', result: '3 locations. One brand. Full system activation.', orientation: 'horizontal' },
+  { slug: 'taha', result: 'Single campaign. Measurable revenue lift.', orientation: 'vertical' },
+  { slug: 'aahaa', result: 'Visual identity that found its voice.', orientation: 'square' },
+  { slug: 'hotel-kc', result: 'Two-part campaign storytelling.', orientation: 'horizontal' },
+  { slug: 'grand-coffee', result: 'Brand system from the ground up.', orientation: 'vertical' },
+] as const
+
+const selectedWork: Project[] = selectedWorkDetails.flatMap(({ slug, ...details }) => {
+  const study = caseStudies.find(item => item.slug === slug)
+  return study ? [{ study: study satisfies CaseStudy, ...details }] : []
+})
 
 const processSteps: ProcessStep[] = [
   { eyebrow: 'STRATEGIC', title: 'Discovery & brand immersion', body: 'We learn your restaurant — the food, the culture, the numbers, the competition. Not a questionnaire. A real conversation.' },
@@ -47,8 +53,13 @@ const testimonialCards: BentoCard[] = [
 ]
 
 const clients = [
-  'Taco Naco KC', "T'ÄHÄ", 'Aahaa Modern Indian', 'Hotel Kansas City', 'Grand Coffee',
-  'Town Co', 'Palacana', 'JECA', 'Foxx', 'KC Jazz', 'Pigwich', 'Tacos Borrachos', 'OSPZ', 'FFRB', 'DCOP',
+  { name: 'Taco Naco KC', logo: '/logos/clients/tnkc.png' },
+  { name: "T'ÄHÄ", logo: '/logos/clients/taha.png' },
+  { name: 'Aahaa Modern Indian', logo: '/logos/clients/aahaa.png' },
+  { name: 'Hotel Kansas City', logo: '/logos/clients/htkc.png' },
+  'Grand Coffee',
+  { name: 'Town Co', logo: '/logos/clients/ttco.svg' },
+  'Palacana', 'JECA', 'Foxx', 'KC Jazz', 'Pigwich', 'Tacos Borrachos', 'OSPZ', 'FFRB', 'DCOP',
 ]
 
 const homeStats: Stat[] = [

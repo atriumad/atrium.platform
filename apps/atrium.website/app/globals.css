@@ -195,7 +195,7 @@ main :where(p) {
 }
 
 .brand-marquee-set {
-  width: min(var(--container-max), calc(100vw - var(--gutter) - var(--gutter)));
+  width: max-content;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -221,5 +221,46 @@ main :where(p) {
 @media (prefers-reduced-motion: reduce) {
   .reels-track {
     animation: none;
+  }
+}
+
+/* ─── Growth Engine — editorial index ──────────────────────────────────────── */
+/* Rows are quiet by default; on hover the numeral lifts to full strength and a
+   thin accent creeps in from the left, so the stage colour reveals itself. */
+.ge-row {
+  position: relative;
+  transition: background-color 0.4s ease;
+}
+.ge-row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  height: 2px;
+  width: 0;
+  background: var(--ge-color, transparent);
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ge-row:hover::before {
+  width: 4.5rem;
+}
+.ge-num {
+  opacity: 0.55;
+  transition: opacity 0.4s ease;
+}
+.ge-row:hover .ge-num {
+  opacity: 1;
+}
+.ge-name {
+  transition: color 0.35s ease;
+}
+.ge-row:hover .ge-name {
+  color: var(--ge-color, var(--text-on-dark));
+}
+@media (prefers-reduced-motion: reduce) {
+  .ge-row::before,
+  .ge-num,
+  .ge-name {
+    transition: none;
   }
 }

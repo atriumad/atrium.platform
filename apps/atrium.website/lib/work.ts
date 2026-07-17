@@ -14,6 +14,12 @@ export type CaseGalleryImage = {
 export type CaseStudy = {
   slug: string
   client: string
+  /** Canonical Cloudinary public ID for cover surfaces. */
+  coverImageId?: string
+  /** Local transparent brand mark displayed over the cover. */
+  coverLogo?: string
+  /** CSS object-position override for the cover photograph. */
+  coverPosition?: string
   location?: string
   category: string
   serviceTags: string[]
@@ -33,11 +39,21 @@ export type CaseStudy = {
   order: number
 }
 
+export function getCaseCover(study: CaseStudy) {
+  return {
+    imageId: study.coverImageId ?? study.galleryIds?.[0],
+    logo: study.coverLogo,
+    position: study.coverPosition ?? 'center',
+  }
+}
+
 export const caseStudies: CaseStudy[] = [
   // ─── 1. TACO NACO ───────────────────────────────────────────────────────
   {
     slug: 'taco-naco',
     client: 'Taco Naco KC',
+    coverImageId: 'v1784223449/TNKC_FEB18_Slide_2_tiwzpa',
+    coverLogo: '/logos/clients/tnkc.png',
     category: 'Fast-Casual Mexican · Multi-Location Engagement',
     serviceTags: ['Brand Strategy', 'Content', 'Social', 'Google', 'Reputation', 'Analytics'],
     resultHeadline: '3 locations. 23K followers. Over 1.2 million impressions. One brand.',
@@ -53,6 +69,63 @@ export const caseStudies: CaseStudy[] = [
       { number: '504K', label: 'Google impressions (168K per location × 3)' },
     ],
     quote: { text: '[Client quote pending]', name: 'Fernanda', role: 'Owner, Taco Naco KC', placeholder: true },
+    galleryIds: [
+      'v1784223471/TNKC_FEB03_Slide_4_yislly',
+      'v1784223470/TNKC_JUL16_Do_this_but_with_tacos_dzv561',
+      'v1784223470/TNKC_FEB06_Slide_3_kqlszu',
+      'v1784223470/TNKC_FEB09_SLIDE_3_jb6zwf',
+      'v1784223469/TNKC_FEB07_Slide_1_upe23e',
+      'v1784223468/TNKC__MAY29_Street_Taco_iz9xsl',
+      'v1784223467/TNKC__APR19_Slide_3_ntjjbq',
+      'v1784223466/TNKC_JAN14_PHOTO_GRAPHIC_1_GRAPHIC_nuw7vf',
+      'v1784223464/TNKC__JUL13_Nacho_Bowl_Wednesday_ob34gb',
+      'v1784223463/TNKC_FEB18_Slide_5_vecvgg',
+      'v1784223463/TNKC_FEB_17_Dinner_Post_i3onx6',
+      'v1784223462/TNKC__MAY13_May_4th_wn4mpc',
+      'v1784223449/TNKC_FEB18_Slide_2_tiwzpa',
+      'v1784223447/TNKC__APR24_Photo_3_x2ogwt',
+      'v1784223442/TNKC__APR05_Slide_2_iul1nz',
+      'v1784223446/TNKC__APR05_Slide_3_rxrdsc',
+      'v1784223443/TNKC_FEB19_Tacos_a_la_mexicana_Walking_s7q6wa',
+      'v1784223446/TNKC__JUN08_Slide_3_skkgk3',
+      'v1784223441/TNKC_FEB04_slide_1_ruuolb',
+      'v1784223440/TNKC_MAR09_Creative_02_aesnyx',
+      'v1784223434/TNKC__MAR13_Slide_1_ywvsha',
+      'v1784223438/TNKC__APR25_Photo_2_ll4avk',
+      'v1784223435/TNKC__APR31_farmers_Market_hyktu0',
+      'v1784223437/TNKC__JUN07_Reminder__tequila_uyxndp',
+      'v1784223437/TNKC_JAN12_ITEMS_GRAPHIC_GRAPHIC_nnfoaf',
+      'v1784223433/TNKC__APR23_Photo_1_dgfvuc',
+      'v1784223432/TNKC__MAY33_CHOOSE_YOUR_TUESDAY_TACO_jkrrmd',
+      'v1784223431/TNKC__JUN22_Taco_Tuesday_w8jezn',
+      'v1784223430/TNKC__JUN29_Slide_1_zue945',
+      'v1784223428/TNKC__JUN24_Juarez_Jueves_wk2mm4',
+      'v1784223428/TNKC__APR33_5_mayo_promo_kkgd4r',
+      'v1784223428/TNKC_FEB01_SLIDE_1_gxqz7p',
+      'v1784223427/TNKC__MAY34_Creative_Post_3_gs0fow',
+      'v1784223425/TNKC__MAY27_Ceviche_oc2tqn',
+      'v1784223422/Artboard_3_dpdix7',
+      'v1784223421/Artboard_1_ysxd6p',
+      'v1784223421/Artboard_2_b2kwez',
+    ],
+    videoIds: [
+      'v1784224201/TNKC__APR01_Fernanda_-_Taco_Vegano-_vwptj7',
+      'v1784224171/TNKC__MAY07_Mezcal_Shoot_Video-_ivewix',
+      'v1784223915/TNKC__MAR04_TEAM_VIDEO_ozlmpc',
+      'v1784224082/TNKC__JUN11_Skit_about_Chilaquiles-_il3uu9',
+      'v1784223903/TNKC__MAY01_Football_Video-_jrujen',
+      'v1784223740/TNKC__MAR08_Burrito_Video_1_-_Opening_Craving_fqvcty',
+      'v1784223738/TNKC__JUN15_LGBT_Video_f05df3',
+      'v1784223717/TNKC__APR11_CATERING-_guseq4',
+      'v1784223715/TNKC__MAY06_Tequila_Shoot_Video-_ql7vsf',
+      'v1784223713/TNKC__APR34_5_MAYO_REEL-_1_zkigjq',
+      'v1784223598/TNKC__APR29_Ceviche_Tostada-_uzbjdh',
+      'v1784223585/TNKC__APR05_WE_HAVE_3_LCOCATIONS_NOT_JUST_WESTPORT-_1_hb0ywq',
+      'v1784223593/TNKC__APR34_5_MAYO_REEL-_vkqw39',
+      'v1784223574/TNKC__APR12_Margarita_1_kxzmtj',
+      'v1784223559/TNKC_JAN06_BURRITO_STOP_MOTION_REEL_zv2tnb',
+      'v1784223570/TNKC_JAN04_WE_HAVE_ALL_TACOS_REEL_vavmzr',
+    ],
     order: 1,
   },
 
@@ -60,6 +133,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'taha',
     client: 'T’ÄHÄ Mexican Kitchen',
+    coverImageId: 'v1784146164/TAHA__MAY15_Slide_1_rn1svh',
+    coverLogo: '/logos/clients/taha.png',
     location: 'Kansas City, MO',
     category: 'Fine Dining · Full-Service Engagement',
     serviceTags: ['Brand Strategy', 'Content', 'Social', 'PR', 'Email & SMS', 'Google'],
@@ -130,6 +205,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'aahaa',
     client: 'Aahaa Modern Indian Cuisine',
+    coverImageId: 'v1784220815/AHAA_FEB13_CREATIVE_POST_PHOTO_3_juwr7s',
+    coverLogo: '/logos/clients/aahaa.png',
     location: 'Overland Park, Kansas',
     category: 'Modern Indian Cuisine · Social Media & Brand Positioning',
     serviceTags: ['Brand Positioning', 'Content Strategy', 'Social Media Management', 'Photography', 'Paid Social'],
@@ -159,6 +236,53 @@ export const caseStudies: CaseStudy[] = [
     scope: [
       { label: 'Strategy', items: ['Brand Positioning', 'Content Strategy', 'Fine Dining Messaging', 'Audience Growth Strategy', 'Campaign Planning', 'Performance Analysis'] },
       { label: 'Execution', items: ['Social Media Management', 'Reels Production', 'Photography Direction', 'Community Management', 'Story Content', 'Paid Social Support'] },
+    ],
+    galleryIds: [
+      'v1784220821/AHAA_FEB04_SLIDE_1_aebrys',
+      'v1784220820/AAHA__APR17_Slide_3_oqa4al',
+      'v1784220820/AAHA_MAR14_SLIDE_2_ngqtu5',
+      'v1784220820/AAHA__APR23_Slide_2_e1olhv',
+      'v1784220817/AAHA_MAR09_Slide_1_d6qcg1',
+      'v1784220817/AHAA_FEB04_SLIDE_3_gbokty',
+      'v1784220817/AAHA__JUL09_We_open_late_for_FIFA_wzfzgl',
+      'v1784220816/AAHA_MAR12_Slide_3_jndvju',
+      'v1784220815/AHAA_FEB13_CREATIVE_POST_PHOTO_3_juwr7s',
+      'v1784220814/AAHA_MAR10_Slide_1_juvfmy',
+      'v1784220815/AAHA_MAR14_SLIDE_1_v6rnzn',
+      'v1784220813/AAHA__MAY14_Chef_new_experience_presentation_ufczsx',
+      'v1784220813/AAHA__MAY26_Slide_3_xp1hpn',
+      'v1784220813/AAHA__JUN08_Slide_1_udyxcf',
+      'v1784220812/AAHA__JUL19_Slide_2_j1ahv4',
+      'v1784220812/AAHA__JUN01_Private_room_poster_tq7dyx',
+      'v1784220811/AAHA__JUL20_Mandi_s_Cupon-01_hf1pjh',
+      'v1784220810/AAHA__APR26_Tuesday_Promo_z96nrm',
+      'v1784220809/AAHA__APR22_Photo_1_jqbryz',
+      'v1784220809/AAHA__APR13_Slide_3_rjjf9j',
+      'v1784220809/AAHA__APR24_Photo_1_ddpjcd',
+      'v1784220808/AAHA__APR20_SLIDE_1_pkoaic',
+      'v1784220808/AAHA__APR15_Slide_2_t0vwcq',
+      'v1784220807/AAHA__APR17_Slide_2_cqhprn',
+      'v1784220802/AAHA__APR13_Slide_1_v2wflw',
+    ],
+    videoIds: [
+      'v1784220843/AAHA__APR14_Slide_2_dmzrji',
+      'v1784221267/AAHA__JUN30_Lunch_buffet_compilation_people_and_food_focus_mbitae',
+      'v1784221224/AAHA__JUN25_BTS-Process-result_wwyfsi',
+      'v1784221200/AAHA__JUL18_1_wos4zt',
+      'v1784221150/AAHA__JUL12_Compilation_2_Standing_Up_ikasut',
+      'v1784221144/AAHA__APR08_Chicken_Lolipo_Prep-_gqqkta',
+      'v1784221142/AHAA_FEB01_CREATIVE_BTS-_WITH_TREND_AUDIO_eyluol',
+      'v1784221134/AAHA__MAY16_Compilation_1-Dinner_on_the_Patio_b8paq9',
+      'v1784221097/AAHA__MAY18_Compialion_Food_Cooking_and_Plating_mh6r6b',
+      'v1784220998/AHAA_FEB17_Waitress_introduction_video_ehlqeb',
+      'v1784220991/AAHA__APR05_Static_bar-_liixhr',
+      'v1784220984/AAHA__MAR02_COMPILATION_HYPE_g0e1yq',
+      'v1784220973/AAHA__MAR01_Hospitality_is_-_caption_pzhmaa',
+      'v1784220958/AAHA__MAR04_SERVING_TESTING_COMPILATION_voy0hp',
+      'v1784220956/AAHA_MAR22_Patio_Open_o9iu0i',
+      'v1784220933/AAHA_JUN04_Compialion_Food_Serving_and_lifestyle_wy01mh',
+      'v1784220925/AAHA__MAR07_LUNCH_IS_BEING_SERVED_obiwi0',
+      'v1784220916/AAHA__APR07_Cinematic-_jozuu8',
     ],
     order: 3,
   },
@@ -329,6 +453,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'hotel-kc',
     client: 'Hotel Kansas City',
+    coverLogo: '/logos/clients/htkc.png',
     category: 'Hospitality · Cinematic Content',
     serviceTags: ['Film & Photo', 'Brand Film', 'Social Content'],
     resultHeadline: 'Elevating a historic property through cinematic storytelling',
@@ -354,6 +479,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'town-company',
     client: 'The Town Company',
+    coverLogo: '/logos/clients/ttco.svg',
     category: 'Restaurant · Cinematic Content',
     serviceTags: ['Film & Photo', 'Brand Film', 'Social Content'],
     resultHeadline: 'Building a Culinary Brand Around the People Behind the Experience',
