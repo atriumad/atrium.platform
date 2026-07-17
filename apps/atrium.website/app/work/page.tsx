@@ -3,6 +3,7 @@ import Link from 'next/link'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import CaseCover from '@/components/work/CaseCover'
 import { type CaseStudy, caseStudies, getCaseSummary } from '@/lib/work'
 
 export const metadata: Metadata = {
@@ -12,25 +13,12 @@ export const metadata: Metadata = {
 
 const sortedCases = [...caseStudies].sort((a, b) => a.order - b.order)
 
-const defaultVisualTheme = { background: 'var(--teal-900)' }
-
-const visualThemes = [
-  defaultVisualTheme,
-  { background: 'var(--amber-500)' },
-  { background: 'var(--mint-400)' },
-  { background: 'var(--teal-700)' },
-  { background: 'var(--cloud-300)' },
-]
-
 function CaseVisual({ study, index, featured = false }: { study: CaseStudy; index: number; featured?: boolean }) {
-  const theme = visualThemes[index % visualThemes.length] ?? defaultVisualTheme
-
   return (
-    <div
-      className={`relative h-full overflow-hidden rounded-[var(--radius-bento)] transition-transform duration-500 ease-out group-hover:scale-[1.012] lg:aspect-auto ${featured ? 'aspect-[16/10] min-h-[24rem] lg:min-h-[32rem]' : index % 2 === 0 ? 'aspect-[16/10] lg:min-h-[30rem]' : 'aspect-[4/3] lg:min-h-[30rem]'}`}
-      style={{ background: theme.background }}
-      role="img"
-      aria-label={`${study.client} case study cover — restaurant campaign imagery to be supplied`}
+    <CaseCover
+      study={study}
+      priority={featured}
+      className={`rounded-[var(--radius-bento)] lg:aspect-auto ${featured ? 'aspect-[16/10] min-h-[24rem] lg:min-h-[32rem]' : index % 2 === 0 ? 'aspect-[16/10] lg:min-h-[30rem]' : 'aspect-[4/3] lg:min-h-[30rem]'}`}
     />
   )
 }

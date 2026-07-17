@@ -1,16 +1,30 @@
+export type Client = string | { name: string; logo: string }
+
 type Props = {
-  clients: string[]
+  clients: Client[]
   bg?: string
   label?: string
   size?: 'default' | 'compact'
 }
 
 type BrandNameProps = {
-  name: string
+  client: Client
   index: number
 }
 
-function BrandName({ name, index }: BrandNameProps) {
+function BrandName({ client, index }: BrandNameProps) {
+  if (typeof client !== 'string') {
+    return (
+      // biome-ignore lint/performance/noImgElement: decorative marquee logos with variable aspect ratios; next/image adds no value here
+      <img
+        src={client.logo}
+        alt={client.name}
+        loading="lazy"
+        className="shrink-0 w-auto object-contain h-[clamp(1.4rem,1.8vw,1.7rem)]"
+        style={{ opacity: 0.9 }}
+      />
+    )
+  }
   return (
     <span
       className={`shrink-0 whitespace-nowrap text-[clamp(1.05rem,1.55vw,1.45rem)] leading-none ${index % 5 === 1 ? 'italic' : ''}`}
@@ -22,24 +36,25 @@ function BrandName({ name, index }: BrandNameProps) {
         opacity: index % 7 === 0 ? 0.34 : index % 4 === 0 ? 0.52 : 0.82,
       }}
     >
-      {name}
+      {client}
     </span>
   )
 }
 
-function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: string[]; reverse?: boolean; indexOffset?: number }) {
+function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: Client[]; reverse?: boolean; indexOffset?: number }) {
   return (
     <div className="brand-marquee-window overflow-hidden">
       <div className={`brand-marquee-track flex w-max ${reverse ? 'brand-marquee-track--reverse' : ''}`}>
         {[0, 1].map(copyIndex => (
           <div
             key={copyIndex}
-            className="brand-marquee-set flex shrink-0 items-center justify-around gap-12 px-6 md:px-10"
+            className="brand-marquee-set flex shrink-0 items-center gap-12 pr-12"
             aria-hidden={copyIndex > 0}
           >
-            {brands.map((name, index) => (
-              <BrandName key={name} name={name} index={index + indexOffset} />
-            ))}
+            {brands.map((brand, index) => {
+              const name = typeof brand === 'string' ? brand : brand.name
+              return <BrandName key={name} client={brand} index={index + indexOffset} />
+            })}
           </div>
         ))}
       </div>

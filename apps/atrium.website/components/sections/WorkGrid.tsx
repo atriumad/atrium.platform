@@ -3,14 +3,13 @@ import Link from 'next/link'
 import { useEffect, useRef } from 'react'
 import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import CaseCover from '@/components/work/CaseCover'
 import { gsap } from '@/lib/gsap'
+import type { CaseStudy } from '@/lib/work'
 
 export type Project = {
-  number: string
-  client: string
+  study: CaseStudy
   result: string
-  cover: string
-  href: string
   orientation: 'horizontal' | 'vertical' | 'square'
 }
 
@@ -44,23 +43,16 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
           <Button href="/work" variant="ghost" className="hidden md:flex">See all work →</Button>
         </div>
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {projects.map((project, i) => (
+          {projects.map(project => (
             <Link
-              key={project.number}
-              href={project.href}
+              key={project.study.slug}
+              href={`/work/${project.study.slug}`}
               className="work-card group block rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
               style={{ background: 'var(--color-surface-alt)', opacity: 0 }}
             >
-              <div
-                className={`${aspectMap[project.orientation]} relative flex items-end p-5`}
-                style={{ background: i % 2 === 0 ? 'var(--color-forest)' : 'var(--color-forest-2)' }}
-              >
-                <span className="text-5xl font-medium leading-none" style={{ color: 'var(--color-accent)', opacity: 0.15 }}>
-                  {project.number}
-                </span>
-              </div>
+              <CaseCover study={project.study} className={aspectMap[project.orientation]} />
               <div className="p-6">
-                <p className="type-card-title mb-1">{project.client}</p>
+                <p className="type-card-title mb-1">{project.study.client}</p>
                 <p className="type-caption" style={{ opacity: 0.72 }}>{project.result}</p>
               </div>
             </Link>

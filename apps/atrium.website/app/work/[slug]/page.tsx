@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import CaseCover from '@/components/work/CaseCover'
 import DragGallery from '@/components/work/DragGallery'
 import VideoMarquee from '@/components/work/VideoMarquee'
 import { type CaseMetric, type CaseStudy, caseStudies, getCaseStudy, getCaseSummary } from '@/lib/work'
@@ -22,18 +23,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-const visualThemes = [
-  'var(--teal-900)',
-  'var(--amber-500)',
-  'var(--mint-400)',
-  'var(--teal-700)',
-  'var(--cloud-300)',
-]
-
-function getVisualColor(study: CaseStudy, offset = 0) {
-  return visualThemes[(study.order - 1 + offset) % visualThemes.length] ?? 'var(--teal-900)'
-}
-
 function ServiceList({ services, dark = false }: { services: string[]; dark?: boolean }) {
   return (
     <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0" aria-label="Services">
@@ -51,13 +40,12 @@ function ServiceList({ services, dark = false }: { services: string[]; dark?: bo
   )
 }
 
-function CaseMedia({ study, offset = 0, compact = false }: { study: CaseStudy; offset?: number; compact?: boolean }) {
+function CaseMedia({ study, compact = false }: { study: CaseStudy; compact?: boolean }) {
   return (
-    <div
-      className={`h-full w-full rounded-[var(--radius-bento)] ${compact ? 'min-h-[20rem] md:min-h-[32rem]' : 'aspect-[4/3] min-h-[25rem] lg:aspect-auto lg:min-h-[38rem]'}`}
-      style={{ background: getVisualColor(study, offset) }}
-      role="img"
-      aria-label={`${study.client} campaign hero — final case study media to be supplied`}
+    <CaseCover
+      study={study}
+      priority={!compact}
+      className={`rounded-[var(--radius-bento)] ${compact ? 'min-h-[20rem] md:min-h-[32rem]' : 'aspect-[4/3] min-h-[25rem] lg:aspect-auto lg:min-h-[38rem]'}`}
     />
   )
 }
