@@ -309,7 +309,7 @@ export default function Navbar() {
         >
           <span
             className="relative flex-shrink-0 w-4 h-4"
-            style={{ color: 'var(--color-accent)' }}
+            style={{ color: isEditorialCase ? 'var(--text-strong)' : 'var(--color-accent)' }}
           >
             <span
               className={`absolute left-0 top-1/2 w-full h-px transition-transform duration-200 ${mobileOpen ? 'rotate-45' : '-translate-y-[3px]'}`}
