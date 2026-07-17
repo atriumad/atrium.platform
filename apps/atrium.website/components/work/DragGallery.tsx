@@ -296,21 +296,9 @@ export default function DragGallery({
         cursor: 'grab',
         userSelect: 'none',
         touchAction: 'none',
-        background: 'var(--teal-900)',
+        background: '#fff',
       }}
     >
-      {/* Vignette */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.35) 100%)',
-          zIndex: 50,
-        }}
-      />
-
       {[-1, 0, 1].map((yOffset) =>
         [-1, 0, 1].map((xOffset) => {
           const gridIndex = (yOffset + 1) * GRID_COLS + (xOffset + 1)
@@ -342,7 +330,7 @@ export default function DragGallery({
                       height: `${layout.height}px`,
                       borderRadius: `${radius}px`,
                       overflow: 'hidden',
-                      backgroundColor: 'rgba(255,255,255,0.04)',
+                      backgroundColor: 'rgba(0,0,0,0.04)',
                     }}
                     onMouseEnter={() => setHoveredKey(key)}
                     onMouseLeave={() => setHoveredKey((k) => (k === key ? null : k))}

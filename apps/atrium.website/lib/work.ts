@@ -22,6 +22,8 @@ export type CaseStudy = {
   coverLogo?: string
   /** CSS object-position override for the cover photograph. */
   coverPosition?: string
+  /** Vertical nudge for the cover logo (CSS translateY, e.g. '-5%'). */
+  coverLogoOffsetY?: string
   location?: string
   category: string
   serviceTags: string[]
@@ -46,6 +48,7 @@ export function getCaseCover(study: CaseStudy) {
     imageId: study.coverImageId ?? study.galleryIds?.[0],
     logo: study.coverLogo,
     position: study.coverPosition ?? 'center',
+    logoOffsetY: study.coverLogoOffsetY,
   }
 }
 
@@ -113,6 +116,7 @@ export const caseStudies: CaseStudy[] = [
     client: 'Aahaa Modern Indian Cuisine',
     coverImageId: 'v1784220815/AHAA_FEB13_CREATIVE_POST_PHOTO_3_juwr7s',
     coverLogo: '/logos/clients/aahaa.png',
+    coverLogoOffsetY: '-5%',
     location: 'Overland Park, Kansas',
     category: 'Modern Indian Cuisine · Social Media & Brand Positioning',
     serviceTags: ['Brand Positioning', 'Content Strategy', 'Social Media Management', 'Photography', 'Paid Social'],
