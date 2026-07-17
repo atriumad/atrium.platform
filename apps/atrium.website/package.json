@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "biome check .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sync:assets": "bun run scripts/sync-cloudinary-assets.ts --write"
   },
   "dependencies": {
     "@atrium/ui": "workspace:*",
@@ -17,6 +18,7 @@
     "@remotion/player": "4.0.483",
     "gsap": "3.15.0",
     "next": "16.2.9",
+    "next-cloudinary": "^6.17.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "remotion": "4.0.483",

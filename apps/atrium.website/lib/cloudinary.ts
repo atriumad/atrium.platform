@@ -1,59 +1,54 @@
-// ─── Cloudinary delivery layer (launch phase) ──────────────────────────────
-// Assets live in Cloudinary (mastered in Dropbox). Set the cloud name via
-// NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME. Later this whole module gets swapped for
-// Cloudflare R2 + Stream without touching component call sites.
+// ─── Cloudinary delivery layer ─────────────────────────────────────────────
+// URLs are built with the official `next-cloudinary` helpers. Set the cloud
+// name via NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME.
 //
-// Usage: pass a Cloudinary *public ID* (e.g. "clients/taco-naco/hero"), never
-// a raw Dropbox link.
+// Pass a Cloudinary *public ID* (e.g. "taco-naco/TNKC_FEB18_Slide_2"), never a
+// raw Dropbox/Cloudinary URL.
+//
+// NOTE: next-cloudinary prepends its own `v1/` version segment, so a public ID
+// that still carries an embedded `v<digits>/` prefix (the delivery version) is
+// mis-read as a folder and 404s. `stripVersion` drops that prefix defensively
+// so both clean IDs and legacy version-prefixed IDs resolve correctly.
+
+import { getCldImageUrl, getCldVideoUrl } from 'next-cloudinary'
 
 const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? ''
-const BASE = `https://res.cloudinary.com/${CLOUD}`
 
 export const cloudinaryConfigured = Boolean(CLOUD)
+
+/** Normalize a public ID: drop a leading `v1784223449/` delivery-version
+ *  prefix and any trailing file extension (Cloudinary public IDs carry neither). */
+function stripVersion(publicId: string): string {
+  return publicId
+    .trim()
+    .replace(/^\/+/, '')
+    .replace(/^v\d+\//, '')
+    .replace(/\.(mp4|mov|webm|jpg|jpeg|png|webp|avif|gif)$/i, '')
+}
 
 type ImageOpts = { width?: number; height?: number; crop?: 'fill' | 'fit' | 'limit' }
 
 /** Build an optimized delivery URL for a Cloudinary image public ID. */
 export function cldImageUrl(publicId: string, opts: ImageOpts = {}): string {
-  const t = [
-    'f_auto',
-    'q_auto',
-    opts.width ? `w_${opts.width}` : null,
-    opts.height ? `h_${opts.height}` : null,
-    opts.crop ? `c_${opts.crop}` : null,
-  ]
-    .filter(Boolean)
-    .join(',')
-  return `${BASE}/image/upload/${t}/${publicId}`
+  return getCldImageUrl({
+    src: stripVersion(publicId),
+    width: opts.width,
+    height: opts.height,
+    crop: opts.crop ?? 'limit',
+  })
 }
 
-/**
- * next/image loader. Use with <Image loader={cloudinaryLoader} src={publicId} />.
- * Next passes the responsive width; we let Cloudinary format/quality auto.
- */
-export function cloudinaryLoader({
-  src,
-  width,
-  quality,
-}: {
-  src: string
-  width: number
-  quality?: number
-}): string {
-  const t = ['f_auto', `q_${quality ?? 'auto'}`, `w_${width}`, 'c_limit'].join(',')
-  return `${BASE}/image/upload/${t}/${src}`
-}
-
-function normalizeVideoPublicId(publicId: string): string {
-  return publicId.trim().replace(/^\/+/, '').replace(/\.mp4$/i, '')
-}
-
-/** Optimized MP4 for a Cloudinary video public ID (adaptive HLS comes with the Cloudflare phase). */
+/** Optimized MP4 for a Cloudinary video public ID. */
 export function cldVideoUrl(publicId: string): string {
-  return `${BASE}/video/upload/f_auto,q_auto/${normalizeVideoPublicId(publicId)}.mp4`
+  return getCldVideoUrl({ src: stripVersion(publicId) })
 }
 
-/** Poster frame (first frame) for a Cloudinary video public ID. */
+/** Poster frame for a Cloudinary video public ID (first frame). */
 export function cldVideoPoster(publicId: string): string {
-  return `${BASE}/video/upload/f_auto,q_auto,so_0/${normalizeVideoPublicId(publicId)}.jpg`
+  return getCldImageUrl({
+    src: stripVersion(publicId),
+    assetType: 'video',
+    format: 'jpg',
+    rawTransformations: ['so_0'],
+  })
 }

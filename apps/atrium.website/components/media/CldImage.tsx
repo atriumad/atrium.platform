@@ -1,12 +1,17 @@
-import Image, { type ImageProps } from 'next/image'
-import { cloudinaryLoader } from '@/lib/cloudinary'
+import { type CldImageProps as BaseProps, CldImage as CldImageBase } from 'next-cloudinary'
 
-type CldImageProps = Omit<ImageProps, 'src' | 'loader'> & {
-  /** Cloudinary public ID, e.g. "clients/taco-naco/hero" (not a raw URL). */
+type CldImageProps = Omit<BaseProps, 'src'> & {
+  /** Cloudinary public ID, e.g. "taco-naco/TNKC_FEB18_Slide_2" (not a raw URL). */
   publicId: string
 }
 
-// Optimized image from Cloudinary via next/image (f_auto,q_auto, responsive).
+/** Strip a legacy `v1784223449/` delivery-version prefix so next-cloudinary
+ *  doesn't mistake it for a folder (which 404s). */
+function stripVersion(publicId: string): string {
+  return publicId.trim().replace(/^\/+/, '').replace(/^v\d+\//, '')
+}
+
+// Optimized image from Cloudinary (f_auto, q_auto, responsive) via next-cloudinary.
 export default function CldImage({ publicId, alt, ...rest }: CldImageProps) {
-  return <Image loader={cloudinaryLoader} src={publicId} alt={alt} {...rest} />
+  return <CldImageBase src={stripVersion(publicId)} alt={alt} {...rest} />
 }
