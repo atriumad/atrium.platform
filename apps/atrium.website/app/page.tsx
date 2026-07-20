@@ -11,6 +11,7 @@ import StatsStrip, { type Stat } from '@/components/sections/StatsStrip'
 import TestimonialBento, { type BentoCard } from '@/components/sections/TestimonialBento'
 import WorkGrid, { type Project } from '@/components/sections/WorkGrid'
 import LogoTicker from '@/components/ui/LogoTicker'
+import { clients } from '@/lib/clients'
 import { type CaseStudy, caseStudies } from '@/lib/work'
 
 const bentoItems: BentoItem[] = [
@@ -50,16 +51,6 @@ const testimonialCards: BentoCard[] = [
   { type: 'testimonial', quote: 'Working with Atrium across our 3 Taco Naco locations changed how we think about marketing. One system, one voice, real results.', author: 'Brian Goldman Ruiz', role: 'Owner', company: 'Taco Naco KC' },
   { type: 'testimonial', quote: 'The brunch campaign they built moved real revenue. Not followers — people sitting down on Sunday mornings.', author: 'TBD', role: 'Owner', company: "T'ÄHÄ Mexican Kitchen", bg: 'var(--color-forest-2)' },
   { type: 'stat', stat: '88%', statLabel: 'of diners trust online reviews as much as personal recommendations. We manage every one of yours.' },
-]
-
-const clients = [
-  { name: 'Taco Naco KC', logo: '/logos/clients/tnkc.png' },
-  { name: "T'ÄHÄ", logo: '/logos/clients/taha.png' },
-  { name: 'Aahaa Modern Indian', logo: '/logos/clients/aahaa.png' },
-  { name: 'Hotel Kansas City', logo: '/logos/clients/htkc.png' },
-  'Grand Coffee',
-  { name: 'Town Co', logo: '/logos/clients/ttco.svg' },
-  'Palacana', 'JECA', 'Foxx', 'KC Jazz', 'Pigwich', 'Tacos Borrachos', 'OSPZ', 'FFRB', 'DCOP',
 ]
 
 const homeStats: Stat[] = [

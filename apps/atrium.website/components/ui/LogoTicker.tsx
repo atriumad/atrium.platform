@@ -1,4 +1,4 @@
-export type Client = string | { name: string; logo: string }
+export type Client = string | { name: string; logo: string; scale?: number }
 
 type Props = {
   clients: Client[]
@@ -21,7 +21,7 @@ function BrandName({ client, index }: BrandNameProps) {
         alt={client.name}
         loading="lazy"
         className="shrink-0 w-auto object-contain h-[clamp(1.4rem,1.8vw,1.7rem)]"
-        style={{ opacity: 0.9 }}
+        style={{ opacity: 0.9, transform: client.scale ? `scale(${client.scale})` : undefined }}
       />
     )
   }

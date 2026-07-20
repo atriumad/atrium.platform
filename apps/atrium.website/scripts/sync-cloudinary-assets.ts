@@ -36,6 +36,9 @@ const SLUG_MAP: Record<string, string> = {
   AHAA: 'aahaa',
   DCOP: 'don-chuys',
   OSPZ: 'old-shawnee-pizza',
+  CHWF: 'chick-in-waffle',
+  JECA: 'jerusalem-cafe',
+  FFRB: 'farm-fresh',
 }
 
 type Resource = {

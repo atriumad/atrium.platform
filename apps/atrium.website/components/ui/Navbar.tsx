@@ -306,10 +306,11 @@ export default function Navbar() {
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen((v) => !v)}
+          className="flex md:hidden items-center justify-center p-2 -m-2"
         >
           <span
             className="relative flex-shrink-0 w-4 h-4"
-            style={{ color: 'var(--color-accent)' }}
+            style={{ color: isEditorialCase ? 'var(--text-strong)' : 'var(--color-accent)' }}
           >
             <span
               className={`absolute left-0 top-1/2 w-full h-px transition-transform duration-200 ${mobileOpen ? 'rotate-45' : '-translate-y-[3px]'}`}

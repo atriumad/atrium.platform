@@ -5,9 +5,15 @@ import { cldImageUrl } from '@/lib/cloudinary'
 
 // ─── Interactive draggable masonry gallery (images only) ────────────────────
 // Ported from the Framer "Limitless Pro" component, stripped to the image path:
-// an infinite, drag-to-pan masonry wall that wraps in a 3×3 tiling so it never
-// runs out. No video, no zoom, no Framer deps. Fills 100% of the viewport up to
-// a 1920px max width. Swap `images` for the real asset list when ready.
+// an infinite, drag-to-pan masonry wall. No video, no zoom, no Framer deps.
+// Fills 100% of the viewport up to a 1920px max width. Swap `images` for the
+// real asset list when ready.
+//
+// Masonry columns have uneven content height by nature (aspect ratios vary),
+// so a single shared wrap boundary for the whole grid either leaves short
+// columns with a gap, or crops tall columns mid-tile. Each column instead
+// wraps on its own period — independent of its neighbors — which is what
+// keeps the gap uniform on all sides at every seam.
 
 export type GalleryImage = { src: string; alt?: string; width?: number; height?: number }
 
@@ -32,9 +38,10 @@ const STOCK: GalleryImage[] = [
 ]
 
 type LayoutItem = { x: number; y: number; width: number; height: number; originalIndex: number }
+type ColumnBlock = { layout: LayoutItem[]; images: GalleryImage[]; height: number }
 
-const GRID_COLS = 3
-const TILE_CAP = 120
+const REPS = [-1, 0, 1] as const
+const TILE_CAP_PER_COLUMN = 40
 
 function wrapValue(min: number, max: number, value: number): number {
   const range = max - min
@@ -60,11 +67,12 @@ export default function DragGallery({
     return images && images.length > 0 ? images : STOCK
   }, [publicIds, images])
   const containerRef = useRef<HTMLDivElement>(null)
-  const gridElementsRef = useRef<(HTMLDivElement | null)[]>([])
+  const groupElsRef = useRef<Map<string, HTMLDivElement>>(new Map())
 
   const positionRef = useRef({ x: 0, y: 0 })
   const targetPositionRef = useRef({ x: 0, y: 0 })
-  const gridSizeRef = useRef({ width: 0, height: 0 })
+  const totalWidthRef = useRef(0)
+  const columnHeightsRef = useRef<number[]>([])
   const animationFrameRef = useRef<number | undefined>(undefined)
 
   const isDraggingRef = useRef(false)
@@ -73,9 +81,7 @@ export default function DragGallery({
 
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 })
   const [imageDims, setImageDims] = useState<Map<number, { width: number; height: number }>>(new Map())
-  const [masonryLayout, setMasonryLayout] = useState<LayoutItem[]>([])
-  const [repeated, setRepeated] = useState<GalleryImage[]>([])
-  const [gridSize, setGridSize] = useState({ width: 0, height: 0 })
+  const [columnBlocks, setColumnBlocks] = useState<ColumnBlock[]>([])
   const [hoveredKey, setHoveredKey] = useState<string | null>(null)
 
   // ─── Measure container ────────────────────────────────────────────────────
@@ -126,55 +132,45 @@ export default function DragGallery({
     return Math.max(base, needed)
   }, [data.length, containerSize.width, columnWidth, gap])
 
-  // ─── Masonry layout + wrapping block size ─────────────────────────────────
+  // ─── Per-column masonry layout ────────────────────────────────────────────
+  // Each column fills independently until it clears the target height, then
+  // wraps on its own total height. No shared boundary means no column is
+  // ever short (gap) or cropped (overlap) relative to the others.
   useEffect(() => {
     if (data.length === 0 || columnWidth === 0 || containerSize.height === 0) return
 
-    const rowsNeeded = Math.ceil(containerSize.height / Math.max(20, columnWidth * 0.75)) + 6
-    const total = Math.min(columns * rowsNeeded, TILE_CAP)
+    const targetHeight = containerSize.height
 
-    const items: GalleryImage[] = []
-    const indexMap: number[] = []
-    for (let i = 0; i < total; i++) {
-      const idx = i % data.length
-      const img = data[idx]
-      if (!img) continue
-      items.push(img)
-      indexMap.push(idx)
-    }
+    const blocks: ColumnBlock[] = Array.from({ length: columns }, (_unused, col) => {
+      const layout: LayoutItem[] = []
+      const colImages: GalleryImage[] = []
+      const stagger = Math.floor((col * data.length) / columns)
+      let y = 0
+      let i = 0
+      while (y < targetHeight && i < TILE_CAP_PER_COLUMN) {
+        const idx = (i + stagger) % data.length
+        const img = data[idx]
+        i++
+        if (!img) continue
 
-    const columnHeights: number[] = new Array(columns).fill(0)
-    const layout: LayoutItem[] = []
+        const dims = imageDims.get(idx)
+        const aspect = dims ? dims.height / dims.width : 0.75
+        const height = Math.round(columnWidth * aspect)
 
-    items.forEach((_item, i) => {
-      const originalIndex = indexMap[i] ?? 0
-      const shortest = columnHeights.indexOf(Math.min(...columnHeights))
-      const currentH = columnHeights[shortest] ?? 0
-      const dims = imageDims.get(originalIndex)
-      const aspect = dims ? dims.height / dims.width : 0.75
-      const height = Math.round(columnWidth * aspect)
-
-      layout.push({
-        x: shortest * (columnWidth + gap),
-        y: currentH,
-        width: columnWidth,
-        height,
-        originalIndex,
-      })
-      columnHeights[shortest] = currentH + height + gap
+        colImages.push(img)
+        layout.push({ x: col * (columnWidth + gap), y, width: columnWidth, height, originalIndex: idx })
+        y += height + gap
+      }
+      return { layout, images: colImages, height: y }
     })
 
-    setRepeated(items)
-    setMasonryLayout(layout)
+    setColumnBlocks(blocks)
+    columnHeightsRef.current = blocks.map((b) => b.height)
 
-    const maxHeight = Math.max(...columnHeights)
-    const totalWidth = columns * columnWidth + (columns - 1) * gap
-    const size = { width: totalWidth + gap, height: maxHeight + gap }
-    setGridSize(size)
-    gridSizeRef.current = size
+    totalWidthRef.current = columns * columnWidth + (columns - 1) * gap + gap
   }, [data, columns, columnWidth, gap, containerSize.height, imageDims])
 
-  // ─── Smooth animation loop with 3×3 wrap ──────────────────────────────────
+  // ─── Smooth animation loop — shared x wrap, independent per-column y wrap ──
   useEffect(() => {
     const animate = () => {
       const current = positionRef.current
@@ -186,19 +182,20 @@ export default function DragGallery({
         const next = { x: current.x + dx * smoothness, y: current.y + dy * smoothness }
         positionRef.current = next
 
-        const gs = gridSizeRef.current
-        if (gs.width > 0 && gs.height > 0) {
-          const wrapped = {
-            x: wrapValue(-gs.width, gs.width, next.x),
-            y: wrapValue(-gs.height, gs.height, next.y),
-          }
-          gridElementsRef.current.forEach((el, index) => {
-            if (!el) return
-            const xOffset = (index % GRID_COLS) - Math.floor(GRID_COLS / 2)
-            const yOffset = Math.floor(index / GRID_COLS) - Math.floor(GRID_COLS / 2)
-            const tx = wrapped.x + xOffset * gs.width
-            const ty = wrapped.y + yOffset * gs.height
-            el.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px))`
+        const tw = totalWidthRef.current
+        if (tw > 0) {
+          const wrappedX = wrapValue(-tw, tw, next.x)
+          groupElsRef.current.forEach((el, key) => {
+            const [xOffsetStr, colStr, yRepStr] = key.split('_')
+            const xOffset = Number(xOffsetStr)
+            const col = Number(colStr)
+            const yRep = Number(yRepStr)
+            const colHeight = columnHeightsRef.current[col] ?? 0
+            if (colHeight <= 0) return
+            const wrappedY = wrapValue(-colHeight, colHeight, next.y)
+            const tx = wrappedX + xOffset * tw
+            const ty = wrappedY + yRep * colHeight
+            el.style.transform = `translate(${tx}px, ${ty}px)`
           })
         }
       }
@@ -271,15 +268,6 @@ export default function DragGallery({
     }
   }, [dragSensitivity])
 
-  const gridStyle: React.CSSProperties = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    willChange: 'transform',
-    width: `${gridSize.width}px`,
-    height: `${gridSize.height}px`,
-  }
-
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: pan surface; drag is pointer-only by design
     <div
@@ -296,78 +284,66 @@ export default function DragGallery({
         cursor: 'grab',
         userSelect: 'none',
         touchAction: 'none',
-        background: 'var(--teal-900)',
+        background: '#fff',
       }}
     >
-      {/* Vignette */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.35) 100%)',
-          zIndex: 50,
-        }}
-      />
-
-      {[-1, 0, 1].map((yOffset) =>
-        [-1, 0, 1].map((xOffset) => {
-          const gridIndex = (yOffset + 1) * GRID_COLS + (xOffset + 1)
-          return (
-            <div
-              key={`${xOffset}-${yOffset}`}
-              ref={(el) => {
-                gridElementsRef.current[gridIndex] = el
-              }}
-              style={{
-                ...gridStyle,
-                transform: `translate(calc(-50% + ${xOffset * gridSize.width}px), calc(-50% + ${yOffset * gridSize.height}px))`,
-              }}
-            >
-              {repeated.map((image, index) => {
-                const layout = masonryLayout[index]
-                if (!layout) return null
-                const key = `${xOffset}-${yOffset}-${index}`
-                const isHovered = hoveredKey === key
-                return (
-                  // biome-ignore lint/a11y/noStaticElementInteractions: decorative hover-zoom only
-                  <div
-                    key={key}
-                    style={{
-                      position: 'absolute',
-                      left: `${layout.x}px`,
-                      top: `${layout.y}px`,
-                      width: `${layout.width}px`,
-                      height: `${layout.height}px`,
-                      borderRadius: `${radius}px`,
-                      overflow: 'hidden',
-                      backgroundColor: 'rgba(255,255,255,0.04)',
-                    }}
-                    onMouseEnter={() => setHoveredKey(key)}
-                    onMouseLeave={() => setHoveredKey((k) => (k === key ? null : k))}
-                  >
-                    {/* biome-ignore lint/performance/noImgElement: infinite wall of remote assets, next/image not suitable here */}
-                    <img
-                      src={image.src}
-                      alt={image.alt ?? `Gallery image ${layout.originalIndex + 1}`}
-                      draggable={false}
-                      loading="lazy"
+      {REPS.map((xOffset) =>
+        columnBlocks.map((block, col) =>
+          REPS.map((yRep) => {
+            const groupKey = `${xOffset}_${col}_${yRep}`
+            return (
+              <div
+                key={groupKey}
+                ref={(el) => {
+                  if (el) groupElsRef.current.set(groupKey, el)
+                  else groupElsRef.current.delete(groupKey)
+                }}
+                style={{ position: 'absolute', top: 0, left: 0, willChange: 'transform' }}
+              >
+                {block.layout.map((item, i) => {
+                  const image = block.images[i]
+                  if (!image) return null
+                  const tileKey = `${groupKey}-${i}`
+                  const isHovered = hoveredKey === tileKey
+                  return (
+                    // biome-ignore lint/a11y/noStaticElementInteractions: decorative hover-zoom only
+                    <div
+                      key={tileKey}
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        pointerEvents: 'none',
-                        transform: isHovered ? 'scale(1.06)' : 'scale(1)',
-                        transition: 'transform 0.3s ease',
+                        position: 'absolute',
+                        left: `${item.x}px`,
+                        top: `${item.y}px`,
+                        width: `${item.width}px`,
+                        height: `${item.height}px`,
+                        borderRadius: `${radius}px`,
+                        overflow: 'hidden',
+                        backgroundColor: 'rgba(0,0,0,0.04)',
                       }}
-                    />
-                  </div>
-                )
-              })}
-            </div>
-          )
-        }),
+                      onMouseEnter={() => setHoveredKey(tileKey)}
+                      onMouseLeave={() => setHoveredKey((k) => (k === tileKey ? null : k))}
+                    >
+                      {/* biome-ignore lint/performance/noImgElement: infinite wall of remote assets, next/image not suitable here */}
+                      <img
+                        src={image.src}
+                        alt={image.alt ?? `Gallery image ${item.originalIndex + 1}`}
+                        draggable={false}
+                        loading="lazy"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          pointerEvents: 'none',
+                          transform: isHovered ? 'scale(1.06)' : 'scale(1)',
+                          transition: 'transform 0.3s ease',
+                        }}
+                      />
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          }),
+        ),
       )}
     </div>
   )
