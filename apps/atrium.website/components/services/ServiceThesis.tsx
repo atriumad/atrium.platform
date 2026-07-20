@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { Service } from '@/lib/services'
 import { parseHeadline } from './utils'
 
@@ -33,52 +34,23 @@ export default function ServiceThesis({ svc }: { svc: Service }) {
           className="overflow-hidden relative min-h-124 max-md:min-h-112"
           style={{
             borderRadius: 'var(--radius-bento)',
-            background: 'linear-gradient(180deg, color-mix(in srgb, var(--cloud-100) 20%, transparent), color-mix(in srgb, var(--teal-900) 24%, transparent)), var(--surface-atmos)',
-            backgroundSize: 'cover',
             boxShadow: 'var(--shadow-soft)',
           }}
-          aria-label={svc.hero.coverAlt}
-          role="img"
         >
+          <Image
+            src={svc.thesis.image}
+            alt={svc.hero.coverAlt}
+            fill
+            sizes="(min-width: 768px) 45vw, 100vw"
+            className="object-cover"
+          />
           <div
-            className="absolute inset-[9%_11%] p-4"
+            className="absolute inset-0"
             style={{
-              border: '1px solid color-mix(in srgb, var(--cloud-100) 48%, transparent)',
-              borderRadius: '1.8rem', /* intentionally larger than --radius-lg (22px) for this floating-card effect; nearest token --radius-xl (32px) also overshoots — kept literal pending visual review */
-              background: 'color-mix(in srgb, var(--cloud-100) 76%, transparent)',
-              boxShadow: 'var(--shadow-pop)',
-              transform: 'rotate(5deg)',
+              background: 'linear-gradient(180deg, color-mix(in srgb, var(--teal-900) 4%, transparent), color-mix(in srgb, var(--teal-900) 22%, transparent))',
             }}
-          >
-            <div className="flex gap-1.8 mb-4">
-              <span className="w-[0.64rem] h-[0.64rem] rounded-full" style={{ background: 'var(--teal-800)', opacity: 0.16 }} />
-              <span className="w-[0.64rem] h-[0.64rem] rounded-full" style={{ background: 'var(--amber-500)', opacity: 0.72 }} />
-              <span className="w-[0.64rem] h-[0.64rem] rounded-full" style={{ background: 'var(--teal-800)', opacity: 0.16 }} />
-            </div>
-            <div className="grid grid-cols-3 gap-2.2">
-              {svc.perks.slice(0, 6).map((perk, index) => (
-                <span
-                  key={perk.title}
-                  className="aspect-1 rounded-3.6"
-                  style={{
-                    background: index % 2 === 1
-                      ? 'linear-gradient(180deg, color-mix(in srgb, var(--cloud-100) 6%, transparent), color-mix(in srgb, var(--teal-800) 58%, transparent)), var(--surface-atmos-deep)'
-                      : 'linear-gradient(180deg, color-mix(in srgb, var(--cloud-100) 5%, transparent), color-mix(in srgb, var(--teal-800) 38%, transparent)), var(--grad-aurora)',
-                    backgroundSize: index % 2 === 1 ? 'cover' : undefined,
-                  }}
-                />
-              ))}
-            </div>
-            <div
-              className="absolute left-4 bottom-4 right-4 truncate rounded-full px-3.6 py-3 text-12 font-semibold overflow-hidden"
-              style={{
-                background: 'var(--teal-800)',
-                color: 'var(--mint-300)',
-              }}
-            >
-              {svc.name}
-            </div>
-          </div>
+            aria-hidden="true"
+          />
         </div>
       </div>
     </section>

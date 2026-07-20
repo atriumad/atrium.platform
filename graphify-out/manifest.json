@@ -1,7 +1,7 @@
 {
   ".claude/settings.local.json": {
-    "mtime": 1784126998.1335087,
-    "ast_hash": "fbc2aa91b85fa8db38598f231d359d4d",
+    "mtime": 1784570572.8122573,
+    "ast_hash": "0d7d80bf699fb5e60a8e313e5f448fb0",
     "semantic_hash": ""
   },
   ".codex/hooks.json": {
@@ -665,8 +665,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/route.test.ts": {
-    "mtime": 1783977733.3463023,
-    "ast_hash": "2871e48218a94da2045e50ba4c237d01",
+    "mtime": 1784151230.6911058,
+    "ast_hash": "06b69d9a79e90ef1dd3edecfa9a162fe",
     "semantic_hash": ""
   },
   "apps/atrium.grader/app/api/grader/route.ts": {
@@ -825,8 +825,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/app/page.tsx": {
-    "mtime": 1784140177.2240653,
-    "ast_hash": "ff1d1417eb99e3bf093c10546c7e3d1f",
+    "mtime": 1784570073.264201,
+    "ast_hash": "72456b46306f1ef5ad657d5c75de0c4b",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/services/[slug]/page.tsx": {
@@ -900,8 +900,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/WorkGrid.tsx": {
-    "mtime": 1784140146.0134425,
-    "ast_hash": "cdb2a225f2f4e6b92978ce2e60565c56",
+    "mtime": 1784230154.9842615,
+    "ast_hash": "cbf6b80c27cd4704fc0f481148fcbcb0",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Button.tsx": {
@@ -925,13 +925,13 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/LogoTicker.tsx": {
-    "mtime": 1783973128.1714642,
-    "ast_hash": "dd2fc15a97fae7b7225ed73cde6a23a9",
+    "mtime": 1784565095.6653051,
+    "ast_hash": "505391cc7ebf114c291d3c68960c494e",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/Navbar.tsx": {
-    "mtime": 1784125979.2955678,
-    "ast_hash": "fa27a8daad32e2056119ca21f29e4e6d",
+    "mtime": 1784323567.7709763,
+    "ast_hash": "37b8944ca9c75acb6ab232835d823688",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/ui/NoiseOverlay.tsx": {
@@ -950,13 +950,13 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/services.ts": {
-    "mtime": 1784125896.2584143,
-    "ast_hash": "92e4ecc14bf5bd64ca79275e5900263a",
+    "mtime": 1784573847.3276062,
+    "ast_hash": "3667f09cd55f3bcb80eb93afe35fe9a4",
     "semantic_hash": ""
   },
   "apps/atrium.website/next-env.d.ts": {
-    "mtime": 1784145282.6563387,
-    "ast_hash": "d0f8375ae1199dc7acd3977fc33b78b8",
+    "mtime": 1784574135.5470612,
+    "ast_hash": "2a74d3909800ca5467fa83b0ab4a4890",
     "semantic_hash": ""
   },
   "apps/atrium.website/next.config.ts": {
@@ -965,8 +965,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/package.json": {
-    "mtime": 1783113758.5562708,
-    "ast_hash": "05c1e4f72ac04e346db5dc8bf631d0e9",
+    "mtime": 1784315197.8289964,
+    "ast_hash": "10431c87eb0a1c405a9fda27e469e0eb",
     "semantic_hash": ""
   },
   "apps/atrium.website/postcss.config.mjs": {
@@ -975,8 +975,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/tsconfig.json": {
-    "mtime": 1783113758.7409842,
-    "ast_hash": "2a843015f54c685558fbae7456ff961a",
+    "mtime": 1784151232.9162228,
+    "ast_hash": "20dd714250f9a093f495729ec46f7e9a",
     "semantic_hash": ""
   },
   "packages/ui/src/components/Badge.tsx": {
@@ -2515,8 +2515,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceBento.tsx": {
-    "mtime": 1783977657.5639842,
-    "ast_hash": "d8b7c4900a4594d40d48b1df0ae6fd40",
+    "mtime": 1784151447.4989161,
+    "ast_hash": "53b2bc4c437a67c3fe5aa78537b1f082",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceEditorialHero.tsx": {
@@ -2535,8 +2535,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceProofStrip.tsx": {
-    "mtime": 1784141380.3515775,
-    "ast_hash": "b38f76d1b435239c1e07d05070610e0a",
+    "mtime": 1784570095.450193,
+    "ast_hash": "41c9c367c4cd4a1070fd2b19d3cd3610",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceStatsEditorial.tsx": {
@@ -2545,8 +2545,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceThesis.tsx": {
-    "mtime": 1783977591.6672904,
-    "ast_hash": "ab7eeeb2bd837a6bea7740f8550b35fc",
+    "mtime": 1784574031.2068167,
+    "ast_hash": "5a4ee9ed45e30bb8c30bbb4c00d889ed",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceTimelineEditorial.tsx": {
@@ -2625,8 +2625,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/app/process/page.tsx": {
-    "mtime": 1784125441.096224,
-    "ast_hash": "3bebfdbcac795d9fdaafe6e75a06a8ae",
+    "mtime": 1784324441.702467,
+    "ast_hash": "064ec564a46f042945f1c0c5c63d1660",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/resources/page.tsx": {
@@ -2635,13 +2635,13 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/app/work/[slug]/page.tsx": {
-    "mtime": 1784150520.4889016,
-    "ast_hash": "234ab57910bd9bc0137f6d7dfb1cfa73",
+    "mtime": 1784230123.5467083,
+    "ast_hash": "3d04b2015257a564b1f06103b913222a",
     "semantic_hash": ""
   },
   "apps/atrium.website/app/work/page.tsx": {
-    "mtime": 1784140147.9765651,
-    "ast_hash": "a5bc542d4e19f13f238b5cd4bb941853",
+    "mtime": 1784230115.6452756,
+    "ast_hash": "cf9ab875e2607e7cb47a1024d310d62e",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/pages/PageHero.tsx": {
@@ -2650,8 +2650,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/work.ts": {
-    "mtime": 1784150451.8733997,
-    "ast_hash": "6f7648ff1e90276bbe8940a17ea6be55",
+    "mtime": 1784565944.7048426,
+    "ast_hash": "4e93ffc74926f43f2d326f01171c1093",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/work/CaseGallery.tsx": {
@@ -2670,8 +2670,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/GrowthEngineDiagram.tsx": {
-    "mtime": 1784128036.243066,
-    "ast_hash": "d4fbf67893b710e77bcb09360c948319",
+    "mtime": 1784216878.4398613,
+    "ast_hash": "4caac1686ab2364f98ddb3a0b98b162d",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/sections/PurchaseFAQ.tsx": {
@@ -2680,8 +2680,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/RelatedCase.tsx": {
-    "mtime": 1784125917.3718755,
-    "ast_hash": "ac9b7d3dd00a3d6896d573db237cfb50",
+    "mtime": 1784569669.9714293,
+    "ast_hash": "1cac419c4b605c4e4f640051c80100cd",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/services/ServiceDeliverables.tsx": {
@@ -2735,8 +2735,8 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/media/CldImage.tsx": {
-    "mtime": 1784145308.0709493,
-    "ast_hash": "1d81434b6c78e1b0b5e9b4518de3f330",
+    "mtime": 1784315286.057633,
+    "ast_hash": "bdb2c1763977a540f253e55a16043c6f",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/media/CldVideo.tsx": {
@@ -2745,28 +2745,148 @@
     "semantic_hash": ""
   },
   "apps/atrium.website/components/work/DragGallery.tsx": {
-    "mtime": 1784148632.2724407,
-    "ast_hash": "e94c8043ad061929684e24ec3254709c",
+    "mtime": 1784568949.834528,
+    "ast_hash": "789bb2ddecb59f1c6f38b26b76d2ee2d",
     "semantic_hash": ""
   },
   "apps/atrium.website/components/work/VideoMarquee.tsx": {
-    "mtime": 1784151032.5743725,
-    "ast_hash": "6cf0726fa83870d2d872fff07a04a3a6",
+    "mtime": 1784321818.7140043,
+    "ast_hash": "52185a4fac1580b49133a174f03f0ea2",
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/cloudinary.test.ts": {
-    "mtime": 1784150427.1076562,
-    "ast_hash": "1039e172489834f0ea2e851d9f2692a3",
+    "mtime": 1784314440.7421715,
+    "ast_hash": "fe1f613e83d1bfb49bc18dec5a9185bd",
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/cloudinary.ts": {
-    "mtime": 1784150436.9879172,
-    "ast_hash": "67118fed34c35b91cc9880b5c01b9e8b",
+    "mtime": 1784314408.0519328,
+    "ast_hash": "30174168e2cebfed00dc50472af3b209",
     "semantic_hash": ""
   },
   "apps/atrium.website/lib/assets.txt": {
-    "mtime": 1784150391.2272453,
-    "ast_hash": "4901b61e4823c992f89b8db817d1a675",
+    "mtime": 1784230200.5178702,
+    "ast_hash": "71555811b68d6ec93dd0b3791eff157f",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/components/work/CaseCover.tsx": {
+    "mtime": 1784566091.3411372,
+    "ast_hash": "abab897c2ecc25ccbb07485a2e8803f2",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/clients.ts": {
+    "mtime": 1784570017.4033282,
+    "ast_hash": "aec311c5c41313b55a13ab8047b852fb",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/cloudinary-assets.generated.ts": {
+    "mtime": 1784564465.5237718,
+    "ast_hash": "8dd6f7794ce9b8bff10acdd2d01a65ca",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/lib/work.test.ts": {
+    "mtime": 1784230045.8681476,
+    "ast_hash": "07779c65887ab4cb7662e5de5742cf13",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/scripts/sync-cloudinary-assets.ts": {
+    "mtime": 1784564410.7305415,
+    "ast_hash": "fd8c3166999cf308ba7bb858152d4c8c",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/analytics.jpg": {
+    "mtime": 1784572614.7282982,
+    "ast_hash": "8be6b29a43416cc577d69c206107c1c8",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/brand-strategy.jpg": {
+    "mtime": 1784570775.0983713,
+    "ast_hash": "cb4789cccba2541ae7d3eececcf8b68a",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/crm-loyalty.jpg": {
+    "mtime": 1784572614.7613785,
+    "ast_hash": "71582dea1dc3149d90ae73edd2d3d5cb",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/email-sms.jpg": {
+    "mtime": 1784573446.3184423,
+    "ast_hash": "4afc5dbbeef4f5fd0f9ca51041648520",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/experiential.jpg": {
+    "mtime": 1784571756.535145,
+    "ast_hash": "b7cd7d55c654e57c8e0dfbad70a070cf",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/film-photo.jpg": {
+    "mtime": 1784573446.302106,
+    "ast_hash": "4d08ac0f430452f8bcedd408b30564cb",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/google-seo.jpg": {
+    "mtime": 1784573446.3677962,
+    "ast_hash": "605d6b356588d69f16495ebcb175f4ee",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/paid-media.jpg": {
+    "mtime": 1784572224.6925197,
+    "ast_hash": "6007d0a0ea1bc3dcff79b9663af41f94",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/reputation.jpg": {
+    "mtime": 1784572224.645852,
+    "ast_hash": "a1e959efbce309cc874c9498781b438a",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/social-content.jpg": {
+    "mtime": 1784573446.3864825,
+    "ast_hash": "8fc8505f8e99d6448a529c9ad28a8ad7",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/images/services/thesis/social-management.jpg": {
+    "mtime": 1784572224.712918,
+    "ast_hash": "63716802566307f59fb3aed5da326624",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/clients/aahaa.png": {
+    "mtime": 1784229050.768849,
+    "ast_hash": "57be8fb028ba202517d71462b5a26d7e",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/clients/dcop.png": {
+    "mtime": 1784565598.0826786,
+    "ast_hash": "946548b7e8d6a27c164b3d187c7dee82",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/clients/ffrb.png": {
+    "mtime": 1784564746.9089603,
+    "ast_hash": "373f1a529f567a859cc4dc0cd7145545",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/clients/htkc.png": {
+    "mtime": 1784224771.2920299,
+    "ast_hash": "f687068f7c84b3f921f0f4bb010746dd",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/clients/ospz.png": {
+    "mtime": 1784565785.8656456,
+    "ast_hash": "bf414833df55f6593cd0ddbe1922d181",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/clients/taha.png": {
+    "mtime": 1784227037.9629338,
+    "ast_hash": "a6863b0e87964b5596563617391df656",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/clients/tnkc.png": {
+    "mtime": 1784225706.565685,
+    "ast_hash": "383519c82f1fc4e7f098bbaa04476a20",
+    "semantic_hash": ""
+  },
+  "apps/atrium.website/public/logos/clients/ttco.svg": {
+    "mtime": 1784225314.7013545,
+    "ast_hash": "f014d01b9ec2f01e688d9c9112870f7c",
     "semantic_hash": ""
   }
 }

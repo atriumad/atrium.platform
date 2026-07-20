@@ -38,14 +38,18 @@ export default function CaseCover({ study, className = '', priority = false }: P
         {cover.logo ? (
           <div
             className="relative h-20 w-[min(58%,20rem)] md:h-24"
-            style={cover.logoOffsetY ? { transform: `translateY(${cover.logoOffsetY})` } : undefined}
+            style={
+              cover.logoOffsetY || cover.logoScale
+                ? { transform: `translateY(${cover.logoOffsetY ?? '0'}) scale(${cover.logoScale ?? 1})` }
+                : undefined
+            }
           >
             <Image
               src={cover.logo}
               alt=""
               fill
               sizes="20rem"
-              className="object-contain brightness-0 invert"
+              className="object-contain brightness-0 invert drop-shadow-[0_2px_14px_rgba(0,0,0,0.55)]"
             />
           </div>
         ) : (

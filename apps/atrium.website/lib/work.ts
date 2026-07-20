@@ -24,6 +24,8 @@ export type CaseStudy = {
   coverPosition?: string
   /** Vertical nudge for the cover logo (CSS translateY, e.g. '-5%'). */
   coverLogoOffsetY?: string
+  /** Scale multiplier for the cover logo, for marks with heavy internal whitespace. */
+  coverLogoScale?: number
   location?: string
   category: string
   serviceTags: string[]
@@ -49,6 +51,7 @@ export function getCaseCover(study: CaseStudy) {
     logo: study.coverLogo,
     position: study.coverPosition ?? 'center',
     logoOffsetY: study.coverLogoOffsetY,
+    logoScale: study.coverLogoScale,
   }
 }
 
@@ -154,6 +157,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'don-chuys',
     client: 'Don Chuy’s Fresh Méx & Cantina',
+    coverImageId: 'v1784309494/DCOP_FEB17_Slide_2_fe4upi',
+    coverLogo: '/logos/clients/dcop.png',
     category: 'Full-Service Mexican · Multi-Location Growth',
     serviceTags: ['Brand Strategy', 'Content', 'Social', 'Google'],
     resultHeadline: '+839% impressions. +302% Instagram growth. +595% customer actions.',
@@ -183,6 +188,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'old-shawnee-pizza',
     client: 'Old Shawnee Pizza',
+    coverImageId: 'v1784312607/OSPZ_FEB17_Slide_1_d9udr9',
+    coverLogo: '/logos/clients/ospz.png',
     category: 'Pizza Restaurant · Legacy Brand Revitalization',
     serviceTags: ['Brand Strategy', 'Content', 'Social', 'Email & SMS', 'Google', 'CRM'],
     resultHeadline: '1.66 Million Impressions. 24,000+ Customer Actions. $250,000+ Annual Revenue Influenced.',
@@ -224,6 +231,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'chick-in-waffle',
     client: 'Chick-in Waffle',
+    coverImageId: 'v1784555394/CHWF_MAR13_Slide_1_jk9hcg',
     category: 'Fast-Casual · Multi-Location Growth Engine',
     serviceTags: ['Social', 'Content Strategy', 'CRM & Email', 'Loyalty Marketing', 'Google Ads'],
     resultHeadline: '750K+ Impressions. 25K+ Followers. 10x ROAS.',
@@ -257,6 +265,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'jerusalem-cafe',
     client: 'Jerusalem Cafe',
+    coverImageId: 'v1784558603/JECA__APR26_Creative_Graphic_2_oemnjw',
     location: 'Kansas City, Missouri',
     category: 'Multi-Location Restaurant Group',
     serviceTags: ['Social', 'Content Strategy', 'Email Marketing', 'CRM', 'Brand Storytelling'],
@@ -363,6 +372,22 @@ export const caseStudies: CaseStudy[] = [
       'By making Johnny Leach and Helen Jo the central characters, the campaign transformed The Town Company from a restaurant people visit into a story people want to be part of.',
     order: 10,
   },
+
+  // ─── 11. FARM FRESH ─────────────────────────────────────────────────────
+  // TODO: placeholder copy — replace with real story/metrics before launch.
+  {
+    slug: 'farm-fresh',
+    client: 'Farm Fresh',
+    coverImageId: 'v1784559731/FFRB_JAN25_SLIDE_1_vnfwnb',
+    coverLogo: '/logos/clients/ffrb.png',
+    coverLogoScale: 3.0,
+    category: 'Restaurant',
+    serviceTags: ['Social', 'Content Strategy'],
+    resultHeadline: 'Placeholder — copy pending',
+    story: ['Placeholder — copy pending.'],
+    metrics: [],
+    order: 11,
+  },
 ]
 
 // Asset lists come straight from Cloudinary via scripts/sync-cloudinary-assets.ts
@@ -387,6 +412,7 @@ const caseSummaries: Record<string, string> = {
   'grand-coffee': 'A lifestyle-led brand world connecting coffee, wellness, and community through a cohesive creative system.',
   'hotel-kc': 'Cinematic storytelling that translated a historic property into a contemporary hospitality destination.',
   'town-company': 'A culinary story shaped around the people, craft, and thoughtful details behind the guest experience.',
+  'farm-fresh': 'Placeholder — copy pending.',
 }
 
 export function getCaseSummary(study: CaseStudy) {

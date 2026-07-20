@@ -8,7 +8,7 @@ export type Service = {
   name: string
   category: string
   hero: { eyebrow: string; headline: string; body: string; coverAlt: string }
-  thesis: { eyebrow: string; headline: string; body: string }
+  thesis: { eyebrow: string; headline: string; body: string; image: string }
   perks: IconItem[]
   bentoCards: BentoCard[]
   stats: StatItem[]
@@ -31,6 +31,7 @@ export const services: Service[] = [
       eyebrow: 'BUILDING BRAND IDENTITY',
       headline: 'Your brand is the first thing people *feel* before they taste anything.',
       body: "When your Instagram, your Google, your menu, and your email all feel like different restaurants, you're losing trust at every touchpoint — before anyone even orders.",
+      image: '/images/services/thesis/brand-strategy.jpg',
     },
     perks: [
       { title: 'Visual identity',         description: 'Colors, typography, photo style, brand marks — your complete visual system.' },
@@ -73,6 +74,7 @@ export const services: Service[] = [
       eyebrow: 'PRODUCTION, NOT A STUDIO',
       headline: 'Great food deserves to *look* like great food.',
       body: 'Most restaurant photos are shot once, used everywhere, and forgotten. We build a library that keeps working long after the shoot day ends.',
+      image: '/images/services/thesis/film-photo.jpg',
     },
     perks: [
       { title: 'On-location photo',    description: 'Shot inside your restaurant with your actual food and team. No studio.' },
@@ -109,6 +111,7 @@ export const services: Service[] = [
       eyebrow: 'CONTENT WITH A JOB',
       headline: 'Every post should be *working* toward something.',
       body: 'We build content around archetypes — crave, vibe, chef POV, proof — so nothing you post is just filler between campaigns.',
+      image: '/images/services/thesis/social-content.jpg',
     },
     perks: [
       { title: 'Content archetypes',      description: 'Crave, vibe, chef POV, social proof, education, culture — strategic variety.' },
@@ -144,6 +147,7 @@ export const services: Service[] = [
       eyebrow: 'SHOWING UP, DAILY',
       headline: 'The comments and DMs are *where trust is actually built.*',
       body: 'Most restaurants post and disappear. We keep the conversation going — replying, listening, and showing up every single day.',
+      image: '/images/services/thesis/social-management.jpg',
     },
     perks: [
       { title: 'Community management', description: 'Comments, DMs, story replies — daily. Your brand talks back.' },
@@ -179,6 +183,7 @@ export const services: Service[] = [
       eyebrow: 'PROOF BEFORE SPEND',
       headline: 'We only put money behind what *already works.*',
       body: 'Every ad starts as organic content with real signal — saves, shares, comments — then we amplify it with budget, not guesswork.',
+      image: '/images/services/thesis/paid-media.jpg',
     },
     perks: [
       { title: 'Proven creative first',  description: 'We only run ads on content with strong organic signal.' },
@@ -215,6 +220,7 @@ export const services: Service[] = [
       eyebrow: 'YOUR NEW FRONT DOOR',
       headline: 'Being *findable* is the first job of your brand.',
       body: 'A stale, incomplete Google profile loses the decision before you ever get the chance to make an impression.',
+      image: '/images/services/thesis/google-seo.jpg',
     },
     perks: [
       { title: 'GBP optimization',          description: 'Every field, every location, always current.' },
@@ -250,6 +256,7 @@ export const services: Service[] = [
       eyebrow: 'MANAGED LIKE A RESUME',
       headline: 'Your star rating is doing *more selling* than you think.',
       body: "Every unanswered review tells the next guest you don't care. We answer every one, in your voice, before it costs you the table.",
+      image: '/images/services/thesis/reputation.jpg',
     },
     perks: [
       { title: 'Review response',          description: 'Every Google review answered within 24 hours, in your brand voice.' },
@@ -286,6 +293,7 @@ export const services: Service[] = [
       eyebrow: 'EARNED, NOT BOUGHT',
       headline: 'The right creator can do what *ads can\'t.*',
       body: "One authentic post from someone whose audience trusts their taste outperforms a month of paid media — if you find the right one.",
+      image: '/images/services/thesis/experiential.jpg',
     },
     perks: [
       { title: 'Creator matching',      description: 'We find creators who actually eat at places like yours, not just big follower counts.' },
@@ -322,6 +330,7 @@ export const services: Service[] = [
       eyebrow: 'THE HIGHEST-ROI CHANNEL',
       headline: 'You already have their attention. *Use it well.*',
       body: "Segmented, behavior-triggered email and SMS turns guests who've already said yes once into guests who keep coming back.",
+      image: '/images/services/thesis/email-sms.jpg',
     },
     perks: [
       { title: 'Automated flows',      description: 'Welcome, lapsed reactivation, birthday, post-visit follow-up, VIP recognition — triggered by real behavior.' },
@@ -358,6 +367,7 @@ export const services: Service[] = [
       eyebrow: 'RELATIONSHIPS, NOT TRANSACTIONS',
       headline: 'Most guests never come back. *Not because of the food.*',
       body: 'Because nobody followed up. We build the systems that make the second visit feel inevitable — automatically, for every guest.',
+      image: '/images/services/thesis/crm-loyalty.jpg',
     },
     perks: [
       { title: 'Guest segmentation',      description: 'New, returning, VIP, at-risk, lapsed, big spenders — every guest tagged and treated differently.' },
@@ -394,6 +404,7 @@ export const services: Service[] = [
       eyebrow: 'EVERY DOLLAR, VISIBLE',
       headline: "Marketing that *can't be measured* can't be trusted.",
       body: "We connect every channel to real revenue — so you know exactly what's working, not just what feels like it is.",
+      image: '/images/services/thesis/analytics.jpg',
     },
     perks: [
       { title: 'Direct + Influence ROI',   description: 'Email sent Tuesday, 14 orders by Friday, $658 attributed (direct). Plus influence revenue modeled. Both numbers.' },

@@ -198,7 +198,7 @@
       "source_file": "apps/atrium.grader/app/api/grader/route.ts",
       "source_location": "L1",
       "id": "grader_route",
-      "community": 77,
+      "community": 104,
       "norm_label": "route.ts"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "apps/atrium.grader/app/api/grader/route.ts",
       "source_location": "L9",
       "id": "grader_route_reportmeta",
-      "community": 77,
+      "community": 104,
       "norm_label": "reportmeta"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "apps/atrium.grader/app/api/grader/route.ts",
       "source_location": "L17",
       "id": "grader_route_pagespeedwithtimeout",
-      "community": 77,
+      "community": 104,
       "norm_label": "pagespeedwithtimeout()"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "apps/atrium.grader/app/api/grader/route.ts",
       "source_location": "L25",
       "id": "grader_route_post",
-      "community": 77,
+      "community": 104,
       "norm_label": "post()"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "apps/atrium.grader/app/api/grader/social/route.ts",
       "source_location": "L1",
       "id": "social_route",
-      "community": 113,
+      "community": 104,
       "norm_label": "route.ts"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "apps/atrium.grader/app/api/grader/social/route.ts",
       "source_location": "L6",
       "id": "social_route_post",
-      "community": 113,
+      "community": 104,
       "norm_label": "post()"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "apps/atrium.grader/lib/auto-detect-social.ts",
       "source_location": "L1",
       "id": "lib_auto_detect_social",
-      "community": 78,
+      "community": 104,
       "norm_label": "auto-detect-social.ts"
     },
     {
@@ -720,7 +720,7 @@
       "source_file": "apps/atrium.grader/lib/auto-detect-social.ts",
       "source_location": "L6",
       "id": "lib_auto_detect_social_empty",
-      "community": 78,
+      "community": 104,
       "norm_label": "empty"
     },
     {
@@ -729,7 +729,7 @@
       "source_file": "apps/atrium.grader/lib/auto-detect-social.ts",
       "source_location": "L8",
       "id": "lib_auto_detect_social_socialdetectioncontext",
-      "community": 78,
+      "community": 104,
       "norm_label": "socialdetectioncontext"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "apps/atrium.grader/lib/auto-detect-social.ts",
       "source_location": "L12",
       "id": "lib_auto_detect_social_scrapewebsite",
-      "community": 78,
+      "community": 104,
       "norm_label": "scrapewebsite()"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "apps/atrium.grader/lib/auto-detect-social.ts",
       "source_location": "L29",
       "id": "lib_auto_detect_social_autodetectsocial",
-      "community": 113,
+      "community": 104,
       "norm_label": "autodetectsocial()"
     },
     {
@@ -1170,7 +1170,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L1",
       "id": "lib_pagespeed_client",
-      "community": 46,
+      "community": 104,
       "norm_label": "pagespeed-client.ts"
     },
     {
@@ -1179,7 +1179,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L8",
       "id": "lib_pagespeed_client_categories",
-      "community": 46,
+      "community": 104,
       "norm_label": "categories"
     },
     {
@@ -1188,7 +1188,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L10",
       "id": "lib_pagespeed_client_pagespeedresponse",
-      "community": 46,
+      "community": 104,
       "norm_label": "pagespeedresponse"
     },
     {
@@ -1197,7 +1197,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L25",
       "id": "lib_pagespeed_client_pagespeedcategories",
-      "community": 46,
+      "community": 104,
       "norm_label": "pagespeedcategories"
     },
     {
@@ -1206,7 +1206,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L26",
       "id": "lib_pagespeed_client_pagespeedaudits",
-      "community": 46,
+      "community": 104,
       "norm_label": "pagespeedaudits"
     },
     {
@@ -1215,7 +1215,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L28",
       "id": "lib_pagespeed_client_runpagespeedwebsiteaudit",
-      "community": 46,
+      "community": 104,
       "norm_label": "runpagespeedwebsiteaudit()"
     },
     {
@@ -1224,7 +1224,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L44",
       "id": "lib_pagespeed_client_runpagespeedstrategy",
-      "community": 46,
+      "community": 104,
       "norm_label": "runpagespeedstrategy()"
     },
     {
@@ -1233,7 +1233,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L97",
       "id": "lib_pagespeed_client_failedsummary",
-      "community": 46,
+      "community": 104,
       "norm_label": "failedsummary()"
     },
     {
@@ -1242,7 +1242,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L120",
       "id": "lib_pagespeed_client_categoryscore",
-      "community": 46,
+      "community": 104,
       "norm_label": "categoryscore()"
     },
     {
@@ -1251,7 +1251,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L128",
       "id": "lib_pagespeed_client_numericaudit",
-      "community": 46,
+      "community": 104,
       "norm_label": "numericaudit()"
     },
     {
@@ -1260,7 +1260,7 @@
       "source_file": "apps/atrium.grader/lib/pagespeed-client.ts",
       "source_location": "L136",
       "id": "lib_pagespeed_client_auditopportunitytitles",
-      "community": 46,
+      "community": 104,
       "norm_label": "auditopportunitytitles()"
     },
     {
@@ -1323,7 +1323,7 @@
       "source_file": "apps/atrium.grader/lib/place-utils.ts",
       "source_location": "L3",
       "id": "lib_place_utils_manualreputationinput",
-      "community": 87,
+      "community": 64,
       "norm_label": "manualreputationinput"
     },
     {
@@ -1764,7 +1764,7 @@
       "source_file": "apps/atrium.grader/lib/safe-fetch.ts",
       "source_location": "L1",
       "id": "lib_safe_fetch",
-      "community": 78,
+      "community": 104,
       "norm_label": "safe-fetch.ts"
     },
     {
@@ -1773,7 +1773,7 @@
       "source_file": "apps/atrium.grader/lib/safe-fetch.ts",
       "source_location": "L4",
       "id": "lib_safe_fetch_allowed_protocols",
-      "community": 78,
+      "community": 104,
       "norm_label": "allowed_protocols"
     },
     {
@@ -1782,7 +1782,7 @@
       "source_file": "apps/atrium.grader/lib/safe-fetch.ts",
       "source_location": "L7",
       "id": "lib_safe_fetch_unsafeurlerror",
-      "community": 78,
+      "community": 104,
       "norm_label": "unsafeurlerror"
     },
     {
@@ -1791,7 +1791,7 @@
       "source_file": "apps/atrium.grader/lib/safe-fetch.ts",
       "source_location": "L9",
       "id": "lib_safe_fetch_isprivateipv4",
-      "community": 78,
+      "community": 104,
       "norm_label": "isprivateipv4()"
     },
     {
@@ -1800,7 +1800,7 @@
       "source_file": "apps/atrium.grader/lib/safe-fetch.ts",
       "source_location": "L24",
       "id": "lib_safe_fetch_isprivateipv6",
-      "community": 78,
+      "community": 104,
       "norm_label": "isprivateipv6()"
     },
     {
@@ -1809,7 +1809,7 @@
       "source_file": "apps/atrium.grader/lib/safe-fetch.ts",
       "source_location": "L33",
       "id": "lib_safe_fetch_isprivateip",
-      "community": 78,
+      "community": 104,
       "norm_label": "isprivateip()"
     },
     {
@@ -1818,7 +1818,7 @@
       "source_file": "apps/atrium.grader/lib/safe-fetch.ts",
       "source_location": "L51",
       "id": "lib_safe_fetch_assertsafeexternalurl",
-      "community": 78,
+      "community": 104,
       "norm_label": "assertsafeexternalurl()"
     },
     {
@@ -1827,7 +1827,7 @@
       "source_file": "apps/atrium.grader/lib/safe-fetch.ts",
       "source_location": "L88",
       "id": "lib_safe_fetch_safefetch",
-      "community": 78,
+      "community": 104,
       "norm_label": "safefetch()"
     },
     {
@@ -1836,7 +1836,7 @@
       "source_file": "apps/atrium.grader/lib/scan-store.ts",
       "source_location": "L1",
       "id": "lib_scan_store",
-      "community": 77,
+      "community": 104,
       "norm_label": "scan-store.ts"
     },
     {
@@ -1845,7 +1845,7 @@
       "source_file": "apps/atrium.grader/lib/scan-store.ts",
       "source_location": "L10",
       "id": "lib_scan_store_scanevidence",
-      "community": 77,
+      "community": 104,
       "norm_label": "scanevidence"
     },
     {
@@ -1854,7 +1854,7 @@
       "source_file": "apps/atrium.grader/lib/scan-store.ts",
       "source_location": "L23",
       "id": "lib_scan_store_scanlogsummary",
-      "community": 77,
+      "community": 104,
       "norm_label": "scanlogsummary"
     },
     {
@@ -1863,7 +1863,7 @@
       "source_file": "apps/atrium.grader/lib/scan-store.ts",
       "source_location": "L44",
       "id": "lib_scan_store_createscanid",
-      "community": 77,
+      "community": 104,
       "norm_label": "createscanid()"
     },
     {
@@ -1872,7 +1872,7 @@
       "source_file": "apps/atrium.grader/lib/scan-store.ts",
       "source_location": "L48",
       "id": "lib_scan_store_storescanevidence",
-      "community": 77,
+      "community": 104,
       "norm_label": "storescanevidence()"
     },
     {
@@ -1881,7 +1881,7 @@
       "source_file": "apps/atrium.grader/lib/scan-store.ts",
       "source_location": "L66",
       "id": "lib_scan_store_logfailedscan",
-      "community": 77,
+      "community": 104,
       "norm_label": "logfailedscan()"
     },
     {
@@ -1890,7 +1890,7 @@
       "source_file": "apps/atrium.grader/lib/scan-store.ts",
       "source_location": "L79",
       "id": "lib_scan_store_summarizescanevidence",
-      "community": 77,
+      "community": 104,
       "norm_label": "summarizescanevidence()"
     },
     {
@@ -1899,7 +1899,7 @@
       "source_file": "apps/atrium.grader/lib/scan-store.ts",
       "source_location": "L102",
       "id": "lib_scan_store_shouldwritelocalscanfile",
-      "community": 77,
+      "community": 104,
       "norm_label": "shouldwritelocalscanfile()"
     },
     {
@@ -1908,7 +1908,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.test.ts",
       "source_location": "L1",
       "id": "lib_scrape_creators_test",
-      "community": 5,
+      "community": 104,
       "norm_label": "scrape-creators.test.ts"
     },
     {
@@ -1917,7 +1917,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.test.ts",
       "source_location": "L5",
       "id": "lib_scrape_creators_test_nohandles",
-      "community": 5,
+      "community": 104,
       "norm_label": "nohandles"
     },
     {
@@ -1926,7 +1926,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.test.ts",
       "source_location": "L6",
       "id": "lib_scrape_creators_test_allhandles",
-      "community": 5,
+      "community": 104,
       "norm_label": "allhandles"
     },
     {
@@ -1935,7 +1935,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L1",
       "id": "lib_scrape_creators",
-      "community": 5,
+      "community": 104,
       "norm_label": "scrape-creators.ts"
     },
     {
@@ -1944,7 +1944,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L8",
       "id": "lib_scrape_creators_scansocialprofiles",
-      "community": 5,
+      "community": 104,
       "norm_label": "scansocialprofiles()"
     },
     {
@@ -1953,7 +1953,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L34",
       "id": "lib_scrape_creators_fetchinstagram",
-      "community": 5,
+      "community": 104,
       "norm_label": "fetchinstagram()"
     },
     {
@@ -1962,7 +1962,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L67",
       "id": "lib_scrape_creators_fetchfacebook",
-      "community": 5,
+      "community": 104,
       "norm_label": "fetchfacebook()"
     },
     {
@@ -1971,7 +1971,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L95",
       "id": "lib_scrape_creators_fetchtiktok",
-      "community": 5,
+      "community": 104,
       "norm_label": "fetchtiktok()"
     },
     {
@@ -1980,7 +1980,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L126",
       "id": "lib_scrape_creators_scrapeget",
-      "community": 5,
+      "community": 104,
       "norm_label": "scrapeget()"
     },
     {
@@ -1989,7 +1989,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L133",
       "id": "lib_scrape_creators_extractinstagramposts",
-      "community": 5,
+      "community": 104,
       "norm_label": "extractinstagramposts()"
     },
     {
@@ -1998,7 +1998,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L155",
       "id": "lib_scrape_creators_extractfacebookposts",
-      "community": 5,
+      "community": 104,
       "norm_label": "extractfacebookposts()"
     },
     {
@@ -2007,7 +2007,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L175",
       "id": "lib_scrape_creators_extracttiktokposts",
-      "community": 5,
+      "community": 104,
       "norm_label": "extracttiktokposts()"
     },
     {
@@ -2016,7 +2016,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L194",
       "id": "lib_scrape_creators_absent",
-      "community": 5,
+      "community": 104,
       "norm_label": "absent()"
     },
     {
@@ -2025,7 +2025,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L198",
       "id": "lib_scrape_creators_tonumber",
-      "community": 5,
+      "community": 104,
       "norm_label": "tonumber()"
     },
     {
@@ -2034,7 +2034,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L204",
       "id": "lib_scrape_creators_tostr",
-      "community": 5,
+      "community": 104,
       "norm_label": "tostr()"
     },
     {
@@ -2043,7 +2043,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L209",
       "id": "lib_scrape_creators_getscrapecreatorsapikey",
-      "community": 5,
+      "community": 104,
       "norm_label": "getscrapecreatorsapikey()"
     },
     {
@@ -2052,7 +2052,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L214",
       "id": "lib_scrape_creators_instagramtimelineitems",
-      "community": 5,
+      "community": 104,
       "norm_label": "instagramtimelineitems()"
     },
     {
@@ -2061,7 +2061,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L219",
       "id": "lib_scrape_creators_instagramresponseitems",
-      "community": 5,
+      "community": 104,
       "norm_label": "instagramresponseitems()"
     },
     {
@@ -2070,7 +2070,7 @@
       "source_file": "apps/atrium.grader/lib/scrape-creators.ts",
       "source_location": "L229",
       "id": "lib_scrape_creators_toisodate",
-      "community": 5,
+      "community": 104,
       "norm_label": "toisodate()"
     },
     {
@@ -2304,7 +2304,7 @@
       "source_file": "apps/atrium.grader/lib/website-scanner.test.ts",
       "source_location": "L1",
       "id": "lib_website_scanner_test",
-      "community": 46,
+      "community": 104,
       "norm_label": "website-scanner.test.ts"
     },
     {
@@ -2313,7 +2313,7 @@
       "source_file": "apps/atrium.grader/lib/website-scanner.test.ts",
       "source_location": "L14",
       "id": "lib_website_scanner_test_pagespeedresponse",
-      "community": 46,
+      "community": 104,
       "norm_label": "pagespeedresponse()"
     },
     {
@@ -2322,7 +2322,7 @@
       "source_file": "apps/atrium.grader/lib/website-scanner.ts",
       "source_location": "L1",
       "id": "lib_website_scanner",
-      "community": 46,
+      "community": 104,
       "norm_label": "website-scanner.ts"
     },
     {
@@ -2331,7 +2331,7 @@
       "source_file": "apps/atrium.grader/lib/website-scanner.ts",
       "source_location": "L4",
       "id": "lib_website_scanner_emptywebsitesignals",
-      "community": 46,
+      "community": 104,
       "norm_label": "emptywebsitesignals()"
     },
     {
@@ -2340,7 +2340,7 @@
       "source_file": "apps/atrium.grader/lib/website-scanner.ts",
       "source_location": "L17",
       "id": "lib_website_scanner_scanrestaurantwebsite",
-      "community": 46,
+      "community": 104,
       "norm_label": "scanrestaurantwebsite()"
     },
     {
@@ -2349,7 +2349,7 @@
       "source_file": "apps/atrium.grader/lib/website-scanner.ts",
       "source_location": "L28",
       "id": "lib_website_scanner_scanbasicwebsitesignals",
-      "community": 46,
+      "community": 104,
       "norm_label": "scanbasicwebsitesignals()"
     },
     {
@@ -3022,16 +3022,25 @@
       "label": "bentoItems",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/page.tsx",
-      "source_location": "L15",
+      "source_location": "L17",
       "id": "app_page_bentoitems",
       "community": 70,
       "norm_label": "bentoitems"
     },
     {
+      "label": "selectedWorkDetails",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/page.tsx",
+      "source_location": "L26",
+      "id": "app_page_selectedworkdetails",
+      "community": 70,
+      "norm_label": "selectedworkdetails"
+    },
+    {
       "label": "selectedWork",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/page.tsx",
-      "source_location": "L24",
+      "source_location": "L34",
       "id": "app_page_selectedwork",
       "community": 70,
       "norm_label": "selectedwork"
@@ -3040,7 +3049,7 @@
       "label": "processSteps",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/page.tsx",
-      "source_location": "L32",
+      "source_location": "L39",
       "id": "app_page_processsteps",
       "community": 70,
       "norm_label": "processsteps"
@@ -3049,7 +3058,7 @@
       "label": "processStats",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/page.tsx",
-      "source_location": "L37",
+      "source_location": "L44",
       "id": "app_page_processstats",
       "community": 70,
       "norm_label": "processstats"
@@ -3058,25 +3067,16 @@
       "label": "testimonialCards",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/page.tsx",
-      "source_location": "L42",
+      "source_location": "L49",
       "id": "app_page_testimonialcards",
       "community": 70,
       "norm_label": "testimonialcards"
     },
     {
-      "label": "clients",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/app/page.tsx",
-      "source_location": "L49",
-      "id": "app_page_clients",
-      "community": 70,
-      "norm_label": "clients"
-    },
-    {
       "label": "homeStats",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/page.tsx",
-      "source_location": "L54",
+      "source_location": "L56",
       "id": "app_page_homestats",
       "community": 70,
       "norm_label": "homestats"
@@ -3085,7 +3085,7 @@
       "label": "HomePage()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/page.tsx",
-      "source_location": "L60",
+      "source_location": "L62",
       "id": "app_page_homepage",
       "community": 70,
       "norm_label": "homepage()"
@@ -3181,19 +3181,46 @@
       "norm_label": "metadata"
     },
     {
-      "label": "steps",
+      "label": "heroStats",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/process/page.tsx",
       "source_location": "L11",
+      "id": "process_page_herostats",
+      "community": 59,
+      "norm_label": "herostats"
+    },
+    {
+      "label": "steps",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/process/page.tsx",
+      "source_location": "L17",
       "id": "process_page_steps",
       "community": 59,
       "norm_label": "steps"
     },
     {
+      "label": "pillars",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/process/page.tsx",
+      "source_location": "L48",
+      "id": "process_page_pillars",
+      "community": 59,
+      "norm_label": "pillars"
+    },
+    {
+      "label": "DeliverableList()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/process/page.tsx",
+      "source_location": "L54",
+      "id": "process_page_deliverablelist",
+      "community": 59,
+      "norm_label": "deliverablelist()"
+    },
+    {
       "label": "ProcessPage()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/process/page.tsx",
-      "source_location": "L34",
+      "source_location": "L67",
       "id": "process_page_processpage",
       "community": 59,
       "norm_label": "processpage()"
@@ -3258,7 +3285,7 @@
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L21",
       "id": "apps_atrium_website_app_services_slug_page_tsx_slug_page_generatemetadata",
-      "community": 66,
+      "community": 5,
       "norm_label": "generatemetadata()"
     },
     {
@@ -3267,7 +3294,7 @@
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L33",
       "id": "slug_page_servicepage",
-      "community": 66,
+      "community": 5,
       "norm_label": "servicepage()"
     },
     {
@@ -3328,7 +3355,7 @@
       "label": "generateStaticParams()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L10",
+      "source_location": "L11",
       "id": "apps_atrium_website_app_work_slug_page_tsx_slug_page_generatestaticparams",
       "community": 53,
       "norm_label": "generatestaticparams()"
@@ -3337,34 +3364,16 @@
       "label": "generateMetadata()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L14",
+      "source_location": "L15",
       "id": "apps_atrium_website_app_work_slug_page_tsx_slug_page_generatemetadata",
       "community": 89,
       "norm_label": "generatemetadata()"
     },
     {
-      "label": "visualThemes",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L25",
-      "id": "slug_page_visualthemes",
-      "community": 53,
-      "norm_label": "visualthemes"
-    },
-    {
-      "label": "getVisualColor()",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L33",
-      "id": "slug_page_getvisualcolor",
-      "community": 53,
-      "norm_label": "getvisualcolor()"
-    },
-    {
       "label": "ServiceList()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L37",
+      "source_location": "L26",
       "id": "slug_page_servicelist",
       "community": 53,
       "norm_label": "servicelist()"
@@ -3373,7 +3382,7 @@
       "label": "CaseMedia()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L54",
+      "source_location": "L43",
       "id": "slug_page_casemedia",
       "community": 53,
       "norm_label": "casemedia()"
@@ -3382,16 +3391,16 @@
       "label": "CaseHero()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L65",
+      "source_location": "L53",
       "id": "slug_page_casehero",
-      "community": 89,
+      "community": 72,
       "norm_label": "casehero()"
     },
     {
       "label": "StorySection()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L99",
+      "source_location": "L87",
       "id": "slug_page_storysection",
       "community": 53,
       "norm_label": "storysection()"
@@ -3400,7 +3409,7 @@
       "label": "PhotoGallerySection()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L132",
+      "source_location": "L120",
       "id": "slug_page_photogallerysection",
       "community": 53,
       "norm_label": "photogallerysection()"
@@ -3409,7 +3418,7 @@
       "label": "ApproachSection()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L158",
+      "source_location": "L146",
       "id": "slug_page_approachsection",
       "community": 53,
       "norm_label": "approachsection()"
@@ -3418,7 +3427,7 @@
       "label": "ReelsSection()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L200",
+      "source_location": "L188",
       "id": "slug_page_reelssection",
       "community": 53,
       "norm_label": "reelssection()"
@@ -3427,7 +3436,7 @@
       "label": "ResultsSection()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L224",
+      "source_location": "L212",
       "id": "slug_page_resultssection",
       "community": 53,
       "norm_label": "resultssection()"
@@ -3436,36 +3445,36 @@
       "label": "NextCasePreview()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L288",
+      "source_location": "L276",
       "id": "slug_page_nextcasepreview",
-      "community": 89,
+      "community": 72,
       "norm_label": "nextcasepreview()"
     },
     {
       "label": "getStoryParagraphs()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L336",
+      "source_location": "L324",
       "id": "slug_page_getstoryparagraphs",
-      "community": 80,
+      "community": 53,
       "norm_label": "getstoryparagraphs()"
     },
     {
       "label": "getNextStudy()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L341",
+      "source_location": "L329",
       "id": "slug_page_getnextstudy",
-      "community": 80,
+      "community": 53,
       "norm_label": "getnextstudy()"
     },
     {
       "label": "CaseStudyPage()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L347",
+      "source_location": "L335",
       "id": "slug_page_casestudypage",
-      "community": 80,
+      "community": 53,
       "norm_label": "casestudypage()"
     },
     {
@@ -3481,7 +3490,7 @@
       "label": "metadata",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/page.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "id": "work_page_metadata",
       "community": 72,
       "norm_label": "metadata"
@@ -3490,34 +3499,16 @@
       "label": "sortedCases",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/page.tsx",
-      "source_location": "L13",
+      "source_location": "L14",
       "id": "work_page_sortedcases",
       "community": 72,
       "norm_label": "sortedcases"
     },
     {
-      "label": "defaultVisualTheme",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/app/work/page.tsx",
-      "source_location": "L15",
-      "id": "work_page_defaultvisualtheme",
-      "community": 72,
-      "norm_label": "defaultvisualtheme"
-    },
-    {
-      "label": "visualThemes",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/app/work/page.tsx",
-      "source_location": "L17",
-      "id": "work_page_visualthemes",
-      "community": 72,
-      "norm_label": "visualthemes"
-    },
-    {
       "label": "CaseVisual()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/page.tsx",
-      "source_location": "L25",
+      "source_location": "L16",
       "id": "work_page_casevisual",
       "community": 72,
       "norm_label": "casevisual()"
@@ -3526,7 +3517,7 @@
       "label": "ServiceList()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/page.tsx",
-      "source_location": "L38",
+      "source_location": "L26",
       "id": "work_page_servicelist",
       "community": 72,
       "norm_label": "servicelist()"
@@ -3535,16 +3526,16 @@
       "label": "CaseText()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/page.tsx",
-      "source_location": "L51",
+      "source_location": "L39",
       "id": "work_page_casetext",
-      "community": 89,
+      "community": 72,
       "norm_label": "casetext()"
     },
     {
       "label": "WorkPage()",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/page.tsx",
-      "source_location": "L70",
+      "source_location": "L58",
       "id": "work_page_workpage",
       "community": 72,
       "norm_label": "workpage()"
@@ -3625,16 +3616,25 @@
       "label": "CldImageProps",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/media/CldImage.tsx",
-      "source_location": "L4",
+      "source_location": "L3",
       "id": "media_cldimage_cldimageprops",
       "community": 96,
       "norm_label": "cldimageprops"
     },
     {
-      "label": "CldImage()",
+      "label": "stripVersion()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/media/CldImage.tsx",
       "source_location": "L10",
+      "id": "media_cldimage_stripversion",
+      "community": 96,
+      "norm_label": "stripversion()"
+    },
+    {
+      "label": "CldImage()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/media/CldImage.tsx",
+      "source_location": "L15",
       "id": "media_cldimage_cldimage",
       "community": 96,
       "norm_label": "cldimage()"
@@ -4018,19 +4018,10 @@
       "norm_label": "growthenginediagram.tsx"
     },
     {
-      "label": "STAGE_COLORS",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/components/sections/GrowthEngineDiagram.tsx",
-      "source_location": "L8",
-      "id": "sections_growthenginediagram_stage_colors",
-      "community": 9,
-      "norm_label": "stage_colors"
-    },
-    {
       "label": "stages",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/sections/GrowthEngineDiagram.tsx",
-      "source_location": "L14",
+      "source_location": "L12",
       "id": "sections_growthenginediagram_stages",
       "community": 9,
       "norm_label": "stages"
@@ -4039,7 +4030,7 @@
       "label": "GrowthEngineDiagram()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/sections/GrowthEngineDiagram.tsx",
-      "source_location": "L20",
+      "source_location": "L18",
       "id": "sections_growthenginediagram_growthenginediagram",
       "community": 9,
       "norm_label": "growthenginediagram()"
@@ -4212,7 +4203,7 @@
       "source_file": "apps/atrium.website/components/sections/SplitSection.tsx",
       "source_location": "L1",
       "id": "sections_splitsection",
-      "community": 70,
+      "community": 101,
       "norm_label": "splitsection.tsx"
     },
     {
@@ -4221,7 +4212,7 @@
       "source_file": "apps/atrium.website/components/sections/SplitSection.tsx",
       "source_location": "L8",
       "id": "sections_splitsection_props",
-      "community": 70,
+      "community": 101,
       "norm_label": "props"
     },
     {
@@ -4230,7 +4221,7 @@
       "source_file": "apps/atrium.website/components/sections/SplitSection.tsx",
       "source_location": "L19",
       "id": "sections_splitsection_splitsection",
-      "community": 70,
+      "community": 101,
       "norm_label": "splitsection()"
     },
     {
@@ -4311,34 +4302,34 @@
       "source_file": "apps/atrium.website/components/sections/WorkGrid.tsx",
       "source_location": "L1",
       "id": "sections_workgrid",
-      "community": 70,
+      "community": 86,
       "norm_label": "workgrid.tsx"
     },
     {
       "label": "Project",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/sections/WorkGrid.tsx",
-      "source_location": "L8",
+      "source_location": "L10",
       "id": "sections_workgrid_project",
-      "community": 70,
+      "community": 86,
       "norm_label": "project"
     },
     {
       "label": "aspectMap",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/sections/WorkGrid.tsx",
-      "source_location": "L17",
+      "source_location": "L16",
       "id": "sections_workgrid_aspectmap",
-      "community": 70,
+      "community": 86,
       "norm_label": "aspectmap"
     },
     {
       "label": "WorkGrid()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/sections/WorkGrid.tsx",
-      "source_location": "L19",
+      "source_location": "L18",
       "id": "sections_workgrid_workgrid",
-      "community": 70,
+      "community": 86,
       "norm_label": "workgrid()"
     },
     {
@@ -4372,9 +4363,9 @@
       "label": "RelatedCase()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/services/RelatedCase.tsx",
-      "source_location": "L8",
+      "source_location": "L11",
       "id": "services_relatedcase_relatedcase",
-      "community": 66,
+      "community": 89,
       "norm_label": "relatedcase()"
     },
     {
@@ -4408,7 +4399,7 @@
       "label": "BentoCardPosition()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/services/ServiceBento.tsx",
-      "source_location": "L58",
+      "source_location": "L57",
       "id": "services_servicebento_bentocardposition",
       "community": 24,
       "norm_label": "bentocardposition()"
@@ -4417,7 +4408,7 @@
       "label": "BentoCardMini()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/services/ServiceBento.tsx",
-      "source_location": "L75",
+      "source_location": "L74",
       "id": "services_servicebento_bentocardmini",
       "community": 24,
       "norm_label": "bentocardmini()"
@@ -4426,7 +4417,7 @@
       "label": "BentoCardNeutral()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/services/ServiceBento.tsx",
-      "source_location": "L92",
+      "source_location": "L91",
       "id": "services_servicebento_bentocardneutral",
       "community": 24,
       "norm_label": "bentocardneutral()"
@@ -4435,7 +4426,7 @@
       "label": "ServiceBento()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/services/ServiceBento.tsx",
-      "source_location": "L108",
+      "source_location": "L107",
       "id": "services_servicebento_servicebento",
       "community": 24,
       "norm_label": "servicebento()"
@@ -4464,7 +4455,7 @@
       "source_file": "apps/atrium.website/components/services/ServiceEditorialHero.tsx",
       "source_location": "L1",
       "id": "services_serviceeditorialhero",
-      "community": 24,
+      "community": 66,
       "norm_label": "serviceeditorialhero.tsx"
     },
     {
@@ -4554,25 +4545,16 @@
       "source_file": "apps/atrium.website/components/services/ServiceProofStrip.tsx",
       "source_location": "L1",
       "id": "services_serviceproofstrip",
-      "community": 66,
+      "community": 56,
       "norm_label": "serviceproofstrip.tsx"
-    },
-    {
-      "label": "brands",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/components/services/ServiceProofStrip.tsx",
-      "source_location": "L3",
-      "id": "services_serviceproofstrip_brands",
-      "community": 66,
-      "norm_label": "brands"
     },
     {
       "label": "ServiceProofStrip()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/services/ServiceProofStrip.tsx",
-      "source_location": "L5",
+      "source_location": "L4",
       "id": "services_serviceproofstrip_serviceproofstrip",
-      "community": 66,
+      "community": 56,
       "norm_label": "serviceproofstrip()"
     },
     {
@@ -4626,14 +4608,14 @@
       "source_file": "apps/atrium.website/components/services/ServiceThesis.tsx",
       "source_location": "L1",
       "id": "services_servicethesis",
-      "community": 24,
+      "community": 66,
       "norm_label": "servicethesis.tsx"
     },
     {
       "label": "ServiceThesis()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/services/ServiceThesis.tsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "id": "services_servicethesis_servicethesis",
       "community": 24,
       "norm_label": "servicethesis()"
@@ -4662,7 +4644,7 @@
       "source_file": "apps/atrium.website/components/services/SiblingServices.tsx",
       "source_location": "L1",
       "id": "services_siblingservices",
-      "community": 66,
+      "community": 5,
       "norm_label": "siblingservices.tsx"
     },
     {
@@ -4671,7 +4653,7 @@
       "source_file": "apps/atrium.website/components/services/SiblingServices.tsx",
       "source_location": "L6",
       "id": "services_siblingservices_siblingservices",
-      "community": 66,
+      "community": 5,
       "norm_label": "siblingservices()"
     },
     {
@@ -4707,7 +4689,7 @@
       "source_file": "apps/atrium.website/components/ui/Button.tsx",
       "source_location": "L1",
       "id": "ui_button",
-      "community": 70,
+      "community": 101,
       "norm_label": "button.tsx"
     },
     {
@@ -4774,10 +4756,19 @@
       "norm_label": "logoticker.tsx"
     },
     {
-      "label": "Props",
+      "label": "Client",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
       "source_location": "L1",
+      "id": "ui_logoticker_client",
+      "community": 56,
+      "norm_label": "client"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
+      "source_location": "L3",
       "id": "ui_logoticker_props",
       "community": 56,
       "norm_label": "props"
@@ -4786,7 +4777,7 @@
       "label": "BrandNameProps",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
-      "source_location": "L8",
+      "source_location": "L10",
       "id": "ui_logoticker_brandnameprops",
       "community": 56,
       "norm_label": "brandnameprops"
@@ -4795,7 +4786,7 @@
       "label": "BrandName()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
-      "source_location": "L13",
+      "source_location": "L15",
       "id": "ui_logoticker_brandname",
       "community": 56,
       "norm_label": "brandname()"
@@ -4804,7 +4795,7 @@
       "label": "BrandRow()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
-      "source_location": "L30",
+      "source_location": "L44",
       "id": "ui_logoticker_brandrow",
       "community": 56,
       "norm_label": "brandrow()"
@@ -4813,7 +4804,7 @@
       "label": "LogoTicker()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
-      "source_location": "L50",
+      "source_location": "L65",
       "id": "ui_logoticker_logoticker",
       "community": 56,
       "norm_label": "logoticker()"
@@ -4927,6 +4918,33 @@
       "norm_label": "noiseoverlay()"
     },
     {
+      "label": "CaseCover.tsx",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L1",
+      "id": "work_casecover",
+      "community": 86,
+      "norm_label": "casecover.tsx"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L7",
+      "id": "work_casecover_props",
+      "community": 86,
+      "norm_label": "props"
+    },
+    {
+      "label": "CaseCover()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L13",
+      "id": "work_casecover_casecover",
+      "community": 86,
+      "norm_label": "casecover()"
+    },
+    {
       "label": "CaseGallery.tsx",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/work/CaseGallery.tsx",
@@ -5038,7 +5056,7 @@
       "label": "GalleryImage",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
-      "source_location": "L12",
+      "source_location": "L18",
       "id": "work_draggallery_galleryimage",
       "community": 96,
       "norm_label": "galleryimage"
@@ -5047,7 +5065,7 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
-      "source_location": "L14",
+      "source_location": "L20",
       "id": "work_draggallery_props",
       "community": 96,
       "norm_label": "props"
@@ -5056,7 +5074,7 @@
       "label": "STOCK",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
-      "source_location": "L26",
+      "source_location": "L32",
       "id": "work_draggallery_stock",
       "community": 96,
       "norm_label": "stock"
@@ -5065,16 +5083,34 @@
       "label": "LayoutItem",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
-      "source_location": "L34",
+      "source_location": "L40",
       "id": "work_draggallery_layoutitem",
       "community": 96,
       "norm_label": "layoutitem"
     },
     {
+      "label": "ColumnBlock",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
+      "source_location": "L41",
+      "id": "work_draggallery_columnblock",
+      "community": 96,
+      "norm_label": "columnblock"
+    },
+    {
+      "label": "REPS",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
+      "source_location": "L43",
+      "id": "work_draggallery_reps",
+      "community": 96,
+      "norm_label": "reps"
+    },
+    {
       "label": "wrapValue()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
-      "source_location": "L39",
+      "source_location": "L46",
       "id": "work_draggallery_wrapvalue",
       "community": 96,
       "norm_label": "wrapvalue()"
@@ -5083,7 +5119,7 @@
       "label": "DragGallery()",
       "file_type": "code",
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
-      "source_location": "L44",
+      "source_location": "L51",
       "id": "work_draggallery_draggallery",
       "community": 96,
       "norm_label": "draggallery()"
@@ -5134,6 +5170,51 @@
       "norm_label": "videomarquee()"
     },
     {
+      "label": "clients.ts",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/clients.ts",
+      "source_location": "L1",
+      "id": "lib_clients",
+      "community": 56,
+      "norm_label": "clients.ts"
+    },
+    {
+      "label": "clients",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/clients.ts",
+      "source_location": "L5",
+      "id": "lib_clients_clients",
+      "community": 56,
+      "norm_label": "clients"
+    },
+    {
+      "label": "cloudinary-assets.generated.ts",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/cloudinary-assets.generated.ts",
+      "source_location": "L1",
+      "id": "lib_cloudinary_assets_generated",
+      "community": 86,
+      "norm_label": "cloudinary-assets.generated.ts"
+    },
+    {
+      "label": "CaseAssets",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/cloudinary-assets.generated.ts",
+      "source_location": "L5",
+      "id": "lib_cloudinary_assets_generated_caseassets",
+      "community": 86,
+      "norm_label": "caseassets"
+    },
+    {
+      "label": "cloudinaryAssets",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/cloudinary-assets.generated.ts",
+      "source_location": "L7",
+      "id": "lib_cloudinary_assets_generated_cloudinaryassets",
+      "community": 86,
+      "norm_label": "cloudinaryassets"
+    },
+    {
       "label": "cloudinary.test.ts",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/cloudinary.test.ts",
@@ -5155,16 +5236,25 @@
       "label": "cloudinaryConfigured",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
-      "source_location": "L12",
+      "source_location": "L17",
       "id": "lib_cloudinary_cloudinaryconfigured",
       "community": 96,
       "norm_label": "cloudinaryconfigured"
     },
     {
+      "label": "stripVersion()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/cloudinary.ts",
+      "source_location": "L21",
+      "id": "lib_cloudinary_stripversion",
+      "community": 96,
+      "norm_label": "stripversion()"
+    },
+    {
       "label": "ImageOpts",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
-      "source_location": "L14",
+      "source_location": "L29",
       "id": "lib_cloudinary_imageopts",
       "community": 96,
       "norm_label": "imageopts"
@@ -5173,34 +5263,16 @@
       "label": "cldImageUrl()",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
-      "source_location": "L17",
+      "source_location": "L32",
       "id": "lib_cloudinary_cldimageurl",
       "community": 96,
       "norm_label": "cldimageurl()"
     },
     {
-      "label": "cloudinaryLoader()",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/lib/cloudinary.ts",
-      "source_location": "L34",
-      "id": "lib_cloudinary_cloudinaryloader",
-      "community": 96,
-      "norm_label": "cloudinaryloader()"
-    },
-    {
-      "label": "normalizeVideoPublicId()",
-      "file_type": "code",
-      "source_file": "apps/atrium.website/lib/cloudinary.ts",
-      "source_location": "L47",
-      "id": "lib_cloudinary_normalizevideopublicid",
-      "community": 96,
-      "norm_label": "normalizevideopublicid()"
-    },
-    {
       "label": "cldVideoUrl()",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
-      "source_location": "L52",
+      "source_location": "L42",
       "id": "lib_cloudinary_cldvideourl",
       "community": 96,
       "norm_label": "cldvideourl()"
@@ -5209,7 +5281,7 @@
       "label": "cldVideoPoster()",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
-      "source_location": "L57",
+      "source_location": "L47",
       "id": "lib_cloudinary_cldvideoposter",
       "community": 96,
       "norm_label": "cldvideoposter()"
@@ -5274,7 +5346,7 @@
       "source_file": "apps/atrium.website/lib/gsap.ts",
       "source_location": "L1",
       "id": "lib_gsap",
-      "community": 70,
+      "community": 66,
       "norm_label": "gsap.ts"
     },
     {
@@ -5454,7 +5526,7 @@
       "source_file": "apps/atrium.website/lib/services.ts",
       "source_location": "L2",
       "id": "lib_services_bentocard",
-      "community": 24,
+      "community": 5,
       "norm_label": "bentocard"
     },
     {
@@ -5490,23 +5562,23 @@
       "source_file": "apps/atrium.website/lib/services.ts",
       "source_location": "L18",
       "id": "lib_services_services",
-      "community": 9,
+      "community": 66,
       "norm_label": "services"
     },
     {
       "label": "getService()",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/services.ts",
-      "source_location": "L419",
+      "source_location": "L430",
       "id": "lib_services_getservice",
-      "community": 66,
+      "community": 5,
       "norm_label": "getservice()"
     },
     {
       "label": "relatedCaseBySlug",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/services.ts",
-      "source_location": "L425",
+      "source_location": "L436",
       "id": "lib_services_relatedcasebyslug",
       "community": 66,
       "norm_label": "relatedcasebyslug"
@@ -5515,9 +5587,9 @@
       "label": "getSiblingServices()",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/services.ts",
-      "source_location": "L439",
+      "source_location": "L450",
       "id": "lib_services_getsiblingservices",
-      "community": 66,
+      "community": 5,
       "norm_label": "getsiblingservices()"
     },
     {
@@ -5548,6 +5620,15 @@
       "norm_label": "cn()"
     },
     {
+      "label": "work.test.ts",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/work.test.ts",
+      "source_location": "L1",
+      "id": "lib_work_test",
+      "community": 86,
+      "norm_label": "work.test.ts"
+    },
+    {
       "label": "work.ts",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
@@ -5560,7 +5641,7 @@
       "label": "CaseMetric",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L1",
+      "source_location": "L3",
       "id": "lib_work_casemetric",
       "community": 86,
       "norm_label": "casemetric"
@@ -5569,7 +5650,7 @@
       "label": "HowStep",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L2",
+      "source_location": "L4",
       "id": "lib_work_howstep",
       "community": 86,
       "norm_label": "howstep"
@@ -5578,7 +5659,7 @@
       "label": "ScopeGroup",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L3",
+      "source_location": "L5",
       "id": "lib_work_scopegroup",
       "community": 86,
       "norm_label": "scopegroup"
@@ -5587,7 +5668,7 @@
       "label": "CaseQuote",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L4",
+      "source_location": "L6",
       "id": "lib_work_casequote",
       "community": 86,
       "norm_label": "casequote"
@@ -5596,34 +5677,43 @@
       "label": "CaseGalleryImage",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L5",
+      "source_location": "L7",
       "id": "lib_work_casegalleryimage",
-      "community": 86,
+      "community": 68,
       "norm_label": "casegalleryimage"
     },
     {
       "label": "CaseStudy",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L14",
+      "source_location": "L16",
       "id": "lib_work_casestudy",
-      "community": 72,
+      "community": 86,
       "norm_label": "casestudy"
+    },
+    {
+      "label": "getCaseCover()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/work.ts",
+      "source_location": "L48",
+      "id": "lib_work_getcasecover",
+      "community": 86,
+      "norm_label": "getcasecover()"
     },
     {
       "label": "caseStudies",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L36",
+      "source_location": "L58",
       "id": "lib_work_casestudies",
-      "community": 86,
+      "community": 72,
       "norm_label": "casestudies"
     },
     {
       "label": "caseSummaries",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L379",
+      "source_location": "L404",
       "id": "lib_work_casesummaries",
       "community": 86,
       "norm_label": "casesummaries"
@@ -5632,18 +5722,18 @@
       "label": "getCaseSummary()",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L392",
+      "source_location": "L418",
       "id": "lib_work_getcasesummary",
-      "community": 89,
+      "community": 72,
       "norm_label": "getcasesummary()"
     },
     {
       "label": "getCaseStudy()",
       "file_type": "code",
       "source_file": "apps/atrium.website/lib/work.ts",
-      "source_location": "L396",
+      "source_location": "L422",
       "id": "lib_work_getcasestudy",
-      "community": 66,
+      "community": 89,
       "norm_label": "getcasestudy()"
     },
     {
@@ -5764,10 +5854,19 @@
       "norm_label": "typecheck"
     },
     {
+      "label": "sync:assets",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/package.json",
+      "source_location": "L11",
+      "id": "atrium_website_package_scripts_sync_assets",
+      "community": 52,
+      "norm_label": "sync:assets"
+    },
+    {
       "label": "dependencies",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L12",
+      "source_location": "L13",
       "id": "atrium_website_package_dependencies",
       "community": 52,
       "norm_label": "dependencies"
@@ -5776,7 +5875,7 @@
       "label": "@atrium/ui",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L13",
+      "source_location": "L14",
       "id": "atrium_website_package_dependencies_atrium_ui",
       "community": 52,
       "norm_label": "@atrium/ui"
@@ -5785,7 +5884,7 @@
       "label": "@gsap/react",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L14",
+      "source_location": "L15",
       "id": "atrium_website_package_dependencies_gsap_react",
       "community": 52,
       "norm_label": "@gsap/react"
@@ -5794,7 +5893,7 @@
       "label": "@react-three/drei",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L15",
+      "source_location": "L16",
       "id": "atrium_website_package_dependencies_react_three_drei",
       "community": 52,
       "norm_label": "@react-three/drei"
@@ -5803,7 +5902,7 @@
       "label": "@react-three/fiber",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L16",
+      "source_location": "L17",
       "id": "atrium_website_package_dependencies_react_three_fiber",
       "community": 52,
       "norm_label": "@react-three/fiber"
@@ -5812,7 +5911,7 @@
       "label": "@remotion/player",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L17",
+      "source_location": "L18",
       "id": "atrium_website_package_dependencies_remotion_player",
       "community": 52,
       "norm_label": "@remotion/player"
@@ -5821,7 +5920,7 @@
       "label": "gsap",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L18",
+      "source_location": "L19",
       "id": "atrium_website_package_dependencies_gsap",
       "community": 52,
       "norm_label": "gsap"
@@ -5830,16 +5929,25 @@
       "label": "next",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L19",
+      "source_location": "L20",
       "id": "atrium_website_package_dependencies_next",
       "community": 52,
       "norm_label": "next"
     },
     {
+      "label": "next-cloudinary",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/package.json",
+      "source_location": "L21",
+      "id": "atrium_website_package_dependencies_next_cloudinary",
+      "community": 52,
+      "norm_label": "next-cloudinary"
+    },
+    {
       "label": "react",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L20",
+      "source_location": "L22",
       "id": "atrium_website_package_dependencies_react",
       "community": 52,
       "norm_label": "react"
@@ -5848,7 +5956,7 @@
       "label": "react-dom",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L21",
+      "source_location": "L23",
       "id": "atrium_website_package_dependencies_react_dom",
       "community": 52,
       "norm_label": "react-dom"
@@ -5857,7 +5965,7 @@
       "label": "remotion",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L22",
+      "source_location": "L24",
       "id": "atrium_website_package_dependencies_remotion",
       "community": 52,
       "norm_label": "remotion"
@@ -5866,7 +5974,7 @@
       "label": "three",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L23",
+      "source_location": "L25",
       "id": "atrium_website_package_dependencies_three",
       "community": 52,
       "norm_label": "three"
@@ -5875,7 +5983,7 @@
       "label": "devDependencies",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L25",
+      "source_location": "L27",
       "id": "atrium_website_package_devdependencies",
       "community": 52,
       "norm_label": "devdependencies"
@@ -5884,7 +5992,7 @@
       "label": "@tailwindcss/postcss",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L26",
+      "source_location": "L28",
       "id": "atrium_website_package_devdependencies_tailwindcss_postcss",
       "community": 52,
       "norm_label": "@tailwindcss/postcss"
@@ -5893,7 +6001,7 @@
       "label": "@types/node",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L27",
+      "source_location": "L29",
       "id": "atrium_website_package_devdependencies_types_node",
       "community": 52,
       "norm_label": "@types/node"
@@ -5902,7 +6010,7 @@
       "label": "@types/react",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L28",
+      "source_location": "L30",
       "id": "atrium_website_package_devdependencies_types_react",
       "community": 52,
       "norm_label": "@types/react"
@@ -5911,7 +6019,7 @@
       "label": "@types/react-dom",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L29",
+      "source_location": "L31",
       "id": "atrium_website_package_devdependencies_types_react_dom",
       "community": 52,
       "norm_label": "@types/react-dom"
@@ -5920,7 +6028,7 @@
       "label": "@types/three",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L30",
+      "source_location": "L32",
       "id": "atrium_website_package_devdependencies_types_three",
       "community": 52,
       "norm_label": "@types/three"
@@ -5929,7 +6037,7 @@
       "label": "tailwindcss",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L31",
+      "source_location": "L33",
       "id": "atrium_website_package_devdependencies_tailwindcss",
       "community": 52,
       "norm_label": "tailwindcss"
@@ -5938,7 +6046,7 @@
       "label": "typescript",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L32",
+      "source_location": "L34",
       "id": "atrium_website_package_devdependencies_typescript",
       "community": 52,
       "norm_label": "typescript"
@@ -5947,7 +6055,7 @@
       "label": "ignoreScripts",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L34",
+      "source_location": "L36",
       "id": "atrium_website_package_ignorescripts",
       "community": 52,
       "norm_label": "ignorescripts"
@@ -5956,7 +6064,7 @@
       "label": "trustedDependencies",
       "file_type": "code",
       "source_file": "apps/atrium.website/package.json",
-      "source_location": "L38",
+      "source_location": "L40",
       "id": "atrium_website_package_trusteddependencies",
       "community": 52,
       "norm_label": "trusteddependencies"
@@ -5978,6 +6086,114 @@
       "id": "atrium_website_postcss_config_config",
       "community": 193,
       "norm_label": "config"
+    },
+    {
+      "label": "sync-cloudinary-assets.ts",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L1",
+      "id": "scripts_sync_cloudinary_assets",
+      "community": 46,
+      "norm_label": "sync-cloudinary-assets.ts"
+    },
+    {
+      "label": "WRITE",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L28",
+      "id": "scripts_sync_cloudinary_assets_write",
+      "community": 46,
+      "norm_label": "write"
+    },
+    {
+      "label": "SLUG_MAP",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L33",
+      "id": "scripts_sync_cloudinary_assets_slug_map",
+      "community": 46,
+      "norm_label": "slug_map"
+    },
+    {
+      "label": "Resource",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L44",
+      "id": "scripts_sync_cloudinary_assets_resource",
+      "community": 46,
+      "norm_label": "resource"
+    },
+    {
+      "label": "Bucket",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L51",
+      "id": "scripts_sync_cloudinary_assets_bucket",
+      "community": 46,
+      "norm_label": "bucket"
+    },
+    {
+      "label": "fetchAll()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L53",
+      "id": "scripts_sync_cloudinary_assets_fetchall",
+      "community": 46,
+      "norm_label": "fetchall()"
+    },
+    {
+      "label": "folderOf()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L83",
+      "id": "scripts_sync_cloudinary_assets_folderof",
+      "community": 46,
+      "norm_label": "folderof()"
+    },
+    {
+      "label": "slugOf()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L92",
+      "id": "scripts_sync_cloudinary_assets_slugof",
+      "community": 46,
+      "norm_label": "slugof()"
+    },
+    {
+      "label": "Grouped",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L98",
+      "id": "scripts_sync_cloudinary_assets_grouped",
+      "community": 46,
+      "norm_label": "grouped"
+    },
+    {
+      "label": "group()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L100",
+      "id": "scripts_sync_cloudinary_assets_group",
+      "community": 46,
+      "norm_label": "group()"
+    },
+    {
+      "label": "report()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L123",
+      "id": "scripts_sync_cloudinary_assets_report",
+      "community": 46,
+      "norm_label": "report()"
+    },
+    {
+      "label": "serialize()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L138",
+      "id": "scripts_sync_cloudinary_assets_serialize",
+      "community": 46,
+      "norm_label": "serialize()"
     },
     {
       "label": "tsconfig.json",
@@ -14737,6 +14953,87 @@
       "norm_label": "deploy on vercel"
     },
     {
+      "label": "clients",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/page.tsx",
+      "source_location": "L49",
+      "community": 70,
+      "norm_label": "clients",
+      "id": "app_page_clients"
+    },
+    {
+      "label": "visualThemes",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
+      "source_location": "L25",
+      "community": 53,
+      "norm_label": "visualthemes",
+      "id": "slug_page_visualthemes"
+    },
+    {
+      "label": "getVisualColor()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
+      "source_location": "L33",
+      "community": 53,
+      "norm_label": "getvisualcolor()",
+      "id": "slug_page_getvisualcolor"
+    },
+    {
+      "label": "defaultVisualTheme",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/work/page.tsx",
+      "source_location": "L15",
+      "community": 72,
+      "norm_label": "defaultvisualtheme",
+      "id": "work_page_defaultvisualtheme"
+    },
+    {
+      "label": "visualThemes",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/app/work/page.tsx",
+      "source_location": "L17",
+      "community": 72,
+      "norm_label": "visualthemes",
+      "id": "work_page_visualthemes"
+    },
+    {
+      "label": "STAGE_COLORS",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/sections/GrowthEngineDiagram.tsx",
+      "source_location": "L8",
+      "community": 9,
+      "norm_label": "stage_colors",
+      "id": "sections_growthenginediagram_stage_colors"
+    },
+    {
+      "label": "brands",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/components/services/ServiceProofStrip.tsx",
+      "source_location": "L3",
+      "community": 56,
+      "norm_label": "brands",
+      "id": "services_serviceproofstrip_brands"
+    },
+    {
+      "label": "cloudinaryLoader()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/cloudinary.ts",
+      "source_location": "L34",
+      "community": 96,
+      "norm_label": "cloudinaryloader()",
+      "id": "lib_cloudinary_cloudinaryloader"
+    },
+    {
+      "label": "normalizeVideoPublicId()",
+      "file_type": "code",
+      "source_file": "apps/atrium.website/lib/cloudinary.ts",
+      "source_location": "L47",
+      "community": 96,
+      "norm_label": "normalizevideopublicid()",
+      "id": "lib_cloudinary_normalizevideopublicid"
+    },
+    {
       "label": "reelSlots",
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
@@ -14975,7 +15272,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
       "source_location": "L214",
-      "community": 80,
+      "community": 53,
       "norm_label": "getcaseintro()",
       "id": "slug_page_getcaseintro"
     },
@@ -14984,7 +15281,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
       "source_location": "L218",
-      "community": 80,
+      "community": 53,
       "norm_label": "getcasebody()",
       "id": "slug_page_getcasebody"
     },
@@ -15038,7 +15335,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
       "source_location": "L85",
-      "community": 89,
+      "community": 72,
       "norm_label": "getcasetheme()",
       "id": "slug_page_getcasetheme"
     },
@@ -15092,7 +15389,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L1",
-      "community": 66,
+      "community": 5,
       "norm_label": "page.tsx",
       "id": "slug_page"
     },
@@ -15101,7 +15398,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L15",
-      "community": 66,
+      "community": 5,
       "norm_label": "generatestaticparams()",
       "id": "slug_page_generatestaticparams"
     },
@@ -15110,7 +15407,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L19",
-      "community": 66,
+      "community": 5,
       "norm_label": "generatemetadata()",
       "id": "slug_page_generatemetadata"
     },
@@ -15443,7 +15740,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L29",
-      "community": 66,
+      "community": 5,
       "norm_label": "parseheadline()",
       "id": "slug_page_parseheadline"
     },
@@ -15452,7 +15749,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L35",
-      "community": 66,
+      "community": 5,
       "norm_label": "servicebento()",
       "id": "slug_page_servicebento"
     },
@@ -15461,7 +15758,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L106",
-      "community": 66,
+      "community": 5,
       "norm_label": "category_color",
       "id": "slug_page_category_color"
     },
@@ -15470,7 +15767,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L112",
-      "community": 66,
+      "community": 5,
       "norm_label": "siblingservices()",
       "id": "slug_page_siblingservices"
     },
@@ -20780,7 +21077,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.grader/app/api/grader/route.ts",
       "source_location": "L92",
-      "community": 77,
+      "community": 104,
       "norm_label": "buildsocialdetails()",
       "id": "grader_route_buildsocialdetails"
     },
@@ -20789,7 +21086,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.grader/app/api/grader/route.ts",
       "source_location": "L112",
-      "community": 77,
+      "community": 104,
       "norm_label": "buildsocialdiagnosticstep()",
       "id": "grader_route_buildsocialdiagnosticstep"
     },
@@ -20798,7 +21095,7 @@
       "file_type": "code",
       "source_file": "apps/atrium.grader/app/api/grader/route.ts",
       "source_location": "L135",
-      "community": 77,
+      "community": 104,
       "norm_label": "buildsocialinterpretation()",
       "id": "grader_route_buildsocialinterpretation"
     },
@@ -27931,9 +28228,9 @@
       "source_file": "apps/atrium.website/app/gallery-demo/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "gallery_demo_page",
-      "target": "gallery_demo_page_gallerydemopage",
-      "confidence_score": 1.0
+      "target": "gallery_demo_page_gallerydemopage"
     },
     {
       "relation": "imports_from",
@@ -27942,9 +28239,9 @@
       "source_file": "apps/atrium.website/app/gallery-demo/page.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "gallery_demo_page",
-      "target": "work_draggallery",
-      "confidence_score": 1.0
+      "target": "work_draggallery"
     },
     {
       "relation": "imports_from",
@@ -27953,9 +28250,9 @@
       "source_file": "apps/atrium.website/app/gallery-demo/page.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "gallery_demo_page",
-      "target": "work_videomarquee",
-      "confidence_score": 1.0
+      "target": "work_videomarquee"
     },
     {
       "relation": "contains",
@@ -28233,11 +28530,76 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/app/page.tsx",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "apps_atrium_website_app_page_tsx_app_page",
+      "target": "app_page_selectedworkdetails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/page.tsx",
       "source_location": "L38",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_atrium_website_app_page_tsx_app_page",
       "target": "app_page_testimonialcards"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_atrium_website_app_page_tsx_app_page",
+      "target": "lib_clients",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/page.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "apps_atrium_website_app_page_tsx_app_page",
+      "target": "lib_clients_clients",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "apps_atrium_website_app_page_tsx_app_page",
+      "target": "lib_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "apps_atrium_website_app_page_tsx_app_page",
+      "target": "lib_work_casestudies",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/page.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "apps_atrium_website_app_page_tsx_app_page",
+      "target": "lib_work_casestudy",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -28587,11 +28949,41 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/app/process/page.tsx",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "process_page",
+      "target": "process_page_deliverablelist",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/process/page.tsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "process_page",
+      "target": "process_page_herostats",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/process/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "process_page",
       "target": "process_page_metadata"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/process/page.tsx",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "process_page",
+      "target": "process_page_pillars",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -28623,6 +29015,17 @@
       "confidence_score": 1.0,
       "source": "process_page",
       "target": "sections_ctabanner"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/process/page.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "process_page",
+      "target": "ui_button",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -28780,9 +29183,9 @@
       "source_file": "apps/atrium.website/app/services/[slug]/page.tsx",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_atrium_website_app_services_slug_page_tsx_slug_page",
-      "target": "sections_servicetimeline",
-      "confidence_score": 1.0
+      "target": "sections_servicetimeline"
     },
     {
       "relation": "imports_from",
@@ -29511,6 +29914,17 @@
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "source": "apps_atrium_website_app_work_slug_page_tsx_slug_page",
+      "target": "work_casecover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "apps_atrium_website_app_work_slug_page_tsx_slug_page",
       "target": "work_casegallery"
@@ -29522,9 +29936,9 @@
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_atrium_website_app_work_slug_page_tsx_slug_page",
-      "target": "work_draggallery",
-      "confidence_score": 1.0
+      "target": "work_draggallery"
     },
     {
       "relation": "imports_from",
@@ -29533,9 +29947,9 @@
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "apps_atrium_website_app_work_slug_page_tsx_slug_page",
-      "target": "work_videomarquee",
-      "confidence_score": 1.0
+      "target": "work_videomarquee"
     },
     {
       "relation": "calls",
@@ -29573,17 +29987,6 @@
     {
       "relation": "calls",
       "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
-      "source_location": "L151",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "slug_page_photogallerysection",
-      "target": "slug_page_getvisualcolor"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
@@ -29602,6 +30005,17 @@
       "confidence_score": 1.0,
       "source": "slug_page_casehero",
       "target": "slug_page_getcasetheme"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/work/[slug]/page.tsx",
+      "source_location": "L151",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "slug_page_photogallerysection",
+      "target": "slug_page_getvisualcolor"
     },
     {
       "relation": "calls",
@@ -29745,6 +30159,17 @@
       "confidence_score": 1.0,
       "source": "work_page",
       "target": "ui_eyebrow"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/app/work/page.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "work_page",
+      "target": "work_casecover",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -29926,9 +30351,9 @@
       "source_file": "apps/atrium.website/components/media/CldImage.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "media_cldimage",
-      "target": "lib_cloudinary",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary"
     },
     {
       "relation": "imports",
@@ -29937,9 +30362,29 @@
       "source_file": "apps/atrium.website/components/media/CldImage.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "media_cldimage",
-      "target": "lib_cloudinary_cloudinaryloader",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cloudinaryloader"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/media/CldImage.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "media_cldimage",
+      "target": "media_cldimage_cldimage"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/media/CldImage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "media_cldimage",
+      "target": "media_cldimage_cldimageprops"
     },
     {
       "relation": "contains",
@@ -29948,17 +30393,40 @@
       "source_location": "L10",
       "weight": 1.0,
       "source": "media_cldimage",
-      "target": "media_cldimage_cldimage",
+      "target": "media_cldimage_stripversion",
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
+      "relation": "imports_from",
+      "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "apps/atrium.website/components/media/CldImage.tsx",
+      "source_file": "apps/atrium.website/components/services/RelatedCase.tsx",
       "source_location": "L4",
       "weight": 1.0,
-      "source": "media_cldimage",
-      "target": "media_cldimage_cldimageprops",
+      "source": "services_relatedcase",
+      "target": "media_cldimage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "work_casecover",
+      "target": "media_cldimage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/media/CldImage.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "media_cldimage_cldimage",
+      "target": "media_cldimage_stripversion",
       "confidence_score": 1.0
     },
     {
@@ -29968,9 +30436,9 @@
       "source_file": "apps/atrium.website/components/media/CldVideo.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "media_cldvideo",
-      "target": "lib_cloudinary",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary"
     },
     {
       "relation": "imports",
@@ -29979,9 +30447,9 @@
       "source_file": "apps/atrium.website/components/media/CldVideo.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "media_cldvideo",
-      "target": "lib_cloudinary_cldvideoposter",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cldvideoposter"
     },
     {
       "relation": "imports",
@@ -29990,9 +30458,9 @@
       "source_file": "apps/atrium.website/components/media/CldVideo.tsx",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "media_cldvideo",
-      "target": "lib_cloudinary_cldvideourl",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cldvideourl"
     },
     {
       "relation": "contains",
@@ -30000,9 +30468,9 @@
       "source_file": "apps/atrium.website/components/media/CldVideo.tsx",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "media_cldvideo",
-      "target": "media_cldvideo_cldvideo",
-      "confidence_score": 1.0
+      "target": "media_cldvideo_cldvideo"
     },
     {
       "relation": "contains",
@@ -30010,9 +30478,9 @@
       "source_file": "apps/atrium.website/components/media/CldVideo.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "media_cldvideo",
-      "target": "media_cldvideo_cldvideoprops",
-      "confidence_score": 1.0
+      "target": "media_cldvideo_cldvideoprops"
     },
     {
       "relation": "calls",
@@ -31116,6 +31584,28 @@
       "target": "lib_gsap"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/sections/WorkGrid.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "sections_workgrid",
+      "target": "lib_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/sections/WorkGrid.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "sections_workgrid",
+      "target": "lib_work_casestudy",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/components/sections/WorkGrid.tsx",
@@ -31166,6 +31656,17 @@
       "confidence_score": 1.0,
       "source": "sections_workgrid",
       "target": "ui_eyebrow"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/sections/WorkGrid.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "sections_workgrid",
+      "target": "work_casecover",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -31248,6 +31749,17 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/components/services/RelatedCase.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "services_relatedcase",
+      "target": "lib_work_getcasecover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/services/RelatedCase.tsx",
       "source_location": "L4",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -31274,6 +31786,17 @@
       "confidence_score": 1.0,
       "source": "services_relatedcase",
       "target": "ui_eyebrow"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/atrium.website/components/services/RelatedCase.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "services_relatedcase_relatedcase",
+      "target": "lib_work_getcasecover"
     },
     {
       "relation": "calls",
@@ -31775,6 +32298,28 @@
       "source_file": "apps/atrium.website/components/services/ServiceProofStrip.tsx",
       "source_location": "L2",
       "weight": 1.0,
+      "source": "services_serviceproofstrip",
+      "target": "lib_clients",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/services/ServiceProofStrip.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "services_serviceproofstrip",
+      "target": "lib_clients_clients",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/services/ServiceProofStrip.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "services_serviceproofstrip",
       "target": "lib_services"
@@ -32232,6 +32777,17 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/clients.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_clients",
+      "target": "ui_logoticker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
       "source_location": "L3",
       "weight": 1.0,
@@ -32273,6 +32829,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "ui_logoticker",
+      "target": "ui_logoticker_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/ui/LogoTicker.tsx",
       "source_location": "L7",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -32288,6 +32854,17 @@
       "confidence_score": 1.0,
       "source": "ui_logoticker",
       "target": "ui_logoticker_props"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/clients.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_clients",
+      "target": "ui_logoticker_client",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports_from",
@@ -32422,6 +32999,70 @@
       "confidence_score": 1.0,
       "source": "ui_noiseoverlay",
       "target": "ui_noiseoverlay_noiseoverlay"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "work_casecover",
+      "target": "lib_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "work_casecover",
+      "target": "lib_work_casestudy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "work_casecover",
+      "target": "lib_work_getcasecover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "work_casecover",
+      "target": "work_casecover_casecover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "work_casecover",
+      "target": "work_casecover_props",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "apps/atrium.website/components/work/CaseCover.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "work_casecover_casecover",
+      "target": "lib_work_getcasecover"
     },
     {
       "relation": "imports_from",
@@ -32563,9 +33204,9 @@
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_draggallery",
-      "target": "lib_cloudinary",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary"
     },
     {
       "relation": "imports",
@@ -32574,8 +33215,18 @@
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_draggallery",
-      "target": "lib_cloudinary_cldimageurl",
+      "target": "lib_cloudinary_cldimageurl"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "work_draggallery",
+      "target": "work_draggallery_columnblock",
       "confidence_score": 1.0
     },
     {
@@ -32584,9 +33235,9 @@
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_draggallery",
-      "target": "work_draggallery_draggallery",
-      "confidence_score": 1.0
+      "target": "work_draggallery_draggallery"
     },
     {
       "relation": "contains",
@@ -32594,9 +33245,9 @@
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_draggallery",
-      "target": "work_draggallery_galleryimage",
-      "confidence_score": 1.0
+      "target": "work_draggallery_galleryimage"
     },
     {
       "relation": "contains",
@@ -32604,9 +33255,9 @@
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_draggallery",
-      "target": "work_draggallery_layoutitem",
-      "confidence_score": 1.0
+      "target": "work_draggallery_layoutitem"
     },
     {
       "relation": "contains",
@@ -32614,8 +33265,18 @@
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_draggallery",
-      "target": "work_draggallery_props",
+      "target": "work_draggallery_props"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "work_draggallery",
+      "target": "work_draggallery_reps",
       "confidence_score": 1.0
     },
     {
@@ -32624,9 +33285,9 @@
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_draggallery",
-      "target": "work_draggallery_stock",
-      "confidence_score": 1.0
+      "target": "work_draggallery_stock"
     },
     {
       "relation": "contains",
@@ -32634,9 +33295,9 @@
       "source_file": "apps/atrium.website/components/work/DragGallery.tsx",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_draggallery",
-      "target": "work_draggallery_wrapvalue",
-      "confidence_score": 1.0
+      "target": "work_draggallery_wrapvalue"
     },
     {
       "relation": "imports_from",
@@ -32645,9 +33306,9 @@
       "source_file": "apps/atrium.website/components/work/VideoMarquee.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_videomarquee",
-      "target": "lib_cloudinary",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary"
     },
     {
       "relation": "imports",
@@ -32656,9 +33317,9 @@
       "source_file": "apps/atrium.website/components/work/VideoMarquee.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_videomarquee",
-      "target": "lib_cloudinary_cldvideoposter",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cldvideoposter"
     },
     {
       "relation": "imports",
@@ -32667,9 +33328,9 @@
       "source_file": "apps/atrium.website/components/work/VideoMarquee.tsx",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_videomarquee",
-      "target": "lib_cloudinary_cldvideourl",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cldvideourl"
     },
     {
       "relation": "contains",
@@ -32677,9 +33338,9 @@
       "source_file": "apps/atrium.website/components/work/VideoMarquee.tsx",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_videomarquee",
-      "target": "work_videomarquee_props",
-      "confidence_score": 1.0
+      "target": "work_videomarquee_props"
     },
     {
       "relation": "contains",
@@ -32687,9 +33348,9 @@
       "source_file": "apps/atrium.website/components/work/VideoMarquee.tsx",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_videomarquee",
-      "target": "work_videomarquee_reel",
-      "confidence_score": 1.0
+      "target": "work_videomarquee_reel"
     },
     {
       "relation": "contains",
@@ -32697,9 +33358,9 @@
       "source_file": "apps/atrium.website/components/work/VideoMarquee.tsx",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_videomarquee",
-      "target": "work_videomarquee_stock",
-      "confidence_score": 1.0
+      "target": "work_videomarquee_stock"
     },
     {
       "relation": "contains",
@@ -32707,8 +33368,60 @@
       "source_file": "apps/atrium.website/components/work/VideoMarquee.tsx",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "work_videomarquee",
-      "target": "work_videomarquee_videomarquee",
+      "target": "work_videomarquee_videomarquee"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/clients.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "lib_clients",
+      "target": "lib_clients_clients",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/cloudinary-assets.generated.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "lib_cloudinary_assets_generated",
+      "target": "lib_cloudinary_assets_generated_caseassets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/cloudinary-assets.generated.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "lib_cloudinary_assets_generated",
+      "target": "lib_cloudinary_assets_generated_cloudinaryassets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/work.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_work",
+      "target": "lib_cloudinary_assets_generated",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/work.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lib_work",
+      "target": "lib_cloudinary_assets_generated_cloudinaryassets",
       "confidence_score": 1.0
     },
     {
@@ -32718,9 +33431,9 @@
       "source_file": "apps/atrium.website/lib/cloudinary.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary_test",
-      "target": "lib_cloudinary",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary"
     },
     {
       "relation": "imports",
@@ -32730,7 +33443,7 @@
       "source_location": "L2",
       "weight": 1.0,
       "source": "lib_cloudinary_test",
-      "target": "lib_cloudinary_cldvideoposter",
+      "target": "lib_cloudinary_cldimageurl",
       "confidence_score": 1.0
     },
     {
@@ -32740,9 +33453,20 @@
       "source_file": "apps/atrium.website/lib/cloudinary.test.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary_test",
-      "target": "lib_cloudinary_cldvideourl",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cldvideoposter"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/cloudinary.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_cloudinary_test",
+      "target": "lib_cloudinary_cldvideourl"
     },
     {
       "relation": "contains",
@@ -32750,9 +33474,9 @@
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary",
-      "target": "lib_cloudinary_cldimageurl",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cldimageurl"
     },
     {
       "relation": "contains",
@@ -32760,9 +33484,9 @@
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary",
-      "target": "lib_cloudinary_cldvideoposter",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cldvideoposter"
     },
     {
       "relation": "contains",
@@ -32770,9 +33494,9 @@
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
       "source_location": "L52",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary",
-      "target": "lib_cloudinary_cldvideourl",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cldvideourl"
     },
     {
       "relation": "contains",
@@ -32780,9 +33504,9 @@
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary",
-      "target": "lib_cloudinary_cloudinaryconfigured",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cloudinaryconfigured"
     },
     {
       "relation": "contains",
@@ -32790,9 +33514,9 @@
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary",
-      "target": "lib_cloudinary_cloudinaryloader",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_cloudinaryloader"
     },
     {
       "relation": "contains",
@@ -32800,9 +33524,9 @@
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary",
-      "target": "lib_cloudinary_imageopts",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_imageopts"
     },
     {
       "relation": "contains",
@@ -32810,8 +33534,18 @@
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary",
-      "target": "lib_cloudinary_normalizevideopublicid",
+      "target": "lib_cloudinary_normalizevideopublicid"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/cloudinary.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "lib_cloudinary",
+      "target": "lib_cloudinary_stripversion",
       "confidence_score": 1.0
     },
     {
@@ -32819,10 +33553,32 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
-      "source_location": "L58",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "lib_cloudinary_cldimageurl",
+      "target": "lib_cloudinary_stripversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/cloudinary.ts",
+      "source_location": "L49",
       "weight": 1.0,
       "source": "lib_cloudinary_cldvideoposter",
-      "target": "lib_cloudinary_normalizevideopublicid",
+      "target": "lib_cloudinary_stripversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/cloudinary.ts",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "lib_cloudinary_cldvideourl",
+      "target": "lib_cloudinary_stripversion",
       "confidence_score": 1.0
     },
     {
@@ -32832,9 +33588,20 @@
       "source_file": "apps/atrium.website/lib/cloudinary.ts",
       "source_location": "L53",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "lib_cloudinary_cldvideourl",
-      "target": "lib_cloudinary_normalizevideopublicid",
-      "confidence_score": 1.0
+      "target": "lib_cloudinary_normalizevideopublicid"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/cloudinary.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "lib_cloudinary_cldvideoposter",
+      "target": "lib_cloudinary_normalizevideopublicid"
     },
     {
       "relation": "contains",
@@ -33258,6 +34025,39 @@
       "target": "lib_utils_cn"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/work.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "lib_work_test",
+      "target": "lib_work",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/work.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "lib_work_test",
+      "target": "lib_work_casestudy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/work.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "lib_work_test",
+      "target": "lib_work_getcasecover",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/lib/work.ts",
@@ -33316,6 +34116,16 @@
       "confidence_score": 1.0,
       "source": "lib_work",
       "target": "lib_work_casesummaries"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/lib/work.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "lib_work",
+      "target": "lib_work_getcasecover",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -33491,6 +34301,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "apps/atrium.website/package.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "atrium_website_package_scripts",
+      "target": "atrium_website_package_scripts_sync_assets",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/package.json",
       "source_location": "L10",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -33536,6 +34356,16 @@
       "confidence_score": 1.0,
       "source": "atrium_website_package_dependencies",
       "target": "atrium_website_package_dependencies_next"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/package.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "atrium_website_package_dependencies",
+      "target": "atrium_website_package_dependencies_next_cloudinary",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -33686,6 +34516,149 @@
       "confidence_score": 1.0,
       "source": "atrium_website_postcss_config",
       "target": "atrium_website_postcss_config_config"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_bucket",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_fetchall",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_folderof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L100",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_group",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L160",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_grouped",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_report",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_resource",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L138",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_serialize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_slug_map",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_slugof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets",
+      "target": "scripts_sync_cloudinary_assets_write",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets_group",
+      "target": "scripts_sync_cloudinary_assets_folderof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets_slugof",
+      "target": "scripts_sync_cloudinary_assets_folderof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "apps/atrium.website/scripts/sync-cloudinary-assets.ts",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "scripts_sync_cloudinary_assets_group",
+      "target": "scripts_sync_cloudinary_assets_slugof",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -52863,5 +53836,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b0fb961e7fa2bd8a5043257927196bb519cf73b1"
+  "built_at_commit": "6b036b826c4febef641d56079e0636f655afaa14"
 }
