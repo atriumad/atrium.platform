@@ -55,13 +55,22 @@ export function getCaseCover(study: CaseStudy) {
   }
 }
 
+/** True when a case study's only real media is video — no traditional photo
+ *  shoot to build a gallery from. Computed from synced Cloudinary asset
+ *  counts, never hand-flagged, so any future all-video client picks up the
+ *  video-led layout automatically once its folder is mapped in
+ *  scripts/sync-cloudinary-assets.ts. */
+export function isVideoLed(study: CaseStudy): boolean {
+  return (study.videoIds?.length ?? 0) > 0 && (study.galleryIds?.length ?? 0) <= 1
+}
+
 export const caseStudies: CaseStudy[] = [
   // ─── 1. TACO NACO ───────────────────────────────────────────────────────
   {
     slug: 'taco-naco',
     client: 'Taco Naco KC',
     coverImageId: 'v1784223449/TNKC_FEB18_Slide_2_tiwzpa',
-    coverLogo: '/logos/clients/tnkc.png',
+    coverLogo: '/logos/clients/tknc.png',
     category: 'Fast-Casual Mexican · Multi-Location Engagement',
     serviceTags: ['Brand Strategy', 'Content', 'Social', 'Google', 'Reputation', 'Analytics'],
     resultHeadline: '3 locations. 23K followers. Over 1.2 million impressions. One brand.',
@@ -232,6 +241,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'chick-in-waffle',
     client: 'Chick-in Waffle',
     coverImageId: 'v1784555394/CHWF_MAR13_Slide_1_jk9hcg',
+    coverLogo: '/logos/clients/chwf.png',
     category: 'Fast-Casual · Multi-Location Growth Engine',
     serviceTags: ['Social', 'Content Strategy', 'CRM & Email', 'Loyalty Marketing', 'Google Ads'],
     resultHeadline: '750K+ Impressions. 25K+ Followers. 10x ROAS.',
@@ -266,6 +276,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'jerusalem-cafe',
     client: 'Jerusalem Cafe',
     coverImageId: 'v1784558603/JECA__APR26_Creative_Graphic_2_oemnjw',
+    coverLogo: '/logos/clients/jeca.png',
     location: 'Kansas City, Missouri',
     category: 'Multi-Location Restaurant Group',
     serviceTags: ['Social', 'Content Strategy', 'Email Marketing', 'CRM', 'Brand Storytelling'],
@@ -302,6 +313,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'grand-coffee',
     client: 'Grand Coffee',
+    coverImageId: 'v1784743609/GRCO_JAN18_BPM__CLOSE-UP_DETAIL_2_2_gccyjg',
+    coverLogo: '/logos/clients/grco.png',
     category: 'Coffee Shop · Lifestyle Brand Positioning',
     serviceTags: ['Brand Strategy', 'Content Strategy', 'Community Marketing', 'Social Media Management'],
     resultHeadline: 'Building a Lifestyle Brand Through Coffee, Wellness & Community',
@@ -351,7 +364,13 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'town-company',
     client: 'The Town Company',
+    coverImageId: 'v1784751133/TOWN_CO_frgw8z',
     coverLogo: '/logos/clients/ttco.svg',
+    videoIds: [
+      'v1784751095/TOWN_CO_JONNY_-_01_p6ny3n',
+      'v1784751043/TOWN_CO_FINE_CUISINE_BOTH_COMBINED_-_01_puu9ir',
+      'v1784751112/TOWN_CO_HELEN_JO_-_01_bgg0si',
+    ],
     category: 'Restaurant · Cinematic Content',
     serviceTags: ['Film & Photo', 'Brand Film', 'Social Content'],
     resultHeadline: 'Building a Culinary Brand Around the People Behind the Experience',
@@ -373,21 +392,6 @@ export const caseStudies: CaseStudy[] = [
     order: 10,
   },
 
-  // ─── 11. FARM FRESH ─────────────────────────────────────────────────────
-  // TODO: placeholder copy — replace with real story/metrics before launch.
-  {
-    slug: 'farm-fresh',
-    client: 'Farm Fresh',
-    coverImageId: 'v1784559731/FFRB_JAN25_SLIDE_1_vnfwnb',
-    coverLogo: '/logos/clients/ffrb.png',
-    coverLogoScale: 3.0,
-    category: 'Restaurant',
-    serviceTags: ['Social', 'Content Strategy'],
-    resultHeadline: 'Placeholder — copy pending',
-    story: ['Placeholder — copy pending.'],
-    metrics: [],
-    order: 11,
-  },
 ]
 
 // Asset lists come straight from Cloudinary via scripts/sync-cloudinary-assets.ts

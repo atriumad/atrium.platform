@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Footer from '@/components/ui/Footer'
 import GSAPProvider from '@/components/ui/GSAPProvider'
 import Navbar from '@/components/ui/Navbar'
+import TabTitleSwitcher from '@/components/ui/TabTitleSwitcher'
 import { instrumentSerif, interTight, nothingYouCouldDo } from '@/lib/fonts'
 
 import './globals.css'
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${interTight.variable} ${instrumentSerif.variable} ${nothingYouCouldDo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <TabTitleSwitcher />
         <GSAPProvider>
           <Navbar />
           <main className="flex-1">{children}</main>

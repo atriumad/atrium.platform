@@ -37,7 +37,7 @@ export default function CaseCover({ study, className = '', priority = false }: P
       <div className="absolute inset-0 z-20 flex items-center justify-center p-8 md:p-12" aria-hidden="true">
         {cover.logo ? (
           <div
-            className="relative h-20 w-[min(58%,20rem)] md:h-24"
+            className="relative h-28 w-[min(64%,24rem)] md:h-36"
             style={
               cover.logoOffsetY || cover.logoScale
                 ? { transform: `translateY(${cover.logoOffsetY ?? '0'}) scale(${cover.logoScale ?? 1})` }
