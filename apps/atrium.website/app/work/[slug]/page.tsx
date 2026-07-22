@@ -5,8 +5,10 @@ import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
 import CaseCover from '@/components/work/CaseCover'
 import DragGallery from '@/components/work/DragGallery'
+import VideoBentoGrid from '@/components/work/VideoBentoGrid'
 import VideoMarquee from '@/components/work/VideoMarquee'
-import { type CaseMetric, type CaseStudy, caseStudies, getCaseStudy, getCaseSummary } from '@/lib/work'
+import VideoShowcaseSection from '@/components/work/VideoShowcaseSection'
+import { type CaseMetric, type CaseStudy, caseStudies, getCaseStudy, getCaseSummary, isVideoLed } from '@/lib/work'
 
 export async function generateStaticParams() {
   return caseStudies.map(study => ({ slug: study.slug }))
@@ -344,9 +346,22 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
     <article style={{ background: 'var(--surface-page)', color: 'var(--text-strong)' }}>
       <CaseHero study={study} />
       <StorySection paragraphs={getStoryParagraphs(study)} />
-      <PhotoGallerySection study={study} />
-      <ApproachSection study={study} />
-      <ReelsSection study={study} />
+      {isVideoLed(study) ? (
+        <>
+          {(study.videoIds?.length ?? 0) <= 3 ? (
+            <VideoBentoGrid ids={study.videoIds ?? []} />
+          ) : (
+            <VideoShowcaseSection study={study} />
+          )}
+          <ApproachSection study={study} />
+        </>
+      ) : (
+        <>
+          <PhotoGallerySection study={study} />
+          <ApproachSection study={study} />
+          <ReelsSection study={study} />
+        </>
+      )}
       <ResultsSection study={study} metrics={study.metrics} />
       <NextCasePreview nextStudy={nextStudy} />
       <CTABanner
