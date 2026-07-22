@@ -55,6 +55,15 @@ export function getCaseCover(study: CaseStudy) {
   }
 }
 
+/** True when a case study's only real media is video — no traditional photo
+ *  shoot to build a gallery from. Computed from synced Cloudinary asset
+ *  counts, never hand-flagged, so any future all-video client picks up the
+ *  video-led layout automatically once its folder is mapped in
+ *  scripts/sync-cloudinary-assets.ts. */
+export function isVideoLed(study: CaseStudy): boolean {
+  return (study.videoIds?.length ?? 0) > 0 && (study.galleryIds?.length ?? 0) <= 1
+}
+
 export const caseStudies: CaseStudy[] = [
   // ─── 1. TACO NACO ───────────────────────────────────────────────────────
   {
@@ -302,6 +311,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'grand-coffee',
     client: 'Grand Coffee',
+    coverImageId: 'v1784743609/GRCO_JAN18_BPM__CLOSE-UP_DETAIL_2_2_gccyjg',
+    coverLogo: '/logos/clients/grco.png',
     category: 'Coffee Shop · Lifestyle Brand Positioning',
     serviceTags: ['Brand Strategy', 'Content Strategy', 'Community Marketing', 'Social Media Management'],
     resultHeadline: 'Building a Lifestyle Brand Through Coffee, Wellness & Community',
