@@ -364,6 +364,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'town-company',
     client: 'The Town Company',
+    coverImageId: 'v1784751133/TOWN_CO_frgw8z',
     coverLogo: '/logos/clients/ttco.svg',
     videoIds: [
       'v1784751095/TOWN_CO_JONNY_-_01_p6ny3n',
