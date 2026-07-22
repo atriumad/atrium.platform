@@ -20,7 +20,7 @@ function BrandName({ client, index }: BrandNameProps) {
         src={client.logo}
         alt={client.name}
         loading="lazy"
-        className="shrink-0 w-auto object-contain h-[clamp(1.4rem,1.8vw,1.7rem)]"
+        className="shrink-0 w-auto object-contain h-[clamp(2.1rem,2.8vw,2.6rem)]"
         style={{ opacity: 0.9, transform: client.scale ? `scale(${client.scale})` : undefined }}
       />
     )
