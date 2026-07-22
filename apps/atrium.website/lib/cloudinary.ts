@@ -38,9 +38,14 @@ export function cldImageUrl(publicId: string, opts: ImageOpts = {}): string {
   })
 }
 
-/** Optimized MP4 for a Cloudinary video public ID. */
-export function cldVideoUrl(publicId: string): string {
-  return getCldVideoUrl({ src: stripVersion(publicId) })
+type VideoOpts = { width?: number }
+
+/** Optimized MP4 for a Cloudinary video public ID. Cap `width` for
+ *  bandwidth-sensitive placements (e.g. a full-bleed hero) — delivering
+ *  the source resolution when the video renders far smaller on screen is
+ *  the main cause of stutter on slower connections. */
+export function cldVideoUrl(publicId: string, opts: VideoOpts = {}): string {
+  return getCldVideoUrl({ src: stripVersion(publicId), width: opts.width })
 }
 
 /** Poster frame for a Cloudinary video public ID (first frame). */

@@ -26,6 +26,10 @@ describe('Cloudinary delivery URLs', () => {
     expect(poster).toContain('so_0')
   })
 
+  test('video URL caps delivered width when requested', () => {
+    expect(cldVideoUrl('folder/clip', { width: 1600 })).toContain('w_1600')
+  })
+
   test('trims whitespace and drops a trailing media extension', () => {
     expect(cldVideoUrl(' /v123/folder/clip.mp4 ')).not.toContain('/v123/')
     expect(cldVideoUrl(' /v123/folder/clip.mp4 ')).not.toContain('.mp4')

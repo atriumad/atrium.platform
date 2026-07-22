@@ -50,7 +50,7 @@ function CaseMedia({ study, compact = false }: { study: CaseStudy; compact?: boo
   )
 }
 
-function CaseHero({ study }: { study: CaseStudy }) {
+export function CaseHero({ study }: { study: CaseStudy }) {
   return (
     <section className="px-[var(--gutter)] pb-24 pt-32 md:pb-36 md:pt-40" style={{ background: 'var(--surface-page)' }}>
       <div className="mx-auto max-w-[var(--container-max)]">
@@ -84,7 +84,7 @@ function CaseHero({ study }: { study: CaseStudy }) {
   )
 }
 
-function StorySection({ paragraphs }: { paragraphs: string[] }) {
+export function StorySection({ paragraphs }: { paragraphs: string[] }) {
   return (
     <section id="story" className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
       <div className="mx-auto max-w-[var(--container-max)]">
@@ -143,7 +143,7 @@ function PhotoGallerySection({ study }: { study: CaseStudy }) {
   )
 }
 
-function ApproachSection({ study }: { study: CaseStudy }) {
+export function ApproachSection({ study }: { study: CaseStudy }) {
   const approach = study.howWeDidIt ?? []
   if (approach.length === 0) return null
 
@@ -209,7 +209,7 @@ function ReelsSection({ study }: { study: CaseStudy }) {
   )
 }
 
-function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: CaseMetric[] }) {
+export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: CaseMetric[] }) {
   if (metrics.length === 0) return null
 
   const getMetricFontSize = (value: string) => {
@@ -273,7 +273,7 @@ function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: CaseMet
   )
 }
 
-function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
+export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
   return (
     <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
       <div className="mx-auto max-w-[var(--container-max)]">
@@ -321,12 +321,12 @@ function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
   )
 }
 
-function getStoryParagraphs(study: CaseStudy) {
+export function getStoryParagraphs(study: CaseStudy) {
   const intro = study.intro ?? study.story[0] ?? study.resultHeadline
   return [intro, ...study.story].filter((paragraph, index, all) => all.indexOf(paragraph) === index)
 }
 
-function getNextStudy(study: CaseStudy) {
+export function getNextStudy(study: CaseStudy) {
   const sortedCases = [...caseStudies].sort((a, b) => a.order - b.order)
   const currentIndex = sortedCases.findIndex(item => item.slug === study.slug)
   return sortedCases[(currentIndex + 1) % sortedCases.length]

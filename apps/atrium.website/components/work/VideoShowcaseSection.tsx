@@ -20,13 +20,16 @@ function CinematicHero({ videoId }: { videoId: string }) {
   return (
     <video
       ref={videoRef}
-      src={cldVideoUrl(videoId)}
+      // Capped to 1600px: a full-bleed hero rarely renders wider than that in
+      // practice, and shipping the source resolution when the video plays far
+      // smaller on screen is the main cause of stutter on slower connections.
+      src={cldVideoUrl(videoId, { width: 1600 })}
       poster={cldVideoPoster(videoId)}
       muted
       loop
       playsInline
       autoPlay
-      preload="metadata"
+      preload="auto"
       tabIndex={-1}
       aria-hidden="true"
       className="block h-[70vh] w-full object-cover md:h-[85vh]"
