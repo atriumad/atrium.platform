@@ -1,206 +1,165 @@
 import type { Metadata } from 'next'
-import SceneWrapper from '@/components/3d/SceneWrapper'
+import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
-import GrowthEngineDiagram from '@/components/sections/GrowthEngineDiagram'
-import ServiceRow from '@/components/sections/ServiceRow'
+import { stages } from '@/components/sections/GrowthEngineDiagram'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { services } from '@/lib/services'
 
 export const metadata: Metadata = {
   title: 'Services — Atrium',
   description: 'Full-stack hospitality marketing across brand, content, paid media, SEO, email, CRM, and analytics.',
+  alternates: { canonical: '/services' },
 }
 
-// Single source of truth for the three pillar accent colors, shared by the
-// PILLARS data and the hero headline. #B5F2DB is the brand mint token; the
-// other two are deliberate page-specific accents with no brand-token equivalent.
-const PILLAR_COLORS = {
-  generate: 'var(--mint-400)',
-  convert: '#D69445',
-  retain: '#5ABABC',
-} as const
+const HAIRLINE = 'rgba(7,47,52,0.18)'
 
-const PILLARS = [
-  {
-    num: '01',
-    id: 'Generate Demand',
-    color: PILLAR_COLORS.generate,
-    tagline: 'Create awareness and desire.',
-    services: ['Brand Strategy', 'Film & Photo', 'Social Content', 'Social Management', 'Paid Media'],
-  },
-  {
-    num: '02',
-    id: 'Convert Demand',
-    color: PILLAR_COLORS.convert,
-    tagline: 'Turn interest into reservations.',
-    services: ['Google & Local SEO', 'Reputation Management', 'Experiential & Collabs'],
-  },
-  {
-    num: '03',
-    id: 'Retain Demand',
-    color: PILLAR_COLORS.retain,
-    tagline: 'Keep guests coming back.',
-    services: ['Email & SMS', 'CRM & Loyalty', 'Analytics & Reporting'],
-  },
+const STATS = [
+  { number: '11', label: 'Disciplines under one roof — strategy to analytics' },
+  { number: '15+', label: 'Active hospitality brand partnerships' },
+  { number: '28d', label: 'Engine cycle — first shoot to first report' },
 ]
 
 export default function ServicesPage() {
-  let globalIndex = 0
-
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section
-        className="relative min-h-screen flex flex-col overflow-hidden"
+        className="relative min-h-screen flex flex-col justify-center overflow-hidden px-[var(--gutter)]"
         style={{ background: 'var(--teal-800)' }}
       >
-        <SceneWrapper variant="services" />
-
-        {/* top area — headline */}
-        <div className="relative z-10 flex-1 flex flex-col justify-center px-6 md:px-16 pt-28 pb-12">
-          <div className="max-w-6xl mx-auto w-full">
-            <Eyebrow tone="onDark" className="mb-8">HOSPITALITY MARKETING</Eyebrow>
+        <div className="mx-auto w-full max-w-[var(--container-max)]">
+          <div className="max-w-3xl">
+            <Eyebrow tone="onDark" className="mb-6">HOSPITALITY MARKETING</Eyebrow>
             <h1
-              className="type-page-title"
+              className="type-page-title mb-6"
               style={{ color: 'var(--text-on-dark)' }}
             >
-              <span style={{ color: PILLAR_COLORS.generate }}>Generate.</span>{' '}
-              <span style={{ color: PILLAR_COLORS.convert }}>Convert.</span>{' '}
-              <span style={{ color: PILLAR_COLORS.retain }}>Retain.</span>
+              One team. <em style={{ color: 'var(--mint-400)' }}>Every stage of growth.</em>
             </h1>
             <p
-              className="type-lead mt-6 max-w-xl"
-              style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}
+              className="type-lead max-w-xl"
+              style={{ color: 'var(--text-on-dark)', opacity: 0.78 }}
             >
               The complete hospitality marketing engine — one team across all 11 disciplines, no handoffs, no briefing from scratch.
             </p>
           </div>
         </div>
+      </section>
 
-        {/* bottom area — three pillars */}
-        <div
-          className="relative z-10 grid grid-cols-1 md:grid-cols-3"
-          style={{ borderTop: '1px solid rgba(228,238,240,0.10)' }}
-        >
-          {PILLARS.map((p, i) => (
-            <div
-              key={p.id}
-              className="px-6 md:px-10 py-8 flex flex-col gap-4 relative"
-              style={{
-                borderLeft: i > 0 ? '1px solid color-mix(in srgb, var(--cloud-300) 8%, transparent)' : undefined,
-              }}
-            >
-              {/* faint large number */}
-              <span
-                className="absolute right-6 top-4 font-medium leading-none select-none pointer-events-none"
-                style={{ fontSize: '6rem', color: p.color, opacity: 0.07 }}
-                aria-hidden
-              >
-                {p.num}
-              </span>
-
-              {/* category label */}
-              <span
-                className="type-eyebrow"
-                style={{ color: p.color }}
-              >
-                {p.id}
-              </span>
-
-              {/* service names */}
-              <div className="flex flex-wrap gap-x-3 gap-y-1.5">
-                {p.services.map((s) => (
-                  <span
-                    key={s}
-                    className="type-eyebrow leading-tight"
-                    style={{ color: 'var(--text-on-dark)', opacity: 0.45 }}
-                  >
-                    {s}
-                  </span>
-                ))}
+      {/* ── The Atrium Growth Engine — framing + the three engines as full-bleed columns ── */}
+      <section style={{ background: 'var(--cloud-100)' }}>
+        <div className="px-[var(--gutter)] pt-24 pb-14 md:pt-36 md:pb-20">
+          <div className="mx-auto max-w-[var(--container-max)]">
+            <div className="grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16">
+              <div className="lg:col-span-7">
+                <Eyebrow className="mb-6">The Atrium Growth Engine</Eyebrow>
+                <h2 className="type-section-title max-w-[14ch]">
+                  Not eleven services. <em>One system.</em>
+                </h2>
               </div>
-
-              {/* tagline */}
-              <p
-                className="type-caption mt-auto pt-4 font-medium"
-                style={{ color: 'var(--text-on-dark)', opacity: 0.7, borderTop: `1px solid ${p.color}22` }}
-              >
-                {p.tagline}
+              <p className="type-body max-w-lg border-t pt-6 lg:col-span-5" style={{ color: 'var(--text-muted)', borderColor: HAIRLINE }}>
+                The services are just the components. What you buy is the engine that runs
+                them — on a 28-day cycle, measured end to end.
               </p>
             </div>
-          ))}
+
+            <div className="flex flex-col gap-1 border-t pt-5 mt-14 md:mt-20 md:flex-row md:items-baseline md:gap-6" style={{ borderColor: HAIRLINE }}>
+              <span className="type-eyebrow whitespace-nowrap" style={{ color: 'var(--teal-500)' }}>Brand Foundation</span>
+              <span className="type-caption" style={{ color: 'var(--text-muted)' }}>
+                Positioning, identity, and creative direction — everything the engine runs on.
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-1 border-t pt-5 mt-8 md:flex-row md:items-baseline md:gap-6" style={{ borderColor: HAIRLINE }}>
+              <span className="type-eyebrow flex gap-1.5 items-center whitespace-nowrap" style={{ color: 'var(--teal-800)' }}>
+                <span aria-hidden>↺</span> Measure · Learn · Optimize
+              </span>
+              <span className="type-caption" style={{ color: 'var(--text-muted)' }}>
+                POS attribution and monthly reporting feed the next 28-day cycle — every stage, measured.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Engines — full-bleed, one solid-color column per pillar */}
+        <div className="grid grid-cols-1 md:grid-cols-3 min-h-screen">
+          {stages.map((stage) => {
+            const category = `${stage.id} Demand`
+            const catServices = services.filter(s => s.category === category)
+            return (
+              <div
+                key={stage.id}
+                className="flex flex-col gap-10 px-8 md:px-10 py-20 md:py-24"
+                style={{ background: stage.dot }}
+              >
+                <div>
+                  <span className="type-eyebrow" style={{ color: 'var(--teal-800)', opacity: 0.6 }}>
+                    {category}
+                  </span>
+                  <p className="type-lead mt-4" style={{ color: 'var(--teal-800)' }}>
+                    {stage.tagline}
+                  </p>
+                </div>
+
+                <ul className="flex flex-col m-0 p-0 list-none">
+                  {catServices.map((svc) => (
+                    <li key={svc.slug} className="border-t" style={{ borderColor: 'rgba(7,47,52,0.15)' }}>
+                      <Link
+                        href={`/services/${svc.slug}`}
+                        className="group flex items-center justify-between gap-3 py-4 no-underline"
+                      >
+                        <span className="type-card-title m-0" style={{ color: 'var(--teal-800)' }}>
+                          {svc.name}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="flex-shrink-0 transition-transform duration-150 group-hover:translate-x-1"
+                          style={{ color: 'var(--teal-800)' }}
+                        >
+                          →
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })}
         </div>
       </section>
 
-      {/* ── The system before the parts ──────────────────────────────── */}
-      <GrowthEngineDiagram />
-
-      {/* ── Service index ────────────────────────────────────────────── */}
-      <section style={{ background: 'var(--teal-900)' }}>
-        {PILLARS.map((cat) => {
-          const catServices = services.filter(s => s.category === cat.id)
-          return (
-            <div key={cat.id}>
-              {/* Category divider */}
-              <div
-                className="px-6 md:px-16 py-5 flex items-center gap-6"
-                style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }}
-              >
-                <span
-                  className="type-eyebrow"
-                  style={{ color: cat.color, opacity: 0.7 }}
-                >
-                  {cat.id}
-                </span>
-                <div className="flex-1 h-px" style={{ background: 'rgba(228,238,240,0.06)' }} />
-              </div>
-
-              {/* Service rows */}
-              {catServices.map((svc) => {
-                globalIndex++
-                const num = String(globalIndex).padStart(2, '0')
-                return (
-                  <ServiceRow
-                    key={svc.slug}
-                    slug={svc.slug}
-                    name={svc.name}
-                    body={svc.hero.body}
-                    num={num}
-                    color={cat.color}
-                  />
-                )
-              })}
-            </div>
-          )
-        })}
-
-        {/* bottom rule */}
-        <div style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }} />
-      </section>
-
-      {/* ── Stats — quick proof before CTA ──────────────────────────── */}
+      {/* ── Stats — quick proof before CTA, 3 columns matching the engine split ── */}
       <section
-        className="px-6 md:px-16 py-20"
-        style={{ background: 'var(--teal-900)', borderTop: '1px solid rgba(228,238,240,0.06)' }}
+        className="px-6 md:px-16 py-20 md:py-28"
+        style={{ background: 'var(--teal-900)' }}
       >
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-          {[
-            { n: '11', l: 'Disciplines under one roof — strategy to analytics' },
-            { n: '15+', l: 'Active hospitality brand partnerships' },
-            { n: '28d', l: 'Engine cycle — first shoot to first report' },
-          ].map((s) => (
-            <div key={s.n} className="flex flex-col gap-2">
-              <span
-                className="text-5xl md:text-6xl font-medium tabular-nums leading-none"
-                style={{ color: 'var(--mint-400)' }}
+        <div className="mx-auto max-w-[var(--container-max)]">
+          <div className="max-w-2xl pb-14 md:pb-20">
+            <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>The full picture</p>
+            <h2 className="type-section-title m-0 mt-5" style={{ color: 'var(--text-on-dark)' }}>
+              Eleven disciplines. <em style={{ fontFamily: 'var(--font-serif)' }}>One engine.</em>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3">
+            {STATS.map((stat, i) => (
+              <div
+                key={stat.number}
+                className={`flex flex-col gap-4 py-8 md:py-0 ${i > 0 ? 'border-t md:border-t-0 md:border-l md:pl-10' : ''}`}
+                style={{ borderColor: 'rgba(228,238,240,0.10)' }}
               >
-                {s.n}
-              </span>
-              <span className="type-caption" style={{ color: 'var(--text-on-dark)', opacity: 0.64 }}>
-                {s.l}
-              </span>
-            </div>
-          ))}
+                <strong
+                  className="text-[clamp(4rem,8vw,7rem)] font-normal italic leading-[0.85] tracking-[-0.03em]"
+                  style={{ color: 'var(--mint-400)', fontFamily: 'var(--font-serif)' }}
+                >
+                  {stat.number}
+                </strong>
+                <p className="type-body m-0 max-w-xs" style={{ color: 'var(--text-on-dark)', opacity: 0.76 }}>
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

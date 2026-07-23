@@ -7,9 +7,39 @@ import { instrumentSerif, interTight, nothingYouCouldDo } from '@/lib/fonts'
 
 import './globals.css'
 
+const title = 'Atrium — Hospitality Marketing'
+const description = 'Smart creative for restaurants, hotels, and food brands.'
+
 export const metadata: Metadata = {
-  title: 'Atrium — Hospitality Marketing',
-  description: 'Smart creative for restaurants, hotels, and food brands.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.atriumad.com'),
+  title,
+  description,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title,
+    description,
+    type: 'website',
+    siteName: 'Atrium',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+  },
+}
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Atrium',
+  description,
+  areaServed: 'US',
+  address: [
+    { '@type': 'PostalAddress', addressLocality: 'Kansas City', addressRegion: 'MO', addressCountry: 'US' },
+    { '@type': 'PostalAddress', addressLocality: 'Cuba' },
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,6 +49,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${interTight.variable} ${instrumentSerif.variable} ${nothingYouCouldDo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD, no user input */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <TabTitleSwitcher />
         <GSAPProvider>
           <Navbar />

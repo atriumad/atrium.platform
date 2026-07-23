@@ -171,6 +171,11 @@ export default function DragGallery({
   }, [data, columns, columnWidth, gap, containerSize.height, imageDims])
 
   // ─── Smooth animation loop — shared x wrap, independent per-column y wrap ──
+  // Stops rescheduling itself once position has settled (idle), instead of
+  // running requestAnimationFrame forever — resumeAnimationRef restarts it
+  // the moment a drag produces a new target position.
+  const resumeAnimationRef = useRef<() => void>(() => {})
+
   useEffect(() => {
     const animate = () => {
       const current = positionRef.current
@@ -178,32 +183,43 @@ export default function DragGallery({
       const dx = target.x - current.x
       const dy = target.y - current.y
 
-      if (Math.abs(dx) >= 0.01 || Math.abs(dy) >= 0.01) {
-        const next = { x: current.x + dx * smoothness, y: current.y + dy * smoothness }
-        positionRef.current = next
+      if (Math.abs(dx) < 0.01 && Math.abs(dy) < 0.01) {
+        animationFrameRef.current = undefined
+        return
+      }
 
-        const tw = totalWidthRef.current
-        if (tw > 0) {
-          const wrappedX = wrapValue(-tw, tw, next.x)
-          groupElsRef.current.forEach((el, key) => {
-            const [xOffsetStr, colStr, yRepStr] = key.split('_')
-            const xOffset = Number(xOffsetStr)
-            const col = Number(colStr)
-            const yRep = Number(yRepStr)
-            const colHeight = columnHeightsRef.current[col] ?? 0
-            if (colHeight <= 0) return
-            const wrappedY = wrapValue(-colHeight, colHeight, next.y)
-            const tx = wrappedX + xOffset * tw
-            const ty = wrappedY + yRep * colHeight
-            el.style.transform = `translate(${tx}px, ${ty}px)`
-          })
-        }
+      const next = { x: current.x + dx * smoothness, y: current.y + dy * smoothness }
+      positionRef.current = next
+
+      const tw = totalWidthRef.current
+      if (tw > 0) {
+        const wrappedX = wrapValue(-tw, tw, next.x)
+        groupElsRef.current.forEach((el, key) => {
+          const [xOffsetStr, colStr, yRepStr] = key.split('_')
+          const xOffset = Number(xOffsetStr)
+          const col = Number(colStr)
+          const yRep = Number(yRepStr)
+          const colHeight = columnHeightsRef.current[col] ?? 0
+          if (colHeight <= 0) return
+          const wrappedY = wrapValue(-colHeight, colHeight, next.y)
+          const tx = wrappedX + xOffset * tw
+          const ty = wrappedY + yRep * colHeight
+          el.style.transform = `translate(${tx}px, ${ty}px)`
+        })
       }
       animationFrameRef.current = requestAnimationFrame(animate)
     }
+
+    resumeAnimationRef.current = () => {
+      if (animationFrameRef.current === undefined) {
+        animationFrameRef.current = requestAnimationFrame(animate)
+      }
+    }
+
     animationFrameRef.current = requestAnimationFrame(animate)
     return () => {
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current)
+      animationFrameRef.current = undefined
     }
   }, [smoothness])
 
@@ -222,6 +238,7 @@ export default function DragGallery({
         x: positionStart.current.x + (e.clientX - dragStart.current.x) * dragSensitivity,
         y: positionStart.current.y + (e.clientY - dragStart.current.y) * dragSensitivity,
       }
+      resumeAnimationRef.current()
     }
     const onUp = () => {
       isDraggingRef.current = false
@@ -256,6 +273,7 @@ export default function DragGallery({
         x: positionStart.current.x + (t.clientX - dragStart.current.x) * dragSensitivity,
         y: positionStart.current.y + (t.clientY - dragStart.current.y) * dragSensitivity,
       }
+      resumeAnimationRef.current()
     }
     const onEnd = () => {
       isDraggingRef.current = false

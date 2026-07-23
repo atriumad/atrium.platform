@@ -7,9 +7,13 @@ const columns = [
       { label: 'Brand Strategy', href: '/services/brand-strategy' },
       { label: 'Film & Photo', href: '/services/film-photo' },
       { label: 'Social Content', href: '/services/social-content' },
+      { label: 'Social Management', href: '/services/social-management' },
       { label: 'Paid Media', href: '/services/paid-media' },
       { label: 'Google SEO', href: '/services/google-seo' },
+      { label: 'Reputation', href: '/services/reputation' },
+      { label: 'Experiential', href: '/services/experiential' },
       { label: 'Email & SMS', href: '/services/email-sms' },
+      { label: 'CRM & Loyalty', href: '/services/crm-loyalty' },
     ],
   },
   {
@@ -45,7 +49,7 @@ export default function Footer() {
             {columns.map((col) => (
               <div key={col.label}>
                 <p className="type-eyebrow mb-4" style={{ opacity: 0.52, color: 'var(--color-accent)' }}>{col.label}</p>
-                <ul className="flex flex-col gap-3">
+                <ul className={col.links.length > 6 ? 'grid grid-cols-2 gap-x-8 gap-y-3' : 'flex flex-col gap-3'}>
                   {col.links.map((link) => (
                     <li key={link.href}>
                       <Link href={link.href} className="type-caption inline-block whitespace-nowrap transition-transform duration-200 hover:translate-x-1" style={{ opacity: 0.72 }}>

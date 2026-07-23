@@ -9,10 +9,12 @@ import Eyebrow from '@/components/ui/Eyebrow'
 
 const HAIRLINE = 'rgba(7,47,52,0.18)'
 
-const stages = [
-  { n: '01', id: 'Generate', dot: '#2FB98A', tagline: 'Create awareness and desire.', caps: ['Film & Photo', 'Social', 'Paid Media'] },
-  { n: '02', id: 'Convert', dot: '#D69445', tagline: 'Turn interest into reservations.', caps: ['Google & Local SEO', 'Reputation', 'Offers & Campaigns'] },
-  { n: '03', id: 'Retain', dot: '#3E9FA1', tagline: 'Bring guests back.', caps: ['Email & SMS', 'CRM & Loyalty', 'Win-back Flows'] },
+// Exported so other services-page sections (the engine split, stats) can
+// share this exact copy/color data instead of maintaining their own.
+export const stages = [
+  { n: '01', id: 'Generate', dot: 'var(--stage-generate)', tagline: 'Create awareness and desire.', caps: ['Film & Photo', 'Social', 'Paid Media'] },
+  { n: '02', id: 'Convert', dot: 'var(--stage-convert)', tagline: 'Turn interest into reservations.', caps: ['Google & Local SEO', 'Reputation', 'Offers & Campaigns'] },
+  { n: '03', id: 'Retain', dot: 'var(--stage-retain)', tagline: 'Bring guests back.', caps: ['Email & SMS', 'CRM & Loyalty', 'Win-back Flows'] },
 ]
 
 export default function GrowthEngineDiagram() {

@@ -7,8 +7,9 @@ import CaseCover from '@/components/work/CaseCover'
 import { type CaseStudy, caseStudies, getCaseSummary } from '@/lib/work'
 
 export const metadata: Metadata = {
-  title: 'Our Work - Atrium',
-  description: 'Hospitality-only case studies from Atrium across brand, content, social, retention, and reporting.',
+  title: 'Atrium Case Studies — Hospitality Marketing Results',
+  description: 'Hospitality-only case studies from Atrium across brand, content, social, retention, and reporting — real restaurants and hotels, real systems, real results.',
+  alternates: { canonical: '/work' },
 }
 
 const sortedCases = [...caseStudies].sort((a, b) => a.order - b.order)

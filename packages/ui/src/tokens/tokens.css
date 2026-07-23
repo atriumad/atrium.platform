@@ -22,6 +22,13 @@
   --amber-400: #FFC21F;
   --amber-200: #FFE6A8;
 
+  /* Growth Engine stage accents (Generate/Convert/Retain) — distinct from the
+     core brand palette above by design; single source of truth so the
+     services page and the growth-engine diagram can't drift apart. */
+  --stage-generate: #2FB98A;
+  --stage-convert:  #D69445;
+  --stage-retain:   #3E9FA1;
+
   --cloud-100: #ffffff;
   --cloud-200: #F4F8F8;
   --cloud-300: #E4EEF0;

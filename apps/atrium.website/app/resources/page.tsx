@@ -4,8 +4,9 @@ import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
 
 export const metadata: Metadata = {
-  title: 'Resources - Atrium',
-  description: 'Restaurant marketing resources from Atrium: essays, guides, and customer stories for hospitality operators.',
+  title: 'Atrium Resources — Hospitality Marketing Guides & Stories',
+  description: 'Restaurant marketing resources from Atrium: essays, guides, and customer stories for hospitality operators growing bookings, retention, and brand.',
+  alternates: { canonical: '/resources' },
 }
 
 const resourceGroups = [

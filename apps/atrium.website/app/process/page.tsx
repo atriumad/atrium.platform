@@ -4,8 +4,9 @@ import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
 
 export const metadata: Metadata = {
-  title: 'Process - Atrium',
-  description: 'How Atrium turns restaurant strategy, production, activation, and reporting into a monthly growth engine.',
+  title: 'How Atrium Works — The Hospitality Growth Engine',
+  description: 'How Atrium turns restaurant strategy, production, and reporting into one monthly growth engine — content, channels, and measurement on a repeatable cycle.',
+  alternates: { canonical: '/process' },
 }
 
 const heroStats = [

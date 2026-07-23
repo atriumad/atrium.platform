@@ -3,6 +3,9 @@
 import { useEffect, useRef } from 'react'
 import { cldVideoPoster, cldVideoUrl } from '@/lib/cloudinary'
 
+// Clips sit below the fold, so play/pause is gated on visibility instead of
+// firing on mount — avoids all 3 clips fetching and decoding simultaneously
+// before the section has even scrolled into view.
 function BentoClip({ videoId }: { videoId: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -11,7 +14,19 @@ function BentoClip({ videoId }: { videoId: string }) {
     if (!video) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) return
-    void video.play().catch(() => undefined)
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          void video.play().catch(() => undefined)
+        } else {
+          video.pause()
+        }
+      },
+      { rootMargin: '200px' }
+    )
+    observer.observe(video)
+    return () => observer.disconnect()
   }, [])
 
   return (
@@ -22,8 +37,7 @@ function BentoClip({ videoId }: { videoId: string }) {
       muted
       loop
       playsInline
-      autoPlay
-      preload="auto"
+      preload="metadata"
       tabIndex={-1}
       aria-hidden="true"
       className="block h-full w-full object-cover"
@@ -38,21 +52,21 @@ export default function VideoBentoGrid({ ids }: { ids: string[] }) {
   if (!top) return null
 
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
-      <div className="mx-auto grid max-w-[var(--container-max)] gap-6 md:gap-8">
-        <div className="overflow-hidden rounded-[var(--radius-bento)]" style={{ aspectRatio: '16 / 9' }}>
+    <section className="py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+      <div className="grid">
+        <div className="overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
           <BentoClip videoId={top} />
         </div>
 
         {(bottomLeft || bottomRight) && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             {bottomLeft && (
-              <div className="overflow-hidden rounded-[var(--radius-bento)]" style={{ aspectRatio: '4 / 5' }}>
+              <div className="overflow-hidden" style={{ aspectRatio: '4 / 5' }}>
                 <BentoClip videoId={bottomLeft} />
               </div>
             )}
             {bottomRight && (
-              <div className="overflow-hidden rounded-[var(--radius-bento)]" style={{ aspectRatio: '4 / 5' }}>
+              <div className="overflow-hidden" style={{ aspectRatio: '4 / 5' }}>
                 <BentoClip videoId={bottomRight} />
               </div>
             )}

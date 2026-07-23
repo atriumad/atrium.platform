@@ -4,8 +4,9 @@ import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
 
 export const metadata: Metadata = {
-  title: 'About - Atrium',
-  description: 'Atrium is a hospitality-native marketing studio with a Kansas City base and a production team spanning Cuba and the US.',
+  title: 'About Atrium — Hospitality Marketing Studio, Kansas City',
+  description: 'Atrium is a hospitality-native marketing studio based in Kansas City, with a production team spanning Cuba and the US, built for restaurants and hotels.',
+  alternates: { canonical: '/about' },
 }
 
 const principles = [

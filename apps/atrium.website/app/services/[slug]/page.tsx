@@ -27,6 +27,7 @@ export async function generateMetadata(
   return {
     title: `${svc.name} — Atrium`,
     description: svc.hero.body,
+    alternates: { canonical: `/services/${slug}` },
   }
 }
 
