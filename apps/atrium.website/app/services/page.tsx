@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import SceneWrapper from '@/components/3d/SceneWrapper'
 import CTABanner from '@/components/sections/CTABanner'
 import { stages } from '@/components/sections/GrowthEngineDiagram'
 import Eyebrow from '@/components/ui/Eyebrow'
@@ -24,13 +23,11 @@ export default function ServicesPage() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section
-        className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+        className="relative min-h-screen flex flex-col justify-center overflow-hidden px-[var(--gutter)]"
         style={{ background: 'var(--teal-800)' }}
       >
-        <SceneWrapper variant="services" />
-
-        <div className="relative z-10 px-6 md:px-16 w-full">
-          <div className="max-w-3xl mx-auto w-full">
+        <div className="mx-auto w-full max-w-[var(--container-max)]">
+          <div className="max-w-3xl">
             <Eyebrow tone="onDark" className="mb-6">HOSPITALITY MARKETING</Eyebrow>
             <h1
               className="type-page-title mb-6"
@@ -69,6 +66,15 @@ export default function ServicesPage() {
               <span className="type-eyebrow whitespace-nowrap" style={{ color: 'var(--teal-500)' }}>Brand Foundation</span>
               <span className="type-caption" style={{ color: 'var(--text-muted)' }}>
                 Positioning, identity, and creative direction — everything the engine runs on.
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-1 border-t pt-5 mt-8 md:flex-row md:items-baseline md:gap-6" style={{ borderColor: HAIRLINE }}>
+              <span className="type-eyebrow flex gap-1.5 items-center whitespace-nowrap" style={{ color: 'var(--teal-800)' }}>
+                <span aria-hidden>↺</span> Measure · Learn · Optimize
+              </span>
+              <span className="type-caption" style={{ color: 'var(--text-muted)' }}>
+                POS attribution and monthly reporting feed the next 28-day cycle — every stage, measured.
               </span>
             </div>
           </div>
@@ -117,17 +123,6 @@ export default function ServicesPage() {
               </div>
             )
           })}
-        </div>
-
-        <div className="px-[var(--gutter)] py-10 md:py-14">
-          <div className="mx-auto max-w-[var(--container-max)] flex flex-col gap-1 md:flex-row md:items-baseline md:gap-6">
-            <span className="type-eyebrow flex gap-1.5 items-center whitespace-nowrap" style={{ color: 'var(--teal-800)' }}>
-              <span aria-hidden>↺</span> Measure · Learn · Optimize
-            </span>
-            <span className="type-caption" style={{ color: 'var(--text-muted)' }}>
-              POS attribution and monthly reporting feed the next 28-day cycle — every stage, measured.
-            </span>
-          </div>
         </div>
       </section>
 
