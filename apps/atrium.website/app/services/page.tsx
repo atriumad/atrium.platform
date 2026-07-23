@@ -3,6 +3,7 @@ import SceneWrapper from '@/components/3d/SceneWrapper'
 import CTABanner from '@/components/sections/CTABanner'
 import GrowthEngineDiagram from '@/components/sections/GrowthEngineDiagram'
 import ServiceRow from '@/components/sections/ServiceRow'
+import ServiceStatsEditorial from '@/components/services/ServiceStatsEditorial'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { services } from '@/lib/services'
 
@@ -66,7 +67,7 @@ export default function ServicesPage() {
             >
               <span style={{ color: PILLAR_COLORS.generate }}>Generate.</span>{' '}
               <span style={{ color: PILLAR_COLORS.convert }}>Convert.</span>{' '}
-              <span style={{ color: PILLAR_COLORS.retain }}>Retain.</span>
+              <em style={{ color: PILLAR_COLORS.retain, fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>Retain.</em>
             </h1>
             <p
               className="type-lead mt-6 max-w-xl"
@@ -92,8 +93,8 @@ export default function ServicesPage() {
             >
               {/* faint large number */}
               <span
-                className="absolute right-6 top-4 font-medium leading-none select-none pointer-events-none"
-                style={{ fontSize: '6rem', color: p.color, opacity: 0.07 }}
+                className="absolute right-6 top-4 italic leading-none select-none pointer-events-none"
+                style={{ fontSize: '6rem', fontFamily: 'var(--font-serif)', color: p.color, opacity: 0.09 }}
                 aria-hidden
               >
                 {p.num}
@@ -136,7 +137,7 @@ export default function ServicesPage() {
       <GrowthEngineDiagram />
 
       {/* ── Service index ────────────────────────────────────────────── */}
-      <section style={{ background: 'var(--teal-900)' }}>
+      <section style={{ background: 'var(--cloud-100)' }}>
         {PILLARS.map((cat) => {
           const catServices = services.filter(s => s.category === cat.id)
           return (
@@ -144,15 +145,15 @@ export default function ServicesPage() {
               {/* Category divider */}
               <div
                 className="px-6 md:px-16 py-5 flex items-center gap-6"
-                style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }}
+                style={{ borderTop: '1px solid rgba(7,47,52,0.08)' }}
               >
                 <span
                   className="type-eyebrow"
-                  style={{ color: cat.color, opacity: 0.7 }}
+                  style={{ color: `color-mix(in srgb, ${cat.color} 60%, var(--teal-800) 40%)` }}
                 >
                   {cat.id}
                 </span>
-                <div className="flex-1 h-px" style={{ background: 'rgba(228,238,240,0.06)' }} />
+                <div className="flex-1 h-px" style={{ background: 'rgba(7,47,52,0.06)' }} />
               </div>
 
               {/* Service rows */}
@@ -175,34 +176,19 @@ export default function ServicesPage() {
         })}
 
         {/* bottom rule */}
-        <div style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }} />
+        <div style={{ borderTop: '1px solid rgba(7,47,52,0.08)' }} />
       </section>
 
       {/* ── Stats — quick proof before CTA ──────────────────────────── */}
-      <section
-        className="px-6 md:px-16 py-20"
-        style={{ background: 'var(--teal-900)', borderTop: '1px solid rgba(228,238,240,0.06)' }}
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-          {[
-            { n: '11', l: 'Disciplines under one roof — strategy to analytics' },
-            { n: '15+', l: 'Active hospitality brand partnerships' },
-            { n: '28d', l: 'Engine cycle — first shoot to first report' },
-          ].map((s) => (
-            <div key={s.n} className="flex flex-col gap-2">
-              <span
-                className="text-5xl md:text-6xl font-medium tabular-nums leading-none"
-                style={{ color: 'var(--mint-400)' }}
-              >
-                {s.n}
-              </span>
-              <span className="type-caption" style={{ color: 'var(--text-on-dark)', opacity: 0.64 }}>
-                {s.l}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ServiceStatsEditorial
+        eyebrow="The full picture"
+        headline={<>Eleven disciplines. <em style={{ fontFamily: 'var(--font-serif)' }}>One engine.</em></>}
+        stats={[
+          { number: '11', label: 'Disciplines under one roof — strategy to analytics' },
+          { number: '15+', label: 'Active hospitality brand partnerships' },
+          { number: '28d', label: 'Engine cycle — first shoot to first report' },
+        ]}
+      />
 
       <CTABanner
         eyebrow="JOIN 15+ HOSPITALITY BRANDS"
