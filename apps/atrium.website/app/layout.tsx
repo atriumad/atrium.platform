@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.atriumad.com'),
   title,
   description,
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title,
     description,
@@ -27,6 +30,18 @@ export const metadata: Metadata = {
   },
 }
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Atrium',
+  description,
+  areaServed: 'US',
+  address: [
+    { '@type': 'PostalAddress', addressLocality: 'Kansas City', addressRegion: 'MO', addressCountry: 'US' },
+    { '@type': 'PostalAddress', addressLocality: 'Cuba' },
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -34,6 +49,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${interTight.variable} ${instrumentSerif.variable} ${nothingYouCouldDo.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD, no user input */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <TabTitleSwitcher />
         <GSAPProvider>
           <Navbar />
