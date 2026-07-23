@@ -1,9 +1,25 @@
 'use client'
+import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 import type { StatItem } from '@/lib/services'
 
-export default function ServiceStatsEditorial({ stats }: { stats: StatItem[] }) {
+type Props = {
+  stats: StatItem[]
+  eyebrow?: string
+  headline?: ReactNode
+}
+
+export default function ServiceStatsEditorial({
+  stats,
+  eyebrow = 'The business case',
+  headline = (
+    <>
+      Not more activity.<br />
+      <em style={{ fontFamily: 'var(--font-serif)' }}>More momentum.</em>
+    </>
+  ),
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -35,11 +51,10 @@ export default function ServiceStatsEditorial({ stats }: { stats: StatItem[] }) 
       <div className="relative mx-auto max-w-[var(--container-max)]">
         <div className="metric-reveal max-w-4xl pb-14 md:pb-20">
           <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
-            The business case
+            {eyebrow}
           </p>
           <h2 className="type-section-title m-0 mt-5" style={{ color: 'var(--text-on-dark)' }}>
-            Not more activity.<br />
-            <em style={{ fontFamily: 'var(--font-serif)' }}>More momentum.</em>
+            {headline}
           </h2>
         </div>
 
