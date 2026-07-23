@@ -20,8 +20,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!study) return {}
 
   return {
-    title: `${study.client} - Atrium Work`,
+    title: `${study.client} — Atrium Case Study`,
     description: getCaseSummary(study),
+    alternates: { canonical: `/work/${slug}` },
   }
 }
 
