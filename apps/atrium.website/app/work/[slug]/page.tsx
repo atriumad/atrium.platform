@@ -121,24 +121,25 @@ export function StorySection({ paragraphs }: { paragraphs: string[] }) {
 
 function PhotoGallerySection({ study }: { study: CaseStudy }) {
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
-      <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="mb-14 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
-          <div className="lg:col-span-7">
-            <Eyebrow className="mb-6">Photo gallery</Eyebrow>
-            <h2 className="type-section-title">
-              The brand, <em>in frame.</em>
-            </h2>
+    <section className="py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
+      <div className="px-[var(--gutter)]">
+        <div className="mx-auto max-w-[var(--container-max)]">
+          <div className="mb-14 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+            <div className="lg:col-span-7">
+              <Eyebrow className="mb-6">Photo gallery</Eyebrow>
+              <h2 className="type-section-title">
+                The brand, <em>in frame.</em>
+              </h2>
+            </div>
+            <p className="type-body m-0 max-w-md lg:col-span-5" style={{ color: 'var(--text-muted)' }}>
+              A visual record of the atmosphere, details, people, and moments that made the work recognizable.
+            </p>
           </div>
-          <p className="type-body m-0 max-w-md lg:col-span-5" style={{ color: 'var(--text-muted)' }}>
-            A visual record of the atmosphere, details, people, and moments that made the work recognizable.
-          </p>
         </div>
-
       </div>
 
       {/* Interactive draggable gallery — stock fillers until real assets land */}
-      <div className="mt-14 overflow-hidden rounded-[var(--radius-bento)] md:mt-20">
+      <div className="mt-14 overflow-hidden md:mt-20">
         <DragGallery publicIds={study.galleryIds} images={study.gallery} />
       </div>
     </section>
