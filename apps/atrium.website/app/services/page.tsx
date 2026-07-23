@@ -8,6 +8,7 @@ import { services } from '@/lib/services'
 export const metadata: Metadata = {
   title: 'Services — Atrium',
   description: 'Full-stack hospitality marketing across brand, content, paid media, SEO, email, CRM, and analytics.',
+  alternates: { canonical: '/services' },
 }
 
 const HAIRLINE = 'rgba(7,47,52,0.18)'
@@ -111,6 +112,7 @@ export default function ServicesPage() {
                           {svc.name}
                         </span>
                         <span
+                          aria-hidden="true"
                           className="flex-shrink-0 transition-transform duration-150 group-hover:translate-x-1"
                           style={{ color: 'var(--teal-800)' }}
                         >
