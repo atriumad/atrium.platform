@@ -3,7 +3,6 @@ import { cloudinaryAssets } from './cloudinary-assets.generated'
 export type CaseMetric = { number: string; label: string }
 export type HowStep = { title: string; body: string }
 export type ScopeGroup = { label: string; items: string[] }
-export type CaseQuote = { text: string; name: string; role: string; placeholder?: boolean }
 export type CaseGalleryImage = {
   src: string
   srcSet?: string
@@ -35,7 +34,6 @@ export type CaseStudy = {
   metrics: CaseMetric[]
   howWeDidIt?: HowStep[]
   scope?: ScopeGroup[]
-  quote?: CaseQuote
   takeaway?: string
   gallery?: CaseGalleryImage[]
   /** Cloudinary public IDs for the draggable gallery (preferred over `gallery`). */
@@ -85,7 +83,6 @@ export const caseStudies: CaseStudy[] = [
       { number: '1,031', label: 'pieces of content published in 5 months' },
       { number: '504K', label: 'Google impressions (168K per location × 3)' },
     ],
-    quote: { text: '[Client quote pending]', name: 'Fernanda', role: 'Owner, Taco Naco KC', placeholder: true },
     order: 1,
   },
 
@@ -416,7 +413,6 @@ const caseSummaries: Record<string, string> = {
   'grand-coffee': 'A lifestyle-led brand world connecting coffee, wellness, and community through a cohesive creative system.',
   'hotel-kc': 'Cinematic storytelling that translated a historic property into a contemporary hospitality destination.',
   'town-company': 'A culinary story shaped around the people, craft, and thoughtful details behind the guest experience.',
-  'farm-fresh': 'Placeholder — copy pending.',
 }
 
 export function getCaseSummary(study: CaseStudy) {
