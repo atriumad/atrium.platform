@@ -358,7 +358,7 @@ export default function Navbar() {
               boxShadow: 'var(--shadow-dark)',
             }}
           >
-            {/* Left feature panel — Growth Grader promo */}
+            {/* Left feature panel — services overview */}
             <div
               className="flex flex-col justify-between p-8 w-[248px] flex-shrink-0"
               style={{ background: 'var(--color-primary-900)' }}
@@ -368,38 +368,36 @@ export default function Navbar() {
                   className="type-eyebrow"
                   style={{ color: 'var(--color-accent)', opacity: 0.65 }}
                 >
-                  Free tool
+                  One system
                 </span>
                 <h2
                   className="type-card-title mt-4"
                   style={{ color: 'var(--color-surface)' }}
                 >
-                  Know your score.{' '}
+                  11 disciplines.{' '}
                   <em style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-accent)', fontStyle: 'italic' }}>
-                    In 2 minutes.
+                    One roof.
                   </em>
                 </h2>
                 <p
                   className="type-caption mt-4"
                   style={{ color: 'var(--color-surface)', opacity: 0.58 }}
                 >
-                  The Atrium Growth Grader scores your Google presence, website, and social — then shows you exactly what&apos;s leaking revenue.
+                  Brand strategy to CRM, shoots to dashboards — every discipline runs as one system. No hand-offs.
                 </p>
               </div>
 
-              <a
-                href="https://atrium-grader.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/services"
                 onClick={close}
                 className="inline-flex gap-2 items-center mt-8 text-xs font-medium transition-opacity hover:opacity-70 w-fit"
                 style={{ color: 'var(--color-accent)' }}
               >
-                Try the Growth Grader
+                Explore all services
                 <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </a>
+              </Link>
             </div>
 
             {/* Right columns */}

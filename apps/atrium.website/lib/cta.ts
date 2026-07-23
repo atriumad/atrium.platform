@@ -20,10 +20,4 @@ export const CTA = {
     label: 'See Client Results',
     href: '/work',
   },
-  // Low-intent — for visitors not ready to talk yet.
-  lowIntent: {
-    label: 'Check My Growth Score',
-    href: 'https://atrium-grader.vercel.app',
-    external: true,
-  },
 } satisfies Record<string, Cta>

@@ -89,15 +89,6 @@ export default function HomePage() {
         steps={processSteps}
         stats={processStats}
       />
-      <CTABanner
-        eyebrow="Free tool"
-        headline={<>Know your growth score. <em>In 2 minutes.</em></>}
-        body="The Atrium Growth Grader scores your Google presence, website, and social — then shows you exactly what's leaking revenue. No signup required."
-        cta="Try the Growth Grader"
-        ctaHref="https://atrium-grader.vercel.app"
-        ctaExternal
-        coverAlt="Free restaurant marketing audit — Atrium Growth Grader"
-      />
       <SplitSection
         eyebrow="One team, not five vendors"
         headline={<>You don&apos;t need five vendors. <em>You need one system.</em></>}
