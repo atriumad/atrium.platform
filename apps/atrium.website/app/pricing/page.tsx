@@ -5,8 +5,9 @@ import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import Eyebrow from '@/components/ui/Eyebrow'
 
 export const metadata: Metadata = {
-  title: 'Pricing - Atrium',
-  description: 'Custom Atrium engagement models for hospitality marketing: Foundation, Growth, and Full System.',
+  title: 'Atrium Pricing — Hospitality Marketing Engagement Models',
+  description: 'Custom Atrium engagement models for hospitality marketing: Foundation, Growth, and Full System — built around what your business actually needs.',
+  alternates: { canonical: '/pricing' },
 }
 
 const tiers = [

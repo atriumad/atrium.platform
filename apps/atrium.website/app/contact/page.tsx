@@ -5,8 +5,9 @@ import Eyebrow from '@/components/ui/Eyebrow'
 import { getService } from '@/lib/services'
 
 export const metadata: Metadata = {
-  title: 'Contact - Atrium',
-  description: 'Start a hospitality marketing conversation with Atrium.',
+  title: 'Contact Atrium — Book a Hospitality Marketing Diagnostic',
+  description: "Start a hospitality marketing conversation with Atrium. Tell us about your restaurant, hotel, or food brand and we'll map out where growth is leaking.",
+  alternates: { canonical: '/contact' },
 }
 
 const email = 'hello@atrium.studio'
