@@ -38,21 +38,21 @@ export default function VideoBentoGrid({ ids }: { ids: string[] }) {
   if (!top) return null
 
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
-      <div className="mx-auto grid max-w-[var(--container-max)] gap-6 md:gap-8">
-        <div className="overflow-hidden rounded-[var(--radius-bento)]" style={{ aspectRatio: '16 / 9' }}>
+    <section className="py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+      <div className="grid">
+        <div className="overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
           <BentoClip videoId={top} />
         </div>
 
         {(bottomLeft || bottomRight) && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2">
             {bottomLeft && (
-              <div className="overflow-hidden rounded-[var(--radius-bento)]" style={{ aspectRatio: '4 / 5' }}>
+              <div className="overflow-hidden" style={{ aspectRatio: '4 / 5' }}>
                 <BentoClip videoId={bottomLeft} />
               </div>
             )}
             {bottomRight && (
-              <div className="overflow-hidden rounded-[var(--radius-bento)]" style={{ aspectRatio: '4 / 5' }}>
+              <div className="overflow-hidden" style={{ aspectRatio: '4 / 5' }}>
                 <BentoClip videoId={bottomRight} />
               </div>
             )}
