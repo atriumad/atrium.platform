@@ -7,9 +7,13 @@ const columns = [
       { label: 'Brand Strategy', href: '/services/brand-strategy' },
       { label: 'Film & Photo', href: '/services/film-photo' },
       { label: 'Social Content', href: '/services/social-content' },
+      { label: 'Social Management', href: '/services/social-management' },
       { label: 'Paid Media', href: '/services/paid-media' },
       { label: 'Google SEO', href: '/services/google-seo' },
+      { label: 'Reputation', href: '/services/reputation' },
+      { label: 'Experiential', href: '/services/experiential' },
       { label: 'Email & SMS', href: '/services/email-sms' },
+      { label: 'CRM & Loyalty', href: '/services/crm-loyalty' },
     ],
   },
   {
