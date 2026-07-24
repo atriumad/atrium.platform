@@ -78,6 +78,7 @@ export default function DragGallery({
   const isDraggingRef = useRef(false)
   const dragStart = useRef({ x: 0, y: 0 })
   const positionStart = useRef({ x: 0, y: 0 })
+  const touchDirectionRef = useRef<'pan' | 'scroll' | null>(null)
 
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 })
   const [imageDims, setImageDims] = useState<Map<number, { width: number; height: number }>>(new Map())
@@ -257,6 +258,7 @@ export default function DragGallery({
     const t = e.touches[0]
     if (!t) return
     isDraggingRef.current = true
+    touchDirectionRef.current = null
     dragStart.current = { x: t.clientX, y: t.clientY }
     positionStart.current = { ...targetPositionRef.current }
   }, [])
@@ -268,6 +270,19 @@ export default function DragGallery({
       if (!isDraggingRef.current) return
       const t = e.touches[0]
       if (!t) return
+
+      if (touchDirectionRef.current === null) {
+        const dx = t.clientX - dragStart.current.x
+        const dy = t.clientY - dragStart.current.y
+        if (Math.abs(dx) < 4 && Math.abs(dy) < 4) return
+        touchDirectionRef.current = Math.abs(dx) > Math.abs(dy) ? 'pan' : 'scroll'
+        if (touchDirectionRef.current === 'scroll') {
+          isDraggingRef.current = false
+          return
+        }
+      }
+      if (touchDirectionRef.current !== 'pan') return
+
       e.preventDefault()
       targetPositionRef.current = {
         x: positionStart.current.x + (t.clientX - dragStart.current.x) * dragSensitivity,
@@ -277,6 +292,7 @@ export default function DragGallery({
     }
     const onEnd = () => {
       isDraggingRef.current = false
+      touchDirectionRef.current = null
     }
     el.addEventListener('touchmove', onMove, { passive: false })
     el.addEventListener('touchend', onEnd)
@@ -301,7 +317,7 @@ export default function DragGallery({
         overflow: 'hidden',
         cursor: 'grab',
         userSelect: 'none',
-        touchAction: 'none',
+        touchAction: 'pan-y',
         background: '#fff',
       }}
     >

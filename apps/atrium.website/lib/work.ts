@@ -402,6 +402,16 @@ for (const study of caseStudies) {
   if (!study.coverImageId && assets.images[0]) study.coverImageId = assets.images[0]
 }
 
+const HERO_GALLERY_SLUGS = ['taco-naco', 'aahaa', 'hotel-kc', 'grand-coffee', 'jerusalem-cafe', 'taha']
+
+/** Curated cross-case-study sample for the homepage hero's perspective
+ *  gallery panel — real photography, not stock. Draws from `galleryIds`
+ *  already populated by the sync loop above, so it degrades gracefully
+ *  (fewer images, never throws) if a slug's assets haven't synced yet. */
+export const heroGalleryIds: string[] = HERO_GALLERY_SLUGS.flatMap(
+  (slug) => caseStudies.find((c) => c.slug === slug)?.galleryIds?.slice(0, 4) ?? [],
+)
+
 const caseSummaries: Record<string, string> = {
   'taco-naco': 'A unified content and growth system built to make three locations feel like one unmistakable brand.',
   taha: 'An organic campaign system that turned culinary prestige into sold-out experiences and sustained demand.',

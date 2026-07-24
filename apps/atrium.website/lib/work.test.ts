@@ -53,3 +53,17 @@ describe('isVideoLed', () => {
     expect(isVideoLed({ ...study, videoIds: ['a', 'b'], galleryIds: ['one', 'two', 'three'] })).toBe(false)
   })
 })
+
+import { heroGalleryIds } from './work'
+
+describe('heroGalleryIds', () => {
+  test('returns a non-empty, capped list of real Cloudinary IDs', () => {
+    expect(heroGalleryIds.length).toBeGreaterThan(0)
+    expect(heroGalleryIds.length).toBeLessThanOrEqual(24)
+    expect(heroGalleryIds.every((id) => typeof id === 'string' && id.length > 0)).toBe(true)
+  })
+
+  test('contains no duplicate IDs', () => {
+    expect(new Set(heroGalleryIds).size).toBe(heroGalleryIds.length)
+  })
+})
