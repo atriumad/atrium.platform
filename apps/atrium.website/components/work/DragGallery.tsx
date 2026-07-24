@@ -26,6 +26,8 @@ type Props = {
   radius?: number
   dragSensitivity?: number
   smoothness?: number
+  /** Container background, visible through gaps and unloaded-image placeholders. */
+  background?: string
 }
 
 // Stock fillers — replace with the real photo list later.
@@ -55,6 +57,7 @@ export default function DragGallery({
   radius = 8,
   dragSensitivity = 2.5,
   smoothness = 0.085,
+  background = '#fff',
 }: Props) {
   // Resolve the source list once: Cloudinary IDs win, then explicit images, then stock.
   const data = useMemo<GalleryImage[]>(() => {
@@ -302,7 +305,7 @@ export default function DragGallery({
         cursor: 'grab',
         userSelect: 'none',
         touchAction: 'none',
-        background: '#fff',
+        background,
       }}
     >
       {REPS.map((xOffset) =>
