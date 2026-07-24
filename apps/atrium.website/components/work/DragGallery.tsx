@@ -28,6 +28,9 @@ type Props = {
   smoothness?: number
   /** Container background, visible through gaps and unloaded-image placeholders. */
   background?: string
+  /** Top tile of the first N columns (on-screen instance only) loads eager
+   *  + high priority, for LCP when this gallery sits above the fold. */
+  eagerCount?: number
 }
 
 // Stock fillers — replace with the real photo list later.
@@ -58,6 +61,7 @@ export default function DragGallery({
   dragSensitivity = 2.5,
   smoothness = 0.085,
   background = '#fff',
+  eagerCount = 0,
 }: Props) {
   // Resolve the source list once: Cloudinary IDs win, then explicit images, then stock.
   const data = useMemo<GalleryImage[]>(() => {
@@ -326,6 +330,7 @@ export default function DragGallery({
                   if (!image) return null
                   const tileKey = `${groupKey}-${i}`
                   const isHovered = hoveredKey === tileKey
+                  const isEager = xOffset === 0 && yRep === 0 && i === 0 && col < eagerCount
                   return (
                     // biome-ignore lint/a11y/noStaticElementInteractions: decorative hover-zoom only
                     <div
@@ -348,7 +353,8 @@ export default function DragGallery({
                         src={image.src}
                         alt={image.alt ?? `Gallery image ${item.originalIndex + 1}`}
                         draggable={false}
-                        loading="lazy"
+                        loading={isEager ? 'eager' : 'lazy'}
+                        fetchPriority={isEager ? 'high' : 'auto'}
                         style={{
                           width: '100%',
                           height: '100%',
