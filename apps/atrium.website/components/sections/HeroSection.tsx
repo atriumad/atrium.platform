@@ -1,11 +1,12 @@
 'use client'
+import dynamic from 'next/dynamic'
 import { useEffect, useRef } from 'react'
 import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
-import DragGallery from '@/components/work/DragGallery'
 import { CTA } from '@/lib/cta'
 import { gsap } from '@/lib/gsap'
-import { heroGalleryIds } from '@/lib/work'
+
+const HeroScene = dynamic(() => import('@/components/3d/HeroScene'), { ssr: false })
 
 const tags = [
   'Hospitality-only expertise',
@@ -37,20 +38,7 @@ export default function HeroSection() {
       className="flex overflow-hidden relative flex-col justify-center pt-14 min-h-screen"
       style={{ background: '#0a0806' }}
     >
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <DragGallery publicIds={heroGalleryIds} background="#0a0806" eagerCount={8} />
-      </div>
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 5,
-          pointerEvents: 'none',
-          background:
-            'linear-gradient(180deg, rgba(10,8,6,0.55) 0%, rgba(10,8,6,0.5) 55%, rgba(10,8,6,0.72) 100%)',
-        }}
-      />
+      <HeroScene />
 
       <div className="relative z-10 px-6 py-20 mx-auto w-full max-w-7xl md:px-16">
         <div ref={textRef} className="max-w-4xl">
