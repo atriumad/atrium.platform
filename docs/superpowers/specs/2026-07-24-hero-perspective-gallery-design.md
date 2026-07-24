@@ -112,3 +112,43 @@ layout, since the gallery no longer sits behind the text.
 - `next build` succeeds; confirm no leftover `HeroScene`/`three`/
   `@react-three/*` references anywhere in the repo after the final
   cleanup task.
+
+## Post-implementation: live-review adjustments
+
+The values below are what actually shipped, tuned against the running
+page after the plan's tasks were implemented and reviewed. They supersede
+the corresponding values earlier in this doc and in the implementation
+plan.
+
+- **Background:** `var(--color-primary)` (resolves to `--teal-800`), not
+  `#0a0806`. The user wanted the hero on the brand's primary dark token
+  rather than the loose near-black left over from the old 3D scene.
+- **Perspective transform:** `perspective(1600px) rotateY(-12deg)
+  scale(1.05)` — single-axis vertical tilt only. The original two-axis
+  version (`rotateY(-20deg) rotateX(3deg)`) visibly cropped content at the
+  panel's top edge; dropping `rotateX` removed that artifact, and `-12deg`
+  reads as intentional without being severe.
+- **Overscan instead of a bigger mask:** the real cause of the visible
+  top/bottom "cut" wasn't the fade mask's width (widening it from
+  `12%/88%` to `30%/70%` alone didn't fix it) — it was the *geometric*
+  edge of the transformed plane itself being visible inside the masked
+  area. Fix: the inner transformed div is now `position: absolute`,
+  `height: 130%`, `top: -15%` (overscanning its `position: relative`
+  parent in both directions), while the parent keeps `overflow: hidden`.
+  The rotated plane's own edges now always fall outside the visible
+  container, so only the mask's opacity fade is ever visible — never a
+  hard content boundary.
+- **Mask fade:** kept at `transparent 0%, black 30%, black 70%,
+  transparent 100%` (the widened value) as a secondary softening on top
+  of the overscan fix, not a replacement for it.
+
+## Related fix shipped alongside (out of this spec's original scope)
+
+While reviewing the hero live, inconsistent sizing in the homepage's
+client-logo marquee (`components/ui/LogoTicker.tsx`) came up and was
+fixed in the same session (separate commit, not governed by this spec):
+source PNGs had wildly different transparent padding, which threw off
+height-based sizing; logos were trimmed to their real content bounding
+box, the ticker was collapsed to a single row at all breakpoints, and a
+`max-width` cap was added for unusually long wordmarks (JECA, Hotel
+Kansas City) so they don't dominate the strip.
