@@ -33,8 +33,8 @@ export default function HeroPerspectiveGallery({ publicIds }: Props) {
       }}
     >
       <div
-        className="flex h-full gap-4 p-4"
-        style={{ transform: 'perspective(1400px) rotateY(-8deg) rotateX(2deg) scale(1.05)' }}
+        className="flex h-full p-4"
+        style={{ transform: 'perspective(1000px) rotateY(-20deg) rotateX(3deg) scale(1.15)' }}
       >
         {columns.map((columnIds, colIndex) => (
           <Marquee
