@@ -204,6 +204,12 @@ main :where(p) {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-vertical {
+    animation-play-state: paused;
+  }
+}
+
 /* service-detail CSS removed — components now use Tailwind + design tokens */
 
 /* ─── Reels marquee ────────────────────────────────────────────────────────── */
