@@ -1,4 +1,4 @@
-export type Client = string | { name: string; logo: string; scale?: number }
+export type Client = string | { name: string; logo: string }
 
 type Props = {
   clients: Client[]
@@ -20,8 +20,8 @@ function BrandName({ client, index }: BrandNameProps) {
         src={client.logo}
         alt={client.name}
         loading="lazy"
-        className="shrink-0 w-auto object-contain h-[clamp(2.1rem,2.8vw,2.6rem)]"
-        style={{ opacity: 0.9, transform: client.scale ? `scale(${client.scale})` : undefined }}
+        className="shrink-0 w-auto object-contain h-[clamp(2.1rem,2.8vw,2.6rem)] max-w-[20rem]"
+        style={{ opacity: 0.9 }}
       />
     )
   }
@@ -63,9 +63,6 @@ function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: Client
 }
 
 export default function LogoTicker({ clients, bg, label, size = 'default' }: Props) {
-  const splitAt = Math.ceil(clients.length / 2)
-  const firstRow = clients.slice(0, splitAt)
-  const secondRow = clients.slice(splitAt)
   const sectionPadding = size === 'compact' ? 'py-20 md:py-28' : 'py-24 md:py-36'
 
   return (
@@ -84,14 +81,7 @@ export default function LogoTicker({ clients, bg, label, size = 'default' }: Pro
       )}
 
       <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="hidden flex-col gap-14 md:flex md:gap-16">
-          <BrandRow brands={firstRow} />
-          <BrandRow brands={secondRow} reverse indexOffset={splitAt} />
-        </div>
-
-        <div className="md:hidden">
-          <BrandRow brands={clients} />
-        </div>
+        <BrandRow brands={clients} />
       </div>
     </section>
   )

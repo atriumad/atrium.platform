@@ -12,6 +12,6 @@ export const clients: Client[] = [
   { name: 'Chick-in Waffle', logo: '/logos/clients/chwf.png' },
   'Palacana', { name: 'JECA', logo: '/logos/clients/jeca.png' }, 'Foxx', 'KC Jazz', 'Pigwich', 'Tacos Borrachos',
   { name: 'Old Shawnee Pizza', logo: '/logos/clients/ospz.png' },
-  { name: 'Farm Fresh', logo: '/logos/clients/ffrb.png', scale: 1.5 },
+  { name: 'Farm Fresh', logo: '/logos/clients/ffrb.png' },
   { name: 'Don Chuy’s', logo: '/logos/clients/dcop.png' },
 ]
