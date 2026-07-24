@@ -26,15 +26,15 @@ export default function HeroPerspectiveGallery({ publicIds }: Props) {
 
   return (
     <div
-      className="h-full w-full overflow-hidden"
+      className="relative h-full w-full overflow-hidden"
       style={{
-        maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
-        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)',
+        maskImage: 'linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%)',
       }}
     >
       <div
-        className="flex h-full p-4"
-        style={{ transform: 'perspective(1000px) rotateY(-20deg) rotateX(3deg) scale(1.15)' }}
+        className="absolute inset-x-0 flex p-4"
+        style={{ top: '-15%', height: '130%', transform: 'perspective(1600px) rotateY(-12deg) scale(1.05)' }}
       >
         {columns.map((columnIds, colIndex) => (
           <Marquee

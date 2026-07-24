@@ -35,7 +35,7 @@ export default function HeroSection() {
     <section
       ref={containerRef}
       className="relative flex min-h-screen overflow-hidden pt-14 lg:h-screen"
-      style={{ background: '#0a0806' }}
+      style={{ background: 'var(--color-primary)' }}
     >
       <div className="flex w-full flex-1 flex-col lg:flex-row">
         <div className="flex flex-1 flex-col justify-center px-6 py-20 md:px-16 lg:w-1/2">

@@ -404,8 +404,8 @@ for (const study of caseStudies) {
 
 const HERO_GALLERY_SLUGS = ['taco-naco', 'aahaa', 'hotel-kc', 'grand-coffee', 'jerusalem-cafe', 'taha']
 
-/** Curated cross-case-study sample for the homepage hero's DragGallery
- *  background — real photography, not stock. Draws from `galleryIds`
+/** Curated cross-case-study sample for the homepage hero's perspective
+ *  gallery panel — real photography, not stock. Draws from `galleryIds`
  *  already populated by the sync loop above, so it degrades gracefully
  *  (fewer images, never throws) if a slug's assets haven't synced yet. */
 export const heroGalleryIds: string[] = HERO_GALLERY_SLUGS.flatMap(
