@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
+import PageTransitionOverlay from './PageTransitionOverlay'
 
 type Phase = 'idle' | 'covering' | 'covered' | 'revealing'
 
@@ -71,8 +72,7 @@ export default function PageTransitionProvider({ children }: { children: React.R
   return (
     <PageTransitionContext.Provider value={{ phase, origin, navigate, onCoverComplete, onRevealComplete }}>
       {children}
-      {/* Task 3 replaces this stub with PageTransitionOverlay */}
-      <div data-page-transition-stub={phase} style={{ display: 'none' }} />
+      <PageTransitionOverlay />
     </PageTransitionContext.Provider>
   )
 }
