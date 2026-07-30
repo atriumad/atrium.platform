@@ -42,7 +42,7 @@ export default function Footer() {
               Smart creative for restaurants, hotels, and food brands. Hospitality is all we do.
             </p>
             <p className="type-caption mt-6 font-medium" style={{ color: 'var(--color-accent)' }}>
-              Kansas City, MO · Cuba
+              Houston, TX
             </p>
           </div>
           <div className="flex gap-16">

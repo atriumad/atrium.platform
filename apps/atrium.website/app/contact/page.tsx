@@ -36,8 +36,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           { label: 'View pricing models', href: '/pricing', variant: 'ghostLight' },
         ]}
         stats={[
-          { value: 'KC', label: 'Kansas City home base' },
-          { value: 'CU', label: 'production hub in Cuba' },
+          { value: 'HOU', label: 'Houston, TX home base' },
           { value: '15+', label: 'hospitality brands in the operating network' },
         ]}
       />

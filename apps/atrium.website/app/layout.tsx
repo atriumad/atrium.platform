@@ -37,8 +37,7 @@ const organizationJsonLd = {
   description,
   areaServed: 'US',
   address: [
-    { '@type': 'PostalAddress', addressLocality: 'Kansas City', addressRegion: 'MO', addressCountry: 'US' },
-    { '@type': 'PostalAddress', addressLocality: 'Cuba' },
+    { '@type': 'PostalAddress', addressLocality: 'Houston', addressRegion: 'TX', addressCountry: 'US' },
   ],
 }
 
