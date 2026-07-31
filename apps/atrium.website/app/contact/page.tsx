@@ -32,7 +32,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         title={<>Tell us what needs <em>to grow.</em></>}
         body="The fastest first step is context: where the brand is now, what is already working, and what has become too hard for the team to manage alone."
         actions={[
-          { label: 'Email Atrium', href: emailHref },
+          { label: 'Book a call', calLink: 'sergio-dev/30min' },
           { label: 'View pricing models', href: '/pricing', variant: 'ghostLight' },
         ]}
         stats={[
@@ -89,8 +89,8 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         eyebrow="WHAT HAPPENS NEXT"
         headline={<>A short conversation, then <em>a practical scope.</em></>}
         body="We will look at the current system, identify the missing operating pieces, and recommend whether Foundation, Growth, or Full System makes sense."
-        cta="Email Atrium"
-        ctaHref={emailHref}
+        cta="Book a call"
+        ctaCalLink="sergio-dev/30min"
         coverAlt="Atrium contact path from project context to practical scope"
       />
     </>

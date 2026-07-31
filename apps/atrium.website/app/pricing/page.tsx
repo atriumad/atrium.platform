@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import Eyebrow from '@/components/ui/Eyebrow'
@@ -10,24 +9,29 @@ export const metadata: Metadata = {
   alternates: { canonical: '/pricing' },
 }
 
+const CAL_CONFIG = '{"layout":"month_view"}'
+
 const tiers = [
   {
     name: 'Foundation',
     tagline: 'Strategy, content, social. The essentials.',
     fit: 'Best for restaurants that need consistency and a stronger local presence.',
     includes: ['Brand strategy', 'Monthly content production', 'Social management', 'Google optimization', 'Monthly reporting'],
+    calLink: 'sergio-dev/foundation',
   },
   {
     name: 'Growth',
     tagline: 'Paid, email, SMS, reputation. Ready to scale.',
     fit: 'Best for operators with proven demand who want more channels working together.',
     includes: ['Everything in Foundation', 'Email & SMS', 'Paid media', 'Reputation management', 'CRM setup'],
+    calLink: 'sergio-dev/growth',
   },
   {
     name: 'Full System',
     tagline: 'Everything. Dashboard, automations, dedicated team.',
     fit: 'Best for multi-location brands or high-growth concepts that need a complete engine.',
     includes: ['Everything in Growth', 'Custom dashboard', 'Advanced automations', 'Dedicated strategy team', 'Multi-location support'],
+    calLink: 'sergio-dev/full-system',
   },
 ]
 
@@ -123,16 +127,18 @@ function PricingOffers() {
                 <p className="type-caption m-0 font-medium" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-800)' }}>
                   Custom pricing after discovery
                 </p>
-                <Link
-                  href="/contact"
-                  className="type-caption group mt-6 inline-flex items-center gap-3 font-medium no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+                <button
+                  type="button"
+                  data-cal-link={tier.calLink}
+                  data-cal-config={CAL_CONFIG}
+                  className="type-caption group mt-6 inline-flex items-center gap-3 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
                   style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--teal-800)' }}
                 >
                   Request this scope
                   <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
                     →
                   </span>
-                </Link>
+                </button>
               </div>
             </article>
           ))}

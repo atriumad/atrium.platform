@@ -2,12 +2,11 @@ import type { ReactNode } from 'react'
 import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
 
-type HeroAction = {
-  label: string
-  href: string
-  variant?: 'primary' | 'ghost' | 'ghostLight' | 'mint' | 'amber'
-  external?: boolean
-}
+type HeroAction =
+  | { label: string; href: string; variant?: 'primary' | 'ghost' | 'ghostLight' | 'mint' | 'amber'; external?: boolean; calLink?: undefined }
+  | { label: string; href?: undefined; variant?: 'primary' | 'ghost' | 'ghostLight' | 'mint' | 'amber'; external?: undefined; calLink: string }
+
+const CAL_CONFIG = '{"layout":"month_view"}'
 
 type HeroStat = {
   value: string
@@ -41,16 +40,27 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
           </p>
           {actions && actions.length > 0 && (
             <div className="mt-9 flex flex-wrap gap-4">
-              {actions.map((action, index) => (
-                <Button
-                  key={action.href}
-                  href={action.href}
-                  variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
-                  {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                >
-                  {action.label}
-                </Button>
-              ))}
+              {actions.map((action, index) =>
+                action.calLink ? (
+                  <Button
+                    key={action.calLink}
+                    variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
+                    data-cal-link={action.calLink}
+                    data-cal-config={CAL_CONFIG}
+                  >
+                    {action.label}
+                  </Button>
+                ) : (
+                  <Button
+                    key={action.href}
+                    href={action.href}
+                    variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
+                    {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  >
+                    {action.label}
+                  </Button>
+                ),
+              )}
             </div>
           )}
         </div>

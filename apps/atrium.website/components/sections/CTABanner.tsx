@@ -5,18 +5,21 @@ import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { gsap } from '@/lib/gsap'
 
+const CAL_CONFIG = '{"layout":"month_view"}'
+
 type Props = {
   eyebrow?: string
   headline: ReactNode
   body: string
   cta: string
-  ctaHref: string
+  ctaHref?: string
+  ctaCalLink?: string
   ctaExternal?: boolean
   coverAlt: string
   bg?: string
 }
 
-export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaExternal, coverAlt }: Props) {
+export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaCalLink, ctaExternal, coverAlt }: Props) {
   const decorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -45,13 +48,19 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaEx
           <h2 className="type-section-title" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
           <p className="type-body max-w-md" style={{ color: 'var(--color-text-light)', opacity: 0.76 }}>{body}</p>
           <div className="mt-2">
-            <Button
-              href={ctaHref}
-              variant="ghostLight"
-              {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {cta}
-            </Button>
+            {ctaCalLink ? (
+              <Button variant="ghostLight" data-cal-link={ctaCalLink} data-cal-config={CAL_CONFIG}>
+                {cta}
+              </Button>
+            ) : (
+              <Button
+                href={ctaHref}
+                variant="ghostLight"
+                {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {cta}
+              </Button>
+            )}
           </div>
         </div>
         <div ref={decorRef} className="flex-1 flex justify-center">

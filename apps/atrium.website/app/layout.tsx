@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import CalEmbedProvider from '@/components/ui/CalEmbedProvider'
 import Footer from '@/components/ui/Footer'
 import GSAPProvider from '@/components/ui/GSAPProvider'
 import Navbar from '@/components/ui/Navbar'
@@ -52,13 +53,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON-LD, no user input */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
         <TabTitleSwitcher />
-        <PageTransitionProvider>
-          <GSAPProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </GSAPProvider>
-        </PageTransitionProvider>
+        <CalEmbedProvider>
+          <PageTransitionProvider>
+            <GSAPProvider>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </GSAPProvider>
+          </PageTransitionProvider>
+        </CalEmbedProvider>
       </body>
     </html>
   )
