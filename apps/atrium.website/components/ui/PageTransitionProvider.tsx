@@ -80,6 +80,17 @@ export default function PageTransitionProvider({ children }: { children: React.R
     }
   }, [phase, pathname])
 
+  // Safety net: if `pathname` never matches the pending href (e.g. a
+  // popstate/back navigation lands somewhere else while covered), force the
+  // reveal anyway so the overlay can never wedge the site permanently.
+  useEffect(() => {
+    if (phase !== 'covered') return
+    const timeout = window.setTimeout(() => {
+      setPhase((prev) => (prev === 'covered' ? 'revealing' : prev))
+    }, 5000)
+    return () => window.clearTimeout(timeout)
+  }, [phase])
+
   return (
     <PageTransitionContext.Provider value={{ phase, origin, navigate, onCoverComplete, onRevealComplete }}>
       {children}
