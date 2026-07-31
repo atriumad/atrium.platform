@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import { stages } from '@/components/sections/GrowthEngineDiagram'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 import { services } from '@/lib/services'
 
 export const metadata: Metadata = {
@@ -104,7 +104,7 @@ export default function ServicesPage() {
                 <ul className="flex flex-col m-0 p-0 list-none">
                   {catServices.map((svc) => (
                     <li key={svc.slug} className="border-t" style={{ borderColor: 'rgba(7,47,52,0.15)' }}>
-                      <Link
+                      <TransitionLink
                         href={`/services/${svc.slug}`}
                         className="group flex items-center justify-between gap-3 py-4 no-underline"
                       >
@@ -118,7 +118,7 @@ export default function ServicesPage() {
                         >
                           →
                         </span>
-                      </Link>
+                      </TransitionLink>
                     </li>
                   ))}
                 </ul>

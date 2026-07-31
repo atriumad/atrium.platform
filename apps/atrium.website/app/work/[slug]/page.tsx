@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 import CaseCover from '@/components/work/CaseCover'
 import DragGallery from '@/components/work/DragGallery'
 import VideoBentoGrid from '@/components/work/VideoBentoGrid'
@@ -285,7 +285,7 @@ export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
           <Eyebrow>Continue exploring</Eyebrow>
         </div>
 
-        <Link
+        <TransitionLink
           href={`/work/${nextStudy.slug}`}
           className="group grid grid-cols-1 gap-10 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
           aria-label={`Read next case study: ${nextStudy.client}`}
@@ -319,7 +319,7 @@ export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
               </span>
             </div>
           </div>
-        </Link>
+        </TransitionLink>
       </div>
     </section>
   )

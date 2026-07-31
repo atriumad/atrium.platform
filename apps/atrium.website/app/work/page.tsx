@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 import CaseCover from '@/components/work/CaseCover'
 import { type CaseStudy, caseStudies, getCaseSummary } from '@/lib/work'
 
@@ -83,7 +83,7 @@ export default function WorkPage() {
               </div>
             </div>
 
-            <Link
+            <TransitionLink
               href={`/work/${featuredCase.slug}`}
               className="group grid grid-cols-1 gap-10 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
               aria-label={`Read featured case study: ${featuredCase.client}`}
@@ -94,7 +94,7 @@ export default function WorkPage() {
               <div className="h-full lg:col-span-4">
                 <CaseText study={featuredCase} />
               </div>
-            </Link>
+            </TransitionLink>
           </div>
         </section>
       )}
@@ -112,7 +112,7 @@ export default function WorkPage() {
             {archiveCases.map((study, index) => {
               const visualOnRight = index % 2 === 1
               return (
-                <Link
+                <TransitionLink
                   key={study.slug}
                   href={`/work/${study.slug}`}
                   className="group grid grid-cols-1 gap-9 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
@@ -126,7 +126,7 @@ export default function WorkPage() {
                   <div className={`h-full lg:col-span-5 ${visualOnRight ? 'lg:order-1' : ''}`}>
                     <CaseText study={study} />
                   </div>
-                </Link>
+                </TransitionLink>
               )
             })}
           </div>
