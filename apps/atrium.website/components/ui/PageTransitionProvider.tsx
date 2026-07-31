@@ -28,30 +28,41 @@ export default function PageTransitionProvider({ children }: { children: React.R
   const [phase, setPhase] = useState<Phase>('idle')
   const [origin, setOrigin] = useState({ x: 0, y: 0 })
   const pendingHrefRef = useRef<string | null>(null)
+  const isTransitioningRef = useRef(false)
+  const hasCoveredRef = useRef(false)
+  const hasRevealedRef = useRef(false)
 
   const navigate = useCallback(
     (href: string, x: number, y: number) => {
-      if (phase !== 'idle') return
+      if (isTransitioningRef.current) return
       if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         router.push(href)
         return
       }
+      isTransitioningRef.current = true
+      hasCoveredRef.current = false
+      hasRevealedRef.current = false
       pendingHrefRef.current = href
       setOrigin({ x, y })
       setPhase('covering')
     },
-    [phase, router],
+    [router],
   )
 
   const onCoverComplete = useCallback(() => {
+    if (hasCoveredRef.current) return
     const href = pendingHrefRef.current
     if (!href) return
+    hasCoveredRef.current = true
     router.push(href)
     setPhase('covered')
   }, [router])
 
   const onRevealComplete = useCallback(() => {
+    if (hasRevealedRef.current) return
+    hasRevealedRef.current = true
     pendingHrefRef.current = null
+    isTransitioningRef.current = false
     setPhase('idle')
   }, [])
 

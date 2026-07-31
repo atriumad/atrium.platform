@@ -10,17 +10,20 @@ const REVEAL_DURATION = 0.45
 export default function PageTransitionOverlay() {
   const { phase, origin, onCoverComplete, onRevealComplete } = usePageTransition()
   const elRef = useRef<HTMLDivElement>(null)
+  const tweenRef = useRef<gsap.core.Tween | null>(null)
 
   useEffect(() => {
     const el = elRef.current
     if (!el) return
     const maxRadius = Math.hypot(window.innerWidth, window.innerHeight)
 
+    tweenRef.current?.kill()
+
     if (phase === 'covering') {
       el.style.setProperty('--x', `${origin.x}px`)
       el.style.setProperty('--y', `${origin.y}px`)
       const tween = { r: 0 }
-      gsap.to(tween, {
+      tweenRef.current = gsap.to(tween, {
         r: maxRadius,
         duration: COVER_DURATION,
         ease: 'power2.inOut',
@@ -31,13 +34,17 @@ export default function PageTransitionOverlay() {
 
     if (phase === 'revealing') {
       const tween = { r: maxRadius }
-      gsap.to(tween, {
+      tweenRef.current = gsap.to(tween, {
         r: 0,
         duration: REVEAL_DURATION,
         ease: 'power2.inOut',
         onUpdate: () => el.style.setProperty('--r', `${tween.r}px`),
         onComplete: onRevealComplete,
       })
+    }
+
+    return () => {
+      tweenRef.current?.kill()
     }
   }, [phase, origin, onCoverComplete, onRevealComplete])
 
