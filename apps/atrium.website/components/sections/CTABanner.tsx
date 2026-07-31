@@ -3,16 +3,18 @@ import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionCTA from '@/components/ui/TransitionCTA'
+import { CAL_CONFIG } from '@/lib/cal'
 import { gsap } from '@/lib/gsap'
-
-const CAL_CONFIG = '{"layout":"month_view"}'
 
 type Props = {
   eyebrow?: string
   headline: ReactNode
   body: string
   cta: string
-  ctaHref?: string
+  /** Real destination — also the fallback if the Cal.com embed script fails to load. */
+  ctaHref: string
+  /** When set, the CTA opens this Cal.com event as a popup instead of navigating. */
   ctaCalLink?: string
   ctaExternal?: boolean
   coverAlt: string
@@ -49,17 +51,17 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaCa
           <p className="type-body max-w-md" style={{ color: 'var(--color-text-light)', opacity: 0.76 }}>{body}</p>
           <div className="mt-2">
             {ctaCalLink ? (
-              <Button variant="ghostLight" data-cal-link={ctaCalLink} data-cal-config={CAL_CONFIG}>
+              <Button href={ctaHref} variant="ghostLight" data-cal-link={ctaCalLink} data-cal-config={CAL_CONFIG}>
                 {cta}
               </Button>
             ) : (
-              <Button
+              <TransitionCTA
                 href={ctaHref}
                 variant="ghostLight"
                 {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
               >
                 {cta}
-              </Button>
+              </TransitionCTA>
             )}
           </div>
         </div>

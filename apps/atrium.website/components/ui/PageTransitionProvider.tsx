@@ -80,13 +80,17 @@ export default function PageTransitionProvider({ children }: { children: React.R
     }
   }, [phase, pathname])
 
-  // Safety net: if `pathname` never matches the pending href (e.g. a
-  // popstate/back navigation lands somewhere else while covered), force the
-  // reveal anyway so the overlay can never wedge the site permanently.
+  // Safety net: any non-idle phase that doesn't resolve on its own within 5s
+  // (e.g. a popstate/back navigation lands somewhere else while covered, or a
+  // tween is killed by an effect re-run before its onComplete fires) gets
+  // force-reset to idle so the overlay and isTransitioningRef can never wedge
+  // the site permanently.
   useEffect(() => {
-    if (phase !== 'covered') return
+    if (phase === 'idle') return
     const timeout = window.setTimeout(() => {
-      setPhase((prev) => (prev === 'covered' ? 'revealing' : prev))
+      pendingHrefRef.current = null
+      isTransitioningRef.current = false
+      setPhase('idle')
     }, 5000)
     return () => window.clearTimeout(timeout)
   }, [phase])

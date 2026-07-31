@@ -1,8 +1,8 @@
 'use client'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
-import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionCTA from '@/components/ui/TransitionCTA'
 import { gsap } from '@/lib/gsap'
 
 export type ProcessStep = { eyebrow: string; title: string; body: string }
@@ -42,7 +42,7 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
           {eyebrow && <Eyebrow style={{ color: 'var(--color-surface)' } as React.CSSProperties}>{eyebrow}</Eyebrow>}
           <h2 className="type-section-title max-w-lg" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
           <p className="type-body max-w-sm" style={{ color: 'var(--color-text-light)', opacity: 0.74 }}>{body}</p>
-          <div className="mt-2"><Button href={ctaHref} variant="ghostLight">{cta}</Button></div>
+          <div className="mt-2"><TransitionCTA href={ctaHref} variant="ghostLight">{cta}</TransitionCTA></div>
           <div className="flex gap-10 mt-8 pt-8" style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }}>
             {stats.map((s) => (
               <div key={`${s.number}-${s.label}`}>

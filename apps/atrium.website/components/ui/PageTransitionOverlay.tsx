@@ -43,6 +43,13 @@ export default function PageTransitionOverlay() {
       })
     }
 
+    // Landing on `idle` with a tween still killed above (e.g. the provider's
+    // safety-timeout force-reset an animation that never resolved) — snap the
+    // overlay fully open instead of leaving it frozen mid-coverage.
+    if (phase === 'idle') {
+      el.style.setProperty('--r', '0px')
+    }
+
     return () => {
       tweenRef.current?.kill()
     }

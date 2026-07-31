@@ -1,8 +1,8 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import HeroPerspectiveGallery from '@/components/sections/HeroPerspectiveGallery'
-import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionCTA from '@/components/ui/TransitionCTA'
 import { CTA } from '@/lib/cta'
 import { gsap } from '@/lib/gsap'
 import { heroGalleryIds } from '@/lib/work'
@@ -68,8 +68,8 @@ export default function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href={CTA.primary.href} variant="mint">{CTA.primary.label}</Button>
-              <Button href={CTA.proof.href} variant="ghostLight">{CTA.proof.label}</Button>
+              <TransitionCTA href={CTA.primary.href} variant="mint">{CTA.primary.label}</TransitionCTA>
+              <TransitionCTA href={CTA.proof.href} variant="ghostLight">{CTA.proof.label}</TransitionCTA>
             </div>
           </div>
 

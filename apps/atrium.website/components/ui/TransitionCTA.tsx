@@ -27,8 +27,8 @@ export default function TransitionCTA({ href, onClick, disabled, ...rest }: Tran
   const { navigate } = usePageTransition()
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    onClick?.(event)
     if (disabled) return
+    onClick?.(event)
     const intent = resolveClickIntent(event, href, pathname)
     if (!intent.intercept) return
     event.preventDefault()

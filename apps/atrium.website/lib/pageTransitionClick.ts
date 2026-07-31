@@ -9,7 +9,7 @@ export function resolveClickIntent(
 ): ClickIntent {
   const isModifiedClick =
     event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey
-  const isExternal = !href.startsWith('/')
+  const isExternal = !href.startsWith('/') || href.startsWith('//')
   const isHashOnly = href.startsWith('#')
   const [beforeHash = ''] = href.split('#')
   const [beforeQuery = ''] = beforeHash.split('?')
