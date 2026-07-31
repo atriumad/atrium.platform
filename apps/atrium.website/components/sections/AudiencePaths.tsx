@@ -1,3 +1,6 @@
+'use client'
+
+import CldImage from '@/components/media/CldImage'
 import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionLink from '@/components/ui/TransitionLink'
 
@@ -32,16 +35,27 @@ export default function AudiencePaths() {
   return (
     <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
       <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="mb-14 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
-          <div className="lg:col-span-7">
+        <div className="mb-14 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16 md:mb-20">
+          <div className="order-2 lg:order-1 lg:col-span-6">
             <Eyebrow className="mb-6">Built for your stage</Eyebrow>
             <h2 className="type-section-title max-w-[13ch]">
               Different footprint. <em>Different first move.</em>
             </h2>
+            <p className="type-body mt-6 max-w-lg border-t pt-6" style={{ color: 'var(--text-muted)', borderColor: 'rgba(7,47,52,0.18)' }}>
+              A single dining room, a regional group, and a national rollout should not enter through the same scope. Start with the operating problem that matches your footprint.
+            </p>
           </div>
-          <p className="type-body max-w-lg border-t pt-6 lg:col-span-5" style={{ color: 'var(--text-muted)', borderColor: 'rgba(7,47,52,0.18)' }}>
-            A single dining room, a regional group, and a national rollout should not enter through the same scope. Start with the operating problem that matches your footprint.
-          </p>
+          <div className="order-1 lg:order-2 lg:col-span-6">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl lg:aspect-[3/4]">
+              <CldImage
+                publicId="v1784220815/AHAA_FEB13_CREATIVE_POST_PHOTO_3_juwr7s"
+                alt=""
+                fill
+                sizes="(min-width: 1024px) 40rem, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
 
         <div className="border-y" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
