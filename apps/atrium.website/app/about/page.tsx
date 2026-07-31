@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 
 export const metadata: Metadata = {
-  title: 'About Atrium — Hospitality Marketing Studio, Kansas City',
-  description: 'Atrium is a hospitality-native marketing studio based in Kansas City, with a production team spanning Cuba and the US, built for restaurants and hotels.',
+  title: 'About Atrium — Hospitality Marketing Studio, Houston TX',
+  description: 'Atrium is a hospitality-native marketing studio based in Houston, TX, built for restaurants and hotels.',
   alternates: { canonical: '/about' },
 }
 
@@ -28,7 +28,7 @@ const teamCards = [
   {
     label: 'Creative Director & Founder',
     title: 'Carlos',
-    body: 'Inside the kitchens, on the shoots, and behind the dashboards for 15+ hospitality brands across Kansas City and beyond.',
+    body: 'Inside the kitchens, on the shoots, and behind the dashboards for 15+ hospitality brands across Houston and beyond.',
     background: 'var(--mint-400)',
     text: 'var(--teal-900)',
   },
@@ -41,8 +41,8 @@ const teamCards = [
   },
   {
     label: 'Production Hub',
-    title: 'Cuba + US team',
-    body: 'A distributed creative crew built for on-location shoots, edits, campaign assets, and monthly execution rhythm.',
+    title: 'Houston production team',
+    body: 'A dedicated creative crew built for on-location shoots, edits, campaign assets, and monthly execution rhythm.',
     background: 'var(--teal-700)',
     text: 'var(--mint-300)',
   },
@@ -63,7 +63,7 @@ function AboutHero() {
             <p className="type-lead" style={{ color: 'var(--text-body)' }}>
               Atrium works inside the industry, connecting strategy, creative production, and performance reporting under one roof.
             </p>
-            <Link
+            <TransitionLink
               href="/contact"
               className="type-caption group mt-9 inline-flex items-center gap-3 font-medium no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
               style={{ color: 'var(--teal-800)' }}
@@ -72,7 +72,7 @@ function AboutHero() {
               <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
                 →
               </span>
-            </Link>
+            </TransitionLink>
           </div>
         </div>
 
@@ -113,10 +113,10 @@ function StudioStory() {
               We work close enough to service, production, and performance data to understand what hospitality teams actually need.
             </p>
             <p className="type-body mt-6" style={{ color: 'var(--text-muted)' }}>
-              Atrium connects strategy in Kansas City with a distributed production team across Cuba and the United States. The same people who shape the campaign stay close to the work after it goes live.
+              Atrium connects strategy and production under one roof in Houston, Texas. The same people who shape the campaign stay close to the work after it goes live.
             </p>
             <ul className="m-0 mt-8 flex list-none flex-wrap gap-x-3 gap-y-1 border-t p-0 pt-6" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
-              {['Kansas City', 'Cuba', 'United States'].map((location, index) => (
+              {['Houston', 'United States'].map((location, index) => (
                 <li key={location} className="type-caption flex items-center gap-3" style={{ color: 'var(--text-muted)' }}>
                   {index > 0 && <span aria-hidden="true">/</span>}
                   {location}

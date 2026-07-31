@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { CAL_LINKS } from '@/lib/cal'
 import { getService } from '@/lib/services'
 
 export const metadata: Metadata = {
@@ -32,12 +33,11 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         title={<>Tell us what needs <em>to grow.</em></>}
         body="The fastest first step is context: where the brand is now, what is already working, and what has become too hard for the team to manage alone."
         actions={[
-          { label: 'Email Atrium', href: emailHref },
+          { label: 'Book a call', href: emailHref, calLink: CAL_LINKS.intro },
           { label: 'View pricing models', href: '/pricing', variant: 'ghostLight' },
         ]}
         stats={[
-          { value: 'KC', label: 'Kansas City home base' },
-          { value: 'CU', label: 'production hub in Cuba' },
+          { value: 'HOU', label: 'Houston, TX home base' },
           { value: '15+', label: 'hospitality brands in the operating network' },
         ]}
       />
@@ -90,8 +90,9 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         eyebrow="WHAT HAPPENS NEXT"
         headline={<>A short conversation, then <em>a practical scope.</em></>}
         body="We will look at the current system, identify the missing operating pieces, and recommend whether Foundation, Growth, or Full System makes sense."
-        cta="Email Atrium"
+        cta="Book a call"
         ctaHref={emailHref}
+        ctaCalLink={CAL_LINKS.intro}
         coverAlt="Atrium contact path from project context to practical scope"
       />
     </>

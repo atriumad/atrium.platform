@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import TransitionLink from './TransitionLink'
 
 const columns = [
   {
@@ -42,7 +42,7 @@ export default function Footer() {
               Smart creative for restaurants, hotels, and food brands. Hospitality is all we do.
             </p>
             <p className="type-caption mt-6 font-medium" style={{ color: 'var(--color-accent)' }}>
-              Kansas City, MO · Cuba
+              Houston, TX
             </p>
           </div>
           <div className="flex gap-16">
@@ -52,9 +52,9 @@ export default function Footer() {
                 <ul className={col.links.length > 6 ? 'grid grid-cols-2 gap-x-8 gap-y-3' : 'flex flex-col gap-3'}>
                   {col.links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="type-caption inline-block whitespace-nowrap transition-transform duration-200 hover:translate-x-1" style={{ opacity: 0.72 }}>
+                      <TransitionLink href={link.href} className="type-caption inline-block whitespace-nowrap transition-transform duration-200 hover:translate-x-1" style={{ opacity: 0.72 }}>
                         {link.label}
-                      </Link>
+                      </TransitionLink>
                     </li>
                   ))}
                 </ul>

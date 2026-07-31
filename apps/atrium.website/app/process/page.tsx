@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import CTABanner from '@/components/sections/CTABanner'
-import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionCTA from '@/components/ui/TransitionCTA'
 
 export const metadata: Metadata = {
   title: 'How Atrium Works — The Hospitality Growth Engine',
@@ -87,12 +87,12 @@ export default function ProcessPage() {
                 process is designed for restaurant teams that need momentum without managing every handoff.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Button href="/contact" variant="primary" className="px-5 py-3 text-xs">
+                <TransitionCTA href="/contact" variant="primary" className="px-5 py-3 text-xs">
                   Start the process
-                </Button>
-                <Button href="/services" variant="outline" className="px-5 py-3 text-xs">
+                </TransitionCTA>
+                <TransitionCTA href="/services" variant="outline" className="px-5 py-3 text-xs">
                   See services
-                </Button>
+                </TransitionCTA>
               </div>
             </div>
           </div>

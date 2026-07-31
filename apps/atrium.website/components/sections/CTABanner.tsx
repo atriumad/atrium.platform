@@ -3,6 +3,8 @@ import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionCTA from '@/components/ui/TransitionCTA'
+import { CAL_CONFIG } from '@/lib/cal'
 import { gsap } from '@/lib/gsap'
 
 type Props = {
@@ -10,13 +12,16 @@ type Props = {
   headline: ReactNode
   body: string
   cta: string
+  /** Real destination — also the fallback if the Cal.com embed script fails to load. */
   ctaHref: string
+  /** When set, the CTA opens this Cal.com event as a popup instead of navigating. */
+  ctaCalLink?: string
   ctaExternal?: boolean
   coverAlt: string
   bg?: string
 }
 
-export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaExternal, coverAlt }: Props) {
+export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaCalLink, ctaExternal, coverAlt }: Props) {
   const decorRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -45,13 +50,19 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaEx
           <h2 className="type-section-title" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
           <p className="type-body max-w-md" style={{ color: 'var(--color-text-light)', opacity: 0.76 }}>{body}</p>
           <div className="mt-2">
-            <Button
-              href={ctaHref}
-              variant="ghostLight"
-              {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {cta}
-            </Button>
+            {ctaCalLink ? (
+              <Button href={ctaHref} variant="ghostLight" data-cal-link={ctaCalLink} data-cal-config={CAL_CONFIG}>
+                {cta}
+              </Button>
+            ) : (
+              <TransitionCTA
+                href={ctaHref}
+                variant="ghostLight"
+                {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
+                {cta}
+              </TransitionCTA>
+            )}
           </div>
         </div>
         <div ref={decorRef} className="flex-1 flex justify-center">
