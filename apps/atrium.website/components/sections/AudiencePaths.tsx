@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 
 const paths = [
   {
@@ -46,7 +46,7 @@ export default function AudiencePaths() {
 
         <div className="border-y" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
           {paths.map((path, index) => (
-            <Link
+            <TransitionLink
               key={path.label}
               href={path.href}
               className="group grid gap-7 border-b py-9 no-underline last:border-b-0 md:grid-cols-[8rem_minmax(0,0.8fr)_minmax(0,1.2fr)_auto] md:items-center md:gap-10 md:py-11"
@@ -71,7 +71,7 @@ export default function AudiencePaths() {
                 <span className="max-w-[10rem]">{path.cta}</span>
                 <span className="text-xl transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
               </span>
-            </Link>
+            </TransitionLink>
           ))}
         </div>
       </div>

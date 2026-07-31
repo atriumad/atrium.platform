@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 import type { Service } from '@/lib/services'
 
 const modelByCategory = {
@@ -38,12 +38,12 @@ export default function ServiceEngagementModel({ svc }: { svc: Service }) {
           </h2>
           <p className="type-body mt-5 max-w-2xl" style={{ color: 'var(--text-muted)' }}>{model.fit}</p>
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
-            <Link href={model.href} className="type-caption group inline-flex items-center gap-3 font-medium no-underline" style={{ color: 'var(--teal-800)' }}>
+            <TransitionLink href={model.href} className="type-caption group inline-flex items-center gap-3 font-medium no-underline" style={{ color: 'var(--teal-800)' }}>
               Compare the {model.name} model <span className="transition-transform group-hover:translate-x-2" aria-hidden="true">→</span>
-            </Link>
-            <Link href={`/contact?service=${svc.slug}`} className="type-caption group inline-flex items-center gap-3 font-medium no-underline" style={{ color: 'var(--teal-500)' }}>
+            </TransitionLink>
+            <TransitionLink href={`/contact?service=${svc.slug}`} className="type-caption group inline-flex items-center gap-3 font-medium no-underline" style={{ color: 'var(--teal-500)' }}>
               Scope this service <span className="transition-transform group-hover:translate-x-2" aria-hidden="true">→</span>
-            </Link>
+            </TransitionLink>
           </div>
         </div>
       </div>

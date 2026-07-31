@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 import { getSiblingServices } from '@/lib/services'
 import { CATEGORY_COLOR } from './utils'
 
@@ -11,7 +11,7 @@ export default function SiblingServices({ current }: { current: string }) {
         <Eyebrow className="mb-10">OTHER SERVICES</Eyebrow>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {siblings.map(svc => (
-            <Link
+            <TransitionLink
               key={svc.slug}
               href={`/services/${svc.slug}`}
               className="group flex flex-col gap-4 rounded-2xl p-8 no-underline"
@@ -29,7 +29,7 @@ export default function SiblingServices({ current }: { current: string }) {
               <span className="type-caption font-semibold" style={{ color: 'var(--teal-700)' }}>
                 Learn more &rarr;
               </span>
-            </Link>
+            </TransitionLink>
           ))}
         </div>
       </div>
