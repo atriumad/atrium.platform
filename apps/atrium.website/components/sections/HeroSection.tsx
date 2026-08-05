@@ -68,7 +68,7 @@ export default function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href={CTA.primary.href} variant="mint">{CTA.primary.label}</Button>
+              <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="mint">{CTA.primary.label}</Button>
               <Button href={CTA.proof.href} variant="ghostLight">{CTA.proof.label}</Button>
             </div>
           </div>

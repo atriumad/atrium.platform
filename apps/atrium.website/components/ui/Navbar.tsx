@@ -295,7 +295,7 @@ export default function Navbar() {
       {/* Right column — CTA on desktop, menu toggle on mobile */}
       <div className="flex gap-4 justify-end justify-self-end items-center">
         <div className="hidden md:flex">
-          <Button href={CTA.primary.href} variant={isEditorialCase ? 'ghost' : 'ghostLight'} className="px-4 py-2 text-xs">
+          <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant={isEditorialCase ? 'ghost' : 'ghostLight'} className="px-4 py-2 text-xs">
             {CTA.primary.label}
           </Button>
         </div>
@@ -494,7 +494,7 @@ export default function Navbar() {
             </div>
           ))}
 
-          <Button href={CTA.primary.href} variant="primary" onClick={closeMobile} className="justify-center px-4 py-3 w-full text-xs">
+          <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="primary" onClick={closeMobile} className="justify-center px-4 py-3 w-full text-xs">
             {CTA.primary.label}
           </Button>
         </div>

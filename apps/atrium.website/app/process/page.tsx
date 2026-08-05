@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import CTABanner from '@/components/sections/CTABanner'
 import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { CTA } from '@/lib/cta'
 
 export const metadata: Metadata = {
   title: 'How Atrium Works — The Hospitality Growth Engine',
@@ -87,7 +88,7 @@ export default function ProcessPage() {
                 process is designed for restaurant teams that need momentum without managing every handoff.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Button href="/contact" variant="primary" className="px-5 py-3 text-xs">
+                <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="primary" className="px-5 py-3 text-xs">
                   Start the process
                 </Button>
                 <Button href="/services" variant="outline" className="px-5 py-3 text-xs">
@@ -192,8 +193,9 @@ export default function ProcessPage() {
         eyebrow="READY FOR A CLEANER RHYTHM?"
         headline={<>Marketing feels better when <em>the system is visible.</em></>}
         body="We will map the first cycle, identify the missing inputs, and show what needs to happen before the first shoot."
-        cta="Book a Growth Diagnostic"
-        ctaHref="/contact"
+        cta={CTA.primary.label}
+        ctaHref={CTA.primary.href}
+        ctaExternal={CTA.primary.external}
         coverAlt="A monthly restaurant marketing cycle mapped on a wall"
       />
     </>

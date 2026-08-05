@@ -4,6 +4,7 @@ import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
 import CaseCover from '@/components/work/CaseCover'
+import { CTA } from '@/lib/cta'
 import { type CaseStudy, caseStudies, getCaseSummary } from '@/lib/work'
 
 export const metadata: Metadata = {
@@ -65,7 +66,7 @@ export default function WorkPage() {
         eyebrow="OUR WORK"
         title={<>Hospitality only. <em>Results first.</em></>}
         body="A visual archive of restaurant, hotel, and food brands built around measurable outcomes — not vanity metrics."
-        actions={[{ label: 'Start a project', href: '/contact' }]}
+        actions={[{ label: 'Start a project', href: CTA.primary.href, external: CTA.primary.external }]}
       />
 
       {featuredCase && (
@@ -137,8 +138,9 @@ export default function WorkPage() {
         eyebrow="NEXT STEP"
         headline={<>Build the case study <em>your restaurant deserves.</em></>}
         body="If your marketing has activity but not a clear story of growth, Atrium can rebuild the system around outcomes."
-        cta="Book a Growth Diagnostic"
-        ctaHref="/contact"
+        cta={CTA.primary.label}
+        ctaHref={CTA.primary.href}
+        ctaExternal={CTA.primary.external}
         coverAlt="A restaurant marketing result sheet being reviewed by the team"
       />
     </>

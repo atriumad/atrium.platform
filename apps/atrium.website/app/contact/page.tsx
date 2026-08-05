@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/contact' },
 }
 
-const email = 'hello@atrium.studio'
+const email = 'hello@atriumad.com'
 
 const briefItems = [
   'Restaurant, hotel, or food brand name',

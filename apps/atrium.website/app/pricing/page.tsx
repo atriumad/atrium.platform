@@ -3,6 +3,7 @@ import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { CTA } from '@/lib/cta'
 
 export const metadata: Metadata = {
   title: 'Atrium Pricing — Hospitality Marketing Engagement Models',
@@ -124,7 +125,9 @@ function PricingOffers() {
                   Custom pricing after discovery
                 </p>
                 <Link
-                  href="/contact"
+                  href={CTA.primary.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="type-caption group mt-6 inline-flex items-center gap-3 font-medium no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
                   style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--teal-800)' }}
                 >
@@ -193,8 +196,9 @@ export default function PricingPage() {
         eyebrow="SCOPE THE WORK"
         headline={<>The right number comes <em>after the right diagnosis.</em></>}
         body="Tell us what you are trying to grow, what channels are already active, and what has stopped working. We will map the practical scope."
-        cta="Book a Growth Diagnostic"
-        ctaHref="/contact"
+        cta={CTA.primary.label}
+        ctaHref={CTA.primary.href}
+        ctaExternal={CTA.primary.external}
         coverAlt="Engagement model notes for a hospitality marketing plan"
       />
     </>

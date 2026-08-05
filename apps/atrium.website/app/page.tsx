@@ -12,6 +12,7 @@ import TestimonialBento, { type BentoCard } from '@/components/sections/Testimon
 import WorkGrid, { type Project } from '@/components/sections/WorkGrid'
 import LogoTicker from '@/components/ui/LogoTicker'
 import { clients } from '@/lib/clients'
+import { CTA } from '@/lib/cta'
 import { type CaseStudy, caseStudies } from '@/lib/work'
 
 const bentoItems: BentoItem[] = [
@@ -49,7 +50,7 @@ const processStats: ProcessStat[] = [
 const testimonialCards: BentoCard[] = [
   { type: 'stat', stat: '74%', statLabel: 'of diners use social media to decide where to eat. Your feed is their first impression.' },
   { type: 'testimonial', quote: 'Working with Atrium across our 3 Taco Naco locations changed how we think about marketing. One system, one voice, real results.', author: 'Brian Goldman Ruiz', role: 'Owner', company: 'Taco Naco KC' },
-  { type: 'testimonial', quote: 'The brunch campaign they built moved real revenue. Not followers — people sitting down on Sunday mornings.', author: 'TBD', role: 'Owner', company: "T'ÄHÄ Mexican Kitchen", bg: 'var(--color-forest-2)' },
+  { type: 'testimonial', quote: 'The brunch campaign they built moved real revenue. Not followers — people sitting down on Sunday mornings.', author: '', role: 'Owner', company: "T'ÄHÄ Mexican Kitchen", bg: 'var(--color-forest-2)' },
   { type: 'stat', stat: '88%', statLabel: 'of diners trust online reviews as much as personal recommendations. We manage every one of yours.' },
 ]
 
@@ -102,8 +103,9 @@ export default function HomePage() {
         eyebrow="Join 15+ Hospitality Brands"
         headline={<>Been burned by an agency <em>before?</em></>}
         body="If you've outgrown freelancers, been let down by generic agencies, or just want a team that reports revenue instead of vanity — we were built for you. See the system before you commit."
-        cta="Book a Growth Diagnostic"
-        ctaHref="/contact"
+        cta={CTA.primary.label}
+        ctaHref={CTA.primary.href}
+        ctaExternal={CTA.primary.external}
         coverAlt="Team at table in restaurant — natural, warm, working together"
       />
     </>
