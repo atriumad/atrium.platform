@@ -744,7 +744,7 @@ function ReportStage({
       className="atr-report mx-auto flex w-full max-w-[1080px] flex-col gap-5 text-left font-sans leading-[1.5] text-ink max-[560px]:gap-3.5"
     >
       <div className="atr-reveal grid grid-cols-[1fr_360px] items-stretch gap-5 max-[980px]:grid-cols-[1fr_minmax(280px,320px)] max-[700px]:grid-cols-[1fr]">
-        <div className="flex flex-col justify-center rounded-card bg-card px-[34px] py-[38px] shadow-soft transition-[transform,box-shadow] duration-[220ms] ease-atrium hover:-translate-y-[3px] hover:shadow-float motion-reduce:transition-none max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+        <div className="flex flex-col justify-center rounded-card bg-card px-[34px] py-[38px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
           <Eyebrow className="flex flex-wrap items-center gap-1.5">
             <span>Growth diagnostic</span>
             <span aria-hidden="true">·</span>
@@ -787,8 +787,8 @@ function ReportStage({
         </aside>
       </div>
 
-      <div className="atr-reveal grid grid-cols-[1fr_380px] items-start gap-5 max-[980px]:grid-cols-[1fr_minmax(280px,320px)] max-[700px]:grid-cols-[1fr]">
-        <div className="rounded-card bg-card p-[34px] shadow-soft transition-[transform,box-shadow] duration-[220ms] ease-atrium hover:-translate-y-[3px] hover:shadow-float motion-reduce:transition-none max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+      <div className="atr-reveal grid grid-cols-[1fr_380px] items-stretch gap-5 max-[980px]:grid-cols-[1fr_minmax(280px,320px)] max-[700px]:grid-cols-[1fr]">
+        <div className="rounded-card bg-card p-[34px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
           <Eyebrow>Primary leak</Eyebrow>
           <h2 className="m-0 max-w-[16ch] text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.08] tracking-[-0.02em]">{displayPrimaryLeak}</h2>
           <div className="mt-[26px] grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-[22px] max-[560px]:mt-5 max-[560px]:gap-3.5">
@@ -796,7 +796,7 @@ function ReportStage({
             <div className="rounded-card-sm bg-cream p-5 max-[560px]:p-4"><span className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-green">Why it matters</span><p className="mx-0 mb-0 mt-2 text-[0.95rem] text-body">{displayWhyItMatters}</p></div>
           </div>
         </div>
-        <aside className="flex flex-col gap-6 rounded-card bg-amber-soft p-[30px] shadow-soft transition-[transform,box-shadow] duration-[220ms] ease-atrium hover:-translate-y-[3px] hover:shadow-float motion-reduce:transition-none max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+        <aside className="flex flex-col gap-6 rounded-card bg-amber-soft p-[30px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
           <div>
             <p className="m-0 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-amber-ink">First move</p>
             <h3 className="mx-0 mb-0 mt-3.5 text-[1.3rem] font-medium leading-[1.3] tracking-[-0.02em]">{displayFirstMove}</h3>
@@ -813,7 +813,7 @@ function ReportStage({
         </aside>
       </div>
 
-      <div className="atr-reveal rounded-card bg-card p-[34px] shadow-soft transition-[transform,box-shadow] duration-[220ms] ease-atrium hover:-translate-y-[3px] hover:shadow-float motion-reduce:transition-none max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+      <div className="atr-reveal rounded-card bg-card p-[34px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
         <div className="mb-1.5 flex flex-wrap items-baseline justify-between gap-5">
           <div>
             <Eyebrow>30-day plan</Eyebrow>
@@ -829,7 +829,7 @@ function ReportStage({
         ))}
       </div>
 
-      <div className="atr-reveal rounded-card bg-card p-[34px] shadow-soft transition-[transform,box-shadow] duration-[220ms] ease-atrium hover:-translate-y-[3px] hover:shadow-float motion-reduce:transition-none max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+      <div className="atr-reveal rounded-card bg-card p-[34px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
         <div className="mb-[22px] flex flex-wrap items-end justify-between gap-6">
           <div>
             <Eyebrow>Signal by signal</Eyebrow>
@@ -848,7 +848,7 @@ function ReportStage({
         ))}
       </div>
 
-      <details className="atr-reveal group rounded-card bg-card px-[34px] py-[26px] shadow-soft transition-[transform,box-shadow] duration-[220ms] ease-atrium hover:-translate-y-[3px] hover:shadow-float motion-reduce:transition-none max-[980px]:px-7 max-[980px]:py-[22px] max-[560px]:p-5">
+      <details className="atr-reveal group rounded-card bg-card px-[34px] py-[26px] shadow-soft max-[980px]:px-7 max-[980px]:py-[22px] max-[560px]:p-5">
         <summary className="flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
           <h3 className="m-0 text-[1.3rem] font-medium leading-[1.18] tracking-[-0.02em]">Supporting evidence</h3>
           <span className="flex h-[42px] w-[42px] items-center justify-center rounded-[14px] bg-cream text-2xl text-ink transition-transform duration-200 ease-atrium group-open:rotate-45 motion-reduce:transition-none">+</span>
