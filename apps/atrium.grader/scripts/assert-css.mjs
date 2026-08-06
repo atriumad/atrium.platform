@@ -9,11 +9,12 @@ const css = readdirSync(cssDir)
 
 // Utilities that only exist because our theme defines the token behind them.
 const required = [
-  "#0d2f33",                  // rg-ink, via text-rg-ink
-  "#f3c150",                  // rg-amber
-  "26px",                     // rounded-rg
-  "cubic-bezier(.2,.7,.2,1)", // ease-rg
-  "rg-fade-up",               // keyframes behind animate-rg-up
+  "#0d2f33",                  // ink
+  "#f3c150",                  // amber
+  "#f4f1e7",                  // cream — proves the package's theme is reaching the app
+  "26px",                     // rounded-card
+  "cubic-bezier(.2,.7,.2,1)", // ease-atrium
+  "atr-fill",                 // a class defined only inside packages/ui
 ]
 
 const missing = required.filter((token) => !css.includes(token))

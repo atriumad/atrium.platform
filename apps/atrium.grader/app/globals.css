@@ -1,101 +1,17 @@
-@import "@atrium/ui/src/tokens/tokens.css";
 @import "tailwindcss";
+@import "@atrium/ui/styles.css";
 
-@theme {
-  --font-sans: var(--font-inter-tight), "Inter Tight", system-ui, sans-serif;
-  --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
-
-  --color-rg-ink: #0d2f33;
-  --color-rg-body: #3f544f;
-  --color-rg-muted: #78877f;
-  --color-rg-muted-soft: #93a09b;
-  --color-rg-dark: #0d353b;
-  --color-rg-green: #1f7a52;
-  --color-rg-mint: #a9edc8;
-  --color-rg-amber: #f3c150;
-  --color-rg-green-fill: #3fae78;
-  --color-rg-green-soft: #e3f2e9;
-  --color-rg-green-ink: #186043;
-  --color-rg-amber-fill: #eab63f;
-  --color-rg-amber-soft: #f9ecc7;
-  --color-rg-amber-ink: #a97f1c;
-  --color-rg-red-fill: #e08a5b;
-  --color-rg-red-soft: #f7e2d6;
-  --color-rg-red-ink: #c0653a;
-  --color-rg-red-tint: #f0b79b;
-  --color-rg-error: #b4553a;
-  --color-rg-track: #ece8da;
-  --color-rg-track-soft: #e9e5d7;
-  --color-rg-pending: #c7cec9;
-  --color-rg-card: #fff;
-  --color-rg-border: rgba(13, 47, 51, 0.1);
-  --color-rg-surface: #f4f1e7;
-  --color-rg-surface-soft: #faf8f0;
-
-  --radius-rg: 26px;
-  --radius-rg-sm: 18px;
-
-  --shadow-rg: 0 1px 0 rgba(13, 47, 51, 0.04), 0 16px 40px rgba(13, 47, 51, 0.07);
-  --shadow-rg-h: 0 2px 0 rgba(13, 47, 51, 0.04), 0 28px 56px rgba(13, 47, 51, 0.11);
-  --shadow-rg-search-h: 0 2px 0 rgba(13, 47, 51, 0.04), 0 26px 54px rgba(13, 47, 51, 0.12);
-  --shadow-rg-loading: 0 1px 0 rgba(13, 47, 51, 0.04), 0 18px 44px rgba(13, 47, 51, 0.08);
-
-  --ease-rg: cubic-bezier(.2, .7, .2, 1);
-
-  --animate-stage-rise: stage-rise 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
-  --animate-rg-up: rg-fade-up .7s var(--ease-rg) both;
-  --animate-rg-up-form: rg-fade-up .7s var(--ease-rg) .08s both;
-  --animate-rg-up-trust: rg-fade-up .6s var(--ease-rg) .18s both;
-  --animate-rg-up-fast: rg-fade-up .5s var(--ease-rg) both;
-  --animate-rg-pulse: rg-pulse 2s infinite;
-  --animate-rgl-pulse: rgl-pulse 1.6s infinite;
-  --animate-rgl-spin: rgl-spin .8s linear infinite;
-  --animate-rgl-fade-in: rgl-fade-in .3s var(--ease-rg) both;
-
-  @keyframes stage-rise {
-    from { opacity: 0; filter: blur(8px); transform: translate3d(0, 20px, 0) scale(0.988); }
-    to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) scale(1); }
-  }
-  @keyframes rg-fade-up {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: none; }
-  }
-  @keyframes rg-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: .35; }
-  }
-  @keyframes rgl-pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: .3; }
-  }
-  @keyframes rgl-spin {
-    to { transform: rotate(360deg); }
-  }
-  @keyframes rgl-fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-}
+@source "../../../packages/ui/src";
 
 @layer base {
-  /* Font wiring — canonical tokens.css ships literal fallback names
-     only; each app must bridge its loaded next/font variables in. */
-  :root {
-    --font-sans: var(--font-inter-tight), "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
-    --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
-
-    /* Shared easing for the handful of rules that cannot be utilities. */
-    --rg-ease: cubic-bezier(.2, .7, .2, 1);
-  }
-
   html {
     min-height: 100%;
   }
 
   body {
     min-height: 100%;
-    background: var(--surface-page);
-    color: var(--text-body);
+    background: var(--color-cream);
+    color: var(--color-body);
     font-family: var(--font-sans);
     letter-spacing: 0;
     text-rendering: geometricPrecision;
@@ -137,62 +53,8 @@
 }
 
 @layer components {
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
+  /* Dot pattern — grader-only, drives the search lockup. */
   .dot-pattern {
     pointer-events: none;
-  }
-
-  /* Growth-score ring — conic gradient repainted by JS, revealed through a
-     radial mask. Neither the mask nor the JS-written background is
-     expressible as a utility. */
-  .rg-ring {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: conic-gradient(#f3c150 0 0%, rgba(255, 255, 255, .12) 0 100%);
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 16px), #000 calc(100% - 15px));
-    mask: radial-gradient(farthest-side, transparent calc(100% - 16px), #000 calc(100% - 15px));
-  }
-
-  /* Signal meter — starts at 0 and is widened by JS from [data-w]. */
-  .rg-fill {
-    display: block;
-    height: 100%;
-    width: 0;
-    border-radius: 999px;
-    transition: width 1.1s var(--rg-ease);
-  }
-
-  /* Scroll reveal — gated by .rg-anim so content stays visible without JS. */
-  .rg-report.rg-anim .rg-reveal {
-    opacity: 0;
-    translate: 0 22px;
-    transition: opacity .7s var(--rg-ease), translate .7s var(--rg-ease);
-  }
-
-  .rg-report.rg-anim .rg-reveal.in {
-    opacity: 1;
-    translate: 0 0;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .rg-report.rg-anim .rg-reveal {
-      opacity: 1;
-      translate: none;
-      transition: none;
-    }
-
-    .rg-fill {
-      transition: none;
-    }
   }
 }

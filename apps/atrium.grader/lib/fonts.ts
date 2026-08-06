@@ -27,6 +27,6 @@ export const instrumentSerif = localFont({
 export const nothingYouCouldDo = localFont({
   src: "../app/fonts/NothingYouCouldDo-Regular.ttf",
   weight: "400",
-  variable: "--font-handwriting",
+  variable: "--font-script",
   display: "swap",
 })
