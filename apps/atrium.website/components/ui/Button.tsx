@@ -1,1 +1,1 @@
-export { Button as default, Button } from '@atrium/ui'
+export { Button as default, Button } from '@atrium/ui/legacy'
