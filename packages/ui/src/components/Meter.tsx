@@ -32,7 +32,7 @@ export function Meter({
   return (
     <div
       className={cn(
-        'grid items-center gap-6 rounded-2xl border-t border-line py-4',
+        'grid items-center gap-6 border-t border-line py-4',
         'grid-cols-[190px_1fr_96px]',
         'max-[980px]:grid-cols-[minmax(150px,1fr)_minmax(120px,1.4fr)_auto] max-[980px]:gap-[18px]',
         'max-[560px]:grid-cols-[1fr_auto] max-[560px]:gap-x-3.5 max-[560px]:gap-y-3',
