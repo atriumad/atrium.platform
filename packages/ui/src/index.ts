@@ -1,4 +1,8 @@
 export { Button } from './components/Button'
+export { Card } from './components/Card'
 export { Eyebrow } from './components/Eyebrow'
+export { Input } from './components/Input'
+export { Logo } from './components/Logo'
+export { Meter } from './components/Meter'
 export { Stat } from './components/Stat'
 export { Tag } from './components/Tag'
