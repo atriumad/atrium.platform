@@ -43,6 +43,7 @@ export function Meter({
         {label}
         {description ? <small className="mt-0.5 block text-[0.8rem] font-normal text-muted">{description}</small> : null}
       </div>
+      {/* biome-ignore lint/a11y/useSemanticElements: <meter> cannot host custom fill span */}
       <div
         aria-valuemax={100}
         aria-valuemin={0}

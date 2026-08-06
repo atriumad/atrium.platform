@@ -3,6 +3,7 @@ import { createElement } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 import { Card } from "../src/components/Card"
 import { Input } from "../src/components/Input"
+import { Logo } from "../src/components/Logo"
 import { Meter } from "../src/components/Meter"
 
 describe("Card", () => {
@@ -61,5 +62,25 @@ describe("Meter", () => {
   test("clamps out-of-range values", () => {
     const html = renderToStaticMarkup(createElement(Meter, { value: 140, label: "x" }))
     expect(html).toContain('data-w="100%"')
+  })
+})
+
+describe("Logo", () => {
+  test("mark variant has accessible name", () => {
+    const html = renderToStaticMarkup(createElement(Logo, { variant: "mark" }))
+    expect(html).toContain('role="img"')
+    expect(html).toContain('aria-label="Atrium"')
+  })
+
+  test("wordmark variant has accessible name", () => {
+    const html = renderToStaticMarkup(createElement(Logo, { variant: "wordmark" }))
+    expect(html).toContain('role="img"')
+    expect(html).toContain('aria-label="Atrium"')
+  })
+
+  test("lockup variant has accessible name", () => {
+    const html = renderToStaticMarkup(createElement(Logo, { variant: "lockup" }))
+    expect(html).toContain('role="img"')
+    expect(html).toContain('aria-label="Atrium"')
   })
 })
