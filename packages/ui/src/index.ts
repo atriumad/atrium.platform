@@ -1,1 +1,4 @@
-export {} // primitives land in Tasks 3 and 4
+export { Button } from './components/Button'
+export { Eyebrow } from './components/Eyebrow'
+export { Stat } from './components/Stat'
+export { Tag } from './components/Tag'
