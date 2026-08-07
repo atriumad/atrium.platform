@@ -48,7 +48,11 @@ The serif accent is `<em className="font-serif italic text-green">`, once per se
 
 **Colour.** `--teal-800` / `--text-strong` become `text-ink`; `--text-muted` / `--teal-500` become `text-muted`; `--ink-700` / `--text-body` become `text-body`; `--surface-page` becomes `bg-cream`; `--cloud-100` / `--surface-card` become `bg-card`; `--mint-400` becomes `text-mint` or `bg-mint`; `--amber-500` becomes `bg-amber`; borders become `border-line`.
 
-**Dark sections become cards.** The seventeen sections currently on `--teal-800` / `--teal-900` grounds are the substance of this redesign. Each becomes either a `Card` on cream, or a full-bleed cream section whose hierarchy comes from cards rather than from an inverted ground. Where a dark ground genuinely earns its place — a single hero or a closing CTA — use `<Card tone="dark">` and switch its eyebrows to `tone="on-dark"`. Do not leave a dark section reading mint-on-teal.
+**Grounds alternate in bands.** This replaces the earlier "dark sections become cards" rule, which home tried and the owner rejected. A page alternates *groups* of sections, not every section: a dark opening, a run of cream, a dark band, a run of cream, a dark close. Home's settled rhythm is dark(1) / cream(5) / dark(3) / cream(3) / dark(1) — use it as the reference for pacing.
+
+**There are no white grounds.** `bg-card` is for cards sitting on a ground, never for a section ground. Light sections are `bg-cream`; dark sections are `bg-dark`.
+
+**Inverting a ground is not a background swap.** Every inverted section needs its contents inverted too: headings and body to `text-cream`, `Eyebrow` to `tone="on-dark"`, hairlines to `border-cream/20` (never `border-line`, which is a dark hairline for light grounds). `text-ink`, `text-body` and `text-muted` are invisible on dark. Compute the contrast of every text colour against its new ground before committing — large text needs 3:1, body 4.5:1.
 
 **Components.** `<button>` and `<a>`-styled-as-button become `Button`. Bordered boxes become `Card`. Pills and labels become `Tag`. Form fields become `Input`. Numeric callouts become `Stat`. Score or progress bars become `Meter`. Internal navigation keeps its `TransitionLink` / `TransitionCTA` wrapper; the primary CTA stays a plain `Button` because it points at Cal.com externally.
 
@@ -56,7 +60,7 @@ The serif accent is `<em className="font-serif italic text-green">`, once per se
 
 ---
 
-### Task 1: Home
+### Task 1: Home — DONE (commits `bc4adf9`, `a7c2c8e`, `4b92db2`, `8099e56`, `505c8c4`)
 
 **Files:** `app/page.tsx`, `components/sections/HeroSection.tsx`, `components/sections/BrandMarquee.tsx`, `components/sections/BentoGrid.tsx`, `components/sections/AudiencePaths.tsx`, `components/sections/WorkGrid.tsx`, `components/sections/GrowthEngineDiagram.tsx`
 
@@ -68,6 +72,31 @@ The home page is the reference for every page after it. Decisions made here — 
 - [ ] Retire the `.type-*` classes in these files.
 - [ ] Verify at 375, 768, 1280.
 - [ ] Commit.
+
+---
+
+## What Task 1 uncovered — read this before starting any page
+
+Three of the four defects home surfaced were the system's, not the page's. Expect the same ratio on every page: budget for system fixes, not just migration.
+
+**`@layer` decides who wins, not specificity.** `app/globals.css` had its base element block unlayered, and unlayered CSS beats every layered rule. `:where(h1,h2,h3,h4) { color: inherit }` was silently defeating `text-*` on every heading site-wide — the hero shipped at 1.63:1 contrast and passed every automated gate. Fixed in `a7c2c8e`. If a utility "does nothing", check for an unlayered rule before doubting the utility.
+
+**The legacy radius tokens collide with Tailwind's radius scale.** `tokens.css` defines `--radius-sm/md/lg/xl` at `:root`, and Tailwind v4's `rounded-sm/md/lg/xl` read those same variable names. So `rounded-xl` resolves to `32px`, not Tailwind's `12px`. Use the system's own `rounded-card` (26px) and `rounded-card-sm` (18px), or arbitrary values. This trap disappears when `tokens.css` goes in Task 7.
+
+**mint is an on-dark colour only.** It is 1.19:1 on cream — invisible. Anything mint that lands on a light ground must become `text-green`.
+
+**The legacy `ghost` Button variant has a transparent border.** On a light ground it renders as bare text with no button affordance. Use `outline` on light, `primary` on dark.
+
+**`--color-muted` moved to `#5f6e67`** (was `#78877f`, which failed at 3.34:1 on cream). Both `theme.css` and compat's `--teal-500` carry it. Do not reintroduce the lighter value.
+
+### System gaps still open
+
+These will be hit again. Fixing the primitive beats patching each page:
+
+- **`Tag` has no on-dark tone.** Home has 16 hand-rolled pills because of it, several on dark grounds. Add the tone before a page needs pills on dark again.
+- **`Card` has no padding prop.** Its padding is fixed at 34px, too roomy for compact cards, so compact cards get hand-rolled from `rounded-card-sm bg-card shadow-soft`. Add the prop and those stop being bespoke.
+- **`Logo` is unused** — the navbar still renders a raw `<img>`. Task 6.
+- **`NumberReel` now exists** (`8099e56`) for large display figures, and rolls its digits on scroll. Use it for any big number; home has twelve.
 
 ### Task 2: Services
 
