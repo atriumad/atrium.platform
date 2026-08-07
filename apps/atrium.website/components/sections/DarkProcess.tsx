@@ -1,5 +1,5 @@
 'use client'
-import { Eyebrow } from '@atrium/ui'
+import { Eyebrow, NumberReel } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import TransitionCTA from '@/components/ui/TransitionCTA'
@@ -48,8 +48,10 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
           <div className="mt-8 flex gap-10 border-t border-line pt-8">
             {stats.map((s) => (
               <div key={`${s.number}-${s.label}`}>
-                <p className="text-4xl font-medium text-green">{s.number}</p>
-                <p className="mt-1 max-w-[120px] text-[0.875rem] text-muted">{s.label}</p>
+                <p className="m-0 font-serif text-[clamp(2.6rem,4vw,3.4rem)] font-normal leading-none tracking-[-0.03em] text-ink">
+                  <NumberReel value={s.number} />
+                </p>
+                <p className="mt-3 max-w-[140px] text-[0.875rem] leading-relaxed text-muted">{s.label}</p>
               </div>
             ))}
           </div>
@@ -58,9 +60,9 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
           {steps.map((step, i) => (
             <div
               key={step.title}
-              className="process-step flex gap-6 rounded-2xl border border-line bg-ink/[0.03] p-6 opacity-0 transition-all duration-300 hover:translate-x-1"
+              className="process-step flex gap-5 rounded-card-sm bg-card p-6 opacity-0 shadow-soft transition-shadow duration-300 hover:shadow-float motion-reduce:transition-none"
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-mint text-sm font-medium text-ink">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-soft text-[0.95rem] font-medium text-green-ink">
                 {i + 1}
               </div>
               <div className="space-y-1.5">

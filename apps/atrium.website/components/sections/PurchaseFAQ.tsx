@@ -101,10 +101,10 @@ export default function PurchaseFAQ({
               style={{ borderColor: rule }}
             >
               <div className="flex items-baseline justify-between gap-4 sm:block">
-                <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
+                <p className="type-eyebrow m-0" style={{ color: dark ? 'var(--mint-400)' : 'var(--color-green)' }}>
                   {String(index + 1).padStart(2, '0')}
                 </p>
-                <p className="type-eyebrow m-0 sm:mt-3" style={{ color: muted, opacity: 0.66 }}>
+                <p className="type-eyebrow m-0 sm:mt-3" style={{ color: muted, opacity: dark ? 0.66 : 1 }}>
                   {item.signal}
                 </p>
               </div>
