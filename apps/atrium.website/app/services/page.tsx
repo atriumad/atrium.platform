@@ -1,7 +1,7 @@
+import { Eyebrow, NumberReel } from '@atrium/ui'
 import type { Metadata } from 'next'
 import CTABanner from '@/components/sections/CTABanner'
 import { stages } from '@/components/sections/GrowthEngineDiagram'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionLink from '@/components/ui/TransitionLink'
 import { CTA } from '@/lib/cta'
 import { services } from '@/lib/services'
@@ -11,8 +11,6 @@ export const metadata: Metadata = {
   description: 'Full-stack hospitality marketing across brand, content, paid media, SEO, email, CRM, and analytics.',
   alternates: { canonical: '/services' },
 }
-
-const HAIRLINE = 'rgba(7,47,52,0.18)'
 
 const STATS = [
   { number: '11', label: 'Disciplines under one roof — strategy to analytics' },
@@ -24,23 +22,14 @@ export default function ServicesPage() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section
-        className="relative min-h-screen flex flex-col justify-center overflow-hidden px-[var(--gutter)]"
-        style={{ background: 'var(--teal-800)' }}
-      >
+      <section className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-dark px-[var(--gutter)]">
         <div className="mx-auto w-full max-w-[var(--container-max)]">
           <div className="max-w-3xl">
-            <Eyebrow tone="onDark" className="mb-6">HOSPITALITY MARKETING</Eyebrow>
-            <h1
-              className="type-page-title mb-6"
-              style={{ color: 'var(--text-on-dark)' }}
-            >
-              One team. <em style={{ color: 'var(--mint-400)' }}>Every stage of growth.</em>
+            <Eyebrow tone="on-dark" className="mb-6">HOSPITALITY MARKETING</Eyebrow>
+            <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
+              One team. <em className="font-serif italic text-mint">Every stage of growth.</em>
             </h1>
-            <p
-              className="type-lead max-w-xl"
-              style={{ color: 'var(--text-on-dark)', opacity: 0.78 }}
-            >
+            <p className="max-w-xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
               The complete hospitality marketing engine — one team across all 11 disciplines, no handoffs, no briefing from scratch.
             </p>
           </div>
@@ -48,34 +37,34 @@ export default function ServicesPage() {
       </section>
 
       {/* ── The Atrium Growth Engine — framing + the three engines as full-bleed columns ── */}
-      <section style={{ background: 'var(--cloud-100)' }}>
+      <section className="bg-cream">
         <div className="px-[var(--gutter)] pt-24 pb-14 md:pt-36 md:pb-20">
           <div className="mx-auto max-w-[var(--container-max)]">
             <div className="grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16">
               <div className="lg:col-span-7">
                 <Eyebrow className="mb-6">The Atrium Growth Engine</Eyebrow>
-                <h2 className="type-section-title max-w-[14ch]">
-                  Not eleven services. <em>One system.</em>
+                <h2 className="max-w-[14ch] text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+                  Not eleven services. <em className="font-serif italic text-green">One system.</em>
                 </h2>
               </div>
-              <p className="type-body max-w-lg border-t pt-6 lg:col-span-5" style={{ color: 'var(--text-muted)', borderColor: HAIRLINE }}>
+              <p className="max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted lg:col-span-5">
                 The services are just the components. What you buy is the engine that runs
                 them — on a 28-day cycle, measured end to end.
               </p>
             </div>
 
-            <div className="flex flex-col gap-1 border-t pt-5 mt-14 md:mt-20 md:flex-row md:items-baseline md:gap-6" style={{ borderColor: HAIRLINE }}>
-              <span className="type-eyebrow whitespace-nowrap" style={{ color: 'var(--teal-500)' }}>Brand Foundation</span>
-              <span className="type-caption" style={{ color: 'var(--text-muted)' }}>
+            <div className="mt-14 flex flex-col gap-1 border-t border-line pt-5 md:mt-20 md:flex-row md:items-baseline md:gap-6">
+              <Eyebrow as="span" className="whitespace-nowrap">Brand Foundation</Eyebrow>
+              <span className="text-[0.875rem] text-muted">
                 Positioning, identity, and creative direction — everything the engine runs on.
               </span>
             </div>
 
-            <div className="flex flex-col gap-1 border-t pt-5 mt-8 md:flex-row md:items-baseline md:gap-6" style={{ borderColor: HAIRLINE }}>
-              <span className="type-eyebrow flex gap-1.5 items-center whitespace-nowrap" style={{ color: 'var(--teal-800)' }}>
+            <div className="mt-8 flex flex-col gap-1 border-t border-line pt-5 md:flex-row md:items-baseline md:gap-6">
+              <Eyebrow as="span" className="flex items-center gap-1.5 whitespace-nowrap">
                 <span aria-hidden>↺</span> Measure · Learn · Optimize
-              </span>
-              <span className="type-caption" style={{ color: 'var(--text-muted)' }}>
+              </Eyebrow>
+              <span className="text-[0.875rem] text-muted">
                 POS attribution and monthly reporting feed the next 28-day cycle — every stage, measured.
               </span>
             </div>
@@ -83,39 +72,41 @@ export default function ServicesPage() {
         </div>
 
         {/* Engines — full-bleed, one solid-color column per pillar */}
-        <div className="grid grid-cols-1 md:grid-cols-3 min-h-screen">
+        <div className="grid min-h-screen grid-cols-1 md:grid-cols-3">
           {stages.map((stage) => {
             const category = `${stage.id} Demand`
             const catServices = services.filter(s => s.category === category)
+            // Retain's stage colour is dark enough that ink text fails contrast —
+            // every other stage colour is light enough that cream text would fail instead.
+            const onDark = stage.id === 'Retain'
             return (
               <div
                 key={stage.id}
-                className="flex flex-col gap-10 px-8 md:px-10 py-20 md:py-24"
+                className={`flex flex-col gap-10 px-8 py-20 md:px-10 md:py-24 ${onDark ? 'text-cream' : 'text-ink'}`}
                 style={{ background: stage.dot }}
               >
                 <div>
-                  <span className="type-eyebrow" style={{ color: 'var(--teal-800)', opacity: 0.6 }}>
+                  <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em]">
                     {category}
                   </span>
-                  <p className="type-lead mt-4" style={{ color: 'var(--teal-800)' }}>
+                  <p className="mt-4 text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed">
                     {stage.tagline}
                   </p>
                 </div>
 
-                <ul className="flex flex-col m-0 p-0 list-none">
+                <ul className="m-0 flex list-none flex-col p-0">
                   {catServices.map((svc) => (
-                    <li key={svc.slug} className="border-t" style={{ borderColor: 'rgba(7,47,52,0.15)' }}>
+                    <li key={svc.slug} className={`border-t ${onDark ? 'border-cream/20' : 'border-line'}`}>
                       <TransitionLink
                         href={`/services/${svc.slug}`}
                         className="group flex items-center justify-between gap-3 py-4 no-underline"
                       >
-                        <span className="type-card-title m-0" style={{ color: 'var(--teal-800)' }}>
+                        <span className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
                           {svc.name}
                         </span>
                         <span
                           aria-hidden="true"
                           className="flex-shrink-0 transition-transform duration-150 group-hover:translate-x-1"
-                          style={{ color: 'var(--teal-800)' }}
                         >
                           →
                         </span>
@@ -130,15 +121,12 @@ export default function ServicesPage() {
       </section>
 
       {/* ── Stats — quick proof before CTA, 3 columns matching the engine split ── */}
-      <section
-        className="px-6 md:px-16 py-20 md:py-28"
-        style={{ background: 'var(--teal-900)' }}
-      >
+      <section className="bg-cream px-6 py-20 md:px-16 md:py-28">
         <div className="mx-auto max-w-[var(--container-max)]">
           <div className="max-w-2xl pb-14 md:pb-20">
-            <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>The full picture</p>
-            <h2 className="type-section-title m-0 mt-5" style={{ color: 'var(--text-on-dark)' }}>
-              Eleven disciplines. <em style={{ fontFamily: 'var(--font-serif)' }}>One engine.</em>
+            <Eyebrow>The full picture</Eyebrow>
+            <h2 className="m-0 mt-5 text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+              Eleven disciplines. <em className="font-serif italic text-green">One engine.</em>
             </h2>
           </div>
 
@@ -146,16 +134,12 @@ export default function ServicesPage() {
             {STATS.map((stat, i) => (
               <div
                 key={stat.number}
-                className={`flex flex-col gap-4 py-8 md:py-0 ${i > 0 ? 'border-t md:border-t-0 md:border-l md:pl-10' : ''}`}
-                style={{ borderColor: 'rgba(228,238,240,0.10)' }}
+                className={`flex flex-col gap-4 py-8 md:py-0 ${i > 0 ? 'border-t border-line md:border-t-0 md:border-l md:pl-10' : ''}`}
               >
-                <strong
-                  className="text-[clamp(4rem,8vw,7rem)] font-normal italic leading-[0.85] tracking-[-0.03em]"
-                  style={{ color: 'var(--mint-400)', fontFamily: 'var(--font-serif)' }}
-                >
-                  {stat.number}
-                </strong>
-                <p className="type-body m-0 max-w-xs" style={{ color: 'var(--text-on-dark)', opacity: 0.76 }}>
+                <p className="m-0 flex font-serif text-[clamp(4rem,8vw,7rem)] font-normal italic leading-[0.85] tracking-[-0.03em] text-green">
+                  <NumberReel value={stat.number} />
+                </p>
+                <p className="m-0 max-w-xs text-base leading-relaxed text-muted">
                   {stat.label}
                 </p>
               </div>
