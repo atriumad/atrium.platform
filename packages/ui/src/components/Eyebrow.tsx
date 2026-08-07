@@ -1,39 +1,35 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
+import { cn } from '../lib/cn'
 
-type EyebrowTone = 'default' | 'mint' | 'amber' | 'onDark' | 'muted'
+type Tone = 'default' | 'on-dark'
 
-type EyebrowProps = {
-  children: ReactNode
-  tone?: EyebrowTone
-  style?: CSSProperties
+const tones: Record<Tone, string> = {
+  default: 'text-green',
+  'on-dark': 'text-mint',
+}
+
+export function Eyebrow({
+  tone = 'default',
+  as: Component = 'p',
+  className,
+  children,
+  ...rest
+}: {
+  tone?: Tone
+  as?: 'p' | 'span' | 'div'
   className?: string
-}
-
-const toneColor: Record<EyebrowTone, string> = {
-  default: 'var(--teal-500)',
-  muted:   'var(--teal-500)',
-  mint:    'var(--mint-400)',
-  amber:   'var(--amber-500)',
-  onDark:  'var(--teal-300)',
-}
-
-export function Eyebrow({ children, tone = 'default', style, className = '' }: EyebrowProps) {
-  const color = toneColor[tone]
+  children?: ReactNode
+} & HTMLAttributes<HTMLElement>) {
   return (
-    <div className={className} style={{ display: 'flex', alignItems: 'center', ...style }}>
-      <p
-        style={{
-          margin: 0,
-          fontFamily: 'var(--font-sans)',
-          fontWeight: 500,
-          fontSize: '0.75rem',
-          letterSpacing: 'var(--tracking-wider)',
-          textTransform: 'uppercase',
-          color,
-        }}
-      >
-        {children}
-      </p>
-    </div>
+    <Component
+      className={cn(
+        'm-0 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.14em]',
+        tones[tone],
+        className,
+      )}
+      {...rest}
+    >
+      {children}
+    </Component>
   )
 }

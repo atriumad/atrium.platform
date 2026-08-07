@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import CTABanner from '@/components/sections/CTABanner'
 import { stages } from '@/components/sections/GrowthEngineDiagram'
 import Eyebrow from '@/components/ui/Eyebrow'
-import TransitionLink from '@/components/ui/TransitionLink'
+import { CTA } from '@/lib/cta'
 import { services } from '@/lib/services'
 
 export const metadata: Metadata = {
@@ -167,8 +167,9 @@ export default function ServicesPage() {
         eyebrow="JOIN 15+ HOSPITALITY BRANDS"
         headline={<>Been burned by an agency <em>before?</em></>}
         body="If you've outgrown freelancers, been let down by generic agencies, or just want a team that reports revenue instead of vanity — we were built for you. See the system before you commit."
-        cta="Book a Growth Diagnostic"
-        ctaHref="/contact"
+        cta={CTA.primary.label}
+        ctaHref={CTA.primary.href}
+        ctaExternal={CTA.primary.external}
         coverAlt="Team at table in restaurant — natural, warm, working together"
       />
     </>

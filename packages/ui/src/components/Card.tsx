@@ -1,69 +1,50 @@
-'use client'
+import type { HTMLAttributes, ReactNode } from 'react'
+import { cn } from '../lib/cn'
 
-import { type CSSProperties, type ReactNode, useState } from 'react'
+type Tone = 'surface' | 'warm' | 'dark' | 'amber'
+type Elevation = 'none' | 'soft' | 'float'
 
-type CardTone      = 'light' | 'cloud' | 'mint' | 'amber' | 'teal' | 'aurora' | 'aurora-warm' | 'aurora-cool' | 'aurora-deep'
-type CardElevation = 'none' | 'soft' | 'float'
-
-type CardProps = {
-  children?: ReactNode
-  tone?: CardTone
-  padding?: string
-  radius?: string
-  bordered?: boolean
-  hover?: boolean
-  elevation?: CardElevation
-  style?: CSSProperties
+const tones: Record<Tone, string> = {
+  surface: 'bg-card text-ink',
+  warm: 'bg-off-white text-ink',
+  dark: 'bg-dark text-cream',
+  amber: 'bg-amber-soft text-ink',
 }
 
-const tones: Record<CardTone, CSSProperties> = {
-  'light':       { background: 'var(--surface-card)',  color: 'var(--text-body)' },
-  'cloud':       { background: 'var(--cloud-300)',      color: 'var(--text-body)' },
-  'mint':        { background: 'var(--mint-400)',       color: 'var(--teal-800)' },
-  'amber':       { background: 'var(--amber-500)',      color: 'var(--teal-800)' },
-  'teal':        { background: 'var(--teal-800)',       color: 'var(--text-on-dark)' },
-  'aurora':      { backgroundImage: 'var(--grad-aurora)',      backgroundColor: 'var(--mint-200)', color: 'var(--text-body)' },
-  'aurora-warm': { backgroundImage: 'var(--grad-aurora-warm)', backgroundColor: 'var(--mint-200)', color: 'var(--text-body)' },
-  'aurora-cool': { backgroundImage: 'var(--grad-aurora-cool)', backgroundColor: 'var(--mint-200)', color: 'var(--text-body)' },
-  'aurora-deep': { backgroundImage: 'var(--grad-aurora-deep)', backgroundColor: 'var(--teal-800)', color: 'var(--text-on-dark)' },
-}
-
-const elevationShadow: Record<CardElevation, string> = {
-  none:  'none',
-  soft:  'var(--shadow-soft)',
-  float: 'var(--shadow-float)',
+const elevations: Record<Elevation, string> = {
+  none: '',
+  soft: 'shadow-soft',
+  float: 'shadow-float',
 }
 
 export function Card({
+  tone = 'surface',
+  elevation = 'soft',
+  hairline = false,
+  as: Component = 'div',
+  className,
   children,
-  tone = 'light',
-  padding = '28px',
-  radius = 'var(--radius-md)',
-  bordered = false,
-  hover = false,
-  elevation = 'none',
-  style,
-}: CardProps) {
-  const [h, setH] = useState(false)
-
+  ...rest
+}: {
+  tone?: Tone
+  elevation?: Elevation
+  hairline?: boolean
+  as?: 'div' | 'section' | 'article' | 'aside'
+  className?: string
+  children?: ReactNode
+} & HTMLAttributes<HTMLElement>) {
   return (
-    <div
-      onPointerEnter={() => hover && setH(true)}
-      onPointerLeave={() => hover && setH(false)}
-      style={{
-        position: 'relative',
-        borderRadius: radius,
-        padding,
-        overflow: 'hidden',
-        border: bordered && tone === 'light' ? '1px solid var(--cloud-400)' : '1px solid transparent',
-        transition: 'transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out)',
-        transform: h ? 'translateY(-5px)' : 'none',
-        boxShadow: h ? 'var(--shadow-float)' : elevationShadow[elevation],
-        ...tones[tone],
-        ...style,
-      }}
+    <Component
+      className={cn(
+        'rounded-card p-[34px] max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]',
+        tones[tone],
+        elevations[elevation],
+        hairline && (tone === 'dark' ? 'ring-1 ring-cream/20' : 'ring-1 ring-line'),
+        className,
+      )}
+      {...rest}
     >
       {children}
-    </div>
+    </Component>
   )
 }

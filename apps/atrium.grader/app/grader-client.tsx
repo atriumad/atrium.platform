@@ -1,8 +1,7 @@
 "use client"
 
 import type { DiagnosticStepResult, RestaurantGrowthReport } from "@atrium/application"
-import { Button } from "@atrium/ui"
-import { gsap } from "gsap"
+import { Button, Eyebrow, Meter, Stat } from "@atrium/ui"
 import type { FormEvent, SVGProps } from "react"
 import { useEffect, useId, useMemo, useRef, useState } from "react"
 import type { NarrativeData } from "@/lib/report-merger"
@@ -32,71 +31,6 @@ type SocialResponse = {
 type NarrativeResponse = {
   narrative: NarrativeData | null
 }
-
-const loadingScenes = [
-  {
-    kind: "informative",
-    id: "studio",
-    image: "/slide-1.png",
-    imageTone: "photo",
-    badges: ["growth", "studio"],
-    cards: [
-      { label: "creative", body: "Social content that converts followers into regulars." },
-      { label: "market", body: "Local SEO that puts you on the map before they're hungry." },
-      { label: "signal", body: "Data signals that show you exactly where to grow next." },
-    ],
-  },
-  {
-    kind: "informative",
-    id: "forest",
-    image: "/slide-2.png",
-    imageTone: "photo",
-    badges: ["local", "social"],
-    cards: [
-      { label: "content", body: "Reels, posts & stories—published for you, every week." },
-      { label: "growth", body: "Turn local intent searches into real walk-in customers." },
-      { label: "proof", body: "Reviews that build trust before the first visit." },
-    ],
-  },
-  {
-    kind: "informative",
-    id: "mark",
-    image: "/slide-3.png",
-    imageTone: "photo",
-    badges: ["brand", "audit"],
-    cards: [
-      { label: "identity", body: "A visual brand that stands out on every platform." },
-      { label: "system", body: "Consistent look from storefront to scroll to DM." },
-      { label: "handoff", body: "Ready-to-run creative assets delivered in 2 weeks." },
-    ],
-  },
-  {
-    kind: "client",
-    id: "taha",
-    image: "/slide-4.png",
-    imageTone: "photo",
-    client: "T'ähä Mexican Kitchen",
-    summary: "Improved local awareness for T'ähä Mexican Kitchen with social content and search visibility.",
-    badges: ["client reference", "local growth"],
-    stats: [
-      { value: "5.24M+", label: "impressions (+544%)" },
-      { value: "30%", label: "email open rate" },
-    ],
-  },
-  {
-    kind: "client",
-    id: "doncucy",
-    image: "/slide-5.png",
-    imageTone: "photo",
-    client: "Don Chuy's",
-    summary: "Improved social demand for Don Chuy's with stronger creative rhythm and audience signals.",
-    badges: ["client reference", "social growth"],
-    stats: [
-      { value: "+839%", label: "total impressions" },
-      { value: "+302%", label: "instagram growth" },
-    ],
-  },
-] as const
 
 const scanSteps = [
   {
@@ -154,9 +88,6 @@ const scanSteps = [
     ],
   },
 ] as const
-
-const loadingSceneDurationMs = 7000
-const loadingSceneExitDurationMs = 760
 
 type PlaceSuggestion = {
   placeId: string
@@ -387,9 +318,23 @@ export function GraderClient() {
     }
   }
 
+  const shellPhaseClass = phase === "search"
+    ? "items-start bg-[image:radial-gradient(760px_460px_at_22%_8%,rgba(63,174,120,.16),transparent_60%),radial-gradient(720px_480px_at_84%_88%,rgba(243,193,80,.16),transparent_58%)] text-ink"
+    : phase === "loading"
+      ? "items-center bg-[image:radial-gradient(760px_460px_at_22%_8%,rgba(63,174,120,.16),transparent_60%),radial-gradient(720px_480px_at_84%_88%,rgba(243,193,80,.16),transparent_58%)] pt-[clamp(18px,2vw,28px)] text-ink max-[760px]:pt-[18px]"
+      : "items-start pt-[clamp(18px,2vw,28px)] max-[760px]:pt-[18px]"
+
+  const stageClass = phase === "search"
+    ? "mt-[clamp(88px,18svh,168px)] w-[min(100%,1200px)] justify-items-center gap-[26px] max-[900px]:mt-[clamp(64px,14svh,120px)] max-[760px]:mt-[clamp(58px,12svh,92px)] max-[760px]:w-full max-[760px]:gap-[18px]"
+    : "mt-0 w-full justify-items-stretch gap-4"
+
   return (
-    <main className={`grader-page grader-page--${phase}`}>
-      <section className={`grader-stage workflow-stage ${phase !== "search" ? "workflow-stage--report" : ""}`}>
+    <main
+      className={`relative isolate grid min-h-[100svh] grid-rows-[1fr_auto] justify-items-center gap-7 overflow-auto bg-cream p-[clamp(20px,3vw,36px)] transition-[padding] duration-[900ms] ease-atrium max-[760px]:overflow-visible max-[760px]:px-5 max-[760px]:py-[18px] ${shellPhaseClass}`}
+    >
+      <section
+        className={`grid animate-stage-rise will-change-[margin-top,transform] [transition:gap_900ms_var(--ease-atrium),margin-top_980ms_var(--ease-atrium),transform_980ms_var(--ease-atrium)] motion-reduce:animate-none motion-reduce:transition-none ${stageClass}`}
+      >
         {phase === "search" && (
           <SearchStage
             compact={false}
@@ -409,7 +354,7 @@ export function GraderClient() {
         )}
 
         {loading && selectedPlace && (
-          <LoadingStage />
+          <LoadingStage name={selectedPlace.name} />
         )}
         {!loading && report && (
           <ReportStage
@@ -425,8 +370,8 @@ export function GraderClient() {
 
 function SiteFooter() {
   return (
-    <footer className="site-footer">
-      <span>Powered by Atrium</span>
+    <footer className="flex w-[min(100%,960px)] flex-wrap items-center justify-between gap-x-[18px] gap-y-2 border-t border-line pt-4 text-[0.84rem] leading-[1.45] text-muted max-[760px]:justify-center max-[760px]:text-center">
+      <span className="font-medium text-ink">Powered by Atrium</span>
       <span>© 2026 Atrium. All rights reserved.</span>
     </footer>
   )
@@ -473,16 +418,26 @@ function SearchStage({
   }
 
   return (
-    <div className={`search-module ${compact ? "search-module--compact" : ""}`}>
-      <div className="search-lockup">
-        <DotPattern className="search-dot-pattern" cr={1.05} height={22} width={22} />
-        <p className="micro-label">Atrium Growth Grader</p>
-        <h1 className="display-title">
-          Find the <span className="title-serif">leaks</span> before <br /> <span className="title-serif title-serif--delayed">guests</span> do.
+    <div className="flex w-full flex-col items-center gap-[22px] text-center text-ink max-[560px]:gap-[18px]">
+      <div className="flex animate-rise flex-col items-center motion-reduce:animate-none">
+        <DotPattern className="mb-2.5 h-5 w-[90px] text-[rgba(13,47,51,.14)]" cr={1.05} height={22} width={22} />
+        <Eyebrow>Atrium Growth Grader</Eyebrow>
+        <h1 className="mx-0 mb-0 mt-4 max-w-[16ch] font-sans text-[clamp(2.4rem,6vw,4.4rem)] font-medium leading-none tracking-[-0.015em] max-[560px]:max-w-[14ch] max-[560px]:text-[clamp(2.05rem,9vw,2.8rem)]">
+          Find the <em className="font-serif font-normal italic text-green">leaks</em> before <em className="font-serif font-normal italic text-green">guests</em> do.
         </h1>
+        <p className="mx-0 mb-0 mt-[18px] max-w-[52ch] text-[1.06rem] text-body max-[560px]:mt-3.5 max-[560px]:text-[0.98rem]">A free 30-second scan of your restaurant's online growth — discovery, website, reputation, and social — with the first fix to make.</p>
       </div>
 
-      <form className={`search-form group ${selectedPlace ? "search-form--ready" : ""}`} onSubmit={handleSubmit}>
+      <form
+        className="mt-1.5 flex w-[min(100%,620px)] animate-rise items-center gap-3 rounded-full border border-transparent bg-card px-6 py-4 shadow-soft transition-[box-shadow,transform,border-color] duration-200 ease-atrium focus-within:-translate-y-px focus-within:border-[rgba(63,174,120,.4)] focus-within:shadow-float motion-reduce:animate-none motion-reduce:transition-none max-[560px]:gap-2.5 max-[560px]:px-[18px] max-[560px]:py-3.5"
+        onSubmit={handleSubmit}
+      >
+        <span className="flex flex-none text-muted" aria-hidden="true">
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="9" cy="9" r="6.2" stroke="currentColor" strokeWidth="1.7" />
+            <path d="M13.6 13.6 18 18" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+          </svg>
+        </span>
         <input
           aria-label="Restaurant"
           aria-autocomplete="list"
@@ -490,148 +445,89 @@ function SearchStage({
           aria-expanded={!compact && suggestions.length > 0}
           aria-haspopup="listbox"
           autoComplete="off"
-          className="search-input transition-[border-color,box-shadow,transform] duration-200 ease-out focus-visible:scale-[1.01]"
+          className="min-w-0 flex-1 border-0 bg-transparent p-0 font-sans text-[1.08rem] text-ink outline-none placeholder:text-muted max-[560px]:text-base"
           onChange={(event) => onQueryChange(event.target.value)}
           placeholder="Restaurant name and city"
           role="combobox"
           type="text"
           value={query}
         />
-        {selectedPlace && (
-          <button
-            className="search-button transition-[transform,box-shadow,filter] duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.97] disabled:hover:translate-y-0 disabled:active:scale-100"
-            disabled={loading || searching}
-            type="submit"
-          >
-            Scan
-          </button>
-        )}
       </form>
 
+      {!compact && !selectedPlace && suggestions.length === 0 && !searchError && (
+        <div className="flex animate-rise flex-wrap justify-center gap-x-2.5 gap-y-2 motion-reduce:animate-none">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-[15px] py-[7px] text-[0.82rem] font-medium text-body shadow-soft before:h-1.5 before:w-1.5 before:rounded-full before:bg-green-fill before:content-['']">Free</span>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-[15px] py-[7px] text-[0.82rem] font-medium text-body shadow-soft before:h-1.5 before:w-1.5 before:rounded-full before:bg-green-fill before:content-['']">~30-second scan</span>
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-[15px] py-[7px] text-[0.82rem] font-medium text-body shadow-soft before:h-1.5 before:w-1.5 before:rounded-full before:bg-green-fill before:content-['']">No signup</span>
+        </div>
+      )}
+
       {!compact && suggestions.length > 0 && (
-        <div className="suggestion-list" id="restaurant-suggestions" role="listbox">
+        <div
+          className="w-[min(100%,620px)] animate-rise-sm overflow-hidden rounded-card-sm bg-card text-left shadow-soft motion-reduce:animate-none"
+          id="restaurant-suggestions"
+          role="listbox"
+        >
           {suggestions.map((suggestion) => (
             <button
-              className="suggestion-item transition-[transform,border-color,box-shadow] duration-150 ease-out hover:-translate-y-0.5 active:scale-[0.985] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f7a823]"
+              className="flex w-full cursor-pointer flex-col gap-0.5 border-t border-line bg-transparent px-[22px] py-[15px] text-left font-sans transition-colors duration-150 first:border-t-0 hover:bg-off-white max-[560px]:px-[18px] max-[560px]:py-3.5"
               key={suggestion.placeId}
               onClick={() => onChooseSuggestion(suggestion)}
               role="option"
               type="button"
             >
-              <span>{suggestion.name}</span>
-              <small>{suggestion.address}</small>
+              <strong className="text-base font-medium text-ink">{suggestion.name}</strong>
+              <small className="text-[0.85rem] text-muted">{suggestion.address}</small>
             </button>
           ))}
         </div>
       )}
 
       {!compact && searching && suggestions.length === 0 && (
-        <p className="inline-message inline-message--neutral">Searching restaurants...</p>
+        <p className="m-0 text-[0.9rem] text-muted">Searching restaurants…</p>
       )}
 
-      {!compact && searchError && <p className="inline-message inline-message--error">{searchError}</p>}
+      {!compact && searchError && <p className="m-0 text-[0.9rem] text-error">{searchError}</p>}
 
       {selectedPlace && !compact && (
-        <div className="selected-inline">
-          <div className={`selected-media ${selectedPlace.photoUrl ? "selected-media--photo" : "selected-media--fallback"}`}>
+        <button
+          className="group flex w-[min(100%,620px)] animate-rise-sm cursor-pointer items-center gap-[18px] rounded-3xl border border-transparent bg-card px-5 py-[18px] text-left font-sans text-ink shadow-soft transition-[transform,box-shadow,border-color] duration-[180ms] ease-atrium hover:border-[rgba(63,174,120,.45)] hover:shadow-float focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-green-fill disabled:cursor-default disabled:opacity-60 disabled:shadow-soft motion-reduce:animate-none motion-reduce:transition-none max-[560px]:gap-3.5 max-[560px]:rounded-[20px] max-[560px]:p-4"
+          type="button"
+          onClick={onRunDiagnostic}
+          disabled={loading || searching}
+        >
+          <div className="flex h-[70px] w-[70px] flex-none items-center justify-center overflow-hidden rounded-2xl bg-green-soft font-serif text-[1.9rem] italic text-green-ink max-[560px]:h-14 max-[560px]:w-14 max-[560px]:rounded-[14px] max-[560px]:text-2xl">
             {selectedPlace.photoUrl ? (
               /* biome-ignore lint/performance/noImgElement: Google Place photos are dynamic proxied media and must bypass Next image optimization. */
-              <img alt={`${selectedPlace.name} restaurant`} src={selectedPlace.photoUrl} />
+              <img className="h-full w-full object-cover" alt={`${selectedPlace.name} restaurant`} src={selectedPlace.photoUrl} />
             ) : (
-              <span>Loaded restaurant</span>
+              <span>{selectedPlace.name.trim().charAt(0).toUpperCase() || "•"}</span>
             )}
           </div>
-          <div className="selected-place-copy">
-            <strong>{selectedPlace.name}</strong>
-            {selectedSummary && <small>{selectedSummary}</small>}
-            <span className="mt-2 inline-flex w-fit items-center rounded-full border border-[#6fa39f]/40 bg-[#e4faf1] px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-[#072f34]">
-              Restaurant match
-            </span>
+          <div className="min-w-0 flex-1">
+            <span className="flex items-center gap-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-green before:h-1.5 before:w-1.5 before:rounded-full before:bg-green-fill before:content-['']">Selected</span>
+            <strong className="mt-1.5 block text-[1.15rem] font-medium text-ink max-[560px]:text-[1.05rem]">{selectedPlace.name}</strong>
+            {selectedSummary && <small className="text-[0.9rem] text-body">{selectedSummary}</small>}
           </div>
-        </div>
+          <span
+            className="flex h-12 w-12 flex-none items-center justify-center rounded-full bg-green-soft text-green-ink transition-[background-color,color] duration-[180ms] ease-atrium group-hover:bg-green-fill group-hover:text-white motion-reduce:transition-none max-[560px]:h-10 max-[560px]:w-10"
+            aria-hidden="true"
+          >
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10h11M11 5l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </button>
       )}
 
-      {!compact && error && <p className="inline-message inline-message--error">{error}</p>}
+      {!compact && error && <p className="m-0 text-[0.9rem] text-error">{error}</p>}
     </div>
   )
 }
 
-function LoadingStage() {
-  const [sceneIndex, setSceneIndex] = useState(0)
+function LoadingStage({ name }: { name: string }) {
   const [stepIndex, setStepIndex] = useState(0)
-  const collageRef = useRef<HTMLDivElement | null>(null)
-  const scene = loadingScenes[sceneIndex] ?? loadingScenes[0]
-  const step = scanSteps[stepIndex] ?? scanSteps[0]
-
-  useEffect(() => {
-    const root = collageRef.current
-    if (!root) return
-
-    root.dataset.loadingScene = scene.id
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-
-    if (prefersReducedMotion) {
-      const timeout = window.setTimeout(() => {
-        setSceneIndex((current) => (current + 1) % loadingScenes.length)
-      }, loadingSceneDurationMs)
-      return () => window.clearTimeout(timeout)
-    }
-
-    const context = gsap.context(() => {
-      const photo = root.querySelector<HTMLElement>(".loading-collage-photo")
-      const photoTargets = photo ? [photo] : []
-      const pieces = gsap.utils.toArray<HTMLElement>(".loading-card, .loading-badge", root)
-      const floatTargets = [...photoTargets, ...pieces]
-      const floatDuration = Math.max(1.8, (loadingSceneDurationMs - loadingSceneExitDurationMs - 1900) / 2000)
-
-      gsap.set(root, { autoAlpha: 0, filter: "blur(10px)", scale: 0.988, y: 16 })
-      gsap.set(photoTargets, { autoAlpha: 0, filter: "blur(14px)", rotation: 1.5, scale: 0.965, y: 22 })
-      gsap.set(pieces, { autoAlpha: 0, filter: "blur(8px)", scale: 0.94, y: 24 })
-
-      const timeline = gsap.timeline({ defaults: { overwrite: "auto" } })
-      timeline
-        .to(root, { autoAlpha: 1, duration: 0.72, ease: "power4.out", filter: "blur(0px)", scale: 1, y: 0 })
-        .to(photoTargets, { autoAlpha: 1, duration: 0.86, ease: "power4.out", filter: "blur(0px)", rotation: -2, scale: 1, y: 0 }, "<0.08")
-        .to(pieces, {
-          autoAlpha: 1,
-          duration: 0.78,
-          ease: "power4.out",
-          filter: "blur(0px)",
-          scale: 1,
-          stagger: { each: 0.075, from: "edges" },
-          y: 0,
-        }, "<0.16")
-        .to(floatTargets, {
-          duration: floatDuration,
-          ease: "sine.inOut",
-          stagger: { amount: 0.28, from: "center" },
-          y: (index) => (photo && index === 0 ? -8 : -6),
-        }, ">0.18")
-        .to(floatTargets, {
-          duration: floatDuration,
-          ease: "sine.inOut",
-          stagger: { amount: 0.28, from: "center" },
-          y: 0,
-        })
-        .to(pieces, {
-          autoAlpha: 0,
-          duration: loadingSceneExitDurationMs / 1000,
-          ease: "power2.in",
-          filter: "blur(8px)",
-          scale: 0.97,
-          stagger: { each: 0.035, from: "end" },
-          y: -14,
-        })
-        .to(photoTargets, { autoAlpha: 0, duration: 0.64, ease: "power2.in", filter: "blur(10px)", rotation: -3, scale: 0.985, y: -16 }, "<")
-        .to(root, { autoAlpha: 0, duration: 0.64, ease: "power2.in", filter: "blur(9px)", scale: 0.992, y: -10 }, "<")
-        .add(() => {
-          setSceneIndex((current) => (current + 1) % loadingScenes.length)
-        })
-    }, root)
-
-    return () => context.revert()
-  }, [scene.id])
+  const [subIndex, setSubIndex] = useState(0)
 
   useEffect(() => {
     const durations = [4400, 4800, 4600, 4800, 5000, 5600]
@@ -646,6 +542,7 @@ function LoadingStage() {
         if (current < scanSteps.length - 1) {
           current += 1
           setStepIndex(current)
+          setSubIndex(0)
         } else {
           break
         }
@@ -656,69 +553,84 @@ function LoadingStage() {
     return () => { cancelled = true }
   }, [])
 
+  useEffect(() => {
+    const details = scanSteps[stepIndex]?.details ?? []
+    if (details.length <= 1) return
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+    const interval = window.setInterval(() => {
+      setSubIndex((current) => (current + 1) % details.length)
+    }, 1500)
+
+    return () => window.clearInterval(interval)
+  }, [stepIndex])
+
+  const step = scanSteps[stepIndex] ?? scanSteps[0]
+  const activeSub = step.details[subIndex] ?? step.details[0]
+  const progressPct = Math.min(100, (stepIndex / scanSteps.length) * 100 + (stepIndex < scanSteps.length ? 6 : 0))
+
   return (
     <section
       aria-label={`Atrium report loading: ${step.status}`}
       aria-live="polite"
-      className="scan-loading-stage loading-collage-stage"
+      className="mx-auto w-[min(100%,560px)] rounded-card bg-card px-[34px] py-9 text-left font-sans text-ink shadow-soft max-[560px]:rounded-[22px] max-[560px]:px-5 max-[560px]:py-[26px]"
       role="status"
     >
-      <div className="loading-collage" key={scene.id} ref={collageRef}>
-        <div className={`loading-collage-media loading-collage-media--${scene.kind}`}>
-          <div className={`loading-collage-photo loading-collage-photo--${scene.imageTone}`}>
-            {/* biome-ignore lint/performance/noImgElement: Loading-state art is a rotating design-system asset and does not need Next image optimization. */}
-            <img alt="" src={scene.image} />
-          </div>
+      <Eyebrow className="flex items-center gap-2 before:h-[7px] before:w-[7px] before:animate-pulse-soft before:rounded-full before:bg-green-fill before:content-[''] motion-reduce:before:animate-none">Growth scan in progress</Eyebrow>
+      <h1 className="mx-0 mb-0 mt-3 font-sans text-[1.7rem] font-medium tracking-[-0.01em] max-[560px]:text-[1.4rem]">{name}</h1>
 
-          {scene.kind === "informative" ? (
-            <>
-              <div className="loading-card loading-card--text loading-card--a">
-                <span>{scene.cards[0]?.label}</span>
-              </div>
-
-              <div className="loading-card loading-card--text loading-card--e">
-                <span>{scene.cards[2]?.label}</span>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="loading-card loading-card--text loading-card--client loading-card--a">
-                <span>{scene.client}</span>
-              </div>
-
-              <div className="loading-card loading-card--metric loading-card--b">
-                <span>{scene.stats[0]?.label}</span>
-                <strong>{scene.stats[0]?.value}</strong>
-              </div>
-
-              <div className="loading-card loading-card--metric loading-card--d">
-                <span>{scene.stats[1]?.label}</span>
-                <strong>{scene.stats[1]?.value}</strong>
-              </div>
-            </>
-          )}
-
-          <span className="loading-badge loading-badge--a">{scene.badges[0]}</span>
-        </div>
+      <div className="mb-[26px] mt-[22px] h-1.5 overflow-hidden rounded-full bg-track-soft">
+        <span
+          className="block h-full w-0 rounded-full bg-green-fill transition-[width] duration-[800ms] ease-atrium motion-reduce:transition-none"
+          style={{ width: `${progressPct}%` }}
+        />
       </div>
 
-      <div className="loading-visual-status" key={step.id}>
-        <span>{String(stepIndex + 1).padStart(2, "0")} / {String(scanSteps.length).padStart(2, "0")}</span>
-        <strong>{step.status}</strong>
-      </div>
-
-      <div className="loading-progress" aria-hidden="true">
+      <ol className="m-0 list-none p-0">
         {scanSteps.map((s, i) => {
           const state = i < stepIndex ? "done" : i === stepIndex ? "active" : "pending"
+          const dotTone = state === "done" ? "bg-green-fill" : state === "active" ? "bg-green-soft" : "bg-track-soft"
+          const lineTone = state === "done" ? "bg-green-fill" : "bg-track-soft"
+          const labelTone = state === "done"
+            ? "text-ink"
+            : state === "active"
+              ? "font-semibold text-ink"
+              : "text-muted-soft"
           return (
-            <div key={s.id} className={`loading-step loading-step--${state}`}>
-              <div className="loading-step-dot">
-                {i < stepIndex && <span aria-hidden="true" className="loading-step-check" />}
+            <li className="group grid grid-cols-[34px_1fr] gap-4 max-[560px]:grid-cols-[30px_1fr] max-[560px]:gap-3" key={s.id}>
+              <div className="flex flex-col items-center">
+                <div className={`relative flex h-[30px] w-[30px] flex-none items-center justify-center rounded-full transition-[background-color] duration-300 ease-atrium motion-reduce:transition-none ${dotTone}`}>
+                  <span
+                    aria-hidden="true"
+                    className={`h-2 w-2 rounded-full bg-pending ${state === "pending" ? "" : "hidden"}`}
+                  />
+                  <span
+                    aria-hidden="true"
+                    className={`absolute -inset-[3px] animate-spin-slow rounded-full border-2 border-transparent border-r-green-fill border-t-green-fill motion-reduce:animate-none ${state === "active" ? "" : "hidden"}`}
+                  />
+                  <svg
+                    aria-hidden="true"
+                    className={`h-3.5 w-3.5 text-white ${state === "done" ? "" : "hidden"}`}
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M4 10.5l4 4 8-9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" />
+                  </svg>
+                </div>
+                <div className={`my-1 w-0.5 flex-1 rounded-sm transition-[background-color] duration-500 ease-atrium group-last:hidden motion-reduce:transition-none ${lineTone}`} />
               </div>
-            </div>
+              <div className="pb-[22px] max-[560px]:pb-[18px]">
+                <div className={`text-[1.05rem] font-medium transition-colors duration-300 ease-atrium motion-reduce:transition-none max-[560px]:text-base ${labelTone}`}>{s.label}</div>
+                {state === "active" && (
+                  <div className="mt-1 min-h-[1.1em] animate-fade-in text-[0.86rem] text-muted-soft motion-reduce:animate-none" key={activeSub}>{activeSub}</div>
+                )}
+              </div>
+            </li>
           )
         })}
-      </div>
+      </ol>
+
+      <p className="mx-0 mb-0 mt-2 text-center text-[0.85rem] text-muted-soft">Takes about 30 seconds — we check discovery, website, reputation &amp; social.</p>
       <span className="visually-hidden">{step.status}</span>
     </section>
   )
@@ -746,7 +658,10 @@ function ReportStage({
   const firstMove = report.executiveSummary.firstMove ?? primaryPlanItem
   const evidenceHighlights = reportEvidenceHighlights(report)
   const scoreEntries = topScoreEntries(report)
-  const scoreWidth = `${Math.max(0, Math.min(100, report.overallScore))}%`
+  const headerStats = report.scoreInterpretation.slice(0, 4)
+  // Literal hex: the ring is painted from JS into a conic-gradient, outside Tailwind's reach.
+  const gaugeColor = tone === "high" ? "#3fae78" : tone === "medium" ? "#f3c150" : "#e08a5b"
+  const rootRef = useRef<HTMLElement>(null)
   const missingDataWarning = missingCriticalData.length > 0
     ? `Missing data can change the read: ${missingCriticalData.slice(0, 3).join(", ")}.`
     : null
@@ -757,165 +672,211 @@ function ReportStage({
   const displayWhyItMatters = publicReportText(whyItMatters)
   const displayFirstMove = publicReportText(firstMove)
 
+  useEffect(() => {
+    const root = rootRef.current
+    if (!root) return
+    root.classList.add("atr-anim")
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const easeOut = (t: number) => 1 - (1 - t) ** 3
+    const countUp = (el: HTMLElement) => {
+      const target = Number.parseInt(el.dataset.count ?? "0", 10)
+      if (reduce) { el.textContent = String(target); return }
+      let start: number | null = null
+      const tick = (ts: number) => {
+        if (start === null) start = ts
+        const t = Math.min(1, (ts - start) / 1100)
+        el.textContent = String(Math.round(target * easeOut(t)))
+        if (t < 1) requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    }
+    const runGauge = (g: HTMLElement) => {
+      const target = Number.parseFloat(g.dataset.p ?? "0")
+      const color = g.dataset.color ?? "#fff"
+      const ring = g.querySelector<HTMLElement>(".atr-ring")
+      if (!ring) return
+      const paint = (p: number) => {
+        ring.style.background = `conic-gradient(${color} 0 ${p}%, rgba(255,255,255,0.12) ${p}% 100%)`
+      }
+      if (reduce) { paint(target); return }
+      let start: number | null = null
+      const tick = (ts: number) => {
+        if (start === null) start = ts
+        const t = Math.min(1, (ts - start) / 1300)
+        paint(target * easeOut(t))
+        if (t < 1) requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    }
+    const activate = (el: Element) => {
+      el.classList.add("in")
+      el.querySelectorAll<HTMLElement>(".atr-fill[data-w]").forEach((f, i) => {
+        const w = f.dataset.w ?? "0%"
+        if (reduce) { f.style.width = w } else { window.setTimeout(() => { f.style.width = w }, 120 + i * 110) }
+      })
+      el.querySelectorAll<HTMLElement>("[data-count]").forEach((n, i) => {
+        window.setTimeout(() => countUp(n), 120 + i * 110)
+      })
+      const g = el.querySelector<HTMLElement>(".rg-gauge")
+      if (g) window.setTimeout(() => runGauge(g), 200)
+    }
+    const els = Array.from(root.querySelectorAll<HTMLElement>(".atr-reveal"))
+    if (reduce || !("IntersectionObserver" in window)) {
+      els.forEach(activate)
+      return
+    }
+    const io = new IntersectionObserver((entries) => {
+      for (const en of entries) {
+        if (en.isIntersecting) {
+          activate(en.target)
+          io.unobserve(en.target)
+        }
+      }
+    // Threshold stays at 0 so cards taller than the viewport still reveal on small screens.
+    }, { threshold: 0, rootMargin: "0px 0px -8% 0px" })
+    for (const el of els) io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
-    <section className="diagnostic-stage diagnostic-stage--ready gap-12 md:gap-16">
-      <article className="w-full">
-        <header className="grid gap-10 border-t border-[rgb(7_47_52_/_18%)] pt-8 lg:grid-cols-12 lg:items-stretch lg:gap-16">
-          <div className="lg:col-span-8">
-            <p className="type-eyebrow text-[var(--teal-500)]">Growth diagnostic / {publicReportText(report.business.address)}</p>
-            <h1 className="type-section-title mt-6 text-[var(--text-strong)]">
-              {publicReportText(report.business.name)}
-            </h1>
-            <h2 className="mt-7 max-w-[18ch] font-[var(--font-serif)] text-[clamp(2rem,4vw,4rem)] font-normal italic leading-[0.98] text-[var(--teal-700)]">
-              {displayHeadline}
-            </h2>
-            <p className="type-lead mt-7 max-w-[48rem] text-[var(--text-body)]">
-              {displaySummary}
-            </p>
-          </div>
-
-          <aside className="flex min-h-[24rem] flex-col justify-between rounded-[var(--radius-bento)] bg-[var(--surface-dark)] p-7 text-white lg:col-span-4 lg:p-9">
-            <div>
-              <div className="flex items-center justify-between gap-4">
-                <span aria-label="Atrium" className="diagnostic-brand-wordmark" role="img" />
-                <span className="type-eyebrow text-[var(--mint-400)]">Growth score</span>
-              </div>
-              <strong className="mt-12 block whitespace-nowrap font-[var(--font-serif)] text-[clamp(7rem,13vw,11rem)] font-normal italic leading-[0.7] tracking-[-0.06em] text-[var(--mint-400)] tabular-nums">
-                {report.overallScore}
-              </strong>
-              <p className="type-lead mt-7 text-white/75">{scoreSignal}</p>
-              <div className="mt-7 h-px overflow-hidden bg-white/15" aria-hidden="true">
-                <span className={`block h-full ${scoreBarClass(tone)}`} style={{ width: scoreWidth }} />
-              </div>
-            </div>
-            <div className="type-caption flex flex-wrap gap-x-3 gap-y-1 border-t border-white/15 pt-5 text-white/60">
-              <span>{confidenceCopy(report.confidence)}</span>
-              <span aria-hidden="true">/</span>
-              <span>Directional diagnostic</span>
-            </div>
-          </aside>
-        </header>
-
-        <section className="mt-24 grid gap-10 border-t border-[rgb(7_47_52_/_18%)] py-14 lg:grid-cols-12 lg:gap-16 md:mt-32 md:py-20">
-          <div className="lg:col-span-7">
-            <p className="type-eyebrow text-[var(--teal-500)]">Primary leak</p>
-            <h2 className="type-section-title mt-6 max-w-[13ch] text-[var(--text-strong)]">
-              {displayPrimaryLeak}
-            </h2>
-            <div className="mt-12 grid gap-8 border-t border-[rgb(7_47_52_/_14%)] pt-7 md:grid-cols-2">
-              <div>
-                <span className="type-eyebrow text-[var(--teal-500)]">Root cause</span>
-                <p className="type-body mt-4 text-[var(--text-body)]">{displayRootCause}</p>
-              </div>
-              <div>
-                <span className="type-eyebrow text-[var(--teal-500)]">Why it matters</span>
-                <p className="type-body mt-4 text-[var(--text-body)]">{displayWhyItMatters}</p>
-              </div>
-            </div>
-          </div>
-
-          <aside className="flex flex-col justify-between rounded-[var(--radius-bento)] bg-[var(--amber-200)] p-7 text-[var(--text-on-amber)] lg:col-span-5 lg:p-9">
-            <div>
-              <p className="type-eyebrow text-[var(--teal-700)]">First move</p>
-              <h3 className="type-card-title mt-6">{displayFirstMove}</h3>
-            </div>
-            <a
-              className="type-caption group mt-12 inline-flex w-fit items-center gap-3 font-medium text-[var(--teal-800)] no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--teal-800)]"
-              href={contactHref}
-              rel={opensNewTab ? "noreferrer" : undefined}
-              target={opensNewTab ? "_blank" : undefined}
-            >
-              Review the full plan
-              <span className="transition-transform duration-200 group-hover:translate-x-2" aria-hidden="true">→</span>
-            </a>
-          </aside>
-        </section>
-
-        <section className="grid gap-10 border-t border-[rgb(7_47_52_/_18%)] py-14 lg:grid-cols-12 lg:gap-16 md:py-20">
-          <div className="lg:col-span-4">
-            <p className="type-eyebrow text-[var(--teal-500)]">30-day plan</p>
-            <h2 className="type-card-title mt-6 text-[var(--text-strong)]">Fix the closest leak first.</h2>
-            <p className="type-body mt-6 text-[var(--text-muted)]">{publicReportText(report.estimatedLostOpportunity)}</p>
-          </div>
-
-          <ol className="m-0 list-none border-t border-[rgb(7_47_52_/_18%)] p-0 lg:col-span-8">
-            {thirtyDayPlan.map((step, index) => (
-              <li className="grid gap-5 border-b border-[rgb(7_47_52_/_18%)] py-8 md:grid-cols-[4rem_minmax(0,1fr)]" key={step}>
-                <span className="type-eyebrow text-[var(--teal-500)]">{String(index + 1).padStart(2, "0")}</span>
-                <p className="type-lead text-[var(--text-strong)]">{publicReportText(step)}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="rounded-[var(--radius-bento)] bg-[var(--surface-dark)] px-7 py-16 text-white md:px-10 md:py-20">
-          <div className="grid gap-8 pb-14 lg:grid-cols-12 lg:items-end lg:gap-16">
-            <div className="lg:col-span-7">
-              <p className="type-eyebrow text-[var(--mint-400)]">Signal by signal</p>
-              <h2 className="type-section-title mt-6">Where growth is <em>leaking.</em></h2>
-            </div>
-            <p className="type-body max-w-md text-white/65 lg:col-span-5">
-              Each score reflects a different part of the path from discovery to repeat business.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 md:gap-x-14 lg:gap-x-20">
-            {scoreEntries.map((insight) => (
-              <article className="grid min-h-[14rem] items-center gap-7 border-t border-[rgb(181_242_219_/_22%)] py-9 md:grid-cols-[minmax(0,1fr)_auto]" key={insight.category}>
-                <div>
-                  <span className="type-eyebrow text-[var(--mint-300)]">{insight.label}</span>
-                  <p className="type-caption mt-4 max-w-sm text-white/65">{publicReportText(insight.businessImpact)}</p>
-                </div>
-                <strong className="whitespace-nowrap font-[var(--font-serif)] text-[clamp(4.5rem,8vw,7rem)] font-normal italic leading-none tracking-[-0.055em] text-[var(--mint-400)] tabular-nums">
-                  {insight.score}
-                </strong>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <details className="group mt-20 border-t border-[rgb(7_47_52_/_18%)] pt-8 md:mt-28">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
-            <span className="type-card-title text-[var(--text-strong)]">Supporting evidence</span>
-            <span className="flex size-10 items-center justify-center border border-[rgb(7_47_52_/_18%)] text-2xl font-normal text-[var(--teal-800)] transition-transform duration-150 ease-out group-open:rotate-45 motion-reduce:transition-none">
-              +
-            </span>
-          </summary>
-
-          <div className="mt-10">
-            <div className="grid border-t border-[rgb(7_47_52_/_18%)] md:grid-cols-3">
-              {evidenceHighlights.map((highlight) => (
-                <div className="border-b border-[rgb(7_47_52_/_18%)] py-7 md:border-l md:px-6 md:first:border-l-0" key={highlight}>
-                  <span className="type-eyebrow text-[var(--teal-500)]">Signal</span>
-                  <p className="type-caption mt-4 text-[var(--text-strong)]">{publicReportText(highlight)}</p>
-                </div>
-              ))}
-              {missingDataWarning ? (
-                <div className="border-b border-[rgb(7_47_52_/_18%)] bg-[var(--amber-200)] p-7">
-                  <span className="type-eyebrow text-[var(--teal-700)]">Limitation</span>
-                  <p className="type-caption mt-4 text-[var(--text-strong)]">{publicReportText(missingDataWarning)}</p>
-                </div>
-              ) : null}
-            </div>
-
-            <div className="mt-12 grid gap-x-12 lg:grid-cols-2">
-              {report.diagnosticSteps.map((step) => (
-                <DiagnosticEvidenceCard key={step.id} step={step} />
+    <section
+      ref={rootRef}
+      className="atr-report mx-auto flex w-full max-w-[1080px] flex-col gap-5 text-left font-sans leading-[1.5] text-ink max-[560px]:gap-3.5"
+    >
+      <div className="atr-reveal grid grid-cols-[1fr_360px] items-stretch gap-5 max-[980px]:grid-cols-[1fr_minmax(280px,320px)] max-[700px]:grid-cols-[1fr]">
+        <div className="flex flex-col justify-center rounded-card bg-card px-[34px] py-[38px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+          <Eyebrow className="flex flex-wrap items-center gap-1.5">
+            <span>Growth diagnostic</span>
+            <span aria-hidden="true">·</span>
+            {shortAddress(publicReportText(report.business.address))}
+          </Eyebrow>
+          <h1 className="m-0 break-words text-[clamp(1.95rem,4.6vw,3.5rem)] font-normal leading-[1.06] tracking-[-0.02em]">{publicReportText(report.business.name)}</h1>
+          <h2 className="m-0 max-w-[22ch] font-serif text-[clamp(1.5rem,2.6vw,2.05rem)] font-normal italic leading-[1.22] tracking-[-0.02em] text-green">{displayHeadline}</h2>
+          {headerStats.length > 0 && (
+            <div className="mt-5 flex flex-wrap gap-2">
+              {headerStats.map((entry) => (
+                <Stat key={entry.category} label={entry.label} tone={statTone(entry.status)} value={entry.score} />
               ))}
             </div>
-          </div>
-        </details>
-      </article>
+          )}
+          <p className={`max-w-[48ch] border-t border-line pt-6 text-[1.02rem] leading-[1.62] text-body ${headerStats.length > 0 ? "mt-2.5" : "mt-[26px]"}`}>{displaySummary}</p>
+        </div>
 
-      <div className="type-caption flex w-full flex-col gap-2 border-t border-[rgb(7_47_52_/_18%)] pt-6 text-[var(--text-muted)] md:flex-row md:items-center md:justify-between">
+        <aside className="flex flex-col justify-between rounded-card bg-dark p-[30px] text-white shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+          <div className="flex items-center justify-between">
+            <span className="font-serif text-[1.35rem] italic">atrium</span>
+            <span className="m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mint">Growth score</span>
+          </div>
+          <div
+            className="rg-gauge relative mx-auto mb-1.5 mt-[22px] h-[186px] w-[186px] max-[980px]:h-[164px] max-[980px]:w-[164px]"
+            data-p={report.overallScore}
+            data-color={gaugeColor}
+          >
+            <div className="atr-ring" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <div className="text-[4.4rem] font-medium leading-[0.9] tracking-[-0.03em] text-white max-[980px]:text-[3.6rem]" data-count={report.overallScore}>0</div>
+              <div className="mt-0.5 text-[0.72rem] font-semibold tracking-[0.1em] text-white/55">/ 100</div>
+            </div>
+          </div>
+          <span className={`inline-flex items-center gap-[7px] self-center rounded-full px-3.5 py-1.5 text-[0.82rem] font-semibold before:h-[7px] before:w-[7px] before:animate-pulse-soft before:rounded-full before:content-[''] motion-reduce:before:animate-none ${tagToneClass(tone)}`}>{scoreSignal}</span>
+          <div className="mt-[22px] flex flex-wrap justify-center gap-2.5 border-t border-white/[.14] pt-3.5 text-[0.76rem] text-white/55">
+            <span>{confidenceCopy(report.confidence)}</span>
+            <span aria-hidden="true">·</span>
+            <span>Directional scan</span>
+          </div>
+        </aside>
+      </div>
+
+      <div className="atr-reveal grid grid-cols-[1fr_380px] items-stretch gap-5 max-[980px]:grid-cols-[1fr_minmax(280px,320px)] max-[700px]:grid-cols-[1fr]">
+        <div className="rounded-card bg-card p-[34px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+          <Eyebrow>Primary leak</Eyebrow>
+          <h2 className="m-0 max-w-[16ch] text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.08] tracking-[-0.02em]">{displayPrimaryLeak}</h2>
+          <div className="mt-[26px] grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-[22px] max-[560px]:mt-5 max-[560px]:gap-3.5">
+            <div className="rounded-card-sm bg-cream p-5 max-[560px]:p-4"><span className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-green">Root cause</span><p className="mx-0 mb-0 mt-2 text-[0.95rem] text-body">{displayRootCause}</p></div>
+            <div className="rounded-card-sm bg-cream p-5 max-[560px]:p-4"><span className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-green">Why it matters</span><p className="mx-0 mb-0 mt-2 text-[0.95rem] text-body">{displayWhyItMatters}</p></div>
+          </div>
+        </div>
+        <aside className="flex flex-col gap-6 rounded-card bg-amber-soft p-[30px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+          <div>
+            <p className="m-0 text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-amber-ink">First move</p>
+            <h3 className="mx-0 mb-0 mt-3.5 text-[1.3rem] font-medium leading-[1.3] tracking-[-0.02em]">{displayFirstMove}</h3>
+          </div>
+          <Button
+            className="self-start"
+            href={contactHref}
+            rel={opensNewTab ? "noreferrer" : undefined}
+            target={opensNewTab ? "_blank" : undefined}
+            variant="primary"
+          >
+            Review the full plan →
+          </Button>
+        </aside>
+      </div>
+
+      <div className="atr-reveal rounded-card bg-card p-[34px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+        <div className="mb-1.5 flex flex-wrap items-baseline justify-between gap-5">
+          <div>
+            <Eyebrow>30-day plan</Eyebrow>
+            <h2 className="m-0 text-2xl font-medium tracking-[-0.02em]">Fix the closest leak first.</h2>
+          </div>
+          <p className="m-0 max-w-[40ch] text-[0.92rem] text-muted">{publicReportText(report.estimatedLostOpportunity)}</p>
+        </div>
+        {thirtyDayPlan.map((step, index) => (
+          <div className="group flex items-start gap-[18px] border-t border-line py-5 max-[560px]:gap-3.5 max-[560px]:py-4" key={step}>
+            <div className="flex h-[38px] w-[38px] flex-none items-center justify-center rounded-xl bg-green-soft text-[0.95rem] font-medium text-green-ink transition-transform duration-200 ease-atrium group-hover:-rotate-6 group-hover:scale-[1.08] motion-reduce:transition-none">{index + 1}</div>
+            <p className="mx-0 mb-0 mt-1.5 text-[1.05rem] font-medium leading-[1.35]">{publicReportText(step)}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="atr-reveal rounded-card bg-card p-[34px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
+        <div className="mb-[22px] flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <Eyebrow>Signal by signal</Eyebrow>
+            <h2 className="m-0 max-w-[16ch] text-[clamp(1.5rem,2.6vw,2.1rem)] font-medium leading-[1.08] tracking-[-0.02em]">Where growth is <em className="font-serif font-normal italic text-green">leaking.</em></h2>
+          </div>
+          <p className="m-0 max-w-[40ch] text-[0.92rem] text-muted">Each score maps a step from discovery to repeat business.</p>
+        </div>
+        {scoreEntries.map((insight) => (
+          <Meter
+            key={insight.category}
+            description={publicReportText(insight.businessImpact)}
+            label={insight.label}
+            tone={insight.score >= 80 ? "hi" : insight.score >= 60 ? "mid" : "lo"}
+            value={insight.score}
+          />
+        ))}
+      </div>
+
+      <details className="atr-reveal group rounded-card bg-card px-[34px] py-[26px] shadow-soft max-[980px]:px-7 max-[980px]:py-[22px] max-[560px]:p-5">
+        <summary className="flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
+          <h3 className="m-0 text-[1.3rem] font-medium leading-[1.18] tracking-[-0.02em]">Supporting evidence</h3>
+          <span className="flex h-[42px] w-[42px] items-center justify-center rounded-[14px] bg-cream text-2xl text-ink transition-transform duration-200 ease-atrium group-open:rotate-45 motion-reduce:transition-none">+</span>
+        </summary>
+        <div className="mt-[22px]">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3.5">
+            {evidenceHighlights.map((highlight) => (
+              <div className="rounded-card-sm bg-cream p-5 max-[560px]:p-4" key={highlight}><span className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-green">Signal</span><p className="mx-0 mb-0 mt-2 text-[0.95rem] text-body">{publicReportText(highlight)}</p></div>
+            ))}
+            {missingDataWarning ? (
+              <div className="rounded-card-sm bg-amber-soft p-5 max-[560px]:p-4"><span className="text-[0.7rem] font-semibold uppercase tracking-[0.12em] text-amber-ink">Limitation</span><p className="mx-0 mb-0 mt-2 text-[0.95rem] text-body">{publicReportText(missingDataWarning)}</p></div>
+            ) : null}
+          </div>
+          <div className="mt-[22px] grid grid-cols-1 gap-x-8 gap-y-2 min-[900px]:grid-cols-2">
+            {report.diagnosticSteps.map((step) => (
+              <DiagnosticEvidenceCard key={step.id} step={step} />
+            ))}
+          </div>
+        </div>
+      </details>
+
+      <div className="atr-reveal flex flex-wrap justify-between gap-4 px-1.5 py-1 text-[0.82rem] text-muted">
         <span>Directional free scan. Confirm with first-party business data before major spend.</span>
         {missingCriticalData.length ? <span>Missing: {missingCriticalData.slice(0, 2).map(publicReportText).join(", ")}</span> : null}
       </div>
 
-      <div className="result-actions">
-        <Button variant="outline" onClick={onReset} type="button">
-          Scan another restaurant
-        </Button>
+      <div className="atr-reveal mt-1.5 flex justify-center">
+        <Button onClick={onReset} variant="secondary">Scan another restaurant</Button>
       </div>
     </section>
   )
@@ -927,40 +888,40 @@ function DiagnosticEvidenceCard({ step }: { step: DiagnosticStepResult }) {
   const limitation = publicReportText(diagnosticStepLimitation(step))
 
   return (
-    <article className="border-t border-[rgb(7_47_52_/_18%)] py-9">
+    <article className="border-t border-line py-9">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="type-eyebrow text-[var(--teal-500)]">{diagnosticStepTitle(step.id)}</p>
-          <strong className="type-lead mt-3 block font-normal text-[var(--text-strong)]">{diagnosticStatusCopy(step.status)}</strong>
+          <p className="text-xs font-medium uppercase leading-[1.2] tracking-[0.18em] text-green">{diagnosticStepTitle(step.id)}</p>
+          <strong className="mt-3 block text-[clamp(1.125rem,1.5vw,1.375rem)] font-normal leading-[1.5] tracking-[-0.012em] text-ink">{diagnosticStatusCopy(step.status)}</strong>
         </div>
-        <span className="type-caption border border-[rgb(7_47_52_/_14%)] px-3 py-1 text-[var(--teal-700)]">
+        <span className="border border-line px-3 py-1 text-sm leading-[1.55] tracking-[-0.004em] text-ink">
           {stepConfidenceCopy(step.confidence)}
         </span>
       </div>
 
-      <dl className="mt-7 grid gap-5 border-t border-[rgb(7_47_52_/_14%)] pt-5 sm:grid-cols-2">
+      <dl className="mt-7 grid gap-5 border-t border-line pt-5 sm:grid-cols-2">
         <div>
-          <dt className="type-eyebrow text-[var(--teal-500)]">Signal group</dt>
-          <dd className="type-caption mt-2 text-[var(--text-body)]">{diagnosticStepTitle(step.id)}</dd>
+          <dt className="text-xs font-medium uppercase leading-[1.2] tracking-[0.18em] text-green">Signal group</dt>
+          <dd className="mt-2 text-sm leading-[1.55] tracking-[-0.004em] text-body">{diagnosticStepTitle(step.id)}</dd>
         </div>
         <div>
-          <dt className="type-eyebrow text-[var(--teal-500)]">Checked</dt>
-          <dd className="type-caption mt-2 text-[var(--text-body)]">{step.checked.slice(0, 3).map(publicReportText).join(", ")}</dd>
+          <dt className="text-xs font-medium uppercase leading-[1.2] tracking-[0.18em] text-green">Checked</dt>
+          <dd className="mt-2 text-sm leading-[1.55] tracking-[-0.004em] text-body">{step.checked.slice(0, 3).map(publicReportText).join(", ")}</dd>
         </div>
       </dl>
 
       <div className="mt-7 grid gap-6 sm:grid-cols-2">
-        <div className="border-t border-[rgb(7_47_52_/_14%)] pt-5">
-          <span className="type-eyebrow text-[var(--teal-500)]">Found</span>
-          <ul className="type-caption mt-3 grid gap-1 text-[var(--text-body)]">
+        <div className="border-t border-line pt-5">
+          <span className="text-xs font-medium uppercase leading-[1.2] tracking-[0.18em] text-green">Found</span>
+          <ul className="mt-3 grid gap-1 text-sm leading-[1.55] tracking-[-0.004em] text-body">
             {foundSignals.length > 0
               ? foundSignals.map((signal) => <li key={signal}>{signal}</li>)
               : <li>No confirmed signals in this step.</li>}
           </ul>
         </div>
-        <div className="border-t border-[rgb(7_47_52_/_14%)] pt-5">
-          <span className="type-eyebrow text-[var(--teal-500)]">Missing</span>
-          <ul className="type-caption mt-3 grid gap-1 text-[var(--text-body)]">
+        <div className="border-t border-line pt-5">
+          <span className="text-xs font-medium uppercase leading-[1.2] tracking-[0.18em] text-green">Missing</span>
+          <ul className="mt-3 grid gap-1 text-sm leading-[1.55] tracking-[-0.004em] text-body">
             {missingSignals.length > 0
               ? missingSignals.map((signal) => <li key={signal}>{signal}</li>)
               : <li>No major missing signal flagged.</li>}
@@ -968,8 +929,8 @@ function DiagnosticEvidenceCard({ step }: { step: DiagnosticStepResult }) {
         </div>
       </div>
 
-      <p className="type-caption mt-7 text-[var(--text-muted)]">{limitation}</p>
-      <p className="type-caption mt-4 text-[var(--text-body)]">
+      <p className="mt-7 text-sm leading-[1.55] tracking-[-0.004em] text-muted">{limitation}</p>
+      <p className="mt-4 text-sm leading-[1.55] tracking-[-0.004em] text-body">
         <strong>What Atrium would fix:</strong> {publicReportText(diagnosticStepFix(step.id))}
       </p>
     </article>
@@ -1036,6 +997,31 @@ function topScoreEntries(report: RestaurantGrowthReport) {
   return report.scoreInterpretation.slice(0, 5)
 }
 
+function statTone(
+  status: RestaurantGrowthReport["scoreInterpretation"][number]["status"],
+): "good" | "warn" | "bad" {
+  if (status === "healthy") return "good"
+  if (status === "watch") return "warn"
+  return "bad"
+}
+
+function shortAddress(address: string): string {
+  const parts = address.split(",").map((part) => part.trim()).filter(Boolean)
+  const withoutCountry = parts.filter((part) => !(
+    part.toLowerCase() === "usa" || part.toLowerCase() === "united states" || part.toLowerCase() === "us"
+  ))
+
+  if (withoutCountry.length >= 2) {
+    const city = withoutCountry[withoutCountry.length - 2]
+    const stateZip = withoutCountry[withoutCountry.length - 1]
+    const stateMatch = stateZip?.match(/^[A-Za-z]{2}\b/)
+    if (city && stateMatch) return `${city}, ${stateMatch[0].toUpperCase()}`
+    if (city) return city
+  }
+
+  return withoutCountry[withoutCountry.length - 1] ?? address
+}
+
 function reportEvidenceHighlights(report: RestaurantGrowthReport): readonly string[] {
   const agentHighlights = report.executiveSummary.evidenceHighlights
   if (agentHighlights?.length) return agentHighlights.slice(0, 4)
@@ -1059,16 +1045,16 @@ function scoreTone(score: number): ScoreTone {
   return "low"
 }
 
+function tagToneClass(tone: ScoreTone) {
+  if (tone === "high") return "bg-[rgba(63,174,120,.18)] text-mint before:bg-green-fill"
+  if (tone === "medium") return "bg-[rgba(243,193,80,.16)] text-amber before:bg-amber"
+  return "bg-[rgba(224,138,91,.18)] text-red-tint before:bg-red-fill"
+}
+
 function scoreSignalCopy(tone: ScoreTone) {
   if (tone === "high") return "Strong base"
   if (tone === "medium") return "Watch zone"
   return "Leak alert"
-}
-
-function scoreBarClass(tone: ScoreTone) {
-  if (tone === "high") return "bg-[var(--mint-500)]"
-  if (tone === "medium") return "bg-[var(--amber-400)]"
-  return "bg-[var(--amber-600)]"
 }
 
 function diagnosticStepTitle(id: DiagnosticStepResult["id"]) {

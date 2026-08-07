@@ -1,69 +1,62 @@
 'use client'
 
-import { type CSSProperties, type InputHTMLAttributes, useId, useState } from 'react'
+import type { InputHTMLAttributes } from 'react'
+import { useId } from 'react'
+import { cn } from '../lib/cn'
 
-type InputProps = {
-  label?: string
+type Size = 'sm' | 'md'
+
+const sizes: Record<Size, string> = {
+  sm: 'px-4 py-2.5 text-[0.9rem]',
+  md: 'px-5 py-3.5 text-[1rem]',
+}
+
+export function Input({
+  label,
+  hint,
+  error,
+  size = 'md',
+  id,
+  className,
+  ...rest
+}: {
+  label: string
   hint?: string
-  invalid?: boolean
-  style?: CSSProperties
-  inputStyle?: CSSProperties
-} & Omit<InputHTMLAttributes<HTMLInputElement>, 'style'>
-
-export function Input({ label, hint, id, type = 'text', invalid = false, style, inputStyle, ...rest }: InputProps) {
-  const [focused, setFocused] = useState(false)
-  const generatedId = useId()
-  const inputId = id ?? generatedId
-
-  const borderColor = invalid ? 'var(--amber-600)' : focused ? 'var(--teal-800)' : 'var(--cloud-400)'
+  error?: string
+  size?: Size
+  className?: string
+} & Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>) {
+  const generated = useId()
+  const inputId = id ?? generated
+  const describedBy = error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '7px', ...style }}>
-      {label && (
-        <label
-          htmlFor={inputId}
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '13px',
-            fontWeight: 600,
-            letterSpacing: '0.02em',
-            color: 'var(--text-strong)',
-          }}
-        >
-          {label}
-        </label>
-      )}
+    <div className={cn('flex flex-col gap-2', className)}>
+      <label className="font-sans text-[0.82rem] font-medium text-body" htmlFor={inputId}>
+        {label}
+      </label>
       <input
+        aria-describedby={describedBy}
+        aria-invalid={error ? true : undefined}
+        className={cn(
+          'w-full rounded-full bg-card font-sans text-ink transition duration-200 ease-atrium',
+          'border placeholder:text-muted',
+          'focus:outline-2 focus:outline-offset-2 focus:outline-green-fill',
+          error ? 'border-error' : 'border-line',
+          sizes[size],
+        )}
         id={inputId}
-        type={type}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        style={{
-          fontFamily: 'var(--font-sans)',
-          fontSize: '15px',
-          color: 'var(--text-body)',
-          background: 'var(--cloud-100)',
-          padding: '12px 16px',
-          borderRadius: 'var(--radius-sm)',
-          border: `1.5px solid ${borderColor}`,
-          outline: focused ? '2px solid var(--focus-ring)' : '2px solid transparent',
-          outlineOffset: '2px',
-          transition: 'border-color var(--dur-base) var(--ease-out), outline-color var(--dur-base) var(--ease-out)',
-          ...inputStyle,
-        }}
         {...rest}
       />
-      {hint && (
-        <span
-          style={{
-            fontFamily: 'var(--font-sans)',
-            fontSize: '12px',
-            color: invalid ? 'var(--amber-600)' : 'var(--text-muted)',
-          }}
-        >
+      {error ? (
+        <span className="font-sans text-[0.8rem] text-error" id={`${inputId}-error`} role="alert">
+          {error}
+        </span>
+      ) : hint ? (
+        <span className="font-sans text-[0.8rem] text-muted" id={`${inputId}-hint`}>
           {hint}
         </span>
-      )}
+      ) : null}
     </div>
   )
 }

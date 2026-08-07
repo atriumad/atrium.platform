@@ -7,7 +7,8 @@
     "dev": "next dev --turbopack",
     "lint": "biome check .",
     "typecheck": "tsc --noEmit",
-    "test": "bun test"
+    "test": "bun test",
+    "assert-css": "node scripts/assert-css.mjs"
   },
   "dependencies": {
     "@atrium/application": "workspace:*",
@@ -18,10 +19,11 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^26.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "tailwindcss": "^3.4.0",
+    "tailwindcss": "^4",
     "typescript": "^5.5.0"
   }
 }

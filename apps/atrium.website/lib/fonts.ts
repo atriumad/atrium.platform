@@ -2,7 +2,7 @@ import localFont from 'next/font/local'
 
 export const interTight = localFont({
   src: '../app/fonts/InterTight-VariableFont_wght.ttf',
-  weight: '400 600',
+  weight: '100 900',
   variable: '--font-inter-tight',
   display: 'swap',
 })

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
-import TransitionLink from '@/components/ui/TransitionLink'
 
 export const metadata: Metadata = {
   title: 'About Atrium — Hospitality Marketing Studio, Houston TX',
@@ -63,8 +62,6 @@ function AboutHero() {
             <p className="type-lead" style={{ color: 'var(--text-body)' }}>
               Atrium works inside the industry, connecting strategy, creative production, and performance reporting under one roof.
             </p>
-            <TransitionLink
-              href="/contact"
               className="type-caption group mt-9 inline-flex items-center gap-3 font-medium no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
               style={{ color: 'var(--teal-800)' }}
             >
@@ -251,8 +248,9 @@ export default function AboutPage() {
         eyebrow="START HERE"
         headline={<>Bring us the restaurant. <em>We will bring the system.</em></>}
         body="If your team needs senior creative, operational rhythm, and reporting in the same room, the next step is a short conversation."
-        cta="Book a Growth Diagnostic"
-        ctaHref="/contact"
+        cta={CTA.primary.label}
+        ctaHref={CTA.primary.href}
+        ctaExternal={CTA.primary.external}
         coverAlt="Atrium team planning a hospitality campaign"
       />
     </>

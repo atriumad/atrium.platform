@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { CTA } from '@/lib/cta'
 
 export const metadata: Metadata = {
   title: 'Atrium Resources — Hospitality Marketing Guides & Stories',
@@ -40,7 +41,7 @@ export default function ResourcesPage() {
         eyebrow="RESOURCES"
         title={<>Useful thinking for <em>restaurant operators.</em></>}
         body="A focused resource library for owners and marketing leads who need clearer decisions around content, reviews, retention, and local demand."
-        actions={[{ label: 'Read customer stories', href: '/work' }, { label: 'Talk through your market', href: '/contact', variant: 'ghostLight' }]}
+        actions={[{ label: 'Read customer stories', href: '/work' }, { label: 'Talk through your market', href: CTA.primary.href, external: CTA.primary.external, variant: 'ghostLight' }]}
         stats={[
           { value: '3', label: 'resource tracks' },
           { value: '10+', label: 'case studies and guides planned' },
@@ -97,8 +98,9 @@ export default function ResourcesPage() {
         eyebrow="NEED A READ ON YOUR SYSTEM?"
         headline={<>Bring the messy context. <em>We will sort it.</em></>}
         body="If a resource gets you part of the way there, a short conversation can turn the idea into the next operating move."
-        cta="Book a Growth Diagnostic"
-        ctaHref="/contact"
+        cta={CTA.primary.label}
+        ctaHref={CTA.primary.href}
+        ctaExternal={CTA.primary.external}
         coverAlt="Restaurant marketing notes organized into a clear next step"
       />
     </>

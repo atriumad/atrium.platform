@@ -1,45 +1,57 @@
-import type { CSSProperties } from 'react'
+import { cn } from '../lib/cn'
 
-type LogoVariant = 'mark' | 'wordmark' | 'lockup'
-
-type LogoProps = {
-  variant?: LogoVariant
-  color?: string
-  height?: number
-  assetBase?: string
-  gap?: number
-  style?: CSSProperties
-}
+type Variant = 'mark' | 'wordmark' | 'lockup'
 
 const WORDMARK_RATIO = 819.21 / 225.63
 
 export function Logo({
   variant = 'wordmark',
-  color = 'var(--teal-800)',
   height = 32,
-  assetBase = '/logos',
-  gap = 14,
-  style,
-}: LogoProps) {
-  const mask = (file: string, ratio: number): CSSProperties => ({
-    display: 'block',
-    height: `${height}px`,
-    width: `${height * ratio}px`,
-    background: color,
-    WebkitMask: `url(${assetBase}/${file}) left center / contain no-repeat`,
-    mask: `url(${assetBase}/${file}) left center / contain no-repeat`,
-  })
+  className,
+}: {
+  variant?: Variant
+  height?: number
+  className?: string
+}) {
+  const mask = (file: string, width: number) => (
+    <span
+      aria-hidden="true"
+      className="block bg-current"
+      style={{
+        height,
+        width,
+        maskImage: `url(${file})`,
+        WebkitMaskImage: `url(${file})`,
+        maskSize: 'contain',
+        WebkitMaskSize: 'contain',
+        maskRepeat: 'no-repeat',
+        WebkitMaskRepeat: 'no-repeat',
+        maskPosition: 'center',
+        WebkitMaskPosition: 'center',
+      }}
+    />
+  )
 
   if (variant === 'mark') {
-    return <span role="img" aria-label="Atrium" style={{ ...mask('atrium-mark.svg', 1), ...style }} />
+    return (
+      <span className={cn('inline-flex text-ink', className)} role="img" aria-label="Atrium">
+        {mask('/logos/atrium-mark.svg', height)}
+      </span>
+    )
   }
+
   if (variant === 'wordmark') {
-    return <span role="img" aria-label="atrium" style={{ ...mask('atrium-wordmark.svg', WORDMARK_RATIO), ...style }} />
+    return (
+      <span className={cn('inline-flex text-ink', className)} role="img" aria-label="Atrium">
+        {mask('/logos/atrium-wordmark.svg', height * WORDMARK_RATIO)}
+      </span>
+    )
   }
+
   return (
-    <span style={{ display: 'inline-flex', alignItems: 'center', gap: `${gap}px`, ...style }} aria-label="Atrium" role="img">
-      <span style={mask('atrium-mark.svg', 1)} />
-      <span style={mask('atrium-wordmark.svg', WORDMARK_RATIO)} />
+    <span className={cn('inline-flex items-center gap-[0.5em] text-ink', className)} role="img" aria-label="Atrium">
+      {mask('/logos/atrium-mark.svg', height * 1.05)}
+      {mask('/logos/atrium-wordmark.svg', height * WORDMARK_RATIO)}
     </span>
   )
 }

@@ -12,6 +12,7 @@ import ServiceProofStrip from '@/components/services/ServiceProofStrip'
 import ServiceStatsEditorial from '@/components/services/ServiceStatsEditorial'
 import ServiceSystemMap from '@/components/services/ServiceSystemMap'
 import ServiceThesis from '@/components/services/ServiceThesis'
+import { CTA } from '@/lib/cta'
 import { getService, services } from '@/lib/services'
 
 export async function generateStaticParams() {
@@ -69,8 +70,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         eyebrow="JOIN 15+ HOSPITALITY BRANDS"
         headline={<>Been burned by an agency <em>before?</em></>}
         body="If you've outgrown freelancers, been let down by generic agencies, or just want a team that reports revenue instead of vanity — we were built for you. See the system before you commit."
-        cta="Book a Growth Diagnostic"
-        ctaHref="/contact"
+        cta={CTA.primary.label}
+        ctaHref={CTA.primary.href}
+        ctaExternal={CTA.primary.external}
         coverAlt="Team at table in restaurant — natural, warm, working together"
       />
     </>

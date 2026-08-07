@@ -1,117 +1,43 @@
-'use client'
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
+import { cn } from '../lib/cn'
 
-import { type AnchorHTMLAttributes, type ButtonHTMLAttributes, type CSSProperties, type ReactNode, useState } from 'react'
+type Variant = 'primary' | 'secondary' | 'accent' | 'ghost'
+type Size = 'sm' | 'md' | 'lg'
 
-type ButtonVariant = 'primary' | 'mint' | 'amber' | 'outline' | 'ghost' | 'ghostLight'
-type ButtonSize    = 'sm' | 'md' | 'lg'
-
-type SharedProps = {
-  variant?: ButtonVariant
-  size?: ButtonSize
-  iconLeft?: ReactNode
-  iconRight?: ReactNode
-  fullWidth?: boolean
-  disabled?: boolean
-  children?: ReactNode
-  style?: CSSProperties
+const variants: Record<Variant, string> = {
+  primary: 'bg-ink text-mint shadow-soft hover:-translate-y-0.5 hover:shadow-float',
+  secondary: 'bg-card text-ink border border-line shadow-soft hover:-translate-y-0.5 hover:shadow-float',
+  accent: 'bg-amber text-ink shadow-soft hover:-translate-y-0.5 hover:shadow-float',
+  ghost: 'bg-transparent text-ink hover:bg-ink/5',
 }
 
-type ButtonAsButton = SharedProps & { href?: undefined } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof SharedProps | 'style'>
-type ButtonAsAnchor = SharedProps & { href: string } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof SharedProps | 'style' | 'href'>
-
-type ButtonProps = ButtonAsButton | ButtonAsAnchor
-
-const sizes: Record<ButtonSize, CSSProperties> = {
-  sm: { padding: '8px 16px',  fontSize: '13px', gap: '6px' },
-  md: { padding: '12px 24px', fontSize: '15px', gap: '8px' },
-  lg: { padding: '16px 34px', fontSize: '17px', gap: '10px' },
+const sizes: Record<Size, string> = {
+  sm: 'px-4 py-2 text-[0.82rem] gap-1.5',
+  md: 'px-6 py-3.5 text-[0.92rem] gap-2',
+  lg: 'px-8 py-4 text-[1.02rem] gap-2.5',
 }
 
-const variantStyles: Record<ButtonVariant, CSSProperties> = {
-  primary:    { background: 'var(--teal-800)', color: 'var(--mint-400)',  border: '1.5px solid var(--teal-800)' },
-  mint:       { background: 'var(--mint-400)', color: 'var(--teal-800)',  border: '1.5px solid var(--mint-400)' },
-  amber:      { background: 'var(--amber-500)',color: 'var(--teal-800)',  border: '1.5px solid var(--amber-500)' },
-  outline:    { background: 'transparent',     color: 'var(--teal-800)',  border: '1.5px solid var(--teal-800)' },
-  ghost:      { background: 'transparent',     color: 'var(--teal-800)',  border: '1.5px solid transparent' },
-  ghostLight: { background: 'transparent',     color: 'var(--cloud-300)', border: '1.5px solid var(--teal-300)' },
-}
+const base = [
+  'inline-flex items-center justify-center rounded-full font-sans font-semibold leading-none',
+  'cursor-pointer no-underline transition duration-200 ease-atrium',
+  'focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-green-fill',
+  'disabled:cursor-not-allowed disabled:opacity-45 disabled:hover:translate-y-0',
+  'motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+].join(' ')
 
-const hoverBg: Record<ButtonVariant, string> = {
-  primary:    'var(--teal-900)',
-  mint:       'var(--mint-500)',
-  amber:      'var(--amber-600)',
-  outline:    'var(--teal-800)',
-  ghost:      'var(--cloud-300)',
-  ghostLight: 'rgba(228,238,240,0.10)',
-}
+type Shared = { variant?: Variant; size?: Size; className?: string; children?: ReactNode }
 
-const hoverColor: Partial<Record<ButtonVariant, string>> = {
-  outline:    'var(--mint-400)',
-  ghostLight: 'var(--mint-300)',
-}
+type ButtonProps = Shared & { href?: undefined } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof Shared>
+type AnchorProps = Shared & { href: string } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof Shared | 'href'>
 
-const base: CSSProperties = {
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontFamily: 'var(--font-sans)',
-  fontWeight: 600,
-  lineHeight: 1,
-  letterSpacing: '0.01em',
-  borderRadius: 'var(--radius-pill)',
-  cursor: 'pointer',
-  textDecoration: 'none',
-  whiteSpace: 'nowrap',
-  transition: 'transform var(--dur-fast) var(--ease-out), background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out)',
-}
-
-export function Button(props: ButtonProps) {
-  const {
-    variant = 'primary',
-    size = 'md',
-    iconLeft,
-    iconRight,
-    fullWidth = false,
-    disabled = false,
-    children,
-    style,
-    ...rest
-  } = props
-
-  const [pressed, setPressed] = useState(false)
-  const [hover,   setHover]   = useState(false)
-
-  const computed: CSSProperties = {
-    ...base,
-    ...sizes[size],
-    ...variantStyles[variant],
-    ...(fullWidth ? { width: '100%' } : {}),
-    opacity: disabled ? 0.45 : 1,
-    cursor:  disabled ? 'not-allowed' : 'pointer',
-    transform: pressed ? 'scale(0.97)' : 'scale(1)',
-    ...(hover && !disabled ? { background: hoverBg[variant], color: hoverColor[variant] } : {}),
-    ...style,
-  }
-
-  const events = {
-    onPointerDown:  () => setPressed(true),
-    onPointerUp:    () => setPressed(false),
-    onPointerLeave: () => { setPressed(false); setHover(false) },
-    onPointerEnter: () => setHover(true),
-  }
+export function Button(props: ButtonProps | AnchorProps) {
+  const { variant = 'primary', size = 'md', className, children, ...rest } = props
+  const classes = cn(base, variants[variant], sizes[size], className)
 
   if ('href' in props && props.href !== undefined) {
-    const { href } = props
-    return (
-      <a href={disabled ? undefined : href} style={computed} aria-disabled={disabled} {...events} {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}>
-        {iconLeft}{children}{iconRight}
-      </a>
-    )
+    return <a className={classes} {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}>{children}</a>
   }
 
-  return (
-    <button disabled={disabled} style={computed} {...events} {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}>
-      {iconLeft}{children}{iconRight}
-    </button>
-  )
+  const { type = 'button', ...buttonRest } = rest as ButtonHTMLAttributes<HTMLButtonElement>
+  return <button className={classes} type={type} {...buttonRest}>{children}</button>
 }

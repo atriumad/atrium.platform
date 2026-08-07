@@ -48,7 +48,7 @@ export default function TestimonialBento({ items, eyebrow }: Props) {
                   &ldquo;{card.quote}&rdquo;
                 </p>
                 <div className="mt-8 pt-6" style={{ borderTop: '1px solid rgba(228,238,240,0.1)' }}>
-                  <p className="type-caption font-medium" style={{ color: 'var(--color-accent)' }}>{card.author}</p>
+                  {card.author && <p className="type-caption font-medium" style={{ color: 'var(--color-accent)' }}>{card.author}</p>}
                   <p className="type-eyebrow mt-1 opacity-60" style={{ color: 'var(--color-text-light)' }}>{card.role} · {card.company}</p>
                 </div>
               </div>

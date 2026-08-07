@@ -1,0 +1,84 @@
+@theme {
+  /* Type — three families, no more */
+  --font-sans: var(--font-inter-tight), "Inter Tight", system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
+  --font-script: var(--font-nothing-you-could-do), "Nothing You Could Do", cursive;
+
+  /* Warm neutrals — the ground */
+  --color-cream: #f4f1e7;
+  --color-off-white: #faf8f0;
+  --color-card: #ffffff;
+  --color-track: #ece8da;
+  --color-track-soft: #e9e5d7;
+  --color-pending: #c7cec9;
+
+  /* Greens */
+  --color-ink: #0d2f33;
+  --color-dark: #0d353b;
+  --color-green: #1f7a52;
+  --color-green-fill: #3fae78;
+  --color-green-soft: #e3f2e9;
+  --color-green-ink: #186043;
+  --color-mint: #a9edc8;
+
+  /* Accent */
+  --color-amber: #f3c150;
+  --color-amber-fill: #eab63f;
+  --color-amber-soft: #f9ecc7;
+  --color-amber-ink: #a97f1c;
+
+  /* State — terracotta, never a traffic-light red */
+  --color-red-fill: #e08a5b;
+  --color-red-soft: #f7e2d6;
+  --color-red-ink: #c0653a;
+  --color-red-tint: #f0b79b;
+  --color-error: #b4553a;
+
+  /* Text and line */
+  --color-body: #3f544f;
+  --color-muted: #78877f;
+  --color-muted-soft: #93a09b;
+  --color-line: rgba(13, 47, 51, 0.1);
+
+  /* Editorial accents — campaign rotation only. One leads, one supports,
+     the rest stay in reserve. No component may default to one. */
+  --color-coral: #ec9a82;
+  --color-lilac: #d2b4ee;
+  --color-sage: #a8c89a;
+  --color-periwinkle: #7e9bf0;
+
+  --radius-card: 26px;
+  --radius-card-sm: 18px;
+
+  --shadow-soft: 0 1px 0 rgba(13, 47, 51, 0.04), 0 16px 40px rgba(13, 47, 51, 0.07);
+  --shadow-float: 0 2px 0 rgba(13, 47, 51, 0.04), 0 28px 56px rgba(13, 47, 51, 0.11);
+
+  --ease-atrium: cubic-bezier(.2, .7, .2, 1);
+
+  --animate-stage-rise: stage-rise 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
+  --animate-rise: rise .7s var(--ease-atrium) both;
+  --animate-rise-sm: rise .5s var(--ease-atrium) both;
+  --animate-pulse-soft: pulse-soft 2s infinite;
+  --animate-spin-slow: spin-slow .8s linear infinite;
+  --animate-fade-in: fade-in .3s var(--ease-atrium) both;
+
+  @keyframes stage-rise {
+    from { opacity: 0; filter: blur(8px); transform: translate3d(0, 20px, 0) scale(0.988); }
+    to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .35; }
+  }
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
