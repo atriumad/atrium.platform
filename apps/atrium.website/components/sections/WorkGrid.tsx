@@ -1,6 +1,6 @@
 'use client'
+import { Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionCTA from '@/components/ui/TransitionCTA'
 import TransitionLink from '@/components/ui/TransitionLink'
 import CaseCover from '@/components/work/CaseCover'
@@ -33,12 +33,14 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
   }, [])
 
   return (
-    <section className="px-6 md:px-12 py-20 md:py-28" style={{ background: 'var(--color-surface)' }}>
+    <section className="bg-cream px-6 py-20 md:px-12 md:py-28">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-end mb-14">
           <div>
             <Eyebrow className="mb-3">Selected Work</Eyebrow>
-            <h2 className="type-section-title">See what changed. <em>Not just what shipped.</em></h2>
+            <h2 className="text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+              See what changed. <em className="font-serif italic text-green">Not just what shipped.</em>
+            </h2>
           </div>
           <TransitionCTA href="/work" variant="ghost" className="hidden md:flex">See all work →</TransitionCTA>
         </div>
@@ -47,13 +49,12 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
             <TransitionLink
               key={project.study.slug}
               href={`/work/${project.study.slug}`}
-              className="work-card group block rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
-              style={{ background: 'var(--color-surface-alt)', opacity: 0 }}
+              className="work-card group block overflow-hidden rounded-card bg-card opacity-0 shadow-soft transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
             >
               <CaseCover study={project.study} className={aspectMap[project.orientation]} />
               <div className="p-6">
-                <p className="type-card-title mb-1">{project.study.client}</p>
-                <p className="type-caption" style={{ opacity: 0.72 }}>{project.result}</p>
+                <p className="mb-1 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">{project.study.client}</p>
+                <p className="text-[0.875rem] text-muted">{project.result}</p>
               </div>
             </TransitionLink>
           ))}

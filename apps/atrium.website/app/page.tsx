@@ -68,7 +68,6 @@ export default function HomePage() {
         clients={clients}
         label="Trusted by hospitality brands building demand"
         size="compact"
-        bg="var(--surface-page)"
       />
       <AudiencePaths />
       <BentoGrid

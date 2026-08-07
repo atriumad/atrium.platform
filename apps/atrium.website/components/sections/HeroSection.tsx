@@ -1,8 +1,8 @@
 'use client'
+import { Button, Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
 import HeroPerspectiveGallery from '@/components/sections/HeroPerspectiveGallery'
-import Button from '@/components/ui/Button'
-import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionCTA from '@/components/ui/TransitionCTA'
 import { CTA } from '@/lib/cta'
 import { gsap } from '@/lib/gsap'
 import { heroGalleryIds } from '@/lib/work'
@@ -34,58 +34,43 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-screen overflow-hidden pt-14 lg:h-screen"
-      style={{ background: 'var(--color-primary)' }}
+      className="relative flex min-h-screen overflow-hidden bg-dark pt-14 lg:h-screen"
     >
       <div className="flex w-full flex-1 flex-col lg:flex-row">
         <div className="flex flex-1 flex-col justify-center px-6 py-20 md:px-16 lg:w-1/2">
           <div ref={textRef} className="max-w-4xl">
-            <Eyebrow className="mb-6" tone="onDark">
+            <Eyebrow className="mb-6" tone="on-dark">
               The hospitality-only growth team
             </Eyebrow>
 
-            <h1
-              className="type-page-title mb-6"
-              style={{
-                color: 'var(--text-on-dark)',
-              }}
-            >
+            <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
               Turn attention into reservations. And first visits into{' '}
-              <em style={{ color: 'var(--mint-400)' }}>
-                regulars.
-              </em>
+              <em className="font-serif italic text-mint">regulars.</em>
             </h1>
 
-            <p
-              className="type-lead mb-10 max-w-xl"
-              style={{
-                color: 'var(--text-on-dark)',
-                opacity: 0.78,
-              }}
-            >
+            <p className="mb-10 max-w-xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
               One accountable team — strategy, content, Google, retention and reporting
               in a single system. Hospitality is all we do.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="mint">{CTA.primary.label}</Button>
-              <Button href={CTA.proof.href} variant="ghostLight">{CTA.proof.label}</Button>
+              <Button href={CTA.primary.href} target="_blank" rel="noopener noreferrer" variant="accent">
+                {CTA.primary.label}
+              </Button>
+              <TransitionCTA href={CTA.proof.href} variant="ghostLight">
+                {CTA.proof.label}
+              </TransitionCTA>
             </div>
           </div>
 
           <div ref={tagsRef} className="flex flex-wrap gap-3 mt-16">
             {tags.map((tag) => (
-              <div
+              <span
                 key={tag}
-                className="type-caption rounded-full px-5 py-2 font-medium"
-                style={{
-                  background: 'rgba(228,238,240,0.07)',
-                  color: 'var(--mint-400)',
-                  border: '1px solid rgba(181,242,219,0.15)',
-                }}
+                className="rounded-full border border-cream/15 bg-cream/[0.07] px-5 py-2 text-[0.875rem] font-medium text-mint"
               >
                 {tag}
-              </div>
+              </span>
             ))}
           </div>
         </div>

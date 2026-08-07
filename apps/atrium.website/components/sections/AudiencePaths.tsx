@@ -1,7 +1,7 @@
 'use client'
 
+import { Eyebrow } from '@atrium/ui'
 import CldImage from '@/components/media/CldImage'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionLink from '@/components/ui/TransitionLink'
 
 const paths = [
@@ -33,15 +33,15 @@ const paths = [
 
 export default function AudiencePaths() {
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+    <section className="bg-card px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-14 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16 md:mb-20">
           <div className="order-2 lg:order-1 lg:col-span-6">
             <Eyebrow className="mb-6">Built for your stage</Eyebrow>
-            <h2 className="type-section-title max-w-[13ch]">
-              Different footprint. <em>Different first move.</em>
+            <h2 className="max-w-[13ch] text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+              Different footprint. <em className="font-serif italic text-green">Different first move.</em>
             </h2>
-            <p className="type-body mt-6 max-w-lg border-t pt-6" style={{ color: 'var(--text-muted)', borderColor: 'rgba(7,47,52,0.18)' }}>
+            <p className="mt-6 max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted">
               A single dining room, a regional group, and a national rollout should not enter through the same scope. Start with the operating problem that matches your footprint.
             </p>
           </div>
@@ -58,30 +58,27 @@ export default function AudiencePaths() {
           </div>
         </div>
 
-        <div className="border-y" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+        <div className="border-y border-line">
           {paths.map((path, index) => (
             <TransitionLink
               key={path.label}
               href={path.href}
-              className="group grid gap-7 border-b py-9 no-underline last:border-b-0 md:grid-cols-[8rem_minmax(0,0.8fr)_minmax(0,1.2fr)_auto] md:items-center md:gap-10 md:py-11"
-              style={{ borderColor: 'rgba(7,47,52,0.18)' }}
+              className="group grid gap-7 border-b border-line py-9 no-underline last:border-b-0 md:grid-cols-[8rem_minmax(0,0.8fr)_minmax(0,1.2fr)_auto] md:items-center md:gap-10 md:py-11"
             >
-              <p className="m-0 font-normal leading-none tracking-[-0.05em]" style={{ color: 'var(--teal-800)', fontFamily: 'var(--font-serif)', fontSize: 'clamp(4rem,7vw,7rem)' }}>
+              <p className="m-0 font-serif text-[clamp(4rem,7vw,7rem)] font-normal leading-none tracking-[-0.05em] text-ink">
                 {path.count}
               </p>
               <div>
-                <p className="type-eyebrow m-0" style={{ color: 'var(--teal-500)' }}>
-                  Path {String(index + 1).padStart(2, '0')}
-                </p>
-                <h3 className="type-card-title mt-3" style={{ color: 'var(--text-strong)' }}>
+                <Eyebrow>Path {String(index + 1).padStart(2, '0')}</Eyebrow>
+                <h3 className="mt-3 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">
                   {path.label}
                 </h3>
               </div>
               <div>
-                <p className="type-body m-0 max-w-xl" style={{ color: 'var(--text-body)' }}>{path.tension}</p>
-                <p className="type-caption mt-3 font-medium" style={{ color: 'var(--teal-800)' }}>{path.outcome}</p>
+                <p className="m-0 max-w-xl text-base leading-relaxed text-body">{path.tension}</p>
+                <p className="mt-3 text-[0.875rem] font-medium text-ink">{path.outcome}</p>
               </div>
-              <span className="type-caption inline-flex items-center gap-3 font-medium" style={{ color: 'var(--teal-800)' }}>
+              <span className="inline-flex items-center gap-3 text-[0.875rem] font-medium text-ink">
                 <span className="max-w-[10rem]">{path.cta}</span>
                 <span className="text-xl transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
               </span>
