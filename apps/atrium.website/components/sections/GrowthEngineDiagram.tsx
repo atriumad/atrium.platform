@@ -17,7 +17,7 @@ export const stages = [
 
 export default function GrowthEngineDiagram() {
   return (
-    <section className="bg-card px-[var(--gutter)] py-24 md:py-36">
+    <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
         {/* Header — matches the AudiencePaths / WorkGrid rhythm */}
         <div className="mb-14 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
@@ -48,7 +48,7 @@ export default function GrowthEngineDiagram() {
             {stages.map((stage) => (
               <div key={stage.id} className="flex items-center md:px-10 md:first:pl-0">
                 <span
-                  className="h-2.5 w-2.5 rounded-full shadow-[0_0_0_6px_var(--color-card)]"
+                  className="h-2.5 w-2.5 rounded-full shadow-[0_0_0_6px_var(--color-cream)]"
                   style={{ background: stage.dot }}
                 />
               </div>

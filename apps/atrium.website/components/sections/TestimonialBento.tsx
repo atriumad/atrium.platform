@@ -1,11 +1,11 @@
 'use client'
+import { Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
-import Eyebrow from '@/components/ui/Eyebrow'
 import { gsap } from '@/lib/gsap'
 
 export type BentoCard =
-  | { type: 'stat'; stat: string; statLabel: string; bg?: string }
-  | { type: 'testimonial'; quote: string; author: string; role: string; company: string; bg?: string }
+  | { type: 'stat'; stat: string; statLabel: string }
+  | { type: 'testimonial'; quote: string; author: string; role: string; company: string }
 
 type Props = { items: BentoCard[]; eyebrow?: string }
 
@@ -27,29 +27,36 @@ export default function TestimonialBento({ items, eyebrow }: Props) {
   }, [])
 
   return (
-    <section className="px-6 md:px-12 py-20 md:py-28" style={{ background: 'var(--color-surface)' }}>
-      <div className="max-w-6xl mx-auto">
-        {eyebrow && <Eyebrow className="mb-14">{eyebrow}</Eyebrow>}
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+    <section className="bg-dark px-6 py-20 md:px-12 md:py-28">
+      <div className="mx-auto max-w-6xl">
+        {eyebrow && <Eyebrow className="mb-14" tone="on-dark">{eyebrow}</Eyebrow>}
+        <div ref={gridRef} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
           {items.map((card, i) => {
             const key = card.type === 'stat' ? `${card.stat}-${i}` : `${card.quote}-${i}`
-            const bg = card.bg ?? (card.type === 'stat' ? 'var(--color-forest)' : 'var(--color-primary)')
             if (card.type === 'stat') {
               return (
-                <div key={key} className="tb-card rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[260px]" style={{ background: bg, opacity: 0 }}>
-                  <p className="text-6xl md:text-7xl font-medium leading-none" style={{ color: 'var(--color-accent)' }}>{card.stat}</p>
-                  <p className="type-caption mt-4" style={{ color: 'var(--color-text-light)', opacity: 0.8 }}>{card.statLabel}</p>
+                <div
+                  key={key}
+                  className="tb-card flex min-h-[260px] flex-col justify-between rounded-2xl border border-cream/20 bg-cream/[0.06] p-8 opacity-0 md:p-10"
+                >
+                  <p className="text-6xl font-medium leading-none text-mint md:text-7xl">{card.stat}</p>
+                  <p className="mt-4 text-[0.875rem] text-cream/70">{card.statLabel}</p>
                 </div>
               )
             }
             return (
-              <div key={key} className="tb-card rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[260px] md:col-span-2" style={{ background: bg, opacity: 0 }}>
-                <p className="type-lead italic" style={{ color: 'var(--color-text-light)', fontFamily: 'var(--font-serif)' }}>
+              <div
+                key={key}
+                className="tb-card flex min-h-[260px] flex-col justify-between rounded-2xl border border-cream/20 bg-cream/[0.06] p-8 opacity-0 md:col-span-2 md:p-10"
+              >
+                <p className="font-serif text-[clamp(1.05rem,1.4vw,1.25rem)] italic leading-relaxed text-cream">
                   &ldquo;{card.quote}&rdquo;
                 </p>
-                <div className="mt-8 pt-6" style={{ borderTop: '1px solid rgba(228,238,240,0.1)' }}>
-                  {card.author && <p className="type-caption font-medium" style={{ color: 'var(--color-accent)' }}>{card.author}</p>}
-                  <p className="type-eyebrow mt-1 opacity-60" style={{ color: 'var(--color-text-light)' }}>{card.role} · {card.company}</p>
+                <div className="mt-8 border-t border-cream/20 pt-6">
+                  {card.author && <p className="text-[0.875rem] font-medium text-mint">{card.author}</p>}
+                  <Eyebrow as="p" tone="on-dark" className="mt-1">
+                    {card.role} · {card.company}
+                  </Eyebrow>
                 </div>
               </div>
             )

@@ -1,4 +1,4 @@
-import Eyebrow from '@/components/ui/Eyebrow'
+import { Eyebrow } from '@atrium/ui'
 
 // ─── Comparison vs alternatives (doc vs.md §2.3 / §9.9) ─────────────────────
 // Answers the decisive objection: "Why hire Atrium instead of keeping my
@@ -21,21 +21,21 @@ const rows: Row[] = [
 
 export default function ComparisonMatrix() {
   return (
-    <section className="px-6 md:px-12 py-24 md:py-32" style={{ background: 'var(--surface-page)' }}>
-      <div className="max-w-6xl mx-auto">
-        <div className="max-w-2xl mb-12 md:mb-16">
-          <Eyebrow className="mb-4">Why Atrium</Eyebrow>
-          <h2 className="type-section-title" style={{ color: 'var(--text-strong)' }}>
-            One accountable team, <em>not five vendors.</em>
+    <section className="bg-dark px-6 py-24 md:px-12 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-12 max-w-2xl md:mb-16">
+          <Eyebrow className="mb-4" tone="on-dark">Why Atrium</Eyebrow>
+          <h2 className="text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            One accountable team, <em className="font-serif italic text-mint">not five vendors.</em>
           </h2>
-          <p className="type-body mt-5 max-w-md" style={{ color: 'var(--text-muted)' }}>
+          <p className="mt-5 max-w-md text-base leading-relaxed text-cream/70">
             The real question isn&apos;t Atrium versus another agency. It&apos;s Atrium versus the
             photographer, the social manager, and the ads shop you&apos;re already juggling.
           </p>
         </div>
 
-        <div className="overflow-x-auto -mx-6 px-6 md:mx-0 md:px-0">
-          <table className="w-full border-collapse min-w-[42rem]">
+        <div className="-mx-6 overflow-x-auto px-6 md:mx-0 md:px-0">
+          <table className="w-full min-w-[42rem] border-collapse">
             <thead>
               <tr>
                 <th className="text-left" aria-hidden />
@@ -45,14 +45,11 @@ export default function ComparisonMatrix() {
                     <th
                       key={col}
                       scope="col"
-                      className="type-caption px-4 py-4 text-left align-bottom"
-                      style={{
-                        color: isAtrium ? 'var(--teal-800)' : 'var(--text-muted)',
-                        fontWeight: isAtrium ? 600 : 500,
-                        background: isAtrium ? 'color-mix(in srgb, var(--mint-400) 22%, transparent)' : 'transparent',
-                        borderTopLeftRadius: isAtrium ? 'var(--radius-md)' : undefined,
-                        borderTopRightRadius: isAtrium ? 'var(--radius-md)' : undefined,
-                      }}
+                      className={`px-4 py-4 text-left align-bottom text-[0.875rem] ${
+                        isAtrium
+                          ? 'rounded-t-md bg-mint/[0.14] font-semibold text-mint'
+                          : 'font-medium text-cream/70'
+                      }`}
                     >
                       {col}
                     </th>
@@ -62,12 +59,8 @@ export default function ComparisonMatrix() {
             </thead>
             <tbody>
               {rows.map((row) => (
-                <tr key={row.criterion} style={{ borderTop: '1px solid rgba(7,47,52,0.08)' }}>
-                  <th
-                    scope="row"
-                    className="type-caption px-4 py-4 text-left font-medium"
-                    style={{ color: 'var(--text-strong)' }}
-                  >
+                <tr key={row.criterion} className="border-t border-cream/20">
+                  <th scope="row" className="px-4 py-4 text-left text-[0.875rem] font-medium text-cream">
                     {row.criterion}
                   </th>
                   {row.values.map((value, i) => {
@@ -75,12 +68,9 @@ export default function ComparisonMatrix() {
                     return (
                       <td
                         key={columns[i]}
-                        className="type-caption px-4 py-4"
-                        style={{
-                          color: isAtrium ? 'var(--teal-800)' : 'var(--text-muted)',
-                          fontWeight: isAtrium ? 600 : 400,
-                          background: isAtrium ? 'color-mix(in srgb, var(--mint-400) 10%, transparent)' : 'transparent',
-                        }}
+                        className={`px-4 py-4 text-[0.875rem] ${
+                          isAtrium ? 'bg-mint/[0.06] font-semibold text-mint' : 'font-normal text-cream/70'
+                        }`}
                       >
                         {value}
                       </td>

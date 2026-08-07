@@ -33,7 +33,7 @@ const paths = [
 
 export default function AudiencePaths() {
   return (
-    <section className="bg-card px-[var(--gutter)] py-24 md:py-36">
+    <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-14 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16 md:mb-20">
           <div className="order-2 lg:order-1 lg:col-span-6">
