@@ -1,8 +1,8 @@
 'use client'
+import { Eyebrow } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import Button from '@/components/ui/Button'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionCTA from '@/components/ui/TransitionCTA'
 import { CAL_CONFIG } from '@/lib/cal'
 import { gsap } from '@/lib/gsap'
@@ -46,7 +46,7 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaCa
       />
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
         <div className="flex-1 flex flex-col gap-6">
-          {eyebrow && <Eyebrow style={{ color: 'var(--color-text-light)' } as React.CSSProperties}>{eyebrow}</Eyebrow>}
+          {eyebrow && <Eyebrow tone="on-dark">{eyebrow}</Eyebrow>}
           <h2 className="type-section-title" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
           <p className="type-body max-w-md" style={{ color: 'var(--color-text-light)', opacity: 0.76 }}>{body}</p>
           <div className="mt-2">
