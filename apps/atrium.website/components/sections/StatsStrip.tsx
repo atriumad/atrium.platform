@@ -1,5 +1,5 @@
 'use client'
-import { Eyebrow } from '@atrium/ui'
+import { Eyebrow, NumberReel } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
 
@@ -46,8 +46,8 @@ export default function StatsStrip({ stats }: Props) {
               key={`${stat.number}-${stat.label}`}
               className="metric-reveal grid min-h-[15rem] grid-cols-1 items-center gap-7 border-t border-cream/20 py-10 md:min-h-[17rem] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-8 md:py-12"
             >
-              <p className="stat-number m-0 font-serif text-[clamp(5rem,13vw,11.5rem)] font-normal leading-[0.72] tracking-[-0.055em] text-cream md:order-2 md:text-right md:text-[clamp(4.5rem,7.5vw,8.5rem)]">
-                {stat.number}
+              <p className="stat-number m-0 font-serif text-[clamp(5rem,13vw,11.5rem)] font-normal leading-none tracking-[-0.055em] text-cream md:order-2 md:justify-end md:text-[clamp(4.5rem,7.5vw,8.5rem)] flex">
+                <NumberReel value={stat.number} />
               </p>
               <div className="md:order-1">
                 <p className="stat-label m-0 max-w-sm text-base leading-relaxed text-cream/70">
