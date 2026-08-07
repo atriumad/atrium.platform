@@ -1,42 +1,23 @@
+import { Eyebrow } from '@atrium/ui'
 import Image from 'next/image'
 import type { Service } from '@/lib/services'
 import { parseHeadline } from './utils'
 
 export default function ServiceThesis({ svc }: { svc: Service }) {
   return (
-    <section
-      className="px-(--gutter) pt-20 pb-26 max-sm:px-(--gutter)"
-      style={{ background: 'var(--cloud-100)' }}
-    >
+    <section className="bg-cream px-(--gutter) pt-20 pb-26 max-sm:px-(--gutter)">
       <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] items-center gap-16 max-w-6xl mx-auto max-md:grid-cols-1 max-md:gap-10">
         <div className="flex flex-col gap-[1.2rem]">
-          <span
-            className="type-eyebrow"
-            style={{ color: 'var(--teal-500)' }}
-          >
-            {svc.thesis.eyebrow}
-          </span>
-          <h2
-            className="type-section-title m-0 max-w-[17ch]"
-            style={{ color: 'var(--text-strong)' }}
-          >
-            {parseHeadline(svc.thesis.headline)}
+          <Eyebrow>{svc.thesis.eyebrow}</Eyebrow>
+          <h2 className="m-0 max-w-[17ch] text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+            {parseHeadline(svc.thesis.headline, 'font-serif italic text-green')}
           </h2>
-          <p
-            className="type-body m-0 max-w-120"
-            style={{ color: 'var(--text-muted)' }}
-          >
+          <p className="m-0 max-w-120 text-base leading-relaxed text-muted">
             {svc.thesis.body}
           </p>
         </div>
 
-        <div
-          className="overflow-hidden relative min-h-124 max-md:min-h-112"
-          style={{
-            borderRadius: 'var(--radius-bento)',
-            boxShadow: 'var(--shadow-soft)',
-          }}
-        >
+        <div className="overflow-hidden relative min-h-124 max-md:min-h-112 rounded-card shadow-soft">
           <Image
             src={svc.thesis.image}
             alt={svc.hero.coverAlt}
@@ -45,10 +26,7 @@ export default function ServiceThesis({ svc }: { svc: Service }) {
             className="object-cover"
           />
           <div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(180deg, color-mix(in srgb, var(--teal-900) 4%, transparent), color-mix(in srgb, var(--teal-900) 22%, transparent))',
-            }}
+            className="absolute inset-0 bg-linear-to-b from-ink/[0.04] to-ink/[0.22]"
             aria-hidden="true"
           />
         </div>

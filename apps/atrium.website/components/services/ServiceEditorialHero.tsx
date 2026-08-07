@@ -7,25 +7,16 @@ import { parseHeadline } from './utils'
 
 export default function ServiceEditorialHero({ svc }: { svc: Service }) {
   return (
-    <section
-      className="relative overflow-hidden pt-[9.5rem] pb-[3rem] max-md:pt-[7.5rem] max-sm:pt-[6.5rem] max-sm:pb-[2rem]"
-      style={{ background: 'var(--teal-800)' }}
-    >
+    <section className="relative overflow-hidden bg-dark pt-[9.5rem] pb-[3rem] max-md:pt-[7.5rem] max-sm:pt-[6.5rem] max-sm:pb-[2rem]">
       <div className="px-[var(--gutter)]">
         <div className="flex flex-col gap-5 max-w-[var(--container-wide)] mx-auto">
           <CategoryBadge category={svc.category} />
 
-          <h1
-            className="type-page-title m-0 max-w-[13ch]"
-            style={{ color: 'var(--text-on-dark)' }}
-          >
-            {parseHeadline(svc.hero.headline)}
+          <h1 className="m-0 max-w-[13ch] text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
+            {parseHeadline(svc.hero.headline, 'font-serif italic text-mint')}
           </h1>
 
-          <p
-            className="type-lead m-0 max-w-[38rem]"
-            style={{ color: 'var(--text-on-dark)', opacity: 0.74 }}
-          >
+          <p className="m-0 max-w-[38rem] text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
             {svc.hero.body}
           </p>
 

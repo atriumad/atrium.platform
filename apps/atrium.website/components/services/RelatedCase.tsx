@@ -1,7 +1,7 @@
 'use client'
 
+import { Eyebrow, NumberReel } from '@atrium/ui'
 import CldImage from '@/components/media/CldImage'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionLink from '@/components/ui/TransitionLink'
 import { relatedCaseBySlug } from '@/lib/services'
 import { getCaseCover, getCaseStudy } from '@/lib/work'
@@ -18,13 +18,12 @@ export default function RelatedCase({ serviceSlug }: { serviceSlug: string }) {
   const cover = getCaseCover(study)
 
   return (
-    <section className="px-6 md:px-12 py-24 md:py-32" style={{ background: 'var(--surface-page)' }}>
+    <section className="bg-cream px-6 md:px-12 py-24 md:py-32">
       <div className="max-w-6xl mx-auto">
         <Eyebrow className="mb-8">Related case</Eyebrow>
         <TransitionLink
           href={`/work/${study.slug}`}
-          className="group relative isolate overflow-hidden grid md:grid-cols-[1fr_auto] gap-10 md:gap-16 items-end rounded-[var(--radius-lg)] p-8 md:p-12 min-h-[26rem] md:min-h-[32rem] transition-colors"
-          style={{ border: '1px solid rgba(7,47,52,0.08)' }}
+          className="group relative isolate overflow-hidden grid md:grid-cols-[1fr_auto] gap-10 md:gap-16 items-end rounded-card border border-line p-8 md:p-12 min-h-[26rem] md:min-h-[32rem] transition-colors"
         >
           {cover.imageId && (
             <CldImage
@@ -39,11 +38,11 @@ export default function RelatedCase({ serviceSlug }: { serviceSlug: string }) {
           <div className="absolute inset-0 -z-10 bg-black/55" aria-hidden="true" />
 
           <div className="flex flex-col gap-4">
-            <span className="type-caption font-medium text-white/80">{study.client}</span>
-            <h2 className="type-card-title max-w-[18ch]" style={{ color: '#fff' }}>
+            <span className="text-[0.875rem] font-medium text-cream/80">{study.client}</span>
+            <h2 className="max-w-[18ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-cream">
               {study.resultHeadline}
             </h2>
-            <span className="type-caption inline-flex items-center gap-2 mt-2 text-white/90 transition-transform group-hover:translate-x-1">
+            <span className="inline-flex items-center gap-2 mt-2 text-[0.875rem] text-cream/90 transition-transform group-hover:translate-x-1">
               Read the full case study
               <svg aria-hidden="true" width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -54,8 +53,10 @@ export default function RelatedCase({ serviceSlug }: { serviceSlug: string }) {
           <div className="grid grid-cols-3 md:flex md:flex-col gap-6 md:gap-5 md:min-w-[13rem]">
             {metrics.map((m) => (
               <div key={m.label} className="flex flex-col gap-1">
-                <span className="text-3xl md:text-4xl font-medium tabular-nums leading-none text-white">{m.number}</span>
-                <span className="type-eyebrow leading-tight text-white/70">{m.label}</span>
+                <span className="flex text-3xl md:text-4xl font-medium tabular-nums leading-none text-cream">
+                  <NumberReel value={m.number} />
+                </span>
+                <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] leading-tight text-cream/70">{m.label}</span>
               </div>
             ))}
           </div>

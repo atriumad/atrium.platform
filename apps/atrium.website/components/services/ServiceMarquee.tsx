@@ -1,4 +1,5 @@
 'use client'
+import { Tag } from '@atrium/ui'
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from '@/lib/gsap'
 import type { Service } from '@/lib/services'
@@ -100,21 +101,9 @@ export default function ServiceMarquee({ svc }: Props) {
             {items.map((item) => {
               const key = keyCounter++
               return (
-                <div
-                  key={key}
-                  className="flex gap-3 items-center px-5 py-3 rounded-full shrink-0"
-                  style={{
-                    background: 'rgba(255,255,255,0.06)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                  }}
-                >
-                  <span
-                    className="type-caption whitespace-nowrap font-medium"
-                    style={{ color: 'var(--mint-400)' }}
-                  >
-                    {item.title}
-                  </span>
-                </div>
+                <Tag key={key} variant="on-dark" className="shrink-0 whitespace-nowrap">
+                  {item.title}
+                </Tag>
               )
             })}
           </div>

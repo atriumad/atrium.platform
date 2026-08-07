@@ -1,31 +1,20 @@
+import { Card } from '@atrium/ui'
 import type { BentoCard } from '@/lib/services'
 import { parseHeadline } from './utils'
 
 function BentoCardPhoto({ card }: { card: BentoCard }) {
   return (
-    <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem] md:row-span-2 min-h-[37rem] max-md:min-h-[30rem]"
-      style={{
-        background: 'linear-gradient(180deg, rgba(4,32,36,0.04) 20%, rgba(4,32,36,0.82)), var(--surface-atmos-deep)',
-        backgroundSize: 'cover',
-        color: 'var(--cloud-100)',
-      }}
-    >
-      <div
-        className="relative z-1 max-w-[15rem] rounded-full px-[0.85rem] py-[0.62rem] text-[0.75rem] leading-[1.25]"
-        style={{
-          background: 'rgba(255,255,255,0.17)',
-          color: 'rgba(255,255,255,0.72)',
-        }}
-      >
+    <article className="atr-bg-atmos--deep relative flex flex-col justify-between overflow-hidden rounded-card p-[26px] max-sm:p-5 md:row-span-2 min-h-[37rem] max-md:min-h-[30rem] text-cream">
+      <div className="absolute inset-0 bg-linear-to-b from-ink/[0.2] to-ink/90" aria-hidden="true" />
+      <div className="relative z-1 max-w-[15rem] rounded-full bg-cream/[0.17] px-[0.85rem] py-[0.62rem] text-[0.75rem] leading-[1.25] text-cream/72">
         {card.coverAlt}
       </div>
       <div className="relative z-1 grid gap-[0.9rem]">
-        <span className="type-eyebrow opacity-56">{card.size}</span>
-        <h3 className="type-card-title m-0" style={{ color: 'inherit' }}>
+        <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] opacity-56">{card.size}</span>
+        <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
           {parseHeadline(card.title)}
         </h3>
-        <p className="type-caption m-0 opacity-76" style={{ color: 'inherit' }}>
+        <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
           {card.copy}
         </p>
       </div>
@@ -35,72 +24,55 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
 
 function BentoCardStatement({ card }: { card: BentoCard }) {
   return (
-    <article
-      className="relative flex flex-col justify-between gap-[1rem] overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
-      style={{ background: 'var(--cloud-400)', color: 'var(--teal-800)' }}
-    >
-      <div className="flex flex-col gap-[0.9rem]">
-        <h3
-          className="type-card-title m-0 max-w-[11ch]"
-          style={{ color: 'var(--amber-400)' }}
-        >
-          {parseHeadline(card.title)}
-        </h3>
-      </div>
-      <p className="type-caption m-0 max-w-[31rem] opacity-72" style={{ color: 'var(--teal-800)' }}>
+    <Card tone="surface" padding="sm" className="relative flex flex-col justify-between gap-[1rem] overflow-hidden">
+      <h3 className="m-0 max-w-[11ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-green">
+        {parseHeadline(card.title)}
+      </h3>
+      <p className="m-0 max-w-[31rem] text-[0.875rem] leading-relaxed text-ink/72">
         {card.copy}
       </p>
-    </article>
+    </Card>
   )
 }
 
 function BentoCardPosition({ card }: { card: BentoCard }) {
   return (
-    <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
-      style={{ background: 'var(--teal-300)', color: 'var(--teal-900)' }}
-    >
-      <span className="type-eyebrow opacity-56">{card.size}</span>
-      <h3 className="type-card-title m-0 max-w-[15ch]">
+    <Card tone="amber" padding="sm" className="relative flex flex-col justify-between overflow-hidden">
+      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] opacity-56">{card.size}</span>
+      <h3 className="m-0 max-w-[15ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
         {parseHeadline(card.title)}
       </h3>
-      <p className="type-caption m-0 opacity-76">
+      <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
         {card.copy}
       </p>
-    </article>
+    </Card>
   )
 }
 
 function BentoCardMini({ card }: { card: BentoCard }) {
   return (
-    <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 max-sm:p-[1.25rem]"
-      style={{ background: 'var(--mint-300)', color: 'var(--teal-800)' }}
-    >
-      <span className="type-eyebrow opacity-56">{card.size}</span>
-      <h3 className="type-card-title m-0">
+    <Card tone="warm" padding="sm" className="relative flex flex-col justify-between overflow-hidden">
+      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] opacity-56">{card.size}</span>
+      <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
         {parseHeadline(card.title)}
       </h3>
-      <p className="type-caption m-0 opacity-76">
+      <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
         {card.copy}
       </p>
-    </article>
+    </Card>
   )
 }
 
 function BentoCardNeutral({ card }: { card: BentoCard }) {
   return (
-    <article
-      className="relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-bento)] p-4-5 gap-3-5"
-      style={{ background: 'var(--mint-300)', color: 'var(--teal-800)' }}
-    >
-      <h3 className="type-card-title m-0">
+    <Card tone="warm" padding="sm" className="relative flex flex-col justify-between gap-3-5 overflow-hidden">
+      <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
         {parseHeadline(card.title)}
       </h3>
-      <p className="type-caption m-0 opacity-76">
+      <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
         {card.copy}
       </p>
-    </article>
+    </Card>
   )
 }
 
@@ -110,7 +82,7 @@ export default function ServiceBento({ cards }: { cards: BentoCard[] }) {
 
   if (!feature || !proof || !position) {
     return (
-      <section className="px-[var(--gutter)] pt-[1rem] pb-[6.5rem] max-sm:px-[var(--gutter)]" style={{ background: 'var(--cloud-100)' }}>
+      <section className="bg-cream px-[var(--gutter)] pt-[1rem] pb-[6.5rem] max-sm:px-[var(--gutter)]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[1rem] max-w-[var(--container-max)] mx-auto">
           {fallbackCards.map(card => (
             <BentoCardNeutral key={card.title} card={card} />
@@ -121,7 +93,7 @@ export default function ServiceBento({ cards }: { cards: BentoCard[] }) {
   }
 
   return (
-    <section className="px-[var(--gutter)] pt-[1rem] pb-[6.5rem] max-sm:px-[var(--gutter)]" style={{ background: 'var(--cloud-100)' }}>
+    <section className="bg-cream px-[var(--gutter)] pt-[1rem] pb-[6.5rem] max-sm:px-[var(--gutter)]">
       <div className="grid md:grid-cols-[0.86fr_1.2fr] md:grid-rows-[minmax(20rem,auto)_16rem] gap-[1rem] max-w-[var(--container-max)] mx-auto max-md:grid-cols-1 max-md:grid-rows-auto">
         <BentoCardPhoto card={feature} />
         <BentoCardStatement card={proof} />
