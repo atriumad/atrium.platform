@@ -4,7 +4,7 @@
 
 **Goal:** Rebuild `apps/atrium.website` on the design system defined in `packages/ui` — components, typography, colour and layout patterns — page by page, each page finished before the next begins.
 
-**Depth:** Redesign, not reskin. Sections adopt the grader's language: cards with large radii on warm ground, headings at weight 400 with a serif-italic accent, pills, and hierarchy expressed through cards rather than alternating dark blocks.
+**Depth:** Redesign, not reskin. Sections adopt the grader's language: cards with large radii, headings at weight 400 with a serif-italic accent, and pills. Grounds alternate in bands of cream and dark — see the conventions below; there are no white grounds.
 
 **Tech Stack:** Next.js 16 (Turbopack), React 19, Tailwind v4, `@atrium/ui`, Bun workspaces, Biome.
 
@@ -66,12 +66,12 @@ The serif accent is `<em className="font-serif italic text-green">`, once per se
 
 The home page is the reference for every page after it. Decisions made here — how a dark hero resolves, how the bento grid becomes cards, how the marquee sits on cream — become the pattern the rest of the plan follows.
 
-- [ ] Migrate the hero: retire `.type-page-title`, apply the heading scale, keep one serif-italic accent, replace the CTA pair with `Button` (`primary` external, `secondary` internal wrapped in `TransitionCTA`).
-- [ ] Convert `BentoGrid`'s dark tiles to `Card` with `tone="dark"` only where the tile earns it; the rest become `surface` or `warm` on cream.
-- [ ] Replace every `style={{}}` colour with a utility; leave only runtime-computed values.
-- [ ] Retire the `.type-*` classes in these files.
-- [ ] Verify at 375, 768, 1280.
-- [ ] Commit.
+- [x] Migrate the hero: retire `.type-page-title`, apply the heading scale, keep one serif-italic accent, replace the CTA pair with `Button` (`primary` external, `secondary` internal wrapped in `TransitionCTA`).
+- [x] Convert `BentoGrid`'s dark tiles to `Card` with `tone="dark"` only where the tile earns it; the rest become `surface` or `warm` on cream.
+- [x] Replace every `style={{}}` colour with a utility; leave only runtime-computed values.
+- [x] Retire the `.type-*` classes in these files.
+- [x] Verify at 375, 768, 1280.
+- [x] Commit.
 
 ---
 
