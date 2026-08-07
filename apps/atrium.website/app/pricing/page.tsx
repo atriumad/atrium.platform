@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import Eyebrow from '@/components/ui/Eyebrow'
@@ -17,18 +16,21 @@ const tiers = [
     tagline: 'Strategy, content, social. The essentials.',
     fit: 'Best for restaurants that need consistency and a stronger local presence.',
     includes: ['Brand strategy', 'Monthly content production', 'Social management', 'Google optimization', 'Monthly reporting'],
+    calLink: CAL_LINKS.foundation,
   },
   {
     name: 'Growth',
     tagline: 'Paid, email, SMS, reputation. Ready to scale.',
     fit: 'Best for operators with proven demand who want more channels working together.',
     includes: ['Everything in Foundation', 'Email & SMS', 'Paid media', 'Reputation management', 'CRM setup'],
+    calLink: CAL_LINKS.growth,
   },
   {
     name: 'Full System',
     tagline: 'Everything. Dashboard, automations, dedicated team.',
     fit: 'Best for multi-location brands or high-growth concepts that need a complete engine.',
     includes: ['Everything in Growth', 'Custom dashboard', 'Advanced automations', 'Dedicated strategy team', 'Multi-location support'],
+    calLink: CAL_LINKS.fullSystem,
   },
 ]
 
@@ -135,7 +137,7 @@ function PricingOffers() {
                   <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
                     →
                   </span>
-                </Link>
+                </a>
               </div>
             </article>
           ))}

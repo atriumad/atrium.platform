@@ -1,10 +1,10 @@
 'use client'
 import Image from 'next/image'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CTA } from '@/lib/cta'
-import Button from './Button'
+import TransitionCTA from './TransitionCTA'
+import TransitionLink from './TransitionLink'
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 const icons: Record<string, React.ReactNode> = {
@@ -135,7 +135,7 @@ function ServiceItem({
   onClose: () => void
 }) {
   return (
-    <Link
+    <TransitionLink
       href={svc.href}
       onClick={onClose}
       className="flex gap-3 items-start px-2 py-2 -mx-2 rounded-lg transition-colors group hover:bg-white/5"
@@ -158,7 +158,7 @@ function ServiceItem({
           {svc.desc}
         </span>
       </span>
-    </Link>
+    </TransitionLink>
   )
 }
 
@@ -236,7 +236,7 @@ export default function Navbar() {
         }}
       />
       {/* Logo */}
-      <Link href="/" className="flex justify-self-start items-center">
+      <TransitionLink href="/" className="flex justify-self-start items-center">
         <Image
           src="/logos/atrium-wordmark.svg"
           alt="Atrium"
@@ -246,7 +246,7 @@ export default function Navbar() {
           unoptimized
           style={{ height: '24px', width: 'auto', filter: isEditorialCase ? 'brightness(0)' : 'brightness(0) invert(1)' }}
         />
-      </Link>
+      </TransitionLink>
 
       {/* Nav links — centered column */}
       <nav className="hidden gap-8 justify-self-center items-center md:flex">
@@ -281,14 +281,14 @@ export default function Navbar() {
         </div>
 
         {otherLinks.map((link) => (
-          <Link
+          <TransitionLink
             key={link.href}
             href={link.href}
             className="relative text-sm font-medium transition-opacity hover:opacity-70 after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[var(--color-accent)] after:transition-all after:duration-300 hover:after:w-full"
             style={{ color: navTextColor }}
           >
             {link.label}
-          </Link>
+          </TransitionLink>
         ))}
       </nav>
 
@@ -297,7 +297,7 @@ export default function Navbar() {
         <div className="hidden md:flex">
           <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant={isEditorialCase ? 'ghost' : 'ghostLight'} className="px-4 py-2 text-xs">
             {CTA.primary.label}
-          </Button>
+          </TransitionCTA>
         </div>
 
         {/* Mobile menu toggle — icon-only, morphs into an X when open */}
@@ -387,7 +387,7 @@ export default function Navbar() {
                 </p>
               </div>
 
-              <Link
+              <TransitionLink
                 href="/services"
                 onClick={close}
                 className="inline-flex gap-2 items-center mt-8 text-xs font-medium transition-opacity hover:opacity-70 w-fit"
@@ -397,7 +397,7 @@ export default function Navbar() {
                 <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </Link>
+              </TransitionLink>
             </div>
 
             {/* Right columns */}
@@ -456,7 +456,7 @@ export default function Navbar() {
             style={{ borderColor: 'var(--color-border-subtle)' }}
           >
             {otherLinks.map((link) => (
-              <Link
+              <TransitionLink
                 key={link.href}
                 href={link.href}
                 onClick={closeMobile}
@@ -464,7 +464,7 @@ export default function Navbar() {
                 style={{ color: 'var(--color-surface)' }}
               >
                 {link.label}
-              </Link>
+              </TransitionLink>
             ))}
           </div>
 
@@ -496,7 +496,7 @@ export default function Navbar() {
 
           <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="primary" onClick={closeMobile} className="justify-center px-4 py-3 w-full text-xs">
             {CTA.primary.label}
-          </Button>
+          </TransitionCTA>
         </div>
       </div>
     </header>

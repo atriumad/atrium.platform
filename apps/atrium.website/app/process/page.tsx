@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import CTABanner from '@/components/sections/CTABanner'
-import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
 import { CTA } from '@/lib/cta'
 
@@ -90,10 +89,10 @@ export default function ProcessPage() {
               <div className="flex flex-wrap gap-3">
                 <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="primary" className="px-5 py-3 text-xs">
                   Start the process
-                </Button>
-                <Button href="/services" variant="outline" className="px-5 py-3 text-xs">
+                </TransitionCTA>
+                <TransitionCTA href="/services" variant="outline" className="px-5 py-3 text-xs">
                   See services
-                </Button>
+                </TransitionCTA>
               </div>
             </div>
           </div>

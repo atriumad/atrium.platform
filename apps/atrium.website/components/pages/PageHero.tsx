@@ -1,12 +1,17 @@
 import type { ReactNode } from 'react'
 import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionCTA from '@/components/ui/TransitionCTA'
+import { CAL_CONFIG } from '@/lib/cal'
 
 type HeroAction = {
   label: string
+  /** Real destination — also the fallback if the Cal.com embed script fails to load. */
   href: string
   variant?: 'primary' | 'ghost' | 'ghostLight' | 'mint' | 'amber'
   external?: boolean
+  /** When set, the button opens this Cal.com event as a popup instead of navigating. */
+  calLink?: string
 }
 
 type HeroStat = {
@@ -41,16 +46,28 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
           </p>
           {actions && actions.length > 0 && (
             <div className="mt-9 flex flex-wrap gap-4">
-              {actions.map((action, index) => (
-                <Button
-                  key={action.href}
-                  href={action.href}
-                  variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
-                  {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                >
-                  {action.label}
-                </Button>
-              ))}
+              {actions.map((action, index) =>
+                action.calLink ? (
+                  <Button
+                    key={action.href}
+                    href={action.href}
+                    variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
+                    data-cal-link={action.calLink}
+                    data-cal-config={CAL_CONFIG}
+                  >
+                    {action.label}
+                  </Button>
+                ) : (
+                  <TransitionCTA
+                    key={action.href}
+                    href={action.href}
+                    variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
+                    {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  >
+                    {action.label}
+                  </TransitionCTA>
+                ),
+              )}
             </div>
           )}
         </div>

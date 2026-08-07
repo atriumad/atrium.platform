@@ -1,8 +1,8 @@
 'use client'
 
-import Link from 'next/link'
 import CldImage from '@/components/media/CldImage'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 import { relatedCaseBySlug } from '@/lib/services'
 import { getCaseCover, getCaseStudy } from '@/lib/work'
 
@@ -21,7 +21,7 @@ export default function RelatedCase({ serviceSlug }: { serviceSlug: string }) {
     <section className="px-6 md:px-12 py-24 md:py-32" style={{ background: 'var(--surface-page)' }}>
       <div className="max-w-6xl mx-auto">
         <Eyebrow className="mb-8">Related case</Eyebrow>
-        <Link
+        <TransitionLink
           href={`/work/${study.slug}`}
           className="group relative isolate overflow-hidden grid md:grid-cols-[1fr_auto] gap-10 md:gap-16 items-end rounded-[var(--radius-lg)] p-8 md:p-12 min-h-[26rem] md:min-h-[32rem] transition-colors"
           style={{ border: '1px solid rgba(7,47,52,0.08)' }}
@@ -59,7 +59,7 @@ export default function RelatedCase({ serviceSlug }: { serviceSlug: string }) {
               </div>
             ))}
           </div>
-        </Link>
+        </TransitionLink>
       </div>
     </section>
   )

@@ -1,4 +1,4 @@
-import Button from '@/components/ui/Button'
+import TransitionCTA from '@/components/ui/TransitionCTA'
 import type { Service } from '@/lib/services'
 import { relatedCaseBySlug } from '@/lib/services'
 import CategoryBadge from './CategoryBadge'
@@ -30,8 +30,8 @@ export default function ServiceEditorialHero({ svc }: { svc: Service }) {
           </p>
 
           <div className="mt-3 flex flex-wrap gap-4">
-            <Button href={`/contact?service=${svc.slug}`} variant="mint">See how this works for my brand</Button>
-            <Button href={`/work/${relatedCaseBySlug[svc.slug]}`} variant="ghostLight">See a related result</Button>
+            <TransitionCTA href={`/contact?service=${svc.slug}`} variant="mint">See how this works for my brand</TransitionCTA>
+            <TransitionCTA href={`/work/${relatedCaseBySlug[svc.slug]}`} variant="ghostLight">See a related result</TransitionCTA>
           </div>
         </div>
       </div>

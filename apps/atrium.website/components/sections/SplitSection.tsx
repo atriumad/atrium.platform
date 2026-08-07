@@ -1,8 +1,8 @@
 'use client'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
-import Button from '@/components/ui/Button'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionCTA from '@/components/ui/TransitionCTA'
 import { gsap } from '@/lib/gsap'
 
 type Props = {
@@ -50,7 +50,7 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
           {eyebrow && <Eyebrow style={{ color: textColor } as React.CSSProperties}>{eyebrow}</Eyebrow>}
           <h2 className="type-section-title" style={{ color: textColor }}>{headline}</h2>
           <p className="type-body" style={{ color: textColor, opacity: 0.76 }}>{body}</p>
-          <div className="mt-2"><Button href={ctaHref} variant={isDark ? 'primary' : 'ghost'}>{cta}</Button></div>
+          <div className="mt-2"><TransitionCTA href={ctaHref} variant={isDark ? 'primary' : 'ghost'}>{cta}</TransitionCTA></div>
         </div>
         <div ref={visualRef} className="flex-1 w-full" style={{ opacity: 0 }}>
           <div
