@@ -1,7 +1,9 @@
 @import "tailwindcss";
 @import "@atrium/ui/src/tokens/tokens.css";
-@import "@atrium/ui/theme.css";
+@import "@atrium/ui/styles.css";
 @import "@atrium/ui/compat.css";
+
+@source "../../../packages/ui/src";
 
 /* ─── Tailwind theme ──────────────────────────────────────────────────────── */
 @theme inline {
