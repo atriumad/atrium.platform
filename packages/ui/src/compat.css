@@ -1,0 +1,53 @@
+/* ─── Legacy palette compatibility ────────────────────────────────────────
+   Repoints the pre-design-system palette at the values in theme.css, so a
+   surface still authored against the old token names renders in the new
+   system without being rewritten.
+
+   Only the RAW palette is remapped. tokens.css defines every semantic token
+   as a reference to one of these (--text-strong: var(--teal-800), --surface-page:
+   var(--cloud-200), --accent: var(--mint-400), ...), and the website's own
+   --color-* aliases reference the semantics in turn, so all three layers
+   follow from these twenty-one declarations.
+
+   Load order: tokens.css, then theme.css, then this file.
+
+   This is scaffolding with an expiry date. Every file migrated to the real
+   tokens removes references from here; when the last one goes, delete it. */
+
+:root {
+  /* Greens — teal-800 carries both body text and dark section grounds, so it
+     maps to ink, which is correct in both roles. */
+  --teal-900: #0d2f33;
+  --teal-800: #0d2f33;
+  --teal-700: #0d353b;
+  --teal-500: #78877f;
+  --teal-300: #93a09b;
+
+  /* Mints */
+  --mint-500: #3fae78;
+  --mint-400: #a9edc8;
+  --mint-300: #a9edc8;
+  --mint-200: #e3f2e9;
+
+  /* Amber */
+  --amber-600: #a97f1c;
+  --amber-500: #f3c150;
+  --amber-400: #eab63f;
+  --amber-200: #f9ecc7;
+
+  /* Growth-engine stage colours */
+  --stage-generate: #3fae78;
+  --stage-convert: #eab63f;
+  --stage-retain: #1f7a52;
+
+  /* Neutrals — the cool cloud ramp becomes the warm one. This is the change
+     that carries most of the reskin: --surface-page resolves through
+     --cloud-200, so every page ground turns cream from this one line. */
+  --cloud-100: #ffffff;
+  --cloud-200: #f4f1e7;
+  --cloud-300: #faf8f0;
+  --cloud-400: #ece8da;
+
+  /* Body ink */
+  --ink-700: #3f544f;
+}

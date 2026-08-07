@@ -6,6 +6,7 @@
     ".": "./src/index.ts",
     "./legacy": "./src/legacy.ts",
     "./styles.css": "./src/styles.css",
+    "./compat.css": "./src/compat.css",
     "./theme.css": "./src/theme.css",
     "./src/tokens/tokens.css": "./src/tokens/tokens.css"
   },
