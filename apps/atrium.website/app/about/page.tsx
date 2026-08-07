@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { CTA } from '@/lib/cta'
 
 export const metadata: Metadata = {
   title: 'About Atrium — Hospitality Marketing Studio, Houston TX',
@@ -62,6 +64,10 @@ function AboutHero() {
             <p className="type-lead" style={{ color: 'var(--text-body)' }}>
               Atrium works inside the industry, connecting strategy, creative production, and performance reporting under one roof.
             </p>
+            <Link
+              href={CTA.primary.href}
+              target="_blank"
+              rel="noopener noreferrer"
               className="type-caption group mt-9 inline-flex items-center gap-3 font-medium no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
               style={{ color: 'var(--teal-800)' }}
             >
@@ -69,7 +75,7 @@ function AboutHero() {
               <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
                 →
               </span>
-            </TransitionLink>
+            </Link>
           </div>
         </div>
 

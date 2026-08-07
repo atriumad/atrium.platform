@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CTA } from '@/lib/cta'
-import TransitionCTA from './TransitionCTA'
+import Button from './Button'
 import TransitionLink from './TransitionLink'
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -297,7 +297,7 @@ export default function Navbar() {
         <div className="hidden md:flex">
           <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant={isEditorialCase ? 'ghost' : 'ghostLight'} className="px-4 py-2 text-xs">
             {CTA.primary.label}
-          </TransitionCTA>
+          </Button>
         </div>
 
         {/* Mobile menu toggle — icon-only, morphs into an X when open */}
@@ -496,7 +496,7 @@ export default function Navbar() {
 
           <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="primary" onClick={closeMobile} className="justify-center px-4 py-3 w-full text-xs">
             {CTA.primary.label}
-          </TransitionCTA>
+          </Button>
         </div>
       </div>
     </header>

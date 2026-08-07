@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import CTABanner from '@/components/sections/CTABanner'
 import { stages } from '@/components/sections/GrowthEngineDiagram'
 import Eyebrow from '@/components/ui/Eyebrow'
+import TransitionLink from '@/components/ui/TransitionLink'
 import { CTA } from '@/lib/cta'
 import { services } from '@/lib/services'
 
