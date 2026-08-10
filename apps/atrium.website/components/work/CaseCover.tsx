@@ -15,7 +15,7 @@ export default function CaseCover({ study, className = '', priority = false }: P
 
   return (
     <div
-      className={`relative isolate h-full w-full overflow-hidden bg-[var(--teal-900)] ${className}`}
+      className={`relative isolate h-full w-full overflow-hidden bg-dark ${className}`}
       role="img"
       aria-label={`${study.client} case study cover`}
       data-case-cover={study.slug}

@@ -318,7 +318,7 @@ export default function DragGallery({
         cursor: 'grab',
         userSelect: 'none',
         touchAction: 'pan-y',
-        background: '#fff',
+        background: 'var(--color-cream)',
       }}
     >
       {REPS.map((xOffset) =>

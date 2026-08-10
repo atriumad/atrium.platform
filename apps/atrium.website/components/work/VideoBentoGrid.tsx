@@ -52,7 +52,7 @@ export default function VideoBentoGrid({ ids }: { ids: string[] }) {
   if (!top) return null
 
   return (
-    <section className="py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+    <section className="bg-cream py-24 md:py-36">
       <div className="grid">
         <div className="overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
           <BentoClip videoId={top} />

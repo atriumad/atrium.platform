@@ -1,7 +1,7 @@
+import { Eyebrow, NumberReel } from '@atrium/ui'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import CTABanner from '@/components/sections/CTABanner'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionLink from '@/components/ui/TransitionLink'
 import CaseCover from '@/components/work/CaseCover'
 import DragGallery from '@/components/work/DragGallery'
@@ -27,15 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-function ServiceList({ services, dark = false }: { services: string[]; dark?: boolean }) {
+function ServiceList({ services }: { services: string[] }) {
   return (
     <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0" aria-label="Services">
       {services.map((service, index) => (
-        <li
-          key={service}
-          className="type-caption flex items-center gap-3"
-          style={{ color: dark ? 'var(--mint-300)' : 'var(--text-muted)' }}
-        >
+        <li key={service} className="flex items-center gap-3 text-[0.875rem] text-muted">
           {index > 0 && <span aria-hidden="true">/</span>}
           {service}
         </li>
@@ -49,35 +45,35 @@ function CaseMedia({ study, compact = false }: { study: CaseStudy; compact?: boo
     <CaseCover
       study={study}
       priority={!compact}
-      className={`rounded-[var(--radius-bento)] ${compact ? 'min-h-[20rem] md:min-h-[32rem]' : 'aspect-[4/3] min-h-[25rem] lg:aspect-auto lg:min-h-[38rem]'}`}
+      className={`${compact ? 'rounded-card-sm min-h-[20rem] md:min-h-[32rem]' : 'rounded-card aspect-[4/3] min-h-[25rem] lg:aspect-auto lg:min-h-[38rem]'}`}
     />
   )
 }
 
 export function CaseHero({ study }: { study: CaseStudy }) {
   return (
-    <section className="px-[var(--gutter)] pb-24 pt-32 md:pb-36 md:pt-40" style={{ background: 'var(--surface-page)' }}>
+    <section className="bg-cream px-[var(--gutter)] pb-24 pt-32 md:pb-36 md:pt-40">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-16">
           <div className="h-full lg:col-span-8">
             <CaseMedia study={study} />
           </div>
 
-          <div className="flex h-full flex-col justify-between gap-16 border-t pt-8 lg:col-span-4" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          <div className="flex h-full flex-col justify-between gap-16 border-t border-line pt-8 lg:col-span-4">
             <div>
-              <p className="type-eyebrow m-0 mb-6" style={{ color: 'var(--teal-500)' }}>
+              <Eyebrow className="mb-6">
                 Case {String(study.order).padStart(2, '0')} / {study.category}
-              </p>
-              <h1 className="type-section-title" style={{ color: 'var(--text-strong)' }}>
+              </Eyebrow>
+              <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
                 {study.client}
               </h1>
             </div>
 
             <div>
-              <p className="type-lead" style={{ color: 'var(--text-body)' }}>
+              <p className="text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
                 {getCaseSummary(study)}
               </p>
-              <div className="mt-8 border-t pt-6" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
+              <div className="mt-8 border-t border-line pt-6">
                 <ServiceList services={study.serviceTags} />
               </div>
             </div>
@@ -90,12 +86,12 @@ export function CaseHero({ study }: { study: CaseStudy }) {
 
 export function StorySection({ paragraphs }: { paragraphs: string[] }) {
   return (
-    <section id="story" className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+    <section id="story" className="bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="grid gap-10 border-t pt-8 lg:grid-cols-12 lg:gap-16" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+        <div className="grid gap-10 border-t border-cream/20 pt-8 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <Eyebrow className="mb-6">The story</Eyebrow>
-            <h2 className="type-section-title max-w-[12ch]">
+            <Eyebrow tone="on-dark" className="mb-6">The story</Eyebrow>
+            <h2 className="max-w-[12ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
               From challenge to <em>working system.</em>
             </h2>
           </div>
@@ -104,11 +100,11 @@ export function StorySection({ paragraphs }: { paragraphs: string[] }) {
             {paragraphs.map((paragraph, index) => (
               <p
                 key={paragraph}
-                className={`${index === 0 ? 'type-lead' : 'type-body'} m-0 border-b py-7 first:pt-0 last:border-b-0`}
-                style={{
-                  borderColor: 'rgba(7,47,52,0.14)',
-                  color: index === 0 ? 'var(--text-strong)' : 'var(--text-muted)',
-                }}
+                className={`m-0 border-b border-cream/20 py-7 first:pt-0 last:border-b-0 ${
+                  index === 0
+                    ? 'text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream'
+                    : 'text-base leading-relaxed text-cream/70'
+                }`}
               >
                 {paragraph}
               </p>
@@ -123,17 +119,17 @@ export function StorySection({ paragraphs }: { paragraphs: string[] }) {
 
 function PhotoGallerySection({ study }: { study: CaseStudy }) {
   return (
-    <section className="py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
+    <section className="bg-cream py-24 md:py-36">
       <div className="px-[var(--gutter)]">
         <div className="mx-auto max-w-[var(--container-max)]">
-          <div className="mb-14 grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          <div className="mb-14 grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
             <div className="lg:col-span-7">
               <Eyebrow className="mb-6">Photo gallery</Eyebrow>
-              <h2 className="type-section-title">
+              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
                 The brand, <em>in frame.</em>
               </h2>
             </div>
-            <p className="type-body m-0 max-w-md lg:col-span-5" style={{ color: 'var(--text-muted)' }}>
+            <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
               A visual record of the atmosphere, details, people, and moments that made the work recognizable.
             </p>
           </div>
@@ -153,31 +149,30 @@ export function ApproachSection({ study }: { study: CaseStudy }) {
   if (approach.length === 0) return null
 
   return (
-    <section id="approach" className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--surface-page)' }}>
+    <section id="approach" className="bg-cream px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <Eyebrow className="mb-6">The approach</Eyebrow>
-            <h2 className="type-section-title max-w-[10ch]">
+            <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
               What we <em>changed.</em>
             </h2>
           </div>
 
-          <div className="border-t lg:col-span-8" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          <div className="border-t border-line lg:col-span-8">
             {approach.map((step, index) => (
               <article
                 key={step.title}
-                className="grid gap-6 border-b py-9 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-8 md:py-11"
-                style={{ borderColor: 'rgba(7,47,52,0.18)' }}
+                className="grid gap-6 border-b border-line py-9 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-8 md:py-11"
               >
-                <p className="type-eyebrow m-0" style={{ color: 'var(--teal-500)' }}>
+                <p className="m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted">
                   {String(index + 1).padStart(2, '0')}
                 </p>
                 <div>
-                  <h3 className="type-card-title max-w-[22ch]" style={{ color: 'var(--text-strong)' }}>
+                  <h3 className="max-w-[22ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">
                     {step.title}
                   </h3>
-                  <p className="type-body mt-5 max-w-3xl" style={{ color: 'var(--text-muted)' }}>
+                  <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted">
                     {step.body}
                   </p>
                 </div>
@@ -194,16 +189,16 @@ function ReelsSection({ study }: { study: CaseStudy }) {
   if (!study.videoIds?.length) return null
 
   return (
-    <section className="overflow-hidden py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+    <section className="overflow-hidden bg-cream py-24 md:py-36">
       <div className="mx-auto mb-14 max-w-[var(--container-max)] px-[var(--gutter)] md:mb-20">
-        <div className="grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+        <div className="grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-6">Reels and short-form video</Eyebrow>
-            <h2 className="type-section-title">
+            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
               Built to move. <em>Made to repeat.</em>
             </h2>
           </div>
-          <p className="type-body m-0 max-w-md lg:col-span-5" style={{ color: 'var(--text-muted)' }}>
+          <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
             A continuous stream of vertical stories designed for attention, consistency, and everyday brand recall.
           </p>
         </div>
@@ -224,18 +219,16 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
   }
 
   return (
-    <section id="results" className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--teal-900)' }}>
+    <section id="results" className="bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="grid gap-10 pb-16 lg:grid-cols-12 lg:gap-16 lg:pb-24">
           <div className="lg:col-span-7">
-            <p className="type-eyebrow m-0 mb-6" style={{ color: 'var(--mint-400)' }}>
-              Measurable growth
-            </p>
-            <h2 className="type-section-title" style={{ color: 'var(--text-on-dark)' }}>
+            <Eyebrow tone="on-dark" className="mb-6">Measurable growth</Eyebrow>
+            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
               The work, <em>in numbers.</em>
             </h2>
           </div>
-          <p className="type-lead m-0 lg:col-span-5 lg:self-end" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
+          <p className="m-0 text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/70 lg:col-span-5 lg:self-end">
             {study.resultHeadline}
           </p>
         </div>
@@ -244,21 +237,19 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
           {metrics.map(metric => (
             <article
               key={`${metric.number}-${metric.label}`}
-              className="grid min-h-[14rem] grid-cols-1 items-center gap-7 border-t py-10 md:min-h-[17rem] md:grid-cols-[minmax(8rem,0.55fr)_minmax(0,1.45fr)] md:gap-8 md:py-12"
-              style={{ borderColor: 'rgba(181,242,219,0.22)' }}
+              className="grid min-h-[14rem] grid-cols-1 items-center gap-7 border-t border-cream/20 py-10 md:min-h-[17rem] md:grid-cols-[minmax(8rem,0.55fr)_minmax(0,1.45fr)] md:gap-8 md:py-12"
             >
               <p
-                className="m-0 whitespace-nowrap font-normal italic leading-[0.76] tracking-[-0.065em] md:order-2 md:text-right"
+                className="m-0 flex whitespace-nowrap font-normal italic leading-none tracking-[-0.065em] text-cream md:order-2 md:justify-end"
                 style={{
-                  color: 'var(--mint-400)',
                   fontFamily: 'var(--font-serif)',
                   fontSize: getMetricFontSize(metric.number),
                   fontVariantNumeric: 'lining-nums tabular-nums',
                 }}
               >
-                {metric.number}
+                <NumberReel value={metric.number} />
               </p>
-              <p className="type-body m-0 max-w-md md:order-1" style={{ color: 'var(--text-on-dark)', opacity: 0.78 }}>
+              <p className="m-0 max-w-md text-base leading-relaxed text-cream/70 md:order-1">
                 {metric.label}
               </p>
             </article>
@@ -266,10 +257,7 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
         </div>
 
         {study.takeaway && (
-          <p
-            className="type-lead m-0 mt-8 max-w-5xl border-t pt-10 md:mt-12 md:pt-14"
-            style={{ borderColor: 'rgba(181,242,219,0.22)', color: 'var(--text-on-dark)', opacity: 0.78 }}
-          >
+          <p className="m-0 mt-8 max-w-5xl border-t border-cream/20 pt-10 text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/70 md:mt-12 md:pt-14">
             {study.takeaway}
           </p>
         )}
@@ -280,39 +268,37 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
 
 export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-36" style={{ background: 'var(--cloud-100)' }}>
+    <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="mb-12 border-t pt-8 md:mb-16" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+        <div className="mb-12 border-t border-line pt-8 md:mb-16">
           <Eyebrow>Continue exploring</Eyebrow>
         </div>
 
         <TransitionLink
           href={`/work/${nextStudy.slug}`}
-          className="group grid grid-cols-1 gap-10 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
+          className="group grid grid-cols-1 gap-10 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
           aria-label={`Read next case study: ${nextStudy.client}`}
         >
           <div className="h-full lg:col-span-7">
             <CaseMedia study={nextStudy} compact />
           </div>
 
-          <div className="flex h-full flex-col justify-between gap-14 border-t pt-8 lg:col-span-5" style={{ borderColor: 'rgba(7,47,52,0.18)' }}>
+          <div className="flex h-full flex-col justify-between gap-14 border-t border-line pt-8 lg:col-span-5">
             <div>
-              <p className="type-eyebrow m-0 mb-5" style={{ color: 'var(--teal-500)' }}>
-                Next case study
-              </p>
-              <h2 className="type-section-title" style={{ color: 'var(--text-strong)' }}>
+              <Eyebrow className="mb-5">Next case study</Eyebrow>
+              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
                 {nextStudy.client}
               </h2>
             </div>
 
             <div>
-              <p className="type-lead" style={{ color: 'var(--text-body)' }}>
+              <p className="text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
                 {getCaseSummary(nextStudy)}
               </p>
-              <div className="mt-8 border-t pt-6" style={{ borderColor: 'rgba(7,47,52,0.14)' }}>
+              <div className="mt-8 border-t border-line pt-6">
                 <ServiceList services={nextStudy.serviceTags} />
               </div>
-              <span className="type-caption mt-8 inline-flex items-center gap-3 font-medium" style={{ color: 'var(--teal-800)' }}>
+              <span className="mt-8 inline-flex items-center gap-3 text-[0.875rem] font-medium text-ink">
                 View case study
                 <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
                   →
@@ -346,7 +332,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   if (!nextStudy) notFound()
 
   return (
-    <article style={{ background: 'var(--surface-page)', color: 'var(--text-strong)' }}>
+    <article className="bg-cream text-ink">
       <CaseHero study={study} />
       <StorySection paragraphs={getStoryParagraphs(study)} />
       {isVideoLed(study) ? (
