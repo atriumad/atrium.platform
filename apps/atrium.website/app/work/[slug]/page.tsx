@@ -240,7 +240,7 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
               className="grid min-h-[14rem] grid-cols-1 items-center gap-7 border-t border-cream/20 py-10 md:min-h-[17rem] md:grid-cols-[minmax(8rem,0.55fr)_minmax(0,1.45fr)] md:gap-8 md:py-12"
             >
               <p
-                className="m-0 flex whitespace-nowrap font-normal italic leading-none tracking-[-0.065em] text-cream md:order-2 md:justify-end"
+                className="m-0 flex whitespace-nowrap font-normal leading-none tracking-[-0.02em] text-cream md:order-2 md:justify-end"
                 style={{
                   fontFamily: 'var(--font-serif)',
                   fontSize: getMetricFontSize(metric.number),

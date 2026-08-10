@@ -87,7 +87,7 @@ export function NumberReel({
         return (
           <span
             aria-hidden="true"
-            className="inline-block h-[1em] overflow-hidden leading-none"
+            className="inline-block h-[1em] overflow-hidden leading-none tracking-normal"
             // biome-ignore lint/suspicious/noArrayIndexKey: characters repeat within a figure, so position is the identity
             key={i}
           >
