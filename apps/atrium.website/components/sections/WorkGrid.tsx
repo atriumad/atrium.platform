@@ -38,8 +38,8 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
         <div className="flex justify-between items-end mb-14">
           <div>
             <Eyebrow className="mb-3">Selected Work</Eyebrow>
-            <h2 className="text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-              See what changed. <em className="font-serif italic text-green">Not just what shipped.</em>
+            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+              See what changed. <em className="font-serif italic">Not just what shipped.</em>
             </h2>
           </div>
           <TransitionCTA href="/work" variant="ghost" className="hidden md:flex">See all work →</TransitionCTA>

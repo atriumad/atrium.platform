@@ -82,7 +82,7 @@ export default function HomePage() {
       <TestimonialBento items={testimonialCards} eyebrow="Evidence from the operators" />
       <DarkProcess
         eyebrow="How We Work"
-        headline={<>A monthly engine. <em className="font-serif italic text-green">Not random posts.</em></>}
+        headline={<>A monthly engine. <em className="font-serif italic">Not random posts.</em></>}
         body="Strategy, content, and technology run as one system on a 28-day cycle — so marketing stops being guesswork and you can focus on the food."
         cta="See the process"
         ctaHref="/process"

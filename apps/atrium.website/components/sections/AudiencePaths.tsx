@@ -38,8 +38,8 @@ export default function AudiencePaths() {
         <div className="mb-14 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16 md:mb-20">
           <div className="order-2 lg:order-1 lg:col-span-6">
             <Eyebrow className="mb-6">Built for your stage</Eyebrow>
-            <h2 className="max-w-[13ch] text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-              Different footprint. <em className="font-serif italic text-green">Different first move.</em>
+            <h2 className="max-w-[13ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+              Different footprint. <em className="font-serif italic">Different first move.</em>
             </h2>
             <p className="mt-6 max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted">
               A single dining room, a regional group, and a national rollout should not enter through the same scope. Start with the operating problem that matches your footprint.

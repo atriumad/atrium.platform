@@ -13,7 +13,7 @@ export default function ServiceEditorialHero({ svc }: { svc: Service }) {
           <CategoryBadge category={svc.category} />
 
           <h1 className="m-0 max-w-[13ch] text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
-            {parseHeadline(svc.hero.headline, 'font-serif italic text-mint')}
+            {parseHeadline(svc.hero.headline, 'font-serif italic')}
           </h1>
 
           <p className="m-0 max-w-[38rem] text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">

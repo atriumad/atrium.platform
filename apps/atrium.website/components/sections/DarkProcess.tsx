@@ -40,7 +40,7 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
       <div className="mx-auto flex max-w-6xl flex-col gap-16 md:flex-row md:gap-24">
         <div className="flex flex-1 flex-col gap-6">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-          <h2 className="max-w-lg text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+          <h2 className="max-w-lg text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
             {headline}
           </h2>
           <p className="max-w-sm text-base leading-relaxed text-body">{body}</p>

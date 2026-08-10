@@ -26,8 +26,8 @@ export default function ServiceTimeline({ steps }: Props) {
     <section className="bg-dark px-6 md:px-12 py-20 md:py-28">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
         <div className="md:w-80 flex-shrink-0 md:sticky md:top-[8rem] md:self-start">
-          <h2 className="text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-            Your plug-in brand team, <em className="font-serif italic text-mint">from kickoff to rollout.</em>
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            Your plug-in brand team, <em className="font-serif italic">from kickoff to rollout.</em>
           </h2>
           <p className="mt-5 max-w-[22rem] text-base leading-relaxed text-cream/[0.66]">
             We work side-by-side with your team to shape, evolve, and scale your brand

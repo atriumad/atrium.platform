@@ -375,7 +375,7 @@ export default function Navbar() {
                   style={{ color: 'var(--color-surface)' }}
                 >
                   11 disciplines.{' '}
-                  <em style={{ fontFamily: 'var(--font-serif)', color: 'var(--color-accent)', fontStyle: 'italic' }}>
+                  <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
                     One roof.
                   </em>
                 </h2>

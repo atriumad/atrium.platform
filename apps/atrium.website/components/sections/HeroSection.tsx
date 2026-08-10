@@ -45,7 +45,7 @@ export default function HeroSection() {
 
             <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
               Turn attention into reservations. And first visits into{' '}
-              <em className="font-serif italic text-mint">regulars.</em>
+              <em className="font-serif italic">regulars.</em>
             </h1>
 
             <p className="mb-10 max-w-xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">

@@ -27,7 +27,7 @@ export default function ServicesPage() {
           <div className="max-w-3xl">
             <Eyebrow tone="on-dark" className="mb-6">HOSPITALITY MARKETING</Eyebrow>
             <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
-              One team. <em className="font-serif italic text-mint">Every stage of growth.</em>
+              One team. <em className="font-serif italic">Every stage of growth.</em>
             </h1>
             <p className="max-w-xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
               The complete hospitality marketing engine — one team across all 11 disciplines, no handoffs, no briefing from scratch.
@@ -43,8 +43,8 @@ export default function ServicesPage() {
             <div className="grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16">
               <div className="lg:col-span-7">
                 <Eyebrow className="mb-6">The Atrium Growth Engine</Eyebrow>
-                <h2 className="max-w-[14ch] text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-                  Not eleven services. <em className="font-serif italic text-green">One system.</em>
+                <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+                  Not eleven services. <em className="font-serif italic">One system.</em>
                 </h2>
               </div>
               <p className="max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted lg:col-span-5">
@@ -125,8 +125,8 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-[var(--container-max)]">
           <div className="max-w-2xl pb-14 md:pb-20">
             <Eyebrow>The full picture</Eyebrow>
-            <h2 className="m-0 mt-5 text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-              Eleven disciplines. <em className="font-serif italic text-green">One engine.</em>
+            <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+              Eleven disciplines. <em className="font-serif italic">One engine.</em>
             </h2>
           </div>
 
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                 key={stat.number}
                 className={`flex flex-col gap-4 py-8 md:py-0 ${i > 0 ? 'border-t border-line md:border-t-0 md:border-l md:pl-10' : ''}`}
               >
-                <p className="m-0 flex font-serif text-[clamp(4rem,8vw,7rem)] font-normal italic leading-[0.85] tracking-[-0.03em] text-green">
+                <p className="m-0 flex font-serif text-[clamp(4rem,8vw,7rem)] font-normal italic leading-[0.85] tracking-[-0.03em] text-ink">
                   <NumberReel value={stat.number} />
                 </p>
                 <p className="m-0 max-w-xs text-base leading-relaxed text-muted">

@@ -26,9 +26,9 @@ const sizeClass: Record<BentoItem['size'], string> = {
 }
 
 const titleClass: Record<BentoItem['size'], string> = {
-  large: 'text-[1.75rem] leading-[0.98] tracking-[-0.035em] md:text-[clamp(2.4rem,3vw,3.5rem)] md:leading-[0.94]',
-  medium: 'text-[1.75rem] leading-[0.98] tracking-[-0.03em] md:text-[clamp(2rem,2.4vw,2.75rem)] md:leading-[0.96]',
-  small: 'text-[1.75rem] leading-[0.98] tracking-[-0.025em] md:text-[clamp(1.7rem,1.8vw,2.1rem)]',
+  large: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
+  medium: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
+  small: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
 }
 
 const copyWidthClass: Record<BentoItem['size'], string> = {
@@ -63,7 +63,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
           <div className="mb-16 max-w-3xl">
             {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
             {headline && (
-              <h2 className="text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
                 {headline}
               </h2>
             )}
@@ -82,7 +82,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                 className={`bento-card flex flex-col justify-between overflow-hidden opacity-0 ${sizeClass[item.size]}`}
               >
                 <div>
-                  <h3 className={`${titleClass[item.size]} mb-3 font-normal ${isDark ? 'text-mint' : ''}`}>
+                  <h3 className={`${titleClass[item.size]} mb-3 font-medium ${isDark ? 'text-mint' : ''}`}>
                     {item.title}
                   </h3>
                   <p className={`text-sm leading-relaxed opacity-75 ${copyWidthClass[item.size]}`}>

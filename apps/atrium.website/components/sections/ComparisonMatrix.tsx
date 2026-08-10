@@ -25,8 +25,8 @@ export default function ComparisonMatrix() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 max-w-2xl md:mb-16">
           <Eyebrow className="mb-4" tone="on-dark">Why Atrium</Eyebrow>
-          <h2 className="text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-            One accountable team, <em className="font-serif italic text-mint">not five vendors.</em>
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            One accountable team, <em className="font-serif italic">not five vendors.</em>
           </h2>
           <p className="mt-5 max-w-md text-base leading-relaxed text-cream/70">
             The real question isn&apos;t Atrium versus another agency. It&apos;s Atrium versus the

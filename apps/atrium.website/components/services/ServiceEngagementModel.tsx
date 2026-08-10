@@ -28,7 +28,7 @@ export default function ServiceEngagementModel({ svc }: { svc: Service }) {
       <div className="mx-auto grid max-w-[var(--container-max)] gap-10 border-y border-line py-12 md:py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-20">
         <div className="min-w-0">
           <Eyebrow className="mb-6">Related engagement model</Eyebrow>
-          <p className="m-0 max-w-full font-serif font-normal italic leading-[0.86] tracking-[-0.055em] text-green text-[clamp(3.5rem,5.5vw,6.75rem)]">
+          <p className="m-0 max-w-full font-serif font-normal italic leading-[0.86] tracking-[-0.055em] text-ink text-[clamp(3.5rem,5.5vw,6.75rem)]">
             {model.name}
           </p>
         </div>

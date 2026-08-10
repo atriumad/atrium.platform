@@ -81,9 +81,6 @@
     text-wrap: balance;
   }
 
-  :where(h1, h2) {
-    font-variation-settings: "wght" 400;
-  }
 
   :where(h3, h4) {
     letter-spacing: -0.022em;

@@ -23,8 +23,8 @@ export default function GrowthEngineDiagram() {
         <div className="mb-14 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-6">The Atrium Growth Engine</Eyebrow>
-            <h2 className="max-w-[14ch] text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-              Not eleven services. <em className="font-serif italic text-green">One system.</em>
+            <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+              Not eleven services. <em className="font-serif italic">One system.</em>
             </h2>
           </div>
           <p className="max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted lg:col-span-5">
