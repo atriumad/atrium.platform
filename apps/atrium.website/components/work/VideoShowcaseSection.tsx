@@ -24,7 +24,7 @@ function CinematicHero({ videoId }: { videoId: string }) {
       // practice, and shipping the source resolution when the video plays far
       // smaller on screen is the main cause of stutter on slower connections.
       src={cldVideoUrl(videoId, { width: 1600 })}
-      poster={cldVideoPoster(videoId)}
+      poster={cldVideoPoster(videoId) || undefined}
       muted
       loop
       playsInline

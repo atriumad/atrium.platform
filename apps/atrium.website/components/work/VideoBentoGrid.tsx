@@ -33,7 +33,7 @@ function BentoClip({ videoId }: { videoId: string }) {
     <video
       ref={videoRef}
       src={cldVideoUrl(videoId, { width: 1200 })}
-      poster={cldVideoPoster(videoId)}
+      poster={cldVideoPoster(videoId) || undefined}
       muted
       loop
       playsInline

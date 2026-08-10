@@ -16,6 +16,13 @@ const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? ''
 
 export const cloudinaryConfigured = Boolean(CLOUD)
 
+/** Assets for some clients are delivered from our own CDN rather than
+ *  Cloudinary, so an "id" may already be a finished URL. Those pass through
+ *  the builders untouched — there is no public ID to transform. */
+function isAbsoluteUrl(src: string): boolean {
+  return /^https?:\/\//i.test(src.trim())
+}
+
 /** Normalize a public ID: drop a leading `v1784223449/` delivery-version
  *  prefix and any trailing file extension (Cloudinary public IDs carry neither). */
 function stripVersion(publicId: string): string {
@@ -30,6 +37,7 @@ type ImageOpts = { width?: number; height?: number; crop?: 'fill' | 'fit' | 'lim
 
 /** Build an optimized delivery URL for a Cloudinary image public ID. */
 export function cldImageUrl(publicId: string, opts: ImageOpts = {}): string {
+  if (isAbsoluteUrl(publicId)) return publicId.trim()
   return getCldImageUrl({
     src: stripVersion(publicId),
     width: opts.width,
@@ -45,11 +53,17 @@ type VideoOpts = { width?: number }
  *  the source resolution when the video renders far smaller on screen is
  *  the main cause of stutter on slower connections. */
 export function cldVideoUrl(publicId: string, opts: VideoOpts = {}): string {
+  if (isAbsoluteUrl(publicId)) return publicId.trim()
   return getCldVideoUrl({ src: stripVersion(publicId), width: opts.width })
 }
 
-/** Poster frame for a Cloudinary video public ID (first frame). */
+/** Poster frame for a Cloudinary video public ID (first frame).
+ *  Returns an empty string for CDN-delivered videos: there is no frame to
+ *  derive. Callers must convert that to `undefined` — an empty poster
+ *  attribute resolves against the document URL and the browser tries to
+ *  load the page itself as the poster image. */
 export function cldVideoPoster(publicId: string): string {
+  if (isAbsoluteUrl(publicId)) return ''
   return getCldImageUrl({
     src: stripVersion(publicId),
     assetType: 'video',

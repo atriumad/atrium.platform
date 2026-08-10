@@ -1,3 +1,4 @@
+import { caseAssetOverrides } from './case-assets.overrides'
 import { cloudinaryAssets } from './cloudinary-assets.generated'
 
 export type CaseMetric = { number: string; label: string }
@@ -67,7 +68,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'taco-naco',
     client: 'Taco Naco KC',
-    coverImageId: 'v1784223449/TNKC_FEB18_Slide_2_tiwzpa',
+    coverImageId: 'https://cdn.atriumad.com/clients/TNKC/photos/TNKC_%20APR05%20Slide%205.jpg',
     coverLogo: '/logos/clients/tknc.png',
     category: 'Fast-Casual Mexican · Multi-Location Engagement',
     serviceTags: ['Brand Strategy', 'Content', 'Social', 'Google', 'Reputation', 'Analytics'],
@@ -395,7 +396,7 @@ export const caseStudies: CaseStudy[] = [
 // — never hand-maintained. Generated IDs are the source of truth for the gallery
 // and video marquee; a curated `coverImageId` (if set) wins for the cover surface.
 for (const study of caseStudies) {
-  const assets = cloudinaryAssets[study.slug]
+  const assets = caseAssetOverrides[study.slug] ?? cloudinaryAssets[study.slug]
   if (!assets) continue
   study.galleryIds = assets.images
   study.videoIds = assets.videos
