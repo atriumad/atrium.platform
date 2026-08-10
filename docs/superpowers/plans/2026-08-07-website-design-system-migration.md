@@ -37,14 +37,16 @@ These replace the old vocabulary. Stated once here rather than repeated per task
 | Legacy class | Replacement |
 |---|---|
 | `.type-page-title` | `text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em]` |
-| `.type-section-title` | `text-[clamp(1.9rem,3.4vw,3rem)] font-normal leading-[1.08] tracking-[-0.02em]` |
+| `.type-section-title` | `text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]` |
 | `.type-card-title` | `text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]` |
 | `.type-lead` | `text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body` |
 | `.type-body` | `text-base leading-relaxed text-body` |
 | `.type-caption` | `text-[0.875rem] text-muted` |
 | `.type-eyebrow` | the `Eyebrow` primitive |
 
-The serif accent is `<em className="font-serif italic text-green">`, once per section.
+The serif accent is `<em className="font-serif italic">`, once per section. **It carries no colour** — the italic already marks it, and a second colour inside a heading reads as an inconsistency. Every heading is one colour.
+
+Every `h3` uses the card-title treatment: one size, one weight (500). Do not introduce a second heading scale at the same level.
 
 **Colour.** `--teal-800` / `--text-strong` become `text-ink`; `--text-muted` / `--teal-500` become `text-muted`; `--ink-700` / `--text-body` become `text-body`; `--surface-page` becomes `bg-cream`; `--cloud-100` / `--surface-card` become `bg-card`; `--mint-400` becomes `text-mint` or `bg-mint`; `--amber-500` becomes `bg-amber`; borders become `border-line`.
 
