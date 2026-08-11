@@ -28,50 +28,38 @@ export function CaseRow({
   )
 }
 
-/** One panel of a full-bleed case gallery. At rest it is the cover with the
- *  client's name; on hover a brand-green curtain rises over the photograph and
- *  the panel becomes a record — client, headline number, services, and the way
- *  in. Touch has no hover, so below md the curtain is dropped and the detail
- *  simply stays on the label. */
+/** One panel of a full-bleed case gallery. At rest the photograph sits under a
+ *  dark veil with the client's name on it; hovering lifts the veil and the
+ *  picture comes forward, while its neighbours fall back. */
 export default function CasePanel({
   study,
   detail,
-  tags,
   revealClass = '',
 }: {
   study: CaseStudy
-  /** The headline claim — a result, a metric. */
+  /** The headline claim — a result, a metric. Held back until hover. */
   detail: string
-  /** Optional service list, shown on the curtain. */
-  tags?: string
   /** Hook and starting opacity for a scroll reveal. Panels without a reveal
    *  driving them must not start hidden, or they never appear. */
   revealClass?: string
 }) {
   return (
     <TransitionLink className={`${PANEL} ${DIM} ${revealClass}`} href={`/work/${study.slug}`}>
-      <CaseCover study={study} />
+      <CaseCover
+        scrimClassName="bg-black/55 transition-opacity duration-500 ease-atrium md:group-focus-visible:opacity-0 md:group-hover:opacity-0"
+        study={study}
+      />
 
-      {/* Resting label. Above CaseCover's scrim and logo, which end at z-20. */}
-      <div className="absolute inset-x-0 bottom-0 z-30 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-6 pt-20 transition-opacity duration-300 md:p-8 md:pt-28 md:group-hover:opacity-0">
+      {/* Above CaseCover's scrim and logo, which end at z-20. The gradient
+          stays through the hover — it is what keeps the type legible once the
+          veil is gone. */}
+      <div className="absolute inset-x-0 bottom-0 z-30 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-6 pt-20 md:p-8 md:pt-28">
         <p className="m-0 text-[1.0625rem] font-medium leading-snug text-white md:text-[1.25rem]">
           {study.client}
         </p>
-        <p className="mt-2 max-w-sm text-[0.9375rem] leading-relaxed text-white/80 md:hidden">
+        <p className="mt-2 max-w-sm text-[0.9375rem] leading-relaxed text-white/80 transition-all duration-500 md:max-h-0 md:translate-y-2 md:overflow-hidden md:opacity-0 md:group-focus-within:max-h-24 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100 md:group-hover:max-h-24 md:group-hover:translate-y-0 md:group-hover:opacity-100">
           {detail}
         </p>
-      </div>
-
-      {/* The curtain. green-ink rather than green: cream tops out at 4.63:1 on
-          green, which leaves no headroom for the smaller type below. */}
-      <div className="absolute inset-0 z-40 hidden translate-y-full flex-col justify-end bg-green-ink p-8 transition-transform duration-700 ease-atrium md:flex md:group-focus-visible:translate-y-0 md:group-hover:translate-y-0">
-        <p className="m-0 text-[1.25rem] font-medium leading-snug text-cream">{study.client}</p>
-        <p className="mt-3 text-[1.0625rem] leading-relaxed text-cream/90">{detail}</p>
-        {tags && <p className="mt-4 text-[0.8125rem] leading-relaxed text-cream/80">{tags}</p>}
-        <span className="mt-6 inline-flex items-center gap-2 text-[0.875rem] font-medium text-cream">
-          Read the case
-          <span aria-hidden="true">→</span>
-        </span>
       </div>
     </TransitionLink>
   )
