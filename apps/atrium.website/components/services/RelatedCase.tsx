@@ -18,8 +18,8 @@ export default function RelatedCase({ serviceSlug }: { serviceSlug: string }) {
   const cover = getCaseCover(study)
 
   return (
-    <section className="bg-cream px-6 md:px-12 py-24 md:py-32">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-cream px-[var(--gutter)] py-24 md:py-32">
+      <div className="max-w-[var(--container-max)] mx-auto">
         <Eyebrow className="mb-8">Related case</Eyebrow>
         <TransitionLink
           href={`/work/${study.slug}`}
