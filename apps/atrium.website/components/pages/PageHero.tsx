@@ -1,6 +1,6 @@
+import { Eyebrow } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import Button from '@/components/ui/Button'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionCTA from '@/components/ui/TransitionCTA'
 import { CAL_CONFIG } from '@/lib/cal'
 
@@ -27,40 +27,40 @@ type PageHeroProps = {
   stats?: HeroStat[]
 }
 
+/** The opening band of every subpage. A header rather than a hero: it runs on
+ *  the section heading scale, not the page-title scale, so a subpage reads as
+ *  part of the site instead of a landing page of its own. */
 export default function PageHero({ eyebrow, title, body, actions, stats }: PageHeroProps) {
   return (
-    <section
-      className="relative overflow-hidden px-6 pt-32 pb-20 md:px-12 md:pt-40 md:pb-28"
-      style={{ background: 'var(--teal-800)', color: 'var(--text-on-dark)' }}
-    >
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.65fr)] lg:items-end">
+    <section className="bg-dark px-[var(--gutter)] pt-[7.5rem] pb-16 max-sm:pt-[6rem]">
+      <div className="mx-auto grid max-w-[var(--container-max)] gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(300px,0.6fr)] lg:items-end">
         <div>
-          <Eyebrow tone="onDark" className="mb-7">
+          <Eyebrow className="mb-6" tone="on-dark">
             {eyebrow}
           </Eyebrow>
-          <h1 className="type-page-title max-w-4xl">
+          <h1 className="m-0 max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
             {title}
           </h1>
-          <p className="type-lead mt-8 max-w-2xl" style={{ color: 'var(--text-on-dark)', opacity: 0.76 }}>
+          <p className="mt-6 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
             {body}
           </p>
           {actions && actions.length > 0 && (
-            <div className="mt-9 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap gap-4">
               {actions.map((action, index) =>
                 action.calLink ? (
                   <Button
-                    key={action.href}
-                    href={action.href}
-                    variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
-                    data-cal-link={action.calLink}
                     data-cal-config={CAL_CONFIG}
+                    data-cal-link={action.calLink}
+                    href={action.href}
+                    key={action.href}
+                    variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
                   >
                     {action.label}
                   </Button>
                 ) : (
                   <TransitionCTA
-                    key={action.href}
                     href={action.href}
+                    key={action.href}
                     variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
                     {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   >
@@ -73,19 +73,16 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
         </div>
 
         {stats && stats.length > 0 && (
-          <div className="border-t md:grid md:grid-cols-3 lg:block" style={{ borderColor: 'rgba(181,242,219,0.28)' }}>
+          <div className="border-cream/25 border-t md:grid md:grid-cols-3 lg:block">
             {stats.map((stat) => (
               <div
+                className="grid min-h-28 grid-cols-[minmax(4.5rem,0.7fr)_minmax(0,1fr)] items-center gap-5 border-cream/25 border-b py-5 md:block md:px-5 lg:grid lg:px-0"
                 key={`${stat.value}-${stat.label}`}
-                className="grid min-h-32 grid-cols-[minmax(5rem,0.72fr)_minmax(0,1fr)] items-center gap-5 border-b py-6 md:block md:px-5 lg:grid lg:px-0"
-                style={{ borderColor: 'rgba(181,242,219,0.28)' }}
               >
-                <p className="m-0 text-[clamp(3.25rem,5vw,5.75rem)] font-normal italic leading-none tracking-[-0.04em]" style={{ color: 'var(--mint-400)', fontFamily: 'var(--font-serif)' }}>
+                <p className="m-0 font-serif text-[clamp(2.75rem,4vw,4.5rem)] font-normal italic leading-none tracking-[-0.04em] text-mint">
                   {stat.value}
                 </p>
-                <p className="type-caption m-0 md:mt-4 lg:mt-0" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
-                  {stat.label}
-                </p>
+                <p className="m-0 text-[0.875rem] text-cream/[0.72] md:mt-4 lg:mt-0">{stat.label}</p>
               </div>
             ))}
           </div>
