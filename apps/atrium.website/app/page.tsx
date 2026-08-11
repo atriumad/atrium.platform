@@ -25,11 +25,11 @@ const bentoItems: BentoItem[] = [
 ]
 
 const selectedWorkDetails = [
-  { slug: 'taco-naco', result: '3 locations. One brand. Full system activation.', orientation: 'horizontal' },
-  { slug: 'taha', result: 'Single campaign. Measurable revenue lift.', orientation: 'vertical' },
-  { slug: 'aahaa', result: 'Visual identity that found its voice.', orientation: 'square' },
-  { slug: 'hotel-kc', result: 'Two-part campaign storytelling.', orientation: 'horizontal' },
-  { slug: 'grand-coffee', result: 'Brand system from the ground up.', orientation: 'vertical' },
+  { slug: 'taco-naco', result: '3 locations. One brand. Full system activation.' },
+  { slug: 'taha', result: 'Single campaign. Measurable revenue lift.' },
+  { slug: 'aahaa', result: 'Visual identity that found its voice.' },
+  { slug: 'hotel-kc', result: 'Two-part campaign storytelling.' },
+  { slug: 'grand-coffee', result: 'Brand system from the ground up.' },
 ] as const
 
 const selectedWork: Project[] = selectedWorkDetails.flatMap(({ slug, ...details }) => {
