@@ -36,8 +36,8 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
   }, [])
 
   return (
-    <section className="bg-cream px-6 py-20 md:px-12 md:py-28">
-      <div className="mx-auto flex max-w-6xl flex-col gap-16 md:flex-row md:gap-24">
+    <section className="bg-cream px-[var(--gutter)] py-20 md:py-28">
+      <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-16 md:flex-row md:gap-24">
         <div className="flex flex-1 flex-col gap-6">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
           <h2 className="max-w-lg text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">

@@ -21,8 +21,8 @@ const rows: Row[] = [
 
 export default function ComparisonMatrix() {
   return (
-    <section className="bg-dark px-6 py-24 md:px-12 md:py-32">
-      <div className="mx-auto max-w-6xl">
+    <section className="bg-dark px-[var(--gutter)] py-24 md:py-32">
+      <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-12 max-w-2xl md:mb-16">
           <Eyebrow className="mb-4" tone="on-dark">Why Atrium</Eyebrow>
           <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">

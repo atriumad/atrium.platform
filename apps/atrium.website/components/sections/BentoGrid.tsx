@@ -57,8 +57,8 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
   }, [])
 
   return (
-    <section className="bg-cream px-6 py-20 md:px-12 md:py-28">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-cream px-[var(--gutter)] py-20 md:py-28">
+      <div className="mx-auto max-w-[var(--container-max)]">
         {(eyebrow || headline) && (
           <div className="mb-16 max-w-3xl">
             {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}

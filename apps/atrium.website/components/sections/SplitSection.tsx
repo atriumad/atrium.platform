@@ -44,8 +44,8 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
   const textColor = isDark ? 'var(--color-text-light)' : 'var(--color-text-dark)'
 
   return (
-    <section className="px-6 md:px-12 py-20 md:py-28 overflow-hidden" style={{ background: bg_ }}>
-      <div className={`max-w-6xl mx-auto flex flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}>
+    <section className="px-[var(--gutter)] py-20 md:py-28 overflow-hidden" style={{ background: bg_ }}>
+      <div className={`max-w-[var(--container-max)] mx-auto flex flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}>
         <div ref={textRef} className="flex-1 flex flex-col gap-6 max-w-lg" style={{ opacity: 0 }}>
           {eyebrow && <Eyebrow style={{ color: textColor } as React.CSSProperties}>{eyebrow}</Eyebrow>}
           <h2 className="type-section-title" style={{ color: textColor }}>{headline}</h2>

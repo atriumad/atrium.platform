@@ -27,8 +27,8 @@ export default function TestimonialBento({ items, eyebrow }: Props) {
   }, [])
 
   return (
-    <section className="bg-dark px-6 py-20 md:px-12 md:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section className="bg-dark px-[var(--gutter)] py-20 md:py-28">
+      <div className="mx-auto max-w-[var(--container-max)]">
         {eyebrow && <Eyebrow className="mb-14" tone="on-dark">{eyebrow}</Eyebrow>}
         <div ref={gridRef} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
           {items.map((card, i) => {
