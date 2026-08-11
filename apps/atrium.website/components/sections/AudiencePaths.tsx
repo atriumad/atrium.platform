@@ -36,7 +36,7 @@ export default function AudiencePaths() {
     <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-14 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-16 md:mb-20">
-          <div className="order-2 lg:order-1 lg:col-span-6">
+          <div className="order-2 lg:order-1 lg:col-span-7">
             <Eyebrow className="mb-6">Built for your stage</Eyebrow>
             <h2 className="max-w-[13ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
               Different footprint. <em className="font-serif italic">Different first move.</em>
@@ -45,13 +45,13 @@ export default function AudiencePaths() {
               A single dining room, a regional group, and a national rollout should not enter through the same scope. Start with the operating problem that matches your footprint.
             </p>
           </div>
-          <div className="order-1 lg:order-2 lg:col-span-6">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl lg:aspect-[3/4]">
+          <div className="order-1 lg:order-2 lg:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl lg:ml-auto lg:aspect-[4/5] lg:max-w-[22rem]">
               <CldImage
                 publicId="v1784220815/AHAA_FEB13_CREATIVE_POST_PHOTO_3_juwr7s"
                 alt=""
                 fill
-                sizes="(min-width: 1024px) 40rem, 100vw"
+                sizes="(min-width: 1024px) 22rem, 100vw"
                 className="object-cover"
               />
             </div>

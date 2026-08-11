@@ -2,30 +2,20 @@
 import { Button, Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
 import HeroPerspectiveGallery from '@/components/sections/HeroPerspectiveGallery'
-import TransitionCTA from '@/components/ui/TransitionCTA'
+import TransitionLink from '@/components/ui/TransitionLink'
 import { CTA } from '@/lib/cta'
 import { gsap } from '@/lib/gsap'
 import { heroGalleryIds } from '@/lib/work'
 
-const tags = [
-  'Hospitality-only expertise',
-  'Full-stack creative + systems',
-  'Every dollar tracked to revenue',
-]
-
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLDivElement>(null)
-  const tagsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!textRef.current || !tagsRef.current) return
+    if (!textRef.current) return
     const ctx = gsap.context(() => {
       gsap.from(Array.from(textRef.current?.children ?? []), {
         y: 32, opacity: 0, duration: 0.9, stagger: 0.15, ease: 'power3.out', delay: 0.2,
-      })
-      gsap.from(Array.from(tagsRef.current?.children ?? []), {
-        y: 24, opacity: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out', delay: 1,
       })
     }, containerRef)
     return () => ctx.revert()
@@ -48,30 +38,27 @@ export default function HeroSection() {
               <em className="font-serif italic">regulars.</em>
             </h1>
 
-            <p className="mb-10 max-w-xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
-              One accountable team — strategy, content, Google, retention and reporting
-              in a single system. Hospitality is all we do.
+            <p className="mb-10 max-w-lg text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
+              Strategy, content, Google, retention and reporting — one accountable
+              team, one system.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            {/* One button, one link: the pair used to read as two competing
+                choices. The link carries the same weight as body text. */}
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
               <Button href={CTA.primary.href} target="_blank" rel="noopener noreferrer" variant="accent">
                 {CTA.primary.label}
               </Button>
-              <TransitionCTA href={CTA.proof.href} variant="ghostLight">
-                {CTA.proof.label}
-              </TransitionCTA>
-            </div>
-          </div>
-
-          <div ref={tagsRef} className="flex flex-wrap gap-3 mt-16">
-            {tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-cream/15 bg-cream/[0.07] px-5 py-2 text-[0.875rem] font-medium text-mint"
+              <TransitionLink
+                href={CTA.proof.href}
+                className="group inline-flex items-center gap-2 text-[0.9375rem] text-cream/[0.78] underline decoration-cream/25 underline-offset-[6px] transition-colors hover:text-mint hover:decoration-mint/50"
               >
-                {tag}
-              </span>
-            ))}
+                {CTA.proof.label}
+                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </TransitionLink>
+            </div>
           </div>
         </div>
 
