@@ -2,47 +2,76 @@ import TransitionLink from '@/components/ui/TransitionLink'
 import CaseCover from '@/components/work/CaseCover'
 import type { CaseStudy } from '@/lib/work'
 
-/** How far a hovered panel grows. A two-up row starts from a wider share, so
- *  it needs less growth than a three-up row to read as the same gesture.
- *  Written as whole literal classes because Tailwind scans for them as text. */
-export const GROW_TWO_UP = 'md:hover:grow-[1.7] md:focus-within:grow-[1.7]'
-export const GROW_THREE_UP = 'md:hover:grow-[2.2] md:focus-within:grow-[2.2]'
-
 const PANEL =
-  'group relative block aspect-[16/10] overflow-hidden no-underline md:aspect-auto md:h-full md:flex-1 md:basis-0 md:transition-[flex-grow] md:duration-700 md:ease-atrium'
+  'group relative block aspect-[16/10] overflow-hidden no-underline transition-opacity duration-500 md:aspect-auto md:h-full md:flex-1 md:basis-0'
 
-/** One panel of a full-bleed case gallery. Panels share their row until one is
- *  hovered, which takes the space from its siblings rather than from the page,
- *  so the row expands without reflowing anything below it. */
+// Every sibling but the hovered one drops back. Written as one selector —
+// `.row:hover .panel:not(:hover)` — so there is no rule racing another to
+// restore the panel under the cursor.
+const DIM = 'md:group-hover/row:[&:not(:hover)]:opacity-40'
+
+/** Wraps a row of panels. Panels read the hover state from here to dim. */
+export function CaseRow({
+  children,
+  tall = false,
+}: {
+  children: React.ReactNode
+  /** Two-up rows are taller than three-up rows. */
+  tall?: boolean
+}) {
+  return (
+    <div
+      className={`group/row flex w-full flex-col md:flex-row ${tall ? 'md:h-[52vh]' : 'md:h-[44vh]'}`}
+    >
+      {children}
+    </div>
+  )
+}
+
+/** One panel of a full-bleed case gallery. At rest it is the cover with the
+ *  client's name; on hover a brand-green curtain rises over the photograph and
+ *  the panel becomes a record — client, headline number, services, and the way
+ *  in. Touch has no hover, so below md the curtain is dropped and the detail
+ *  simply stays on the label. */
 export default function CasePanel({
   study,
   detail,
-  growClass,
+  tags,
   revealClass = '',
 }: {
   study: CaseStudy
-  /** The line held back until hover — a result, a metric, a sector. */
+  /** The headline claim — a result, a metric. */
   detail: string
-  growClass: string
+  /** Optional service list, shown on the curtain. */
+  tags?: string
   /** Hook and starting opacity for a scroll reveal. Panels without a reveal
    *  driving them must not start hidden, or they never appear. */
   revealClass?: string
 }) {
   return (
-    <TransitionLink
-      className={`${PANEL} ${growClass} ${revealClass}`}
-      href={`/work/${study.slug}`}
-    >
+    <TransitionLink className={`${PANEL} ${DIM} ${revealClass}`} href={`/work/${study.slug}`}>
       <CaseCover study={study} />
 
-      {/* Sits above CaseCover's own scrim and logo layers, which end at z-20. */}
-      <div className="absolute inset-x-0 bottom-0 z-30 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-6 pt-20 md:p-8 md:pt-28">
+      {/* Resting label. Above CaseCover's scrim and logo, which end at z-20. */}
+      <div className="absolute inset-x-0 bottom-0 z-30 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-6 pt-20 transition-opacity duration-300 md:p-8 md:pt-28 md:group-hover:opacity-0">
         <p className="m-0 text-[1.0625rem] font-medium leading-snug text-white md:text-[1.25rem]">
           {study.client}
         </p>
-        <p className="mt-2 max-w-sm text-[0.9375rem] leading-relaxed text-white/80 transition-all duration-500 md:max-h-0 md:translate-y-2 md:overflow-hidden md:opacity-0 md:group-focus-within:max-h-24 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100 md:group-hover:max-h-24 md:group-hover:translate-y-0 md:group-hover:opacity-100">
+        <p className="mt-2 max-w-sm text-[0.9375rem] leading-relaxed text-white/80 md:hidden">
           {detail}
         </p>
+      </div>
+
+      {/* The curtain. green-ink rather than green: cream tops out at 4.63:1 on
+          green, which leaves no headroom for the smaller type below. */}
+      <div className="absolute inset-0 z-40 hidden translate-y-full flex-col justify-end bg-green-ink p-8 transition-transform duration-700 ease-atrium md:flex md:group-focus-visible:translate-y-0 md:group-hover:translate-y-0">
+        <p className="m-0 text-[1.25rem] font-medium leading-snug text-cream">{study.client}</p>
+        <p className="mt-3 text-[1.0625rem] leading-relaxed text-cream/90">{detail}</p>
+        {tags && <p className="mt-4 text-[0.8125rem] leading-relaxed text-cream/80">{tags}</p>}
+        <span className="mt-6 inline-flex items-center gap-2 text-[0.875rem] font-medium text-cream">
+          Read the case
+          <span aria-hidden="true">→</span>
+        </span>
       </div>
     </TransitionLink>
   )

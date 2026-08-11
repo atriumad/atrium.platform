@@ -2,7 +2,7 @@
 import { Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
 import TransitionCTA from '@/components/ui/TransitionCTA'
-import CasePanel, { GROW_THREE_UP, GROW_TWO_UP } from '@/components/work/CasePanel'
+import CasePanel, { CaseRow } from '@/components/work/CasePanel'
 import { gsap } from '@/lib/gsap'
 import type { CaseStudy } from '@/lib/work'
 
@@ -58,28 +58,26 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
       {/* Full-bleed, flush with the sections above and below: two panels over
           three. The two rows stay independent of each other. */}
       <div ref={galleryRef}>
-        <div className="flex w-full flex-col md:h-[52vh] md:flex-row">
+        <CaseRow tall>
           {topRow.map((project) => (
             <CasePanel
               detail={project.result}
-              growClass={GROW_TWO_UP}
               key={project.study.slug}
               revealClass="work-panel opacity-0"
               study={project.study}
             />
           ))}
-        </div>
-        <div className="flex w-full flex-col md:h-[44vh] md:flex-row">
+        </CaseRow>
+        <CaseRow>
           {bottomRow.map((project) => (
             <CasePanel
               detail={project.result}
-              growClass={GROW_THREE_UP}
               key={project.study.slug}
               revealClass="work-panel opacity-0"
               study={project.study}
             />
           ))}
-        </div>
+        </CaseRow>
       </div>
     </section>
   )

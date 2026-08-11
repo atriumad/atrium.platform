@@ -4,9 +4,10 @@ import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import TransitionLink from '@/components/ui/TransitionLink'
 import CaseCover from '@/components/work/CaseCover'
-import CasePanel, { chunkRows, GROW_THREE_UP, GROW_TWO_UP } from '@/components/work/CasePanel'
+import WorkStoryBlock from '@/components/work/WorkStoryBlock'
 import { CTA } from '@/lib/cta'
 import { type CaseStudy, caseStudies, getCaseSummary } from '@/lib/work'
+import { workStories } from '@/lib/work-stories'
 
 export const metadata: Metadata = {
   title: 'Atrium Case Studies — Hospitality Marketing Results',
@@ -17,19 +18,53 @@ export const metadata: Metadata = {
 
 const sortedCases = [...caseStudies].sort((a, b) => a.order - b.order)
 
-// Rows alternate two-up and three-up, the same rhythm the home gallery uses.
-const ROW_PATTERN = [2, 3, 2, 2]
-
-/** The line a panel holds back until hover: the case's headline metric, or its
- *  sector when it has no metric to lead with. */
-function panelDetail(study: CaseStudy): string {
+/** One line of the full archive. The gallery above is the argument; this is
+ *  the reference — scannable, every case, no pictures competing for the eye. */
+function CaseIndexRow({ study, index }: { study: CaseStudy; index: number }) {
   const metric = study.metrics[0]
-  return metric ? `${metric.number} ${metric.label}` : study.category
+
+  return (
+    <TransitionLink
+      aria-label={`Read case study: ${study.client}`}
+      className="group grid grid-cols-1 items-baseline gap-x-8 gap-y-3 border-line border-b py-7 no-underline last:border-b-0 lg:grid-cols-[3rem_minmax(0,1.15fr)_minmax(0,0.85fr)_minmax(0,1fr)_auto]"
+      href={`/work/${study.slug}`}
+    >
+      <p className="m-0 font-serif text-[1.35rem] leading-none text-muted italic">
+        {String(index + 1).padStart(2, '0')}
+      </p>
+
+      <div>
+        <h3 className="m-0 text-[1.25rem] font-medium leading-[1.2] text-ink">{study.client}</h3>
+        <p className="mt-1.5 text-[0.875rem] text-muted">{study.category}</p>
+      </div>
+
+      {metric ? (
+        <p className="m-0 text-[0.9375rem] text-body">
+          <span className="font-medium text-ink">{metric.number}</span> {metric.label}
+        </p>
+      ) : (
+        <span />
+      )}
+
+      <p className="m-0 text-[0.875rem] text-muted">{study.serviceTags.slice(0, 3).join(' · ')}</p>
+
+      <span
+        aria-hidden="true"
+        className="text-xl text-ink transition-transform duration-300 group-hover:translate-x-2"
+      >
+        →
+      </span>
+    </TransitionLink>
+  )
 }
 
 export default function WorkPage() {
-  const [featuredCase, ...archiveCases] = sortedCases
-  const rows = chunkRows(archiveCases, ROW_PATTERN)
+  const [featuredCase] = sortedCases
+  // A story only renders if its case study still exists to link to.
+  const stories = workStories.flatMap((story) => {
+    const study = sortedCases.find((item) => item.slug === story.slug)
+    return study ? [{ story, study }] : []
+  })
 
   return (
     <>
@@ -83,32 +118,45 @@ export default function WorkPage() {
         </section>
       )}
 
-      <section className="bg-cream pb-0">
-        <div className="px-[var(--gutter)]">
-          <div className="mx-auto mb-14 max-w-[var(--container-max)] border-line border-t pt-10 md:mb-20">
-            <Eyebrow className="mb-5">Case study archive</Eyebrow>
-            <h2 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
-              Different challenges. <em className="font-serif italic">Evidence in every story.</em>
+      <section className="bg-cream px-[var(--gutter)] pt-24 md:pt-32">
+        <div className="mx-auto max-w-[var(--container-max)] border-line border-t pt-10">
+          <Eyebrow className="mb-5">How the work runs</Eyebrow>
+          <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+            Different challenges. <em className="font-serif italic">Evidence in every story.</em>
+          </h2>
+          <p className="mt-6 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
+            Two engagements, told the short way: what the room looked like when we arrived, how the
+            work was actually run, and the pieces that came out of it.
+          </p>
+        </div>
+      </section>
+
+      {stories.map((entry, index) => (
+        <WorkStoryBlock
+          index={index}
+          key={entry.story.slug}
+          story={entry.story}
+          study={entry.study}
+        />
+      ))}
+
+      {/* The complete list, including the cases shown above. The gallery sells;
+          this is for the visitor who wants to find a specific kind of client. */}
+      <section className="bg-cream px-[var(--gutter)] py-24 md:py-32">
+        <div className="mx-auto max-w-[var(--container-max)]">
+          <div className="mb-12 md:mb-16">
+            <Eyebrow className="mb-5">Full archive</Eyebrow>
+            <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+              Every case, <em className="font-serif italic">start to finish.</em>
             </h2>
           </div>
-        </div>
 
-        {/* Full-bleed and flush with the CTA below, same as the home gallery. */}
-        {rows.map((row) => (
-          <div
-            className={`flex w-full flex-col md:flex-row ${row.length > 2 ? 'md:h-[44vh]' : 'md:h-[52vh]'}`}
-            key={row.map((study) => study.slug).join('-')}
-          >
-            {row.map((study) => (
-              <CasePanel
-                detail={panelDetail(study)}
-                growClass={row.length > 2 ? GROW_THREE_UP : GROW_TWO_UP}
-                key={study.slug}
-                study={study}
-              />
+          <div className="border-line border-t">
+            {sortedCases.map((study, index) => (
+              <CaseIndexRow index={index} key={study.slug} study={study} />
             ))}
           </div>
-        ))}
+        </div>
       </section>
 
       <CTABanner
