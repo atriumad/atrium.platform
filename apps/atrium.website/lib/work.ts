@@ -91,7 +91,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'taha',
     client: 'T’ÄHÄ Mexican Kitchen',
-    coverImageId: 'v1784146164/TAHA__MAY15_Slide_1_rn1svh',
+    coverImageId: 'https://cdn.atriumad.com/clients/TAHA/photos/TAHA_%20JUL15%20Lifestyle%20Photo.jpg',
     coverLogo: '/logos/clients/taha.png',
     location: 'Kansas City, MO',
     category: 'Fine Dining · Full-Service Engagement',
