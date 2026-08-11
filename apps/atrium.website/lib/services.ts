@@ -13,9 +13,6 @@ export type Service = {
   bentoCards: BentoCard[]
   stats: StatItem[]
   timeline?: TimelineStep[]
-  // Nav mega-menu row content — name/description/icon read from data rather
-  // than a parallel list hand-maintained in the Navbar component.
-  menu: { blurb: string; icon: string }
 }
 
 export const services: Service[] = [
@@ -24,7 +21,6 @@ export const services: Service[] = [
     slug: 'brand-strategy',
     name: 'Brand Strategy & Creative Direction',
     category: 'Generate Demand',
-    menu: { blurb: 'How you look, sound and position', icon: 'Compass' },
     hero: {
       eyebrow: 'GENERATE DEMAND',
       headline: 'Before anyone sees your content, *they need to feel your brand*',
@@ -68,7 +64,6 @@ export const services: Service[] = [
     slug: 'film-photo',
     name: 'Film & Photo Production',
     category: 'Generate Demand',
-    menu: { blurb: 'Shot on location, in your kitchen', icon: 'Clapperboard' },
     hero: {
       eyebrow: 'GENERATE DEMAND',
       headline: 'The food is doing the hard part. *We just make sure people see it.*',
@@ -106,7 +101,6 @@ export const services: Service[] = [
     slug: 'social-content',
     name: 'Social Content',
     category: 'Generate Demand',
-    menu: { blurb: 'Platform-native, built around business goals', icon: 'Sparkles' },
     hero: {
       eyebrow: 'GENERATE DEMAND',
       headline: "Posting isn't a strategy. *Never was.*",
@@ -143,7 +137,6 @@ export const services: Service[] = [
     slug: 'social-management',
     name: 'Social Media Management',
     category: 'Generate Demand',
-    menu: { blurb: 'Daily engagement and community management', icon: 'MessageCircle' },
     hero: {
       eyebrow: 'GENERATE DEMAND',
       headline: 'Your brand should be *present, not just posting.*',
@@ -180,7 +173,6 @@ export const services: Service[] = [
     slug: 'paid-media',
     name: 'Paid Media Strategies',
     category: 'Generate Demand',
-    menu: { blurb: 'Budget behind creative that already worked', icon: 'Target' },
     hero: {
       eyebrow: 'GENERATE DEMAND',
       headline: "We don't boost posts. *We build campaigns.*",
@@ -218,7 +210,6 @@ export const services: Service[] = [
     slug: 'google-seo',
     name: 'Google & Local SEO',
     category: 'Convert Demand',
-    menu: { blurb: 'Your profile is the new front door', icon: 'MapPin' },
     hero: {
       eyebrow: 'CONVERT DEMAND',
       headline: "If they can't find you, *they can't choose you.*",
@@ -255,7 +246,6 @@ export const services: Service[] = [
     slug: 'reputation',
     name: 'Reputation Management & Reviews',
     category: 'Convert Demand',
-    menu: { blurb: 'Every review answered, every rating tracked', icon: 'Star' },
     hero: {
       eyebrow: 'CONVERT DEMAND',
       headline: 'Your rating is your resume. *We manage it like one.*',
@@ -293,7 +283,6 @@ export const services: Service[] = [
     slug: 'experiential',
     name: 'Experiential & Collabs',
     category: 'Convert Demand',
-    menu: { blurb: 'Creators, events and activations', icon: 'Users' },
     hero: {
       eyebrow: 'CONVERT DEMAND',
       headline: "The best marketing *doesn't feel like marketing.*",
@@ -331,7 +320,6 @@ export const services: Service[] = [
     slug: 'email-sms',
     name: 'Email & SMS Marketing',
     category: 'Retain Demand',
-    menu: { blurb: 'Direct reach you own, not rent', icon: 'Mail' },
     hero: {
       eyebrow: 'RETAIN DEMAND',
       headline: 'The guest who already trusts you *is your most valuable audience.*',
@@ -369,7 +357,6 @@ export const services: Service[] = [
     slug: 'crm-loyalty',
     name: 'CRM & Loyalty',
     category: 'Retain Demand',
-    menu: { blurb: 'Segmentation, lifecycle flows, VIP recognition', icon: 'HeartHandshake' },
     hero: {
       eyebrow: 'RETAIN DEMAND',
       headline: 'A regular is worth more than *a hundred new followers.*',
@@ -407,7 +394,6 @@ export const services: Service[] = [
     slug: 'analytics',
     name: 'Analytics & Reporting',
     category: 'Retain Demand',
-    menu: { blurb: 'One dashboard for every channel', icon: 'LineChart' },
     hero: {
       eyebrow: 'RETAIN DEMAND',
       headline: "You can't fix *what you can't see.*",

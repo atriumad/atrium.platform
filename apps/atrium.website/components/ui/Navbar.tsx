@@ -130,22 +130,28 @@ const otherLinks = [
 function ServiceItem({
   svc,
   onClose,
+  tone = 'dark',
 }: {
   svc: { label: string; href: string; desc: string; icon: string }
   onClose: () => void
+  /** The mobile panel stays dark; the desktop menu is light. */
+  tone?: 'dark' | 'light'
 }) {
+  const light = tone === 'light'
   return (
     <TransitionLink
       href={svc.href}
       onClick={onClose}
-      className="flex gap-3 items-start px-2 py-2 -mx-2 rounded-lg transition-colors group hover:bg-white/5"
-      style={{ color: 'var(--color-surface)' }}
+      className={`flex gap-3 items-start px-2 py-2 -mx-2 rounded-lg transition-colors group ${light ? 'hover:bg-black/[0.04]' : 'hover:bg-white/5'}`}
+      style={{ color: light ? 'var(--text-strong)' : 'var(--color-surface)' }}
     >
       <span
         className="mt-0.5 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors group-hover:bg-[color-mix(in_srgb,var(--mint-400)_18%,transparent)]"
         style={{
-          background: 'color-mix(in srgb, var(--mint-400) 9%, transparent)',
-          color: 'var(--color-accent)',
+          background: light
+            ? 'color-mix(in srgb, var(--stage-generate) 14%, transparent)'
+            : 'color-mix(in srgb, var(--mint-400) 9%, transparent)',
+          color: light ? 'var(--stage-retain)' : 'var(--color-accent)',
         }}
       >
         {icons[svc.icon]}
@@ -154,7 +160,10 @@ function ServiceItem({
         <span className="text-sm font-medium leading-tight transition-opacity group-hover:opacity-70">
           {svc.label}
         </span>
-        <span className="text-xs leading-tight" style={{ color: 'var(--color-surface)', opacity: 0.4 }}>
+        <span
+          className="text-xs leading-tight"
+          style={light ? { color: 'var(--text-muted)' } : { color: 'var(--color-surface)', opacity: 0.4 }}
+        >
           {svc.desc}
         </span>
       </span>
@@ -169,6 +178,8 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [bgOpacity, setBgOpacity] = useState(0)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const menuTriggerRef = useRef<HTMLButtonElement>(null)
+  const menuPanelRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
@@ -199,6 +210,28 @@ export default function Navbar() {
     timeoutRef.current = setTimeout(() => setOpen(false), 220)
   }
   const close = () => setOpen(false)
+
+  useEffect(() => {
+    if (!open) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      setOpen(false)
+      menuTriggerRef.current?.focus()
+    }
+    const onPointerDown = (event: MouseEvent) => {
+      const target = event.target as Node
+      if (menuPanelRef.current?.contains(target) || menuTriggerRef.current?.contains(target)) return
+      setOpen(false)
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    document.addEventListener('mousedown', onPointerDown)
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener('mousedown', onPointerDown)
+    }
+  }, [open])
   const closeMobile = () => setMobileOpen(false)
   const isEditorialCase = pathname.startsWith('/work/')
   // Only the home page animates the header from transparent → solid on scroll.
@@ -259,6 +292,7 @@ export default function Navbar() {
           onMouseLeave={onLeave}
         >
           <button
+            ref={menuTriggerRef}
             type="button"
             aria-expanded={open}
             aria-haspopup="menu"
@@ -332,7 +366,7 @@ export default function Navbar() {
           open ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         style={{
-          background: 'color-mix(in srgb, var(--teal-900) 55%, transparent)',
+          background: 'color-mix(in srgb, var(--teal-900) 32%, transparent)',
           backdropFilter: 'blur(var(--blur-md))',
           WebkitBackdropFilter: 'blur(var(--blur-md))',
         }}
@@ -348,31 +382,32 @@ export default function Navbar() {
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
         role="menu"
+        ref={menuPanelRef}
       >
         <div className="flex justify-center px-6 pt-2 pb-6">
           <div
             className="flex overflow-hidden w-full max-w-5xl rounded-[var(--radius-lg)] border"
             style={{
-              background: 'var(--color-primary)',
-              borderColor: 'var(--color-border-subtle)',
-              boxShadow: 'var(--shadow-dark)',
+              background: 'var(--color-surface)',
+              borderColor: 'var(--border-light)',
+              boxShadow: 'var(--shadow-float)',
             }}
           >
             {/* Left feature panel — services overview */}
             <div
               className="flex flex-col justify-between p-8 w-[248px] flex-shrink-0"
-              style={{ background: 'var(--color-primary-900)' }}
+              style={{ background: 'var(--cloud-300)' }}
             >
               <div>
                 <span
                   className="type-eyebrow"
-                  style={{ color: 'var(--color-accent)', opacity: 0.65 }}
+                  style={{ color: 'var(--stage-retain)' }}
                 >
                   One system
                 </span>
                 <h2
                   className="type-card-title mt-4"
-                  style={{ color: 'var(--color-surface)' }}
+                  style={{ color: 'var(--text-strong)' }}
                 >
                   11 disciplines.{' '}
                   <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
@@ -381,7 +416,7 @@ export default function Navbar() {
                 </h2>
                 <p
                   className="type-caption mt-4"
-                  style={{ color: 'var(--color-surface)', opacity: 0.58 }}
+                  style={{ color: 'var(--text-muted)' }}
                 >
                   Brand strategy to CRM, shoots to dashboards — every discipline runs as one system. No hand-offs.
                 </p>
@@ -391,7 +426,7 @@ export default function Navbar() {
                 href="/services"
                 onClick={close}
                 className="inline-flex gap-2 items-center mt-8 text-xs font-medium transition-opacity hover:opacity-70 w-fit"
-                style={{ color: 'var(--color-accent)' }}
+                style={{ color: 'var(--stage-retain)' }}
               >
                 Explore all services
                 <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -401,17 +436,17 @@ export default function Navbar() {
             </div>
 
             {/* Right columns */}
-            <div className="flex flex-1 divide-x" style={{ borderColor: 'var(--color-border-subtle)' }}>
+            <div className="flex flex-1 divide-x" style={{ borderColor: 'var(--border-light)' }}>
               {/* Generate Demand */}
               <div className="flex flex-col flex-1 gap-1 p-6">
                 <p
                   className="type-eyebrow mb-4"
-                  style={{ color: 'var(--color-accent)', opacity: 0.55 }}
+                  style={{ color: 'var(--stage-retain)' }}
                 >
                   {leftGroup.label}
                 </p>
                 {leftGroup.services.map((svc) => (
-                  <ServiceItem key={svc.href} svc={svc} onClose={close} />
+                  <ServiceItem key={svc.href} svc={svc} onClose={close} tone="light" />
                 ))}
               </div>
 
@@ -425,13 +460,13 @@ export default function Navbar() {
                   >
                     <p
                       className="type-eyebrow mb-4"
-                      style={{ color: 'var(--color-accent)', opacity: 0.55 }}
+                      style={{ color: 'var(--stage-retain)' }}
                     >
                       {group.label}
                     </p>
                     <div className="flex flex-col gap-1">
                       {group.services.map((svc) => (
-                        <ServiceItem key={svc.href} svc={svc} onClose={close} />
+                        <ServiceItem key={svc.href} svc={svc} onClose={close} tone="light" />
                       ))}
                     </div>
                   </div>
