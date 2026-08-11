@@ -1,23 +1,8 @@
 'use client'
-import {
-  ArrowUpRight,
-  Clapperboard,
-  Compass,
-  HeartHandshake,
-  LineChart,
-  Mail,
-  MapPin,
-  MessageCircle,
-  Sparkles,
-  Star,
-  Target,
-  Users,
-} from 'lucide-react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CTA } from '@/lib/cta'
-import { services } from '@/lib/services'
 import Button from './Button'
 import TransitionLink from './TransitionLink'
 
@@ -141,40 +126,6 @@ const otherLinks = [
   { label: 'About', href: '/about' },
 ]
 
-// ─── Desktop mega-menu columns — read from lib/services.ts ─────────────────
-const MENU_ICONS: Record<string, typeof Compass> = {
-  Compass,
-  Clapperboard,
-  Sparkles,
-  MessageCircle,
-  Target,
-  MapPin,
-  Star,
-  Users,
-  Mail,
-  HeartHandshake,
-  LineChart,
-}
-
-// Column order + pill fill per category. Text colour is picked per fill so it
-// clears 4.5:1 against it (computed, not eyeballed):
-//   bg-green-fill (#3fae78) vs text-ink  -> 5.12:1 | vs text-cream -> 2.47:1
-//   bg-amber-fill (#eab63f) vs text-ink  -> 7.65:1 | vs text-cream -> 1.65:1
-//   bg-green      (#1f7a52) vs text-cream -> 4.69:1 | vs text-ink   -> 2.69:1
-// Only the darker retain green clears 4.5:1 with cream text; the other two
-// need ink, same split already established in app/services/page.tsx.
-const MENU_CATEGORIES = [
-  { category: 'Generate Demand', pillClass: 'bg-green-fill text-ink' },
-  { category: 'Convert Demand', pillClass: 'bg-amber-fill text-ink' },
-  { category: 'Retain Demand', pillClass: 'bg-green text-cream' },
-] as const
-
-const menuColumns = MENU_CATEGORIES.map(({ category, pillClass }) => ({
-  category,
-  pillClass,
-  services: services.filter((svc) => svc.category === category),
-}))
-
 // ─── Service item ──────────────────────────────────────────────────────────────
 function ServiceItem({
   svc,
@@ -219,31 +170,6 @@ export default function Navbar() {
   const [bgOpacity, setBgOpacity] = useState(0)
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const rafRef = useRef<number>(0)
-  const menuTriggerRef = useRef<HTMLButtonElement>(null)
-  const menuPanelRef = useRef<HTMLDivElement>(null)
-
-  // Services mega menu — close on Escape (returning focus to the trigger) and
-  // on outside click, in addition to the existing hover/focus open behaviour.
-  useEffect(() => {
-    if (!open) return
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return
-      setOpen(false)
-      menuTriggerRef.current?.focus()
-    }
-    const onPointerDown = (event: MouseEvent) => {
-      const target = event.target as Node
-      if (menuTriggerRef.current?.contains(target)) return
-      if (menuPanelRef.current?.contains(target)) return
-      setOpen(false)
-    }
-    document.addEventListener('keydown', onKeyDown)
-    document.addEventListener('mousedown', onPointerDown)
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      document.removeEventListener('mousedown', onPointerDown)
-    }
-  }, [open])
 
   useEffect(() => {
     const onScroll = () => {
@@ -333,12 +259,9 @@ export default function Navbar() {
           onMouseLeave={onLeave}
         >
           <button
-            ref={menuTriggerRef}
             type="button"
             aria-expanded={open}
             aria-haspopup="menu"
-            aria-controls="services-menu"
-            onClick={onEnter}
             onFocus={onEnter}
             onBlur={onLeave}
             className="flex gap-1 items-center text-sm font-medium transition-opacity hover:opacity-70"
@@ -415,11 +338,8 @@ export default function Navbar() {
         }}
       />
 
-      {/* ── Mega menu — full-bleed light panel, absolute child of fixed header ── */}
+      {/* ── Mega menu — absolute child of fixed header = full-width ── */}
       <div
-        id="services-menu"
-        ref={menuPanelRef}
-        inert={!open}
         className={`absolute left-0 right-0 top-full transition-all duration-200 ease-out ${
           open
             ? 'opacity-100 translate-y-0 pointer-events-auto'
@@ -428,50 +348,96 @@ export default function Navbar() {
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
         role="menu"
-        aria-label="Services"
       >
-        <div className="bg-cream border-b border-line shadow-float">
-          <div className="grid grid-cols-3 gap-10 mx-auto px-[var(--gutter)] py-12 max-w-[var(--container-max)]">
-            {menuColumns.map((column) => (
-              <div key={column.category} className="flex flex-col">
-                <TransitionLink
-                  href="/services"
-                  onClick={close}
-                  role="menuitem"
-                  className={`inline-flex gap-1.5 items-center self-start px-3 py-1.5 mb-5 text-xs font-semibold tracking-wide uppercase rounded-full transition-opacity hover:opacity-85 w-fit ${column.pillClass}`}
+        <div className="flex justify-center px-6 pt-2 pb-6">
+          <div
+            className="flex overflow-hidden w-full max-w-5xl rounded-[var(--radius-lg)] border"
+            style={{
+              background: 'var(--color-primary)',
+              borderColor: 'var(--color-border-subtle)',
+              boxShadow: 'var(--shadow-dark)',
+            }}
+          >
+            {/* Left feature panel — services overview */}
+            <div
+              className="flex flex-col justify-between p-8 w-[248px] flex-shrink-0"
+              style={{ background: 'var(--color-primary-900)' }}
+            >
+              <div>
+                <span
+                  className="type-eyebrow"
+                  style={{ color: 'var(--color-accent)', opacity: 0.65 }}
                 >
-                  {column.category}
-                  <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5" strokeWidth={2} />
-                </TransitionLink>
-
-                <div className="flex flex-col divide-y divide-line">
-                  {column.services.map((svc) => {
-                    const Icon = MENU_ICONS[svc.menu.icon]
-                    return (
-                      <TransitionLink
-                        key={svc.slug}
-                        href={`/services/${svc.slug}`}
-                        onClick={close}
-                        role="menuitem"
-                        className="flex gap-4 items-center py-3.5 transition-colors -mx-3 px-3 rounded-card-sm hover:bg-ink/[0.04]"
-                      >
-                        <span className="flex flex-col flex-1 gap-1 min-w-0">
-                          <span className="text-sm font-medium leading-tight text-ink">
-                            {svc.name}
-                          </span>
-                          <span className="text-xs leading-snug text-muted">
-                            {svc.menu.blurb}
-                          </span>
-                        </span>
-                        {Icon && (
-                          <Icon aria-hidden="true" className="flex-shrink-0 w-4 h-4 text-muted" strokeWidth={1.5} />
-                        )}
-                      </TransitionLink>
-                    )
-                  })}
-                </div>
+                  One system
+                </span>
+                <h2
+                  className="type-card-title mt-4"
+                  style={{ color: 'var(--color-surface)' }}
+                >
+                  11 disciplines.{' '}
+                  <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
+                    One roof.
+                  </em>
+                </h2>
+                <p
+                  className="type-caption mt-4"
+                  style={{ color: 'var(--color-surface)', opacity: 0.58 }}
+                >
+                  Brand strategy to CRM, shoots to dashboards — every discipline runs as one system. No hand-offs.
+                </p>
               </div>
-            ))}
+
+              <TransitionLink
+                href="/services"
+                onClick={close}
+                className="inline-flex gap-2 items-center mt-8 text-xs font-medium transition-opacity hover:opacity-70 w-fit"
+                style={{ color: 'var(--color-accent)' }}
+              >
+                Explore all services
+                <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </TransitionLink>
+            </div>
+
+            {/* Right columns */}
+            <div className="flex flex-1 divide-x" style={{ borderColor: 'var(--color-border-subtle)' }}>
+              {/* Generate Demand */}
+              <div className="flex flex-col flex-1 gap-1 p-6">
+                <p
+                  className="type-eyebrow mb-4"
+                  style={{ color: 'var(--color-accent)', opacity: 0.55 }}
+                >
+                  {leftGroup.label}
+                </p>
+                {leftGroup.services.map((svc) => (
+                  <ServiceItem key={svc.href} svc={svc} onClose={close} />
+                ))}
+              </div>
+
+              {/* Convert + Retain stacked */}
+              <div className="flex flex-col flex-1 p-6">
+                {rightGroups.map((group, gi) => (
+                  <div
+                    key={group.label}
+                    className={gi > 0 ? 'mt-5 pt-5 border-t' : ''}
+                    style={{ borderColor: 'var(--color-border-subtle)' }}
+                  >
+                    <p
+                      className="type-eyebrow mb-4"
+                      style={{ color: 'var(--color-accent)', opacity: 0.55 }}
+                    >
+                      {group.label}
+                    </p>
+                    <div className="flex flex-col gap-1">
+                      {group.services.map((svc) => (
+                        <ServiceItem key={svc.href} svc={svc} onClose={close} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

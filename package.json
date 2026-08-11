@@ -21,7 +21,8 @@
     "graphify:callflow": "graphify export callflow-html",
     "db:generate": "cd packages/infrastructure && bunx prisma generate",
     "db:migrate": "cd packages/infrastructure && bunx prisma migrate dev",
-    "db:studio": "cd packages/infrastructure && bunx prisma studio"
+    "db:studio": "cd packages/infrastructure && bunx prisma studio",
+    "deploy:cdn": "turbo run deploy --filter=@atrium/cdn"
   },
   "workspaces": [
     "apps/*",
