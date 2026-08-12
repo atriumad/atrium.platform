@@ -47,8 +47,12 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaCa
       <div className="max-w-[var(--container-max)] mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
         <div className="flex-1 flex flex-col gap-6">
           {eyebrow && <Eyebrow tone="on-dark">{eyebrow}</Eyebrow>}
-          <h2 className="type-section-title" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
-          <p className="type-body max-w-md" style={{ color: 'var(--color-text-light)', opacity: 0.76 }}>{body}</p>
+          {/* Was .type-section-title, an older and larger scale than the rest
+              of the site had moved to. */}
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            {headline}
+          </h2>
+          <p className="max-w-md text-base leading-relaxed text-cream/[0.78]">{body}</p>
           <div className="mt-2">
             {ctaCalLink ? (
               <Button href={ctaHref} variant="ghostLight" data-cal-link={ctaCalLink} data-cal-config={CAL_CONFIG}>
@@ -76,7 +80,7 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaCa
               style={{ background: 'rgba(7,47,52,0.5)', backdropFilter: 'blur(4px)' }}
             >
               <span className="text-6xl font-serif italic leading-none" style={{ color: 'var(--color-accent)' }}>&</span>
-              <p className="type-caption max-w-[180px]" style={{ color: 'rgba(228,238,240,0.62)' }}>
+              <p className="max-w-[180px] text-[0.875rem] text-cream/[0.62]">
                 {coverAlt}
               </p>
               <div className="w-8 h-px" style={{ background: 'var(--color-accent)' }} />

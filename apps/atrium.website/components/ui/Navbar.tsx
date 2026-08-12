@@ -253,7 +253,10 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 w-full z-50 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-6 md:px-12 h-14"
+      // Same edge as the page content: the container's left edge once the
+      // viewport is wider than the container, the plain gutter below that. The
+      // header is fixed, so its percentage resolves against the viewport.
+      className="fixed top-0 left-0 right-0 w-full z-50 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-[max(var(--gutter),calc((100%-var(--container-max))/2))] h-14"
       style={{
         borderBottom: headerBorder,
         boxShadow: headerShadow,

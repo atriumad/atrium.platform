@@ -24,11 +24,21 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-screen overflow-hidden bg-dark pt-14 lg:h-screen"
+      className="@container relative flex min-h-screen overflow-hidden bg-dark pt-14 lg:h-screen"
     >
       <div className="flex w-full flex-1 flex-col lg:flex-row">
-        <div className="flex flex-1 flex-col justify-center px-6 py-20 md:px-16 lg:w-1/2">
-          <div ref={textRef} className="max-w-4xl">
+        {/* The copy column is half the viewport, so it cannot inherit the
+            page's centred container. Instead it reproduces where that
+            container's left edge lands — (100% - container-max) / 2 once the
+            page is wider than the container, and the plain gutter below that —
+            so the hero starts on the same line as every section under it. The
+            width unit is 100cqw off the section, not 100vw, because vw counts
+            the scrollbar and would push it ~8px right of everything else. */}
+        <div className="flex flex-1 flex-col justify-center py-20 lg:w-1/2">
+          <div
+            className="w-full pr-[var(--gutter)] pl-[max(var(--gutter),calc((100cqw-var(--container-max))/2))]"
+            ref={textRef}
+          >
             <Eyebrow className="mb-6" tone="on-dark">
               The hospitality-only growth team
             </Eyebrow>
