@@ -1,12 +1,10 @@
 import { Eyebrow } from '@atrium/ui'
 import type { Metadata } from 'next'
-import PageHero from '@/components/pages/PageHero'
 import CTABanner from '@/components/sections/CTABanner'
 import TransitionLink from '@/components/ui/TransitionLink'
-import CaseCover from '@/components/work/CaseCover'
 import WorkStoryBlock from '@/components/work/WorkStoryBlock'
 import { CTA } from '@/lib/cta'
-import { type CaseStudy, caseStudies, getCaseSummary } from '@/lib/work'
+import { type CaseStudy, caseStudies } from '@/lib/work'
 import { workStories } from '@/lib/work-stories'
 
 export const metadata: Metadata = {
@@ -59,7 +57,6 @@ function CaseIndexRow({ study, index }: { study: CaseStudy; index: number }) {
 }
 
 export default function WorkPage() {
-  const [featuredCase] = sortedCases
   // A story only renders if its case study still exists to link to.
   const stories = workStories.flatMap((story) => {
     const study = sortedCases.find((item) => item.slug === story.slug)
@@ -68,55 +65,57 @@ export default function WorkPage() {
 
   return (
     <>
-      <PageHero
-        body="A visual archive of restaurant, hotel, and food brands built around measurable outcomes — not vanity metrics."
-        eyebrow="OUR WORK"
-        title={
-          <>
+      {/* The agency opens the page, not a client. No hero band — the extra top
+          padding is what the fixed header used to sit over. */}
+      <section className="bg-cream px-[var(--gutter)] pt-32 pb-20 md:pt-40 md:pb-24">
+        <div className="mx-auto max-w-[var(--container-max)]">
+          <Eyebrow className="mb-5">Our work</Eyebrow>
+          <h1 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
             Hospitality only. <em className="font-serif italic">Results first.</em>
-          </>
-        }
-      />
-
-      {featuredCase && (
-        <section className="bg-cream px-[var(--gutter)] py-24 md:py-32">
-          <div className="mx-auto max-w-[var(--container-max)]">
-            <div className="mb-12 md:mb-16">
-              <Eyebrow className="mb-5">Featured case</Eyebrow>
-              <h2 className="max-w-[20ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
-                The work should look good.{' '}
-                <em className="font-serif italic">The outcome should look better.</em>
-              </h2>
-            </div>
-
-            <TransitionLink
-              aria-label={`Read featured case study: ${featuredCase.client}`}
-              className="group block no-underline"
-              href={`/work/${featuredCase.slug}`}
+          </h1>
+          {/* Our own reel, not a client's. The file is shot 9:16, so a wide
+              frame crops it to a band — object-cover keeps the centre. */}
+          <div className="mt-12 h-[26rem] overflow-hidden rounded-card md:h-[34rem]">
+            <video
+              autoPlay
+              className="h-full w-full object-cover"
+              loop
+              muted
+              playsInline
+              preload="metadata"
             >
-              <div className="h-[26rem] overflow-hidden rounded-card md:h-[34rem]">
-                <CaseCover priority study={featuredCase} />
-              </div>
-              <div className="mt-7 grid gap-6 border-line border-t pt-7 lg:grid-cols-12 lg:gap-16">
-                <div className="lg:col-span-5">
-                  <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">
-                    {featuredCase.client}
-                  </h3>
-                  <p className="mt-2 text-[0.875rem] text-muted">{featuredCase.category}</p>
-                </div>
-                <div className="lg:col-span-7">
-                  <p className="m-0 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
-                    {getCaseSummary(featuredCase)}
-                  </p>
-                  <p className="mt-4 text-[0.875rem] text-muted">
-                    {featuredCase.serviceTags.join(' · ')}
-                  </p>
-                </div>
-              </div>
-            </TransitionLink>
+              <source
+                src="https://cdn.atriumad.com/clients/ATRM/reels/ATRM_%20JUL02%20Recap%209-16.mp4"
+                type="video/mp4"
+              />
+            </video>
           </div>
-        </section>
-      )}
+
+          <div className="mt-7 grid gap-6 border-line border-t pt-7 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">
+                One accountable team
+              </p>
+              <p className="mt-2 text-[0.875rem] text-muted">
+                Hospitality only · Strategy through reporting
+              </p>
+            </div>
+            <div className="lg:col-span-7">
+              <p className="m-0 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
+                Every brand below is a restaurant, a hotel, or a food company. We do not take work
+                outside hospitality, because the playbook only compounds when the room, the menu and
+                the market are the same problem we solved last month.
+              </p>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
+                One team runs all of it — strategy, the shoot, the channels, the reporting — so
+                nothing is briefed twice and nobody hands the brand off mid-campaign. What follows
+                is the record: what the business looked like when we arrived, what we built, and
+                what changed, measured against revenue rather than reach.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="bg-cream px-[var(--gutter)] pt-24 md:pt-32">
         <div className="mx-auto max-w-[var(--container-max)] border-line border-t pt-10">
