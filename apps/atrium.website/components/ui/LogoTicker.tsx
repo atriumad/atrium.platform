@@ -1,4 +1,18 @@
-export type Client = string | { name: string; logo: string }
+export type ClientLogo = {
+  name: string
+  logo: string
+  /** Size in px at --logo-scale 1, taken from the brand sheet.
+   *
+   *  These are per-logo on purpose. A common height cannot work across marks
+   *  this different: Jerusalem Cafe is 16:1 and Old Shawnee Pizza is 1.2:1, so
+   *  matching their heights makes one absurdly wide and the other a speck.
+   *  The sheet sizes each mark to read at the same optical weight on a shared
+   *  baseline, which means different heights. */
+  width: number
+  height: number
+}
+
+export type Client = string | ClientLogo
 
 type Props = {
   clients: Client[]
@@ -19,8 +33,14 @@ function BrandName({ client, index }: BrandNameProps) {
       <img
         src={client.logo}
         alt={client.name}
+        width={client.width}
+        height={client.height}
         loading="lazy"
-        className="h-[clamp(2.1rem,2.8vw,2.6rem)] w-auto max-w-[20rem] shrink-0 object-contain opacity-90"
+        className="shrink-0 object-contain opacity-90"
+        style={{
+          width: `calc(${client.width}px * var(--logo-scale))`,
+          height: `calc(${client.height}px * var(--logo-scale))`,
+        }}
       />
     )
   }
@@ -45,7 +65,9 @@ function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: Client
         {[0, 1].map(copyIndex => (
           <div
             key={copyIndex}
-            className="brand-marquee-set flex shrink-0 items-center gap-12 pr-12"
+            // One knob scales the whole set, so the sheet's relative sizing
+            // survives every breakpoint.
+            className="brand-marquee-set flex shrink-0 items-center gap-12 pr-12 [--logo-scale:0.28] md:gap-16 md:pr-16 md:[--logo-scale:0.39] lg:[--logo-scale:0.5]"
             aria-hidden={copyIndex > 0}
           >
             {brands.map((brand, index) => {
