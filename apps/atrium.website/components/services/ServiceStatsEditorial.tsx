@@ -1,4 +1,5 @@
 'use client'
+import { Eyebrow, NumberReel } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
@@ -16,7 +17,7 @@ export default function ServiceStatsEditorial({
   headline = (
     <>
       Not more activity.<br />
-      <em style={{ fontFamily: 'var(--font-serif)' }}>More momentum.</em>
+      <em className="font-serif italic">More momentum.</em>
     </>
   ),
 }: Props) {
@@ -43,17 +44,11 @@ export default function ServiceStatsEditorial({
   }, [])
 
   return (
-    <section
-      ref={containerRef}
-      className="relative px-[var(--gutter)] py-24 md:py-36"
-      style={{ background: 'var(--teal-900)' }}
-    >
+    <section ref={containerRef} className="relative bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="relative mx-auto max-w-[var(--container-max)]">
         <div className="metric-reveal max-w-4xl pb-14 md:pb-20">
-          <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
-            {eyebrow}
-          </p>
-          <h2 className="type-section-title m-0 mt-5" style={{ color: 'var(--text-on-dark)' }}>
+          <Eyebrow tone="on-dark">{eyebrow}</Eyebrow>
+          <h2 className="m-0 mt-5 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
             {headline}
           </h2>
         </div>
@@ -62,17 +57,13 @@ export default function ServiceStatsEditorial({
           {stats.map(stat => (
             <article
               key={`${stat.number}-${stat.label}`}
-              className="metric-reveal grid min-h-[15rem] grid-cols-1 items-center gap-7 border-t py-10 md:min-h-[17rem] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-8 md:py-12"
-              style={{ borderColor: 'rgba(181,242,219,0.22)' }}
+              className="metric-reveal grid min-h-[15rem] grid-cols-1 items-center gap-7 border-t border-cream/20 py-10 md:min-h-[17rem] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-8 md:py-12"
             >
-              <strong
-                className="stat-number m-0 text-[clamp(5rem,13vw,11.5rem)] font-normal italic leading-[0.72] tracking-[-0.055em] md:order-2 md:text-right md:text-[clamp(4.5rem,7.5vw,8.5rem)]"
-                style={{ color: 'var(--mint-400)', fontFamily: 'var(--font-serif)' }}
-              >
-                {stat.number}
-              </strong>
+              <p className="stat-number m-0 flex font-serif text-[clamp(5rem,13vw,11.5rem)] font-normal leading-none tracking-[-0.02em] text-cream md:order-2 md:justify-end md:text-[clamp(4.5rem,7.5vw,8.5rem)]">
+                <NumberReel value={stat.number} />
+              </p>
               <div className="md:order-1">
-                <p className="stat-label type-body m-0 max-w-sm" style={{ color: 'var(--text-on-dark)', opacity: 0.76 }}>
+                <p className="stat-label m-0 max-w-sm text-base leading-relaxed text-cream/70">
                   {stat.label}
                 </p>
               </div>

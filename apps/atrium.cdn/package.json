@@ -1,0 +1,16 @@
+{
+  "name": "@atrium/cdn",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "deploy": "node scripts/deploy.mjs",
+    "manifest": "bun scripts/manifest.ts",
+    "lint": "biome check .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.0",
+    "typescript": "^5.5.0"
+  }
+}

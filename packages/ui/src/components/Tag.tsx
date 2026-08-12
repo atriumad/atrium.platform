@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { cn } from '../lib/cn'
 
-type Variant = 'outline' | 'filled' | 'solid' | 'mint'
+type Variant = 'outline' | 'filled' | 'solid' | 'mint' | 'on-dark'
 type Size = 'sm' | 'md'
 
 const variants: Record<Variant, string> = {
@@ -9,6 +9,7 @@ const variants: Record<Variant, string> = {
   filled: 'bg-amber text-ink',
   solid: 'bg-ink text-cream',
   mint: 'bg-mint text-ink',
+  'on-dark': 'bg-cream/[0.07] text-mint border border-cream/15',
 }
 
 const sizes: Record<Size, string> = {

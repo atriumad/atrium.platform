@@ -1,7 +1,7 @@
 'use client'
+import { Eyebrow, NumberReel } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionCTA from '@/components/ui/TransitionCTA'
 import { gsap } from '@/lib/gsap'
 
@@ -36,36 +36,39 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
   }, [])
 
   return (
-    <section className="px-6 md:px-12 py-20 md:py-28" style={{ background: 'var(--color-primary)' }}>
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
-        <div className="flex-1 flex flex-col gap-6">
-          {eyebrow && <Eyebrow style={{ color: 'var(--color-surface)' } as React.CSSProperties}>{eyebrow}</Eyebrow>}
-          <h2 className="type-section-title max-w-lg" style={{ color: 'var(--color-text-light)' }}>{headline}</h2>
-          <p className="type-body max-w-sm" style={{ color: 'var(--color-text-light)', opacity: 0.74 }}>{body}</p>
-          <div className="mt-2"><TransitionCTA href={ctaHref} variant="ghostLight">{cta}</TransitionCTA></div>
-          <div className="flex gap-10 mt-8 pt-8" style={{ borderTop: '1px solid rgba(228,238,240,0.08)' }}>
+    <section className="bg-cream px-[var(--gutter)] py-20 md:py-28">
+      <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-16 md:flex-row md:gap-24">
+        <div className="flex flex-1 flex-col gap-6">
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h2 className="max-w-lg text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+            {headline}
+          </h2>
+          <p className="max-w-sm text-base leading-relaxed text-body">{body}</p>
+          <div className="mt-2"><TransitionCTA href={ctaHref} variant="outline">{cta}</TransitionCTA></div>
+          <div className="mt-8 flex gap-10 border-t border-line pt-8">
             {stats.map((s) => (
               <div key={`${s.number}-${s.label}`}>
-                <p className="text-4xl font-medium" style={{ color: 'var(--color-accent)' }}>{s.number}</p>
-                <p className="type-caption mt-1 max-w-[120px]" style={{ color: 'var(--color-text-light)', opacity: 0.68 }}>{s.label}</p>
+                <p className="m-0 font-serif text-[clamp(2.6rem,4vw,3.4rem)] font-normal leading-none tracking-[-0.03em] text-ink">
+                  <NumberReel value={s.number} />
+                </p>
+                <p className="mt-3 max-w-[140px] text-[0.875rem] leading-relaxed text-muted">{s.label}</p>
               </div>
             ))}
           </div>
         </div>
-        <div ref={stepsRef} className="flex-1 flex flex-col gap-4">
+        <div ref={stepsRef} className="flex flex-1 flex-col gap-4">
           {steps.map((step, i) => (
             <div
               key={step.title}
-              className="process-step flex gap-6 p-6 rounded-2xl transition-all duration-300 hover:translate-x-1"
-              style={{ background: 'rgba(228,238,240,0.04)', border: '1px solid rgba(228,238,240,0.06)', opacity: 0 }}
+              className="process-step flex gap-5 rounded-card-sm bg-card p-6 opacity-0 shadow-soft transition-shadow duration-300 hover:shadow-float motion-reduce:transition-none"
             >
-              <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 text-sm font-medium" style={{ background: 'var(--color-accent)', color: 'var(--color-text-dark)' }}>
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-soft text-[0.95rem] font-medium text-green-ink">
                 {i + 1}
               </div>
               <div className="space-y-1.5">
-                <p className="type-eyebrow" style={{ color: 'var(--color-accent)', opacity: 0.8 }}>{step.eyebrow}</p>
-                <p className="type-card-title" style={{ color: 'var(--color-text-light)' }}>{step.title}</p>
-                <p className="type-caption" style={{ color: 'var(--color-text-light)', opacity: 0.72 }}>{step.body}</p>
+                <Eyebrow as="p">{step.eyebrow}</Eyebrow>
+                <p className="text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">{step.title}</p>
+                <p className="text-[0.875rem] text-muted">{step.body}</p>
               </div>
             </div>
           ))}

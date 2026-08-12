@@ -1,5 +1,9 @@
 @import "tailwindcss";
 @import "@atrium/ui/src/tokens/tokens.css";
+@import "@atrium/ui/styles.css";
+@import "@atrium/ui/compat.css";
+
+@source "../../../packages/ui/src";
 
 /* ─── Tailwind theme ──────────────────────────────────────────────────────── */
 @theme inline {
@@ -55,47 +59,49 @@
 }
 
 /* ─── Base reset ──────────────────────────────────────────────────────────── */
-* { box-sizing: border-box; }
+/* Base element defaults live in @layer base so Tailwind utilities can
+   override them. Unlayered CSS beats every layered rule regardless of
+   specificity, which silently defeated text-* on every heading. */
+@layer base {
+  * { box-sizing: border-box; }
 
-body {
-  background: var(--surface-page);
-  color: var(--text-body);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
+  body {
+    background: var(--surface-page);
+    color: var(--text-body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-:where(h1, h2, h3, h4) {
-  color: inherit;
-  font-family: var(--font-sans);
-  font-weight: 400;
-  letter-spacing: -0.035em;
-  text-wrap: balance;
-}
+  :where(h1, h2, h3, h4) {
+    color: inherit;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
 
-:where(h1, h2) {
-  font-variation-settings: "wght" 400;
-}
 
-:where(h3, h4) {
-  letter-spacing: -0.022em;
-}
+  :where(h3, h4) {
+    letter-spacing: -0.022em;
+  }
 
-:where(h1, h2, h3, h4) em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.025em;
-}
+  :where(h1, h2, h3, h4) em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+  }
 
-main :where(p, li) {
-  font-family: var(--font-sans);
-  letter-spacing: -0.008em;
-  text-wrap: pretty;
-}
+  main :where(p, li) {
+    font-family: var(--font-sans);
+    letter-spacing: -0.008em;
+    text-wrap: pretty;
+  }
 
-main :where(p) {
-  max-width: 72ch;
+  main :where(p) {
+    max-width: 72ch;
+  }
 }
 
 /* Semantic typography roles. Components opt into a role instead of choosing

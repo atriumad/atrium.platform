@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+# ─── CDN auto-deploy on commit ───────────────────────────────────────────────
+# Runs AFTER a commit is created (never blocks it). Fires only when the commit
+# touched CDN content or its tooling:
+#   apps/atrium.cdn/public/**   (assets → document root)
+#   apps/atrium.cdn/scripts/**  (build/deploy pipeline)
+# On failure the commit is safe — a loud warning points to the deploy log.
+#
+# Install once per machine:  git config core.hooksPath .githooks
+
+CHANGED="$(git show --name-only --pretty=format: HEAD 2>/dev/null)"
+
+if ! printf '%s\n' "$CHANGED" | grep -qE '^apps/atrium\.cdn/(public|scripts)/'; then
+  exit 0
+fi
+
+echo "CDN content changed in last commit — deploying to Hostinger..."
+if ! (cd apps/atrium.cdn && bun run deploy) > /tmp/atrium-cdn-deploy.log 2>&1; then
+  echo "!! CDN deploy FAILED (commit is safe)."
+  echo "!! Log: /tmp/atrium-cdn-deploy.log"
+  echo "!! Re-run: bun run deploy:cdn   (check ~/.ssh/config + hPanel SSH key)"
+  exit 0
+fi
+cat /tmp/atrium-cdn-deploy.log

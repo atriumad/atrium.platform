@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import CTABanner from '@/components/sections/CTABanner'
 import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import Eyebrow from '@/components/ui/Eyebrow'
+import { CAL_LINKS } from '@/lib/cal'
 import { CTA } from '@/lib/cta'
 
 export const metadata: Metadata = {
@@ -137,7 +139,7 @@ function PricingOffers() {
                   <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
                     →
                   </span>
-                </a>
+                </Link>
               </div>
             </article>
           ))}

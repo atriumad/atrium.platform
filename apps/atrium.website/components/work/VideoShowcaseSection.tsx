@@ -1,7 +1,7 @@
 'use client'
 
+import { Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
-import Eyebrow from '@/components/ui/Eyebrow'
 import VideoMarquee from '@/components/work/VideoMarquee'
 import { cldVideoPoster, cldVideoUrl } from '@/lib/cloudinary'
 import type { CaseStudy } from '@/lib/work'
@@ -24,7 +24,7 @@ function CinematicHero({ videoId }: { videoId: string }) {
       // practice, and shipping the source resolution when the video plays far
       // smaller on screen is the main cause of stutter on slower connections.
       src={cldVideoUrl(videoId, { width: 1600 })}
-      poster={cldVideoPoster(videoId)}
+      poster={cldVideoPoster(videoId) || undefined}
       muted
       loop
       playsInline
@@ -43,21 +43,18 @@ export default function VideoShowcaseSection({ study }: { study: CaseStudy }) {
   if (!heroId) return null
 
   return (
-    <section className="overflow-hidden" style={{ background: 'var(--cloud-100)' }}>
+    <section className="overflow-hidden bg-cream">
       <CinematicHero videoId={heroId} />
 
       <div className="mx-auto mt-14 max-w-[var(--container-max)] px-[var(--gutter)] md:mt-20">
-        <div
-          className="grid gap-8 border-t pt-8 lg:grid-cols-12 lg:items-end lg:gap-16"
-          style={{ borderColor: 'rgba(7,47,52,0.18)' }}
-        >
+        <div className="grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-6">Reels and short-form video</Eyebrow>
-            <h2 className="type-section-title">
+            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
               Built to move. <em>Made to repeat.</em>
             </h2>
           </div>
-          <p className="type-body m-0 max-w-md lg:col-span-5" style={{ color: 'var(--text-muted)' }}>
+          <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
             A continuous stream of vertical stories designed for attention, consistency, and everyday brand recall.
           </p>
         </div>

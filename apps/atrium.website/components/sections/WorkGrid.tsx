@@ -1,66 +1,83 @@
 'use client'
+import { Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
-import Eyebrow from '@/components/ui/Eyebrow'
 import TransitionCTA from '@/components/ui/TransitionCTA'
-import TransitionLink from '@/components/ui/TransitionLink'
-import CaseCover from '@/components/work/CaseCover'
+import CasePanel, { CaseRow } from '@/components/work/CasePanel'
 import { gsap } from '@/lib/gsap'
 import type { CaseStudy } from '@/lib/work'
 
 export type Project = {
   study: CaseStudy
   result: string
-  orientation: 'horizontal' | 'vertical' | 'square'
 }
 
-const aspectMap = { horizontal: 'aspect-[16/9]', vertical: 'aspect-[3/4]', square: 'aspect-square' }
-
 export default function WorkGrid({ projects }: { projects: Project[] }) {
-  const gridRef = useRef<HTMLDivElement>(null)
+  const galleryRef = useRef<HTMLDivElement>(null)
+  const topRow = projects.slice(0, 2)
+  const bottomRow = projects.slice(2)
 
   useEffect(() => {
-    if (!gridRef.current) return
-    const cards = gridRef.current.querySelectorAll('.work-card')
+    if (!galleryRef.current) return
+    const panels = galleryRef.current.querySelectorAll('.work-panel')
     const ctx = gsap.context(() => {
-      gsap.fromTo(cards,
+      gsap.fromTo(
+        panels,
         { y: 32, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.1, ease: 'power2.out',
-          scrollTrigger: { trigger: gridRef.current, start: 'top 80%', once: true },
-        }
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: galleryRef.current, start: 'top 85%', once: true },
+        },
       )
     })
     return () => ctx.revert()
   }, [])
 
   return (
-    <section className="px-6 md:px-12 py-20 md:py-28" style={{ background: 'var(--color-surface)' }}>
-      <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-end mb-14">
-          <div>
-            <Eyebrow className="mb-3">Selected Work</Eyebrow>
-            <h2 className="type-section-title">See what changed. <em>Not just what shipped.</em></h2>
+    <section className="bg-cream pt-20 md:pt-28">
+      {/* Gutter and container width live on the header, not the section: the
+          gallery below has to reach both edges. Nested so the header lines up
+          with the rest of the page's sections. */}
+      <div className="px-[var(--gutter)]">
+        <div className="mx-auto mb-14 max-w-[var(--container-max)] md:mb-20">
+          <Eyebrow className="mb-3">Selected Work</Eyebrow>
+          <h2 className="max-w-3xl text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+            See what changed. <em className="font-serif italic">Not just what shipped.</em>
+          </h2>
+          <div className="mt-10">
+            <TransitionCTA href="/work" variant="outline">
+              See all work
+            </TransitionCTA>
           </div>
-          <TransitionCTA href="/work" variant="ghost" className="hidden md:flex">See all work →</TransitionCTA>
         </div>
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {projects.map(project => (
-            <TransitionLink
+      </div>
+
+      {/* Full-bleed, flush with the sections above and below: two panels over
+          three. The two rows stay independent of each other. */}
+      <div ref={galleryRef}>
+        <CaseRow tall>
+          {topRow.map((project) => (
+            <CasePanel
+              detail={project.result}
               key={project.study.slug}
-              href={`/work/${project.study.slug}`}
-              className="work-card group block rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1"
-              style={{ background: 'var(--color-surface-alt)', opacity: 0 }}
-            >
-              <CaseCover study={project.study} className={aspectMap[project.orientation]} />
-              <div className="p-6">
-                <p className="type-card-title mb-1">{project.study.client}</p>
-                <p className="type-caption" style={{ opacity: 0.72 }}>{project.result}</p>
-              </div>
-            </TransitionLink>
+              revealClass="work-panel opacity-0"
+              study={project.study}
+            />
           ))}
-        </div>
-        <div className="mt-10 md:hidden">
-          <TransitionCTA href="/work" variant="ghost">See all work →</TransitionCTA>
-        </div>
+        </CaseRow>
+        <CaseRow>
+          {bottomRow.map((project) => (
+            <CasePanel
+              detail={project.result}
+              key={project.study.slug}
+              revealClass="work-panel opacity-0"
+              study={project.study}
+            />
+          ))}
+        </CaseRow>
       </div>
     </section>
   )

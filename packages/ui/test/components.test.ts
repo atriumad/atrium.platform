@@ -24,6 +24,17 @@ describe("Card", () => {
     expect(html).toContain("ring-1")
     expect(html).toContain("ring-line")
   })
+
+  test("padding sm is more compact than the default", () => {
+    const html = renderToStaticMarkup(createElement(Card, { padding: "sm" }, "x"))
+    expect(html).toContain("p-[26px]")
+    expect(html).not.toContain("p-[34px]")
+  })
+
+  test("padding defaults to md when omitted", () => {
+    const html = renderToStaticMarkup(createElement(Card, {}, "x"))
+    expect(html).toContain("p-[34px]")
+  })
 })
 
 describe("Input", () => {

@@ -47,7 +47,11 @@ export default function VideoMarquee({ publicIds, videos, height = 460, gap = 24
   const reels = useMemo<Reel[]>(() => {
     const base =
       publicIds && publicIds.length > 0
-        ? publicIds.map((id) => ({ src: cldVideoUrl(id), poster: cldVideoPoster(id) }))
+        ? publicIds.map((id): Reel => {
+            // exactOptionalPropertyTypes: an optional prop must be absent, not undefined.
+            const poster = cldVideoPoster(id)
+            return poster ? { src: cldVideoUrl(id), poster } : { src: cldVideoUrl(id) }
+          })
         : videos && videos.length > 0
           ? videos
           : STOCK

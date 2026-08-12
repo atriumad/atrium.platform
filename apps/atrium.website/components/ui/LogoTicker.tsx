@@ -20,17 +20,14 @@ function BrandName({ client, index }: BrandNameProps) {
         src={client.logo}
         alt={client.name}
         loading="lazy"
-        className="shrink-0 w-auto object-contain h-[clamp(2.1rem,2.8vw,2.6rem)] max-w-[20rem]"
-        style={{ opacity: 0.9 }}
+        className="h-[clamp(2.1rem,2.8vw,2.6rem)] w-auto max-w-[20rem] shrink-0 object-contain opacity-90"
       />
     )
   }
   return (
     <span
-      className={`shrink-0 whitespace-nowrap text-[clamp(1.05rem,1.55vw,1.45rem)] leading-none ${index % 5 === 1 ? 'italic' : ''}`}
+      className={`shrink-0 whitespace-nowrap text-[clamp(1.05rem,1.55vw,1.45rem)] leading-none text-ink ${index % 5 === 1 ? 'font-serif italic' : 'font-sans'}`}
       style={{
-        color: 'var(--text-strong)',
-        fontFamily: index % 5 === 1 ? 'var(--font-serif)' : 'var(--font-sans)',
         fontWeight: index % 3 === 0 ? 600 : 500,
         letterSpacing: index % 4 === 0 ? '-0.04em' : '-0.015em',
         opacity: index % 7 === 0 ? 0.34 : index % 4 === 0 ? 0.52 : 0.82,
@@ -67,15 +64,12 @@ export default function LogoTicker({ clients, bg, label, size = 'default' }: Pro
 
   return (
     <section
-      className={`relative overflow-hidden px-[var(--gutter)] ${sectionPadding}`}
-      style={{ background: bg ?? 'var(--surface-page)' }}
+      className={`relative overflow-hidden px-[var(--gutter)] ${sectionPadding} ${bg ? '' : 'bg-cream'}`}
+      style={bg ? { background: bg } : undefined}
       aria-label={label ?? 'Client brands'}
     >
       {label && (
-        <p
-          className="type-lead m-0 mx-auto mb-14 text-center md:mb-20"
-          style={{ color: 'var(--text-strong)' }}
-        >
+        <p className="m-0 mx-auto mb-14 text-center text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-ink md:mb-20">
           {label}
         </p>
       )}

@@ -25,11 +25,11 @@ const bentoItems: BentoItem[] = [
 ]
 
 const selectedWorkDetails = [
-  { slug: 'taco-naco', result: '3 locations. One brand. Full system activation.', orientation: 'horizontal' },
-  { slug: 'taha', result: 'Single campaign. Measurable revenue lift.', orientation: 'vertical' },
-  { slug: 'aahaa', result: 'Visual identity that found its voice.', orientation: 'square' },
-  { slug: 'hotel-kc', result: 'Two-part campaign storytelling.', orientation: 'horizontal' },
-  { slug: 'grand-coffee', result: 'Brand system from the ground up.', orientation: 'vertical' },
+  { slug: 'taco-naco', result: '3 locations. One brand. Full system activation.' },
+  { slug: 'taha', result: 'Single campaign. Measurable revenue lift.' },
+  { slug: 'aahaa', result: 'Visual identity that found its voice.' },
+  { slug: 'hotel-kc', result: 'Two-part campaign storytelling.' },
+  { slug: 'grand-coffee', result: 'Brand system from the ground up.' },
 ] as const
 
 const selectedWork: Project[] = selectedWorkDetails.flatMap(({ slug, ...details }) => {
@@ -50,7 +50,7 @@ const processStats: ProcessStat[] = [
 const testimonialCards: BentoCard[] = [
   { type: 'stat', stat: '74%', statLabel: 'of diners use social media to decide where to eat. Your feed is their first impression.' },
   { type: 'testimonial', quote: 'Working with Atrium across our 3 Taco Naco locations changed how we think about marketing. One system, one voice, real results.', author: 'Brian Goldman Ruiz', role: 'Owner', company: 'Taco Naco KC' },
-  { type: 'testimonial', quote: 'The brunch campaign they built moved real revenue. Not followers — people sitting down on Sunday mornings.', author: '', role: 'Owner', company: "T'ÄHÄ Mexican Kitchen", bg: 'var(--color-forest-2)' },
+  { type: 'testimonial', quote: 'The brunch campaign they built moved real revenue. Not followers — people sitting down on Sunday mornings.', author: '', role: 'Owner', company: "T'ÄHÄ Mexican Kitchen" },
   { type: 'stat', stat: '88%', statLabel: 'of diners trust online reviews as much as personal recommendations. We manage every one of yours.' },
 ]
 
@@ -68,7 +68,6 @@ export default function HomePage() {
         clients={clients}
         label="Trusted by hospitality brands building demand"
         size="compact"
-        bg="var(--surface-page)"
       />
       <AudiencePaths />
       <BentoGrid
@@ -83,7 +82,7 @@ export default function HomePage() {
       <TestimonialBento items={testimonialCards} eyebrow="Evidence from the operators" />
       <DarkProcess
         eyebrow="How We Work"
-        headline={<>A monthly engine. <em>Not random posts.</em></>}
+        headline={<>A monthly engine. <em className="font-serif italic">Not random posts.</em></>}
         body="Strategy, content, and technology run as one system on a 28-day cycle — so marketing stops being guesswork and you can focus on the food."
         cta="See the process"
         ctaHref="/process"

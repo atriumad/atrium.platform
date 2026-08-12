@@ -1,7 +1,7 @@
 'use client'
+import { Card, Eyebrow } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
-import Eyebrow from '@/components/ui/Eyebrow'
 import { gsap } from '@/lib/gsap'
 
 export type BentoItem = {
@@ -26,9 +26,9 @@ const sizeClass: Record<BentoItem['size'], string> = {
 }
 
 const titleClass: Record<BentoItem['size'], string> = {
-  large: 'text-[1.75rem] leading-[0.98] tracking-[-0.035em] md:text-[clamp(2.4rem,3vw,3.5rem)] md:leading-[0.94]',
-  medium: 'text-[1.75rem] leading-[0.98] tracking-[-0.03em] md:text-[clamp(2rem,2.4vw,2.75rem)] md:leading-[0.96]',
-  small: 'text-[1.75rem] leading-[0.98] tracking-[-0.025em] md:text-[clamp(1.7rem,1.8vw,2.1rem)]',
+  large: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
+  medium: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
+  small: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
 }
 
 const copyWidthClass: Record<BentoItem['size'], string> = {
@@ -57,13 +57,13 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
   }, [])
 
   return (
-    <section className="px-6 md:px-12 py-20 md:py-28" style={{ background: 'var(--surface-page)' }}>
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-cream px-[var(--gutter)] py-20 md:py-28">
+      <div className="mx-auto max-w-[var(--container-max)]">
         {(eyebrow || headline) && (
           <div className="mb-16 max-w-3xl">
             {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
             {headline && (
-              <h2 className="type-section-title">
+              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
                 {headline}
               </h2>
             )}
@@ -72,50 +72,34 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
 
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 auto-rows-[240px] gap-5">
           {items.map((item, i) => {
-            const isDark = item.dark ?? (i % 3 !== 1)
+            const isDark = item.dark ?? i === 0
+            const tone = isDark ? 'dark' : i % 2 === 0 ? 'warm' : 'surface'
             return (
-              <div
+              <Card
                 key={item.title as unknown as string}
-                className={`bento-card rounded-[var(--radius-bento)] overflow-hidden flex flex-col justify-between p-6 md:p-8 relative atr-lift ${sizeClass[item.size]}`}
-                style={{
-                  backgroundImage: isDark ? 'var(--grad-aurora-deep)' : 'var(--grad-aurora-cool)',
-                  backgroundColor: isDark ? 'var(--teal-800)' : 'var(--mint-200)',
-                  opacity: 0,
-                  color: isDark ? 'var(--text-on-dark)' : 'var(--text-strong)',
-                  boxShadow: isDark ? 'var(--shadow-float)' : 'var(--shadow-soft)',
-                }}
+                tone={tone}
+                elevation={isDark ? 'float' : 'soft'}
+                className={`bento-card flex flex-col justify-between overflow-hidden opacity-0 ${sizeClass[item.size]}`}
               >
-                {/* grain overlay */}
-                <div className="atr-grain-overlay--soft atr-grain-overlay" />
-
                 <div>
-                  <h3
-                    className={`${titleClass[item.size]} mb-3 font-normal`}
-                    style={{ color: isDark ? 'var(--mint-400)' : 'var(--teal-800)' }}
-                  >
+                  <h3 className={`${titleClass[item.size]} mb-3 font-medium ${isDark ? 'text-mint' : ''}`}>
                     {item.title}
                   </h3>
-                  <p
-                    className={`text-sm leading-relaxed ${copyWidthClass[item.size]}`}
-                    style={{ color: isDark ? 'var(--cloud-300)' : 'var(--ink-700)', opacity: 0.75 }}
-                  >
+                  <p className={`text-sm leading-relaxed opacity-75 ${copyWidthClass[item.size]}`}>
                     {item.body}
                   </p>
                 </div>
 
                 <div className="mt-4 text-xs">
                   <span
-                    className="inline-block max-w-full rounded-full px-3 py-1.5 text-[0.68rem] font-medium uppercase leading-[1.25] tracking-[0.16em]"
-                    style={{
-                      background: isDark ? 'rgba(228,238,240,0.07)' : 'rgba(7,47,52,0.06)',
-                      border: isDark ? '1px solid rgba(228,238,240,0.12)' : '1px solid rgba(7,47,52,0.10)',
-                      color: isDark ? 'var(--cloud-300)' : 'var(--teal-500)',
-                    }}
+                    className={`inline-block max-w-full rounded-full border px-3 py-1.5 text-[0.68rem] font-medium uppercase leading-[1.25] tracking-[0.16em] ${
+                      isDark ? 'border-cream/15 bg-cream/[0.07] text-cream/75' : 'border-line bg-ink/[0.04] text-muted'
+                    }`}
                   >
                     {item.cover}
                   </span>
                 </div>
-              </div>
+              </Card>
             )
           })}
         </div>

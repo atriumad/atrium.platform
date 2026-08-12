@@ -8,14 +8,22 @@ type Props = {
   study: CaseStudy
   className?: string
   priority?: boolean
+  /** The veil over the photograph. Callers that want it to react — fade on
+   *  hover, say — pass their own transition classes here. */
+  scrimClassName?: string
 }
 
-export default function CaseCover({ study, className = '', priority = false }: Props) {
+export default function CaseCover({
+  study,
+  className = '',
+  priority = false,
+  scrimClassName = 'bg-black/45',
+}: Props) {
   const cover = getCaseCover(study)
 
   return (
     <div
-      className={`relative isolate h-full w-full overflow-hidden bg-[var(--teal-900)] ${className}`}
+      className={`relative isolate h-full w-full overflow-hidden bg-dark ${className}`}
       role="img"
       aria-label={`${study.client} case study cover`}
       data-case-cover={study.slug}
@@ -32,7 +40,7 @@ export default function CaseCover({ study, className = '', priority = false }: P
         />
       )}
 
-      <div className="absolute inset-0 z-10 bg-black/45" aria-hidden="true" />
+      <div className={`absolute inset-0 z-10 ${scrimClassName}`} aria-hidden="true" />
 
       <div className="absolute inset-0 z-20 flex items-center justify-center p-8 md:p-12" aria-hidden="true">
         {cover.logo ? (

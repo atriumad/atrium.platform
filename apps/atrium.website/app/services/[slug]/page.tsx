@@ -61,7 +61,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       <PurchaseFAQ
         limit={5}
-        dark
         heading="What operators ask before this goes live."
         intro="The service changes by channel. The rules do not: one owner, an agreed cadence, and measurement that matches the systems you actually use."
       />

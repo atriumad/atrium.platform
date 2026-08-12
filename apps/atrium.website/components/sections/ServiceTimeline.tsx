@@ -23,43 +23,32 @@ export default function ServiceTimeline({ steps }: Props) {
   }, [])
 
   return (
-    <section className="px-6 md:px-12 py-20 md:py-28" style={{ background: 'var(--teal-800)' }}>
+    <section className="bg-dark px-6 md:px-12 py-20 md:py-28">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
         <div className="md:w-80 flex-shrink-0 md:sticky md:top-[8rem] md:self-start">
-          <h2 className="type-section-title" style={{ color: 'var(--text-on-dark)' }}>
-            Your plug-in brand team, <em>from kickoff to rollout.</em>
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            Your plug-in brand team, <em className="font-serif italic">from kickoff to rollout.</em>
           </h2>
-          <p className="type-body mt-5 max-w-[22rem]" style={{ color: 'var(--text-on-dark)', opacity: 0.66 }}>
+          <p className="mt-5 max-w-[22rem] text-base leading-relaxed text-cream/[0.66]">
             We work side-by-side with your team to shape, evolve, and scale your brand
             without the slowdowns of traditional agencies.
           </p>
         </div>
-        <ol
-          ref={listRef}
-          className="flex-1 flex flex-col divide-y"
-          style={{ borderColor: 'rgba(228,238,240,0.10)' }}
-        >
+        <ol ref={listRef} className="flex-1 flex flex-col divide-y divide-cream/10">
           {steps.map((step, i) => (
             <li
               key={step.title}
               className="timeline-item flex gap-6 py-8 first:pt-0 last:pb-0"
               style={{ opacity: 0 }}
             >
-              <span
-                className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-xs font-semibold"
-                style={{
-                  background: 'rgba(181,242,219,0.12)',
-                  color: 'var(--mint-400)',
-                  border: '1px solid rgba(181,242,219,0.20)',
-                }}
-              >
+              <span className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center border border-cream/20 bg-cream/[0.12] text-xs font-semibold text-mint">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div className="flex flex-col gap-1.5">
-                <p className="type-card-title" style={{ color: 'var(--text-on-dark)' }}>
+                <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-cream">
                   {step.title}
                 </p>
-                <p className="type-caption" style={{ color: 'var(--text-on-dark)', opacity: 0.72 }}>
+                <p className="m-0 text-[0.875rem] leading-relaxed text-cream/72">
                   {step.body}
                 </p>
               </div>

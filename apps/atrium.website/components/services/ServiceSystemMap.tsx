@@ -1,3 +1,4 @@
+import { Eyebrow, Tag } from '@atrium/ui'
 import type { Service } from '@/lib/services'
 
 const stages = [
@@ -23,48 +24,46 @@ const stages = [
 
 export default function ServiceSystemMap({ svc }: { svc: Service }) {
   return (
-    <section className="px-[var(--gutter)] py-24 md:py-32" style={{ background: 'var(--teal-900)' }}>
+    <section className="bg-cream px-[var(--gutter)] py-24 md:py-32">
       <div className="mx-auto max-w-[var(--container-max)]">
         <div className="mb-12 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-16">
           <div className="lg:col-span-7">
-            <p className="type-eyebrow m-0 mb-5" style={{ color: 'var(--mint-400)' }}>Inside the Growth Engine</p>
-            <h2 className="type-section-title max-w-[14ch]" style={{ color: 'var(--text-on-dark)' }}>
-              This service has a job <em>before and after launch.</em>
+            <Eyebrow className="mb-5">Inside the Growth Engine</Eyebrow>
+            <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+              This service has a job <em className="font-serif italic">before and after launch.</em>
             </h2>
           </div>
-          <p className="type-body max-w-lg border-t pt-6 lg:col-span-5" style={{ color: 'var(--cloud-300)', opacity: 0.7, borderColor: 'rgba(181,242,219,0.2)' }}>
+          <p className="max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted lg:col-span-5">
             {svc.name} sits inside {svc.category.toLowerCase()}. It does not operate as an isolated deliverable; it passes signal and demand into the next stage.
           </p>
         </div>
 
-        <div className="grid border-y md:grid-cols-3" style={{ borderColor: 'rgba(181,242,219,0.2)' }}>
+        <div className="grid border-y border-line md:grid-cols-3">
           {stages.map((stage, index) => {
             const active = stage.name === svc.category
             return (
               <article
                 key={stage.name}
-                className={`relative flex min-h-[17rem] flex-col border-b px-6 py-8 last:border-b-0 md:min-h-[19rem] md:border-b-0 md:px-8 md:py-9 ${index > 0 ? 'md:border-l' : ''}`}
-                style={{
-                  borderColor: 'rgba(181,242,219,0.2)',
-                  background: active ? 'color-mix(in srgb, var(--mint-400) 8%, transparent)' : 'transparent',
-                }}
+                className={`relative flex min-h-[17rem] flex-col border-b border-line px-6 py-8 last:border-b-0 md:min-h-[19rem] md:border-b-0 md:px-8 md:py-9 ${index > 0 ? 'md:border-l md:border-line' : ''} ${active ? 'bg-green-soft' : ''}`}
               >
                 <div className="flex items-center justify-between gap-4">
-                  <p className="type-eyebrow m-0" style={{ color: active ? 'var(--mint-400)' : 'var(--cloud-300)', opacity: active ? 1 : 0.52 }}>
+                  <p className={`m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] ${active ? 'text-green' : 'text-muted'}`}>
                     {String(index + 1).padStart(2, '0')} · {stage.short}
                   </p>
-                  {active && <span className="type-eyebrow rounded-full px-3 py-1" style={{ color: 'var(--teal-900)', background: 'var(--mint-400)' }}>This service</span>}
+                  {active && <Tag variant="mint" size="sm">This service</Tag>}
                 </div>
-                <h3 className="type-card-title mt-8" style={{ color: 'var(--text-on-dark)' }}>{stage.job}</h3>
-                <p className="type-caption mt-auto max-w-xs pt-8" style={{ color: 'var(--cloud-300)', opacity: 0.64 }}>{stage.handoff}</p>
+                <h3 className="mt-8 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">{stage.job}</h3>
+                <p className="mt-auto max-w-xs pt-8 text-[0.875rem] text-muted">{stage.handoff}</p>
               </article>
             )
           })}
         </div>
 
-        <div className="flex flex-col gap-2 border-b py-6 md:flex-row md:items-center md:gap-6" style={{ borderColor: 'rgba(181,242,219,0.2)' }}>
-          <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>↺ Measure · learn · optimize</p>
-          <p className="type-caption m-0" style={{ color: 'var(--cloud-300)', opacity: 0.64 }}>Every stage returns evidence to the next 28-day cycle.</p>
+        <div className="flex flex-col gap-2 border-b border-line py-6 md:flex-row md:items-center md:gap-6">
+          <Eyebrow as="span" className="flex items-center gap-1.5 whitespace-nowrap">
+            <span aria-hidden>↺</span> Measure · learn · optimize
+          </Eyebrow>
+          <p className="m-0 text-[0.875rem] text-muted">Every stage returns evidence to the next 28-day cycle.</p>
         </div>
       </div>
     </section>

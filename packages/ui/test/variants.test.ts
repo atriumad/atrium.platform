@@ -37,6 +37,12 @@ describe("Tag", () => {
     const html = renderToStaticMarkup(createElement(Tag, { variant: "outline" }, "New"))
     expect(html).toContain("border-line")
   })
+
+  test("on-dark carries mint text and a dark-ground hairline", () => {
+    const html = renderToStaticMarkup(createElement(Tag, { variant: "on-dark" }, "New"))
+    expect(html).toContain("text-mint")
+    expect(html).toContain("border-cream/15")
+  })
 })
 
 describe("Eyebrow", () => {

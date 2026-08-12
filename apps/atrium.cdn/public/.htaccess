@@ -1,0 +1,98 @@
+# ═══ cdn.atriumad.com — static CDN document root ═════════════════════════════
+# Hostinger shared hosting (LiteSpeed/Apache). This directory is 100% static:
+# no PHP, no directory listings, no hotlinking, no search indexing.
+
+# ── Kill PHP: nothing here should ever execute ─────────────────────────────
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phps|phar|cgi|pl)$">
+  Require all denied
+</FilesMatch>
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .phps
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .phps
+
+# ── Directory listing & server signature off ───────────────────────────────
+Options -Indexes -MultiViews
+ServerSignature Off
+
+# ── Block hidden and sensitive files (incl. .env, .git*) ───────────────────
+RedirectMatch 404 /\..*$
+<FilesMatch "^(\.htaccess|\.htpasswd|\.env|\.gitignore|\.DS_Store|ftpquota)$">
+  Require all denied
+</FilesMatch>
+
+# ── Security + privacy headers ─────────────────────────────────────────────
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "DENY"
+  Header set Referrer-Policy "no-referrer"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header set X-Robots-Tag "noindex, nofollow, noarchive"
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header unset X-Powered-By
+</IfModule>
+
+# ── Correct MIME types ─────────────────────────────────────────────────────
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType video/mp4 .mp4 .m4v
+  AddType video/webm .webm
+  AddType font/woff2 .woff2
+  AddType font/woff .woff
+  AddType text/css .css
+  AddType text/javascript .js .mjs
+  AddType application/json .json
+</IfModule>
+
+# ── Long-lived cache for media ─────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+  ExpiresByType video/webm "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+</IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpg|jpeg|png|webp|avif|gif|svg|mp4|m4v|webm|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# ── Compression for text assets (media is already compressed) ──────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/css text/javascript application/json image/svg+xml
+</IfModule>
+
+# ── CORS: only the site may consume fonts/media cross-origin ───────────────
+<IfModule mod_headers.c>
+  SetEnvIf Origin "^https?://(www\.)?atriumad\.com$" ACAO=$0
+  Header set Access-Control-Allow-Origin "%{ACAO}e" env=ACAO
+  Header set Access-Control-Allow-Methods "GET, HEAD, OPTIONS"
+  Header set Access-Control-Allow-Headers "Range, Accept, If-None-Match, If-Modified-Since"
+  Header set Access-Control-Expose-Headers "Content-Length, Content-Range, Accept-Ranges"
+  Header set Vary "Origin"
+</IfModule>
+
+# ── Hotlink protection ─────────────────────────────────────────────────────
+# Empty referer must stay allowed: next/image fetches server-side with no
+# Referer header, and <video>/<img> loads from atriumad.com carry its referer.
+# Uncomment the vercel.app line to let Vercel previews load videos directly.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_REFERER} !^$
+  RewriteCond %{HTTP_REFERER} !^https?://(www\.)?atriumad\.com [NC]
+  RewriteCond %{HTTP_REFERER} !^https?://localhost [NC]
+  # RewriteCond %{HTTP_REFERER} !^https?://[a-z0-9-]+\.vercel\.app [NC]
+  RewriteRule \.(jpg|jpeg|png|webp|avif|gif|mp4|m4v|webm)$ - [F]
+</IfModule>
+
+# ── Force HTTPS ────────────────────────────────────────────────────────────
+# Only if "Force HTTPS" is NOT enabled in hPanel for this subdomain.
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

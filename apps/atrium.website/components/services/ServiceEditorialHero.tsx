@@ -1,43 +1,33 @@
-import TransitionCTA from '@/components/ui/TransitionCTA'
 import type { Service } from '@/lib/services'
-import { relatedCaseBySlug } from '@/lib/services'
 import CategoryBadge from './CategoryBadge'
 import ServiceMarquee from './ServiceMarquee'
 import { parseHeadline } from './utils'
 
+/** The header of a service page. Deliberately a page header and not a hero:
+ *  a service is a subpage of Services, not a landing page of its own, so it
+ *  opens on the section heading scale. The page already closes on a
+ *  CTABanner, so there is no CTA pair here to duplicate it. */
 export default function ServiceEditorialHero({ svc }: { svc: Service }) {
   return (
-    <section
-      className="relative overflow-hidden pt-[9.5rem] pb-[3rem] max-md:pt-[7.5rem] max-sm:pt-[6.5rem] max-sm:pb-[2rem]"
-      style={{ background: 'var(--teal-800)' }}
-    >
+    <section className="bg-dark pt-[7.5rem] pb-12 max-sm:pt-[6rem]">
+      {/* Gutter and container nest rather than share an element, so the header
+          starts at the same left edge as every section below it. */}
       <div className="px-[var(--gutter)]">
-        <div className="flex flex-col gap-5 max-w-[var(--container-wide)] mx-auto">
+        <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-5">
           <CategoryBadge category={svc.category} />
 
-          <h1
-            className="type-page-title m-0 max-w-[13ch]"
-            style={{ color: 'var(--text-on-dark)' }}
-          >
-            {parseHeadline(svc.hero.headline)}
+          <h1 className="m-0 max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            {parseHeadline(svc.hero.headline, 'font-serif italic')}
           </h1>
 
-          <p
-            className="type-lead m-0 max-w-[38rem]"
-            style={{ color: 'var(--text-on-dark)', opacity: 0.74 }}
-          >
+          <p className="m-0 max-w-[38rem] text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/[0.78]">
             {svc.hero.body}
           </p>
-
-          <div className="mt-3 flex flex-wrap gap-4">
-            <TransitionCTA href={`/contact?service=${svc.slug}`} variant="mint">See how this works for my brand</TransitionCTA>
-            <TransitionCTA href={`/work/${relatedCaseBySlug[svc.slug]}`} variant="ghostLight">See a related result</TransitionCTA>
-          </div>
         </div>
       </div>
 
-      {/* Perks marquee — full-bleed, transparent, over the hero's green */}
-      <div className="mt-[3.5rem] max-sm:mt-[2.5rem]">
+      {/* Full-bleed, so it stays outside the gutter wrapper. */}
+      <div className="mt-12 max-sm:mt-9">
         <ServiceMarquee svc={svc} />
       </div>
     </section>

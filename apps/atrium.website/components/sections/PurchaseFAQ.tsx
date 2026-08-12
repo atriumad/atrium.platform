@@ -1,4 +1,4 @@
-import Eyebrow from '@/components/ui/Eyebrow'
+import { Eyebrow } from '@atrium/ui'
 
 type FAQItem = {
   question: string
@@ -73,46 +73,39 @@ export default function PurchaseFAQ({
   dark = false,
 }: Props) {
   const items = limit ? purchaseQuestions.slice(0, limit) : purchaseQuestions
-  const foreground = dark ? 'var(--text-on-dark)' : 'var(--text-strong)'
-  const muted = dark ? 'var(--cloud-300)' : 'var(--text-muted)'
-  const rule = dark ? 'rgba(181,242,219,0.2)' : 'rgba(7,47,52,0.16)'
 
   return (
-    <section
-      className="px-[var(--gutter)] py-24 md:py-36"
-      style={{ background: dark ? 'var(--teal-900)' : 'var(--surface-page)', color: foreground }}
-    >
+    <section className={`px-[var(--gutter)] py-24 md:py-36 ${dark ? 'bg-dark' : 'bg-cream'}`}>
       <div className="mx-auto grid max-w-[var(--container-max)] gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="self-start lg:sticky lg:top-32 lg:col-span-4">
-          <Eyebrow tone={dark ? 'onDark' : 'default'} className="mb-6">Before we start</Eyebrow>
-          <h2 className="type-section-title max-w-[12ch]" style={{ color: foreground }}>
+          <Eyebrow tone={dark ? 'on-dark' : 'default'} className="mb-6">Before we start</Eyebrow>
+          <h2 className={`m-0 max-w-[12ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] ${dark ? 'text-cream' : 'text-ink'}`}>
             {heading}
           </h2>
-          <p className="type-body mt-7 max-w-sm" style={{ color: muted, opacity: dark ? 0.72 : 1 }}>
+          <p className={`mt-7 max-w-sm text-base leading-relaxed ${dark ? 'text-cream/70' : 'text-muted'}`}>
             {intro}
           </p>
         </div>
 
-        <div className="border-t lg:col-span-8" style={{ borderColor: rule }}>
+        <div className={`border-t lg:col-span-8 ${dark ? 'border-cream/20' : 'border-line'}`}>
           {items.map((item, index) => (
             <article
               key={item.question}
-              className="grid gap-5 border-b py-8 sm:grid-cols-[5rem_minmax(0,1fr)] md:gap-8 md:py-10"
-              style={{ borderColor: rule }}
+              className={`grid gap-5 border-b py-8 sm:grid-cols-[5rem_minmax(0,1fr)] md:gap-8 md:py-10 ${dark ? 'border-cream/20' : 'border-line'}`}
             >
               <div className="flex items-baseline justify-between gap-4 sm:block">
-                <p className="type-eyebrow m-0" style={{ color: 'var(--mint-400)' }}>
+                <p className={`m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] ${dark ? 'text-mint' : 'text-green'}`}>
                   {String(index + 1).padStart(2, '0')}
                 </p>
-                <p className="type-eyebrow m-0 sm:mt-3" style={{ color: muted, opacity: 0.66 }}>
+                <p className={`m-0 sm:mt-3 text-[0.7rem] font-semibold uppercase tracking-[0.14em] ${dark ? 'text-cream/70' : 'text-muted'}`}>
                   {item.signal}
                 </p>
               </div>
               <div>
-                <h3 className="type-card-title max-w-[24ch]" style={{ color: foreground }}>
+                <h3 className={`max-w-[24ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] ${dark ? 'text-cream' : 'text-ink'}`}>
                   {item.question}
                 </h3>
-                <p className="type-body mt-4 max-w-2xl" style={{ color: muted, opacity: dark ? 0.72 : 1 }}>
+                <p className={`mt-4 max-w-2xl text-base leading-relaxed ${dark ? 'text-cream/70' : 'text-muted'}`}>
                   {item.answer}
                 </p>
               </div>
