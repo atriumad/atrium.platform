@@ -36,7 +36,13 @@ function BrandName({ client, index }: BrandNameProps) {
         width={client.width}
         height={client.height}
         loading="lazy"
-        className="shrink-0 object-contain opacity-90"
+        // brightness(0) collapses each mark to flat black whatever its own
+        // colours are, and the opacity then reads as one grey against the
+        // cream. grayscale() would not do this — it keeps every logo's own
+        // lightness, so a pale mark stays pale and a dense one stays dense.
+        // This assumes the section's light ground; a dark `bg` would need the
+        // mark inverted instead.
+        className="shrink-0 object-contain brightness-0 opacity-[0.55]"
         style={{
           width: `calc(${client.width}px * var(--logo-scale))`,
           height: `calc(${client.height}px * var(--logo-scale))`,
