@@ -73,7 +73,7 @@ function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: Client
             key={copyIndex}
             // One knob scales the whole set, so the sheet's relative sizing
             // survives every breakpoint.
-            className="brand-marquee-set flex shrink-0 items-center gap-12 pr-12 [--logo-scale:0.28] md:gap-16 md:pr-16 md:[--logo-scale:0.39] lg:[--logo-scale:0.5]"
+            className="brand-marquee-set flex shrink-0 items-center gap-10 pr-10 [--logo-scale:0.28] md:gap-14 md:pr-14 md:[--logo-scale:0.39] lg:[--logo-scale:0.5]"
             aria-hidden={copyIndex > 0}
           >
             {brands.map((brand, index) => {
@@ -88,7 +88,9 @@ function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: Client
 }
 
 export default function LogoTicker({ clients, bg, label, size = 'default' }: Props) {
-  const sectionPadding = size === 'compact' ? 'py-20 md:py-28' : 'py-24 md:py-36'
+  // Tight on purpose: the strip is a caption for the page, not a section of
+  // its own, so it sits close to the label and takes little vertical room.
+  const sectionPadding = size === 'compact' ? 'py-14 md:py-16' : 'py-16 md:py-20'
 
   return (
     <section
@@ -97,7 +99,7 @@ export default function LogoTicker({ clients, bg, label, size = 'default' }: Pro
       aria-label={label ?? 'Client brands'}
     >
       {label && (
-        <p className="m-0 mx-auto mb-14 text-center text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-ink md:mb-20">
+        <p className="m-0 mx-auto mb-10 text-center text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-ink md:mb-12">
           {label}
         </p>
       )}

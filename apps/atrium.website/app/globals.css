@@ -276,3 +276,50 @@
     transition: none;
   }
 }
+/* ─── Hero bloom ───────────────────────────────────────────────────────────
+   A light source sitting off the right edge, built from the brand's own
+   palette: the ground is brand primary (--color-ink) and the light is the
+   accent (mint) washed toward white, falling through green as it spreads.
+
+   The bloom is deliberately on the right, where the hero gallery sits, so the
+   copy column stays on the dark side of the frame and keeps its contrast.
+
+   Painted back to front: the pale core, a very wide halo that carries the
+   falloff across the whole width, a soft darkening into the bottom-left
+   corner, and the field underneath. The grain is what stops it reading as
+   flat CSS — without it these wide, low-contrast transitions band visibly on
+   8-bit displays. */
+.atr-hero-bloom {
+  background-color: var(--color-ink);
+  background-image:
+    radial-gradient(
+      88% 118% at 106% 14%,
+      color-mix(in srgb, var(--color-mint) 62%, white) 0%,
+      color-mix(in srgb, var(--color-mint) 46%, transparent) 22%,
+      color-mix(in srgb, var(--color-green) 32%, transparent) 50%,
+      transparent 84%
+    ),
+    radial-gradient(
+      165% 175% at 112% 20%,
+      color-mix(in srgb, var(--color-green-fill) 28%, transparent) 0%,
+      color-mix(in srgb, var(--color-green) 14%, transparent) 42%,
+      transparent 78%
+    ),
+    radial-gradient(
+      70% 80% at 8% 96%,
+      color-mix(in srgb, var(--color-ink) 85%, black) 0%,
+      transparent 70%
+    ),
+    linear-gradient(125deg, var(--color-ink) 0%, var(--color-dark) 58%, var(--color-ink) 100%);
+}
+
+.atr-hero-bloom::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
