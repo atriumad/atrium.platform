@@ -2,7 +2,7 @@
 import { Eyebrow } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
-import TransitionCTA from '@/components/ui/TransitionCTA'
+import { OutlineCTA } from '@/components/ui/PillCTA'
 import { gsap } from '@/lib/gsap'
 
 type Props = {
@@ -63,9 +63,9 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
             {body}
           </p>
           <div className="mt-2">
-            <TransitionCTA href={ctaHref} variant={isDark ? 'primary' : 'outline'}>
+            <OutlineCTA href={ctaHref} tone={isDark ? 'on-dark' : 'on-light'}>
               {cta}
-            </TransitionCTA>
+            </OutlineCTA>
           </div>
         </div>
         <div className="w-full flex-1" ref={visualRef} style={{ opacity: 0 }}>

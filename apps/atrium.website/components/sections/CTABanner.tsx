@@ -1,9 +1,9 @@
 'use client'
-import { Eyebrow } from '@atrium/ui'
+
+import { Button, Eyebrow } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
-import Button from '@/components/ui/Button'
-import TransitionCTA from '@/components/ui/TransitionCTA'
+import { PillCTA } from '@/components/ui/PillCTA'
 import { CAL_CONFIG } from '@/lib/cal'
 import { gsap } from '@/lib/gsap'
 
@@ -55,17 +55,26 @@ export default function CTABanner({ eyebrow, headline, body, cta, ctaHref, ctaCa
           <p className="max-w-md text-base leading-relaxed text-cream/[0.78]">{body}</p>
           <div className="mt-2">
             {ctaCalLink ? (
-              <Button href={ctaHref} variant="ghostLight" data-cal-link={ctaCalLink} data-cal-config={CAL_CONFIG}>
-                {cta}
-              </Button>
-            ) : (
-              <TransitionCTA
+              <Button
+                className="group"
+                data-cal-config={CAL_CONFIG}
+                data-cal-link={ctaCalLink}
                 href={ctaHref}
-                variant="ghostLight"
-                {...(ctaExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                size="pill"
+                variant="light"
               >
                 {cta}
-              </TransitionCTA>
+                <span
+                  aria-hidden="true"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-ink text-cream transition-transform duration-300 group-hover:translate-x-0.5"
+                >
+                  →
+                </span>
+              </Button>
+            ) : (
+              <PillCTA external={ctaExternal} href={ctaHref} tone="on-dark">
+                {cta}
+              </PillCTA>
             )}
           </div>
         </div>

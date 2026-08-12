@@ -1,7 +1,7 @@
 'use client'
 import { Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
-import TransitionCTA from '@/components/ui/TransitionCTA'
+import { OutlineCTA } from '@/components/ui/PillCTA'
 import CasePanel, { CaseRow } from '@/components/work/CasePanel'
 import { gsap } from '@/lib/gsap'
 import type { CaseStudy } from '@/lib/work'
@@ -45,9 +45,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
             See what changed. <em className="font-serif italic">Not just what shipped.</em>
           </h2>
           <div className="mt-10">
-            <TransitionCTA href="/work" variant="outline">
-              See all work
-            </TransitionCTA>
+            <OutlineCTA href="/work">See all work</OutlineCTA>
           </div>
         </div>
       </div>
