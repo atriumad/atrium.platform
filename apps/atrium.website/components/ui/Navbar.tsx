@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CTA } from '@/lib/cta'
 import Button from './Button'
+import MegaMenu from './MegaMenu'
 import TransitionLink from './TransitionLink'
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -252,7 +253,10 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 w-full z-50 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-6 md:px-12 h-14"
+      // Same edge as the page content: the container's left edge once the
+      // viewport is wider than the container, the plain gutter below that. The
+      // header is fixed, so its percentage resolves against the viewport.
+      className="fixed top-0 left-0 right-0 w-full z-50 grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-[max(var(--gutter),calc((100%-var(--container-max))/2))] h-14"
       style={{
         borderBottom: headerBorder,
         boxShadow: headerShadow,
@@ -324,6 +328,10 @@ export default function Navbar() {
             {link.label}
           </TransitionLink>
         ))}
+
+        {/* Side-by-side with the dropdown above so the two can be compared on
+            the live site. One of them goes once that is decided. */}
+        <MegaMenu textColor={navTextColor} />
       </nav>
 
       {/* Right column — CTA on desktop, menu toggle on mobile */}

@@ -1,4 +1,18 @@
-export type Client = string | { name: string; logo: string }
+export type ClientLogo = {
+  name: string
+  logo: string
+  /** Size in px at --logo-scale 1, taken from the brand sheet.
+   *
+   *  These are per-logo on purpose. A common height cannot work across marks
+   *  this different: Jerusalem Cafe is 16:1 and Old Shawnee Pizza is 1.2:1, so
+   *  matching their heights makes one absurdly wide and the other a speck.
+   *  The sheet sizes each mark to read at the same optical weight on a shared
+   *  baseline, which means different heights. */
+  width: number
+  height: number
+}
+
+export type Client = string | ClientLogo
 
 type Props = {
   clients: Client[]
@@ -19,8 +33,20 @@ function BrandName({ client, index }: BrandNameProps) {
       <img
         src={client.logo}
         alt={client.name}
+        width={client.width}
+        height={client.height}
         loading="lazy"
-        className="h-[clamp(2.1rem,2.8vw,2.6rem)] w-auto max-w-[20rem] shrink-0 object-contain opacity-90"
+        // brightness(0) collapses each mark to flat black whatever its own
+        // colours are, and the opacity then reads as one grey against the
+        // cream. grayscale() would not do this — it keeps every logo's own
+        // lightness, so a pale mark stays pale and a dense one stays dense.
+        // This assumes the section's light ground; a dark `bg` would need the
+        // mark inverted instead.
+        className="shrink-0 object-contain brightness-0 opacity-[0.55]"
+        style={{
+          width: `calc(${client.width}px * var(--logo-scale))`,
+          height: `calc(${client.height}px * var(--logo-scale))`,
+        }}
       />
     )
   }
@@ -45,7 +71,9 @@ function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: Client
         {[0, 1].map(copyIndex => (
           <div
             key={copyIndex}
-            className="brand-marquee-set flex shrink-0 items-center gap-12 pr-12"
+            // One knob scales the whole set, so the sheet's relative sizing
+            // survives every breakpoint.
+            className="brand-marquee-set flex shrink-0 items-center gap-10 pr-10 [--logo-scale:0.28] md:gap-14 md:pr-14 md:[--logo-scale:0.39] lg:[--logo-scale:0.5]"
             aria-hidden={copyIndex > 0}
           >
             {brands.map((brand, index) => {
@@ -60,7 +88,9 @@ function BrandRow({ brands, reverse = false, indexOffset = 0 }: { brands: Client
 }
 
 export default function LogoTicker({ clients, bg, label, size = 'default' }: Props) {
-  const sectionPadding = size === 'compact' ? 'py-20 md:py-28' : 'py-24 md:py-36'
+  // Tight on purpose: the strip is a caption for the page, not a section of
+  // its own, so it sits close to the label and takes little vertical room.
+  const sectionPadding = size === 'compact' ? 'py-14 md:py-16' : 'py-16 md:py-20'
 
   return (
     <section
@@ -69,7 +99,7 @@ export default function LogoTicker({ clients, bg, label, size = 'default' }: Pro
       aria-label={label ?? 'Client brands'}
     >
       {label && (
-        <p className="m-0 mx-auto mb-14 text-center text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-ink md:mb-20">
+        <p className="m-0 mx-auto mb-10 text-center font-medium text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-ink md:mb-12">
           {label}
         </p>
       )}

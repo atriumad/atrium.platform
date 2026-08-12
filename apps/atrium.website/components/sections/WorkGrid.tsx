@@ -1,7 +1,7 @@
 'use client'
 import { Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
-import TransitionCTA from '@/components/ui/TransitionCTA'
+import { OutlineCTA } from '@/components/ui/PillCTA'
 import CasePanel, { CaseRow } from '@/components/work/CasePanel'
 import { gsap } from '@/lib/gsap'
 import type { CaseStudy } from '@/lib/work'
@@ -37,27 +37,26 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
   }, [])
 
   return (
-    <section className="bg-cream pt-20 md:pt-28">
-      {/* Gutter and container width live on the header, not the section: the
-          gallery below has to reach both edges. Nested so the header lines up
-          with the rest of the page's sections. */}
-      <div className="px-[var(--gutter)]">
+    <section className="bg-cream px-[var(--gutter)] py-20 md:py-28">
+      <div>
         <div className="mx-auto mb-14 max-w-[var(--container-max)] md:mb-20">
           <Eyebrow className="mb-3">Selected Work</Eyebrow>
           <h2 className="max-w-3xl text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
             See what changed. <em className="font-serif italic">Not just what shipped.</em>
           </h2>
           <div className="mt-10">
-            <TransitionCTA href="/work" variant="outline">
-              See all work
-            </TransitionCTA>
+            <OutlineCTA href="/work">See all work</OutlineCTA>
           </div>
         </div>
       </div>
 
-      {/* Full-bleed, flush with the sections above and below: two panels over
-          three. The two rows stay independent of each other. */}
-      <div ref={galleryRef}>
+      {/* Inside the page container rather than full-bleed, so it starts on the
+          same line as the heading. The rounded clip makes the two rows read as
+          one block now that they no longer run to the screen edges. */}
+      <div
+        className="mx-auto max-w-[var(--container-max)] overflow-hidden rounded-card"
+        ref={galleryRef}
+      >
         <CaseRow tall>
           {topRow.map((project) => (
             <CasePanel

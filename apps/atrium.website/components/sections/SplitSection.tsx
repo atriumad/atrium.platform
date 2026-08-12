@@ -1,8 +1,8 @@
 'use client'
+import { Eyebrow } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
-import Eyebrow from '@/components/ui/Eyebrow'
-import TransitionCTA from '@/components/ui/TransitionCTA'
+import { OutlineCTA } from '@/components/ui/PillCTA'
 import { gsap } from '@/lib/gsap'
 
 type Props = {
@@ -40,26 +40,41 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
   }, [flip])
 
   const isDark = bg === 'dark'
+  // A caller may still pass an arbitrary CSS colour, so the ground stays a
+  // style; everything drawn on top of it now comes from the design system.
   const bg_ = isDark ? 'var(--color-primary)' : (bg ?? 'var(--color-surface)')
-  const textColor = isDark ? 'var(--color-text-light)' : 'var(--color-text-dark)'
 
   return (
-    <section className="px-[var(--gutter)] py-20 md:py-28 overflow-hidden" style={{ background: bg_ }}>
-      <div className={`max-w-[var(--container-max)] mx-auto flex flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}>
-        <div ref={textRef} className="flex-1 flex flex-col gap-6 max-w-lg" style={{ opacity: 0 }}>
-          {eyebrow && <Eyebrow style={{ color: textColor } as React.CSSProperties}>{eyebrow}</Eyebrow>}
-          <h2 className="type-section-title" style={{ color: textColor }}>{headline}</h2>
-          <p className="type-body" style={{ color: textColor, opacity: 0.76 }}>{body}</p>
-          <div className="mt-2"><TransitionCTA href={ctaHref} variant={isDark ? 'primary' : 'outline'}>{cta}</TransitionCTA></div>
+    <section className="overflow-hidden px-[var(--gutter)] py-20 md:py-28" style={{ background: bg_ }}>
+      <div
+        className={`mx-auto flex max-w-[var(--container-max)] flex-col ${flip ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}
+      >
+        <div className="flex max-w-lg flex-1 flex-col gap-6" ref={textRef} style={{ opacity: 0 }}>
+          {eyebrow && <Eyebrow tone={isDark ? 'on-dark' : 'default'}>{eyebrow}</Eyebrow>}
+          {/* Was .type-section-title, an older and larger scale than the rest
+              of the site had moved to, which is why this section read as a
+              different size from its neighbours. */}
+          <h2
+            className={`text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] ${isDark ? 'text-cream' : 'text-ink'}`}
+          >
+            {headline}
+          </h2>
+          <p className={`text-base leading-relaxed ${isDark ? 'text-cream/[0.78]' : 'text-body'}`}>
+            {body}
+          </p>
+          <div className="mt-2">
+            <OutlineCTA href={ctaHref} tone={isDark ? 'on-dark' : 'on-light'}>
+              {cta}
+            </OutlineCTA>
+          </div>
         </div>
-        <div ref={visualRef} className="flex-1 w-full" style={{ opacity: 0 }}>
+        <div className="w-full flex-1" ref={visualRef} style={{ opacity: 0 }}>
           <div
-            className="type-caption flex aspect-[4/3] items-center justify-center rounded-3xl p-10 text-center"
-            style={{
-              background: isDark ? 'rgba(228,238,240,0.06)' : 'var(--color-surface-alt)',
-              color: isDark ? 'rgba(228,238,240,0.3)' : 'rgba(7,47,52,0.3)',
-              border: isDark ? '1px solid rgba(228,238,240,0.1)' : '1px solid rgba(7,47,52,0.08)',
-            }}
+            className={`flex aspect-[4/3] items-center justify-center rounded-card p-10 text-center text-[0.875rem] ${
+              isDark
+                ? 'border border-cream/10 bg-cream/[0.06] text-cream/30'
+                : 'border border-line bg-card text-muted'
+            }`}
           >
             <span className="max-w-xs leading-relaxed">[{coverAlt}]</span>
           </div>

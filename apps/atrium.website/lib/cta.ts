@@ -16,7 +16,7 @@ export const CONTACT_EMAIL = 'hello@atriumad.com'
 export const CTA = {
   // High-intent — books the Growth Diagnostic call on Cal.com.
   primary: {
-    label: 'Book a Growth Diagnostic',
+    label: "Let's Talk",
     href: CAL_URL,
     external: true,
   },
