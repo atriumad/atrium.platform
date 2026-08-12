@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CTA } from '@/lib/cta'
 import Button from './Button'
+import MegaMenu from './MegaMenu'
 import TransitionLink from './TransitionLink'
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -324,6 +325,10 @@ export default function Navbar() {
             {link.label}
           </TransitionLink>
         ))}
+
+        {/* Side-by-side with the dropdown above so the two can be compared on
+            the live site. One of them goes once that is decided. */}
+        <MegaMenu textColor={navTextColor} />
       </nav>
 
       {/* Right column — CTA on desktop, menu toggle on mobile */}
