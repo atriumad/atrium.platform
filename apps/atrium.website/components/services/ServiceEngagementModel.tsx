@@ -28,17 +28,17 @@ export default function ServiceEngagementModel({ svc }: { svc: Service }) {
       <div className="mx-auto grid max-w-[var(--container-max)] gap-10 border-y border-line py-12 md:py-16 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-20">
         <div className="min-w-0">
           <Eyebrow className="mb-6">Related engagement model</Eyebrow>
-          <p className="m-0 max-w-full font-serif font-normal italic leading-[0.86] tracking-[-0.055em] text-ink text-[clamp(3.5rem,5.5vw,6.75rem)]">
+          <p className="m-0 max-w-full font-serif font-normal italic leading-[0.86] tracking-[-0.055em] text-charcoal text-[clamp(3.5rem,5.5vw,6.75rem)]">
             {model.name}
           </p>
         </div>
         <div className="min-w-0">
-          <h2 className="max-w-[24ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">
+          <h2 className="max-w-[24ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
             The most common starting point for {svc.name.toLowerCase()}.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">{model.fit}</p>
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
-            <TransitionLink href={model.href} className="group inline-flex items-center gap-3 text-[0.875rem] font-medium text-ink no-underline">
+            <TransitionLink href={model.href} className="group inline-flex items-center gap-3 text-[0.875rem] font-medium text-charcoal no-underline">
               Compare the {model.name} model <span className="transition-transform group-hover:translate-x-2" aria-hidden="true">→</span>
             </TransitionLink>
             <TransitionLink href={`/contact?service=${svc.slug}`} className="group inline-flex items-center gap-3 text-[0.875rem] font-medium text-green no-underline">

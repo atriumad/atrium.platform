@@ -40,7 +40,7 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
       <div className="mx-auto flex max-w-[var(--container-max)] flex-col gap-16 md:flex-row md:gap-24">
         <div className="flex flex-1 flex-col gap-6">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-          <h2 className="max-w-lg text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+          <h2 className="max-w-lg text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
             {headline}
           </h2>
           <p className="max-w-sm text-base leading-relaxed text-body">{body}</p>
@@ -48,7 +48,7 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
           <div className="mt-8 flex gap-10 border-t border-line pt-8">
             {stats.map((s) => (
               <div key={`${s.number}-${s.label}`}>
-                <p className="m-0 font-serif text-[clamp(2.6rem,4vw,3.4rem)] font-normal leading-none tracking-[-0.03em] text-ink">
+                <p className="m-0 font-serif text-[clamp(2.6rem,4vw,3.4rem)] font-normal leading-none tracking-[-0.03em] text-charcoal">
                   <NumberReel value={s.number} />
                 </p>
                 <p className="mt-3 max-w-[140px] text-[0.875rem] leading-relaxed text-muted">{s.label}</p>
@@ -67,7 +67,7 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
               </div>
               <div className="space-y-1.5">
                 <Eyebrow as="p">{step.eyebrow}</Eyebrow>
-                <p className="text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">{step.title}</p>
+                <p className="text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">{step.title}</p>
                 <p className="text-[0.875rem] text-muted">{step.body}</p>
               </div>
             </div>

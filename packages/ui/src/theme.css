@@ -4,28 +4,40 @@
   --font-serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
   --font-script: var(--font-nothing-you-could-do), "Nothing You Could Do", cursive;
 
-  /* Warm neutrals — the ground */
-  --color-cream: #f4f1e7;
-  --color-off-white: #faf8f0;
+  /* ── Palette ──────────────────────────────────────────────────────────
+     Values come from the brand sheet (Atrium Design System 2 —
+     tokens/colors.css). Two deliberate departures from it, both for
+     legibility, are marked below. */
+
+  /* Neutrals */
+  --color-cream: #f3efe4;
+  --color-off-white: #faf9f5;
   --color-card: #ffffff;
-  --color-track: #ece8da;
-  --color-track-soft: #e9e5d7;
+  --color-cool: #e4eef0;
+  --color-track: #e6e1d4;
+  --color-track-soft: #ece7db;
   --color-pending: #c7cec9;
 
-  /* Greens */
-  --color-ink: #0d2f33;
-  --color-dark: #0d353b;
-  --color-green: #1f7a52;
-  --color-green-fill: #3fae78;
-  --color-green-soft: #e3f2e9;
-  --color-green-ink: #186043;
-  --color-mint: #a9edc8;
+  /* Brand core. --color-ink is the dark ground the site is built on and the
+     colour every highlight element takes: the sheet's Deep Teal. Charcoal
+     Teal is what text is set in — see --color-text below. */
+  --color-ink: #042f34;
+  --color-dark: #16232b;
+  --color-lime: #b8e89a;
+
+  /* Greens. The sheet has no mid green of its own — these are its gradient
+     stops and its success colour, so the family stays teal-leaning rather
+     than the grass green this used to carry. */
+  --color-green: #0e6e64;
+  --color-green-fill: #1e8c7c;
+  --color-green-ink: #0a4249;
+  --color-green-soft: #dcefe9;
 
   /* Accent */
-  --color-amber: #f3c150;
-  --color-amber-fill: #eab63f;
-  --color-amber-soft: #f9ecc7;
-  --color-amber-ink: #a97f1c;
+  --color-amber: #ffc933;
+  --color-amber-fill: #f0b21f;
+  --color-amber-soft: #fdeec4;
+  --color-amber-ink: #8a6410;
 
   /* State — terracotta, never a traffic-light red */
   --color-red-fill: #e08a5b;
@@ -34,15 +46,25 @@
   --color-red-tint: #f0b79b;
   --color-error: #b4553a;
 
-  /* Text and line */
-  --color-body: #3f544f;
-  --color-muted: #5f6e67;
-  --color-muted-soft: #93a09b;
-  --color-line: rgba(13, 47, 51, 0.1);
+  /* Text and line. The sheet's ink tints, flattened over cream so they can be
+     used as solid colours.
+
+     Text is Charcoal Teal, not a pure black, and body and muted are tints of
+     it flattened over cream so they can be used as solid colours.
+
+     DEPARTURE: the sheet sets muted at 55%, which measures 3.55:1 here and so
+     cannot carry body text. This is 66% — 4.94:1 — the one value on this list
+     that is not the sheet's. */
+  --color-charcoal: #16232b;
+  --color-body: #545c5f;
+  --color-muted: #61686a;
+  --color-muted-soft: #8b9092;
+  --color-line: rgba(22, 35, 43, 0.14);
+  --color-line-inverse: rgba(243, 239, 228, 0.2);
 
   /* Editorial accents — campaign rotation only. One leads, one supports,
      the rest stay in reserve. No component may default to one. */
-  --color-coral: #ec9a82;
+  --color-coral: #e67a6f;
   --color-lilac: #d2b4ee;
   --color-sage: #a8c89a;
   --color-periwinkle: #7e9bf0;
@@ -50,8 +72,8 @@
   --radius-card: 26px;
   --radius-card-sm: 18px;
 
-  --shadow-soft: 0 1px 0 rgba(13, 47, 51, 0.04), 0 16px 40px rgba(13, 47, 51, 0.07);
-  --shadow-float: 0 2px 0 rgba(13, 47, 51, 0.04), 0 28px 56px rgba(13, 47, 51, 0.11);
+  --shadow-soft: 0 1px 0 rgba(4, 47, 52, 0.04), 0 16px 40px rgba(4, 47, 52, 0.07);
+  --shadow-float: 0 2px 0 rgba(4, 47, 52, 0.04), 0 28px 56px rgba(4, 47, 52, 0.11);
 
   --ease-atrium: cubic-bezier(.2, .7, .2, 1);
 

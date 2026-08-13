@@ -6,10 +6,10 @@ type Elevation = 'none' | 'soft' | 'float'
 type Padding = 'sm' | 'md'
 
 const tones: Record<Tone, string> = {
-  surface: 'bg-card text-ink',
-  warm: 'bg-off-white text-ink',
+  surface: 'bg-card text-charcoal',
+  warm: 'bg-off-white text-charcoal',
   dark: 'bg-dark text-cream',
-  amber: 'bg-amber-soft text-ink',
+  amber: 'bg-amber-soft text-charcoal',
 }
 
 const elevations: Record<Elevation, string> = {

@@ -28,7 +28,7 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
       <h3 className="m-0 max-w-[11ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-green">
         {parseHeadline(card.title)}
       </h3>
-      <p className="m-0 max-w-[31rem] text-[0.875rem] leading-relaxed text-ink/72">
+      <p className="m-0 max-w-[31rem] text-[0.875rem] leading-relaxed text-charcoal/72">
         {card.copy}
       </p>
     </Card>

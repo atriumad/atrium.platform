@@ -65,20 +65,20 @@ export default function AudiencePaths() {
               href={path.href}
               className="group grid gap-7 border-b border-line py-9 no-underline last:border-b-0 md:grid-cols-[8rem_minmax(0,0.8fr)_minmax(0,1.2fr)_auto] md:items-center md:gap-10 md:py-11"
             >
-              <p className="m-0 font-serif text-[clamp(4rem,7vw,7rem)] font-normal leading-none tracking-[-0.05em] text-ink">
+              <p className="m-0 font-serif text-[clamp(4rem,7vw,7rem)] font-normal leading-none tracking-[-0.05em] text-charcoal">
                 {path.count}
               </p>
               <div>
                 <Eyebrow>Path {String(index + 1).padStart(2, '0')}</Eyebrow>
-                <h3 className="mt-3 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">
+                <h3 className="mt-3 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
                   {path.label}
                 </h3>
               </div>
               <div>
                 <p className="m-0 max-w-xl text-base leading-relaxed text-body">{path.tension}</p>
-                <p className="mt-3 text-[0.875rem] font-medium text-ink">{path.outcome}</p>
+                <p className="mt-3 text-[0.875rem] font-medium text-charcoal">{path.outcome}</p>
               </div>
-              <span className="inline-flex items-center gap-3 text-[0.875rem] font-medium text-ink">
+              <span className="inline-flex items-center gap-3 text-[0.875rem] font-medium text-charcoal">
                 <span className="max-w-[10rem]">{path.cta}</span>
                 <span className="text-xl transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
               </span>

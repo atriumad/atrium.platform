@@ -5,13 +5,13 @@ type Variant = 'primary' | 'secondary' | 'accent' | 'ghost' | 'light' | 'outline
 type Size = 'sm' | 'md' | 'lg' | 'pill'
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-ink text-mint shadow-soft hover:-translate-y-0.5 hover:shadow-float',
-  secondary: 'bg-card text-ink border border-line shadow-soft hover:-translate-y-0.5 hover:shadow-float',
-  accent: 'bg-amber text-ink shadow-soft hover:-translate-y-0.5 hover:shadow-float',
-  ghost: 'bg-transparent text-ink hover:bg-ink/5',
+  primary: 'bg-ink text-lime shadow-soft hover:-translate-y-0.5 hover:shadow-float',
+  secondary: 'bg-card text-charcoal border border-line shadow-soft hover:-translate-y-0.5 hover:shadow-float',
+  accent: 'bg-amber text-charcoal shadow-soft hover:-translate-y-0.5 hover:shadow-float',
+  ghost: 'bg-transparent text-charcoal hover:bg-ink/5',
   // For dark grounds. `light` is the solid counterpart to `primary`;
   // `outlineLight` is the quiet one beside it.
-  light: 'bg-cream text-ink shadow-soft hover:-translate-y-0.5 hover:shadow-float',
+  light: 'bg-cream text-charcoal shadow-soft hover:-translate-y-0.5 hover:shadow-float',
   outlineLight: 'bg-transparent text-cream border border-cream/25 hover:border-cream/50 hover:bg-cream/[0.06]',
 }
 

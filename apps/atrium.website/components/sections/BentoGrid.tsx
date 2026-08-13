@@ -82,7 +82,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                 className={`bento-card flex flex-col justify-between overflow-hidden opacity-0 ${sizeClass[item.size]}`}
               >
                 <div>
-                  <h3 className={`${titleClass[item.size]} mb-3 font-medium ${isDark ? 'text-mint' : ''}`}>
+                  <h3 className={`${titleClass[item.size]} mb-3 font-medium ${isDark ? 'text-lime' : ''}`}>
                     {item.title}
                   </h3>
                   <p className={`text-sm leading-relaxed opacity-75 ${copyWidthClass[item.size]}`}>

@@ -55,7 +55,7 @@ export default function SplitSection({ eyebrow, headline, body, cta, ctaHref, co
               of the site had moved to, which is why this section read as a
               different size from its neighbours. */}
           <h2
-            className={`text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] ${isDark ? 'text-cream' : 'text-ink'}`}
+            className={`text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] ${isDark ? 'text-cream' : 'text-charcoal'}`}
           >
             {headline}
           </h2>

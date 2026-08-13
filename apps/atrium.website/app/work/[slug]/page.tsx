@@ -64,7 +64,7 @@ export function CaseHero({ study }: { study: CaseStudy }) {
               <Eyebrow className="mb-6">
                 Case {String(study.order).padStart(2, '0')} / {study.category}
               </Eyebrow>
-              <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+              <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
                 {study.client}
               </h1>
             </div>
@@ -125,7 +125,7 @@ function PhotoGallerySection({ study }: { study: CaseStudy }) {
           <div className="mb-14 grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
             <div className="lg:col-span-7">
               <Eyebrow className="mb-6">Photo gallery</Eyebrow>
-              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
                 The brand, <em>in frame.</em>
               </h2>
             </div>
@@ -154,7 +154,7 @@ export function ApproachSection({ study }: { study: CaseStudy }) {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <Eyebrow className="mb-6">The approach</Eyebrow>
-            <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+            <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
               What we <em>changed.</em>
             </h2>
           </div>
@@ -169,7 +169,7 @@ export function ApproachSection({ study }: { study: CaseStudy }) {
                   {String(index + 1).padStart(2, '0')}
                 </p>
                 <div>
-                  <h3 className="max-w-[22ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">
+                  <h3 className="max-w-[22ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
                     {step.title}
                   </h3>
                   <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted">
@@ -194,7 +194,7 @@ function ReelsSection({ study }: { study: CaseStudy }) {
         <div className="grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-6">Reels and short-form video</Eyebrow>
-            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
               Built to move. <em>Made to repeat.</em>
             </h2>
           </div>
@@ -286,7 +286,7 @@ export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
           <div className="flex h-full flex-col justify-between gap-14 border-t border-line pt-8 lg:col-span-5">
             <div>
               <Eyebrow className="mb-5">Next case study</Eyebrow>
-              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
                 {nextStudy.client}
               </h2>
             </div>
@@ -298,7 +298,7 @@ export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
               <div className="mt-8 border-t border-line pt-6">
                 <ServiceList services={nextStudy.serviceTags} />
               </div>
-              <span className="mt-8 inline-flex items-center gap-3 text-[0.875rem] font-medium text-ink">
+              <span className="mt-8 inline-flex items-center gap-3 text-[0.875rem] font-medium text-charcoal">
                 View case study
                 <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
                   →
@@ -332,7 +332,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   if (!nextStudy) notFound()
 
   return (
-    <article className="bg-cream text-ink">
+    <article className="bg-cream text-charcoal">
       <CaseHero study={study} />
       <StorySection paragraphs={getStoryParagraphs(study)} />
       {isVideoLed(study) ? (

@@ -34,7 +34,7 @@ export function Logo({
 
   if (variant === 'mark') {
     return (
-      <span className={cn('inline-flex text-ink', className)} role="img" aria-label="Atrium">
+      <span className={cn('inline-flex text-charcoal', className)} role="img" aria-label="Atrium">
         {mask('/logos/atrium-mark.svg', height)}
       </span>
     )
@@ -42,14 +42,14 @@ export function Logo({
 
   if (variant === 'wordmark') {
     return (
-      <span className={cn('inline-flex text-ink', className)} role="img" aria-label="Atrium">
+      <span className={cn('inline-flex text-charcoal', className)} role="img" aria-label="Atrium">
         {mask('/logos/atrium-wordmark.svg', height * WORDMARK_RATIO)}
       </span>
     )
   }
 
   return (
-    <span className={cn('inline-flex items-center gap-[0.5em] text-ink', className)} role="img" aria-label="Atrium">
+    <span className={cn('inline-flex items-center gap-[0.5em] text-charcoal', className)} role="img" aria-label="Atrium">
       {mask('/logos/atrium-mark.svg', height * 1.05)}
       {mask('/logos/atrium-wordmark.svg', height * WORDMARK_RATIO)}
     </span>

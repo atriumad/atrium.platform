@@ -29,7 +29,7 @@ export default function ServiceSystemMap({ svc }: { svc: Service }) {
         <div className="mb-12 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-16">
           <div className="lg:col-span-7">
             <Eyebrow className="mb-5">Inside the Growth Engine</Eyebrow>
-            <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+            <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
               This service has a job <em className="font-serif italic">before and after launch.</em>
             </h2>
           </div>
@@ -52,7 +52,7 @@ export default function ServiceSystemMap({ svc }: { svc: Service }) {
                   </p>
                   {active && <Tag variant="mint" size="sm">This service</Tag>}
                 </div>
-                <h3 className="mt-8 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">{stage.job}</h3>
+                <h3 className="mt-8 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">{stage.job}</h3>
                 <p className="mt-auto max-w-xs pt-8 text-[0.875rem] text-muted">{stage.handoff}</p>
               </article>
             )

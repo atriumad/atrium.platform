@@ -32,13 +32,13 @@ function CaseIndexRow({ study, index }: { study: CaseStudy; index: number }) {
       </p>
 
       <div>
-        <h3 className="m-0 text-[1.25rem] font-medium leading-[1.2] text-ink">{study.client}</h3>
+        <h3 className="m-0 text-[1.25rem] font-medium leading-[1.2] text-charcoal">{study.client}</h3>
         <p className="mt-1.5 text-[0.875rem] text-muted">{study.category}</p>
       </div>
 
       {metric ? (
         <p className="m-0 text-[0.9375rem] text-body">
-          <span className="font-medium text-ink">{metric.number}</span> {metric.label}
+          <span className="font-medium text-charcoal">{metric.number}</span> {metric.label}
         </p>
       ) : (
         <span />
@@ -48,7 +48,7 @@ function CaseIndexRow({ study, index }: { study: CaseStudy; index: number }) {
 
       <span
         aria-hidden="true"
-        className="text-xl text-ink transition-transform duration-300 group-hover:translate-x-2"
+        className="text-xl text-charcoal transition-transform duration-300 group-hover:translate-x-2"
       >
         →
       </span>
@@ -70,7 +70,7 @@ export default function WorkPage() {
       <section className="bg-cream px-[var(--gutter)] pt-32 pb-20 md:pt-40 md:pb-24">
         <div className="mx-auto max-w-[var(--container-max)]">
           <Eyebrow className="mb-5">Our work</Eyebrow>
-          <h1 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+          <h1 className="max-w-[16ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
             Hospitality only. <em className="font-serif italic">Results first.</em>
           </h1>
           {/* Our own reel, not a client's. The file is shot 9:16, so a wide
@@ -93,7 +93,7 @@ export default function WorkPage() {
 
           <div className="mt-7 grid gap-6 border-line border-t pt-7 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">
+              <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
                 One accountable team
               </p>
               <p className="mt-2 text-[0.875rem] text-muted">
@@ -120,7 +120,7 @@ export default function WorkPage() {
       <section className="bg-cream px-[var(--gutter)] pt-24 md:pt-32">
         <div className="mx-auto max-w-[var(--container-max)] border-line border-t pt-10">
           <Eyebrow className="mb-5">How the work runs</Eyebrow>
-          <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+          <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
             Different challenges. <em className="font-serif italic">Evidence in every story.</em>
           </h2>
           <p className="mt-6 max-w-2xl text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
@@ -145,7 +145,7 @@ export default function WorkPage() {
         <div className="mx-auto max-w-[var(--container-max)]">
           <div className="mb-12 md:mb-16">
             <Eyebrow className="mb-5">Full archive</Eyebrow>
-            <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+            <h2 className="max-w-[18ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
               Every case, <em className="font-serif italic">start to finish.</em>
             </h2>
           </div>

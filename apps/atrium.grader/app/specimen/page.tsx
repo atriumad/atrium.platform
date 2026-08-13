@@ -21,7 +21,7 @@ const swatches = [
       { name: 'green-fill', className: 'bg-green-fill' },
       { name: 'green-soft', className: 'bg-green-soft' },
       { name: 'green-ink', className: 'bg-green-ink' },
-      { name: 'mint', className: 'bg-mint' },
+      { name: 'mint', className: 'bg-lime' },
     ],
   },
   {
@@ -79,7 +79,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function Specimen() {
   return (
-    <main className="min-h-svh bg-cream px-8 py-16 font-sans text-ink max-[560px]:px-5">
+    <main className="min-h-svh bg-cream px-8 py-16 font-sans text-charcoal max-[560px]:px-5">
       <div className="mx-auto flex max-w-[1080px] flex-col gap-16">
         <header className="flex flex-col gap-4">
           <Logo height={28} variant="lockup" />

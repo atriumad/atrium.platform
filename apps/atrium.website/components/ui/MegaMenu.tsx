@@ -34,14 +34,14 @@ const MENU_ICONS: Record<string, typeof Compass> = {
 
 // Column order + pill fill per category. Text colour is picked per fill so it
 // clears 4.5:1 against it (computed, not eyeballed):
-//   bg-green-fill (#3fae78) vs text-ink   -> 5.12:1 | vs text-cream -> 2.47:1
-//   bg-amber-fill (#eab63f) vs text-ink   -> 7.65:1 | vs text-cream -> 1.65:1
-//   bg-green      (#1f7a52) vs text-cream -> 4.69:1 | vs text-ink   -> 2.69:1
-// Only the darker retain green clears 4.5:1 with cream text; the other two
-// need ink, the same split app/services/page.tsx already uses.
+//   bg-lime   (#b5f2db) vs text-charcoal   -> 11.42:1
+//   bg-amber  (#ffc933) vs text-charcoal   ->  9.34:1
+//   bg-green  (#0e6e64) vs text-cream ->  5.32:1
+// green-fill is no longer used here: against the brand palette it measures
+// 3.49:1 with ink and 3.59:1 with cream, so it cannot carry a label either way.
 const MENU_CATEGORIES = [
-  { category: 'Generate Demand', pillClass: 'bg-green-fill text-ink' },
-  { category: 'Convert Demand', pillClass: 'bg-amber-fill text-ink' },
+  { category: 'Generate Demand', pillClass: 'bg-lime text-charcoal' },
+  { category: 'Convert Demand', pillClass: 'bg-amber text-charcoal' },
   { category: 'Retain Demand', pillClass: 'bg-green text-cream' },
 ] as const
 
@@ -185,7 +185,7 @@ export default function MegaMenu({
                         role="menuitem"
                       >
                         <span className="flex min-w-0 flex-1 flex-col gap-1">
-                          <span className="font-medium text-ink text-sm leading-tight">
+                          <span className="font-medium text-charcoal text-sm leading-tight">
                             {svc.name}
                           </span>
                           <span className="text-muted text-xs leading-snug">{svc.menu.blurb}</span>

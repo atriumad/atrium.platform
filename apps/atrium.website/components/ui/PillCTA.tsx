@@ -26,7 +26,7 @@ export function PillCTA({ href, children, tone = 'on-light', external, className
       <span
         aria-hidden="true"
         className={`flex h-11 w-11 items-center justify-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5 ${
-          onDark ? 'bg-ink text-cream' : 'bg-cream text-ink'
+          onDark ? 'bg-ink text-cream' : 'bg-cream text-charcoal'
         }`}
       >
         →

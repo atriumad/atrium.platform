@@ -319,9 +319,9 @@ export function GraderClient() {
   }
 
   const shellPhaseClass = phase === "search"
-    ? "items-start bg-[image:radial-gradient(760px_460px_at_22%_8%,rgba(63,174,120,.16),transparent_60%),radial-gradient(720px_480px_at_84%_88%,rgba(243,193,80,.16),transparent_58%)] text-ink"
+    ? "items-start bg-[image:radial-gradient(760px_460px_at_22%_8%,rgba(63,174,120,.16),transparent_60%),radial-gradient(720px_480px_at_84%_88%,rgba(243,193,80,.16),transparent_58%)] text-charcoal"
     : phase === "loading"
-      ? "items-center bg-[image:radial-gradient(760px_460px_at_22%_8%,rgba(63,174,120,.16),transparent_60%),radial-gradient(720px_480px_at_84%_88%,rgba(243,193,80,.16),transparent_58%)] pt-[clamp(18px,2vw,28px)] text-ink max-[760px]:pt-[18px]"
+      ? "items-center bg-[image:radial-gradient(760px_460px_at_22%_8%,rgba(63,174,120,.16),transparent_60%),radial-gradient(720px_480px_at_84%_88%,rgba(243,193,80,.16),transparent_58%)] pt-[clamp(18px,2vw,28px)] text-charcoal max-[760px]:pt-[18px]"
       : "items-start pt-[clamp(18px,2vw,28px)] max-[760px]:pt-[18px]"
 
   const stageClass = phase === "search"
@@ -371,7 +371,7 @@ export function GraderClient() {
 function SiteFooter() {
   return (
     <footer className="flex w-[min(100%,960px)] flex-wrap items-center justify-between gap-x-[18px] gap-y-2 border-t border-line pt-4 text-[0.84rem] leading-[1.45] text-muted max-[760px]:justify-center max-[760px]:text-center">
-      <span className="font-medium text-ink">Powered by Atrium</span>
+      <span className="font-medium text-charcoal">Powered by Atrium</span>
       <span>© 2026 Atrium. All rights reserved.</span>
     </footer>
   )
@@ -418,7 +418,7 @@ function SearchStage({
   }
 
   return (
-    <div className="flex w-full flex-col items-center gap-[22px] text-center text-ink max-[560px]:gap-[18px]">
+    <div className="flex w-full flex-col items-center gap-[22px] text-center text-charcoal max-[560px]:gap-[18px]">
       <div className="flex animate-rise flex-col items-center motion-reduce:animate-none">
         <DotPattern className="mb-2.5 h-5 w-[90px] text-[rgba(13,47,51,.14)]" cr={1.05} height={22} width={22} />
         <Eyebrow>Atrium Growth Grader</Eyebrow>
@@ -445,7 +445,7 @@ function SearchStage({
           aria-expanded={!compact && suggestions.length > 0}
           aria-haspopup="listbox"
           autoComplete="off"
-          className="min-w-0 flex-1 border-0 bg-transparent p-0 font-sans text-[1.08rem] text-ink outline-none placeholder:text-muted max-[560px]:text-base"
+          className="min-w-0 flex-1 border-0 bg-transparent p-0 font-sans text-[1.08rem] text-charcoal outline-none placeholder:text-muted max-[560px]:text-base"
           onChange={(event) => onQueryChange(event.target.value)}
           placeholder="Restaurant name and city"
           role="combobox"
@@ -476,7 +476,7 @@ function SearchStage({
               role="option"
               type="button"
             >
-              <strong className="text-base font-medium text-ink">{suggestion.name}</strong>
+              <strong className="text-base font-medium text-charcoal">{suggestion.name}</strong>
               <small className="text-[0.85rem] text-muted">{suggestion.address}</small>
             </button>
           ))}
@@ -491,7 +491,7 @@ function SearchStage({
 
       {selectedPlace && !compact && (
         <button
-          className="group flex w-[min(100%,620px)] animate-rise-sm cursor-pointer items-center gap-[18px] rounded-3xl border border-transparent bg-card px-5 py-[18px] text-left font-sans text-ink shadow-soft transition-[transform,box-shadow,border-color] duration-[180ms] ease-atrium hover:border-[rgba(63,174,120,.45)] hover:shadow-float focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-green-fill disabled:cursor-default disabled:opacity-60 disabled:shadow-soft motion-reduce:animate-none motion-reduce:transition-none max-[560px]:gap-3.5 max-[560px]:rounded-[20px] max-[560px]:p-4"
+          className="group flex w-[min(100%,620px)] animate-rise-sm cursor-pointer items-center gap-[18px] rounded-3xl border border-transparent bg-card px-5 py-[18px] text-left font-sans text-charcoal shadow-soft transition-[transform,box-shadow,border-color] duration-[180ms] ease-atrium hover:border-[rgba(63,174,120,.45)] hover:shadow-float focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[3px] focus-visible:outline-green-fill disabled:cursor-default disabled:opacity-60 disabled:shadow-soft motion-reduce:animate-none motion-reduce:transition-none max-[560px]:gap-3.5 max-[560px]:rounded-[20px] max-[560px]:p-4"
           type="button"
           onClick={onRunDiagnostic}
           disabled={loading || searching}
@@ -506,7 +506,7 @@ function SearchStage({
           </div>
           <div className="min-w-0 flex-1">
             <span className="flex items-center gap-1.5 text-[0.66rem] font-semibold uppercase tracking-[0.14em] text-green before:h-1.5 before:w-1.5 before:rounded-full before:bg-green-fill before:content-['']">Selected</span>
-            <strong className="mt-1.5 block text-[1.15rem] font-medium text-ink max-[560px]:text-[1.05rem]">{selectedPlace.name}</strong>
+            <strong className="mt-1.5 block text-[1.15rem] font-medium text-charcoal max-[560px]:text-[1.05rem]">{selectedPlace.name}</strong>
             {selectedSummary && <small className="text-[0.9rem] text-body">{selectedSummary}</small>}
           </div>
           <span
@@ -573,7 +573,7 @@ function LoadingStage({ name }: { name: string }) {
     <section
       aria-label={`Atrium report loading: ${step.status}`}
       aria-live="polite"
-      className="mx-auto w-[min(100%,560px)] rounded-card bg-card px-[34px] py-9 text-left font-sans text-ink shadow-soft max-[560px]:rounded-[22px] max-[560px]:px-5 max-[560px]:py-[26px]"
+      className="mx-auto w-[min(100%,560px)] rounded-card bg-card px-[34px] py-9 text-left font-sans text-charcoal shadow-soft max-[560px]:rounded-[22px] max-[560px]:px-5 max-[560px]:py-[26px]"
       role="status"
     >
       <Eyebrow className="flex items-center gap-2 before:h-[7px] before:w-[7px] before:animate-pulse-soft before:rounded-full before:bg-green-fill before:content-[''] motion-reduce:before:animate-none">Growth scan in progress</Eyebrow>
@@ -592,9 +592,9 @@ function LoadingStage({ name }: { name: string }) {
           const dotTone = state === "done" ? "bg-green-fill" : state === "active" ? "bg-green-soft" : "bg-track-soft"
           const lineTone = state === "done" ? "bg-green-fill" : "bg-track-soft"
           const labelTone = state === "done"
-            ? "text-ink"
+            ? "text-charcoal"
             : state === "active"
-              ? "font-semibold text-ink"
+              ? "font-semibold text-charcoal"
               : "text-muted-soft"
           return (
             <li className="group grid grid-cols-[34px_1fr] gap-4 max-[560px]:grid-cols-[30px_1fr] max-[560px]:gap-3" key={s.id}>
@@ -741,7 +741,7 @@ function ReportStage({
   return (
     <section
       ref={rootRef}
-      className="atr-report mx-auto flex w-full max-w-[1080px] flex-col gap-5 text-left font-sans leading-[1.5] text-ink max-[560px]:gap-3.5"
+      className="atr-report mx-auto flex w-full max-w-[1080px] flex-col gap-5 text-left font-sans leading-[1.5] text-charcoal max-[560px]:gap-3.5"
     >
       <div className="atr-reveal grid grid-cols-[1fr_360px] items-stretch gap-5 max-[980px]:grid-cols-[1fr_minmax(280px,320px)] max-[700px]:grid-cols-[1fr]">
         <div className="flex flex-col justify-center rounded-card bg-card px-[34px] py-[38px] shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
@@ -765,7 +765,7 @@ function ReportStage({
         <aside className="flex flex-col justify-between rounded-card bg-dark p-[30px] text-white shadow-soft max-[980px]:p-7 max-[560px]:px-5 max-[560px]:py-[22px]">
           <div className="flex items-center justify-between">
             <span className="font-serif text-[1.35rem] italic">atrium</span>
-            <span className="m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-mint">Growth score</span>
+            <span className="m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-lime">Growth score</span>
           </div>
           <div
             className="rg-gauge relative mx-auto mb-1.5 mt-[22px] h-[186px] w-[186px] max-[980px]:h-[164px] max-[980px]:w-[164px]"
@@ -851,7 +851,7 @@ function ReportStage({
       <details className="atr-reveal group rounded-card bg-card px-[34px] py-[26px] shadow-soft max-[980px]:px-7 max-[980px]:py-[22px] max-[560px]:p-5">
         <summary className="flex cursor-pointer list-none items-center justify-between [&::-webkit-details-marker]:hidden">
           <h3 className="m-0 text-[1.3rem] font-medium leading-[1.18] tracking-[-0.02em]">Supporting evidence</h3>
-          <span className="flex h-[42px] w-[42px] items-center justify-center rounded-[14px] bg-cream text-2xl text-ink transition-transform duration-200 ease-atrium group-open:rotate-45 motion-reduce:transition-none">+</span>
+          <span className="flex h-[42px] w-[42px] items-center justify-center rounded-[14px] bg-cream text-2xl text-charcoal transition-transform duration-200 ease-atrium group-open:rotate-45 motion-reduce:transition-none">+</span>
         </summary>
         <div className="mt-[22px]">
           <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3.5">
@@ -892,9 +892,9 @@ function DiagnosticEvidenceCard({ step }: { step: DiagnosticStepResult }) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-medium uppercase leading-[1.2] tracking-[0.18em] text-green">{diagnosticStepTitle(step.id)}</p>
-          <strong className="mt-3 block text-[clamp(1.125rem,1.5vw,1.375rem)] font-normal leading-[1.5] tracking-[-0.012em] text-ink">{diagnosticStatusCopy(step.status)}</strong>
+          <strong className="mt-3 block text-[clamp(1.125rem,1.5vw,1.375rem)] font-normal leading-[1.5] tracking-[-0.012em] text-charcoal">{diagnosticStatusCopy(step.status)}</strong>
         </div>
-        <span className="border border-line px-3 py-1 text-sm leading-[1.55] tracking-[-0.004em] text-ink">
+        <span className="border border-line px-3 py-1 text-sm leading-[1.55] tracking-[-0.004em] text-charcoal">
           {stepConfidenceCopy(step.confidence)}
         </span>
       </div>
@@ -1046,7 +1046,7 @@ function scoreTone(score: number): ScoreTone {
 }
 
 function tagToneClass(tone: ScoreTone) {
-  if (tone === "high") return "bg-[rgba(63,174,120,.18)] text-mint before:bg-green-fill"
+  if (tone === "high") return "bg-[rgba(63,174,120,.18)] text-lime before:bg-green-fill"
   if (tone === "medium") return "bg-[rgba(243,193,80,.16)] text-amber before:bg-amber"
   return "bg-[rgba(224,138,91,.18)] text-red-tint before:bg-red-fill"
 }

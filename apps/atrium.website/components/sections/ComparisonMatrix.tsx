@@ -47,7 +47,7 @@ export default function ComparisonMatrix() {
                       scope="col"
                       className={`px-4 py-4 text-left align-bottom text-[0.875rem] ${
                         isAtrium
-                          ? 'rounded-t-md bg-mint/[0.14] font-semibold text-mint'
+                          ? 'rounded-t-md bg-lime/[0.14] font-semibold text-lime'
                           : 'font-medium text-cream/70'
                       }`}
                     >
@@ -69,7 +69,7 @@ export default function ComparisonMatrix() {
                       <td
                         key={columns[i]}
                         className={`px-4 py-4 text-[0.875rem] ${
-                          isAtrium ? 'bg-mint/[0.06] font-semibold text-mint' : 'font-normal text-cream/70'
+                          isAtrium ? 'bg-lime/[0.06] font-semibold text-lime' : 'font-normal text-cream/70'
                         }`}
                       >
                         {value}

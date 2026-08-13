@@ -5,7 +5,7 @@ type Tone = 'default' | 'on-dark'
 
 const tones: Record<Tone, string> = {
   default: 'text-green',
-  'on-dark': 'text-mint',
+  'on-dark': 'text-lime',
 }
 
 export function Eyebrow({

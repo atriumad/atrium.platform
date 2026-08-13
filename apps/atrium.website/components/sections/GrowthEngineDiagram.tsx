@@ -64,13 +64,13 @@ export default function GrowthEngineDiagram() {
               className="flex flex-col gap-4 border-t border-line py-9 first:border-t-0 md:border-t-0 md:border-l md:py-0 md:px-10 md:first:border-l-0 md:first:pl-0 md:last:pr-0"
             >
               <div className="flex items-baseline gap-4">
-                <span className="font-serif text-[clamp(2.75rem,4.5vw,4rem)] leading-none tracking-[-0.04em] text-ink">
+                <span className="font-serif text-[clamp(2.75rem,4.5vw,4rem)] leading-none tracking-[-0.04em] text-charcoal">
                   {stage.n}
                 </span>
                 <span className="h-2 w-2 rounded-full md:hidden" style={{ background: stage.dot }} />
               </div>
               <div>
-                <h3 className="flex flex-col text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.05] text-ink">
+                <h3 className="flex flex-col text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.05] text-charcoal">
                   {stage.id}
                   <Eyebrow as="span" className="mt-2">Demand</Eyebrow>
                 </h3>

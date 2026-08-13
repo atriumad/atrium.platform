@@ -82,7 +82,7 @@ export default function ServicesPage() {
             return (
               <div
                 key={stage.id}
-                className={`flex flex-col gap-10 px-8 py-20 md:px-10 md:py-24 ${onDark ? 'text-cream' : 'text-ink'}`}
+                className={`flex flex-col gap-10 px-8 py-20 md:px-10 md:py-24 ${onDark ? 'text-cream' : 'text-charcoal'}`}
                 style={{ background: stage.dot }}
               >
                 <div>
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                 key={stat.number}
                 className={`flex flex-col gap-4 py-8 md:py-0 ${i > 0 ? 'border-t border-line md:border-t-0 md:border-l md:pl-10' : ''}`}
               >
-                <p className="m-0 flex font-serif text-[clamp(4rem,8vw,7rem)] font-normal leading-[0.85] tracking-[-0.03em] text-ink">
+                <p className="m-0 flex font-serif text-[clamp(4rem,8vw,7rem)] font-normal leading-[0.85] tracking-[-0.03em] text-charcoal">
                   <NumberReel value={stat.number} />
                 </p>
                 <p className="m-0 max-w-xs text-base leading-relaxed text-muted">
