@@ -41,7 +41,7 @@ export default function Footer() {
             <p className="type-caption" style={{ opacity: 0.72 }}>
               Smart creative for restaurants, hotels, and food brands. Hospitality is all we do.
             </p>
-            <p className="type-caption mt-6 font-medium" style={{ color: 'var(--color-accent)' }}>
+            <p className="type-caption mt-6 " style={{ color: 'var(--color-accent)' }}>
               Houston, TX
             </p>
           </div>

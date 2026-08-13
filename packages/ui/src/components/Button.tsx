@@ -5,13 +5,13 @@ type Variant = 'primary' | 'secondary' | 'accent' | 'ghost' | 'light' | 'outline
 type Size = 'sm' | 'md' | 'lg' | 'pill'
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-ink text-mint shadow-soft hover:-translate-y-0.5 hover:shadow-float',
-  secondary: 'bg-card text-ink border border-line shadow-soft hover:-translate-y-0.5 hover:shadow-float',
-  accent: 'bg-amber text-ink shadow-soft hover:-translate-y-0.5 hover:shadow-float',
-  ghost: 'bg-transparent text-ink hover:bg-ink/5',
+  primary: 'bg-ink text-lime shadow-soft',
+  secondary: 'bg-card text-charcoal border border-line shadow-soft',
+  accent: 'bg-amber text-charcoal shadow-soft',
+  ghost: 'bg-transparent text-charcoal hover:bg-ink/5',
   // For dark grounds. `light` is the solid counterpart to `primary`;
   // `outlineLight` is the quiet one beside it.
-  light: 'bg-cream text-ink shadow-soft hover:-translate-y-0.5 hover:shadow-float',
+  light: 'bg-cream text-charcoal shadow-soft',
   outlineLight: 'bg-transparent text-cream border border-cream/25 hover:border-cream/50 hover:bg-cream/[0.06]',
 }
 
@@ -32,14 +32,26 @@ const base = [
   'motion-reduce:transition-none motion-reduce:hover:translate-y-0',
 ].join(' ')
 
-type Shared = { variant?: Variant; size?: Size; className?: string; children?: ReactNode }
+// The nudge-and-lift on hover, kept out of the variants so a button that
+// animates on its own can turn it off without fighting class order — cn()
+// joins, it does not merge.
+const LIFT = 'hover:-translate-y-0.5 hover:shadow-float'
+
+type Shared = {
+  variant?: Variant
+  size?: Size
+  /** Set false when the button has its own hover motion. */
+  lift?: boolean
+  className?: string
+  children?: ReactNode
+}
 
 type ButtonProps = Shared & { href?: undefined } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof Shared>
 type AnchorProps = Shared & { href: string } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof Shared | 'href'>
 
 export function Button(props: ButtonProps | AnchorProps) {
-  const { variant = 'primary', size = 'md', className, children, ...rest } = props
-  const classes = cn(base, variants[variant], sizes[size], className)
+  const { variant = 'primary', size = 'md', lift = true, className, children, ...rest } = props
+  const classes = cn(base, variants[variant], sizes[size], lift && LIFT, className)
 
   if ('href' in props && props.href !== undefined) {
     return <a className={classes} {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}>{children}</a>

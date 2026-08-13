@@ -16,12 +16,12 @@ import { CTA } from '@/lib/cta'
 import { type CaseStudy, caseStudies } from '@/lib/work'
 
 const bentoItems: BentoItem[] = [
-  { size: 'large', title: <>Content from <em>your</em> kitchen</>, body: "We don't use stock. We shoot on location — your food, your team, your energy. Every frame has a job on the content calendar before we press record.", cover: 'BTS wide shot — camera, chef plating, warm restaurant lighting' },
-  { size: 'small', title: <>Brand consistency that <em>compounds</em></>, body: 'Same voice, same look, same energy — across 3 platforms, 3 locations, or 30 posts.', cover: 'Side-by-side IG grids showing visual consistency' },
-  { size: 'small', title: <>Reviews managed <em>before they go public</em></>, body: 'Happy guests → Google review. Unhappy guests → private feedback.', cover: 'Survey flow diagram' },
-  { size: 'medium', title: <>The guest who returns <em>is the business</em></>, body: '65% of restaurant revenue comes from repeat customers. We build the email flows, SMS sequences, and loyalty systems that earn the next visit.', cover: 'Email campaign on phone + POS order confirmation' },
-  { size: 'medium', title: <>Found when they&apos;re <em>ready to decide</em></>, body: '46% of Google searches have local intent. When someone nearby is hungry, your profile is what they find.', cover: 'Google Maps view with client pin highlighted' },
-  { size: 'small', title: <>One dashboard. <em>Everything visible.</em></>, body: 'Sales, social, email, reviews, campaigns — aggregated in one clean interface.', cover: 'Dashboard mobile view, clean data' },
+  { size: 'large', title: <>Content that <em>shows you at your best</em></>, body: 'Your food, your chef, your room, whatever makes people crave you. We shoot what you already have and make it the reason they came.', cover: 'BTS wide shot — camera, chef plating, warm restaurant lighting' },
+  { size: 'small', title: <>A brand that sounds like <em>you</em></>, body: 'We set the look, the voice, and the plan, so you show up the same and on purpose across every platform.', cover: 'Side-by-side IG grids showing visual consistency' },
+  { size: 'medium', fill: 'lime', title: <>Reviews caught <em>before they go public</em></>, body: 'The happy guest goes to Google. The unhappy one comes to you first. We catch the problems early and push the rating up over time.', cover: 'Survey flow diagram' },
+  { size: 'medium', fill: 'coral', title: <>The guest who returns <em>is the business</em></>, body: "Sixty five percent of a restaurant's revenue is the guest who comes back. We make sure they do, without you paying to win them twice.", cover: 'Email campaign on phone + POS order confirmation' },
+  { size: 'medium', title: <>Found when they&apos;re <em>ready to decide</em></>, body: 'Forty six percent of Google searches are local. When someone three blocks away is hungry, you are what they find.', cover: 'Google Maps view with client pin highlighted' },
+  { size: 'small', fill: 'cool', title: <>Traffic that <em>turns into tables</em></>, body: 'We send people from Instagram and Google straight to your reservation and your online order, not just to your profile.', cover: 'Instagram profile linking through to a reservation confirmation' },
 ]
 
 const selectedWorkDetails = [
@@ -69,12 +69,12 @@ export default function HomePage() {
         label="Trusted by hospitality brands building demand"
         size="compact"
       />
-      <AudiencePaths />
       <BentoGrid
         items={bentoItems}
         eyebrow="One system, six leaks closed"
         headline={<>What changes when every channel <em>shares a job.</em></>}
       />
+      <AudiencePaths />
       <GrowthEngineDiagram />
       <WorkGrid projects={selectedWork} />
       <ComparisonMatrix />

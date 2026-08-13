@@ -31,7 +31,7 @@ export default function WorkStoryBlock({
           </Eyebrow>
 
           <h3
-            className={`m-0 max-w-[18ch] text-[clamp(1.9rem,3vw,2.6rem)] font-normal leading-[1.12] tracking-[-0.02em] ${dark ? 'text-cream' : 'text-ink'}`}
+            className={`m-0 max-w-[18ch] text-[clamp(1.9rem,3vw,2.6rem)] font-normal leading-[1.12] tracking-[-0.02em] ${dark ? 'text-cream' : 'text-charcoal'}`}
           >
             {story.headline}
           </h3>
@@ -51,7 +51,7 @@ export default function WorkStoryBlock({
             {story.metrics.map((metric) => (
               <div key={metric.label}>
                 <p
-                  className={`m-0 font-serif text-[clamp(1.9rem,3vw,2.6rem)] leading-none tracking-[-0.03em] ${dark ? 'text-mint' : 'text-green'}`}
+                  className={`m-0 font-serif text-[clamp(1.9rem,3vw,2.6rem)] leading-none tracking-[-0.03em] ${dark ? 'text-lime' : 'text-green'}`}
                 >
                   <NumberReel value={metric.number} />
                 </p>
@@ -65,7 +65,7 @@ export default function WorkStoryBlock({
           </div>
 
           <TransitionLink
-            className={`group mt-9 inline-flex items-center gap-2 text-[0.9375rem] font-medium no-underline transition-colors ${dark ? 'text-cream hover:text-mint' : 'text-ink hover:text-green'}`}
+            className={`group mt-9 inline-flex items-center gap-2 text-[0.9375rem] no-underline transition-colors ${dark ? 'text-cream hover:text-lime' : 'text-charcoal hover:text-green'}`}
             href={`/work/${story.slug}`}
           >
             Read the full case

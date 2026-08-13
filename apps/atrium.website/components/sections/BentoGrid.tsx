@@ -11,6 +11,8 @@ export type BentoItem = {
   cover: string
   bg?: string
   dark?: boolean
+  /** Overrides the alternating tone with a solid brand fill. */
+  fill?: 'lime' | 'coral' | 'cool'
 }
 
 type Props = {
@@ -72,8 +74,8 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
 
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 auto-rows-[240px] gap-5">
           {items.map((item, i) => {
-            const isDark = item.dark ?? i === 0
-            const tone = isDark ? 'dark' : i % 2 === 0 ? 'warm' : 'surface'
+            const isDark = item.fill ? false : (item.dark ?? i === 0)
+            const tone = item.fill ?? (isDark ? 'dark' : i % 2 === 0 ? 'warm' : 'surface')
             return (
               <Card
                 key={item.title as unknown as string}
@@ -82,7 +84,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                 className={`bento-card flex flex-col justify-between overflow-hidden opacity-0 ${sizeClass[item.size]}`}
               >
                 <div>
-                  <h3 className={`${titleClass[item.size]} mb-3 font-medium ${isDark ? 'text-mint' : ''}`}>
+                  <h3 className={`${titleClass[item.size]} mb-3 ${isDark ? 'text-lime' : ''}`}>
                     {item.title}
                   </h3>
                   <p className={`text-sm leading-relaxed opacity-75 ${copyWidthClass[item.size]}`}>
@@ -92,8 +94,12 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
 
                 <div className="mt-4 text-xs">
                   <span
-                    className={`inline-block max-w-full rounded-full border px-3 py-1.5 text-[0.68rem] font-medium uppercase leading-[1.25] tracking-[0.16em] ${
-                      isDark ? 'border-cream/15 bg-cream/[0.07] text-cream/75' : 'border-line bg-ink/[0.04] text-muted'
+                    className={`inline-block max-w-full rounded-full border px-3 py-1.5 text-[0.68rem] uppercase leading-[1.25] tracking-[0.16em] ${
+                      isDark
+                        ? 'border-cream/15 bg-cream/[0.07] text-cream/75'
+                        : item.fill
+                          ? 'border-charcoal/20 bg-charcoal/[0.06] text-charcoal/70'
+                          : 'border-line bg-ink/[0.04] text-muted'
                     }`}
                   >
                     {item.cover}

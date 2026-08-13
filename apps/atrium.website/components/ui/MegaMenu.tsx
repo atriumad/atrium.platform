@@ -32,22 +32,19 @@ const MENU_ICONS: Record<string, typeof Compass> = {
   Users,
 }
 
-// Column order + pill fill per category. Text colour is picked per fill so it
 // clears 4.5:1 against it (computed, not eyeballed):
-//   bg-green-fill (#3fae78) vs text-ink   -> 5.12:1 | vs text-cream -> 2.47:1
-//   bg-amber-fill (#eab63f) vs text-ink   -> 7.65:1 | vs text-cream -> 1.65:1
-//   bg-green      (#1f7a52) vs text-cream -> 4.69:1 | vs text-ink   -> 2.69:1
-// Only the darker retain green clears 4.5:1 with cream text; the other two
-// need ink, the same split app/services/page.tsx already uses.
+// The category heading is a link, not a pill. Its colour survives as a marker
+// dot, so the three stages stay coded without a filled block whose contrast
+// has to be rechecked every time the palette moves.
 const MENU_CATEGORIES = [
-  { category: 'Generate Demand', pillClass: 'bg-green-fill text-ink' },
-  { category: 'Convert Demand', pillClass: 'bg-amber-fill text-ink' },
-  { category: 'Retain Demand', pillClass: 'bg-green text-cream' },
+  { category: 'Generate Demand', dotClass: 'bg-lime' },
+  { category: 'Convert Demand', dotClass: 'bg-amber' },
+  { category: 'Retain Demand', dotClass: 'bg-green' },
 ] as const
 
-const menuColumns = MENU_CATEGORIES.map(({ category, pillClass }) => ({
+const menuColumns = MENU_CATEGORIES.map(({ category, dotClass }) => ({
   category,
-  pillClass,
+  dotClass,
   services: services.filter((svc) => svc.category === category),
 }))
 
@@ -115,7 +112,7 @@ export default function MegaMenu({
       <button
         aria-controls="mega-menu-test"
         aria-expanded={open}
-        className="flex items-center gap-1 font-medium text-sm transition-opacity hover:opacity-70"
+        className="flex items-center gap-1 text-sm transition-opacity hover:opacity-70"
         onClick={() => setOpen((value) => !value)}
         ref={triggerRef}
         style={textColor ? { color: textColor } : undefined}
@@ -164,13 +161,16 @@ export default function MegaMenu({
             {menuColumns.map((column) => (
               <div className="flex flex-col" key={column.category}>
                 <TransitionLink
-                  className={`mb-5 inline-flex w-fit items-center gap-1.5 self-start rounded-full px-3 py-1.5 font-semibold text-xs uppercase tracking-wide no-underline transition-opacity hover:opacity-85 ${column.pillClass}`}
+                  className="group mb-6 inline-flex w-fit items-center gap-2.5 self-start no-underline"
                   href="/services"
                   onClick={close}
                   role="menuitem"
                 >
-                  {column.category}
-                  <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2} />
+                  <span aria-hidden="true" className={`h-2 w-2 rounded-full ${column.dotClass}`} />
+                  <span className="text-[1.15rem] text-charcoal leading-none transition-transform duration-200 group-hover:translate-x-1">
+                    {column.category}
+                  </span>
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-muted" strokeWidth={1.75} />
                 </TransitionLink>
 
                 <div className="flex flex-col divide-y divide-line">
@@ -178,14 +178,18 @@ export default function MegaMenu({
                     const Icon = MENU_ICONS[svc.menu.icon]
                     return (
                       <TransitionLink
-                        className="-mx-3 flex items-center gap-4 rounded-card-sm px-3 py-3.5 no-underline transition-colors hover:bg-ink/[0.04]"
+                        className="group relative flex items-center gap-4 py-3.5 pl-5 no-underline"
                         href={`/services/${svc.slug}`}
                         key={svc.slug}
                         onClick={close}
                         role="menuitem"
                       >
-                        <span className="flex min-w-0 flex-1 flex-col gap-1">
-                          <span className="font-medium text-ink text-sm leading-tight">
+                        <span
+                          aria-hidden="true"
+                          className="-translate-y-1/2 absolute top-1/2 left-0 h-1.5 w-1.5 rounded-full bg-green opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                        />
+                        <span className="flex min-w-0 flex-1 flex-col gap-1 transition-transform duration-200 group-hover:translate-x-1">
+                          <span className="text-charcoal text-sm leading-tight">
                             {svc.name}
                           </span>
                           <span className="text-muted text-xs leading-snug">{svc.menu.blurb}</span>

@@ -125,14 +125,14 @@ function PricingOffers() {
               </div>
 
               <div className={`mt-auto pt-10 ${index === 1 ? 'px-6 lg:px-0' : ''}`}>
-                <p className="type-caption m-0 font-medium" style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-800)' }}>
+                <p className="type-caption m-0 " style={{ color: index === 1 ? 'var(--mint-400)' : 'var(--teal-800)' }}>
                   Custom pricing after discovery
                 </p>
                 <Link
                   href={CTA.primary.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="type-caption group mt-6 inline-flex items-center gap-3 font-medium no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+                  className="type-caption group mt-6 inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
                   style={{ color: index === 1 ? 'var(--text-on-dark)' : 'var(--teal-800)' }}
                 >
                   Request this scope

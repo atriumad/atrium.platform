@@ -49,7 +49,7 @@ export default function HeroSection() {
             <h1 className="mb-6 text-[clamp(2.6rem,6vw,4.6rem)] font-normal leading-[1.02] tracking-[-0.02em] text-cream">
               You handle the experience.
               <br />
-              We take care of <em className="font-serif italic">the rest.</em>
+              <em className="font-serif italic">We take care of the rest.</em>
             </h1>
 
             {/* Kept as a paragraph rather than an h2: it reads as a heading but

@@ -39,7 +39,7 @@ export function Input({
         aria-describedby={describedBy}
         aria-invalid={error ? true : undefined}
         className={cn(
-          'w-full rounded-full bg-card font-sans text-ink transition duration-200 ease-atrium',
+          'w-full rounded-full bg-card font-sans text-charcoal transition duration-200 ease-atrium',
           'border placeholder:text-muted',
           'focus:outline-2 focus:outline-offset-2 focus:outline-green-fill',
           error ? 'border-error' : 'border-line',

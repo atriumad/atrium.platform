@@ -7,7 +7,7 @@ export default function ServiceDeliverables({ svc }: { svc: Service }) {
       <div className="mx-auto grid max-w-[var(--container-max)] gap-14 lg:grid-cols-12 lg:gap-20">
         <div className="self-start lg:sticky lg:top-32 lg:col-span-4">
           <Eyebrow className="mb-6">What you receive</Eyebrow>
-          <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-ink">
+          <h2 className="max-w-[10ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
             Outputs with an <em className="font-serif italic">operating job.</em>
           </h2>
           <p className="mt-7 max-w-sm text-base leading-relaxed text-muted">
@@ -21,8 +21,8 @@ export default function ServiceDeliverables({ svc }: { svc: Service }) {
               key={perk.title}
               className="grid gap-5 border-b border-line py-8 sm:grid-cols-[4rem_minmax(0,0.7fr)_minmax(0,1.3fr)] sm:gap-8 md:py-10"
             >
-              <p className="m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted">{String(index + 1).padStart(2, '0')}</p>
-              <h3 className="text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-ink">{perk.title}</h3>
+              <p className="m-0 text-[0.7rem] uppercase tracking-[0.14em] text-muted">{String(index + 1).padStart(2, '0')}</p>
+              <h3 className="text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">{perk.title}</h3>
               <p className="m-0 max-w-xl text-base leading-relaxed text-muted">{perk.description}</p>
             </article>
           ))}

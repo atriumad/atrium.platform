@@ -17,37 +17,38 @@
 :root {
   /* Greens — teal-800 carries both body text and dark section grounds, so it
      maps to ink, which is correct in both roles. */
-  --teal-900: #0d2f33;
-  --teal-800: #0d2f33;
-  --teal-700: #0d353b;
-  --teal-500: #5f6e67;
-  --teal-300: #93a09b;
+  --teal-900: #042f34;
+  --teal-800: #042f34;
+  --teal-700: #16232b;
+  --teal-500: #61686a;
+  --teal-300: #8b9092;
 
   /* Mints */
-  --mint-500: #3fae78;
-  --mint-400: #a9edc8;
-  --mint-300: #a9edc8;
-  --mint-200: #e3f2e9;
+  --mint-500: #1e8c7c;
+  --mint-400: #b8e89a;
+  --mint-300: #b8e89a;
+  --mint-200: #dcefe9;
 
   /* Amber */
-  --amber-600: #a97f1c;
-  --amber-500: #f3c150;
-  --amber-400: #eab63f;
-  --amber-200: #f9ecc7;
+  --amber-600: #8a6410;
+  --amber-500: #ffc933;
+  --amber-400: #f0b21f;
+  --amber-200: #fdeec4;
 
   /* Growth-engine stage colours */
-  --stage-generate: #3fae78;
-  --stage-convert: #eab63f;
-  --stage-retain: #1f7a52;
+  --stage-generate: #1e8c7c;
+  --stage-convert: #f0b21f;
+  --stage-retain: #0e6e64;
 
   /* Neutrals — the cool cloud ramp becomes the warm one. This is the change
      that carries most of the reskin: --surface-page resolves through
      --cloud-200, so every page ground turns cream from this one line. */
   --cloud-100: #ffffff;
-  --cloud-200: #f4f1e7;
-  --cloud-300: #faf8f0;
-  --cloud-400: #ece8da;
+  --cloud-150: #e4eef0;
+  --cloud-200: #f3efe4;
+  --cloud-300: #faf9f5;
+  --cloud-400: #e6e1d4;
 
   /* Body ink */
-  --ink-700: #3f544f;
+  --ink-700: #545c5f;
 }

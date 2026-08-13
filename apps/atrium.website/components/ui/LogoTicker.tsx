@@ -52,7 +52,7 @@ function BrandName({ client, index }: BrandNameProps) {
   }
   return (
     <span
-      className={`shrink-0 whitespace-nowrap text-[clamp(1.05rem,1.55vw,1.45rem)] leading-none text-ink ${index % 5 === 1 ? 'font-serif italic' : 'font-sans'}`}
+      className={`shrink-0 whitespace-nowrap text-[clamp(1.05rem,1.55vw,1.45rem)] leading-none text-charcoal ${index % 5 === 1 ? 'font-serif italic' : 'font-sans'}`}
       style={{
         fontWeight: index % 3 === 0 ? 600 : 500,
         letterSpacing: index % 4 === 0 ? '-0.04em' : '-0.015em',
@@ -99,7 +99,7 @@ export default function LogoTicker({ clients, bg, label, size = 'default' }: Pro
       aria-label={label ?? 'Client brands'}
     >
       {label && (
-        <p className="m-0 mx-auto mb-10 text-center font-medium text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-ink md:mb-12">
+        <p className="m-0 mx-auto mb-10 text-center text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-charcoal md:mb-12">
           {label}
         </p>
       )}

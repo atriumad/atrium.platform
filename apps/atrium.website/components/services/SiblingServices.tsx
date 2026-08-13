@@ -26,7 +26,7 @@ export default function SiblingServices({ current }: { current: string }) {
               <p className="type-caption flex-1" style={{ color: 'var(--text-strong)', opacity: 0.7 }}>
                 {svc.hero.body}
               </p>
-              <span className="type-caption font-semibold" style={{ color: 'var(--teal-700)' }}>
+              <span className="type-caption " style={{ color: 'var(--teal-700)' }}>
                 Learn more &rarr;
               </span>
             </TransitionLink>

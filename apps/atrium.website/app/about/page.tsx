@@ -68,7 +68,7 @@ function AboutHero() {
               href={CTA.primary.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="type-caption group mt-9 inline-flex items-center gap-3 font-medium no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
+              className="type-caption group mt-9 inline-flex items-center gap-3 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]"
               style={{ color: 'var(--teal-800)' }}
             >
               Start a project

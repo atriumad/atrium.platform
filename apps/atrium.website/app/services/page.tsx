@@ -82,11 +82,11 @@ export default function ServicesPage() {
             return (
               <div
                 key={stage.id}
-                className={`flex flex-col gap-10 px-8 py-20 md:px-10 md:py-24 ${onDark ? 'text-cream' : 'text-ink'}`}
+                className={`flex flex-col gap-10 px-8 py-20 md:px-10 md:py-24 ${onDark ? 'text-cream' : 'text-charcoal'}`}
                 style={{ background: stage.dot }}
               >
                 <div>
-                  <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em]">
+                  <span className="text-[0.7rem] uppercase tracking-[0.14em]">
                     {category}
                   </span>
                   <p className="mt-4 text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed">
@@ -101,7 +101,7 @@ export default function ServicesPage() {
                         href={`/services/${svc.slug}`}
                         className="group flex items-center justify-between gap-3 py-4 no-underline"
                       >
-                        <span className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
+                        <span className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
                           {svc.name}
                         </span>
                         <span
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                 key={stat.number}
                 className={`flex flex-col gap-4 py-8 md:py-0 ${i > 0 ? 'border-t border-line md:border-t-0 md:border-l md:pl-10' : ''}`}
               >
-                <p className="m-0 flex font-serif text-[clamp(4rem,8vw,7rem)] font-normal leading-[0.85] tracking-[-0.03em] text-ink">
+                <p className="m-0 flex font-serif text-[clamp(4rem,8vw,7rem)] font-normal leading-[0.85] tracking-[-0.03em] text-charcoal">
                   <NumberReel value={stat.number} />
                 </p>
                 <p className="m-0 max-w-xs text-base leading-relaxed text-muted">

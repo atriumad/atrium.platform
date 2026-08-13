@@ -20,13 +20,26 @@ type Props = {
 export function PillCTA({ href, children, tone = 'on-light', external, className }: Props) {
   const onDark = tone === 'on-dark'
 
+  // On hover the badge grows until it has swallowed the pill, so the button
+  // inverts outward from the arrow rather than cross-fading.
+  //
+  // It expands to lime rather than to the badge's own colour: on a dark ground
+  // an ink fill is the page background, and with no border the button would
+  // vanish mid-animation. Lime reads against both grounds, and charcoal on it
+  // is 11.49:1.
   const inner = (
     <>
-      {children}
       <span
         aria-hidden="true"
-        className={`flex h-11 w-11 items-center justify-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5 ${
-          onDark ? 'bg-ink text-cream' : 'bg-cream text-ink'
+        className="-z-10 -translate-y-1/2 absolute top-1/2 right-1.5 h-11 w-11 origin-center scale-100 rounded-full bg-lime transition-transform duration-500 ease-atrium group-hover:scale-[16] motion-reduce:transition-none"
+      />
+      <span className="relative transition-colors duration-300 group-hover:text-charcoal">
+        {children}
+      </span>
+      <span
+        aria-hidden="true"
+        className={`relative flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-300 group-hover:bg-charcoal group-hover:text-lime ${
+          onDark ? 'bg-ink text-cream' : 'bg-cream text-charcoal'
         }`}
       >
         →
@@ -35,7 +48,10 @@ export function PillCTA({ href, children, tone = 'on-light', external, className
   )
 
   const shared = {
-    className: `group ${className ?? ''}`,
+    className: `group relative isolate overflow-hidden ${className ?? ''}`,
+    // The circle expanding out of the badge is the hover; lifting the whole
+    // pill on top of it reads as two animations fighting.
+    lift: false,
     size: 'pill' as const,
     variant: (onDark ? 'light' : 'primary') as 'light' | 'primary',
   }
@@ -59,18 +75,29 @@ export function PillCTA({ href, children, tone = 'on-light', external, className
 export function OutlineCTA({ href, children, tone = 'on-light', external, className }: Props) {
   const onDark = tone === 'on-dark'
 
+  // One step of the same roll NumberReel uses on the metrics: the label lifts
+  // and its own copy arrives from below. No fill — the outline is the button.
   const inner = (
     <>
-      {children}
+      <span className="relative block h-[1.25em] overflow-hidden">
+        <span className="block transition-transform duration-500 ease-atrium group-hover:-translate-y-1/2 motion-reduce:transition-none">
+          <span className="block h-[1.25em] leading-[1.25em]">{children}</span>
+          <span aria-hidden="true" className="block h-[1.25em] leading-[1.25em]">
+            {children}
+          </span>
+        </span>
+      </span>
       <span
         aria-hidden="true"
-        className={`h-1.5 w-1.5 rounded-full ${onDark ? 'bg-cream' : 'bg-ink'}`}
+        className={`h-1.5 w-1.5 rounded-full transition-transform duration-500 ease-atrium group-hover:scale-150 ${
+          onDark ? 'bg-lime' : 'bg-green'
+        }`}
       />
     </>
   )
 
   const shared = {
-    className: className ?? '',
+    className: `group ${className ?? ''}`,
     size: 'lg' as const,
     variant: (onDark ? 'outlineLight' : 'secondary') as 'outlineLight' | 'secondary',
   }

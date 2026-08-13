@@ -79,7 +79,7 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
                 className="grid min-h-28 grid-cols-[minmax(4.5rem,0.7fr)_minmax(0,1fr)] items-center gap-5 border-cream/25 border-b py-5 md:block md:px-5 lg:grid lg:px-0"
                 key={`${stat.value}-${stat.label}`}
               >
-                <p className="m-0 font-serif text-[clamp(2.75rem,4vw,4.5rem)] font-normal italic leading-none tracking-[-0.04em] text-mint">
+                <p className="m-0 font-serif text-[clamp(2.75rem,4vw,4.5rem)] font-normal italic leading-none tracking-[-0.04em] text-lime">
                   {stat.value}
                 </p>
                 <p className="m-0 text-[0.875rem] text-cream/[0.72] md:mt-4 lg:mt-0">{stat.label}</p>

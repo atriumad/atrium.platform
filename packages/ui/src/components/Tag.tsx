@@ -5,11 +5,11 @@ type Variant = 'outline' | 'filled' | 'solid' | 'mint' | 'on-dark'
 type Size = 'sm' | 'md'
 
 const variants: Record<Variant, string> = {
-  outline: 'bg-transparent text-ink border border-line',
-  filled: 'bg-amber text-ink',
+  outline: 'bg-transparent text-charcoal border border-line',
+  filled: 'bg-amber text-charcoal',
   solid: 'bg-ink text-cream',
-  mint: 'bg-mint text-ink',
-  'on-dark': 'bg-cream/[0.07] text-mint border border-cream/15',
+  mint: 'bg-lime text-charcoal',
+  'on-dark': 'bg-cream/[0.07] text-lime border border-cream/15',
 }
 
 const sizes: Record<Size, string> = {

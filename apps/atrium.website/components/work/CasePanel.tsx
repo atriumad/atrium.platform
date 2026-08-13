@@ -54,7 +54,7 @@ export default function CasePanel({
           stays through the hover — it is what keeps the type legible once the
           veil is gone. */}
       <div className="absolute inset-x-0 bottom-0 z-30 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-6 pt-20 md:p-8 md:pt-28">
-        <p className="m-0 text-[1.0625rem] font-medium leading-snug text-white md:text-[1.25rem]">
+        <p className="m-0 text-[1.0625rem] leading-snug text-white md:text-[1.25rem]">
           {study.client}
         </p>
         <p className="mt-2 max-w-sm text-[0.9375rem] leading-relaxed text-white/80 transition-all duration-500 md:max-h-0 md:translate-y-2 md:overflow-hidden md:opacity-0 md:group-focus-within:max-h-24 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100 md:group-hover:max-h-24 md:group-hover:translate-y-0 md:group-hover:opacity-100">

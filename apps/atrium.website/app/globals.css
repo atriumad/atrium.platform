@@ -73,8 +73,11 @@
     overflow-x: hidden;
   }
 
+  /* Headings take the brand's text colour — Charcoal Teal — rather than
+     inheriting body, which is a tint of it. :where() keeps specificity at
+     zero so any text-* utility still wins. */
   :where(h1, h2, h3, h4) {
-    color: inherit;
+    color: var(--color-charcoal);
     font-family: var(--font-sans);
     font-weight: 400;
     letter-spacing: -0.035em;
@@ -294,8 +297,8 @@
   background-image:
     radial-gradient(
       88% 118% at 106% 14%,
-      color-mix(in srgb, var(--color-mint) 62%, white) 0%,
-      color-mix(in srgb, var(--color-mint) 46%, transparent) 22%,
+      color-mix(in srgb, var(--color-lime) 62%, white) 0%,
+      color-mix(in srgb, var(--color-lime) 46%, transparent) 22%,
       color-mix(in srgb, var(--color-green) 32%, transparent) 50%,
       transparent 84%
     ),
