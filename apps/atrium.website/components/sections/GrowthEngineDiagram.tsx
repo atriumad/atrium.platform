@@ -1,98 +1,120 @@
 import { Eyebrow } from '@atrium/ui'
+import Image from 'next/image'
+import { caseStudies } from '@/lib/work'
 
 // ─── Atrium Growth Engine (doc vs.md §2.1 / §5 / §7.5) ──────────────────────
-// A horizontal flow — Generate → Convert → Retain read as one connected system
-// on a shared rail, bracketed by the Brand Foundation it's built on and the
-// Measure · Learn · Optimize loop that feeds the next 28-day cycle. Editorial,
-// light, hairline-driven — the same language as the rest of the site, but
-// horizontal so it reads as flow, not another vertical index.
-
-// Exported so other services-page sections (the engine split, stats) can
-// share this exact copy/color data instead of maintaining their own.
+// Generate → Convert → Retain, read as three cards rather than a rail. Each
+// one is a picture with a caption strip; hovering fills the strip with lime
+// and opens it to the copy underneath, so the section is scannable at rest and
+// explains itself on demand.
 export const stages = [
-  { n: '01', id: 'Generate', dot: 'var(--stage-generate)', tagline: 'Create awareness and desire.', caps: ['Film & Photo', 'Social', 'Paid Media'] },
-  { n: '02', id: 'Convert', dot: 'var(--stage-convert)', tagline: 'Turn interest into reservations.', caps: ['Google & Local SEO', 'Reputation', 'Offers & Campaigns'] },
-  { n: '03', id: 'Retain', dot: 'var(--stage-retain)', tagline: 'Bring guests back.', caps: ['Email & SMS', 'CRM & Loyalty', 'Win-back Flows'] },
+  {
+    n: '01',
+    id: 'Generate',
+    // Consumed by app/services/page.tsx for its stage markers.
+    dot: 'var(--stage-generate)',
+    lead: 'Generate',
+    rest: 'demand',
+    tagline: 'Create awareness and desire.',
+    caps: ['Film & Photo', 'Social', 'Paid Media'],
+  },
+  {
+    n: '02',
+    id: 'Convert',
+    // Consumed by app/services/page.tsx for its stage markers.
+    dot: 'var(--stage-convert)',
+    lead: 'Convert',
+    rest: 'interest',
+    tagline: 'Turn interest into reservations.',
+    caps: ['Google & Local SEO', 'Reputation', 'Offers & Campaigns'],
+  },
+  {
+    n: '03',
+    id: 'Retain',
+    // Consumed by app/services/page.tsx for its stage markers.
+    dot: 'var(--stage-retain)',
+    lead: 'Retain',
+    rest: 'the guest',
+    tagline: 'Bring guests back.',
+    caps: ['Email & SMS', 'CRM & Loyalty', 'Win-back Flows'],
+  },
 ]
 
 export default function GrowthEngineDiagram() {
+  // Only the clients served from our own CDN, and only their absolute URLs:
+  // everyone else still points at the disabled Cloudinary account, and
+  // next/image cannot take a bare public ID. next-cloudinary's CldImage would
+  // pull client-only code into this server component.
+  const covers = ['taco-naco', 'taha', 'taco-naco']
+    .map((slug, i) => {
+      const gallery = caseStudies.find((c) => c.slug === slug)?.galleryIds ?? []
+      return gallery.filter((id) => /^https?:\/\//i.test(id))[i === 2 ? 6 : 1]
+    })
+    .filter(Boolean)
+
   return (
-    <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
+    <section className="bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
-        {/* Header — matches the AudiencePaths / WorkGrid rhythm */}
         <div className="mb-14 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
           <div className="lg:col-span-7">
-            <Eyebrow className="mb-6">The Atrium Growth Engine</Eyebrow>
-            <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+            <Eyebrow className="mb-6" tone="on-dark">
+              The Atrium Growth Engine
+            </Eyebrow>
+            <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
               Not eleven services. <em className="font-serif italic">One system.</em>
             </h2>
           </div>
-          <p className="max-w-lg border-t border-line pt-6 text-base leading-relaxed text-muted lg:col-span-5">
-            The services are just the components. What you buy is the engine that runs
-            them — on a 28-day cycle, measured end to end.
+          <p className="max-w-lg border-cream/20 border-t pt-6 text-base leading-relaxed text-cream/[0.78] lg:col-span-5">
+            The services are just the components. What you buy is the engine that runs them — on a
+            28-day cycle, measured end to end.
           </p>
         </div>
 
-        {/* Opening frame — the foundation everything is built on */}
-        <div className="flex flex-col gap-1 border-t border-line pt-5 pb-10 md:flex-row md:items-baseline md:gap-6">
-          <Eyebrow as="span" className="whitespace-nowrap">Brand Foundation</Eyebrow>
-          <span className="text-[0.875rem] text-muted">
-            Positioning, identity, and creative direction — everything the engine runs on.
-          </span>
-        </div>
-
-        {/* The rail — one connected line carrying the three stages */}
-        <div className="relative mb-10 hidden md:block" aria-hidden>
-          <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-line" />
-          <div className="relative grid grid-cols-3">
-            {stages.map((stage) => (
-              <div key={stage.id} className="flex items-center md:px-10 md:first:pl-0">
-                <span
-                  className="h-2.5 w-2.5 rounded-full shadow-[0_0_0_6px_var(--color-cream)]"
-                  style={{ background: stage.dot }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Three stages as flowing columns — divided by hairlines, not boxed */}
-        <div className="grid grid-cols-1 md:grid-cols-3">
-          {stages.map((stage) => (
-            <div
-              key={stage.id}
-              className="flex flex-col gap-4 border-t border-line py-9 first:border-t-0 md:border-t-0 md:border-l md:py-0 md:px-10 md:first:border-l-0 md:first:pl-0 md:last:pr-0"
-            >
-              <div className="flex items-baseline gap-4">
-                <span className="font-serif text-[clamp(2.75rem,4.5vw,4rem)] leading-none tracking-[-0.04em] text-charcoal">
+        <div className="grid gap-5 md:grid-cols-3">
+          {stages.map((stage, i) => {
+            const cover = covers[i]
+            return (
+              <article
+                className="group relative aspect-[3/4] overflow-hidden rounded-card bg-charcoal"
+                key={stage.id}
+              >
+                {cover && (
+                  <Image
+                    alt=""
+                    className="object-cover transition-transform duration-700 ease-atrium group-hover:scale-[1.04]"
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    src={cover}
+                  />
+                )}
+                <span className="absolute top-5 left-5 z-10 font-serif text-[1.1rem] text-cream/70 italic">
                   {stage.n}
                 </span>
-                <span className="h-2 w-2 rounded-full md:hidden" style={{ background: stage.dot }} />
-              </div>
-              <div>
-                <h3 className="flex flex-col text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.05] text-charcoal">
-                  {stage.id}
-                  <Eyebrow as="span" className="mt-2">Demand</Eyebrow>
-                </h3>
-                <p className="mt-2.5 max-w-xs text-base leading-relaxed text-body">{stage.tagline}</p>
-              </div>
-              <ul className="m-0 mt-1 flex list-none flex-col gap-1.5 p-0">
-                {stage.caps.map((cap) => (
-                  <li key={cap} className="text-[0.875rem] text-muted">{cap}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
 
-        {/* Closing frame — the loop that feeds the next cycle */}
-        <div className="mt-2 flex flex-col gap-1 border-t border-line pt-5 md:flex-row md:items-baseline md:gap-6">
-          <Eyebrow as="span" className="flex items-center gap-1.5 whitespace-nowrap">
-            <span aria-hidden>↺</span> Measure · Learn · Optimize
-          </Eyebrow>
-          <span className="text-[0.875rem] text-muted">
-            POS attribution and monthly reporting feed the next 28-day cycle — every stage, measured.
-          </span>
+                {/* Anchored to the bottom of a fixed-ratio card, so opening it
+                    grows the panel up over the picture instead of making the
+                    card taller — the row keeps one height at rest and hover. */}
+                <div className="absolute inset-x-0 bottom-0 z-10 bg-cream p-6 transition-colors duration-300 group-hover:bg-lime md:p-7">
+                  <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
+                    <em className="font-serif italic">{stage.lead}</em> {stage.rest}
+                  </h3>
+
+                  {/* 0fr → 1fr is the one height transition that works without
+                      hardcoding a max-height that would clip longer copy. */}
+                  <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-atrium group-focus-within:grid-rows-[1fr] group-hover:grid-rows-[1fr]">
+                    <div className="overflow-hidden">
+                      <p className="mt-3 text-[0.9375rem] leading-relaxed text-charcoal/80">
+                        {stage.tagline}
+                      </p>
+                      <p className="mt-2 text-[0.8125rem] text-charcoal/60">
+                        {stage.caps.join(' · ')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>
