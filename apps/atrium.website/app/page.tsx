@@ -69,12 +69,12 @@ export default function HomePage() {
         label="Trusted by hospitality brands building demand"
         size="compact"
       />
-      <AudiencePaths />
       <BentoGrid
         items={bentoItems}
         eyebrow="One system, six leaks closed"
         headline={<>What changes when every channel <em>shares a job.</em></>}
       />
+      <AudiencePaths />
       <GrowthEngineDiagram />
       <WorkGrid projects={selectedWork} />
       <ComparisonMatrix />
