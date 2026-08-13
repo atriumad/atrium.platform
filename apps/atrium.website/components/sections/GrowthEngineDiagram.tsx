@@ -1,6 +1,5 @@
 import { Eyebrow } from '@atrium/ui'
 import Image from 'next/image'
-import { caseStudies } from '@/lib/work'
 
 // ─── Atrium Growth Engine (doc vs.md §2.1 / §5 / §7.5) ──────────────────────
 // Generate → Convert → Retain, read as three cards rather than a rail. Each
@@ -63,18 +62,17 @@ export const stages = [
   },
 ]
 
-export default function GrowthEngineDiagram() {
-  // Only the clients served from our own CDN, and only their absolute URLs:
-  // everyone else still points at the disabled Cloudinary account, and
-  // next/image cannot take a bare public ID. next-cloudinary's CldImage would
-  // pull client-only code into this server component.
-  const covers = ['taco-naco', 'taha', 'taco-naco']
-    .map((slug, i) => {
-      const gallery = caseStudies.find((c) => c.slug === slug)?.galleryIds ?? []
-      return gallery.filter((id) => /^https?:\/\//i.test(id))[i === 2 ? 6 : 1]
-    })
-    .filter(Boolean)
+// Shot for this section and staged on our own CDN, so the URLs are absolute
+// and hardcoded rather than pulled from a case study's gallery. next/image
+// cannot take a bare public ID, and next-cloudinary's CldImage would drag
+// client-only code into this server component.
+const COVERS = [
+  'https://cdn.atriumad.com/clients/ATRM/photos/home_growth_fundations/hf_20260813_200354_5ca297ca-a0be-482a-87fa-247d35375eaf.jpg',
+  'https://cdn.atriumad.com/clients/ATRM/photos/home_growth_fundations/hf_20260813_194857_d037d490-333d-421f-b20a-ba9f2a7516ae.png',
+  'https://cdn.atriumad.com/clients/ATRM/photos/home_growth_fundations/DSC08166.JPG',
+]
 
+export default function GrowthEngineDiagram() {
   return (
     <section className="bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
@@ -90,7 +88,7 @@ export default function GrowthEngineDiagram() {
 
         <div className="grid gap-5 md:grid-cols-3">
           {stages.map((stage, i) => {
-            const cover = covers[i]
+            const cover = COVERS[i]
             return (
               <article
                 className="group relative aspect-[3/4] overflow-hidden rounded-card bg-charcoal"

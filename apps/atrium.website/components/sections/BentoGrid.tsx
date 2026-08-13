@@ -1,5 +1,6 @@
 'use client'
 import { Card, Eyebrow } from '@atrium/ui'
+import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
 import { gsap } from '@/lib/gsap'
@@ -8,11 +9,14 @@ export type BentoItem = {
   size: 'large' | 'medium' | 'small'
   title: ReactNode
   body: string
-  cover: string
+  /** Describes the picture. Alt text on the tiles that carry one. */
+  cover?: string
   bg?: string
   dark?: boolean
   /** Overrides the alternating tone with a solid brand fill. */
   fill?: 'lime' | 'coral' | 'cool'
+  /** Absolute URL. Fills the tile behind a scrim; the copy inverts to cream. */
+  image?: string
 }
 
 type Props = {
@@ -74,37 +78,58 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
 
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 auto-rows-[240px] gap-5">
           {items.map((item, i) => {
-            const isDark = item.fill ? false : (item.dark ?? i === 0)
-            const tone = item.fill ?? (isDark ? 'dark' : i % 2 === 0 ? 'warm' : 'surface')
+            // A photo tile carries its own ground, so it takes the dark tone
+            // and reads as one of the dark cards for text purposes.
+            const isDark = item.image ? true : item.fill ? false : (item.dark ?? i === 0)
+            const tone = item.image ? 'dark' : (item.fill ?? (isDark ? 'dark' : i % 2 === 0 ? 'warm' : 'surface'))
             return (
               <Card
                 key={item.title as unknown as string}
                 tone={tone}
                 elevation={isDark ? 'float' : 'soft'}
-                className={`bento-card flex flex-col justify-between overflow-hidden opacity-0 ${sizeClass[item.size]}`}
+                // Title top, copy bottom, so the copy works the whole tile
+                // rather than leaving the bottom empty. The medium tiles are
+                // the exception: they are tall and narrow, and spreading them
+                // opens a gap nothing fills.
+                className={`bento-card group relative flex flex-col overflow-hidden opacity-0 ${
+                  item.size === 'medium' ? 'gap-3' : 'justify-between gap-6'
+                } ${sizeClass[item.size]}`}
               >
-                <div>
-                  <h3 className={`${titleClass[item.size]} mb-3 ${isDark ? 'text-lime' : ''}`}>
-                    {item.title}
-                  </h3>
-                  <p className={`text-sm leading-relaxed opacity-75 ${copyWidthClass[item.size]}`}>
-                    {item.body}
-                  </p>
-                </div>
+                {item.image && (
+                  <>
+                    <Image
+                      alt={item.cover ?? ''}
+                      className="object-cover transition-transform duration-700 ease-atrium group-hover:scale-[1.04]"
+                      fill
+                      // The first tile is the LCP element on the home page.
+                      priority={i === 0}
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      src={item.image}
+                    />
+                    {/* Two layers: a light flat wash so the copy holds anywhere
+                        on the tile, and a gradient that deepens under the
+                        heading without burying the picture. */}
+                    <div className="absolute inset-0 bg-charcoal/30" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-charcoal/55 via-transparent to-charcoal/35" />
+                  </>
+                )}
 
-                <div className="mt-4 text-xs">
-                  <span
-                    className={`inline-block max-w-full rounded-full border px-3 py-1.5 text-[0.68rem] uppercase leading-[1.25] tracking-[0.16em] ${
-                      isDark
-                        ? 'border-cream/15 bg-cream/[0.07] text-cream/75'
-                        : item.fill
-                          ? 'border-charcoal/20 bg-charcoal/[0.06] text-charcoal/70'
-                          : 'border-line bg-ink/[0.04] text-muted'
-                    }`}
-                  >
-                    {item.cover}
-                  </span>
-                </div>
+                <h3
+                  className={`relative m-0 ${titleClass[item.size]} ${
+                    item.image ? 'text-cream' : isDark ? 'text-lime' : ''
+                  }`}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className={`relative m-0 text-sm leading-relaxed ${copyWidthClass[item.size]} ${
+                    // Over a photo, 75% opacity gives out wherever the picture
+                    // goes bright; cream at 90% holds against both.
+                    item.image ? 'text-cream/90' : 'opacity-75'
+                  }`}
+                >
+                  {item.body}
+                </p>
               </Card>
             )
           })}
