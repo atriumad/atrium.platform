@@ -23,7 +23,11 @@ export function Eyebrow({
   return (
     <Component
       className={cn(
-        'm-0 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.14em]',
+        // max-w-none because the website caps `main :where(p)` at a 72ch
+        // prose measure. An eyebrow is a label, not prose, and inside a
+        // centred block that cap left it sitting off to one side with its text
+        // centred inside its own short box.
+        'm-0 max-w-none font-sans text-[0.7rem] font-semibold uppercase tracking-[0.14em]',
         tones[tone],
         className,
       )}

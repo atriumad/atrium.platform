@@ -8,9 +8,10 @@ import { caseStudies } from '@/lib/work'
 // and opens it to the copy underneath, so the section is scannable at rest and
 // explains itself on demand.
 //
-// The serif accent falls on `rest`, not `lead`: across the site the sans sets
-// up and the italic delivers, so the stress belongs on what the stage produces
-// — demand, interest, the guest — not on the verb, which is the generic half.
+// The serif accent falls on the verb here, against the site's usual habit of
+// stressing the second half. All three cards end in "Demand", so italicising
+// that would mark the one word the three have in common; the verb is what
+// separates them, and the stress belongs on whatever carries the meaning.
 export const stages = [
   {
     n: '01',
@@ -18,8 +19,9 @@ export const stages = [
     // Consumed by app/services/page.tsx for its stage markers.
     dot: 'var(--stage-generate)',
     lead: 'Generate',
-    rest: 'demand',
+    rest: 'Demand',
     tagline: 'Create awareness and desire.',
+    body: 'Create awareness and desire through photography and film that show what it feels like. Build social presence where people spend time. Place paid discovery in front of people already looking for what you do.',
     caps: ['Film & Photo', 'Social', 'Paid Media'],
     // Hover fill and the text colour that clears 4.5:1 on it.
     fill: 'group-hover:bg-lime',
@@ -33,8 +35,9 @@ export const stages = [
     // Consumed by app/services/page.tsx for its stage markers.
     dot: 'var(--stage-convert)',
     lead: 'Convert',
-    rest: 'interest',
+    rest: 'Demand',
     tagline: 'Turn interest into reservations.',
+    body: 'Turn interest into visits by owning local search, earning trust signals through reputation and reviews, and running campaigns that give people a reason to come in now.',
     caps: ['Google & Local SEO', 'Reputation', 'Offers & Campaigns'],
     fill: 'group-hover:bg-amber',
     onFill: 'group-hover:text-charcoal',
@@ -47,8 +50,9 @@ export const stages = [
     // Consumed by app/services/page.tsx for its stage markers.
     dot: 'var(--stage-retain)',
     lead: 'Retain',
-    rest: 'the guest',
+    rest: 'Demand',
     tagline: 'Bring guests back.',
+    body: 'Bring guests back through direct communication that stays relevant, loyalty systems that recognize repeat visits, and win-back sequences that activate the lapsed.',
     caps: ['Email & SMS', 'CRM & Loyalty', 'Win-back Flows'],
     // green is dark enough that the copy has to invert with it: charcoal on
     // green is 2.6:1, cream on green is 5.32:1.
@@ -74,19 +78,14 @@ export default function GrowthEngineDiagram() {
   return (
     <section className="bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="mb-14 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
-          <div className="lg:col-span-7">
-            <Eyebrow className="mb-6" tone="on-dark">
-              The Atrium Growth Engine
-            </Eyebrow>
-            <h2 className="max-w-[14ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-              Not eleven services. <em className="font-serif italic">One system.</em>
-            </h2>
-          </div>
-          <p className="max-w-lg border-cream/20 border-t pt-6 text-base leading-relaxed text-cream/[0.78] lg:col-span-5">
-            The services are just the components. What you buy is the engine that runs them — on a
-            28-day cycle, measured end to end.
-          </p>
+        <div className="mx-auto mb-14 max-w-3xl text-center md:mb-20">
+          <Eyebrow className="mb-6" tone="on-dark">
+            Growth Foundation
+          </Eyebrow>
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] leading-[1.08] tracking-[-0.02em] text-cream">
+            Positioning, identity, and systems built to{' '}
+            <em className="font-serif italic">convert strangers into regulars.</em>
+          </h2>
         </div>
 
         <div className="grid gap-5 md:grid-cols-3">
@@ -119,7 +118,7 @@ export default function GrowthEngineDiagram() {
                   <h3
                     className={`m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal transition-colors duration-300 ${stage.onFill}`}
                   >
-                    {stage.lead} <em className="font-serif italic">{stage.rest}</em>
+                    <em className="font-serif italic">{stage.lead}</em> {stage.rest}
                   </h3>
 
                   {/* 0fr → 1fr is the one height transition that works without
@@ -129,12 +128,7 @@ export default function GrowthEngineDiagram() {
                       <p
                         className={`mt-3 text-[0.9375rem] leading-relaxed text-charcoal/80 transition-colors duration-300 ${stage.onFillSoft}`}
                       >
-                        {stage.tagline}
-                      </p>
-                      <p
-                        className={`mt-2 text-[0.8125rem] text-charcoal/60 transition-colors duration-300 ${stage.onFillFaint}`}
-                      >
-                        {stage.caps.join(' · ')}
+                        {stage.body}
                       </p>
                     </div>
                   </div>
