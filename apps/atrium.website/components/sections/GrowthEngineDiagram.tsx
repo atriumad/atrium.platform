@@ -21,6 +21,11 @@ export const stages = [
     rest: 'demand',
     tagline: 'Create awareness and desire.',
     caps: ['Film & Photo', 'Social', 'Paid Media'],
+    // Hover fill and the text colour that clears 4.5:1 on it.
+    fill: 'group-hover:bg-lime',
+    onFill: 'group-hover:text-charcoal',
+    onFillSoft: 'group-hover:text-charcoal/80',
+    onFillFaint: 'group-hover:text-charcoal/60',
   },
   {
     n: '02',
@@ -31,6 +36,10 @@ export const stages = [
     rest: 'interest',
     tagline: 'Turn interest into reservations.',
     caps: ['Google & Local SEO', 'Reputation', 'Offers & Campaigns'],
+    fill: 'group-hover:bg-amber',
+    onFill: 'group-hover:text-charcoal',
+    onFillSoft: 'group-hover:text-charcoal/80',
+    onFillFaint: 'group-hover:text-charcoal/60',
   },
   {
     n: '03',
@@ -41,6 +50,12 @@ export const stages = [
     rest: 'the guest',
     tagline: 'Bring guests back.',
     caps: ['Email & SMS', 'CRM & Loyalty', 'Win-back Flows'],
+    // green is dark enough that the copy has to invert with it: charcoal on
+    // green is 2.6:1, cream on green is 5.32:1.
+    fill: 'group-hover:bg-green',
+    onFill: 'group-hover:text-cream',
+    onFillSoft: 'group-hover:text-cream/85',
+    onFillFaint: 'group-hover:text-cream/70',
   },
 ]
 
@@ -98,8 +113,12 @@ export default function GrowthEngineDiagram() {
                 {/* Anchored to the bottom of a fixed-ratio card, so opening it
                     grows the panel up over the picture instead of making the
                     card taller — the row keeps one height at rest and hover. */}
-                <div className="absolute inset-x-0 bottom-0 z-10 bg-cream p-6 transition-colors duration-300 group-hover:bg-lime md:p-7">
-                  <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
+                <div
+                  className={`absolute inset-x-0 bottom-0 z-10 bg-cream p-6 transition-colors duration-300 md:p-7 ${stage.fill}`}
+                >
+                  <h3
+                    className={`m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal transition-colors duration-300 ${stage.onFill}`}
+                  >
                     {stage.lead} <em className="font-serif italic">{stage.rest}</em>
                   </h3>
 
@@ -107,10 +126,14 @@ export default function GrowthEngineDiagram() {
                       hardcoding a max-height that would clip longer copy. */}
                   <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-atrium group-focus-within:grid-rows-[1fr] group-hover:grid-rows-[1fr]">
                     <div className="overflow-hidden">
-                      <p className="mt-3 text-[0.9375rem] leading-relaxed text-charcoal/80">
+                      <p
+                        className={`mt-3 text-[0.9375rem] leading-relaxed text-charcoal/80 transition-colors duration-300 ${stage.onFillSoft}`}
+                      >
                         {stage.tagline}
                       </p>
-                      <p className="mt-2 text-[0.8125rem] text-charcoal/60">
+                      <p
+                        className={`mt-2 text-[0.8125rem] text-charcoal/60 transition-colors duration-300 ${stage.onFillFaint}`}
+                      >
                         {stage.caps.join(' · ')}
                       </p>
                     </div>
