@@ -19,9 +19,9 @@ const bentoItems: BentoItem[] = [
   { size: 'large', title: <>Content that <em>shows you at your best</em></>, body: 'Your food, your chef, your room, whatever makes people crave you. We shoot what you already have and make it the reason they came.', cover: 'BTS wide shot — camera, chef plating, warm restaurant lighting' },
   { size: 'small', title: <>A brand that sounds like <em>you</em></>, body: 'We set the look, the voice, and the plan, so you show up the same and on purpose across every platform.', cover: 'Side-by-side IG grids showing visual consistency' },
   { size: 'medium', fill: 'lime', title: <>Reviews caught <em>before they go public</em></>, body: 'The happy guest goes to Google. The unhappy one comes to you first. We catch the problems early and push the rating up over time.', cover: 'Survey flow diagram' },
-  { size: 'medium', title: <>The guest who returns <em>is the business</em></>, body: "Sixty five percent of a restaurant's revenue is the guest who comes back. We make sure they do, without you paying to win them twice.", cover: 'Email campaign on phone + POS order confirmation' },
+  { size: 'medium', fill: 'coral', title: <>The guest who returns <em>is the business</em></>, body: "Sixty five percent of a restaurant's revenue is the guest who comes back. We make sure they do, without you paying to win them twice.", cover: 'Email campaign on phone + POS order confirmation' },
   { size: 'medium', title: <>Found when they&apos;re <em>ready to decide</em></>, body: 'Forty six percent of Google searches are local. When someone three blocks away is hungry, you are what they find.', cover: 'Google Maps view with client pin highlighted' },
-  { size: 'small', fill: 'coral', title: <>Traffic that <em>turns into tables</em></>, body: 'We send people from Instagram and Google straight to your reservation and your online order, not just to your profile.', cover: 'Instagram profile linking through to a reservation confirmation' },
+  { size: 'small', fill: 'cool', title: <>Traffic that <em>turns into tables</em></>, body: 'We send people from Instagram and Google straight to your reservation and your online order, not just to your profile.', cover: 'Instagram profile linking through to a reservation confirmation' },
 ]
 
 const selectedWorkDetails = [

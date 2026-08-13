@@ -12,7 +12,7 @@ export type BentoItem = {
   bg?: string
   dark?: boolean
   /** Overrides the alternating tone with a solid brand fill. */
-  fill?: 'lime' | 'coral'
+  fill?: 'lime' | 'coral' | 'cool'
 }
 
 type Props = {

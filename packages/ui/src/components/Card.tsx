@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { cn } from '../lib/cn'
 
-type Tone = 'surface' | 'warm' | 'dark' | 'amber' | 'lime' | 'coral'
+type Tone = 'surface' | 'warm' | 'dark' | 'amber' | 'lime' | 'coral' | 'cool'
 type Elevation = 'none' | 'soft' | 'float'
 type Padding = 'sm' | 'md'
 
@@ -14,6 +14,9 @@ const tones: Record<Tone, string> = {
   // 5.63:1 on coral — so the copy inside needs no special casing.
   lime: 'bg-lime text-charcoal',
   coral: 'bg-coral text-charcoal',
+  // The sheet's Pale Blue-Gray — a neutral that is neither the page nor the
+  // white cards, so a tile can sit apart without taking a brand colour.
+  cool: 'bg-cool text-charcoal',
 }
 
 const elevations: Record<Elevation, string> = {
