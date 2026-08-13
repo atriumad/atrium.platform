@@ -7,6 +7,10 @@ import { caseStudies } from '@/lib/work'
 // one is a picture with a caption strip; hovering fills the strip with lime
 // and opens it to the copy underneath, so the section is scannable at rest and
 // explains itself on demand.
+//
+// The serif accent falls on `rest`, not `lead`: across the site the sans sets
+// up and the italic delivers, so the stress belongs on what the stage produces
+// — demand, interest, the guest — not on the verb, which is the generic half.
 export const stages = [
   {
     n: '01',
@@ -96,7 +100,7 @@ export default function GrowthEngineDiagram() {
                     card taller — the row keeps one height at rest and hover. */}
                 <div className="absolute inset-x-0 bottom-0 z-10 bg-cream p-6 transition-colors duration-300 group-hover:bg-lime md:p-7">
                   <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
-                    <em className="font-serif italic">{stage.lead}</em> {stage.rest}
+                    {stage.lead} <em className="font-serif italic">{stage.rest}</em>
                   </h3>
 
                   {/* 0fr → 1fr is the one height transition that works without
