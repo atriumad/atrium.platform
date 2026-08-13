@@ -165,11 +165,11 @@ export function ApproachSection({ study }: { study: CaseStudy }) {
                 key={step.title}
                 className="grid gap-6 border-b border-line py-9 md:grid-cols-[4rem_minmax(0,1fr)] md:gap-8 md:py-11"
               >
-                <p className="m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted">
+                <p className="m-0 text-[0.7rem] uppercase tracking-[0.14em] text-muted">
                   {String(index + 1).padStart(2, '0')}
                 </p>
                 <div>
-                  <h3 className="max-w-[22ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
+                  <h3 className="max-w-[22ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
                     {step.title}
                   </h3>
                   <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted">
@@ -298,7 +298,7 @@ export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
               <div className="mt-8 border-t border-line pt-6">
                 <ServiceList services={nextStudy.serviceTags} />
               </div>
-              <span className="mt-8 inline-flex items-center gap-3 text-[0.875rem] font-medium text-charcoal">
+              <span className="mt-8 inline-flex items-center gap-3 text-[0.875rem] text-charcoal">
                 View case study
                 <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
                   →

@@ -61,7 +61,7 @@ export default function CaseCover({
             />
           </div>
         ) : (
-          <span className="max-w-[16ch] text-center text-3xl font-medium leading-tight text-white md:text-5xl">
+          <span className="max-w-[16ch] text-center text-3xl leading-tight text-white md:text-5xl">
             {study.client}
           </span>
         )}

@@ -10,8 +10,8 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
         {card.coverAlt}
       </div>
       <div className="relative z-1 grid gap-[0.9rem]">
-        <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] opacity-56">{card.size}</span>
-        <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
+        <span className="text-[0.7rem] uppercase tracking-[0.14em] opacity-56">{card.size}</span>
+        <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
           {parseHeadline(card.title)}
         </h3>
         <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
@@ -25,7 +25,7 @@ function BentoCardPhoto({ card }: { card: BentoCard }) {
 function BentoCardStatement({ card }: { card: BentoCard }) {
   return (
     <Card tone="surface" padding="sm" className="relative flex flex-col justify-between gap-[1rem] overflow-hidden">
-      <h3 className="m-0 max-w-[11ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-green">
+      <h3 className="m-0 max-w-[11ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-green">
         {parseHeadline(card.title)}
       </h3>
       <p className="m-0 max-w-[31rem] text-[0.875rem] leading-relaxed text-charcoal/72">
@@ -38,8 +38,8 @@ function BentoCardStatement({ card }: { card: BentoCard }) {
 function BentoCardPosition({ card }: { card: BentoCard }) {
   return (
     <Card tone="amber" padding="sm" className="relative flex flex-col justify-between overflow-hidden">
-      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] opacity-56">{card.size}</span>
-      <h3 className="m-0 max-w-[15ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
+      <span className="text-[0.7rem] uppercase tracking-[0.14em] opacity-56">{card.size}</span>
+      <h3 className="m-0 max-w-[15ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
         {parseHeadline(card.title)}
       </h3>
       <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
@@ -52,8 +52,8 @@ function BentoCardPosition({ card }: { card: BentoCard }) {
 function BentoCardMini({ card }: { card: BentoCard }) {
   return (
     <Card tone="warm" padding="sm" className="relative flex flex-col justify-between overflow-hidden">
-      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] opacity-56">{card.size}</span>
-      <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
+      <span className="text-[0.7rem] uppercase tracking-[0.14em] opacity-56">{card.size}</span>
+      <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
         {parseHeadline(card.title)}
       </h3>
       <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">
@@ -66,7 +66,7 @@ function BentoCardMini({ card }: { card: BentoCard }) {
 function BentoCardNeutral({ card }: { card: BentoCard }) {
   return (
     <Card tone="warm" padding="sm" className="relative flex flex-col justify-between gap-3-5 overflow-hidden">
-      <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
+      <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
         {parseHeadline(card.title)}
       </h3>
       <p className="m-0 text-[0.875rem] leading-relaxed opacity-76">

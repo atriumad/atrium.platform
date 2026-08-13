@@ -107,7 +107,7 @@ export default function ProcessPage() {
                 className={index > 0 ? 'sm:border-l sm:pl-8' : ''}
                 style={{ borderColor: 'rgba(7,47,52,0.14)' }}
               >
-                <p className="m-0 text-5xl font-medium leading-none" style={{ color: 'var(--text-strong)' }}>
+                <p className="m-0 text-5xl leading-none" style={{ color: 'var(--text-strong)' }}>
                   {stat.value}
                 </p>
                 <p className="type-caption mt-3" style={{ color: 'var(--text-muted)' }}>
@@ -139,7 +139,7 @@ export default function ProcessPage() {
                 style={{ borderColor: 'rgba(7,47,52,0.18)' }}
               >
                 <p
-                  className="m-0 text-4xl font-medium leading-none opacity-45 transition-opacity duration-300 group-hover:opacity-100 md:col-span-2 md:text-5xl"
+                  className="m-0 text-4xl leading-none opacity-45 transition-opacity duration-300 group-hover:opacity-100 md:col-span-2 md:text-5xl"
                   style={{ color: 'var(--teal-500)' }}
                   aria-hidden="true"
                 >

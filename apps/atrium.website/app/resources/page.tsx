@@ -70,7 +70,7 @@ export default function ResourcesPage() {
                 <div className="mt-8 space-y-3">
                   {group.items.map((item) => (
                     <div key={item} className="rounded-xl px-4 py-3" style={{ background: 'rgba(7,47,52,0.05)' }}>
-                      <p className="type-caption font-medium">{item}</p>
+                      <p className="type-caption ">{item}</p>
                     </div>
                   ))}
                 </div>

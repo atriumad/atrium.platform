@@ -70,15 +70,15 @@ export default function AudiencePaths() {
               </p>
               <div>
                 <Eyebrow>Path {String(index + 1).padStart(2, '0')}</Eyebrow>
-                <h3 className="mt-3 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
+                <h3 className="mt-3 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
                   {path.label}
                 </h3>
               </div>
               <div>
                 <p className="m-0 max-w-xl text-base leading-relaxed text-body">{path.tension}</p>
-                <p className="mt-3 text-[0.875rem] font-medium text-charcoal">{path.outcome}</p>
+                <p className="mt-3 text-[0.875rem] text-charcoal">{path.outcome}</p>
               </div>
-              <span className="inline-flex items-center gap-3 text-[0.875rem] font-medium text-charcoal">
+              <span className="inline-flex items-center gap-3 text-[0.875rem] text-charcoal">
                 <span className="max-w-[10rem]">{path.cta}</span>
                 <span className="text-xl transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
               </span>

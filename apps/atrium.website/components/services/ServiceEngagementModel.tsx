@@ -33,15 +33,15 @@ export default function ServiceEngagementModel({ svc }: { svc: Service }) {
           </p>
         </div>
         <div className="min-w-0">
-          <h2 className="max-w-[24ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
+          <h2 className="max-w-[24ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
             The most common starting point for {svc.name.toLowerCase()}.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">{model.fit}</p>
           <div className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
-            <TransitionLink href={model.href} className="group inline-flex items-center gap-3 text-[0.875rem] font-medium text-charcoal no-underline">
+            <TransitionLink href={model.href} className="group inline-flex items-center gap-3 text-[0.875rem] text-charcoal no-underline">
               Compare the {model.name} model <span className="transition-transform group-hover:translate-x-2" aria-hidden="true">→</span>
             </TransitionLink>
-            <TransitionLink href={`/contact?service=${svc.slug}`} className="group inline-flex items-center gap-3 text-[0.875rem] font-medium text-green no-underline">
+            <TransitionLink href={`/contact?service=${svc.slug}`} className="group inline-flex items-center gap-3 text-[0.875rem] text-green no-underline">
               Scope this service <span className="transition-transform group-hover:translate-x-2" aria-hidden="true">→</span>
             </TransitionLink>
           </div>

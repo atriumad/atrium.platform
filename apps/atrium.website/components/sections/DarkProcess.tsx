@@ -62,12 +62,12 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
               key={step.title}
               className="process-step flex gap-5 rounded-card-sm bg-card p-6 opacity-0 shadow-soft transition-shadow duration-300 hover:shadow-float motion-reduce:transition-none"
             >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-soft text-[0.95rem] font-medium text-green-ink">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-soft text-[0.95rem] text-green-ink">
                 {i + 1}
               </div>
               <div className="space-y-1.5">
                 <Eyebrow as="p">{step.eyebrow}</Eyebrow>
-                <p className="text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">{step.title}</p>
+                <p className="text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">{step.title}</p>
                 <p className="text-[0.875rem] text-muted">{step.body}</p>
               </div>
             </div>

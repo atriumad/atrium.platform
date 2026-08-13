@@ -32,13 +32,13 @@ function CaseIndexRow({ study, index }: { study: CaseStudy; index: number }) {
       </p>
 
       <div>
-        <h3 className="m-0 text-[1.25rem] font-medium leading-[1.2] text-charcoal">{study.client}</h3>
+        <h3 className="m-0 text-[1.25rem] leading-[1.2] text-charcoal">{study.client}</h3>
         <p className="mt-1.5 text-[0.875rem] text-muted">{study.category}</p>
       </div>
 
       {metric ? (
         <p className="m-0 text-[0.9375rem] text-body">
-          <span className="font-medium text-charcoal">{metric.number}</span> {metric.label}
+          <span className="text-charcoal">{metric.number}</span> {metric.label}
         </p>
       ) : (
         <span />
@@ -93,7 +93,7 @@ export default function WorkPage() {
 
           <div className="mt-7 grid gap-6 border-line border-t pt-7 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
+              <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
                 One accountable team
               </p>
               <p className="mt-2 text-[0.875rem] text-muted">

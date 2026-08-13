@@ -42,7 +42,7 @@ export default function IconGrid({ items, bg }: Props) {
               }}
             >
               <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-semibold"
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-xs "
                 style={{ background: 'var(--teal-800)', color: 'var(--mint-400)' }}
               >
                 {String(i + 1).padStart(2, '0')}

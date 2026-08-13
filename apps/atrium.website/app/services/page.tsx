@@ -86,7 +86,7 @@ export default function ServicesPage() {
                 style={{ background: stage.dot }}
               >
                 <div>
-                  <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em]">
+                  <span className="text-[0.7rem] uppercase tracking-[0.14em]">
                     {category}
                   </span>
                   <p className="mt-4 text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed">
@@ -101,7 +101,7 @@ export default function ServicesPage() {
                         href={`/services/${svc.slug}`}
                         className="group flex items-center justify-between gap-3 py-4 no-underline"
                       >
-                        <span className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15]">
+                        <span className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]">
                           {svc.name}
                         </span>
                         <span

@@ -94,15 +94,15 @@ export default function PurchaseFAQ({
               className={`grid gap-5 border-b py-8 sm:grid-cols-[5rem_minmax(0,1fr)] md:gap-8 md:py-10 ${dark ? 'border-cream/20' : 'border-line'}`}
             >
               <div className="flex items-baseline justify-between gap-4 sm:block">
-                <p className={`m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] ${dark ? 'text-lime' : 'text-green'}`}>
+                <p className={`m-0 text-[0.7rem] uppercase tracking-[0.14em] ${dark ? 'text-lime' : 'text-green'}`}>
                   {String(index + 1).padStart(2, '0')}
                 </p>
-                <p className={`m-0 sm:mt-3 text-[0.7rem] font-semibold uppercase tracking-[0.14em] ${dark ? 'text-cream/70' : 'text-muted'}`}>
+                <p className={`m-0 sm:mt-3 text-[0.7rem] uppercase tracking-[0.14em] ${dark ? 'text-cream/70' : 'text-muted'}`}>
                   {item.signal}
                 </p>
               </div>
               <div>
-                <h3 className={`max-w-[24ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] ${dark ? 'text-cream' : 'text-charcoal'}`}>
+                <h3 className={`max-w-[24ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] ${dark ? 'text-cream' : 'text-charcoal'}`}>
                   {item.question}
                 </h3>
                 <p className={`mt-4 max-w-2xl text-base leading-relaxed ${dark ? 'text-cream/70' : 'text-muted'}`}>

@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import { cn } from '../lib/cn'
 
-type Tone = 'surface' | 'warm' | 'dark' | 'amber'
+type Tone = 'surface' | 'warm' | 'dark' | 'amber' | 'lime' | 'coral'
 type Elevation = 'none' | 'soft' | 'float'
 type Padding = 'sm' | 'md'
 
@@ -10,6 +10,10 @@ const tones: Record<Tone, string> = {
   warm: 'bg-off-white text-charcoal',
   dark: 'bg-dark text-cream',
   amber: 'bg-amber-soft text-charcoal',
+  // Solid brand fills. Charcoal clears 4.5:1 on both — 11.49:1 on lime,
+  // 5.63:1 on coral — so the copy inside needs no special casing.
+  lime: 'bg-lime text-charcoal',
+  coral: 'bg-coral text-charcoal',
 }
 
 const elevations: Record<Elevation, string> = {

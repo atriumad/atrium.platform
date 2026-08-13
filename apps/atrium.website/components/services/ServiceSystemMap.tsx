@@ -47,12 +47,12 @@ export default function ServiceSystemMap({ svc }: { svc: Service }) {
                 className={`relative flex min-h-[17rem] flex-col border-b border-line px-6 py-8 last:border-b-0 md:min-h-[19rem] md:border-b-0 md:px-8 md:py-9 ${index > 0 ? 'md:border-l md:border-line' : ''} ${active ? 'bg-green-soft' : ''}`}
               >
                 <div className="flex items-center justify-between gap-4">
-                  <p className={`m-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] ${active ? 'text-green' : 'text-muted'}`}>
+                  <p className={`m-0 text-[0.7rem] uppercase tracking-[0.14em] ${active ? 'text-green' : 'text-muted'}`}>
                     {String(index + 1).padStart(2, '0')} · {stage.short}
                   </p>
                   {active && <Tag variant="mint" size="sm">This service</Tag>}
                 </div>
-                <h3 className="mt-8 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">{stage.job}</h3>
+                <h3 className="mt-8 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">{stage.job}</h3>
                 <p className="mt-auto max-w-xs pt-8 text-[0.875rem] text-muted">{stage.handoff}</p>
               </article>
             )

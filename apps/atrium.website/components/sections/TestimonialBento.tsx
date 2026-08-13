@@ -39,7 +39,7 @@ export default function TestimonialBento({ items, eyebrow }: Props) {
                   key={key}
                   className="tb-card flex min-h-[260px] flex-col justify-between rounded-2xl border border-cream/20 bg-cream/[0.06] p-8 opacity-0 md:p-10"
                 >
-                  <p className="text-6xl font-medium leading-none text-lime md:text-7xl">{card.stat}</p>
+                  <p className="text-6xl leading-none text-lime md:text-7xl">{card.stat}</p>
                   <p className="mt-4 text-[0.875rem] text-cream/70">{card.statLabel}</p>
                 </div>
               )
@@ -53,7 +53,7 @@ export default function TestimonialBento({ items, eyebrow }: Props) {
                   &ldquo;{card.quote}&rdquo;
                 </p>
                 <div className="mt-8 border-t border-cream/20 pt-6">
-                  {card.author && <p className="text-[0.875rem] font-medium text-lime">{card.author}</p>}
+                  {card.author && <p className="text-[0.875rem] text-lime">{card.author}</p>}
                   <Eyebrow as="p" tone="on-dark" className="mt-1">
                     {card.role} · {card.company}
                   </Eyebrow>

@@ -158,7 +158,7 @@ function ServiceItem({
         {icons[svc.icon]}
       </span>
       <span className="flex flex-col gap-0.5 min-w-0">
-        <span className="text-sm font-medium leading-tight transition-opacity group-hover:opacity-70">
+        <span className="text-sm leading-tight transition-opacity group-hover:opacity-70">
           {svc.label}
         </span>
         <span
@@ -259,7 +259,7 @@ export default function Navbar() {
           <TransitionLink
             key={link.href}
             href={link.href}
-            className="relative text-sm font-medium transition-opacity hover:opacity-70 after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[var(--color-accent)] after:transition-all after:duration-300 hover:after:w-full"
+            className="relative text-sm transition-opacity hover:opacity-70 after:absolute after:bottom-[-2px] after:left-0 after:w-0 after:h-px after:bg-[var(--color-accent)] after:transition-all after:duration-300 hover:after:w-full"
             style={{ color: navTextColor }}
           >
             {link.label}
@@ -318,7 +318,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={closeMobile}
-                className="text-lg font-medium"
+                className="text-lg "
                 style={{ color: 'var(--color-surface)' }}
               >
                 {link.label}

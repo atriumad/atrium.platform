@@ -99,7 +99,7 @@ export default function GrowthEngineDiagram() {
                     grows the panel up over the picture instead of making the
                     card taller — the row keeps one height at rest and hover. */}
                 <div className="absolute inset-x-0 bottom-0 z-10 bg-cream p-6 transition-colors duration-300 group-hover:bg-lime md:p-7">
-                  <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-charcoal">
+                  <h3 className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
                     {stage.lead} <em className="font-serif italic">{stage.rest}</em>
                   </h3>
 

@@ -41,11 +41,11 @@ export default function ServiceTimeline({ steps }: Props) {
               className="timeline-item flex gap-6 py-8 first:pt-0 last:pb-0"
               style={{ opacity: 0 }}
             >
-              <span className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center border border-cream/20 bg-cream/[0.12] text-xs font-semibold text-lime">
+              <span className="flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center border border-cream/20 bg-cream/[0.12] text-xs text-lime">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div className="flex flex-col gap-1.5">
-                <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-cream">
+                <p className="m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-cream">
                   {step.title}
                 </p>
                 <p className="m-0 text-[0.875rem] leading-relaxed text-cream/72">

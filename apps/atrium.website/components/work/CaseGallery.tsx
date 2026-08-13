@@ -362,7 +362,7 @@ export default function CaseGallery({ client, images = [] }: CaseGalleryProps) {
                       }}
                     >
                       {hasFailed ? (
-                        <div className="flex items-end p-3 h-full text-xs font-medium" style={{ color: 'var(--teal-700)' }}>
+                        <div className="flex items-end p-3 h-full text-xs " style={{ color: 'var(--teal-700)' }}>
                           {client}
                         </div>
                       ) : (

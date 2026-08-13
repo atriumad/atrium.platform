@@ -112,7 +112,7 @@ export default function MegaMenu({
       <button
         aria-controls="mega-menu-test"
         aria-expanded={open}
-        className="flex items-center gap-1 font-medium text-sm transition-opacity hover:opacity-70"
+        className="flex items-center gap-1 text-sm transition-opacity hover:opacity-70"
         onClick={() => setOpen((value) => !value)}
         ref={triggerRef}
         style={textColor ? { color: textColor } : undefined}
@@ -167,7 +167,7 @@ export default function MegaMenu({
                   role="menuitem"
                 >
                   <span aria-hidden="true" className={`h-2 w-2 rounded-full ${column.dotClass}`} />
-                  <span className="font-medium text-[1.15rem] text-charcoal leading-none transition-transform duration-200 group-hover:translate-x-1">
+                  <span className="text-[1.15rem] text-charcoal leading-none transition-transform duration-200 group-hover:translate-x-1">
                     {column.category}
                   </span>
                   <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-muted" strokeWidth={1.75} />
@@ -189,7 +189,7 @@ export default function MegaMenu({
                           className="-translate-y-1/2 absolute top-1/2 left-0 h-1.5 w-1.5 rounded-full bg-green opacity-0 transition-opacity duration-200 group-hover:opacity-100"
                         />
                         <span className="flex min-w-0 flex-1 flex-col gap-1 transition-transform duration-200 group-hover:translate-x-1">
-                          <span className="font-medium text-charcoal text-sm leading-tight">
+                          <span className="text-charcoal text-sm leading-tight">
                             {svc.name}
                           </span>
                           <span className="text-muted text-xs leading-snug">{svc.menu.blurb}</span>

@@ -38,8 +38,8 @@ export default function RelatedCase({ serviceSlug }: { serviceSlug: string }) {
           <div className="absolute inset-0 -z-10 bg-black/55" aria-hidden="true" />
 
           <div className="flex flex-col gap-4">
-            <span className="text-[0.875rem] font-medium text-cream/80">{study.client}</span>
-            <h2 className="max-w-[18ch] text-[clamp(1.35rem,2vw,1.8rem)] font-medium leading-[1.15] text-cream">
+            <span className="text-[0.875rem] text-cream/80">{study.client}</span>
+            <h2 className="max-w-[18ch] text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-cream">
               {study.resultHeadline}
             </h2>
             <span className="inline-flex items-center gap-2 mt-2 text-[0.875rem] text-cream/90 transition-transform group-hover:translate-x-1">
@@ -53,10 +53,10 @@ export default function RelatedCase({ serviceSlug }: { serviceSlug: string }) {
           <div className="grid grid-cols-3 md:flex md:flex-col gap-6 md:gap-5 md:min-w-[13rem]">
             {metrics.map((m) => (
               <div key={m.label} className="flex flex-col gap-1">
-                <span className="flex text-3xl md:text-4xl font-medium tabular-nums leading-none text-cream">
+                <span className="flex text-3xl md:text-4xl tabular-nums leading-none text-cream">
                   <NumberReel value={m.number} />
                 </span>
-                <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] leading-tight text-cream/70">{m.label}</span>
+                <span className="text-[0.7rem] uppercase tracking-[0.14em] leading-tight text-cream/70">{m.label}</span>
               </div>
             ))}
           </div>

@@ -65,7 +65,7 @@ export default function WorkStoryBlock({
           </div>
 
           <TransitionLink
-            className={`group mt-9 inline-flex items-center gap-2 text-[0.9375rem] font-medium no-underline transition-colors ${dark ? 'text-cream hover:text-lime' : 'text-charcoal hover:text-green'}`}
+            className={`group mt-9 inline-flex items-center gap-2 text-[0.9375rem] no-underline transition-colors ${dark ? 'text-cream hover:text-lime' : 'text-charcoal hover:text-green'}`}
             href={`/work/${story.slug}`}
           >
             Read the full case
