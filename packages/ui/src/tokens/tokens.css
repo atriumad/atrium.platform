@@ -146,9 +146,19 @@
   --radius-pill: 999px;
 
   /* ─── Layout ──────────────────────────────────────────────── */
-  --container-max:  1200px;
+  /* On desktop the side padding is not the gutter — it is
+     (viewport - container) / 2 — so the container width, not --gutter, is
+     what sets the page edge on any screen wider than the container.
+     Widened from 1200px so the page runs closer to the edges:
+
+       1920 → 173px (was 353)
+       1440 →  29px (was 113, the gutter takes over here)
+       1082 →  22px (gutter) */
+  --container-max:  1560px;
   --container-wide: 1360px;
-  --gutter: clamp(1.25rem, 4vw, 4rem);
+  /* Halved from clamp(1.25rem, 4vw, 4rem) — the page sat further from the
+     edges than the design wanted. */
+  --gutter: clamp(0.625rem, 2vw, 2rem);
 
   /* ─── Shadows ─────────────────────────────────────────────── */
   --shadow-none:        none;

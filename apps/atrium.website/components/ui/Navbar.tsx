@@ -175,12 +175,8 @@ function ServiceItem({
 // ─── Navbar ────────────────────────────────────────────────────────────────────
 export default function Navbar() {
   const pathname = usePathname()
-  const [open, setOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [bgOpacity, setBgOpacity] = useState(0)
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const menuTriggerRef = useRef<HTMLButtonElement>(null)
-  const menuPanelRef = useRef<HTMLDivElement>(null)
   const rafRef = useRef<number>(0)
 
   useEffect(() => {
@@ -203,36 +199,6 @@ export default function Navbar() {
     return () => { document.body.style.overflow = '' }
   }, [mobileOpen])
 
-  const onEnter = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    setOpen(true)
-  }
-  const onLeave = () => {
-    timeoutRef.current = setTimeout(() => setOpen(false), 220)
-  }
-  const close = () => setOpen(false)
-
-  useEffect(() => {
-    if (!open) return
-
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return
-      setOpen(false)
-      menuTriggerRef.current?.focus()
-    }
-    const onPointerDown = (event: MouseEvent) => {
-      const target = event.target as Node
-      if (menuPanelRef.current?.contains(target) || menuTriggerRef.current?.contains(target)) return
-      setOpen(false)
-    }
-
-    document.addEventListener('keydown', onKeyDown)
-    document.addEventListener('mousedown', onPointerDown)
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      document.removeEventListener('mousedown', onPointerDown)
-    }
-  }, [open])
   const closeMobile = () => setMobileOpen(false)
   const isEditorialCase = pathname.startsWith('/work/')
   // Only the home page animates the header from transparent → solid on scroll.
@@ -287,36 +253,7 @@ export default function Navbar() {
 
       {/* Nav links — centered column */}
       <nav className="hidden gap-8 justify-self-center items-center md:flex">
-        {/* Full-height wrapper so hover persists across the whole header row down
-            to the menu edge — removes the dead zone below the trigger. */}
-        {/* biome-ignore lint/a11y/noStaticElementInteractions: hover-only bridge; keyboard handled by the button's focus/blur */}
-        <div
-          className="flex items-center h-14"
-          onMouseEnter={onEnter}
-          onMouseLeave={onLeave}
-        >
-          <button
-            ref={menuTriggerRef}
-            type="button"
-            aria-expanded={open}
-            aria-haspopup="menu"
-            onFocus={onEnter}
-            onBlur={onLeave}
-            className="flex gap-1 items-center text-sm font-medium transition-opacity hover:opacity-70"
-            style={{ color: navTextColor }}
-          >
-            Services
-            <svg
-              aria-hidden="true"
-              focusable="false"
-              width="10" height="6" viewBox="0 0 10 6" fill="none"
-              className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-              style={{ opacity: 0.5 }}
-            >
-              <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
+        <MegaMenu label="Services" textColor={navTextColor} />
 
         {otherLinks.map((link) => (
           <TransitionLink
@@ -328,10 +265,6 @@ export default function Navbar() {
             {link.label}
           </TransitionLink>
         ))}
-
-        {/* Side-by-side with the dropdown above so the two can be compared on
-            the live site. One of them goes once that is decided. */}
-        <MegaMenu textColor={navTextColor} />
       </nav>
 
       {/* Right column — CTA on desktop, menu toggle on mobile */}
@@ -367,124 +300,6 @@ export default function Navbar() {
       </div>
 
       {/* Backdrop — dims and blurs the page while the services mega menu is open */}
-      <div
-        aria-hidden="true"
-        onMouseEnter={close}
-        className={`fixed inset-0 -z-10 transition-opacity duration-300 ease-out ${
-          open ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        style={{
-          background: 'color-mix(in srgb, var(--teal-900) 32%, transparent)',
-          backdropFilter: 'blur(var(--blur-md))',
-          WebkitBackdropFilter: 'blur(var(--blur-md))',
-        }}
-      />
-
-      {/* ── Mega menu — absolute child of fixed header = full-width ── */}
-      <div
-        className={`absolute left-0 right-0 top-full transition-all duration-200 ease-out ${
-          open
-            ? 'opacity-100 translate-y-0 pointer-events-auto'
-            : 'opacity-0 -translate-y-2 pointer-events-none'
-        }`}
-        onMouseEnter={onEnter}
-        onMouseLeave={onLeave}
-        role="menu"
-        ref={menuPanelRef}
-      >
-        <div className="flex justify-center px-6 pt-2 pb-6">
-          <div
-            className="flex overflow-hidden w-full max-w-5xl rounded-[var(--radius-lg)] border"
-            style={{
-              background: 'var(--color-surface)',
-              borderColor: 'var(--border-light)',
-              boxShadow: 'var(--shadow-float)',
-            }}
-          >
-            {/* Left feature panel — services overview */}
-            <div
-              className="flex flex-col justify-between p-8 w-[248px] flex-shrink-0"
-              style={{ background: 'var(--cloud-300)' }}
-            >
-              <div>
-                <span
-                  className="type-eyebrow"
-                  style={{ color: 'var(--stage-retain)' }}
-                >
-                  One system
-                </span>
-                <h2
-                  className="type-card-title mt-4"
-                  style={{ color: 'var(--text-strong)' }}
-                >
-                  11 disciplines.{' '}
-                  <em style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic' }}>
-                    One roof.
-                  </em>
-                </h2>
-                <p
-                  className="type-caption mt-4"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  Brand strategy to CRM, shoots to dashboards — every discipline runs as one system. No hand-offs.
-                </p>
-              </div>
-
-              <TransitionLink
-                href="/services"
-                onClick={close}
-                className="inline-flex gap-2 items-center mt-8 text-xs font-medium transition-opacity hover:opacity-70 w-fit"
-                style={{ color: 'var(--stage-retain)' }}
-              >
-                Explore all services
-                <svg aria-hidden="true" focusable="false" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </TransitionLink>
-            </div>
-
-            {/* Right columns */}
-            <div className="flex flex-1 divide-x" style={{ borderColor: 'var(--border-light)' }}>
-              {/* Generate Demand */}
-              <div className="flex flex-col flex-1 gap-1 p-6">
-                <p
-                  className="type-eyebrow mb-4"
-                  style={{ color: 'var(--stage-retain)' }}
-                >
-                  {leftGroup.label}
-                </p>
-                {leftGroup.services.map((svc) => (
-                  <ServiceItem key={svc.href} svc={svc} onClose={close} tone="light" />
-                ))}
-              </div>
-
-              {/* Convert + Retain stacked */}
-              <div className="flex flex-col flex-1 p-6">
-                {rightGroups.map((group, gi) => (
-                  <div
-                    key={group.label}
-                    className={gi > 0 ? 'mt-5 pt-5 border-t' : ''}
-                    style={{ borderColor: 'var(--color-border-subtle)' }}
-                  >
-                    <p
-                      className="type-eyebrow mb-4"
-                      style={{ color: 'var(--stage-retain)' }}
-                    >
-                      {group.label}
-                    </p>
-                    <div className="flex flex-col gap-1">
-                      {group.services.map((svc) => (
-                        <ServiceItem key={svc.href} svc={svc} onClose={close} tone="light" />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Mobile full-screen panel */}
       <div
         className={`md:hidden fixed inset-0 top-14 overflow-y-auto transition-opacity duration-200 ease-out ${

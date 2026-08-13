@@ -32,22 +32,19 @@ const MENU_ICONS: Record<string, typeof Compass> = {
   Users,
 }
 
-// Column order + pill fill per category. Text colour is picked per fill so it
 // clears 4.5:1 against it (computed, not eyeballed):
-//   bg-lime   (#b5f2db) vs text-charcoal   -> 11.42:1
-//   bg-amber  (#ffc933) vs text-charcoal   ->  9.34:1
-//   bg-green  (#0e6e64) vs text-cream ->  5.32:1
-// green-fill is no longer used here: against the brand palette it measures
-// 3.49:1 with ink and 3.59:1 with cream, so it cannot carry a label either way.
+// The category heading is a link, not a pill. Its colour survives as a marker
+// dot, so the three stages stay coded without a filled block whose contrast
+// has to be rechecked every time the palette moves.
 const MENU_CATEGORIES = [
-  { category: 'Generate Demand', pillClass: 'bg-lime text-charcoal' },
-  { category: 'Convert Demand', pillClass: 'bg-amber text-charcoal' },
-  { category: 'Retain Demand', pillClass: 'bg-green text-cream' },
+  { category: 'Generate Demand', dotClass: 'bg-lime' },
+  { category: 'Convert Demand', dotClass: 'bg-amber' },
+  { category: 'Retain Demand', dotClass: 'bg-green' },
 ] as const
 
-const menuColumns = MENU_CATEGORIES.map(({ category, pillClass }) => ({
+const menuColumns = MENU_CATEGORIES.map(({ category, dotClass }) => ({
   category,
-  pillClass,
+  dotClass,
   services: services.filter((svc) => svc.category === category),
 }))
 
@@ -164,13 +161,16 @@ export default function MegaMenu({
             {menuColumns.map((column) => (
               <div className="flex flex-col" key={column.category}>
                 <TransitionLink
-                  className={`mb-5 inline-flex w-fit items-center gap-1.5 self-start rounded-full px-3 py-1.5 font-semibold text-xs uppercase tracking-wide no-underline transition-opacity hover:opacity-85 ${column.pillClass}`}
+                  className="group mb-6 inline-flex w-fit items-center gap-2.5 self-start no-underline"
                   href="/services"
                   onClick={close}
                   role="menuitem"
                 >
-                  {column.category}
-                  <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2} />
+                  <span aria-hidden="true" className={`h-2 w-2 rounded-full ${column.dotClass}`} />
+                  <span className="font-medium text-[1.15rem] text-charcoal leading-none transition-transform duration-200 group-hover:translate-x-1">
+                    {column.category}
+                  </span>
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-muted" strokeWidth={1.75} />
                 </TransitionLink>
 
                 <div className="flex flex-col divide-y divide-line">
@@ -178,13 +178,17 @@ export default function MegaMenu({
                     const Icon = MENU_ICONS[svc.menu.icon]
                     return (
                       <TransitionLink
-                        className="-mx-3 flex items-center gap-4 rounded-card-sm px-3 py-3.5 no-underline transition-colors hover:bg-ink/[0.04]"
+                        className="group relative flex items-center gap-4 py-3.5 pl-5 no-underline"
                         href={`/services/${svc.slug}`}
                         key={svc.slug}
                         onClick={close}
                         role="menuitem"
                       >
-                        <span className="flex min-w-0 flex-1 flex-col gap-1">
+                        <span
+                          aria-hidden="true"
+                          className="-translate-y-1/2 absolute top-1/2 left-0 h-1.5 w-1.5 rounded-full bg-green opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                        />
+                        <span className="flex min-w-0 flex-1 flex-col gap-1 transition-transform duration-200 group-hover:translate-x-1">
                           <span className="font-medium text-charcoal text-sm leading-tight">
                             {svc.name}
                           </span>
