@@ -49,6 +49,9 @@ export function PillCTA({ href, children, tone = 'on-light', external, className
 
   const shared = {
     className: `group relative isolate overflow-hidden ${className ?? ''}`,
+    // The circle expanding out of the badge is the hover; lifting the whole
+    // pill on top of it reads as two animations fighting.
+    lift: false,
     size: 'pill' as const,
     variant: (onDark ? 'light' : 'primary') as 'light' | 'primary',
   }
