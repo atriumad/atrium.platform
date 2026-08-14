@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { CTA } from '@/lib/cta'
 import Button from './Button'
 import MegaMenu from './MegaMenu'
+import { PillCTA } from './PillCTA'
 import TransitionLink from './TransitionLink'
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -270,9 +271,9 @@ export default function Navbar() {
       {/* Right column — CTA on desktop, menu toggle on mobile */}
       <div className="flex gap-4 justify-end justify-self-end items-center">
         <div className="hidden md:flex">
-          <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant={isEditorialCase ? 'ghost' : 'ghostLight'} className="px-4 py-2 text-xs">
+          <PillCTA external={CTA.primary.external} href={CTA.primary.href} size="sm" tone={isEditorialCase ? 'on-light' : 'on-dark'}>
             {CTA.primary.label}
-          </Button>
+          </PillCTA>
         </div>
 
         {/* Mobile menu toggle — icon-only, morphs into an X when open */}
