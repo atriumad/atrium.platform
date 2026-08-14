@@ -32,19 +32,19 @@ const MENU_ICONS: Record<string, typeof Compass> = {
   Users,
 }
 
-// clears 4.5:1 against it (computed, not eyeballed):
-// The category heading is a link, not a pill. Its colour survives as a marker
-// dot, so the three stages stay coded without a filled block whose contrast
-// has to be rechecked every time the palette moves.
+// Each stage heading is a filled pill in its own colour, so the ink is paired
+// per stage rather than assumed — the two light fills carry charcoal, the dark
+// one carries cream. Contrast against the fill is computed, not eyeballed:
+// lime 11.5:1, amber 10.4:1, green 5.3:1. Recheck these if the palette moves.
 const MENU_CATEGORIES = [
-  { category: 'Generate Demand', dotClass: 'bg-lime' },
-  { category: 'Convert Demand', dotClass: 'bg-amber' },
-  { category: 'Retain Demand', dotClass: 'bg-green' },
+  { category: 'Generate Demand', pillClass: 'bg-lime text-charcoal' },
+  { category: 'Convert Demand', pillClass: 'bg-amber text-charcoal' },
+  { category: 'Retain Demand', pillClass: 'bg-green text-cream' },
 ] as const
 
-const menuColumns = MENU_CATEGORIES.map(({ category, dotClass }) => ({
+const menuColumns = MENU_CATEGORIES.map(({ category, pillClass }) => ({
   category,
-  dotClass,
+  pillClass,
   services: services.filter((svc) => svc.category === category),
 }))
 
@@ -161,16 +161,15 @@ export default function MegaMenu({
             {menuColumns.map((column) => (
               <div className="flex flex-col" key={column.category}>
                 <TransitionLink
-                  className="group mb-6 inline-flex w-fit items-center gap-2.5 self-start no-underline"
+                  className={`group mb-6 inline-flex w-fit items-center gap-2 self-start rounded-full px-4 py-2 no-underline transition-opacity duration-200 hover:opacity-90 ${column.pillClass}`}
                   href="/services"
                   onClick={close}
                   role="menuitem"
                 >
-                  <span aria-hidden="true" className={`h-2 w-2 rounded-full ${column.dotClass}`} />
-                  <span className="text-[1.15rem] text-charcoal leading-none transition-transform duration-200 group-hover:translate-x-1">
+                  <span className="font-serif text-[1.4rem] leading-none transition-transform duration-200 group-hover:translate-x-0.5">
                     {column.category}
                   </span>
-                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 text-muted" strokeWidth={1.75} />
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4 opacity-70" strokeWidth={1.75} />
                 </TransitionLink>
 
                 <div className="flex flex-col divide-y divide-line">

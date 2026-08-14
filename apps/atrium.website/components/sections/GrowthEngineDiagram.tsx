@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 // ─── Atrium Growth Engine (doc vs.md §2.1 / §5 / §7.5) ──────────────────────
 // Generate → Convert → Retain, read as three cards rather than a rail. Each
-// one is a picture with a caption strip; hovering fills the strip with lime
-// and opens it to the copy underneath, so the section is scannable at rest and
-// explains itself on demand.
+// one is a picture with a caption strip carrying its stage colour at rest, so
+// the three stages are coded the moment the section is seen. Hover is left to
+// do one job: open the strip to the copy underneath.
 //
 // The serif accent falls on the verb here, against the site's usual habit of
 // stressing the second half. All three cards end in "Demand", so italicising
@@ -22,11 +22,10 @@ export const stages = [
     tagline: 'Create awareness and desire.',
     body: 'Create awareness and desire through photography and film that show what it feels like. Build social presence where people spend time. Place paid discovery in front of people already looking for what you do.',
     caps: ['Film & Photo', 'Social', 'Paid Media'],
-    // Hover fill and the text colour that clears 4.5:1 on it.
-    fill: 'group-hover:bg-lime',
-    onFill: 'group-hover:text-charcoal',
-    onFillSoft: 'group-hover:text-charcoal/80',
-    onFillFaint: 'group-hover:text-charcoal/60',
+    // Strip fill and the text colour that clears 4.5:1 on it.
+    fill: 'bg-lime',
+    onFill: 'text-charcoal',
+    onFillSoft: 'text-charcoal/80',
   },
   {
     n: '02',
@@ -38,10 +37,9 @@ export const stages = [
     tagline: 'Turn interest into reservations.',
     body: 'Turn interest into visits by owning local search, earning trust signals through reputation and reviews, and running campaigns that give people a reason to come in now.',
     caps: ['Google & Local SEO', 'Reputation', 'Offers & Campaigns'],
-    fill: 'group-hover:bg-amber',
-    onFill: 'group-hover:text-charcoal',
-    onFillSoft: 'group-hover:text-charcoal/80',
-    onFillFaint: 'group-hover:text-charcoal/60',
+    fill: 'bg-amber',
+    onFill: 'text-charcoal',
+    onFillSoft: 'text-charcoal/80',
   },
   {
     n: '03',
@@ -55,10 +53,9 @@ export const stages = [
     caps: ['Email & SMS', 'CRM & Loyalty', 'Win-back Flows'],
     // green is dark enough that the copy has to invert with it: charcoal on
     // green is 2.6:1, cream on green is 5.32:1.
-    fill: 'group-hover:bg-green',
-    onFill: 'group-hover:text-cream',
-    onFillSoft: 'group-hover:text-cream/85',
-    onFillFaint: 'group-hover:text-cream/70',
+    fill: 'bg-green',
+    onFill: 'text-cream',
+    onFillSoft: 'text-cream/85',
   },
 ]
 
@@ -111,10 +108,10 @@ export default function GrowthEngineDiagram() {
                     grows the panel up over the picture instead of making the
                     card taller — the row keeps one height at rest and hover. */}
                 <div
-                  className={`absolute inset-x-0 bottom-0 z-10 bg-cream p-6 transition-colors duration-300 md:p-7 ${stage.fill}`}
+                  className={`absolute inset-x-0 bottom-0 z-10 p-6 md:p-7 ${stage.fill}`}
                 >
                   <h3
-                    className={`m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal transition-colors duration-300 ${stage.onFill}`}
+                    className={`m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] ${stage.onFill}`}
                   >
                     <em className="font-serif italic">{stage.lead}</em> {stage.rest}
                   </h3>
@@ -124,7 +121,7 @@ export default function GrowthEngineDiagram() {
                   <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-atrium group-focus-within:grid-rows-[1fr] group-hover:grid-rows-[1fr]">
                     <div className="overflow-hidden">
                       <p
-                        className={`mt-3 text-[0.9375rem] leading-relaxed text-charcoal/80 transition-colors duration-300 ${stage.onFillSoft}`}
+                        className={`mt-3 text-[0.9375rem] leading-relaxed ${stage.onFillSoft}`}
                       >
                         {stage.body}
                       </p>
