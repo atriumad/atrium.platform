@@ -1,7 +1,15 @@
 import { caseAssetOverrides } from './case-assets.overrides'
 import { cloudinaryAssets } from './cloudinary-assets.generated'
 
-export type CaseMetric = { number: string; label: string }
+export type CaseMetric = {
+  number: string
+  label: string
+  /** A sentence under the label, where the number needs context to mean
+   *  anything. Optional — older studies carry the label alone. */
+  detail?: string
+}
+
+export type CaseTestimonial = { quote: string; name: string; role: string }
 export type HowStep = { title: string; body: string }
 export type ScopeGroup = { label: string; items: string[] }
 export type CaseGalleryImage = {
@@ -32,7 +40,23 @@ export type CaseStudy = {
   resultHeadline: string
   intro?: string
   story: string[]
+  /** The two halves of the story told side by side. Both fall back to `story`
+   *  — the paragraphs were already written in that order — so a study reads
+   *  correctly before anyone gets round to splitting it by hand. */
+  challenge?: string
+  solution?: string
+  /** The case study's own H1. Falls back to the client name. */
+  heroHeadline?: string
+  /** Heading over the challenge/solution pair. */
+  storyHeadline?: string
+  /** Standfirst under the photo-gallery heading. */
+  galleryNote?: string
+  testimonial?: CaseTestimonial
   metrics: CaseMetric[]
+  /** Two short claims for the card in Selected Work, where a full metric label
+   *  is too long to sit in a pill. Drawn from `metrics` — same numbers, fewer
+   *  words. A study with none falls back to its first two metrics. */
+  highlights?: string[]
   howWeDidIt?: HowStep[]
   scope?: ScopeGroup[]
   takeaway?: string
@@ -67,29 +91,63 @@ export const caseStudies: CaseStudy[] = [
   // ─── 1. TACO NACO ───────────────────────────────────────────────────────
   {
     slug: 'taco-naco',
+    highlights: ['23K Followers', '1.2M+ Impressions'],
     client: 'Taco Naco KC',
     coverImageId: 'https://cdn.atriumad.com/clients/TNKC/photos/TNKC_%20APR05%20Slide%205.jpg',
     coverLogo: '/logos/clients/tknc.png',
     category: 'Fast-Casual Mexican · Multi-Location Engagement',
-    serviceTags: ['Brand Strategy', 'Content', 'Social', 'Google', 'Reputation', 'Analytics'],
+    serviceTags: [
+      'Professional Content',
+      'Brand Strategy',
+      'Social Media Marketing',
+      'UGC Collabs',
+      'Discoverability Strategy',
+    ],
+    heroHeadline: 'Turning local flavor into a brand people follow.',
     resultHeadline: '3 locations. 23K followers. Over 1.2 million impressions. One brand.',
+    storyHeadline: 'From local favorite to digital momentum.',
+    challenge:
+      'Taco Naco had the food, personality, and loyal local following. The challenge was translating that energy into a consistent digital presence that could grow with the brand and keep people engaged across every location.',
+    solution:
+      'We built a content-first system around Taco Naco’s personality—combining brand strategy, professional content, social media marketing, and UGC collaborations to create a recognizable presence designed for consistency, community, and growth.',
     story: [
       'Taco Naco KC has three locations — Overland Park, Westport, and State Line. Great food, loyal crowd, but online the brand was all over the place. No consistent look. No real strategy. No way to know what was working.',
       'We came in December 2025 and built the whole thing from scratch. One brand direction. One content system. One team managing every platform, every location, every day. We started shooting monthly, launched platforms they weren’t on, and connected their Google profiles to a real strategy.',
       'Five months in — 23K followers across every platform, over 713K impressions on social, and 504K impressions on Google alone across all three locations. Over 1,000 pieces of content published. The brand finally looks and sounds like one brand, no matter where you find it.',
     ],
     metrics: [
-      { number: '23K', label: 'followers across all platforms (started at ~5.9K)' },
-      { number: '1.2M+', label: 'total impressions (social + Google across 3 locations)' },
-      { number: '1,031', label: 'pieces of content published in 5 months' },
-      { number: '504K', label: 'Google impressions (168K per location × 3)' },
+      {
+        number: '2.47M',
+        label: 'Total impressions',
+        detail: 'Building visibility across Taco Naco’s digital ecosystem.',
+      },
+      {
+        number: '23.58K',
+        label: 'Total followers',
+        detail: 'A growing community across Taco Naco’s social platforms.',
+      },
+      {
+        number: '+19.2%',
+        label: 'Google visibility',
+        detail:
+          'Growth in Google Business Profile impressions, reaching 333.45K impressions.',
+      },
     ],
+    galleryNote:
+      'Professional content captures the color, texture, people, and personality that make the Taco Naco experience instantly recognizable.',
+    testimonial: {
+      quote:
+        'From day one, we connected with the Atrium team—their energy, creativity, and passion for what they do. They truly work with us as part of our team. More than feeling like we hired an agency, we feel like we found a true partner for our business.',
+      name: 'Fernanda Reyes',
+      role: 'Taco Naco KC',
+    },
     order: 1,
   },
 
   // ─── 2. T'ÄHÄ (worked example, verbatim from brief) ────────────────────
   {
     slug: 'taha',
+    highlights: ['5.24M+ Impressions', '30% Open Rate'],
     client: 'T’ÄHÄ Mexican Kitchen',
     coverImageId: 'https://cdn.atriumad.com/clients/TAHA/photos/TAHA_%20JUL15%20Lifestyle%20Photo.jpg',
     coverLogo: '/logos/clients/taha.png',
@@ -123,6 +181,7 @@ export const caseStudies: CaseStudy[] = [
   // ─── 3. AAHAA ───────────────────────────────────────────────────────────
   {
     slug: 'aahaa',
+    highlights: ['460K+ Organic Impressions', '+19.6% Instagram Growth'],
     client: 'Aahaa Modern Indian Cuisine',
     coverImageId: 'https://cdn.atriumad.com/clients/AAHA/photos/AAHA_%20JUN06%20Slide%201.jpg',
     coverLogo: '/logos/clients/aahaa.png',
@@ -335,6 +394,7 @@ export const caseStudies: CaseStudy[] = [
   // ─── 9. HOTEL KANSAS CITY (worked example, verbatim from brief) ────────
   {
     slug: 'hotel-kc',
+    highlights: ['250K+ Audience Reach', '10+ Films Delivered'],
     client: 'Hotel Kansas City',
     coverLogo: '/logos/clients/htkc.png',
     category: 'Hospitality · Cinematic Content',

@@ -5,9 +5,7 @@ import CTABanner from '@/components/sections/CTABanner'
 import TransitionLink from '@/components/ui/TransitionLink'
 import CaseCover from '@/components/work/CaseCover'
 import DragGallery from '@/components/work/DragGallery'
-import VideoBentoGrid from '@/components/work/VideoBentoGrid'
 import VideoMarquee from '@/components/work/VideoMarquee'
-import VideoShowcaseSection from '@/components/work/VideoShowcaseSection'
 import { CTA } from '@/lib/cta'
 import { type CaseMetric, type CaseStudy, caseStudies, getCaseStudy, getCaseSummary, isVideoLed } from '@/lib/work'
 
@@ -29,10 +27,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 function ServiceList({ services }: { services: string[] }) {
   return (
-    <ul className="m-0 flex list-none flex-wrap gap-x-3 gap-y-1 p-0" aria-label="Services">
-      {services.map((service, index) => (
-        <li key={service} className="flex items-center gap-3 text-[0.875rem] text-muted">
-          {index > 0 && <span aria-hidden="true">/</span>}
+    <ul className="m-0 flex list-none flex-wrap justify-center gap-2 p-0" aria-label="Services">
+      {services.map((service) => (
+        <li
+          className="rounded-full border border-line px-3.5 py-1.5 text-[0.8125rem] text-body leading-none"
+          key={service}
+        >
           {service}
         </li>
       ))}
@@ -40,78 +40,65 @@ function ServiceList({ services }: { services: string[] }) {
   )
 }
 
-function CaseMedia({ study, compact = false }: { study: CaseStudy; compact?: boolean }) {
-  return (
-    <CaseCover
-      study={study}
-      priority={!compact}
-      className={`${compact ? 'rounded-card-sm min-h-[20rem] md:min-h-[32rem]' : 'rounded-card aspect-[4/3] min-h-[25rem] lg:aspect-auto lg:min-h-[38rem]'}`}
-    />
-  )
-}
-
+/** Type only, then the work itself. The cover photograph is gone: the reels
+ *  are the first thing a case study should show, and a still of the same
+ *  footage above them was saying it twice. */
 export function CaseHero({ study }: { study: CaseStudy }) {
   return (
-    <section className="bg-cream px-[var(--gutter)] pb-24 pt-32 md:pb-36 md:pt-40">
-      <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-stretch lg:gap-16">
-          <div className="h-full lg:col-span-8">
-            <CaseMedia study={study} />
-          </div>
-
-          <div className="flex h-full flex-col justify-between gap-16 border-t border-line pt-8 lg:col-span-4">
-            <div>
-              <Eyebrow className="mb-6">
-                Case {String(study.order).padStart(2, '0')} / {study.category}
-              </Eyebrow>
-              <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-                {study.client}
-              </h1>
-            </div>
-
-            <div>
-              <p className="text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
-                {getCaseSummary(study)}
-              </p>
-              <div className="mt-8 border-t border-line pt-6">
-                <ServiceList services={study.serviceTags} />
-              </div>
-            </div>
+    <section className="overflow-hidden bg-cream pt-32 pb-24 md:pt-40 md:pb-36">
+      <div className="px-[var(--gutter)]">
+        <div className="mx-auto max-w-3xl text-center">
+          <Eyebrow className="mb-6">{study.client}</Eyebrow>
+          <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            {study.heroHeadline ?? study.client}
+          </h1>
+          <div className="mt-8">
+            <ServiceList services={study.serviceTags} />
           </div>
         </div>
       </div>
+
+      {study.videoIds?.length ? (
+        <div className="mt-16 md:mt-20">
+          <VideoMarquee publicIds={study.videoIds} />
+        </div>
+      ) : null}
     </section>
   )
 }
 
-export function StorySection({ paragraphs }: { paragraphs: string[] }) {
+/** The story as the two things a reader actually wants: what was wrong, and
+ *  what we did about it. */
+export function ChallengeSolutionSection({ study }: { study: CaseStudy }) {
+  const challenge = study.challenge ?? study.story[0]
+  const solution = study.solution ?? study.story[1] ?? study.story[0]
+  if (!challenge) return null
+
+  const columns = [
+    { label: 'Challenge', body: challenge },
+    { label: 'Solution', body: solution },
+  ]
+
   return (
     <section id="story" className="bg-dark px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="grid gap-10 border-t border-cream/20 pt-8 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
-            <Eyebrow tone="on-dark" className="mb-6">The story</Eyebrow>
-            <h2 className="max-w-[12ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
-              From challenge to <em>working system.</em>
-            </h2>
-          </div>
-
-          <div className="lg:col-span-7 lg:pt-14">
-            {paragraphs.map((paragraph, index) => (
-              <p
-                key={paragraph}
-                className={`m-0 border-b border-cream/20 py-7 first:pt-0 last:border-b-0 ${
-                  index === 0
-                    ? 'text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream'
-                    : 'text-base leading-relaxed text-cream/70'
-                }`}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
+        <div className="mx-auto mb-16 max-w-3xl text-center md:mb-20">
+          <Eyebrow tone="on-dark" className="mb-6">The story</Eyebrow>
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            {study.storyHeadline ?? <>From challenge to <em>working system.</em></>}
+          </h2>
         </div>
 
+        <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+          {columns.map(({ label, body }) => (
+            <div className="border-t border-cream/20 pt-8" key={label}>
+              <Eyebrow tone="on-dark" className="mb-6">{label}</Eyebrow>
+              <p className="m-0 text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-cream/80">
+                {body}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -130,7 +117,8 @@ function PhotoGallerySection({ study }: { study: CaseStudy }) {
               </h2>
             </div>
             <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
-              A visual record of the atmosphere, details, people, and moments that made the work recognizable.
+              {study.galleryNote ??
+                'A visual record of the atmosphere, details, people, and moments that made the work recognizable.'}
             </p>
           </div>
         </div>
@@ -185,30 +173,6 @@ export function ApproachSection({ study }: { study: CaseStudy }) {
   )
 }
 
-function ReelsSection({ study }: { study: CaseStudy }) {
-  if (!study.videoIds?.length) return null
-
-  return (
-    <section className="overflow-hidden bg-cream py-24 md:py-36">
-      <div className="mx-auto mb-14 max-w-[var(--container-max)] px-[var(--gutter)] md:mb-20">
-        <div className="grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16">
-          <div className="lg:col-span-7">
-            <Eyebrow className="mb-6">Reels and short-form video</Eyebrow>
-            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-              Built to move. <em>Made to repeat.</em>
-            </h2>
-          </div>
-          <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
-            A continuous stream of vertical stories designed for attention, consistency, and everyday brand recall.
-          </p>
-        </div>
-      </div>
-
-      <VideoMarquee publicIds={study.videoIds} />
-    </section>
-  )
-}
-
 export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: CaseMetric[] }) {
   if (metrics.length === 0) return null
 
@@ -233,14 +197,17 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-24">
+        {/* One column per metric, number over label over detail. Three across
+            is the shape the copy is written for — the label is a heading now,
+            not a sentence, so setting it beside the figure wastes the width. */}
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-x-12 lg:gap-x-16">
           {metrics.map(metric => (
             <article
               key={`${metric.number}-${metric.label}`}
-              className="grid min-h-[14rem] grid-cols-1 items-center gap-7 border-t border-cream/20 py-10 md:min-h-[17rem] md:grid-cols-[minmax(8rem,0.55fr)_minmax(0,1.45fr)] md:gap-8 md:py-12"
+              className="flex flex-col gap-5 border-t border-cream/20 py-10 md:py-12"
             >
               <p
-                className="m-0 flex whitespace-nowrap font-normal leading-none tracking-[-0.02em] text-cream md:order-2 md:justify-end"
+                className="m-0 flex whitespace-nowrap font-normal leading-none tracking-[-0.02em] text-cream"
                 style={{
                   fontFamily: 'var(--font-serif)',
                   fontSize: getMetricFontSize(metric.number),
@@ -249,9 +216,16 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
               >
                 <NumberReel value={metric.number} />
               </p>
-              <p className="m-0 max-w-md text-base leading-relaxed text-cream/70 md:order-1">
-                {metric.label}
-              </p>
+              <div>
+                <p className="m-0 text-[0.8125rem] uppercase tracking-[0.12em] text-cream">
+                  {metric.label}
+                </p>
+                {metric.detail && (
+                  <p className="m-0 mt-3 max-w-sm text-base leading-relaxed text-cream/70">
+                    {metric.detail}
+                  </p>
+                )}
+              </div>
             </article>
           ))}
         </div>
@@ -261,6 +235,35 @@ export function ResultsSection({ study, metrics }: { study: CaseStudy; metrics: 
             {study.takeaway}
           </p>
         )}
+      </div>
+    </section>
+  )
+}
+
+export function TestimonialSection({ study }: { study: CaseStudy }) {
+  const testimonial = study.testimonial
+  if (!testimonial) return null
+
+  return (
+    <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
+      <div className="mx-auto max-w-3xl text-center">
+        <Eyebrow className="mb-6">Client testimonial</Eyebrow>
+        <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+          More than an agency. <em>A true partner.</em>
+        </h2>
+
+        <blockquote className="m-0 mt-10">
+          <p className="m-0 text-[clamp(1.15rem,1.6vw,1.4rem)] leading-relaxed text-body">
+            “{testimonial.quote}”
+          </p>
+          {/* `text-center` is set again here rather than inherited: the
+              browser's own blockquote/footer styling resets alignment, so the
+              attribution drifts left of the quote it belongs to. */}
+          <footer className="mt-8 text-center">
+            <p className="m-0 text-charcoal">{testimonial.name}</p>
+            <p className="m-0 mt-1 font-serif text-muted italic">{testimonial.role}</p>
+          </footer>
+        </blockquote>
       </div>
     </section>
   )
@@ -280,7 +283,10 @@ export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
           aria-label={`Read next case study: ${nextStudy.client}`}
         >
           <div className="h-full lg:col-span-7">
-            <CaseMedia study={nextStudy} compact />
+            <CaseCover
+              className="min-h-[20rem] rounded-card-sm md:min-h-[32rem]"
+              study={nextStudy}
+            />
           </div>
 
           <div className="flex h-full flex-col justify-between gap-14 border-t border-line pt-8 lg:col-span-5">
@@ -333,25 +339,16 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <article className="bg-cream text-charcoal">
+      {/* Hero carries the reels, so the page opens on the work itself. Then
+          the story, the numbers, the pictures — the reels no longer need a
+          section of their own further down. A video-led study has no photo
+          shoot to build a gallery from, so that one section drops out. */}
       <CaseHero study={study} />
-      <StorySection paragraphs={getStoryParagraphs(study)} />
-      {isVideoLed(study) ? (
-        <>
-          {(study.videoIds?.length ?? 0) <= 3 ? (
-            <VideoBentoGrid ids={study.videoIds ?? []} />
-          ) : (
-            <VideoShowcaseSection study={study} />
-          )}
-          <ApproachSection study={study} />
-        </>
-      ) : (
-        <>
-          <PhotoGallerySection study={study} />
-          <ApproachSection study={study} />
-          <ReelsSection study={study} />
-        </>
-      )}
-      <ResultsSection study={study} metrics={study.metrics} />
+      <ChallengeSolutionSection study={study} />
+      <ResultsSection study={study} metrics={study.metrics.slice(0, 3)} />
+      {!isVideoLed(study) && <PhotoGallerySection study={study} />}
+      <ApproachSection study={study} />
+      <TestimonialSection study={study} />
       <NextCasePreview nextStudy={nextStudy} />
       <CTABanner
         eyebrow="JOIN 15+ HOSPITALITY BRANDS"
