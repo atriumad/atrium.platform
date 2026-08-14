@@ -20,12 +20,14 @@ import { type CaseStudy, caseStudies } from '@/lib/work'
 const BENTO_CDN = 'https://cdn.atriumad.com/clients/ATRM/photos/home_bento'
 
 const bentoItems: BentoItem[] = [
-  { size: 'large', title: <>Content that <em>shows you at your best</em></>, body: 'Your food, your chef, your room, whatever makes people crave you. We shoot what you already have and make it the reason they came.', cover: 'BTS wide shot — camera, chef plating, warm restaurant lighting', image: `${BENTO_CDN}/hf_20260813_164837_3011f832-4f1b-4a17-944e-3b46fa35fe40.png.jpg` },
-  { size: 'small', fill: 'lime', title: <>Reviews caught <em>before they go public</em></>, body: 'The happy guest goes to Google. The unhappy one comes to you first. We catch the problems early and push the rating up over time.' },
-  { size: 'small', fill: 'coral', title: <>The guest who returns <em>is the business</em></>, body: "Sixty five percent of a restaurant's revenue is the guest who comes back. We make sure they do, without you paying to win them twice." },
-  { size: 'medium', title: <>Traffic that <em>turns into tables</em></>, body: 'We send people from Instagram and Google straight to your reservation and your online order, not just to your profile.', cover: 'Instagram profile linking through to a reservation confirmation', image: `${BENTO_CDN}/hf_20260813_163511_10455442-be91-4766-a01f-3352da1c3d85.png` },
-  { size: 'medium', title: <>Found when they&apos;re <em>ready to decide</em></>, body: 'Forty six percent of Google searches are local. When someone three blocks away is hungry, you are what they find.' },
-  { size: 'small', title: <>A brand that sounds like <em>you</em></>, body: 'We set the look, the voice, and the plan, so you show up the same and on purpose across every platform.', cover: 'Side-by-side IG grids showing visual consistency', image: `${BENTO_CDN}/hf_20260813_174647_f38cf676-2e0f-46e9-91eb-6424b5608163.png` },
+  { size: 'large', title: <>Content that <em>shows you at your best</em></>, body: 'Your food, your chef, your room, whatever makes people crave you. We shoot what you already have and make it the reason they came.', cover: 'BTS wide shot — camera, chef plating, warm restaurant lighting', image: `${BENTO_CDN}/hf_20260814_193524_bdfb6f8a-d155-47fa-85ba-78268bf599c5_min.webp` },
+  // The only cut-out in the set: the phone is on transparency, so the tile's
+  // lime is what it sits on rather than a photograph of its own.
+  { size: 'small', fill: 'lime', cutout: true, title: <>Traffic that <em>turns into tables</em></>, body: 'We send people from Instagram and Google straight to your reservation and your online order, not just to your profile.', cover: 'Hands holding a phone open on a restaurant reservation page', image: `${BENTO_CDN}/hf_20260814_192712_bea1ee09-0c5a-489c-9c39-6e77f1621b9e_min.png` },
+  { size: 'small', title: <>Reviews caught <em>before they go public</em></>, cover: 'Three plated dishes on a marble table against a green banquette', image: `${BENTO_CDN}/DSC06328.jpg` },
+  { size: 'small', title: <>Found when they&apos;re <em>ready to decide</em></>, body: 'Forty six percent of Google searches are local. When someone three blocks away is hungry, you are what they find.', cover: 'A phone in an orange jacket pocket showing a restaurant story', image: `${BENTO_CDN}/hf_20260814_191805_04781e92-1d07-419d-907e-aec6490112c2_min.webp` },
+  { size: 'large', title: <>A brand that sounds like <em>you</em></>, cover: 'A roadside billboard carrying the brand at dusk', image: `${BENTO_CDN}/hf_20260814_192354_2dcf196c-f797-434e-a9eb-3b64a9c68601_min.webp` },
+  { size: 'small', title: <>The guest who returns <em>is the business</em></>, cover: 'A guest reading a win-back message on his phone at home', image: `${BENTO_CDN}/hf_20260813_164755_d9e5278d-7df6-4814-8113-08c1d2a474db.jpg` },
 ]
 
 const selectedWorkDetails = [

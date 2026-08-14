@@ -9,15 +9,21 @@ import { gsap } from '@/lib/gsap'
 export type BentoItem = {
   size: 'large' | 'medium' | 'small'
   title: ReactNode
-  body: string
+  /** Optional: some tiles carry the heading alone and let the picture do the
+   *  rest. Leaving it out is a composition choice, not missing copy. */
+  body?: string
   /** Describes the picture. Alt text on the tiles that carry one. */
   cover?: string
   bg?: string
   dark?: boolean
   /** Overrides the alternating tone with a solid brand fill. */
   fill?: 'lime' | 'coral' | 'cool'
-  /** Absolute URL. Fills the tile behind a scrim; the copy inverts to cream. */
+  /** Absolute URL. Fills the tile edge to edge; the copy inverts to cream. */
   image?: string
+  /** The picture is a cut-out on transparency, not a photograph filling the
+   *  frame. It sits inside the tile at its own scale and the tile keeps its
+   *  `fill` colour behind it, instead of the picture becoming the ground. */
+  cutout?: boolean
 }
 
 type Props = {
@@ -87,9 +93,12 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-8 auto-rows-[22rem] gap-5">
           {items.map((item, i) => {
             // A photo tile carries its own ground, so it takes the dark tone
-            // and reads as one of the dark cards for text purposes.
-            const isDark = item.image ? true : item.fill ? false : (item.dark ?? i === 0)
-            const tone = item.image ? 'dark' : (item.fill ?? (isDark ? 'dark' : i % 2 === 0 ? 'warm' : 'surface'))
+            // and reads as one of the dark cards for text purposes. A cut-out
+            // is the exception: the picture floats on the tile rather than
+            // becoming it, so the tile's own fill still decides the tone.
+            const photo = Boolean(item.image) && !item.cutout
+            const isDark = photo ? true : item.fill ? false : (item.dark ?? i === 0)
+            const tone = photo ? 'dark' : (item.fill ?? (isDark ? 'dark' : i % 2 === 0 ? 'warm' : 'surface'))
             return (
               <Card
                 key={item.title as unknown as string}
@@ -98,24 +107,55 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                 // Title top, copy bottom, on every tile. Now that they are all
                 // one row tall the split lands the same everywhere, so the row
                 // reads as one band of headings over one band of copy.
-                className={`bento-card group relative flex flex-col justify-between gap-6 overflow-hidden opacity-0 ${sizeClass[item.size]}`}
+                className={`bento-card group relative flex flex-col overflow-hidden opacity-0 ${
+                  // A cut-out owns the bottom of its tile, so the copy sits
+                  // straight under the heading instead of being pushed into
+                  // the picture.
+                  item.cutout ? 'justify-start gap-3' : 'justify-between gap-6'
+                } ${sizeClass[item.size]}`}
               >
+                {item.cutout && (
+                  // Lime knocked back with the deep green, lightening toward
+                  // the corner the object sits in. Mixed from the tokens
+                  // rather than pinned to a hex, so it follows the palette.
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(to bottom right, color-mix(in srgb, var(--color-lime) 66%, var(--color-green)) 0%, color-mix(in srgb, var(--color-lime) 82%, var(--color-green)) 45%, var(--color-lime) 100%)',
+                    }}
+                  />
+                )}
+
                 {item.image && (
                   <>
                     <Image
                       alt={item.cover ?? ''}
-                      className="object-cover transition-transform duration-700 ease-atrium group-hover:scale-[1.04]"
+                      // A cut-out is sized to sit in the lower half of the
+                      // tile, clear of the heading, and is not cropped — the
+                      // whole object is the point.
+                      className={`transition-transform duration-700 ease-atrium group-hover:scale-[1.04] ${
+                        // Clears the heading and the copy above it, then runs
+                        // to the bottom edge — the object is never cropped.
+                        // Flush to the bottom and right edges. The top padding
+                        // is the only inset — it holds the object clear of the
+                        // copy; anything on the sides would just shrink it,
+                        // since `contain` already letterboxes.
+                        item.cutout
+                          ? 'object-contain object-right-bottom pt-[8.5rem]'
+                          : 'object-cover'
+                      }`}
                       fill
                       // The first tile is the LCP element on the home page.
                       priority={i === 0}
                       sizes={imageSizes[item.size]}
                       src={item.image}
                     />
-                    {/* Two layers: a light flat wash so the copy holds anywhere
-                        on the tile, and a gradient that deepens under the
-                        heading without burying the picture. */}
-                    <div className="absolute inset-0 bg-charcoal/30" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-charcoal/55 via-transparent to-charcoal/35" />
+                    {/* No scrim: the pictures carry the tiles at full strength.
+                        The copy is cream straight onto the photograph, so a
+                        tile only works if its picture stays dark where the
+                        heading and the copy sit. */}
                   </>
                 )}
 
@@ -125,7 +165,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                 <div className="relative flex items-start justify-between gap-4">
                   <h3
                     className={`m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] ${
-                      item.image ? 'text-cream' : isDark ? 'text-lime' : ''
+                      photo ? 'text-cream' : isDark ? 'text-lime' : ''
                     }`}
                   >
                     {item.title}
@@ -138,15 +178,17 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                     />
                   )}
                 </div>
-                <p
-                  className={`relative m-0 text-sm leading-relaxed ${copyWidthClass[item.size]} ${
-                    // Over a photo, 75% opacity gives out wherever the picture
-                    // goes bright; cream at 90% holds against both.
-                    item.image ? 'text-cream/90' : 'opacity-75'
-                  }`}
-                >
-                  {item.body}
-                </p>
+                {item.body && (
+                  <p
+                    className={`relative m-0 text-sm leading-relaxed ${copyWidthClass[item.size]} ${
+                      // Over a photo, 75% opacity gives out wherever the picture
+                      // goes bright; cream at 90% holds against both.
+                      photo ? 'text-cream/90' : 'opacity-75'
+                    }`}
+                  >
+                    {item.body}
+                  </p>
+                )}
               </Card>
             )
           })}

@@ -40,20 +40,21 @@ export default function StatsStrip({ stats }: Props) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 lg:gap-x-24">
+        {/* All three across on desktop. In a third of the width there is no
+            room to set the number beside its label, so the pair stacks and the
+            numbers line up as one row of figures. */}
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-x-12 lg:gap-x-16">
           {stats.map(stat => (
             <article
               key={`${stat.number}-${stat.label}`}
-              className="metric-reveal grid min-h-[15rem] grid-cols-1 items-center gap-7 border-t border-cream/20 py-10 md:min-h-[17rem] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-8 md:py-12"
+              className="metric-reveal flex min-h-[15rem] flex-col justify-between gap-7 border-t border-cream/20 py-10 md:min-h-[17rem] md:py-12"
             >
-              <p className="stat-number m-0 font-serif text-[clamp(5rem,13vw,11.5rem)] font-normal leading-none tracking-[-0.02em] text-cream md:order-2 md:justify-end md:text-[clamp(4.5rem,7.5vw,8.5rem)] flex">
+              <p className="stat-number m-0 flex font-serif text-[clamp(5rem,13vw,11.5rem)] font-normal leading-none tracking-[-0.02em] text-cream md:text-[clamp(4rem,6vw,7rem)]">
                 <NumberReel value={stat.number} />
               </p>
-              <div className="md:order-1">
-                <p className="stat-label m-0 max-w-sm text-base leading-relaxed text-cream/70">
-                  {stat.label}
-                </p>
-              </div>
+              <p className="stat-label m-0 max-w-sm text-base leading-relaxed text-cream/70">
+                {stat.label}
+              </p>
             </article>
           ))}
         </div>
