@@ -124,7 +124,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'aahaa',
     client: 'Aahaa Modern Indian Cuisine',
-    coverImageId: 'v1784220815/AHAA_FEB13_CREATIVE_POST_PHOTO_3_juwr7s',
+    coverImageId: 'https://cdn.atriumad.com/clients/AAHA/photos/AAHA_%20JUN06%20Slide%201.jpg',
     coverLogo: '/logos/clients/aahaa.png',
     coverLogoOffsetY: '-5%',
     location: 'Overland Park, Kansas',
