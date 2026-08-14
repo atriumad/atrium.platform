@@ -2,7 +2,7 @@
 import { Eyebrow } from '@atrium/ui'
 import { useEffect, useRef } from 'react'
 import { OutlineCTA } from '@/components/ui/PillCTA'
-import CasePanel, { CaseRow } from '@/components/work/CasePanel'
+import CasePanel from '@/components/work/CasePanel'
 import { gsap } from '@/lib/gsap'
 import type { CaseStudy } from '@/lib/work'
 
@@ -12,16 +12,14 @@ export type Project = {
 }
 
 export default function WorkGrid({ projects }: { projects: Project[] }) {
-  const galleryRef = useRef<HTMLDivElement>(null)
-  const topRow = projects.slice(0, 2)
-  const bottomRow = projects.slice(2)
+  const trackRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!galleryRef.current) return
-    const panels = galleryRef.current.querySelectorAll('.work-panel')
+    if (!trackRef.current) return
+    const cards = trackRef.current.querySelectorAll('.work-panel')
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        panels,
+        cards,
         { y: 32, opacity: 0 },
         {
           y: 0,
@@ -29,7 +27,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
           duration: 0.7,
           stagger: 0.1,
           ease: 'power2.out',
-          scrollTrigger: { trigger: galleryRef.current, start: 'top 85%', once: true },
+          scrollTrigger: { trigger: trackRef.current, start: 'top 85%', once: true },
         },
       )
     })
@@ -38,45 +36,34 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
 
   return (
     <section className="bg-cream px-[var(--gutter)] py-20 md:py-28">
-      <div>
-        <div className="mx-auto mb-14 max-w-[var(--container-max)] md:mb-20">
-          <Eyebrow className="mb-3">Selected Work</Eyebrow>
-          <h2 className="max-w-3xl text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
-            See what changed. <em className="font-serif italic">Not just what shipped.</em>
-          </h2>
-          <div className="mt-10">
-            <OutlineCTA href="/work">See all work</OutlineCTA>
-          </div>
+      <div className="mx-auto mb-14 max-w-3xl text-center md:mb-20">
+        <Eyebrow className="mb-3">Selected Work</Eyebrow>
+        <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+          See what changed. <em className="font-serif italic">Not just what shipped.</em>
+        </h2>
+        <div className="mt-10 flex justify-center">
+          <OutlineCTA href="/work">See all work</OutlineCTA>
         </div>
       </div>
 
-      {/* Inside the page container rather than full-bleed, so it starts on the
-          same line as the heading. The rounded clip makes the two rows read as
-          one block now that they no longer run to the screen edges. */}
-      <div
-        className="mx-auto max-w-[var(--container-max)] overflow-hidden rounded-card"
-        ref={galleryRef}
-      >
-        <CaseRow tall>
-          {topRow.map((project) => (
-            <CasePanel
-              detail={project.result}
+      {/* One row either way. On desktop the cards divide the container, so the
+          whole set is in view at once. On a phone a 9:16 card that fits five
+          across would be a thumbnail, so the row keeps its width and scrolls
+          sideways — the gesture is already natural there. */}
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div
+          className="-mx-[var(--gutter)] flex snap-x snap-mandatory gap-5 overflow-x-auto px-[var(--gutter)] pb-2 md:mx-0 md:snap-none md:overflow-visible md:px-0 md:pb-0"
+          ref={trackRef}
+        >
+          {projects.map((project) => (
+            <div
+              className="work-panel w-[64vw] flex-shrink-0 snap-start opacity-0 sm:w-[40vw] md:w-auto md:min-w-0 md:flex-1 md:flex-shrink"
               key={project.study.slug}
-              revealClass="work-panel opacity-0"
-              study={project.study}
-            />
+            >
+              <CasePanel study={project.study} />
+            </div>
           ))}
-        </CaseRow>
-        <CaseRow>
-          {bottomRow.map((project) => (
-            <CasePanel
-              detail={project.result}
-              key={project.study.slug}
-              revealClass="work-panel opacity-0"
-              study={project.study}
-            />
-          ))}
-        </CaseRow>
+        </div>
       </div>
     </section>
   )
