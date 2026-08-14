@@ -1,5 +1,6 @@
 'use client'
 import { Card, Eyebrow } from '@atrium/ui'
+import { Asterisk } from 'lucide-react'
 import Image from 'next/image'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
@@ -25,22 +26,29 @@ type Props = {
   headline?: ReactNode
 }
 
+// Widths out of eight, not areas: every tile is one row tall, so `size` only
+// says how much of the row it takes. Each row has to add up to 8 — 4+2+2 and
+// 3+3+2 are the two the home page uses.
 const sizeClass: Record<BentoItem['size'], string> = {
-  large:  'md:col-span-2 md:row-span-2',
-  medium: 'md:col-span-1 md:row-span-2',
-  small:  'md:col-span-1 md:row-span-1',
+  large: 'md:col-span-4',
+  medium: 'md:col-span-3',
+  small: 'md:col-span-2',
 }
 
-const titleClass: Record<BentoItem['size'], string> = {
-  large: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
-  medium: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
-  small: 'text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15]',
-}
-
+// Only the widest tile needs a measure; at 3 and 2 columns the tile is already
+// narrower than a comfortable line.
 const copyWidthClass: Record<BentoItem['size'], string> = {
   large: 'max-w-3xl',
-  medium: 'max-w-sm',
-  small: 'max-w-xs',
+  medium: 'max-w-none',
+  small: 'max-w-none',
+}
+
+// The share of the viewport each tile actually occupies, so a 2-column tile
+// does not download the 4-column tile's image.
+const imageSizes: Record<BentoItem['size'], string> = {
+  large: '(min-width: 768px) 50vw, 100vw',
+  medium: '(min-width: 768px) 38vw, 100vw',
+  small: '(min-width: 768px) 25vw, 100vw',
 }
 
 export default function BentoGrid({ items, eyebrow, headline }: Props) {
@@ -76,7 +84,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
           </div>
         )}
 
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 auto-rows-[240px] gap-5">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-8 auto-rows-[22rem] gap-5">
           {items.map((item, i) => {
             // A photo tile carries its own ground, so it takes the dark tone
             // and reads as one of the dark cards for text purposes.
@@ -87,13 +95,10 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                 key={item.title as unknown as string}
                 tone={tone}
                 elevation={isDark ? 'float' : 'soft'}
-                // Title top, copy bottom, so the copy works the whole tile
-                // rather than leaving the bottom empty. The medium tiles are
-                // the exception: they are tall and narrow, and spreading them
-                // opens a gap nothing fills.
-                className={`bento-card group relative flex flex-col overflow-hidden opacity-0 ${
-                  item.size === 'medium' ? 'gap-3' : 'justify-between gap-6'
-                } ${sizeClass[item.size]}`}
+                // Title top, copy bottom, on every tile. Now that they are all
+                // one row tall the split lands the same everywhere, so the row
+                // reads as one band of headings over one band of copy.
+                className={`bento-card group relative flex flex-col justify-between gap-6 overflow-hidden opacity-0 ${sizeClass[item.size]}`}
               >
                 {item.image && (
                   <>
@@ -103,7 +108,7 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                       fill
                       // The first tile is the LCP element on the home page.
                       priority={i === 0}
-                      sizes="(min-width: 768px) 50vw, 100vw"
+                      sizes={imageSizes[item.size]}
                       src={item.image}
                     />
                     {/* Two layers: a light flat wash so the copy holds anywhere
@@ -114,13 +119,25 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                   </>
                 )}
 
-                <h3
-                  className={`relative m-0 ${titleClass[item.size]} ${
-                    item.image ? 'text-cream' : isDark ? 'text-lime' : ''
-                  }`}
-                >
-                  {item.title}
-                </h3>
+                {/* The marker is what a plain tile has instead of a picture —
+                    it gives the heading a right edge to sit against, so the
+                    filled tiles keep the same top line as the photo ones. */}
+                <div className="relative flex items-start justify-between gap-4">
+                  <h3
+                    className={`m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] ${
+                      item.image ? 'text-cream' : isDark ? 'text-lime' : ''
+                    }`}
+                  >
+                    {item.title}
+                  </h3>
+                  {!item.image && (
+                    <Asterisk
+                      aria-hidden="true"
+                      className="mt-1.5 h-4 w-4 flex-shrink-0 opacity-45"
+                      strokeWidth={1.5}
+                    />
+                  )}
+                </div>
                 <p
                   className={`relative m-0 text-sm leading-relaxed ${copyWidthClass[item.size]} ${
                     // Over a photo, 75% opacity gives out wherever the picture

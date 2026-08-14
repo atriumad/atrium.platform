@@ -14,10 +14,34 @@ type Props = {
   className?: string
 }
 
+/** `sm` exists for the header, whose row is 56px — the same height the default
+ *  badge and its padding already add up to. Shrinking the badge is what buys
+ *  the button its breathing room there; everything else is the same button. */
+type PillSize = 'default' | 'sm'
+
+const BADGE: Record<PillSize, string> = {
+  default: 'h-11 w-11',
+  sm: 'h-8 w-8 text-sm',
+}
+
+// Padding is set against the badge so the arrow stays inset by the same
+// hairline at both sizes.
+const PILL_PADDING: Record<PillSize, string> = {
+  default: '',
+  sm: 'py-1 pr-1 pl-5 text-xs gap-3',
+}
+
 /** The site's lead call to action: a pill with the arrow inset against its
  *  right edge. Kept in one place because the badge is markup, not a variant —
  *  repeating it per call site is how the two drift apart. */
-export function PillCTA({ href, children, tone = 'on-light', external, className }: Props) {
+export function PillCTA({
+  href,
+  children,
+  tone = 'on-light',
+  external,
+  className,
+  size = 'default',
+}: Props & { size?: PillSize }) {
   const onDark = tone === 'on-dark'
 
   // On hover the badge grows until it has swallowed the pill, so the button
@@ -31,14 +55,14 @@ export function PillCTA({ href, children, tone = 'on-light', external, className
     <>
       <span
         aria-hidden="true"
-        className="-z-10 -translate-y-1/2 absolute top-1/2 right-1.5 h-11 w-11 origin-center scale-100 rounded-full bg-lime transition-transform duration-500 ease-atrium group-hover:scale-[16] motion-reduce:transition-none"
+        className={`-z-10 -translate-y-1/2 absolute top-1/2 right-1.5 origin-center scale-100 rounded-full bg-lime transition-transform duration-500 ease-atrium group-hover:scale-[16] motion-reduce:transition-none ${BADGE[size]}`}
       />
       <span className="relative transition-colors duration-300 group-hover:text-charcoal">
         {children}
       </span>
       <span
         aria-hidden="true"
-        className={`relative flex h-11 w-11 items-center justify-center rounded-full transition-colors duration-300 group-hover:bg-charcoal group-hover:text-lime ${
+        className={`relative flex items-center justify-center rounded-full transition-colors duration-300 group-hover:bg-charcoal group-hover:text-lime ${BADGE[size]} ${
           onDark ? 'bg-ink text-cream' : 'bg-cream text-charcoal'
         }`}
       >
@@ -48,7 +72,7 @@ export function PillCTA({ href, children, tone = 'on-light', external, className
   )
 
   const shared = {
-    className: `group relative isolate overflow-hidden ${className ?? ''}`,
+    className: `group relative isolate overflow-hidden ${PILL_PADDING[size]} ${className ?? ''}`,
     // The circle expanding out of the badge is the hover; lifting the whole
     // pill on top of it reads as two animations fighting.
     lift: false,
