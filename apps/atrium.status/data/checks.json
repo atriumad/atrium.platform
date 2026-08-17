@@ -1,0 +1,43 @@
+{
+  "recordedAt": "2026-08-17T20:55:45.849Z",
+  "commit": "a59f84ee6b3d54ff6817ba4247a5ac4bd342c632",
+  "branch": "feature/design-system",
+  "dirty": true,
+  "results": [
+    {
+      "task": "typecheck",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 21496,
+      "summary": "passed",
+      "failedWorkspaces": []
+    },
+    {
+      "task": "lint",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 3452,
+      "summary": "2 warnings",
+      "failedWorkspaces": []
+    },
+    {
+      "task": "test",
+      "ok": false,
+      "exitCode": 1,
+      "durationMs": 6280,
+      "summary": "218 pass, 4 fail",
+      "failedWorkspaces": [
+        "@atrium/grader",
+        "@atrium/ui"
+      ]
+    },
+    {
+      "task": "build",
+      "ok": true,
+      "exitCode": 0,
+      "durationMs": 141177,
+      "summary": "passed",
+      "failedWorkspaces": []
+    }
+  ]
+}

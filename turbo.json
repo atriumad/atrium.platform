@@ -22,6 +22,13 @@
     },
     "db:generate": {
       "cache": false
+    },
+    "snapshot": {
+      "cache": false,
+      "outputs": ["data/repo-snapshot.generated.json"]
+    },
+    "checks:snapshot": {
+      "cache": false
     }
   }
 }

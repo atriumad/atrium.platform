@@ -22,7 +22,9 @@
     "db:generate": "cd packages/infrastructure && bunx prisma generate",
     "db:migrate": "cd packages/infrastructure && bunx prisma migrate dev",
     "db:studio": "cd packages/infrastructure && bunx prisma studio",
-    "deploy:cdn": "turbo run deploy --filter=@atrium/cdn"
+    "deploy:cdn": "turbo run deploy --filter=@atrium/cdn",
+    "dev:status": "turbo run dev --filter=@atrium/status",
+    "status:snapshot": "turbo run checks:snapshot --filter=@atrium/status"
   },
   "workspaces": [
     "apps/*",

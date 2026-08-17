@@ -1,0 +1,37 @@
+{
+  "name": "@atrium/status",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "bun run scripts/snapshot.ts && next dev --port 3030",
+    "build": "bun run scripts/snapshot.ts && next build",
+    "start": "next start --port 3030",
+    "lint": "biome check .",
+    "typecheck": "tsc --noEmit",
+    "snapshot": "bun run scripts/snapshot.ts",
+    "checks:snapshot": "bun run scripts/checks-snapshot.ts"
+  },
+  "dependencies": {
+    "@atrium/ui": "workspace:*",
+    "@upstash/redis": "^1.38.2",
+    "next": "16.2.9",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "ignoreScripts": [
+    "sharp",
+    "unrs-resolver"
+  ],
+  "trustedDependencies": [
+    "sharp",
+    "unrs-resolver"
+  ]
+}

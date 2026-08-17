@@ -14,7 +14,7 @@ export const clients: Client[] = [
   { name: 'Hotel Kansas City', logo: '/logos/clients/htkc.png', width: 299, height: 30 },
   { name: 'Grand Coffee', logo: '/logos/clients/grco.png', width: 317, height: 66 },
   { name: 'Town Co', logo: '/logos/clients/ttco.svg', width: 175, height: 62 },
-  { name: 'Chick-in Waffle', logo: '/logos/clients/chwf.png', width: 144, height: 68 },
+  { name: 'Chick-in-Waffle', logo: '/logos/clients/chwf.png', width: 144, height: 68 },
   { name: 'Jerusalem Cafe', logo: '/logos/clients/jeca.png', width: 374, height: 23 },
   { name: 'Old Shawnee Pizza', logo: '/logos/clients/ospz.png', width: 121, height: 102 },
   { name: 'Farm Fresh', logo: '/logos/clients/ffrb.png', width: 153, height: 94 },

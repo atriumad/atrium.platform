@@ -35,7 +35,7 @@ const selectedWorkDetails = [
   { slug: 'taha', result: 'Single campaign. Measurable revenue lift.' },
   { slug: 'aahaa', result: 'Visual identity that found its voice.' },
   { slug: 'hotel-kc', result: 'Two-part campaign storytelling.' },
-  { slug: 'grand-coffee', result: 'Brand system from the ground up.' },
+  { slug: 'chick-in-waffle', result: '$74K+ in email-attributed sales.' },
 ] as const
 
 const selectedWork: Project[] = selectedWorkDetails.flatMap(({ slug, ...details }) => {
