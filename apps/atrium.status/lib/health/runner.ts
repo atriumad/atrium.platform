@@ -173,6 +173,38 @@ export async function sweep(): Promise<SweepResult> {
   return { runs, opened, resolved, durationMs: Date.now() - startedAt }
 }
 
+/**
+ * How old the last sweep may be before a page view refreshes it in the
+ * background. Vercel's Hobby plan only allows one cron a day, so on that plan
+ * this is what actually keeps the board current: whoever looks at it refreshes
+ * it. A real scheduler still matters for catching an outage nobody is watching.
+ */
+export const STALE_AFTER_MS =
+  Number(process.env.SWEEP_STALE_AFTER_MINUTES ?? 10) * 60 * 1000
+
+/**
+ * Sweeps only when the stored data is older than `maxAgeMs`, and only if it
+ * wins a short lock — ten people opening the dashboard at once cause one sweep
+ * between them, not ten. Returns null when it decided not to run.
+ */
+export async function sweepIfStale(maxAgeMs = STALE_AFTER_MS): Promise<SweepResult | null> {
+  const healthStore = store()
+  const latest = await healthStore.latest(monitorIds())
+
+  const newest = Object.values(latest)
+    .filter((run): run is MonitorRun => Boolean(run))
+    .reduce((max, run) => Math.max(max, Date.parse(run.at)), 0)
+
+  if (Date.now() - newest < maxAgeMs) return null
+
+  // Hold the lock for the staleness window (capped), so a failed sweep cannot
+  // pin the lock open for long.
+  const ttlSeconds = Math.min(600, Math.max(30, Math.ceil(maxAgeMs / 1000)))
+  if (!(await healthStore.acquireLock("sweep", ttlSeconds))) return null
+
+  return sweep()
+}
+
 /** Runs one monitor on demand without touching incident state. */
 export async function probe(monitorId: string): Promise<MonitorRun | null> {
   const target = findMonitor(monitorId)

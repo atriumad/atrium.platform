@@ -5,7 +5,7 @@ import type { SystemDefinition } from "@/lib/health/types"
  * `https://atrium.agency`, does not resolve today — pointing monitors at it
  * would paint the dashboard red forever and teach everyone to ignore it.
  */
-const PROD = process.env.NEXT_PUBLIC_WEBSITE_URL ?? ""
+const PROD = (process.env.NEXT_PUBLIC_WEBSITE_URL ?? "").replace(/\/$/, "")
 
 export const atriumWebsite: SystemDefinition = {
   id: "atrium-website",

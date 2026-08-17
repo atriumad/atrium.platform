@@ -28,11 +28,29 @@ systems — they are the storage keys — and the registry validates that at imp
       title: "How checks actually run",
       body: `\`/api/cron/check\` runs every enabled monitor in parallel, classifies each result as
 up / degraded / down, writes the run to Upstash, and opens or closes an incident when the status
-flips. Vercel Cron calls it on a schedule; the request is rejected unless it carries
-\`CRON_SECRET\`.
+flips. The request is rejected unless it carries \`CRON_SECRET\`.
 
-Nothing else writes. The pages only read, so a page view never triggers a probe — the numbers you
-see are what the last scheduled run measured.`,
+A page view never probes directly. What it can do is notice the stored data has gone stale and
+schedule a sweep *after* the response is sent — so looking at the board can refresh it, but never
+slows it down, and the numbers on screen are always the ones that were measured.`,
+    },
+    {
+      title: "Scheduling, and the Hobby-plan problem",
+      body: `Vercel's Hobby plan allows exactly one cron a day, which is a report, not a health
+check. Three layers cover it, in increasing order of reliability:
+
+1. **Vercel Cron**, daily, from \`vercel.json\`. It is the floor, and it is what Hobby permits.
+2. **Stale-triggered sweeps.** Opening the dashboard or calling \`GET /api/health\` refreshes the
+   data in the background when the last sweep is older than \`SWEEP_STALE_AFTER_MINUTES\`
+   (10 by default). A short lock in Upstash means ten people opening the page cause one sweep
+   between them, not ten.
+3. **A GitHub Actions heartbeat** at \`.github/workflows/status-sweep.yml\`, every 10 minutes,
+   calling the same endpoint with the same secret. The repository is public, so those minutes are
+   free. It needs two repository secrets: \`STATUS_URL\` and \`CRON_SECRET\`.
+
+Layer 2 alone keeps the board honest for anyone looking at it. Layer 3 is what catches an outage
+while nobody is looking, which is the only reason a status page exists. On a Pro plan, set the real
+schedule in \`vercel.json\` and delete the workflow.`,
     },
     {
       title: "Storage",
@@ -88,10 +106,17 @@ those endpoints refuse outside development. The deployed app shows the snapshot 
     },
     {
       name: "CRON_SECRET",
-      where: "Vercel project env",
-      purpose: "Shared secret the cron endpoint requires.",
+      where: "Vercel project env + GitHub repository secret",
+      purpose: "Shared secret the sweep endpoint requires.",
       status: "missing",
-      note: "Vercel sends it as a Bearer token on scheduled invocations.",
+      note: "Vercel sends it as a Bearer token on scheduled invocations; the GitHub Actions heartbeat sends the same value.",
+    },
+    {
+      name: "SWEEP_STALE_AFTER_MINUTES",
+      where: "Vercel project env",
+      purpose: "How old the data may get before a page view refreshes it in the background.",
+      status: "missing",
+      note: "Defaults to 10. Lower means fresher and more outbound requests; higher means a quieter board that can be behind.",
     },
     {
       name: "NEXT_PUBLIC_WEBSITE_URL / NEXT_PUBLIC_GRADER_URL",
@@ -112,7 +137,7 @@ those endpoints refuse outside development. The deployed app shows the snapshot 
       id: "status-self",
       label: "Status API",
       meaning: "This dashboard is down, so nothing else is being watched either.",
-      url: `${process.env.NEXT_PUBLIC_STATUS_URL ?? "http://localhost:3030"}/api/health`,
+      url: `${(process.env.NEXT_PUBLIC_STATUS_URL ?? "http://localhost:3030").replace(/\/$/, "")}/api/health`,
       expectStatus: [200],
       enabled: Boolean(process.env.NEXT_PUBLIC_STATUS_URL),
       disabledReason:

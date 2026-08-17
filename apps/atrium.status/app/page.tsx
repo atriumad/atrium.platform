@@ -1,17 +1,25 @@
 import Link from "next/link"
+import { after } from "next/server"
 import { ProbeButton } from "@/app/components/ProbeButton"
 import { SweepButton } from "@/app/components/SweepButton"
 import { STATUS_TOKENS, StatusDot, StatusPill } from "@/app/components/status"
 import { Eyebrow, Panel } from "@/app/components/ui"
 import { overview } from "@/lib/health/query"
+import { sweepIfStale } from "@/lib/health/runner"
 import { CATEGORY_LABELS, type SystemCategory, worstStatus } from "@/lib/health/types"
 import { formatDuration, formatRelative } from "@/lib/health/uptime"
 
 export const dynamic = "force-dynamic"
+export const maxDuration = 60
 
 const CATEGORY_ORDER: SystemCategory[] = ["app", "infrastructure", "third-party", "client"]
 
 export default async function StatusPage() {
+  // Refresh in the background once the response is out, and only if the stored
+  // data has gone stale. This is what keeps the board current on a plan whose
+  // cron only fires once a day.
+  after(() => sweepIfStale())
+
   const data = await overview()
   const live = data.systems
     .map((system) => system.status)

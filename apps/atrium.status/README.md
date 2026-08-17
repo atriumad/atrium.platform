@@ -37,8 +37,28 @@ incident when the status flips. It is the only thing that writes.
   incident — it is a warning, not an outage.
 - **Paused** is a monitor with `enabled: false`. It always carries a
   `disabledReason`, which the dashboard shows instead of a false green.
-- A page view never triggers a probe. "Check now" does, on one monitor, and
-  records the run without touching incident state.
+- A page view never probes inline. It can schedule a sweep *after* the response
+  when the stored data is older than `SWEEP_STALE_AFTER_MINUTES`, guarded by a
+  lock so concurrent viewers cause one sweep between them.
+- "Check now" runs a single monitor and records it, without touching incidents.
+
+## Scheduling
+
+Vercel's Hobby plan allows one cron **per day** — a deploy is rejected outright
+with a more frequent expression. Three layers cover that:
+
+| Layer | Where | Frequency |
+| --- | --- | --- |
+| Vercel Cron | `vercel.json` | daily (the Hobby ceiling) |
+| Stale-triggered sweep | dashboard view, `GET /api/health` | on demand, at most every `SWEEP_STALE_AFTER_MINUTES` |
+| GitHub Actions heartbeat | `.github/workflows/status-sweep.yml` | every 10 minutes |
+
+The workflow needs two repository secrets — `STATUS_URL` (no trailing slash) and
+`CRON_SECRET` — under Settings → Secrets and variables → Actions. The repo is
+public, so those Actions minutes are free.
+
+On a Pro plan: put the real schedule back in `vercel.json` and delete the
+workflow.
 
 ## Endpoints
 
@@ -72,9 +92,9 @@ incident when the status flips. It is the only thing that writes.
 | `NEXT_PUBLIC_CLIENT_CHWF_URL` | per client site | One variable per client monitor. |
 | `NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME` | optional | Defaults to the current cloud; only used to build the probe URL. |
 
-**Cron** — `vercel.json` schedules `/api/cron/check` every 10 minutes. Vercel's
-Hobby plan only runs crons once a day; on Pro the 10-minute schedule works as
-written. Change the `schedule` field to match the plan you are on.
+**Cron** — see [Scheduling](#scheduling) above. `vercel.json` is set to daily so
+a Hobby deploy is accepted; the GitHub Actions heartbeat provides the real
+cadence.
 
 **After the first deploy**, trigger one sweep manually so the board has data:
 
