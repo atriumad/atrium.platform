@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import CTABanner from '@/components/sections/CTABanner'
 import TransitionLink from '@/components/ui/TransitionLink'
-import CaseCover from '@/components/work/CaseCover'
 import DragGallery from '@/components/work/DragGallery'
 import VideoMarquee from '@/components/work/VideoMarquee'
 import { CTA } from '@/lib/cta'
@@ -113,7 +112,7 @@ function PhotoGallerySection({ study }: { study: CaseStudy }) {
             <div className="lg:col-span-7">
               <Eyebrow className="mb-6">Photo gallery</Eyebrow>
               <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-                The brand, <em>in frame.</em>
+                {study.galleryHeadline ?? <>The brand, <em>in frame.</em></>}
               </h2>
             </div>
             <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
@@ -249,7 +248,7 @@ export function TestimonialSection({ study }: { study: CaseStudy }) {
       <div className="mx-auto max-w-3xl text-center">
         <Eyebrow className="mb-6">Client testimonial</Eyebrow>
         <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-          More than an agency. <em>A true partner.</em>
+          {study.testimonialHeadline ?? <>More than an agency. <em>A true partner.</em></>}
         </h2>
 
         <blockquote className="m-0 mt-10">
@@ -258,10 +257,15 @@ export function TestimonialSection({ study }: { study: CaseStudy }) {
           </p>
           {/* `text-center` is set again here rather than inherited: the
               browser's own blockquote/footer styling resets alignment, so the
-              attribution drifts left of the quote it belongs to. */}
+              attribution drifts left of the quote it belongs to.
+
+              `mx-auto` is what actually centres them: globals.css caps every
+              `main p` at 72ch, and a capped block with default margins hugs the
+              left edge — text-align only centres the text inside that narrower
+              box. The serif line measures its own 72ch, so it drifted furthest. */}
           <footer className="mt-8 text-center">
-            <p className="m-0 text-charcoal">{testimonial.name}</p>
-            <p className="m-0 mt-1 font-serif text-muted italic">{testimonial.role}</p>
+            <p className="m-0 mx-auto text-charcoal">{testimonial.name}</p>
+            <p className="m-0 mx-auto mt-1 font-serif text-muted italic">{testimonial.role}</p>
           </footer>
         </blockquote>
       </div>
@@ -269,49 +273,29 @@ export function TestimonialSection({ study }: { study: CaseStudy }) {
   )
 }
 
+/** One line out. The cover, the summary and the service list were all a
+ *  second case study competing with the one just read — the name and the way
+ *  through is the whole job here. */
 export function NextCasePreview({ nextStudy }: { nextStudy: CaseStudy }) {
   return (
     <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
-      <div className="mx-auto max-w-[var(--container-max)]">
-        <div className="mb-12 border-t border-line pt-8 md:mb-16">
-          <Eyebrow>Continue exploring</Eyebrow>
-        </div>
+      <div className="mx-auto max-w-3xl text-center">
+        <Eyebrow className="mb-6">Next case study</Eyebrow>
 
         <TransitionLink
-          href={`/work/${nextStudy.slug}`}
-          className="group grid grid-cols-1 gap-10 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber focus-visible:ring-offset-4 lg:grid-cols-12 lg:items-stretch lg:gap-16"
           aria-label={`Read next case study: ${nextStudy.client}`}
+          className="group inline-flex items-baseline gap-4 no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-amber focus-visible:ring-offset-4"
+          href={`/work/${nextStudy.slug}`}
         >
-          <div className="h-full lg:col-span-7">
-            <CaseCover
-              className="min-h-[20rem] rounded-card-sm md:min-h-[32rem]"
-              study={nextStudy}
-            />
-          </div>
-
-          <div className="flex h-full flex-col justify-between gap-14 border-t border-line pt-8 lg:col-span-5">
-            <div>
-              <Eyebrow className="mb-5">Next case study</Eyebrow>
-              <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-                {nextStudy.client}
-              </h2>
-            </div>
-
-            <div>
-              <p className="text-[clamp(1.05rem,1.4vw,1.25rem)] leading-relaxed text-body">
-                {getCaseSummary(nextStudy)}
-              </p>
-              <div className="mt-8 border-t border-line pt-6">
-                <ServiceList services={nextStudy.serviceTags} />
-              </div>
-              <span className="mt-8 inline-flex items-center gap-3 text-[0.875rem] text-charcoal">
-                View case study
-                <span className="transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">
-                  →
-                </span>
-              </span>
-            </div>
-          </div>
+          <h2 className="m-0 text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+            {nextStudy.client}
+          </h2>
+          <span
+            aria-hidden="true"
+            className="text-[clamp(1.6rem,2.6vw,2.4rem)] text-charcoal transition-transform duration-300 ease-atrium group-hover:translate-x-2 motion-reduce:transition-none"
+          >
+            →
+          </span>
         </TransitionLink>
       </div>
     </section>

@@ -30,7 +30,7 @@ const resourceGroups = [
   {
     label: 'Customer Stories',
     description: 'Long-form case studies with interviews, context, and data.',
-    items: ['Taco Naco KC', "T'ÄHÄ Mexican Kitchen", 'Old Shawnee Pizza', 'Chick-in Waffle', 'Jerusalem Cafe'],
+    items: ['Taco Naco KC', "T'ÄHÄ Mexican Kitchen", 'Old Shawnee Pizza', 'Chick-in-Waffle', 'Jerusalem Cafe'],
   },
 ]
 

@@ -116,20 +116,36 @@ export default function CasePanel({
         )}
       </div>
 
-      <div className="mt-4 flex items-center justify-between gap-4">
-        <p className="m-0 text-[1.0625rem] text-charcoal leading-snug">{study.client}</p>
+      {/* The label is taken out of the flow rather than sat beside the name.
+          Sharing the row meant the longest client name lost the argument for
+          width and wrapped the moment the label arrived. Now the name holds
+          one line whatever its length, and the label comes in over it. */}
+      <div className="relative mt-4 flex items-center">
+        <p className="m-0 min-w-0 flex-1 truncate pr-8 text-[1.0625rem] text-charcoal leading-snug">
+          {study.client}
+        </p>
 
-        <span className="flex flex-shrink-0 items-center gap-1.5 text-charcoal">
-          {/* The label is the hover state; the arrow is always there, so the
-              card reads as clickable before anyone touches it. Animating
-              max-width rather than mounting the span keeps the row from
-              jumping as the label arrives. */}
-          <span className="max-w-0 overflow-hidden whitespace-nowrap text-[0.875rem] underline underline-offset-4 opacity-0 transition-all duration-300 ease-atrium group-focus-visible:max-w-[6rem] group-focus-visible:opacity-100 group-hover:max-w-[6rem] group-hover:opacity-100 motion-reduce:transition-none">
+        <span className="absolute inset-y-0 right-0 flex items-center gap-1.5 text-charcoal">
+          {/* Frosts whatever the label lands on. Masked so it dissolves in
+              from the left instead of cutting the name at a hard edge. */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 right-0 left-[-2.75rem] bg-cream/55 opacity-0 backdrop-blur-[3px] transition-opacity duration-300 ease-atrium group-focus-visible:opacity-100 group-hover:opacity-100 motion-reduce:transition-none"
+            style={{
+              maskImage: 'linear-gradient(to right, transparent, black 45%)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 45%)',
+            }}
+          />
+
+          {/* The arrow is always there, so the card reads as clickable before
+              anyone touches it. Animating max-width rather than mounting the
+              span keeps the arrow from jumping as the label arrives. */}
+          <span className="relative max-w-0 overflow-hidden whitespace-nowrap text-[0.875rem] underline underline-offset-4 opacity-0 transition-all duration-300 ease-atrium group-focus-visible:max-w-[6rem] group-focus-visible:opacity-100 group-hover:max-w-[6rem] group-hover:opacity-100 motion-reduce:transition-none">
             See detail
           </span>
           <ArrowUpRight
             aria-hidden="true"
-            className="h-4 w-4 transition-transform duration-300 ease-atrium group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            className="relative h-4 w-4 transition-transform duration-300 ease-atrium group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             strokeWidth={1.75}
           />
         </span>

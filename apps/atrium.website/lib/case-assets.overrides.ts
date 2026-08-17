@@ -55,6 +55,117 @@ export const caseAssetOverrides: Record<string, CaseAssets> = {
       'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_JUN04%20Compialion%20Food%28Serving%C2%A0and%C2%A0lifestyle%29.mp4',
     ],
   },
+  // Filenames carry non-breaking spaces (%C2%A0) exactly as they sit on the
+  // CDN — they came from the server listing, not from retyping. Retyped names
+  // 404: a plain %20 where the file has %C2%A0 is a different path.
+  'chick-in-waffle': {
+    images: [
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20APR14_You%20have%20a%20problem%C2%A0_.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20APR16_AI%20-%20CREATIVE%C2%A01.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20APR17_AI%20-%20CREATIVE%C2%A02.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20APR20_HIGHLY%20ADDICTIVE%20CONTENT.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20APR21_PHOTO1.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20APR22_Photo%202.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20AUG16%20Slide%201.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20AUG17%20Chicken%20Wing%20Day%20(Jul%C2%A029).jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20AUG19%20Therapy%20is%20expensive.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20JUL01%20Slide%201.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20JUL10%20Graphic%20for%20AD%203%20drink%20and%20bun.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20JUL25%20Fathers%20Day_%20(1).jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20JUN20%20Redesign%20Post.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20JUN23%20REDESIGNING%20POST.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20JUN24%20Do%20you%20wanna%20take%20the%20risk.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20JUN27%20THE%20WRAP%20CONVO%C2%A0PREP.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20JUN28%20Anniversary%202.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20MAY13_Creative%201_.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20MAY14_Creative%202.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20MAY19_Bubble%20and%20Belgium%C2%A0wafffle_.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_APR04%20CHAT%20GPT.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_APR11%20MONTAGE%20OF%20THE%203%20HANDS.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_AUG18%20Slide%201.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_JUL05%20FUNNY%203.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_MAR14%20Slide%202.jpg',
+      'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_MAR14%20Slide%203.jpg',
+    ],
+    // First entry is the cover reel: CasePanel fills the Selected Work card
+    // with videoIds[0], and the case-study marquee opens on it.
+    //
+    // Three clips ship twice on the CDN, once with a " (1)" suffix. Only one
+    // copy of each is listed — the marquee would otherwise play it back to back.
+    videos: [
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20APR24%20GARLIC%20PARM%20CHICK%20IN%20BUN-%20PREPARATION.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG04%20My%20inner%20voice%C2%A0trend.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG05%20POV%20ASMR%201.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG06%20POV%20ASMR%202.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG09%20When%20im%20hungry%C2%A0Skit.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG14%20Chicken%20Wing%20Day%20(Jul%C2%A029).mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20SEP17%20Skit-%20social%20media%C2%A0girl.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20AUG07%20Dumb%20and%20dumber%20skit.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20AUG13%20Mac%20%26%20Cheese%20Day%20(Jul%C2%A014).mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL12%20POV%20Preparation.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL15%20THE%20CLASSIC%20COMBO%20PREP%C2%A0Skit.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL17%20Dipping%20a%20lot%20of%C2%A0syrup.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL19%20The%20Favorite%20Costumer%C2%A0Skit.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL22%20FOOD%20DROP%20ON%20THE%20FLOOR%20-%20CHICK-IN%C2%A0QUESO.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL23%20WITH%20THE%20BOSS%C2%A0Skit.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN06%20Giveaway%20winner_1.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN14%20Dennis%20Favorite%20Thing%20on%20the%20menu%C2%A0-.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN18%20THE%20TENDER%20COMBO%C2%A0PREP.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN32%20Giveaway-.mp4',
+    ],
+  },
+  // Cloudinary's copy of this client is gone (the account returns
+  // "disabled customer"), so the CDN folder is the only source now. Names come
+  // from the server listing — several carry non-breaking spaces (%C2%A0), and
+  // the APR18 reel really was uploaded with its title doubled in the filename.
+  'don-chuys': {
+    images: [
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20AUG09%20O%E2%80%99fallon%20Now%20open.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20AUG19%20Place%20photo%20post.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20AUG21%20Photo%202.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20AUG22%20Happy%20Hour%20Promo%C2%A01%60.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20AUG23%20Happy%20Hour%20Promo%C2%A02.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20AUG25%20Taco%20Tuesday%20Promo.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20JUL02%20Slide%201.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20JUL02%20Slide%202.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20JUL09%20Chilaquiles%20graphic.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20JUL14%20Flor%20de%20Jamaica%C2%A0margarita.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20JUL23%20Taco%20Tuesday%20new%20offers.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20JUL24%20Taco%20Tuesday%20new%20offers%202.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20JUN02%20Photo%201.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20JUN04%20Slide%203.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20MAY07%20Mar%20wars%20OP.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20MAY09%20Tradition%20fire%20flavor.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20MAY10%20appetizers.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20MAY10%20DJ%205%20MAYO.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20MAY11%20Friday%20Mood.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20MAY14%20Slide%201.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_%20MAY14%20Slide%203.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_APR08%20Cucumber%20Marg.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_FEB21%20Valentines%20Day%20Graphic.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_FEB27%20MARGARITA%202%20CON%20CLASE.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_HIRING%20Banner.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_JAN02_PHOTO%20GRAPHIC%201%20WHOLE%20TABLE%20.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_JAN21_CREATIVE_CAPTION_MULTICARD_GRAPHIC.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_MAR21%20Full%20tabel.jpg',
+      'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_MAR26%20Photo%20graphic.jpg',
+    ],
+    // Cover reel first: the ambience compilation carries the "sell the
+    // destination" angle the case study opens on.
+    videos: [
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20JUL20%20Compilation%20Ambience%202.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR18%20MANGO%20VODKA%20FLIGTH%20-%20DRINK%201%20PREPDCOP_%20APR18%20MANGO%20VODKA%20FLIGTH%20-%20DRINK%201%20PREP.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR24%20you%20walked%20in.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR27%20BORN%20TO%20EAT%20-%20FORCED%20TO%20SEND%20EMAILS.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG01%20Taco%20Tuesday.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG12%20Exotic%20Drinks%20Compilation.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG18%20Lunch%20Special.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20JUL26%20Compilation%20for%20the%C2%A0truck.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAY01%205%20mayo%20reel-.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAY08%20Serving.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAYHappy%20Hour%20is%20waiting-.mp4',
+    ],
+  },
   'taco-naco': {
     images: [
       'https://cdn.atriumad.com/clients/TNKC/photos/Artboard%201.jpg',

@@ -49,8 +49,12 @@ export type CaseStudy = {
   heroHeadline?: string
   /** Heading over the challenge/solution pair. */
   storyHeadline?: string
+  /** Heading over the photo gallery. Falls back to the section default. */
+  galleryHeadline?: string
   /** Standfirst under the photo-gallery heading. */
   galleryNote?: string
+  /** Heading over the client testimonial. Falls back to the section default. */
+  testimonialHeadline?: string
   testimonial?: CaseTestimonial
   metrics: CaseMetric[]
   /** Two short claims for the card in Selected Work, where a full metric label
@@ -222,25 +226,58 @@ export const caseStudies: CaseStudy[] = [
   // ─── 4. DON CHUY'S ──────────────────────────────────────────────────────
   {
     slug: 'don-chuys',
-    client: 'Don Chuy’s Fresh Méx & Cantina',
-    coverImageId: 'v1784309494/DCOP_FEB17_Slide_2_fe4upi',
+    client: 'Don Chuy’s Fresh Mex & Cantina',
+    highlights: ['1M+ Social Impressions', '7.2K+ Social Followers'],
+    coverImageId: 'https://cdn.atriumad.com/clients/DCOP/photos/DCOP_MAR21%20Full%20tabel.jpg',
     coverLogo: '/logos/clients/dcop.png',
     category: 'Full-Service Mexican · Multi-Location Growth',
-    serviceTags: ['Brand Strategy', 'Content', 'Social', 'Google'],
-    resultHeadline: '+839% impressions. +302% Instagram growth. +595% customer actions.',
-    intro:
-      'While competitors focused on food photography alone, we positioned Don Chuy’s around what customers were actually buying: the experience.',
+    serviceTags: [
+      'Professional Content',
+      'Brand Strategy',
+      'Social Media Marketing',
+      'UGC Collabs',
+      'Content Strategy',
+    ],
+    heroHeadline: 'Turning bold flavor into a brand people follow.',
+    resultHeadline: '1M+ social impressions. 7.2K+ followers. +40% revenue growth.',
+    storyHeadline: 'From restaurant experience to digital momentum.',
+    challenge:
+      'Don Chuy’s already had what mattered—the food, cocktails, atmosphere, and personality. The opportunity was translating that energy into a digital presence that felt just as distinctive, while building a larger audience and creating stronger visibility around the restaurant.',
+    solution:
+      'We built a content-first system around the Don Chuy’s experience—combining professional content, social media strategy, creative storytelling, and consistent publishing. Food, cocktails, culture, and atmosphere became the foundation for a recognizable social presence designed to capture attention, build community, and keep Don Chuy’s top of mind.',
     story: [
-      'By showcasing the atmosphere, bar program, social energy, signature drinks, weekly promotions, and the overall destination appeal of the restaurant, we helped transform awareness into measurable business growth—supporting a period that culminated in the brand opening its fourth location.',
+      'We built a content-first system around the Don Chuy’s experience—combining professional content, social media strategy, creative storytelling, and consistent publishing. Food, cocktails, culture, and atmosphere became the foundation for a recognizable social presence designed to capture attention, build community, and keep Don Chuy’s top of mind.',
     ],
     metrics: [
-      { number: '+839%', label: 'total impressions generated (876,640 organic impressions)' },
-      { number: '+302%', label: 'Instagram audience growth (1,305 → 5,253 followers)' },
-      { number: '+595%', label: 'customer actions from Google Business (22,860 actions)' },
-      { number: '+1,430%', label: 'Instagram impressions (401,940 total)' },
-      { number: '+4,671%', label: 'website visits from Google (10,400 visits)' },
-      { number: '+610%', label: 'total interactions (30,620 interactions)' },
+      {
+        number: '1M+',
+        label: 'Social media impressions',
+        detail:
+          'Building visibility across Instagram, Facebook, and TikTok through consistent, high-impact content.',
+      },
+      {
+        number: '7.2K+',
+        label: 'Social followers',
+        detail:
+          'Growing an audience of more than 7,200 followers across Don Chuy’s social platforms.',
+      },
+      {
+        number: '+40%',
+        label: 'Revenue growth',
+        detail:
+          'Stronger marketing and brand visibility contributed to measurable business growth.',
+      },
     ],
+    galleryHeadline: 'The experience, in full color.',
+    galleryNote:
+      'Professional content captures the bold food, cocktails, people, and energy that make the Don Chuy’s experience instantly recognizable.',
+    testimonialHeadline: 'A stronger brand. A growing business.',
+    testimonial: {
+      quote:
+        'The impact on social media has been incredible. People are seeing and enjoying the content, and most importantly, it’s bringing new customers through our doors. The team is professional, attentive, and always brings great ideas.',
+      name: 'Jesus Leon',
+      role: 'Don Chuy’s Fresh Mex & Cantina',
+    },
     howWeDidIt: [
       { title: 'We sold the destination, not the menu', body: 'Most restaurant marketing focuses on dishes. We focused on the environment, atmosphere, bar experience, design, and energy of the restaurant—creating demand for the experience itself.' },
       { title: 'We built signature weekly traffic drivers', body: 'Taco Tuesday, Ladies Night, Happy Hour, Lazy Thursday, margarita campaigns, and seasonal promotions gave customers recurring reasons to visit throughout the week.' },
@@ -253,77 +290,141 @@ export const caseStudies: CaseStudy[] = [
   // ─── 5. OLD SHAWNEE PIZZA ───────────────────────────────────────────────
   {
     slug: 'old-shawnee-pizza',
+    highlights: ['$363K+ Retention Revenue', '2.69M+ Social Impressions'],
     client: 'Old Shawnee Pizza',
     coverImageId: 'v1784312607/OSPZ_FEB17_Slide_1_d9udr9',
     coverLogo: '/logos/clients/ospz.png',
     category: 'Pizza Restaurant · Legacy Brand Revitalization',
-    serviceTags: ['Brand Strategy', 'Content', 'Social', 'Email & SMS', 'Google', 'CRM'],
-    resultHeadline: '1.66 Million Impressions. 24,000+ Customer Actions. $250,000+ Annual Revenue Influenced.',
-    intro:
-      'Old Shawnee Pizza wasn’t a new restaurant trying to get noticed. It was already one of the most recognizable independent restaurant brands in Kansas City.',
+    serviceTags: [
+      'Professional Content',
+      'Brand Strategy',
+      'Social Media Marketing',
+      'Paid Media',
+      'Email Retention',
+      'Discoverability Strategy',
+    ],
+    heroHeadline: 'Turning decades of local loyalty into a modern growth engine.',
+    resultHeadline:
+      '$363K+ in retention revenue. 2.69M+ social impressions. 31.72X return on ad spend.',
+    storyHeadline: 'From local legacy to measurable momentum.',
+    challenge:
+      'Old Shawnee Pizza already had decades of history, a loyal customer base, and strong recognition across Kansas City. The opportunity was connecting that legacy to a more consistent digital system—one that could keep both locations visible, engage longtime and new customers, and turn marketing activity into measurable revenue.',
+    solution:
+      'We connected content, social media, paid acquisition, local discoverability, and email retention into one growth system—giving Old Shawnee Pizza a consistent digital presence while creating more ways to turn attention into visits, orders, and repeat business.',
     story: [
-      'For more than 55 years, the Walker family built a loyal following through great food, strong community ties, and a reputation that generations of customers trusted.',
-      'The challenge wasn’t awareness. The challenge was translating decades of local goodwill into a modern digital presence.',
-      'When Atrium partnered with Old Shawnee Pizza, the brand had a compelling story, loyal customers, a thriving bar program, and two established locations—but very little of that was being consistently communicated online.',
-      'Our objective was to turn Old Shawnee Pizza’s legacy into a growth asset. By highlighting the restaurant’s history, showcasing founder Joe Walker’s legacy through William Walker, promoting signature menu items, featuring the bar experience, and building recurring promotional campaigns, we transformed social media into a modern extension of the brand.',
-      'The result was increased visibility, stronger customer engagement, measurable business activity, and a renewed connection between a Kansas City institution and the next generation of customers.',
+      'We connected content, social media, paid acquisition, local discoverability, and email retention into one growth system—giving Old Shawnee Pizza a consistent digital presence while creating more ways to turn attention into visits, orders, and repeat business.',
     ],
+    // The 2.69M social figure is the sum of the two location reports, counting
+    // the shared Instagram account once: Facebook Lenexa 1.03M + Facebook
+    // Shawnee 1.21M + Instagram 332.11K + TikTok 72.09K (current) + ~50K
+    // (previous account). Google Business reach (357.79K + 379.60K ≈ 737K) is
+    // deliberately excluded — it is discovery, not social.
     metrics: [
-      { number: '1.66M+', label: 'organic impressions across Facebook, Instagram, TikTok, and Google Business Profile' },
-      { number: '24,180', label: 'customer actions — website visits, calls, and direction requests' },
-      { number: '$258,000+', label: 'estimated annual revenue influenced from owned channels' },
-      { number: '313,080', label: 'Google Business impressions' },
-      { number: '28,915', label: 'combined followers across Facebook, Instagram, and TikTok' },
-      { number: '84,000+', label: 'monthly email opens driven by CRM automation' },
+      {
+        number: '$363K+',
+        label: 'Retention revenue',
+        detail:
+          'Attributed sales generated through email campaigns and automated customer retention flows.',
+      },
+      {
+        number: '2.69M+',
+        label: 'Social media impressions',
+        detail: 'Building visibility across both locations on Facebook, Instagram, and TikTok.',
+      },
+      {
+        number: '31.72X',
+        label: 'Return on ad spend',
+        detail:
+          'Turning Google Ads into measurable restaurant revenue with high-intent customers.',
+      },
     ],
+    galleryHeadline: 'A local institution, in frame.',
+    galleryNote:
+      'Professional content captures the food, people, history, and personality behind a restaurant that has been part of the Kansas City community for generations.',
+    testimonialHeadline: 'Built on history. Growing with intention.',
+    testimonial: {
+      quote:
+        'Atrium took the time to really understand who we are and what we’re trying to do. We’ve seen the difference in our social media and engagement, but most importantly, it’s getting people through the doors. They’ve become more than an agency we hired—they’re a partner we trust.',
+      name: 'William Walker',
+      role: 'Old Shawnee Pizza',
+    },
     howWeDidIt: [
       { title: 'We turned a legacy into a marketing asset', body: 'Most restaurants talk about their food. Old Shawnee Pizza had something more valuable: history. We built content around the story of Joe Walker, the family legacy, and William Walker’s leadership, creating a narrative that competitors simply couldn’t replicate. This transformed Old Shawnee Pizza from another local restaurant into a brand with authenticity, heritage, and personality.' },
       { title: 'We positioned the restaurant as a community gathering place', body: 'The strongest brands aren’t built around products. They’re built around experiences. Our content highlighted the atmosphere, neighborhood culture, bar program, live events, and social environment that customers already loved. The result was content that felt personal, local, and relevant.' },
       { title: 'We made William Walker the face of the brand', body: 'People connect with people. By featuring William throughout content, promotions, kitchen stories, behind-the-scenes videos, and menu features, we gave customers a face they could connect with. This increased trust, strengthened engagement, and reinforced the family-owned identity of the business.' },
       { title: 'We leveraged signature products to drive reach', body: 'Data quickly revealed clear customer favorites. Content featuring the Crab Rangoon Pizza, specialty pizzas, signature recipes, lunch specials, and unique menu offerings consistently generated some of the highest engagement across platforms. Rather than producing generic restaurant content, we doubled down on what customers already loved.' },
       { title: 'We built consistent traffic drivers', body: 'Awareness alone doesn’t fill restaurants. We developed campaigns around Lunch Specials, Game Day Promotions, Live Music Events, Whiskey Wednesdays, Tequila Nights, Seasonal Offers, and Family Meal Deals. These recurring promotions created reasons for customers to return throughout the week rather than only on weekends.' },
-      { title: 'We connected awareness to revenue', body: 'Social media was only one part of the strategy. Email marketing, CRM automations, and customer retention campaigns allowed us to continue conversations long after customers left the restaurant. By consistently nurturing the customer database, Old Shawnee Pizza generated more than 84,000 monthly email opens and an estimated $21,500 in monthly revenue influence through owned marketing channels. This created a marketing ecosystem focused not only on acquiring customers—but keeping them.' },
+      { title: 'We connected awareness to revenue', body: 'Social media was only one part of the strategy. Email marketing, CRM automations, and customer retention campaigns allowed us to continue conversations long after customers left the restaurant. Consistently nurturing the customer database turned owned channels into $363K+ in attributed retention revenue, while high-intent Google Ads returned 31.72X on ad spend. This created a marketing ecosystem focused not only on acquiring customers—but keeping them.' },
     ],
     scope: [
       { label: 'Strategy', items: ['Brand Positioning', 'Content Strategy', 'Promotional Planning', 'Customer Retention Strategy', 'CRM Development', 'Email Marketing Strategy'] },
       { label: 'Content & Execution', items: ['Social Media Management', 'Photography', 'Video Production', 'Reels & TikTok Content', 'Community Management', 'Graphic Design', 'Copywriting', 'Google Business Optimization', 'Email Campaign Management', 'Marketing Automation'] },
     ],
     takeaway:
-      'Old Shawnee Pizza didn’t need a rebrand. It needed a digital presence that reflected the strength of the brand it had already built over five decades. By combining storytelling, consistent content production, local market positioning, CRM marketing, and customer retention campaigns, we helped transform a Kansas City institution into a modern digital brand. 1.66 million impressions. 24,000+ customer actions. $258,000+ annual revenue influenced. Not by changing who Old Shawnee Pizza was. By making sure more people saw what made it special.',
+      'Old Shawnee Pizza didn’t need a rebrand. It needed a digital presence that reflected the strength of the brand it had already built over five decades. By combining storytelling, consistent content production, local discoverability, paid acquisition, and email retention, we helped turn a Kansas City institution into a modern growth engine. $363K+ in retention revenue. 2.69M+ social impressions. 31.72X return on ad spend. Not by changing who Old Shawnee Pizza was. By making sure more people saw what made it special.',
     order: 5,
   },
 
-  // ─── 6. CHICK-IN WAFFLE ─────────────────────────────────────────────────
+  // ─── 6. CHICK-IN-WAFFLE ─────────────────────────────────────────────────
   {
     slug: 'chick-in-waffle',
-    client: 'Chick-in Waffle',
-    coverImageId: 'v1784555394/CHWF_MAR13_Slide_1_jk9hcg',
+    highlights: ['$74K+ Email Sales', '1M+ Social Views'],
+    client: 'Chick-in-Waffle',
+    coverImageId: 'https://cdn.atriumad.com/clients/CHWF/photos/CHWF_%20APR22_Photo%202.jpg',
     coverLogo: '/logos/clients/chwf.png',
     category: 'Fast-Casual · Multi-Location Growth Engine',
-    serviceTags: ['Social', 'Content Strategy', 'CRM & Email', 'Loyalty Marketing', 'Google Ads'],
-    resultHeadline: '750K+ Impressions. 25K+ Followers. 10x ROAS.',
-    intro:
-      'More customers. More repeat visits. More revenue. Through organic content, CRM automation, loyalty marketing, and localized Google Ads, Chick-in Waffle built a system designed to drive awareness, capture demand, and increase customer retention.',
+    serviceTags: [
+      'Professional Content',
+      'Brand Strategy',
+      'Social Media Marketing',
+      'Paid Media',
+      'Email Retention',
+      'SEO',
+      'Google Business Profile',
+    ],
+    heroHeadline: 'Turning a bold vision into a brand built to scale.',
+    resultHeadline:
+      '$74K+ in email-attributed sales. Over a million social views. 12.36X blended Google Ads ROAS.',
+    storyHeadline: 'From founder vision to a working growth system.',
+    challenge:
+      'Chick-in-Waffle already had a bold vision and personality driven by its founder, Dennis. The opportunity was turning that vision into a consistent brand voice and marketing system that could connect content, customer acquisition, retention, and growth across multiple locations.',
+    solution:
+      'We built a scalable system around Chick-in-Waffle’s personality—sharpening its bold, sarcastic voice and translating it into content formats, copywriting, professional creative, social media, paid campaigns, email retention, and SEO designed to work together across the customer journey.',
     story: [
-      'Through founder-led storytelling, product-focused creative, and a full retention system — CRM, loyalty, and localized Google Ads — Chick-in Waffle built a growth engine across multiple locations that turned first-time visits into repeat business.',
+      'We built a scalable system around Chick-in-Waffle’s personality—sharpening its bold, sarcastic voice and translating it into content formats, copywriting, professional creative, social media, paid campaigns, email retention, and SEO designed to work together across the customer journey.',
     ],
     metrics: [
-      { number: '750K+', label: 'impressions generated through organic social content' },
-      { number: '25K+', label: 'followers across Facebook, Instagram, and TikTok' },
-      { number: '10x', label: 'average Google Ads ROAS across locations' },
-      { number: '$9K+', label: 'average monthly revenue attributed to email marketing' },
-      { number: '32%', label: 'email open rate across CRM campaigns' },
-      { number: '90%', label: 'growth in engagement' },
+      {
+        number: '$74K+',
+        label: 'Email-attributed sales',
+        detail: 'Turning retention campaigns into measurable repeat revenue.',
+      },
+      {
+        number: '1M+',
+        label: 'Social media views',
+        detail: 'Building visibility across Facebook, Instagram, and TikTok.',
+      },
+      {
+        number: '12.36X',
+        label: 'Blended Google Ads ROAS',
+        detail: 'Turning paid search demand into measurable restaurant revenue.',
+      },
     ],
+    galleryHeadline: 'The brand, turned all the way up.',
+    galleryNote:
+      'Professional content brings Chick-in-Waffle’s bold personality to life through craveable food, energetic visuals, and a style designed to be instantly recognizable.',
+    testimonialHeadline: 'More than marketing. A system built around the vision.',
     howWeDidIt: [
+      { title: 'Sharpened the voice into a format', body: 'The bold, sarcastic personality Dennis already had was translated into repeatable content formats and copywriting — so the brand sounds like itself on every platform, not just when the founder is in frame.' },
       { title: 'Made the food impossible to ignore', body: 'We moved beyond traditional food photography and created content designed to stop the scroll. Product launches, food-focused videos, menu features, and visually driven creative turned menu items into attention-grabbing content.' },
       { title: 'Turned the founder into a brand asset', body: 'Dennis became a recognizable face of the business. Founder-led content consistently generated strong engagement and helped build trust, familiarity, and connection with customers.' },
       { title: 'Showed the people behind the brand', body: 'The team, culture, hiring campaigns, community partnerships, and behind-the-scenes moments gave customers something bigger than a menu to connect with.' },
-      { title: 'Built a customer retention system', body: 'CRM campaigns, loyalty marketing, and automated customer journeys helped keep Chick-in Waffle top-of-mind after the first visit, generating an average of $9K+ in monthly attributed revenue.' },
-      { title: 'Captured high-intent demand', body: 'Location-specific Google Ads campaigns targeted customers actively searching for dining options nearby, delivering an average 10x return on ad spend.' },
+      { title: 'Built a retention system, not a newsletter', body: 'Email campaigns and automated customer journeys kept Chick-in-Waffle top-of-mind after the first visit, turning an existing customer base into $74K+ in attributed sales.' },
+      { title: 'Captured high-intent demand', body: 'Location-specific paid search campaigns targeted customers actively searching for dining options nearby, delivering a 12.36X blended return on ad spend, while SEO and Google Business Profile work made the brand easier to find without paying for the click.' },
     ],
     scope: [
-      { label: 'Services Provided', items: ['Social Media Management', 'Content Strategy', 'Founder Storytelling', 'CRM & Email Marketing', 'Marketing Automation', 'Loyalty Marketing', 'Google Ads Management', 'Multi-Location Marketing Strategy'] },
+      { label: 'Strategy', items: ['Brand Strategy', 'Brand Voice & Copywriting', 'Content Strategy', 'Multi-Location Marketing Strategy', 'Email Retention Strategy'] },
+      { label: 'Content & Execution', items: ['Professional Content', 'Social Media Marketing', 'Founder Storytelling', 'Paid Media', 'Email Marketing & Automation', 'SEO', 'Google Business Profile'] },
     ],
     order: 6,
   },
@@ -477,9 +578,9 @@ const caseSummaries: Record<string, string> = {
   'taco-naco': 'A unified content and growth system built to make three locations feel like one unmistakable brand.',
   taha: 'An organic campaign system that turned culinary prestige into sold-out experiences and sustained demand.',
   aahaa: 'A premium repositioning that moved the conversation from Indian cuisine to a complete fine-dining experience.',
-  'don-chuys': 'A multi-location strategy that made the atmosphere, bar program, and weekly rituals the engine of growth.',
-  'old-shawnee-pizza': 'A modern digital presence designed to carry a 55-year local legacy into its next generation of customers.',
-  'chick-in-waffle': 'A connected acquisition and retention system built to create demand, repeat visits, and measurable revenue.',
+  'don-chuys': 'A content-first system that turned the food, cocktails, and atmosphere into a social presence people follow.',
+  'old-shawnee-pizza': 'A growth system that turned decades of local loyalty into visits, orders, and repeat revenue.',
+  'chick-in-waffle': 'A founder’s bold vision turned into a brand voice and a growth system built to scale across locations.',
   'jerusalem-cafe': 'Consistent storytelling and owned-channel marketing that kept a Kansas City staple visible and relevant.',
   'grand-coffee': 'A lifestyle-led brand world connecting coffee, wellness, and community through a cohesive creative system.',
   'hotel-kc': 'Cinematic storytelling that translated a historic property into a contemporary hospitality destination.',
