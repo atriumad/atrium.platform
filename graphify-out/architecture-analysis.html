@@ -66,6 +66,7 @@
     padding: 0 32px;
     display: flex;
     gap: 0;
+    flex-wrap: wrap;
   }
   nav button {
     background: none;
@@ -93,6 +94,7 @@
     border-radius: 10px;
     padding: 20px 24px;
   }
+  .card + .card { margin-top: 20px; }
   .card-title {
     font-size: 13px;
     font-weight: 600;
@@ -159,8 +161,9 @@
   .arch-layer.events { border-color: rgba(245,158,11,.4); background: rgba(245,158,11,.05); }
   .arch-layer.shared { border-color: rgba(236,72,153,.4); background: rgba(236,72,153,.05); }
   .arch-layer.future { border-color: rgba(107,114,128,.3); background: rgba(107,114,128,.03); opacity: .7; }
+  .arch-layer.dormant { border-color: rgba(239,68,68,.35); background: rgba(239,68,68,.04); }
 
-  .layer-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .layer-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
   .layer-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
   .layer-name { font-size: 14px; font-weight: 700; }
   .layer-path { font-size: 11px; color: var(--muted); margin-left: auto; font-family: monospace; }
@@ -168,6 +171,8 @@
   .status-live { background: rgba(34,197,94,.15); color: var(--green); }
   .status-partial { background: rgba(234,179,8,.15); color: var(--yellow); }
   .status-planned { background: rgba(107,114,128,.15); color: var(--muted); }
+  .status-dormant { background: rgba(239,68,68,.15); color: var(--red); }
+  .status-deleted { background: rgba(107,114,128,.15); color: var(--muted); text-decoration: line-through; }
 
   .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip {
@@ -234,7 +239,7 @@
   .bp-warn { border-color: rgba(234,179,8,.2); }
   .bp-err { border-color: rgba(239,68,68,.2); }
 
-  /* ── Risk Table ── */
+  /* ── Risk / ledger tables ── */
   .risk-table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .risk-table th {
     text-align: left;
@@ -249,6 +254,12 @@
   .risk-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
   .risk-table tr:last-child td { border-bottom: none; }
   .risk-table tr:hover td { background: var(--surface2); }
+  .risk-table .id { font-family: monospace; font-weight: 700; white-space: nowrap; }
+  .risk-table .t { font-weight: 600; }
+  .risk-table .d { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
+  .table-scroll { overflow-x: auto; }
+  .table-scroll table { min-width: 780px; }
+
   .sev {
     font-size: 10px;
     padding: 2px 8px;
@@ -259,22 +270,29 @@
   .sev-high { background: rgba(239,68,68,.15); color: var(--red); }
   .sev-med { background: rgba(234,179,8,.15); color: var(--yellow); }
   .sev-low { background: rgba(34,197,94,.15); color: var(--green); }
-  .prob-bar {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+
+  .st {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 700;
+    white-space: nowrap;
   }
+  .st-done { background: rgba(34,197,94,.15); color: var(--green); }
+  .st-part { background: rgba(234,179,8,.15); color: var(--yellow); }
+  .st-open { background: rgba(239,68,68,.15); color: var(--red); }
+  .st-moot { background: rgba(107,114,128,.18); color: var(--muted); }
+
+  .prob-bar { display: flex; align-items: center; gap: 6px; }
   .prob-track {
     flex: 1;
     height: 5px;
     background: var(--border);
     border-radius: 3px;
     overflow: hidden;
+    min-width: 46px;
   }
-  .prob-fill {
-    height: 100%;
-    border-radius: 3px;
-  }
+  .prob-fill { height: 100%; border-radius: 3px; }
 
   /* ── Flow diagram (SVG) ── */
   .flow-container {
@@ -284,7 +302,7 @@
     padding: 24px;
     overflow-x: auto;
   }
-  .flow-svg { min-width: 700px; width: 100%; }
+  .flow-svg { min-width: 760px; width: 100%; }
 
   /* ── Score ring ── */
   .score-ring-container {
@@ -306,7 +324,7 @@
   .ring-label { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; margin-top: 2px; }
   .score-desc { flex: 1; }
   .score-desc h3 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
-  .score-desc p { font-size: 13px; color: var(--muted); max-width: 400px; }
+  .score-desc p { font-size: 13px; color: var(--muted); max-width: 520px; }
 
   /* ── Section header ── */
   .section-header {
@@ -314,6 +332,8 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
   }
   .section-header h2 { font-size: 16px; font-weight: 700; }
   .section-header p { font-size: 12px; color: var(--muted); margin-top: 2px; }
@@ -347,7 +367,7 @@
   .dep-status { font-size: 11px; margin-top: 6px; }
 
   /* ── Entity map ── */
-  .entity-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+  .entity-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
   .entity-card {
     background: var(--surface2);
     border: 1px solid var(--border);
@@ -364,6 +384,23 @@
   }
   .entity-name { font-size: 12px; font-weight: 700; }
   .entity-fields { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* ── Rubric ── */
+  .rubric { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .rubric th { text-align: left; padding: 8px 12px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; border-bottom: 1px solid var(--border); }
+  .rubric td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  .rubric tr:last-child td { border-bottom: none; font-weight: 700; }
+  .rubric .n { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+
+  /* ── Verify list ── */
+  .verify { display: flex; flex-direction: column; gap: 8px; }
+  .verify-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; font-size: 12px;
+  }
+  .verify-cmd { font-family: 'Fira Code', monospace; font-size: 11.5px; color: var(--accent); white-space: nowrap; }
+  .verify-out { color: var(--muted); }
 
   /* ── Tooltip ── */
   #tooltip {
@@ -389,6 +426,12 @@
     border-radius: 3px;
     border: 1px solid var(--border);
   }
+  .note {
+    font-size: 12px; color: var(--muted); line-height: 1.55;
+    border-left: 2px solid var(--border); padding-left: 12px; margin-top: 14px;
+  }
+  ul.tight { margin: 8px 0 0 18px; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+  ul.tight strong { color: var(--text); }
 </style>
 </head>
 <body>
@@ -403,1283 +446,1891 @@
   </svg>
   <div>
     <h1>Atrium Platform — Architecture Analysis</h1>
-    <p>Generated 2026-06-22 · branch: plan-1-foundation · Hexagonal + Event-Driven · Turborepo monorepo</p>
+    <p>Rev. 2 · 2026-08-17 · branch <code>feature/design-system</code> · verificado contra el árbol de trabajo (no contra el reporte anterior)</p>
   </div>
-  <span class="badge badge-yellow">Score: 72 / 100</span>
+  <span class="badge badge-red">Coherencia: 48 / 100</span>
 </header>
 
 <nav>
-  <button class="active" onclick="showTab('overview')">Overview</button>
-  <button onclick="showTab('flow')">Data Flow</button>
-  <button onclick="showTab('practices')">Best Practices</button>
-  <button onclick="showTab('risks')">Risk Metrics</button>
-  <button onclick="showTab('entities')">Domain Model</button>
-  <button onclick="showTab('deps')">Dependencies</button>
+  <button class="active" onclick="showTab('overview', this)">Overview</button>
+  <button onclick="showTab('ledger', this)">Resuelto vs Pendiente</button>
+  <button onclick="showTab('flow', this)">Flujo real</button>
+  <button onclick="showTab('risks', this)">Riesgos</button>
+  <button onclick="showTab('bugs', this)">Bugs de lógica</button>
+  <button onclick="showTab('practices', this)">Best Practices</button>
+  <button onclick="showTab('roadmap', this)">Qué falta</button>
+  <button onclick="showTab('deps', this)">Modelo &amp; Deps</button>
 </nav>
 
 <main>
 
 <!-- ════════════════ OVERVIEW ════════════════ -->
 <div id="tab-overview" class="tab-panel active">
+
+  <div class="card" style="margin-bottom:24px;">
+    <div class="card-title">Lo que cambió desde la Rev. 1 (2026-06-22)</div>
+    <div class="score-ring-container">
+      <div class="ring-wrap">
+        <svg class="ring-svg" width="90" height="90">
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#252c3d" stroke-width="9"/>
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#ef4444" stroke-width="9"
+                  stroke-dasharray="238.8" stroke-dashoffset="124.2" stroke-linecap="round"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#ef4444">48</div>
+          <div class="ring-label">/ 100</div>
+        </div>
+      </div>
+      <div class="score-desc">
+        <h3>El score bajó de 72 a 48 — no porque el código empeorara</h3>
+        <p>
+          La calidad del código <em>subió</em>: typecheck verde en 9/9 paquetes, pureza de dominio verificada,
+          gate anti-SSRF real, rate limit, budget guard, scoring versionado. Lo que se rompió es la
+          <strong>coherencia de plataforma</strong>: <code>apps/web</code> fue eliminada (commit <code>5eb5dbc</code>) y con ella
+          el único consumidor del núcleo hexagonal. Hoy <code>packages/infrastructure</code> tiene
+          <strong>cero importadores</strong> — el composition root, los 12 repositorios Prisma y sus mappers están
+          escritos, testeados y muertos. La app viva (<code>atrium.grader</code>) no pasa por ellos.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <div class="metrics-row">
-    <div class="metric-card green">
-      <div class="metric-label">Architecture Score</div>
-      <div class="metric-value">72</div>
-      <div class="metric-sub">/ 100 — Good foundation</div>
-    </div>
-    <div class="metric-card blue">
-      <div class="metric-label">Layers Implemented</div>
-      <div class="metric-value">5</div>
-      <div class="metric-sub">of 7 planned</div>
+    <div class="metric-card red">
+      <div class="metric-label">Coherencia plataforma</div>
+      <div class="metric-value">48</div>
+      <div class="metric-sub">/ 100 — núcleo desconectado</div>
     </div>
     <div class="metric-card yellow">
-      <div class="metric-label">Open Risks</div>
-      <div class="metric-value">8</div>
-      <div class="metric-sub">3 high · 4 medium · 1 low</div>
+      <div class="metric-label">Calidad app viva</div>
+      <div class="metric-value">74</div>
+      <div class="metric-sub">grader: sólido, sin durabilidad</div>
+    </div>
+    <div class="metric-card red">
+      <div class="metric-label">Riesgos abiertos</div>
+      <div class="metric-value">17</div>
+      <div class="metric-sub">4 high · 9 med · 4 low</div>
     </div>
     <div class="metric-card yellow">
-      <div class="metric-label">Best Practices</div>
-      <div class="metric-value">14</div>
-      <div class="metric-sub">✅ 9 ok · ⚠️ 4 warn · ❌ 1 gap</div>
+      <div class="metric-label">Riesgos Rev. 1</div>
+      <div class="metric-value">2/8</div>
+      <div class="metric-sub">resueltos · 2 obsoletos · 4 abiertos</div>
+    </div>
+    <div class="metric-card red">
+      <div class="metric-label">Tests</div>
+      <div class="metric-value">240<span style="font-size:16px;color:var(--muted)"> / 248</span></div>
+      <div class="metric-sub">8 en rojo · sin CI que los frene</div>
     </div>
     <div class="metric-card green">
-      <div class="metric-label">Domain Entities</div>
-      <div class="metric-value">15</div>
-      <div class="metric-sub">Prisma models defined</div>
-    </div>
-    <div class="metric-card blue">
-      <div class="metric-label">Use Cases</div>
-      <div class="metric-value">6</div>
-      <div class="metric-sub">Auth · CRM · Health</div>
+      <div class="metric-label">Typecheck</div>
+      <div class="metric-value">9/9</div>
+      <div class="metric-sub">strict · lint: 2 warnings</div>
     </div>
   </div>
 
-  <div style="display:grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: start;">
-
-    <!-- Architecture Layers -->
-    <div class="card">
-      <div class="card-title">Monorepo Layers — Hexagonal Architecture</div>
-      <div class="arch-diagram">
-
-        <div class="arch-layer web" onclick="ping(this, 'apps/web — Next.js 15 App Router. Auth routes, dashboard, sign-in/up pages. Must stay thin: no business logic here.')">
-          <div class="layer-header">
-            <span class="layer-dot" style="background:var(--web)"></span>
-            <span class="layer-name" style="color:var(--web)">apps / web</span>
-            <span class="layer-status status-live">LIVE</span>
-            <span class="layer-path">apps/web/</span>
-          </div>
-          <div class="chips">
-            <span class="chip ok">Next.js 15</span>
-            <span class="chip ok">App Router</span>
-            <span class="chip ok">JWT HTTP-only</span>
-            <span class="chip ok">Middleware</span>
-            <span class="chip warn">No rate limit</span>
-            <span class="chip warn">Email unverified</span>
-          </div>
-        </div>
-
-        <div class="arrow-down"></div>
-
-        <div class="arch-layer application" onclick="ping(this, 'packages/application — Use cases: AuthenticateUser, RegisterOwner, GetCustomerProfile, ListCustomers, ComputeChurnRisk, RecalculateHealthScore. Orchestration only, no DB access.')">
-          <div class="layer-header">
-            <span class="layer-dot" style="background:var(--app)"></span>
-            <span class="layer-name" style="color:var(--app)">packages / application</span>
-            <span class="layer-status status-live">LIVE</span>
-            <span class="layer-path">packages/application/src/</span>
-          </div>
-          <div class="chips">
-            <span class="chip ok">AuthenticateUser</span>
-            <span class="chip ok">RegisterOwner</span>
-            <span class="chip ok">GetCustomerProfile</span>
-            <span class="chip ok">ListCustomers</span>
-            <span class="chip ok">ComputeChurnRisk</span>
-            <span class="chip ok">RecalculateHealthScore</span>
-            <span class="chip warn">No event publishing</span>
-          </div>
-        </div>
-
-        <div class="arrow-down"></div>
-
-        <div class="arch-layer domain" onclick="ping(this, 'packages/domain — Pure business logic. Entities, value objects, port interfaces. Zero external dependencies. This is the core of hexagonal architecture.')">
-          <div class="layer-header">
-            <span class="layer-dot" style="background:var(--domain)"></span>
-            <span class="layer-name" style="color:var(--domain)">packages / domain</span>
-            <span class="layer-status status-live">LIVE</span>
-            <span class="layer-path">packages/domain/src/</span>
-          </div>
-          <div class="chips">
-            <span class="chip ok">Customer</span>
-            <span class="chip ok">Location</span>
-            <span class="chip ok">Order</span>
-            <span class="chip ok">LocationHealth</span>
-            <span class="chip ok">Ports (interfaces)</span>
-            <span class="chip ok">No infra deps ✓</span>
-          </div>
-        </div>
-
-        <div class="arrow-down"></div>
-
-        <div class="arch-layer infrastructure" onclick="ping(this, 'packages/infrastructure — Prisma 7 + Neon PostgreSQL. Composition root, concrete repository adapters, bcrypt password hashing. Implements domain ports.')">
-          <div class="layer-header">
-            <span class="layer-dot" style="background:var(--infra)"></span>
-            <span class="layer-name" style="color:var(--infra)">packages / infrastructure</span>
-            <span class="layer-status status-live">LIVE</span>
-            <span class="layer-path">packages/infrastructure/src/</span>
-          </div>
-          <div class="chips">
-            <span class="chip ok">Prisma 7</span>
-            <span class="chip ok">Neon PostgreSQL</span>
-            <span class="chip ok">Composition Root</span>
-            <span class="chip ok">Repository Adapters</span>
-            <span class="chip ok">Mappers</span>
-            <span class="chip warn">createUseCases() per-request</span>
-          </div>
-        </div>
-
-      </div>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
-        <div class="arch-layer events" style="margin:0" onclick="ping(this, 'packages/events — DomainEvent types defined: SalesEvent, ReputationEvent, CrmEvent, AnalyticsEvent, AiEvent. No event bus implementation yet.')">
-          <div class="layer-header">
-            <span class="layer-dot" style="background:var(--events)"></span>
-            <span class="layer-name" style="color:var(--events); font-size:13px">events</span>
-            <span class="layer-status status-partial">SCHEMA ONLY</span>
-          </div>
-          <div class="chips">
-            <span class="chip ok">Types defined</span>
-            <span class="chip warn">No bus</span>
-          </div>
-        </div>
-        <div class="arch-layer shared" style="margin:0" onclick="ping(this, 'packages/shared — Money, CustomerIdentifier, DateRange, Result<T,E> type, Connector interface.')">
-          <div class="layer-header">
-            <span class="layer-dot" style="background:var(--shared)"></span>
-            <span class="layer-name" style="color:var(--shared); font-size:13px">shared</span>
-            <span class="layer-status status-live">LIVE</span>
-          </div>
-          <div class="chips">
-            <span class="chip ok">Result&lt;T,E&gt;</span>
-            <span class="chip ok">Money</span>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px;">
-        <div class="arch-layer future" style="margin:0">
-          <div class="layer-header">
-            <span class="layer-dot" style="background:var(--future)"></span>
-            <span class="layer-name" style="color:var(--muted); font-size:13px">connectors</span>
-            <span class="layer-status status-planned">PLANNED</span>
-          </div>
-          <div class="chips">
-            <span class="chip">POS / Toast</span>
-            <span class="chip">Google</span>
-            <span class="chip">Meta Ads</span>
-          </div>
-        </div>
-        <div class="arch-layer future" style="margin:0">
-          <div class="layer-header">
-            <span class="layer-dot" style="background:var(--future)"></span>
-            <span class="layer-name" style="color:var(--muted); font-size:13px">ai</span>
-            <span class="layer-status status-planned">PLANNED</span>
-          </div>
-          <div class="chips">
-            <span class="chip">Agents</span>
-            <span class="chip">Prompts</span>
-            <span class="chip">Evaluators</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right column -->
-    <div style="display:flex; flex-direction:column; gap:16px;">
-
-      <!-- Arch score -->
-      <div class="card">
-        <div class="card-title">Architecture Health</div>
-        <div class="score-ring-container" style="flex-direction:column; align-items:flex-start; gap:12px;">
-
-          <div style="display:flex; align-items:center; gap:12px; width:100%;">
-            <svg class="ring-svg" width="56" height="56" viewBox="0 0 56 56">
-              <circle cx="28" cy="28" r="22" fill="none" stroke="#1a1f2c" stroke-width="6"/>
-              <circle cx="28" cy="28" r="22" fill="none" stroke="#22c55e" stroke-width="6"
-                stroke-dasharray="138.2" stroke-dashoffset="38.3" stroke-linecap="round"/>
-            </svg>
-            <div>
-              <div style="font-size:13px; font-weight:700;">Layer Separation</div>
-              <div style="font-size:11px; color:var(--muted);">Domain isolado · 72% completo</div>
-            </div>
-            <span class="badge badge-green" style="margin-left:auto">72%</span>
-          </div>
-
-          <div style="display:flex; align-items:center; gap:12px; width:100%;">
-            <svg class="ring-svg" width="56" height="56" viewBox="0 0 56 56">
-              <circle cx="28" cy="28" r="22" fill="none" stroke="#1a1f2c" stroke-width="6"/>
-              <circle cx="28" cy="28" r="22" fill="none" stroke="#4f7fff" stroke-width="6"
-                stroke-dasharray="138.2" stroke-dashoffset="48.4" stroke-linecap="round"/>
-            </svg>
-            <div>
-              <div style="font-size:13px; font-weight:700;">Test Coverage</div>
-              <div style="font-size:11px; color:var(--muted);">Unit tests en domain + app</div>
-            </div>
-            <span class="badge" style="background:rgba(79,127,255,.15);color:var(--accent);border:1px solid rgba(79,127,255,.3);margin-left:auto">65%</span>
-          </div>
-
-          <div style="display:flex; align-items:center; gap:12px; width:100%;">
-            <svg class="ring-svg" width="56" height="56" viewBox="0 0 56 56">
-              <circle cx="28" cy="28" r="22" fill="none" stroke="#1a1f2c" stroke-width="6"/>
-              <circle cx="28" cy="28" r="22" fill="none" stroke="#eab308" stroke-width="6"
-                stroke-dasharray="138.2" stroke-dashoffset="83" stroke-linecap="round"/>
-            </svg>
-            <div>
-              <div style="font-size:13px; font-weight:700;">Event-Driven Readiness</div>
-              <div style="font-size:11px; color:var(--muted);">Schemas OK · Sin bus real</div>
-            </div>
-            <span class="badge badge-yellow" style="margin-left:auto">40%</span>
-          </div>
-
-          <div style="display:flex; align-items:center; gap:12px; width:100%;">
-            <svg class="ring-svg" width="56" height="56" viewBox="0 0 56 56">
-              <circle cx="28" cy="28" r="22" fill="none" stroke="#1a1f2c" stroke-width="6"/>
-              <circle cx="28" cy="28" r="22" fill="none" stroke="#ef4444" stroke-width="6"
-                stroke-dasharray="138.2" stroke-dashoffset="96.7" stroke-linecap="round"/>
-            </svg>
-            <div>
-              <div style="font-size:13px; font-weight:700;">Security Hardening</div>
-              <div style="font-size:11px; color:var(--muted);">Sin rate limit · Sin refresh</div>
-            </div>
-            <span class="badge badge-red" style="margin-left:auto">30%</span>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Top risks quick -->
-      <div class="card">
-        <div class="card-title">Top Risks</div>
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
-            <div class="tl-content">
-              <div class="tl-title">Sin rate limiting en <code>/api/auth/signin</code></div>
-              <div class="tl-desc">Brute-force sin defensa. Prioridad alta.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
-            <div class="tl-content">
-              <div class="tl-title"><code>createUseCases()</code> sin singleton</div>
-              <div class="tl-desc">Nueva instancia Prisma por request bajo serverless = leaks.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
-            <div class="tl-content">
-              <div class="tl-title">JWT sin refresh token</div>
-              <div class="tl-desc">7 días de expiración fija. Sin rotación ni revocación.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div><div class="tl-line"></div></div>
-            <div class="tl-content">
-              <div class="tl-title">Event bus no implementado</div>
-              <div class="tl-desc">DomainEvents definidos pero sin publisher real.</div>
-            </div>
-          </div>
-          <div class="tl-item">
-            <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div><div class="tl-line"></div></div>
-            <div class="tl-content">
-              <div class="tl-title">Email sin verificación activa</div>
-              <div class="tl-desc"><code>emailVerifiedAt</code> existe en DB pero no se chequea en login.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ DATA FLOW ════════════════ -->
-<div id="tab-flow" class="tab-panel">
   <div class="section-header">
     <div>
-      <h2>Data Flow — Request Lifecycle</h2>
-      <p>Flujo completo desde HTTP hasta Neon PostgreSQL y de vuelta</p>
+      <h2>Mapa de capas — estado real hoy</h2>
+      <p>Click en una capa para ver el detalle verificado</p>
+    </div>
+    <div class="chips">
+      <span class="chip ok">LIVE = con tráfico</span>
+      <span class="chip err">DORMANT = código sin consumidor</span>
+      <span class="chip">PLANNED = no existe</span>
     </div>
   </div>
 
-  <div class="flow-container" style="margin-bottom:20px;">
-    <svg class="flow-svg" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#4f7fff" opacity=".7"/>
-        </marker>
-        <marker id="arr-event" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#f59e0b" opacity=".7"/>
-        </marker>
-        <marker id="arr-data" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-          <polygon points="0 0, 8 3, 0 6" fill="#06b6d4" opacity=".7"/>
-        </marker>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="3" result="blur"/>
-          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-        </filter>
-      </defs>
+  <div class="arch-diagram">
 
-      <!-- ─── Layer backgrounds ─── -->
-      <rect x="10" y="10" width="880" height="80" rx="8" fill="#10b981" fill-opacity=".06" stroke="#10b981" stroke-opacity=".25" stroke-width="1"/>
-      <rect x="10" y="110" width="880" height="80" rx="8" fill="#7c5cfc" fill-opacity=".06" stroke="#7c5cfc" stroke-opacity=".25" stroke-width="1"/>
-      <rect x="10" y="210" width="880" height="80" rx="8" fill="#4f7fff" fill-opacity=".06" stroke="#4f7fff" stroke-opacity=".25" stroke-width="1"/>
-      <rect x="10" y="310" width="880" height="80" rx="8" fill="#06b6d4" fill-opacity=".06" stroke="#06b6d4" stroke-opacity=".25" stroke-width="1"/>
-      <rect x="10" y="410" width="880" height="80" rx="8" fill="#f59e0b" fill-opacity=".05" stroke="#f59e0b" stroke-opacity=".2" stroke-width="1" stroke-dasharray="6 3"/>
+    <div class="arch-layer web" onclick="ping(this,'apps/atrium.grader — Next 15, App Router, 5 route handlers bajo /api/grader, middleware con rate limit best-effort. Única app con lógica de servidor.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--web)"></span>
+        <span class="layer-name">apps / atrium.grader</span>
+        <span class="layer-status status-live">LIVE · nueva</span>
+        <span class="layer-path">apps/atrium.grader/</span>
+      </div>
+      <div class="chips">
+        <span class="chip">Next 15 · App Router</span>
+        <span class="chip">5 API routes</span>
+        <span class="chip ok">middleware rate limit</span>
+        <span class="chip ok">safe-fetch anti-SSRF</span>
+        <span class="chip warn">conectores en app/lib</span>
+        <span class="chip warn">capa IA en app/lib</span>
+        <span class="chip err">sin persistencia</span>
+        <span class="chip err">sin auth</span>
+      </div>
+    </div>
 
-      <!-- ─── Layer labels ─── -->
-      <text x="22" y="30" font-size="10" fill="#10b981" font-weight="700" font-family="system-ui" opacity=".8" text-transform="uppercase">WEB LAYER</text>
-      <text x="22" y="130" font-size="10" fill="#7c5cfc" font-weight="700" font-family="system-ui" opacity=".8">APPLICATION LAYER</text>
-      <text x="22" y="230" font-size="10" fill="#4f7fff" font-weight="700" font-family="system-ui" opacity=".8">DOMAIN LAYER</text>
-      <text x="22" y="330" font-size="10" fill="#06b6d4" font-weight="700" font-family="system-ui" opacity=".8">INFRASTRUCTURE LAYER</text>
-      <text x="22" y="430" font-size="10" fill="#f59e0b" font-weight="700" font-family="system-ui" opacity=".7">EVENTS (planned bus)</text>
+    <div class="arrow-down"></div>
 
-      <!-- ─── Boxes — WEB ─── -->
-      <rect x="70" y="25" width="110" height="48" rx="6" fill="#0f1620" stroke="#10b981" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="125" y="46" font-size="11" fill="#10b981" text-anchor="middle" font-family="system-ui" font-weight="600">Browser</text>
-      <text x="125" y="61" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">HTTP Request</text>
+    <div class="arch-layer web" onclick="ping(this,'apps/atrium.website — sitio de marketing. Solo depende de @atrium/ui. Sin rutas de servidor propias. Media vía Cloudinary con env var obligatoria.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--web)"></span>
+        <span class="layer-name">apps / atrium.website</span>
+        <span class="layer-status status-live">LIVE</span>
+        <span class="layer-path">apps/atrium.website/</span>
+      </div>
+      <div class="chips">
+        <span class="chip">Next 16.2.9</span>
+        <span class="chip">solo @atrium/ui</span>
+        <span class="chip">Cloudinary · Remotion · GSAP</span>
+        <span class="chip warn">5 tests rojos (env var)</span>
+        <span class="chip">sin API routes</span>
+      </div>
+    </div>
 
-      <rect x="240" y="25" width="120" height="48" rx="6" fill="#0f1620" stroke="#10b981" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="300" y="46" font-size="11" fill="#10b981" text-anchor="middle" font-family="system-ui" font-weight="600">Middleware</text>
-      <text x="300" y="61" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">JWT verify · redirect</text>
+    <div class="arch-layer web" onclick="ping(this,'apps/atrium.cdn — assets estáticos a Hostinger. Deploy disparado por .githooks/post-commit, no bloqueante y sin verificación previa.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--web)"></span>
+        <span class="layer-name">apps / atrium.cdn</span>
+        <span class="layer-status status-live">LIVE</span>
+        <span class="layer-path">apps/atrium.cdn/</span>
+      </div>
+      <div class="chips">
+        <span class="chip">assets → Hostinger</span>
+        <span class="chip err">deploy en post-commit hook</span>
+        <span class="chip err">falla = exit 0</span>
+      </div>
+    </div>
 
-      <rect x="420" y="25" width="130" height="48" rx="6" fill="#0f1620" stroke="#10b981" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="485" y="46" font-size="11" fill="#10b981" text-anchor="middle" font-family="system-ui" font-weight="600">Route Handler</text>
-      <text x="485" y="61" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">parse · validate · delegate</text>
+    <div class="arch-layer future" onclick="ping(this,'apps/web fue eliminada en el commit 5eb5dbc: sign-in, sign-up, /api/auth/signin, /api/signup, middleware JWT, auth.ts, lib/auth-secret. Los riesgos R-01 y R-03 desaparecieron con ella.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--future)"></span>
+        <span class="layer-name">apps / web</span>
+        <span class="layer-status status-deleted">ELIMINADA · 5eb5dbc</span>
+        <span class="layer-path">—</span>
+      </div>
+      <div class="chips">
+        <span class="chip">sign-in / sign-up</span>
+        <span class="chip">/api/auth/signin</span>
+        <span class="chip">middleware JWT</span>
+        <span class="chip">auth-secret</span>
+      </div>
+    </div>
 
-      <rect x="615" y="25" width="130" height="48" rx="6" fill="#0f1620" stroke="#10b981" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="680" y="46" font-size="11" fill="#10b981" text-anchor="middle" font-family="system-ui" font-weight="600">JWT Cookie</text>
-      <text x="680" y="61" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">HTTP-only · 7d</text>
+    <div class="arrow-down"></div>
 
-      <!-- ─── Boxes — APPLICATION ─── -->
-      <rect x="240" y="125" width="130" height="48" rx="6" fill="#0f1620" stroke="#7c5cfc" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="305" y="146" font-size="11" fill="#7c5cfc" text-anchor="middle" font-family="system-ui" font-weight="600">AuthenticateUser</text>
-      <text x="305" y="161" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">use case</text>
+    <div class="arch-layer application" onclick="ping(this,'packages/application — 6 casos de uso originales + diagnostics (restaurant-growth-grader, social-health-scorer). Solo el módulo diagnostics tiene consumidor real: el grader.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--app)"></span>
+        <span class="layer-name">packages / application</span>
+        <span class="layer-status status-partial">PARCIAL · mitad viva</span>
+        <span class="layer-path">packages/application/src/</span>
+      </div>
+      <div class="chips">
+        <span class="chip ok">diagnostics/* → usado por grader</span>
+        <span class="chip err">auth/* → sin consumidor</span>
+        <span class="chip err">crm/* → sin consumidor</span>
+        <span class="chip err">health-score/* → sin consumidor</span>
+        <span class="chip ok">pureza verificada (solo @atrium/*)</span>
+        <span class="chip warn">ComputeChurnRisk retorna evento, nadie lo publica</span>
+      </div>
+    </div>
 
-      <rect x="420" y="125" width="130" height="48" rx="6" fill="#0f1620" stroke="#7c5cfc" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="485" y="146" font-size="11" fill="#7c5cfc" text-anchor="middle" font-family="system-ui" font-weight="600">ComputeChurnRisk</text>
-      <text x="485" y="161" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">use case</text>
+    <div class="arrow-down"></div>
 
-      <rect x="615" y="125" width="130" height="48" rx="6" fill="#0f1620" stroke="#7c5cfc" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="680" y="146" font-size="11" fill="#7c5cfc" text-anchor="middle" font-family="system-ui" font-weight="600">RecalculateHealth</text>
-      <text x="680" y="161" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">Score · use case</text>
+    <div class="arch-layer domain" onclick="ping(this,'packages/domain — 14 entidades + 7 ports. Auditoría de imports: cero dependencias externas. Regla 1 de ARCHITECTURE.md sigue cumplida.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--domain)"></span>
+        <span class="layer-name">packages / domain</span>
+        <span class="layer-status status-live">SANO</span>
+        <span class="layer-path">packages/domain/src/</span>
+      </div>
+      <div class="chips">
+        <span class="chip ok">14 entidades · 7 ports</span>
+        <span class="chip ok">cero deps externas ✓</span>
+        <span class="chip warn">HealthTrend sin "insufficient_data"</span>
+      </div>
+    </div>
 
-      <!-- ─── Boxes — DOMAIN ─── -->
-      <rect x="240" y="225" width="130" height="48" rx="6" fill="#0f1620" stroke="#4f7fff" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="305" y="246" font-size="11" fill="#4f7fff" text-anchor="middle" font-family="system-ui" font-weight="600">Entities</text>
-      <text x="305" y="261" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">Customer·Order·Location</text>
+    <div class="arch-layer dormant" onclick="ping(this,'packages/infrastructure — grep de @atrium/infrastructure en apps/ y packages/: 0 resultados fuera de su propio package.json. createUseCases() nunca se invoca en runtime.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--infra)"></span>
+        <span class="layer-name">packages / infrastructure</span>
+        <span class="layer-status status-dormant">DORMANT · 0 importadores</span>
+        <span class="layer-path">packages/infrastructure/src/</span>
+      </div>
+      <div class="chips">
+        <span class="chip ok">Prisma singleton corregido</span>
+        <span class="chip ok">12 repos + 8 mappers, todos con test</span>
+        <span class="chip err">createUseCases() nunca se llama</span>
+        <span class="chip err">18 modelos Prisma sin escritura en prod</span>
+        <span class="chip warn">sin driver adapter Neon</span>
+      </div>
+    </div>
 
-      <rect x="420" y="225" width="130" height="48" rx="6" fill="#0f1620" stroke="#4f7fff" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="485" y="246" font-size="11" fill="#4f7fff" text-anchor="middle" font-family="system-ui" font-weight="600">Ports</text>
-      <text x="485" y="261" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">Repository interfaces</text>
+    <div class="arch-layer events" onclick="ping(this,'packages/events — 5 familias de eventos + type guards. grep de EventBus / publish( / EventEmitter en todo el repo: 0 resultados.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--events)"></span>
+        <span class="layer-name">packages / events</span>
+        <span class="layer-status status-partial">SOLO TIPOS</span>
+        <span class="layer-path">packages/events/src/</span>
+      </div>
+      <div class="chips">
+        <span class="chip ok">5 familias + type guards</span>
+        <span class="chip err">0 publishers</span>
+        <span class="chip err">0 subscribers</span>
+        <span class="chip err">sin outbox</span>
+      </div>
+    </div>
 
-      <rect x="615" y="225" width="130" height="48" rx="6" fill="#0f1620" stroke="#4f7fff" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="680" y="246" font-size="11" fill="#4f7fff" text-anchor="middle" font-family="system-ui" font-weight="600">Value Objects</text>
-      <text x="680" y="261" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">Money·Result&lt;T,E&gt;</text>
+    <div class="arch-layer shared" onclick="ping(this,'packages/shared — Result<T,E>, Money, DateRange, CustomerIdentifier, Connector interface.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--shared)"></span>
+        <span class="layer-name">packages / shared · packages / ui</span>
+        <span class="layer-status status-live">LIVE</span>
+        <span class="layer-path">packages/shared · packages/ui</span>
+      </div>
+      <div class="chips">
+        <span class="chip">Result&lt;T,E&gt; · Money · DateRange</span>
+        <span class="chip">design tokens + componentes</span>
+        <span class="chip err">3 tests rojos: mint → lime</span>
+      </div>
+    </div>
 
-      <!-- ─── Boxes — INFRA ─── -->
-      <rect x="240" y="325" width="130" height="48" rx="6" fill="#0f1620" stroke="#06b6d4" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="305" y="346" font-size="11" fill="#06b6d4" text-anchor="middle" font-family="system-ui" font-weight="600">Prisma Adapters</text>
-      <text x="305" y="361" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">implements ports</text>
+    <div class="arch-layer future" onclick="ping(this,'connectors y ai siguen sin existir como paquetes. El código que les corresponde ya se escribió, pero dentro de apps/atrium.grader/lib.')">
+      <div class="layer-header">
+        <span class="layer-dot" style="background:var(--future)"></span>
+        <span class="layer-name">packages / connectors · packages / ai</span>
+        <span class="layer-status status-planned">NO EXISTEN — pero su código sí</span>
+        <span class="layer-path">se escribieron dentro del grader</span>
+      </div>
+      <div class="chips">
+        <span class="chip warn">google-places-client.ts</span>
+        <span class="chip warn">scrape-creators.ts</span>
+        <span class="chip warn">pagespeed-client.ts</span>
+        <span class="chip warn">report-agent.ts (LLM)</span>
+      </div>
+    </div>
 
-      <rect x="420" y="325" width="130" height="48" rx="6" fill="#0f1620" stroke="#06b6d4" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="485" y="346" font-size="11" fill="#06b6d4" text-anchor="middle" font-family="system-ui" font-weight="600">Mappers</text>
-      <text x="485" y="361" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">Prisma → Domain</text>
-
-      <rect x="615" y="325" width="130" height="48" rx="6" fill="#0f1620" stroke="#06b6d4" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="680" y="346" font-size="11" fill="#06b6d4" text-anchor="middle" font-family="system-ui" font-weight="600">Neon PostgreSQL</text>
-      <text x="680" y="361" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">pooled + direct URL</text>
-
-      <!-- ─── Boxes — EVENTS ─── -->
-      <rect x="240" y="425" width="130" height="48" rx="6" fill="#0f1620" stroke="#f59e0b" stroke-opacity=".4" stroke-width="1" stroke-dasharray="5 3"/>
-      <text x="305" y="446" font-size="11" fill="#f59e0b" text-anchor="middle" font-family="system-ui" font-weight="600">DomainEvent</text>
-      <text x="305" y="461" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">types defined</text>
-
-      <rect x="420" y="425" width="130" height="48" rx="6" fill="#0f1620" stroke="#f59e0b" stroke-opacity=".4" stroke-width="1" stroke-dasharray="5 3"/>
-      <text x="485" y="441" font-size="11" fill="#f59e0b" text-anchor="middle" font-family="system-ui" font-weight="600">Event Bus</text>
-      <text x="485" y="456" font-size="9.5" fill="#64748b" text-anchor="middle" font-family="system-ui">⚠️ NOT IMPLEMENTED</text>
-      <text x="485" y="469" font-size="8.5" fill="#ef4444" text-anchor="middle" font-family="system-ui">planned: Trigger.dev</text>
-
-      <!-- ─── Arrows ─── -->
-      <!-- Browser → Middleware -->
-      <line x1="180" y1="49" x2="238" y2="49" stroke="#4f7fff" stroke-opacity=".6" stroke-width="1.5" marker-end="url(#arr)"/>
-      <!-- Middleware → Route Handler -->
-      <line x1="360" y1="49" x2="418" y2="49" stroke="#4f7fff" stroke-opacity=".6" stroke-width="1.5" marker-end="url(#arr)"/>
-      <!-- Route Handler → JWT Cookie -->
-      <line x1="550" y1="49" x2="613" y2="49" stroke="#4f7fff" stroke-opacity=".6" stroke-width="1.5" marker-end="url(#arr)"/>
-      <!-- Route Handler → AuthenticateUser -->
-      <line x1="485" y1="73" x2="305" y2="123" stroke="#4f7fff" stroke-opacity=".5" stroke-width="1.5" marker-end="url(#arr)"/>
-      <!-- AuthenticateUser → Entities -->
-      <line x1="305" y1="173" x2="305" y2="223" stroke="#7c5cfc" stroke-opacity=".5" stroke-width="1.5" marker-end="url(#arr)"/>
-      <!-- ComputeChurnRisk → Ports -->
-      <line x1="485" y1="173" x2="485" y2="223" stroke="#7c5cfc" stroke-opacity=".5" stroke-width="1.5" marker-end="url(#arr)"/>
-      <!-- RecalculateHealth → Value Objects -->
-      <line x1="680" y1="173" x2="680" y2="223" stroke="#7c5cfc" stroke-opacity=".5" stroke-width="1.5" marker-end="url(#arr)"/>
-      <!-- Ports → Prisma Adapters -->
-      <line x1="305" y1="273" x2="305" y2="323" stroke="#4f7fff" stroke-opacity=".5" stroke-width="1.5" marker-end="url(#arr-data)"/>
-      <line x1="485" y1="273" x2="485" y2="323" stroke="#4f7fff" stroke-opacity=".5" stroke-width="1.5" marker-end="url(#arr-data)"/>
-      <!-- Prisma Adapters → Neon -->
-      <line x1="370" y1="349" x2="418" y2="349" stroke="#06b6d4" stroke-opacity=".6" stroke-width="1.5" marker-end="url(#arr-data)"/>
-      <line x1="550" y1="349" x2="613" y2="349" stroke="#06b6d4" stroke-opacity=".6" stroke-width="1.5" marker-end="url(#arr-data)"/>
-      <!-- App → Events (dashed) -->
-      <line x1="305" y1="173" x2="305" y2="423" stroke="#f59e0b" stroke-opacity=".3" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#arr-event)"/>
-
-      <!-- ─── Legend ─── -->
-      <line x1="40" y1="500" x2="70" y2="500" stroke="#4f7fff" stroke-opacity=".7" stroke-width="1.5" marker-end="url(#arr)"/>
-      <text x="76" y="504" font-size="10" fill="#64748b" font-family="system-ui">Control flow</text>
-      <line x1="170" y1="500" x2="200" y2="500" stroke="#06b6d4" stroke-opacity=".7" stroke-width="1.5" marker-end="url(#arr-data)"/>
-      <text x="206" y="504" font-size="10" fill="#64748b" font-family="system-ui">Data flow</text>
-      <line x1="290" y1="500" x2="320" y2="500" stroke="#f59e0b" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr-event)"/>
-      <text x="326" y="504" font-size="10" fill="#64748b" font-family="system-ui">Event (planned)</text>
-    </svg>
   </div>
 
-  <!-- Auth flow detail -->
   <div class="two-col">
     <div class="card">
-      <div class="card-title">Auth Flow — Sign In Detail</div>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--web)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">POST /api/auth/signin</div>
-            <div class="tl-desc">Parse JSON body → extract email + password strings</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--app)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">AuthenticateUser.execute()</div>
-            <div class="tl-desc">Loads user from PrismaAuthRepository → BcryptPasswordHasher.verify()</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--domain)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">Result&lt;User, AuthError&gt;</div>
-            <div class="tl-desc">Returns typed Result — no exceptions thrown across boundaries</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--web)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">createSessionToken()</div>
-            <div class="tl-desc">Sign JWT with jose · set HTTP-only cookie · maxAge 7d</div>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--web)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">Middleware verifica en cada request</div>
-            <div class="tl-desc">jwt.verify() → session payload → Next.js headers → redirect si falta</div>
-          </div>
-        </div>
+      <div class="card-title">Rubro del score — reproducible</div>
+      <table class="rubric">
+        <thead><tr><th>Dimensión</th><th class="n">Peso</th><th class="n">Nota</th><th class="n">Aporte</th></tr></thead>
+        <tbody>
+          <tr><td>Pureza / separación de capas</td><td class="n">15%</td><td class="n">85</td><td class="n">12.8</td></tr>
+          <tr><td>Coherencia de wiring en runtime</td><td class="n">15%</td><td class="n">30</td><td class="n">4.5</td></tr>
+          <tr><td>Event-driven readiness</td><td class="n">10%</td><td class="n">35</td><td class="n">3.5</td></tr>
+          <tr><td>Seguridad</td><td class="n">20%</td><td class="n">62</td><td class="n">12.4</td></tr>
+          <tr><td>Control de costo / escala</td><td class="n">15%</td><td class="n">40</td><td class="n">6.0</td></tr>
+          <tr><td>Tests &amp; CI</td><td class="n">15%</td><td class="n">45</td><td class="n">6.8</td></tr>
+          <tr><td>Persistencia / observabilidad</td><td class="n">10%</td><td class="n">25</td><td class="n">2.5</td></tr>
+          <tr><td>Total</td><td class="n">100%</td><td class="n">—</td><td class="n">48.4</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        El 72 de la Rev. 1 asumía una app de producto corriendo sobre el núcleo. Con el núcleo dormido,
+        las dimensiones de wiring, persistencia y eventos arrastran el promedio. Recuperar los ~25 puntos
+        no requiere reescribir nada: requiere <em>conectar</em> lo que ya está escrito y testeado.
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Health Score Recalculation Flow</div>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--app)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">RecalculateHealthScore.execute(locationId, range)</div>
-            <div class="tl-desc">Orchestrates 5 repositories in parallel</div>
-          </div>
+      <div class="card-title">Evidencia — comandos ejecutados hoy</div>
+      <div class="verify">
+        <div class="verify-row">
+          <span class="verify-cmd">bun test</span>
+          <span class="verify-out">240 pass · <strong style="color:var(--red)">8 fail</strong> · 618 expects · 48 archivos · 6.02s</span>
         </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--domain)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">computeRevenueScore()</div>
-            <div class="tl-desc">% change current vs prev period → clamp(0,100)</div>
-          </div>
+        <div class="verify-row">
+          <span class="verify-cmd">bun run typecheck</span>
+          <span class="verify-out">9 successful, 9 total (turbo, 8 cached)</span>
         </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--domain)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">computeReputationScore(reviews)</div>
-            <div class="tl-desc">Avg rating (90%) + sentiment score (10%)</div>
-          </div>
+        <div class="verify-row">
+          <span class="verify-cmd">bun run lint</span>
+          <span class="verify-out">300 archivos · 2 warnings (biome), 0 errores</span>
         </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--domain)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">computeTrend(current, prevScores[])</div>
-            <div class="tl-desc">Needs ≥3 prev scores → up/down/stable (±3 threshold)</div>
-          </div>
+        <div class="verify-row">
+          <span class="verify-cmd">grep @atrium/infrastructure</span>
+          <span class="verify-out">0 importadores fuera de su propio package.json</span>
         </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--infra)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title">PrismaHealthRepository.save(LocationHealth)</div>
-            <div class="tl-desc">Persist score snapshot → location_health table</div>
-          </div>
+        <div class="verify-row">
+          <span class="verify-cmd">grep EventBus|publish(|EventEmitter</span>
+          <span class="verify-out">0 resultados en apps/ y packages/</span>
         </div>
+        <div class="verify-row">
+          <span class="verify-cmd">grep aes-256|createCipheriv</span>
+          <span class="verify-out">0 resultados — R-06 sin implementar</span>
+        </div>
+        <div class="verify-row">
+          <span class="verify-cmd">grep unstable_cache|revalidate</span>
+          <span class="verify-out">0 resultados en el grader — sin capa de caché</span>
+        </div>
+        <div class="verify-row">
+          <span class="verify-cmd">ls .github</span>
+          <span class="verify-out">no existe — no hay CI</span>
+        </div>
+        <div class="verify-row">
+          <span class="verify-cmd">git ls-files | grep .env</span>
+          <span class="verify-out">solo <code>.env.example</code> versionados ✓ secretos ignorados</span>
+        </div>
+      </div>
+      <div class="note">
+        Corrección sobre una nota previa: el patrón de <code>client.ts</code> <strong>no</strong> está roto en producción.
+        <code>export const prisma</code> a nivel de módulo ya es el singleton por instancia; el <code>globalThis</code>
+        solo hace falta para sobrevivir al hot-reload en dev, y por eso está bajo
+        <code>NODE_ENV !== "production"</code>. Es el patrón canónico, no un bug.
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════ BEST PRACTICES ════════════════ -->
-<div id="tab-practices" class="tab-panel">
+<!-- ════════════════ LEDGER ════════════════ -->
+<div id="tab-ledger" class="tab-panel">
   <div class="section-header">
     <div>
-      <h2>Best Practices Audit</h2>
-      <p>14 checks — Hexagonal Architecture · Security · Testing · Observabilidad</p>
+      <h2>Los 8 riesgos de la Rev. 1 — qué pasó con cada uno</h2>
+      <p>Cada estado fue verificado leyendo el archivo, no inferido del historial de commits</p>
     </div>
-    <div style="display:flex; gap:8px;">
-      <span class="badge badge-green">9 OK</span>
-      <span class="badge badge-yellow">4 WARN</span>
-      <span class="badge badge-red">1 GAP</span>
+    <div class="chips">
+      <span class="chip ok">2 resueltos</span>
+      <span class="chip warn">1 parcial</span>
+      <span class="chip err">3 abiertos</span>
+      <span class="chip">2 obsoletos</span>
     </div>
   </div>
 
+  <div class="card table-scroll">
+    <table class="risk-table">
+      <thead>
+        <tr><th>#</th><th>Riesgo Rev. 1</th><th>Estado</th><th>Evidencia en el árbol actual</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="id">R-01</td>
+          <td>
+            <div class="t">Brute-force en <code>/api/auth/signin</code></div>
+            <div class="d">Sin rate limiting ni lockout</div>
+          </td>
+          <td><span class="st st-moot">OBSOLETO</span><div class="d">re-encuadrado</div></td>
+          <td class="d">
+            El endpoint ya no existe: <code>apps/web</code> completa fue borrada en <code>5eb5dbc</code>.
+            La superficie nueva sí tiene defensa: <code>apps/atrium.grader/middleware.ts</code> aplica
+            20 req/min por IP+path sobre <code>/api/grader/:path*</code>. Pero es un <code>Map</code> en memoria
+            por instancia Edge, sin store compartido → ver <strong>N-04</strong>. El riesgo original
+            <em>volverá</em> el día que exista otra vez un login.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">R-02</td>
+          <td>
+            <div class="t">Prisma connection pool exhaustion</div>
+            <div class="d"><code>createUseCases()</code> creaba cliente por request</div>
+          </td>
+          <td><span class="st st-done">RESUELTO</span><div class="d">en código</div></td>
+          <td class="d">
+            <code>packages/infrastructure/src/client.ts</code> ahora exporta un singleton a nivel de módulo
+            con caché en <code>globalThis</code> para dev. <code>createUseCases(client?)</code> acepta inyección
+            y cae al singleton. Queda pendiente el <em>driver adapter</em> de Neon
+            (<code>@neondatabase/serverless</code> declarado pero no cableado) — y de todos modos el punto es
+            teórico mientras ninguna app consuma el paquete.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">R-03</td>
+          <td>
+            <div class="t">JWT no revocable post-logout</div>
+            <div class="d">7d fijos, sin blacklist ni refresh</div>
+          </td>
+          <td><span class="st st-moot">OBSOLETO</span><div class="d">deuda de diseño diferida</div></td>
+          <td class="d">
+            No queda código JWT en el repo: <code>auth.ts</code>, <code>middleware.ts</code>,
+            <code>lib/auth-secret.ts</code> y <code>lib/auth-http.ts</code> se fueron con <code>apps/web</code>.
+            <code>jose</code> ya no aparece en ningún <code>package.json</code>. La decisión (sesiones en DB vs
+            refresh + expiración corta) sigue sin tomar y hay que tomarla <em>antes</em> de reconstruir el dashboard,
+            no después.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">R-04</td>
+          <td>
+            <div class="t"><code>emailVerifiedAt</code> no validado en login</div>
+          </td>
+          <td><span class="st st-open">ABIERTO</span></td>
+          <td class="d">
+            <code>packages/application/src/auth/authenticate-user.ts</code> sigue validando solo email+password.
+            Peor que en junio: el puerto <code>AuthUserWithPassword</code> (<code>auth-ports.ts</code>)
+            <strong>no expone el campo</strong>, así que el fix ya no es una línea — toca puerto,
+            <code>PrismaAuthRepository</code>, mapper y el <code>AuthError</code> nuevo. La columna sí existe
+            (<code>schema.prisma:281</code>).
+          </td>
+        </tr>
+        <tr>
+          <td class="id">R-05</td>
+          <td>
+            <div class="t">Event bus ausente = side effects perdidos</div>
+          </td>
+          <td><span class="st st-part">PARCIAL</span></td>
+          <td class="d">
+            Avance real: <code>ComputeChurnRisk</code> ahora devuelve <code>event?: ChurnRiskElevatedEvent</code>
+            en su resultado — los casos de uso <em>exponen</em> sus eventos en vez de esconderlos.
+            Pero sigue habiendo 0 publishers y 0 subscribers en todo el repo. Quien llame al caso de uso debe
+            transportar el evento a mano, y nadie lo hace. Sin bus ni outbox, tampoco hay garantía
+            de entrega.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">R-06</td>
+          <td>
+            <div class="t"><code>ConnectorCredential</code> sin encriptación</div>
+          </td>
+          <td><span class="st st-open">ABIERTO</span><div class="d">exposición latente</div></td>
+          <td class="d">
+            <code>schema.prisma:293</code> sigue diciendo <code>credentials String // encrypted JSON</code> y no hay
+            una sola llamada a <code>createCipheriv</code> / AES en el repo. Mitigante: no existen conectores
+            OAuth todavía, así que la tabla está vacía. El riesgo se activa el día del primer connector —
+            y ese día el schema ya <em>miente</em> sobre lo que guarda.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">R-07</td>
+          <td>
+            <div class="t">Health score con datos vacíos retorna 50</div>
+          </td>
+          <td><span class="st st-open">ABIERTO</span></td>
+          <td class="d">
+            <code>health-score-service.ts</code> conserva cuatro <code>return 50</code> silenciosos
+            (líneas 13, 19, 33, 42: revenue, reputation, traffic, retention). <code>hasEnoughData</code> no
+            aparece en ningún archivo. Una ubicación nueva y sin datos puntúa igual que una mediocre con datos.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">R-08</td>
+          <td>
+            <div class="t"><code>computeTrend()</code> necesita ≥3 snapshots</div>
+          </td>
+          <td><span class="st st-open">ABIERTO</span></td>
+          <td class="d">
+            <code>health-score-service.ts:49</code>: <code>if (previousScores.length &lt; 3) return "stable"</code>.
+            <code>HealthTrend</code> en <code>location-health.ts:1</code> sigue siendo
+            <code>"up" | "stable" | "down"</code>. Nada distingue "estable" de "no sé".
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="two-col">
-    <div>
-      <div style="margin-bottom:12px; font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.5px">Architecture</div>
+    <div class="card">
+      <div class="card-title">Lo que se ganó y no estaba en el reporte anterior</div>
       <div class="bp-list">
         <div class="bp-item bp-ok">
           <span class="bp-icon">✅</span>
           <div class="bp-content">
-            <div class="bp-title">Domain sin dependencias externas</div>
-            <div class="bp-desc"><code>packages/domain</code> no importa Prisma, Next.js, ni SDKs de terceros. Regla 1 del ARCHITECTURE.md cumplida.</div>
+            <div class="bp-title">Gate anti-SSRF de verdad</div>
+            <div class="bp-desc">
+              <code>lib/safe-fetch.ts</code>: allowlist de protocolo, rangos IPv4/IPv6 privados incluyendo
+              <code>169.254.169.254</code> (metadata de cloud), resolución DNS antes del fetch, tope de 2 MB
+              de cuerpo. Es la puerta correcta para URLs que vienen de sitios de terceros.
+            </div>
           </div>
           <span class="bp-tag">OK</span>
         </div>
         <div class="bp-item bp-ok">
           <span class="bp-icon">✅</span>
           <div class="bp-content">
-            <div class="bp-title">Ports & Adapters implementados</div>
-            <div class="bp-desc">Interfaces definidas en domain, implementaciones concretas en infrastructure. Prisma Adapters implementan exactamente los ports.</div>
+            <div class="bp-title">Scoring versionado y trazable</div>
+            <div class="bp-desc">
+              Cada reporte carga <code>scoringVersion</code> + <code>providerVersions</code>, y
+              <code>diagnosticSteps</code> declara por paso status/source/confidence/found/missing/errors.
+              Permite auditar drift de puntuación entre versiones.
+            </div>
           </div>
           <span class="bp-tag">OK</span>
         </div>
         <div class="bp-item bp-ok">
           <span class="bp-icon">✅</span>
           <div class="bp-content">
-            <div class="bp-title">Composition Root centralizado</div>
-            <div class="bp-desc"><code>createUseCases()</code> en infrastructure wires todas las dependencias en un lugar.</div>
+            <div class="bp-title">Degradación explícita, no silenciosa</div>
+            <div class="bp-desc">
+              PageSpeed corre con tope de 5 s y, si falla, el fallo se acumula en
+              <code>providerErrors</code> en vez de desaparecer. El reporte sigue saliendo.
+            </div>
           </div>
           <span class="bp-tag">OK</span>
+        </div>
+        <div class="bp-item bp-ok">
+          <span class="bp-icon">✅</span>
+          <div class="bp-content">
+            <div class="bp-title">Validación de entrada en los endpoints baratos</div>
+            <div class="bp-desc">
+              <code>place-photo</code> exige <code>^places/[^/]+/photos/[^/]+$</code> y clampea dimensiones a
+              1–1600. <code>search</code> exige ≥3 caracteres. Nada de eso existía en junio.
+            </div>
+          </div>
+          <span class="bp-tag">OK</span>
+        </div>
+        <div class="bp-item bp-ok">
+          <span class="bp-icon">✅</span>
+          <div class="bp-content">
+            <div class="bp-title">Pureza de capas sigue intacta bajo presión</div>
+            <div class="bp-desc">
+              Auditoría de imports en <code>packages/domain</code> y <code>packages/application</code>:
+              solo <code>@atrium/*</code> y rutas relativas. Se agregó todo el módulo <code>diagnostics</code>
+              sin colar un solo <code>fetch</code> ni un SDK.
+            </div>
+          </div>
+          <span class="bp-tag">OK</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Lo que se perdió</div>
+      <div class="bp-list">
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">El núcleo hexagonal quedó sin consumidor</div>
+            <div class="bp-desc">
+              <code>packages/infrastructure</code>: 0 importadores. 12 repositorios, 8 mappers y el
+              composition root existen, tienen tests y nunca corren. Es el activo más caro del repo
+              y hoy vale 0 en runtime.
+            </div>
+          </div>
+          <span class="bp-tag">GAP</span>
+        </div>
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">Ningún scan sobrevive a la request</div>
+            <div class="bp-desc">
+              <code>storeScanEvidence()</code> hace <code>console.info</code> y, opcionalmente, escribe un JSON
+              local — pero solo si <code>GRADER_SCAN_STORE=file</code> <em>y</em>
+              <code>NODE_ENV !== "production"</code>. En producción el <code>scanId</code> que devuelve la API
+              no apunta a nada. Sin leads, sin auditoría, sin histórico.
+            </div>
+          </div>
+          <span class="bp-tag">GAP</span>
+        </div>
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">Deriva respecto a ARCHITECTURE.md</div>
+            <div class="bp-desc">
+              Los principios 2, 4 y 5 (conectores sin reglas, normalización antes del core, IA sobre
+              entidades internas) se saltan: el grader habla directo con Google Places, ScrapeCreators,
+              PageSpeed y el LLM desde <code>app/lib</code>. El documento además sigue describiendo
+              <code>apps/web</code>, Prisma 5 y auth JWT como estado actual.
+            </div>
+          </div>
+          <span class="bp-tag">GAP</span>
+        </div>
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">Suite en rojo sin nadie que la vigile</div>
+            <div class="bp-desc">
+              8 de 248 tests fallan y no hay <code>.github/</code>. El único hook es
+              <code>post-commit</code>… que <em>despliega el CDN a producción</em> y hace
+              <code>exit 0</code> si el deploy falla.
+            </div>
+          </div>
+          <span class="bp-tag">GAP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ FLOW ════════════════ -->
+<div id="tab-flow" class="tab-panel">
+  <div class="section-header">
+    <div>
+      <h2>Flujo real — el único con tráfico</h2>
+      <p><code>POST /api/grader</code> → proveedores externos → scoring en application → respuesta. Sin DB en ningún punto.</p>
+    </div>
+  </div>
+
+  <div class="flow-container">
+    <svg class="flow-svg" viewBox="0 0 1100 470" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#4f7fff"/>
+        </marker>
+        <marker id="ar-red" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#ef4444"/>
+        </marker>
+      </defs>
+
+      <!-- lanes -->
+      <rect x="0" y="0" width="1100" height="92" fill="rgba(16,185,129,.05)" stroke="#252c3d"/>
+      <text x="12" y="20" fill="#10b981" font-size="10" font-weight="700" letter-spacing="1">EDGE / ROUTE HANDLER</text>
+
+      <rect x="0" y="92" width="1100" height="120" fill="rgba(107,114,128,.05)" stroke="#252c3d"/>
+      <text x="12" y="112" fill="#9ca3af" font-size="10" font-weight="700" letter-spacing="1">PROVEEDORES EXTERNOS (en apps/atrium.grader/lib — deberían ser packages/connectors)</text>
+
+      <rect x="0" y="212" width="1100" height="96" fill="rgba(124,92,252,.05)" stroke="#252c3d"/>
+      <text x="12" y="232" fill="#7c5cfc" font-size="10" font-weight="700" letter-spacing="1">APPLICATION — scoring puro</text>
+
+      <rect x="0" y="308" width="1100" height="80" fill="rgba(245,158,11,.05)" stroke="#252c3d"/>
+      <text x="12" y="328" fill="#f59e0b" font-size="10" font-weight="700" letter-spacing="1">IA (segunda request, opcional)</text>
+
+      <rect x="0" y="388" width="1100" height="82" fill="rgba(239,68,68,.06)" stroke="#252c3d"/>
+      <text x="12" y="408" fill="#ef4444" font-size="10" font-weight="700" letter-spacing="1">PERSISTENCIA — el hueco</text>
+
+      <!-- edge row -->
+      <g font-size="11" fill="#e2e8f0">
+        <rect x="30" y="34" width="120" height="42" rx="6" fill="#1a1f2c" stroke="#10b981"/>
+        <text x="90" y="52" text-anchor="middle" font-weight="700">Browser</text>
+        <text x="90" y="66" text-anchor="middle" fill="#64748b" font-size="9">grader-client.tsx</text>
+
+        <rect x="200" y="34" width="140" height="42" rx="6" fill="#1a1f2c" stroke="#10b981"/>
+        <text x="270" y="52" text-anchor="middle" font-weight="700">middleware</text>
+        <text x="270" y="66" text-anchor="middle" fill="#64748b" font-size="9">20/min · IP+path · in-memory</text>
+
+        <rect x="390" y="34" width="150" height="42" rx="6" fill="#1a1f2c" stroke="#10b981"/>
+        <text x="465" y="52" text-anchor="middle" font-weight="700">POST /api/grader</text>
+        <text x="465" y="66" text-anchor="middle" fill="#64748b" font-size="9">placeId: string</text>
+
+        <rect x="590" y="34" width="160" height="42" rx="6" fill="#1a1f2c" stroke="#eab308"/>
+        <text x="670" y="52" text-anchor="middle" font-weight="700">budget guard</text>
+        <text x="670" y="66" text-anchor="middle" fill="#64748b" font-size="9">contador en proceso</text>
+
+        <rect x="800" y="34" width="170" height="42" rx="6" fill="#1a1f2c" stroke="#10b981"/>
+        <text x="885" y="52" text-anchor="middle" font-weight="700">respuesta JSON</text>
+        <text x="885" y="66" text-anchor="middle" fill="#64748b" font-size="9">{ scanId, report, meta }</text>
+      </g>
+
+      <!-- providers -->
+      <g font-size="11" fill="#e2e8f0">
+        <rect x="60" y="130" width="150" height="42" rx="6" fill="#1a1f2c" stroke="#6b7280"/>
+        <text x="135" y="148" text-anchor="middle" font-weight="700">Google Places</text>
+        <text x="135" y="162" text-anchor="middle" fill="#64748b" font-size="9">details + nearby + photos</text>
+
+        <rect x="240" y="130" width="150" height="42" rx="6" fill="#1a1f2c" stroke="#6b7280"/>
+        <text x="315" y="148" text-anchor="middle" font-weight="700">website-scanner</text>
+        <text x="315" y="162" text-anchor="middle" fill="#64748b" font-size="9">safeFetch · 2 MB · HTML</text>
+
+        <rect x="420" y="130" width="150" height="42" rx="6" fill="#1a1f2c" stroke="#6b7280"/>
+        <text x="495" y="148" text-anchor="middle" font-weight="700">PageSpeed</text>
+        <text x="495" y="162" text-anchor="middle" fill="#64748b" font-size="9">opcional · timeout 5 s</text>
+
+        <rect x="600" y="130" width="150" height="42" rx="6" fill="#1a1f2c" stroke="#6b7280"/>
+        <text x="675" y="148" text-anchor="middle" font-weight="700">ScrapeCreators</text>
+        <text x="675" y="162" text-anchor="middle" fill="#64748b" font-size="9">social · ruta aparte</text>
+
+        <rect x="790" y="130" width="180" height="42" rx="6" fill="#1a1f2c" stroke="#ef4444"/>
+        <text x="880" y="148" text-anchor="middle" font-weight="700" fill="#ef4444">sin caché</text>
+        <text x="880" y="162" text-anchor="middle" fill="#64748b" font-size="9">0 hits de revalidate/unstable_cache</text>
+      </g>
+
+      <!-- application -->
+      <g font-size="11" fill="#e2e8f0">
+        <rect x="120" y="248" width="230" height="42" rx="6" fill="#1a1f2c" stroke="#7c5cfc"/>
+        <text x="235" y="266" text-anchor="middle" font-weight="700">gradeRestaurantGrowth()</text>
+        <text x="235" y="280" text-anchor="middle" fill="#64748b" font-size="9">application/src/diagnostics</text>
+
+        <rect x="400" y="248" width="200" height="42" rx="6" fill="#1a1f2c" stroke="#7c5cfc"/>
+        <text x="500" y="266" text-anchor="middle" font-weight="700">Result&lt;Report, Error&gt;</text>
+        <text x="500" y="280" text-anchor="middle" fill="#64748b" font-size="9">sin excepciones cruzando capas</text>
+
+        <rect x="650" y="248" width="230" height="42" rx="6" fill="#1a1f2c" stroke="#7c5cfc"/>
+        <text x="765" y="266" text-anchor="middle" font-weight="700">scoringVersion + providerVersions</text>
+        <text x="765" y="280" text-anchor="middle" fill="#64748b" font-size="9">drift auditable</text>
+      </g>
+
+      <!-- AI -->
+      <g font-size="11" fill="#e2e8f0">
+        <rect x="120" y="336" width="250" height="40" rx="6" fill="#1a1f2c" stroke="#ef4444"/>
+        <text x="245" y="353" text-anchor="middle" font-weight="700" fill="#ef4444">POST /api/grader/narrative</text>
+        <text x="245" y="367" text-anchor="middle" fill="#64748b" font-size="9">recibe profile+report DEL CLIENTE</text>
+
+        <rect x="420" y="336" width="200" height="40" rx="6" fill="#1a1f2c" stroke="#f59e0b"/>
+        <text x="520" y="353" text-anchor="middle" font-weight="700">buildPrompt()</text>
+        <text x="520" y="367" text-anchor="middle" fill="#64748b" font-size="9">evidencia → JSON en el prompt</text>
+
+        <rect x="670" y="336" width="210" height="40" rx="6" fill="#1a1f2c" stroke="#f59e0b"/>
+        <text x="775" y="353" text-anchor="middle" font-weight="700">generateText → zod</text>
+        <text x="775" y="367" text-anchor="middle" fill="#64748b" font-size="9">sin timeout · sin retry · null si falla</text>
+      </g>
+
+      <!-- persistence -->
+      <g font-size="11" fill="#e2e8f0">
+        <rect x="120" y="414" width="250" height="42" rx="6" fill="#1a1f2c" stroke="#ef4444" stroke-dasharray="5,4"/>
+        <text x="245" y="432" text-anchor="middle" font-weight="700">storeScanEvidence()</text>
+        <text x="245" y="446" text-anchor="middle" fill="#64748b" font-size="9">console.info + file solo en dev</text>
+
+        <rect x="430" y="414" width="230" height="42" rx="6" fill="#1a1f2c" stroke="#ef4444" stroke-dasharray="5,4"/>
+        <text x="545" y="432" text-anchor="middle" font-weight="700" fill="#ef4444">Neon PostgreSQL</text>
+        <text x="545" y="446" text-anchor="middle" fill="#64748b" font-size="9">18 modelos · 0 escrituras</text>
+
+        <rect x="720" y="414" width="230" height="42" rx="6" fill="#1a1f2c" stroke="#ef4444" stroke-dasharray="5,4"/>
+        <text x="835" y="432" text-anchor="middle" font-weight="700" fill="#ef4444">Event bus</text>
+        <text x="835" y="446" text-anchor="middle" fill="#64748b" font-size="9">no implementado</text>
+      </g>
+
+      <!-- arrows -->
+      <g stroke="#4f7fff" stroke-width="1.6" fill="none" marker-end="url(#ar)">
+        <path d="M150,55 L198,55"/>
+        <path d="M340,55 L388,55"/>
+        <path d="M540,55 L588,55"/>
+        <path d="M750,55 L798,55"/>
+        <path d="M465,78 L465,126 L570,126" />
+        <path d="M440,78 L200,78 L135,126"/>
+        <path d="M480,78 L680,78 L675,126"/>
+        <path d="M300,174 L235,244"/>
+        <path d="M350,269 L398,269"/>
+        <path d="M600,269 L648,269"/>
+        <path d="M780,244 L860,80"/>
+      </g>
+      <g stroke="#ef4444" stroke-width="1.6" fill="none" marker-end="url(#ar-red)" stroke-dasharray="5,4">
+        <path d="M700,290 L300,330"/>
+        <path d="M370,356 L418,356"/>
+        <path d="M620,356 L668,356"/>
+        <path d="M235,290 L245,410"/>
+      </g>
+
+      <g font-size="9" fill="#64748b">
+        <text x="1000" y="55">← al browser</text>
+        <text x="700" y="318" fill="#ef4444">el cliente reenvía el reporte completo</text>
+        <text x="260" y="404" fill="#ef4444">evidencia muere aquí en prod</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Amplificación de costo en /api/grader/search</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--web)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">1 · POST con <code>query.length ≥ 3</code></div>
+            <div class="tl-desc">Sin tope superior de longitud. Sin debounce garantizado del lado servidor.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">2 · Autocomplete de Google → hasta 6 predicciones</div>
+            <div class="tl-desc"><code>google-places-client.ts:270</code> — <code>.slice(0, 6)</code></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">3 · <code>Promise.all</code> → 6 llamadas Place Details</div>
+            <div class="tl-desc">Una por predicción, para completar nombre y dirección. Cada una es facturable.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">4 · Total: 7 llamadas facturables por request, sin caché</div>
+            <div class="tl-desc">
+              Con el límite de 20 req/min por IP <em>por path</em>: hasta ~140 llamadas Google por IP
+              por minuto <em>por instancia</em>. Nadie se autentica para llegar ahí.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Superficie pública sin autenticación</div>
+      <table class="risk-table">
+        <thead><tr><th>Ruta</th><th>Costo por hit</th><th>Guardas</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="d"><code>POST /api/grader</code></td>
+            <td class="d">Places details + nearby + fetch de sitio + PageSpeed</td>
+            <td class="d">rate limit · budget guard · safeFetch</td>
+          </tr>
+          <tr>
+            <td class="d"><code>POST /api/grader/search</code></td>
+            <td class="d">≈7 llamadas Places</td>
+            <td class="d">rate limit · <code>len ≥ 3</code> · <span style="color:var(--red)">sin caché</span></td>
+          </tr>
+          <tr>
+            <td class="d"><code>POST /api/grader/narrative</code></td>
+            <td class="d">tokens de LLM (Anthropic / Google / OpenRouter)</td>
+            <td class="d"><span style="color:var(--red)">solo rate limit — cuerpo sin validar</span></td>
+          </tr>
+          <tr>
+            <td class="d"><code>POST /api/grader/social</code>, <code>/detect-social</code></td>
+            <td class="d">ScrapeCreators (por request)</td>
+            <td class="d">rate limit</td>
+          </tr>
+          <tr>
+            <td class="d"><code>GET /api/grader/place-photo</code></td>
+            <td class="d">Places photo media</td>
+            <td class="d">regex de nombre · clamp · <span style="color:var(--red)"><code>no-store</code></span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        Ninguna ruta pide identidad. El rate limit por IP+path es la única barrera, y se resetea con cada
+        instancia nueva. Un atacante con IPs rotativas gasta presupuesto ajeno sin tocar un login.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ RISKS ════════════════ -->
+<div id="tab-risks" class="tab-panel">
+  <div class="metrics-row">
+    <div class="metric-card red">
+      <div class="metric-label">Alta severidad</div>
+      <div class="metric-value">4</div>
+      <div class="metric-sub">antes de tráfico real en el grader</div>
+    </div>
+    <div class="metric-card yellow">
+      <div class="metric-label">Media severidad</div>
+      <div class="metric-value">9</div>
+      <div class="metric-sub">próximos dos sprints</div>
+    </div>
+    <div class="metric-card green">
+      <div class="metric-label">Baja severidad</div>
+      <div class="metric-value">4</div>
+      <div class="metric-sub">aceptable a corto plazo</div>
+    </div>
+    <div class="metric-card yellow">
+      <div class="metric-label">Risk score</div>
+      <div class="metric-value">6.1</div>
+      <div class="metric-sub">/ 10 — moderado-alto</div>
+    </div>
+  </div>
+
+  <div class="card table-scroll">
+    <div class="card-title">Registro nuevo — era grader (N) + herencia viva (R)</div>
+    <table class="risk-table">
+      <thead>
+        <tr><th>#</th><th>Riesgo</th><th>Área</th><th>Sev.</th><th>Prob.</th><th>Mitigación</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="id">N-01</td>
+          <td>
+            <div class="t">Endpoint de IA confía en el cuerpo del cliente</div>
+            <div class="d">
+              <code>/api/grader/narrative</code> acepta <code>profile</code> y <code>report</code> completos con un
+              <code>as NarrativeRequest</code> — un cast de compilación, cero validación en runtime — y no los ata
+              a ningún <code>scanId</code> real. Doble problema: gasto libre de tokens y texto arbitrario del atacante
+              entrando al prompt vía <code>buildPrompt()</code> y <code>evidenceContext</code> (inyección de prompt).
+            </div>
+          </td>
+          <td class="d">Security · IA</td>
+          <td><span class="sev sev-high">HIGH</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:85%;background:var(--red)"></div></div><span class="d">85%</span></div>
+          </td>
+          <td class="d">
+            Aceptar solo <code>{ scanId }</code>, releer la evidencia del store server-side, y pasar el cuerpo por
+            <code>zod.safeParse</code>. Delimitar la evidencia en el prompt como dato no confiable.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-02</td>
+          <td>
+            <div class="t">Amplificación de costo 7× sin caché</div>
+            <div class="d">
+              <code>search</code> dispara 1 autocomplete + hasta 6 <em>place details</em>
+              (<code>google-places-client.ts:270-274</code>). <code>grep unstable_cache|revalidate</code> = 0 hits
+              en todo el grader. Sin tope de longitud de query.
+            </div>
+          </td>
+          <td class="d">Cost · Scale</td>
+          <td><span class="sev sev-high">HIGH</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:90%;background:var(--red)"></div></div><span class="d">90%</span></div>
+          </td>
+          <td class="d">
+            Caché por <code>placeId</code> y por query normalizada (respetando los límites de caché de Google),
+            no pedir details para las 6 predicciones —solo al seleccionar—, y tope de longitud de query.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-03</td>
+          <td>
+            <div class="t">Budget guard en memoria y con error opaco</div>
+            <div class="d">
+              <code>business-provider.ts:38</code> — contadores por proceso, con warning propio que lo admite.
+              El techo real es <code>límite × nº de instancias</code>. Además lanza
+              <code>BusinessProviderConfigError</code>, que el <code>catch</code> genérico de
+              <code>route.ts</code> convierte en <code>500 "Unable to run diagnostic"</code>: agotar presupuesto es
+              indistinguible de un bug.
+            </div>
+          </td>
+          <td class="d">Cost · Ops</td>
+          <td><span class="sev sev-high">HIGH</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:80%;background:var(--red)"></div></div><span class="d">80%</span></div>
+          </td>
+          <td class="d">
+            Contador en Redis/Upstash con ventana por día y mes. Mapear agotamiento a <code>429</code>/<code>503</code>
+            con <code>Retry-After</code>, distinto del <code>500</code>.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-04</td>
+          <td>
+            <div class="t">Rate limit por instancia, no por sistema</div>
+            <div class="d">
+              <code>middleware.ts</code> guarda hits en un <code>Map</code> del proceso Edge. Límite efectivo =
+              20 × instancias × rutas. La poda solo corre al superar 5 000 claves, así que cada instancia crece
+              hasta esa marca antes de limpiar.
+            </div>
+          </td>
+          <td class="d">Security · Scale</td>
+          <td><span class="sev sev-high">HIGH</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:75%;background:var(--red)"></div></div><span class="d">75%</span></div>
+          </td>
+          <td class="d">
+            <code>@upstash/ratelimit</code> con sliding window. Clave por IP (no IP+path) para que el presupuesto
+            sea del cliente, no de cada ruta.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-05</td>
+          <td>
+            <div class="t">Cero persistencia de scans en producción</div>
+            <div class="d">
+              <code>scan-store.ts:103</code> exige <code>GRADER_SCAN_STORE=file</code> y
+              <code>NODE_ENV !== "production"</code>. El <code>scanId</code> devuelto al cliente no referencia nada
+              durable. Y el paquete que podría guardarlo (<code>infrastructure</code>, con Prisma y 18 modelos)
+              no se importa desde ningún sitio.
+            </div>
+          </td>
+          <td class="d">Architecture · Product</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:100%;background:var(--yellow)"></div></div><span class="d">100%</span></div>
+          </td>
+          <td class="d">
+            Modelo <code>Scan</code> + <code>ScanEvidence</code> en Prisma, escrito vía un port en
+            <code>application</code>. Es también el enganche natural para leads y para medir drift de scoring.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-06</td>
+          <td>
+            <div class="t">Llamada al LLM sin timeout, retry ni presupuesto</div>
+            <div class="d">
+              <code>generateText</code> sin <code>abortSignal</code> — el handler puede quedarse colgado hasta el
+              tope de la plataforma. Se usa extracción manual del primer objeto JSON en vez de salida estructurada;
+              si falla, devuelve <code>null</code> con un <code>console.error</code> y nada más. El modelo por
+              defecto, <code>"openrouter/free"</code>, no es un slug válido de OpenRouter.
+            </div>
+          </td>
+          <td class="d">IA · Reliability</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:70%;background:var(--yellow)"></div></div><span class="d">70%</span></div>
+          </td>
+          <td class="d">
+            <code>abortSignal</code> + 1 retry con backoff, <code>generateObject</code> con el schema zod,
+            contador de tokens por día, y un modelo por defecto que exista.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-07</td>
+          <td>
+            <div class="t">Deriva de configuración: <code>.env.example</code> incompleto</div>
+            <div class="d">
+              El código lee <code>PAGESPEED_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>,
+              <code>GOOGLE_GENERATIVE_AI_API_KEY</code>, <code>OPENROUTER_API_KEY</code>,
+              <code>GRADER_AI_PROVIDER</code> y <code>GRADER_AI_MODEL</code>. Ninguna está documentada. Un deploy
+              limpio pierde PageSpeed y narrativa <em>en silencio</em>.
+            </div>
+          </td>
+          <td class="d">Ops</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:95%;background:var(--yellow)"></div></div><span class="d">95%</span></div>
+          </td>
+          <td class="d">
+            Completar <code>.env.example</code> y validar el entorno al arrancar con un schema zod que falle ruidoso
+            (o degrade explícito y reportado).
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-08</td>
+          <td>
+            <div class="t">Sin CI, y un hook que despliega a producción</div>
+            <div class="d">
+              No existe <code>.github/</code>. El único hook es <code>.githooks/post-commit</code>, que corre
+              <code>bun run deploy</code> del CDN contra Hostinger tras cada commit que toque
+              <code>apps/atrium.cdn/{public,scripts}</code>, y sale con <code>0</code> aunque falle.
+            </div>
+          </td>
+          <td class="d">Ops · Quality</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:85%;background:var(--yellow)"></div></div><span class="d">85%</span></div>
+          </td>
+          <td class="d">
+            Pipeline con <code>typecheck + lint + test</code> como gate de merge. Mover el deploy del CDN a la
+            pipeline, disparado por rama, no por commit local.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-09</td>
+          <td>
+            <div class="t">8 tests en rojo, dos causas distintas</div>
+            <div class="d">
+              3 en <code>packages/ui/test/variants.test.ts</code>: los tests esperan <code>text-mint</code> y los
+              componentes emiten <code>text-lime</code> (rename de token no propagado — Button, Tag, Eyebrow).
+              5 en <code>apps/atrium.website/lib/cloudinary.test.ts</code>: exigen
+              <code>NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME</code> en el entorno — tests no herméticos, y una pipeline de
+              media que se cae sin esa variable.
+            </div>
+          </td>
+          <td class="d">Quality</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:100%;background:var(--yellow)"></div></div><span class="d">100%</span></div>
+          </td>
+          <td class="d">
+            Actualizar los asserts al token <code>lime</code>; inyectar el cloud name en el setup del test y
+            validar la env var al construir el sitio.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-10</td>
+          <td>
+            <div class="t">Conectores e IA fuera de su capa</div>
+            <div class="d">
+              <code>google-places-client.ts</code>, <code>scrape-creators.ts</code>,
+              <code>pagespeed-client.ts</code> y <code>report-agent.ts</code> viven en
+              <code>apps/atrium.grader/lib</code>. ARCHITECTURE.md pide <code>packages/connectors</code> y una capa
+              de IA que consuma entidades internas. Consecuencia práctica: nada de eso es reutilizable por el
+              futuro dashboard sin copiar y pegar.
+            </div>
+          </td>
+          <td class="d">Architecture</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:100%;background:var(--yellow)"></div></div><span class="d">100%</span></div>
+          </td>
+          <td class="d">
+            Extraer a <code>packages/connectors/*</code> detrás de los ports que ya define
+            <code>shared/connector.ts</code>, normalizando en el borde. La IA a <code>packages/ai</code>,
+            consumiendo el perfil ya normalizado.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">R-04</td>
+          <td>
+            <div class="t">Email no verificado puede autenticarse</div>
+            <div class="d">Heredado. El puerto ni siquiera expone <code>emailVerifiedAt</code>.</div>
+          </td>
+          <td class="d">Auth</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:70%;background:var(--yellow)"></div></div><span class="d">70%</span></div>
+          </td>
+          <td class="d">Añadir el campo al puerto + check en <code>AuthenticateUser</code>. Latente hasta que vuelva el login.</td>
+        </tr>
+        <tr>
+          <td class="id">R-05</td>
+          <td>
+            <div class="t">Sin bus: los eventos que ya se generan se tiran</div>
+            <div class="d"><code>ChurnRiskElevatedEvent</code> se construye y se devuelve; nadie lo publica.</div>
+          </td>
+          <td class="d">Architecture</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:100%;background:var(--yellow)"></div></div><span class="d">100%</span></div>
+          </td>
+          <td class="d">Bus in-process + tabla outbox para garantizar entrega. Luego cola real.</td>
+        </tr>
+        <tr>
+          <td class="id">R-06</td>
+          <td>
+            <div class="t">El schema promete cifrado que no existe</div>
+            <div class="d">Sin conectores OAuth aún → exposición latente, no activa.</div>
+          </td>
+          <td class="d">Security</td>
+          <td><span class="sev sev-med">MED</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:50%;background:var(--yellow)"></div></div><span class="d">50%</span></div>
+          </td>
+          <td class="d">AES-256-GCM con clave en secreto gestionado + rotación, antes del primer connector real.</td>
+        </tr>
+        <tr>
+          <td class="id">R-07</td>
+          <td>
+            <div class="t">Health score inventa un 50 neutral</div>
+            <div class="d">4 <code>return 50</code> sin señal de "datos insuficientes".</div>
+          </td>
+          <td class="d">Domain Logic</td>
+          <td><span class="sev sev-low">LOW</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:80%;background:var(--green)"></div></div><span class="d">80%</span></div>
+          </td>
+          <td class="d"><code>hasEnoughData</code> por componente + UI que lo muestre. Dormido mientras no haya dashboard.</td>
+        </tr>
+        <tr>
+          <td class="id">R-08</td>
+          <td>
+            <div class="t"><code>computeTrend()</code> miente "stable"</div>
+            <div class="d">Con &lt;3 snapshots devuelve estable sin avisar.</div>
+          </td>
+          <td class="d">Domain Logic</td>
+          <td><span class="sev sev-low">LOW</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:85%;background:var(--green)"></div></div><span class="d">85%</span></div>
+          </td>
+          <td class="d">Cuarto valor <code>"insufficient_data"</code> en <code>HealthTrend</code>.</td>
+        </tr>
+        <tr>
+          <td class="id">N-11</td>
+          <td>
+            <div class="t"><code>place-photo</code> con <code>no-store</code></div>
+            <div class="d">Cada render de la misma foto vuelve a pegarle al endpoint facturable de Google.</div>
+          </td>
+          <td class="d">Cost</td>
+          <td><span class="sev sev-low">LOW</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:90%;background:var(--green)"></div></div><span class="d">90%</span></div>
+          </td>
+          <td class="d">
+            La URI de Google expira, pero el 302 puede cachearse un rato menor a esa expiración
+            (<code>s-maxage</code> corto) en vez de prohibir la caché por completo.
+          </td>
+        </tr>
+        <tr>
+          <td class="id">N-12</td>
+          <td>
+            <div class="t">ARCHITECTURE.md describe un sistema que ya no existe</div>
+            <div class="d">
+              Sigue hablando de <code>apps/web</code>, Prisma 5 y auth JWT como "estado actual de implementación".
+              Cualquier agente o persona nueva que lo lea trabaja sobre un mapa viejo.
+            </div>
+          </td>
+          <td class="d">Docs</td>
+          <td><span class="sev sev-low">LOW</span></td>
+          <td>
+            <div class="prob-bar"><div class="prob-track"><div class="prob-fill" style="width:100%;background:var(--green)"></div></div><span class="d">100%</span></div>
+          </td>
+          <td class="d">Reescribir la sección de estado actual y marcar explícitamente qué capas están dormidas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════ BUGS ════════════════ -->
+<div id="tab-bugs" class="tab-panel">
+  <div class="section-header">
+    <div>
+      <h2>Errores de lógica concretos</h2>
+      <p>No riesgos de arquitectura — código que hace algo distinto de lo que aparenta. Cada uno con archivo y línea.</p>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Confían en el cliente o pierden información</div>
+      <div class="bp-list">
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">L-1 · <code>narrative/route.ts</code> — cast en vez de validación</div>
+            <div class="bp-desc">
+              <code>await req.json() as NarrativeRequest</code> no valida nada en runtime. Un
+              <code>profile</code> con campos de texto arbitrarios llega intacto a <code>buildPrompt()</code>,
+              y la evidencia se serializa con <code>JSON.stringify</code> dentro del prompt. TypeScript da una
+              falsa sensación de contrato aquí.
+            </div>
+          </div>
+          <span class="bp-tag">BUG</span>
+        </div>
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">L-2 · <code>narrative/route.ts</code> — 200 para un cuerpo inválido</div>
+            <div class="bp-desc">
+              Si falta <code>profile</code> o <code>report</code> devuelve <code>200 {narrative:null}</code>.
+              El cliente no puede distinguir "payload mal armado" de "la IA no está disponible", así que
+              ningún bug de integración se va a notar nunca.
+            </div>
+          </div>
+          <span class="bp-tag">BUG</span>
         </div>
         <div class="bp-item bp-warn">
           <span class="bp-icon">⚠️</span>
           <div class="bp-content">
-            <div class="bp-title">createUseCases() no es singleton</div>
-            <div class="bp-desc">En Neon serverless se crea nueva conexión Prisma por cada request. Debería module-level singleton o usar <code>global.__prisma</code> pattern.</div>
+            <div class="bp-title">L-3 · <code>route.ts</code> — el <code>catch</code> aplana los errores de config</div>
+            <div class="bp-desc">
+              Solo <code>OpenDataPlacesLookupError</code> se mapea a status específicos. Todo lo demás cae en
+              <code>500 "Unable to run diagnostic"</code>, incluido
+              <code>BusinessProviderConfigError</code> (presupuesto agotado) y la falta de
+              <code>GOOGLE_PLACES_API_KEY</code>. Tres causas muy distintas, una sola respuesta.
+            </div>
           </div>
           <span class="bp-tag">WARN</span>
+        </div>
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">L-4 · <code>report-agent.ts</code> — parseo frágil sin reintento</div>
+            <div class="bp-desc">
+              <code>extractFirstJsonObject()</code> toma el primer bloque <code>{...}</code> balanceado. Si el modelo
+              escribe prosa con una llave suelta antes del JSON, el parseo falla y la función devuelve
+              <code>null</code>: sin retry, sin fallback, sin métrica. El schema zod que ya existe podría usarse
+              como salida estructurada del propio SDK.
+            </div>
+          </div>
+          <span class="bp-tag">WARN</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Contabilidad, límites y ciclo de vida</div>
+      <div class="bp-list">
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">L-5 · <code>middleware.ts</code> — la clave incluye el path</div>
+            <div class="bp-desc">
+              <code>${ip}:${pathname}</code> significa que el límite es por ruta: 20/min en
+              <code>/api/grader</code> <em>más</em> 20 en <code>/search</code>, <em>más</em> 20 en
+              <code>/narrative</code>… El presupuesto real por IP es 5× el aparente, y las rutas caras cuentan
+              igual que las baratas.
+            </div>
+          </div>
+          <span class="bp-tag">WARN</span>
+        </div>
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">L-6 · <code>business-provider.ts</code> — cobra antes de saber si sirvió</div>
+            <div class="bp-desc">
+              <code>recordGooglePlacesUsage()</code> se llama al construir los headers
+              (<code>google-places-client.ts:190</code>), no al recibir respuesta. Un fallo de red o un 4xx
+              consumen cuota igual. Es conservador —mejor de más que de menos— pero el contador no representa
+              gasto real, y eso importa cuando se use para facturar o alertar.
+            </div>
+          </div>
+          <span class="bp-tag">WARN</span>
+        </div>
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">L-7 · <code>route.ts</code> — el timer de PageSpeed nunca se limpia</div>
+            <div class="bp-desc">
+              <code>pagespeedWithTimeout()</code> compite contra un <code>setTimeout(5000)</code> que no se cancela
+              cuando gana la auditoría. El timer queda pendiente hasta 5 s después de responder, lo que en
+              serverless puede retrasar el congelamiento de la instancia.
+            </div>
+          </div>
+          <span class="bp-tag">WARN</span>
+        </div>
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">L-8 · <code>safe-fetch.ts</code> — ventana de DNS rebinding</div>
+            <div class="bp-desc">
+              Se valida con <code>lookup()</code> y después <code>fetch()</code> vuelve a resolver por su cuenta:
+              un DNS hostil puede responder público en la comprobación y privado en la petición real. También se
+              copian los headers de la respuesta original sobre un cuerpo ya bufferizado, así que
+              <code>content-encoding</code>/<code>content-length</code> pueden quedar desalineados.
+              Ambas cosas son limitaciones conocidas del enfoque, no descuidos — pero conviene anotarlas.
+            </div>
+          </div>
+          <span class="bp-tag">WARN</span>
+        </div>
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">L-9 · <code>health-score-service.ts</code> — el 50 fantasma y el "stable" mentiroso</div>
+            <div class="bp-desc">
+              Líneas 13/19/33/42: sin datos previos, cada componente devuelve 50 como si fuera una medición.
+              Línea 49: con &lt;3 snapshots, <code>computeTrend</code> devuelve <code>"stable"</code>. Los dos
+              bugs de R-07/R-08 siguen exactamente donde estaban, y ahora hay tests que <em>fijan</em> ese
+              comportamiento como correcto.
+            </div>
+          </div>
+          <span class="bp-tag">BUG</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Un patrón, no incidentes aislados</div>
+    <div class="note" style="border-left-color:var(--red)">
+      L-1, L-2, L-3 y L-4 comparten la misma forma: <strong>el borde de la aplicación no distingue entre
+      "no pude" y "no debía"</strong>. Cuerpo inválido, presupuesto agotado, falta de API key y modelo que
+      alucina terminan todos en la misma respuesta opaca o en un <code>null</code> silencioso. Mientras eso siga
+      así, ninguna de estas fallas va a aparecer en un dashboard ni en una alerta: solo como un usuario que dice
+      que el reporte "salió raro". El arreglo transversal es un mapeo explícito de error a status y una señal
+      de degradación en la respuesta —el patrón que <code>providerErrors</code> ya usa bien para PageSpeed y que
+      conviene extender al resto.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ PRACTICES ════════════════ -->
+<div id="tab-practices" class="tab-panel">
+  <div class="metrics-row">
+    <div class="metric-card green">
+      <div class="metric-label">OK</div>
+      <div class="metric-value">10</div>
+      <div class="metric-sub">verificados en el árbol</div>
+    </div>
+    <div class="metric-card yellow">
+      <div class="metric-label">WARN</div>
+      <div class="metric-value">6</div>
+      <div class="metric-sub">funciona, no escala</div>
+    </div>
+    <div class="metric-card red">
+      <div class="metric-label">GAP</div>
+      <div class="metric-value">4</div>
+      <div class="metric-sub">ausente</div>
+    </div>
+    <div class="metric-card blue">
+      <div class="metric-label">Checks</div>
+      <div class="metric-value">20</div>
+      <div class="metric-sub">arquitectura · seguridad · ops</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Arquitectura</div>
+      <div class="bp-list">
+        <div class="bp-item bp-ok">
+          <span class="bp-icon">✅</span>
+          <div class="bp-content">
+            <div class="bp-title">Dominio sin dependencias externas</div>
+            <div class="bp-desc">Auditoría de imports: <code>packages/domain</code> y <code>packages/application</code> solo importan <code>@atrium/*</code> y rutas relativas. Regla 1 cumplida incluso tras añadir <code>diagnostics</code>.</div>
+          </div>
+          <span class="bp-tag">OK</span>
+        </div>
+        <div class="bp-item bp-ok">
+          <span class="bp-icon">✅</span>
+          <div class="bp-content">
+            <div class="bp-title">Ports &amp; adapters coherentes</div>
+            <div class="bp-desc">7 ports en dominio, 12 repositorios Prisma que los implementan, 8 mappers, cada uno con su test. La estructura está bien; lo que falta es que alguien la use.</div>
+          </div>
+          <span class="bp-tag">OK</span>
+        </div>
+        <div class="bp-item bp-ok">
+          <span class="bp-icon">✅</span>
+          <div class="bp-content">
+            <div class="bp-title"><code>Result&lt;T,E&gt;</code> en los bordes</div>
+            <div class="bp-desc">Casos de uso y <code>gradeRestaurantGrowth</code> devuelven <code>Result</code>; los route handlers ramifican sobre <code>result.ok</code>. Sin excepciones cruzando capas.</div>
+          </div>
+          <span class="bp-tag">OK</span>
         </div>
         <div class="bp-item bp-ok">
           <span class="bp-icon">✅</span>
           <div class="bp-content">
             <div class="bp-title">Route handlers delgados</div>
-            <div class="bp-desc">API routes parsean HTTP, delegan en use cases, no contienen lógica de negocio. Respetan el principio de UI thin.</div>
-          </div>
-          <span class="bp-tag">OK</span>
-        </div>
-        <div class="bp-item bp-warn">
-          <span class="bp-icon">⚠️</span>
-          <div class="bp-content">
-            <div class="bp-title">Event bus no implementado</div>
-            <div class="bp-desc">DomainEvent types excelentes, pero no hay publisher ni consumer. Use cases no emiten eventos post-operación. La arquitectura event-driven está en 40%.</div>
-          </div>
-          <span class="bp-tag">WARN</span>
-        </div>
-        <div class="bp-item bp-ok">
-          <span class="bp-icon">✅</span>
-          <div class="bp-content">
-            <div class="bp-title">Result&lt;T, E&gt; para errores tipados</div>
-            <div class="bp-desc">No exceptions across layer boundaries. Use cases retornan <code>Result</code> discriminated union. Error handling explícito.</div>
+            <div class="bp-desc">Las 5 rutas del grader parsean, delegan y formatean. El scoring vive en <code>application</code>, no en la ruta.</div>
           </div>
           <span class="bp-tag">OK</span>
         </div>
         <div class="bp-item bp-ok">
           <span class="bp-icon">✅</span>
           <div class="bp-content">
-            <div class="bp-title">Mappers separados (Prisma → Domain)</div>
-            <div class="bp-desc">Cada aggregate tiene su mapper. Aísla el modelo de Prisma del modelo de dominio. Cambios en schema no rompen dominio.</div>
-          </div>
-          <span class="bp-tag">OK</span>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div style="margin-bottom:12px; font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.5px">Security · Testing · Observabilidad</div>
-      <div class="bp-list">
-        <div class="bp-item bp-ok">
-          <span class="bp-icon">✅</span>
-          <div class="bp-content">
-            <div class="bp-title">JWT en cookie HTTP-only</div>
-            <div class="bp-desc">Token nunca expuesto a JavaScript del browser. <code>secure: true</code> en prod. <code>sameSite: lax</code> protege CSRF.</div>
+            <div class="bp-title">Composition root con inyección opcional</div>
+            <div class="bp-desc"><code>createUseCases(client?)</code> permite inyectar un <code>PrismaClient</code> —clave para tests— y cae al singleton por defecto.</div>
           </div>
           <span class="bp-tag">OK</span>
         </div>
         <div class="bp-item bp-err">
           <span class="bp-icon">❌</span>
           <div class="bp-content">
-            <div class="bp-title">Sin rate limiting en auth endpoints</div>
-            <div class="bp-desc"><code>/api/auth/signin</code> y <code>/api/signup</code> sin throttling. Brute-force de contraseñas sin ninguna defensa. Crítico en prod.</div>
+            <div class="bp-title">La capa de infraestructura no tiene consumidor</div>
+            <div class="bp-desc">0 importadores. El composition root nunca se invoca. Es el hallazgo estructural principal de esta revisión.</div>
+          </div>
+          <span class="bp-tag">GAP</span>
+        </div>
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">Event bus: sigue sin existir</div>
+            <div class="bp-desc">Tipos y guards impecables; 0 publishers, 0 subscribers, sin outbox. Event-driven readiness ≈ 35%.</div>
           </div>
           <span class="bp-tag">GAP</span>
         </div>
         <div class="bp-item bp-warn">
           <span class="bp-icon">⚠️</span>
           <div class="bp-content">
-            <div class="bp-title">emailVerifiedAt no validado en login</div>
-            <div class="bp-desc">El campo existe en DB pero <code>AuthenticateUser</code> no verifica si el email fue confirmado. Cualquier email registrado puede hacer login.</div>
+            <div class="bp-title">Conectores dentro de la app</div>
+            <div class="bp-desc">Los cuatro clientes externos y el agente de IA viven en <code>apps/atrium.grader/lib</code>. No reutilizables, y la normalización ocurre después de entrar a la app, no en el borde.</div>
           </div>
           <span class="bp-tag">WARN</span>
         </div>
         <div class="bp-item bp-warn">
           <span class="bp-icon">⚠️</span>
           <div class="bp-content">
-            <div class="bp-title">JWT sin refresh token ni revocación</div>
-            <div class="bp-desc">7 días de expiración fija. Sin mecanismo de refresh. Sin blacklist de tokens revocados (ej. logout en todos los devices).</div>
+            <div class="bp-title">Documento de arquitectura desactualizado</div>
+            <div class="bp-desc">ARCHITECTURE.md describe <code>apps/web</code>, Prisma 5 y auth JWT como presentes. Es la fuente que leen los agentes.</div>
           </div>
           <span class="bp-tag">WARN</span>
         </div>
         <div class="bp-item bp-ok">
           <span class="bp-icon">✅</span>
           <div class="bp-content">
-            <div class="bp-title">Tests unitarios en domain + application</div>
-            <div class="bp-desc">customer.test.ts, health-score-service.test.ts, compute-churn-risk.test.ts, authenticate-user.test.ts. Cobertura parcial pero presente.</div>
+            <div class="bp-title">Contratos versionados</div>
+            <div class="bp-desc"><code>scoringVersion</code> + <code>providerVersions</code> en cada reporte. Cumple el principio 6 mejor que en junio.</div>
+          </div>
+          <span class="bp-tag">OK</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Seguridad · Tests · Operación</div>
+      <div class="bp-list">
+        <div class="bp-item bp-ok">
+          <span class="bp-icon">✅</span>
+          <div class="bp-content">
+            <div class="bp-title">Gate SSRF sobre todo fetch no confiable</div>
+            <div class="bp-desc">Protocolo, IP literales privadas, metadata de cloud, resolución DNS y tope de 2 MB. Cubre el caso real: URLs de sitios sacadas de Google.</div>
           </div>
           <span class="bp-tag">OK</span>
         </div>
         <div class="bp-item bp-ok">
           <span class="bp-icon">✅</span>
           <div class="bp-content">
-            <div class="bp-title">Tipos estrictos — TypeScript strict mode</div>
-            <div class="bp-desc">tsconfig con strict: true en todos los packages. No any implícito. Type safety en boundaries de capas.</div>
+            <div class="bp-title">Higiene de secretos</div>
+            <div class="bp-desc"><code>git ls-files</code> solo devuelve <code>.env.example</code>; los <code>.env</code> reales están ignorados. Ninguna clave llega al cliente salvo las <code>NEXT_PUBLIC_*</code> previstas.</div>
           </div>
           <span class="bp-tag">OK</span>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ RISK METRICS ════════════════ -->
-<div id="tab-risks" class="tab-panel">
-  <div class="section-header">
-    <div>
-      <h2>Risk Registry</h2>
-      <p>8 riesgos identificados con probabilidad, impacto y mitigación sugerida</p>
-    </div>
-  </div>
-
-  <div class="metrics-row" style="margin-bottom:24px;">
-    <div class="metric-card red">
-      <div class="metric-label">Alta Severidad</div>
-      <div class="metric-value">3</div>
-      <div class="metric-sub">Requieren acción inmediata</div>
-    </div>
-    <div class="metric-card yellow">
-      <div class="metric-label">Media Severidad</div>
-      <div class="metric-value">4</div>
-      <div class="metric-sub">Planear para próximo sprint</div>
-    </div>
-    <div class="metric-card green">
-      <div class="metric-label">Baja Severidad</div>
-      <div class="metric-value">1</div>
-      <div class="metric-sub">Aceptable a corto plazo</div>
-    </div>
-    <div class="metric-card blue">
-      <div class="metric-label">Risk Score</div>
-      <div class="metric-value">6.4</div>
-      <div class="metric-sub">/ 10 — Moderado-Alto</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <table class="risk-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Riesgo</th>
-          <th>Área</th>
-          <th>Severidad</th>
-          <th>Probabilidad</th>
-          <th>Mitigación</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="color:var(--muted); font-size:12px;">R-01</td>
-          <td>
-            <div style="font-weight:600; font-size:13px;">Brute-force en /api/auth/signin</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Sin rate limiting ni lockout. Passwords débiles vulnerables.</div>
-          </td>
-          <td><span class="chip" style="font-size:11px;">Security</span></td>
-          <td><span class="sev sev-high">HIGH</span></td>
-          <td>
-            <div class="prob-bar">
-              <div class="prob-track"><div class="prob-fill" style="width:90%; background:var(--red)"></div></div>
-              <span style="font-size:11px; color:var(--muted);">90%</span>
-            </div>
-          </td>
-          <td style="font-size:12px; color:var(--muted);">Upstash Ratelimit + <code>@upstash/ratelimit</code> en middleware. 5 req/min por IP.</td>
-        </tr>
-        <tr>
-          <td style="color:var(--muted); font-size:12px;">R-02</td>
-          <td>
-            <div style="font-weight:600; font-size:13px;">Prisma connection pool exhaustion (serverless)</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;"><code>createUseCases()</code> crea nueva instancia Prisma por cada request. Neon conexiones limitadas.</div>
-          </td>
-          <td><span class="chip" style="font-size:11px;">Infrastructure</span></td>
-          <td><span class="sev sev-high">HIGH</span></td>
-          <td>
-            <div class="prob-bar">
-              <div class="prob-track"><div class="prob-fill" style="width:75%; background:var(--red)"></div></div>
-              <span style="font-size:11px; color:var(--muted);">75%</span>
-            </div>
-          </td>
-          <td style="font-size:12px; color:var(--muted);">Module-level singleton en <code>client.ts</code>. <code>globalThis.__prisma</code> pattern para hot-reload dev.</td>
-        </tr>
-        <tr>
-          <td style="color:var(--muted); font-size:12px;">R-03</td>
-          <td>
-            <div style="font-weight:600; font-size:13px;">JWT no revocable post-logout</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Token 7d sin blacklist. Sesión robada no puede invalidarse server-side.</div>
-          </td>
-          <td><span class="chip" style="font-size:11px;">Security</span></td>
-          <td><span class="sev sev-high">HIGH</span></td>
-          <td>
-            <div class="prob-bar">
-              <div class="prob-track"><div class="prob-fill" style="width:60%; background:var(--orange)"></div></div>
-              <span style="font-size:11px; color:var(--muted);">60%</span>
-            </div>
-          </td>
-          <td style="font-size:12px; color:var(--muted);">Token versioning en DB (jti + version col). O reducir expiración a 1h + refresh token.</td>
-        </tr>
-        <tr>
-          <td style="color:var(--muted); font-size:12px;">R-04</td>
-          <td>
-            <div style="font-weight:600; font-size:13px;">Email no verificado puede acceder</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;"><code>emailVerifiedAt</code> en DB pero no chequeado. Cuentas fantasma o no confirmadas.</div>
-          </td>
-          <td><span class="chip" style="font-size:11px;">Auth</span></td>
-          <td><span class="sev sev-med">MED</span></td>
-          <td>
-            <div class="prob-bar">
-              <div class="prob-track"><div class="prob-fill" style="width:70%; background:var(--yellow)"></div></div>
-              <span style="font-size:11px; color:var(--muted);">70%</span>
-            </div>
-          </td>
-          <td style="font-size:12px; color:var(--muted);">Agregar check en <code>AuthenticateUser</code>: if !emailVerifiedAt → return error <code>email_not_verified</code>.</td>
-        </tr>
-        <tr>
-          <td style="color:var(--muted); font-size:12px;">R-05</td>
-          <td>
-            <div style="font-weight:600; font-size:13px;">Event bus ausente = side effects perdidos</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Operaciones de negocio no emiten DomainEvents. Alertas, recomendaciones y IA no se disparan.</div>
-          </td>
-          <td><span class="chip" style="font-size:11px;">Architecture</span></td>
-          <td><span class="sev sev-med">MED</span></td>
-          <td>
-            <div class="prob-bar">
-              <div class="prob-track"><div class="prob-fill" style="width:100%; background:var(--yellow)"></div></div>
-              <span style="font-size:11px; color:var(--muted);">100%</span>
-            </div>
-          </td>
-          <td style="font-size:12px; color:var(--muted);">Implementar Trigger.dev o simple in-process EventEmitter como primer paso. Luego migrar a queue.</td>
-        </tr>
-        <tr>
-          <td style="color:var(--muted); font-size:12px;">R-06</td>
-          <td>
-            <div style="font-weight:600; font-size:13px;">ConnectorCredentials encriptación no verificada</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Schema dice "encrypted JSON" pero no hay lógica de encriptación en el código actual.</div>
-          </td>
-          <td><span class="chip" style="font-size:11px;">Security</span></td>
-          <td><span class="sev sev-med">MED</span></td>
-          <td>
-            <div class="prob-bar">
-              <div class="prob-track"><div class="prob-fill" style="width:50%; background:var(--yellow)"></div></div>
-              <span style="font-size:11px; color:var(--muted);">50%</span>
-            </div>
-          </td>
-          <td style="font-size:12px; color:var(--muted);">Implementar AES-256-GCM con key en env var antes de que conectores sean live.</td>
-        </tr>
-        <tr>
-          <td style="color:var(--muted); font-size:12px;">R-07</td>
-          <td>
-            <div style="font-weight:600; font-size:13px;">Health score con datos vacíos retorna 50</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;"><code>computeRevenueScore(x, 0)</code> retorna 50 neutral. Nuevas ubicaciones con pocos datos → score artificial.</div>
-          </td>
-          <td><span class="chip" style="font-size:11px;">Domain Logic</span></td>
-          <td><span class="sev sev-med">MED</span></td>
-          <td>
-            <div class="prob-bar">
-              <div class="prob-track"><div class="prob-fill" style="width:80%; background:var(--yellow)"></div></div>
-              <span style="font-size:11px; color:var(--muted);">80%</span>
-            </div>
-          </td>
-          <td style="font-size:12px; color:var(--muted);">Agregar <code>hasEnoughData: boolean</code> al resultado de health score. UI muestra "datos insuficientes".</td>
-        </tr>
-        <tr>
-          <td style="color:var(--muted); font-size:12px;">R-08</td>
-          <td>
-            <div style="font-weight:600; font-size:13px;">computeTrend() necesita ≥3 snapshots</div>
-            <div style="font-size:11px; color:var(--muted); margin-top:2px;">Retorna "stable" silenciosamente con &lt;3 scores. No hay indicación al caller de datos insuficientes.</div>
-          </td>
-          <td><span class="chip" style="font-size:11px;">Domain Logic</span></td>
-          <td><span class="sev sev-low">LOW</span></td>
-          <td>
-            <div class="prob-bar">
-              <div class="prob-track"><div class="prob-fill" style="width:85%; background:var(--green)"></div></div>
-              <span style="font-size:11px; color:var(--muted);">85%</span>
-            </div>
-          </td>
-          <td style="font-size:12px; color:var(--muted);">Retornar <code>"insufficient_data"</code> como cuarto valor del HealthTrend type en lugar de silent stable.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Risk matrix -->
-  <div class="two-col" style="margin-top:20px;">
-    <div class="card">
-      <div class="card-title">Risk Matrix — Probabilidad vs Impacto</div>
-      <svg viewBox="0 0 320 240" style="width:100%; max-width:400px;">
-        <!-- Grid -->
-        <rect x="40" y="10" width="270" height="200" fill="none" stroke="#252c3d" stroke-width="1"/>
-        <!-- Quadrants -->
-        <rect x="40" y="10" width="135" height="100" fill="#22c55e" fill-opacity=".04"/>
-        <rect x="175" y="10" width="135" height="100" fill="#eab308" fill-opacity=".05"/>
-        <rect x="40" y="110" width="135" height="100" fill="#eab308" fill-opacity=".05"/>
-        <rect x="175" y="110" width="135" height="100" fill="#ef4444" fill-opacity=".07"/>
-
-        <!-- Quadrant labels -->
-        <text x="107" y="58" text-anchor="middle" font-size="9" fill="#22c55e" opacity=".6" font-family="system-ui">BAJO RIESGO</text>
-        <text x="242" y="58" text-anchor="middle" font-size="9" fill="#eab308" opacity=".6" font-family="system-ui">MONITOREAR</text>
-        <text x="107" y="158" text-anchor="middle" font-size="9" fill="#eab308" opacity=".6" font-family="system-ui">PLANEAR</text>
-        <text x="242" y="158" text-anchor="middle" font-size="9" fill="#ef4444" opacity=".7" font-family="system-ui">CRÍTICO</text>
-
-        <!-- Axis labels -->
-        <text x="175" y="230" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui">Probabilidad →</text>
-        <text x="14" y="110" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui" transform="rotate(-90,14,110)">Impacto →</text>
-
-        <!-- Grid lines -->
-        <line x1="175" y1="10" x2="175" y2="210" stroke="#252c3d" stroke-width="1" stroke-dasharray="3 3"/>
-        <line x1="40" y1="110" x2="310" y2="110" stroke="#252c3d" stroke-width="1" stroke-dasharray="3 3"/>
-
-        <!-- Risk points -->
-        <!-- R-01 brute-force: prob 90% → x=283, impact HIGH → y=30 -->
-        <circle cx="283" cy="30" r="9" fill="#ef4444" fill-opacity=".85"/>
-        <text x="283" y="33" text-anchor="middle" font-size="8" fill="white" font-weight="700">R1</text>
-
-        <!-- R-02 prisma pool: prob 75% → x=242, impact HIGH → y=45 -->
-        <circle cx="242" cy="45" r="9" fill="#ef4444" fill-opacity=".85"/>
-        <text x="242" y="48" text-anchor="middle" font-size="8" fill="white" font-weight="700">R2</text>
-
-        <!-- R-03 JWT: prob 60% → x=202, impact HIGH → y=30 -->
-        <circle cx="202" cy="30" r="9" fill="#ef4444" fill-opacity=".85"/>
-        <text x="202" y="33" text-anchor="middle" font-size="8" fill="white" font-weight="700">R3</text>
-
-        <!-- R-04 email: prob 70% → x=229, impact MED → y=130 -->
-        <circle cx="229" cy="130" r="9" fill="#eab308" fill-opacity=".9"/>
-        <text x="229" y="133" text-anchor="middle" font-size="8" fill="white" font-weight="700">R4</text>
-
-        <!-- R-05 event bus: prob 100% → x=305, impact MED → y=150 -->
-        <circle cx="305" cy="150" r="9" fill="#eab308" fill-opacity=".9"/>
-        <text x="305" y="153" text-anchor="middle" font-size="8" fill="white" font-weight="700">R5</text>
-
-        <!-- R-06 credentials: prob 50% → x=175, impact HIGH → y=65 -->
-        <circle cx="175" cy="65" r="9" fill="#f97316" fill-opacity=".85"/>
-        <text x="175" y="68" text-anchor="middle" font-size="8" fill="white" font-weight="700">R6</text>
-
-        <!-- R-07 health score: prob 80% → x=256, impact LOW → y=195 -->
-        <circle cx="256" cy="195" r="9" fill="#eab308" fill-opacity=".9"/>
-        <text x="256" y="198" text-anchor="middle" font-size="8" fill="white" font-weight="700">R7</text>
-
-        <!-- R-08 trend: prob 85% → x=269, impact LOW → y=195 -->
-        <circle cx="100" cy="195" r="9" fill="#22c55e" fill-opacity=".9"/>
-        <text x="100" y="198" text-anchor="middle" font-size="8" fill="white" font-weight="700">R8</text>
-
-        <!-- Axis ticks -->
-        <text x="40" y="225" font-size="8" fill="#64748b" font-family="system-ui">0%</text>
-        <text x="168" y="225" font-size="8" fill="#64748b" font-family="system-ui">50%</text>
-        <text x="298" y="225" font-size="8" fill="#64748b" font-family="system-ui">100%</text>
-      </svg>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Roadmap de Mitigación Prioritizado</div>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title" style="color:var(--red)">Sprint Actual — Crítico</div>
-            <div class="tl-desc"><strong>R-01:</strong> Rate limiting en auth routes (Upstash / middleware)<br>
-            <strong>R-02:</strong> Prisma singleton con globalThis pattern<br>
-            <strong>R-03:</strong> JWT versioning o reducir a 1h + refresh</div>
+        <div class="bp-item bp-ok">
+          <span class="bp-icon">✅</span>
+          <div class="bp-content">
+            <div class="bp-title">TypeScript strict, 9/9 paquetes verdes</div>
+            <div class="bp-desc"><code>bun run typecheck</code> pasa entero. Lint: 2 warnings de estilo, 0 errores en 300 archivos.</div>
           </div>
+          <span class="bp-tag">OK</span>
         </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <div class="tl-title" style="color:var(--yellow)">Próximo Sprint — Alto</div>
-            <div class="tl-desc"><strong>R-04:</strong> Check emailVerifiedAt en AuthenticateUser<br>
-            <strong>R-05:</strong> Implementar EventEmitter in-process como primer bus<br>
-            <strong>R-06:</strong> Encriptar ConnectorCredentials con AES-GCM</div>
+        <div class="bp-item bp-ok">
+          <span class="bp-icon">✅</span>
+          <div class="bp-content">
+            <div class="bp-title">248 tests, incluidos los caros de verdad</div>
+            <div class="bp-desc">Repositorios, mappers, clientes de proveedor con <code>fetcher</code> inyectado, y las rutas del grader. La inyección de <code>fetch</code> como parámetro es lo que hace testeables los conectores.</div>
           </div>
+          <span class="bp-tag">OK</span>
         </div>
-        <div class="tl-item">
-          <div class="tl-left"><div class="tl-dot" style="background:var(--green)"></div></div>
-          <div class="tl-content">
-            <div class="tl-title" style="color:var(--green)">Q3 — Mejoras de calidad</div>
-            <div class="tl-desc"><strong>R-07:</strong> hasEnoughData flag en health score<br>
-            <strong>R-08:</strong> insufficient_data HealthTrend variant</div>
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">Sin CI</div>
+            <div class="bp-desc">No hay <code>.github/</code>. Nada impide mergear con la suite roja — y está roja ahora mismo.</div>
           </div>
+          <span class="bp-tag">GAP</span>
+        </div>
+        <div class="bp-item bp-err">
+          <span class="bp-icon">❌</span>
+          <div class="bp-content">
+            <div class="bp-title">Deploy a producción desde un post-commit hook</div>
+            <div class="bp-desc">El CDN se publica en Hostinger según el estado local del commit, sin verificación, y el hook sale con 0 si falla.</div>
+          </div>
+          <span class="bp-tag">GAP</span>
+        </div>
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">Rate limit y presupuesto sin estado compartido</div>
+            <div class="bp-desc">Ambos en memoria por instancia. El código lo documenta honestamente, lo que es bueno; sigue siendo insuficiente para multi-región.</div>
+          </div>
+          <span class="bp-tag">WARN</span>
+        </div>
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">Endpoints caros sin identidad</div>
+            <div class="bp-desc">5 rutas públicas que gastan APIs de pago y tokens de LLM. No hay auth, ni firma, ni captcha, ni cuota por sesión.</div>
+          </div>
+          <span class="bp-tag">WARN</span>
+        </div>
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">Observabilidad = <code>console.*</code></div>
+            <div class="bp-desc">Los logs están bien estructurados (<code>[grader-scan]</code> con JSON), pero no van a ningún sink: no hay métricas, trazas ni alertas. Un scoring que se degrada no se nota.</div>
+          </div>
+          <span class="bp-tag">WARN</span>
+        </div>
+        <div class="bp-item bp-warn">
+          <span class="bp-icon">⚠️</span>
+          <div class="bp-content">
+            <div class="bp-title">Tests no herméticos</div>
+            <div class="bp-desc">5 tests del sitio dependen de una env var de Cloudinary presente en el shell. Pasan en la máquina de quien la tenga, fallan en limpio.</div>
+          </div>
+          <span class="bp-tag">WARN</span>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════ DOMAIN MODEL ════════════════ -->
-<div id="tab-entities" class="tab-panel">
+<!-- ════════════════ ROADMAP ════════════════ -->
+<div id="tab-roadmap" class="tab-panel">
   <div class="section-header">
     <div>
-      <h2>Domain Model — Entidades Canónicas</h2>
-      <p>15 modelos Prisma · Multi-tenant · Hexagonal domain layer</p>
-    </div>
-  </div>
-
-  <div class="entity-grid" style="margin-bottom:24px;">
-    <div class="entity-card" style="--c:#4f7fff">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--domain);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">Tenant</div>
-      <div class="entity-fields">id · name · slug · timezone · loyaltyConfig</div>
-      <div style="margin-top:6px;"><span class="chip ok" style="font-size:10px;">Root aggregate</span></div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--domain);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">Location</div>
-      <div class="entity-fields">id · tenantId · name · address · googlePlaceId</div>
-      <div style="margin-top:6px;"><span class="chip ok" style="font-size:10px;">Business unit</span></div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--domain);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">Customer</div>
-      <div class="entity-fields">loyaltyTier · churnRisk · visitFrequency · totalSpent · tags</div>
-      <div style="margin-top:6px;"><span class="chip ok" style="font-size:10px;">CRM core</span></div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--domain);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">Order</div>
-      <div class="entity-fields">locationId · customerId · channel · totalAmount · occurredAt</div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--infra);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">Review</div>
-      <div class="entity-fields">rating · sentimentScore · platform · reply · publishedAt</div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--infra);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">LocationHealth</div>
-      <div class="entity-fields">score · revenue · reputation · traffic · retention · trend</div>
-      <div style="margin-top:6px;"><span class="chip ok" style="font-size:10px;">Computed</span></div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--events);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">RevenueSnapshot</div>
-      <div class="entity-fields">periodType · periodStart · totalRevenue · orderCount · avgTicket</div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--events);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">TrafficSnapshot</div>
-      <div class="entity-fields">sessions · users · source · periodStart · periodEnd</div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--events);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">KeywordSnapshot</div>
-      <div class="entity-fields">keyword · position · impressions · clicks · capturedAt</div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">Alert</div>
-      <div class="entity-fields">type · severity · payload · triggeredAt · acknowledgedAt</div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">Recommendation</div>
-      <div class="entity-fields">category · title · body · rationale · status · expiresAt</div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--future);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">Campaign</div>
-      <div class="entity-fields">channel · promoCode · startsAt · endsAt · status</div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--web);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">User</div>
-      <div class="entity-fields">email · passwordHash · role · emailVerifiedAt</div>
-      <div style="margin-top:6px;"><span class="chip warn" style="font-size:10px;">⚠️ unverified allowed</span></div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--future);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">ConnectorCredential</div>
-      <div class="entity-fields">provider · credentials (encrypted) · status</div>
-      <div style="margin-top:6px;"><span class="chip err" style="font-size:10px;">⚠️ encrypt pending</span></div>
-    </div>
-    <div class="entity-card">
-      <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:var(--muted);border-radius:8px 0 0 8px;"></div>
-      <div class="entity-name">ConnectorEvent</div>
-      <div class="entity-fields">provider · eventType · payload · processedAt</div>
-      <div style="margin-top:6px;"><span class="chip" style="font-size:10px;">Infra-only</span></div>
-    </div>
-  </div>
-
-  <!-- Domain Event types -->
-  <div class="card">
-    <div class="card-title">Domain Event Schema (packages/events)</div>
-    <div class="dep-grid">
-      <div class="dep-card">
-        <div class="dep-name" style="color:var(--events)">SalesEvent</div>
-        <div class="dep-version">sales.synced · sales.order.created</div>
-        <div class="dep-status"><span class="chip ok" style="font-size:10px;">Type defined</span></div>
-      </div>
-      <div class="dep-card">
-        <div class="dep-name" style="color:var(--events)">ReputationEvent</div>
-        <div class="dep-version">reputation.review.created · replied</div>
-        <div class="dep-status"><span class="chip ok" style="font-size:10px;">Type defined</span></div>
-      </div>
-      <div class="dep-card">
-        <div class="dep-name" style="color:var(--events)">CrmEvent</div>
-        <div class="dep-version">crm.customer.merged · segmented</div>
-        <div class="dep-status"><span class="chip ok" style="font-size:10px;">Type defined</span></div>
-      </div>
-      <div class="dep-card">
-        <div class="dep-name" style="color:var(--events)">AnalyticsEvent</div>
-        <div class="dep-version">analytics.traffic.updated · keyword.ranked</div>
-        <div class="dep-status"><span class="chip ok" style="font-size:10px;">Type defined</span></div>
-      </div>
-      <div class="dep-card">
-        <div class="dep-name" style="color:var(--events)">AiEvent</div>
-        <div class="dep-version">ai.insight.generated · action.proposed</div>
-        <div class="dep-status"><span class="chip ok" style="font-size:10px;">Type defined</span></div>
-      </div>
-      <div class="dep-card" style="border-color:rgba(239,68,68,.3)">
-        <div class="dep-name" style="color:var(--red)">EventBus</div>
-        <div class="dep-version">publish() / subscribe() / replay()</div>
-        <div class="dep-status"><span class="chip err" style="font-size:10px;">NOT IMPLEMENTED</span></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════ DEPENDENCIES ════════════════ -->
-<div id="tab-deps" class="tab-panel">
-  <div class="section-header">
-    <div>
-      <h2>Dependency Map</h2>
-      <p>Stack técnico · versiones clave · estado de salud</p>
+      <h2>Qué falta para un sistema sólido y escalable</h2>
+      <p>Tres olas. La primera protege el dinero; la segunda hace real la plataforma; la tercera vuelve a abrir el producto con sesión.</p>
     </div>
   </div>
 
   <div class="three-col">
     <div class="card">
-      <div class="card-title">Core Framework</div>
-      <div class="dep-grid" style="grid-template-columns: 1fr;">
-        <div class="dep-card">
-          <div class="dep-name">next</div>
-          <div class="dep-version">^15 · App Router</div>
-          <div class="dep-status" style="color:var(--green)">✅ Latest · RSC + Server Actions</div>
+      <div class="card-title" style="color:var(--red)">Ola 1 — antes de tráfico real</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">N-01 · Atar la narrativa al scan</div>
+            <div class="tl-desc">La ruta acepta solo <code>scanId</code>, relee evidencia server-side y valida con zod. Cierra a la vez el gasto libre de tokens y la inyección de prompt.</div>
+          </div>
         </div>
-        <div class="dep-card">
-          <div class="dep-name">react</div>
-          <div class="dep-version">^19</div>
-          <div class="dep-status" style="color:var(--green)">✅ Latest</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">N-04 + N-03 · Estado compartido</div>
+            <div class="tl-desc">Rate limit y budget en Redis, con clave por IP y ventana deslizante. Agotamiento → 429/503 con <code>Retry-After</code>, nunca 500.</div>
+          </div>
         </div>
-        <div class="dep-card">
-          <div class="dep-name">typescript</div>
-          <div class="dep-version">^5 · strict mode</div>
-          <div class="dep-status" style="color:var(--green)">✅ Strict config</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">N-02 · Caché y recorte del fan-out</div>
+            <div class="tl-desc">No pedir details de las 6 predicciones: solo de la seleccionada. Caché por <code>placeId</code> y por query. Tope de longitud.</div>
+          </div>
         </div>
-        <div class="dep-card">
-          <div class="dep-name">turbo / bun</div>
-          <div class="dep-version">Turborepo + Bun runtime</div>
-          <div class="dep-status" style="color:var(--green)">✅ Monorepo ready</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">N-08 + N-09 · Poner el gate</div>
+            <div class="tl-desc">Pipeline con typecheck + lint + test. Arreglar los 8 tests rojos primero, para que el gate arranque en verde.</div>
+          </div>
         </div>
-        <div class="dep-card">
-          <div class="dep-name">biome</div>
-          <div class="dep-version">linter + formatter</div>
-          <div class="dep-status" style="color:var(--green)">✅ Fast, unified</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Data & Auth</div>
-      <div class="dep-grid" style="grid-template-columns: 1fr;">
-        <div class="dep-card">
-          <div class="dep-name">@prisma/client</div>
-          <div class="dep-version">^7.8.0</div>
-          <div class="dep-status" style="color:var(--green)">✅ Latest · Prisma 7</div>
-        </div>
-        <div class="dep-card">
-          <div class="dep-name">@neondatabase/serverless</div>
-          <div class="dep-version">Neon PostgreSQL</div>
-          <div class="dep-status" style="color:var(--green)">✅ Serverless HTTP driver</div>
-        </div>
-        <div class="dep-card">
-          <div class="dep-name">jose</div>
-          <div class="dep-version">JWT sign/verify</div>
-          <div class="dep-status" style="color:var(--green)">✅ Edge-compatible</div>
-        </div>
-        <div class="dep-card">
-          <div class="dep-name">bcrypt</div>
-          <div class="dep-version">password hashing</div>
-          <div class="dep-status" style="color:var(--green)">✅ Industry standard</div>
-        </div>
-        <div class="dep-card" style="border-color:rgba(239,68,68,.3)">
-          <div class="dep-name">rate-limiter</div>
-          <div class="dep-version">— not installed —</div>
-          <div class="dep-status" style="color:var(--red)">❌ MISSING · R-01 blocker</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--red)"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">N-06 + N-07 · IA acotada y config honesta</div>
+            <div class="tl-desc"><code>abortSignal</code>, un retry, salida estructurada, modelo por defecto válido. <code>.env.example</code> completo + validación al arrancar.</div>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Planned / Future</div>
-      <div class="dep-grid" style="grid-template-columns: 1fr;">
-        <div class="dep-card" style="opacity:.7">
-          <div class="dep-name">trigger.dev</div>
-          <div class="dep-version">event bus · background jobs</div>
-          <div class="dep-status" style="color:var(--muted)">⏳ Planned — Phase 2</div>
+      <div class="card-title" style="color:var(--yellow)">Ola 2 — despertar la plataforma</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">N-05 · Persistir scans vía el núcleo</div>
+            <div class="tl-desc">
+              Modelos <code>Scan</code>/<code>ScanEvidence</code> en Prisma, un port en <code>application</code> y su
+              adapter en <code>infrastructure</code>. Es el movimiento que reconecta el paquete dormido con la app
+              viva, y de paso da leads y auditoría.
+            </div>
+          </div>
         </div>
-        <div class="dep-card" style="opacity:.7">
-          <div class="dep-name">@anthropic-ai/sdk</div>
-          <div class="dep-version">Claude claude-sonnet-4-6</div>
-          <div class="dep-status" style="color:var(--muted)">⏳ Planned — AI layer</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">N-10 · Extraer <code>packages/connectors</code></div>
+            <div class="tl-desc">
+              Los cuatro clientes salen de <code>app/lib</code> detrás de los ports de
+              <code>shared/connector.ts</code>, normalizando en el borde. Reutilizables por el dashboard futuro.
+            </div>
+          </div>
         </div>
-        <div class="dep-card" style="opacity:.7">
-          <div class="dep-name">connectors/*</div>
-          <div class="dep-version">Toast · Google · Meta</div>
-          <div class="dep-status" style="color:var(--muted)">⏳ Planned — Phase 3</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">R-05 · Bus in-process + outbox</div>
+            <div class="tl-desc">
+              <code>ChurnRiskElevatedEvent</code> ya se construye: solo falta publicarlo. Outbox en la misma
+              transacción para garantizar entrega, y después migrar a cola sin tocar los casos de uso.
+            </div>
+          </div>
         </div>
-        <div class="dep-card" style="opacity:.7">
-          <div class="dep-name">@upstash/ratelimit</div>
-          <div class="dep-version">Redis-backed throttle</div>
-          <div class="dep-status" style="color:var(--yellow)">⚠️ Needed now — R-01</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title"><code>packages/ai</code> sobre entidades internas</div>
+            <div class="tl-desc">Mover <code>report-agent</code> y prompts, consumiendo el perfil ya normalizado (principio 5). Evaluadores de calidad de narrativa como tests.</div>
+          </div>
         </div>
-        <div class="dep-card" style="opacity:.7">
-          <div class="dep-name">resend / nodemailer</div>
-          <div class="dep-version">Email verification</div>
-          <div class="dep-status" style="color:var(--yellow)">⚠️ Needed — R-04</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--yellow)"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Observabilidad real</div>
+            <div class="tl-desc">Los logs JSON ya existen; mandarlos a un sink con métricas por <code>scoringVersion</code> y alerta sobre <code>providerErrors</code> y confianza baja.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="color:var(--accent)">Ola 3 — cuando vuelva el producto con sesión</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--accent)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">R-03 · Decidir el modelo de sesión primero</div>
+            <div class="tl-desc">Sesión en DB (revocable) vs access corto + refresh. Elegir antes de escribir el login, no después. Hoy no hay código atado, así que es gratis decidir bien.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--accent)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">R-01 + R-04 · Auth endurecida desde el día 1</div>
+            <div class="tl-desc">Rate limit y lockout en el login desde el primer commit. <code>emailVerifiedAt</code> en el puerto y chequeado en <code>AuthenticateUser</code>.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--accent)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Multi-tenant enforcement</div>
+            <div class="tl-desc">Los repos aceptan <code>tenantId</code> pero nada garantiza que se pase el correcto. Hace falta un contexto de tenant obligatorio en el borde y tests de aislamiento.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--accent)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">R-06 · Cifrado antes del primer connector</div>
+            <div class="tl-desc">AES-256-GCM con clave gestionada y rotación. El schema ya promete cifrado: cumplirlo antes de que haya algo que perder.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--accent)"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">R-07 + R-08 · Honestidad de datos en el health score</div>
+            <div class="tl-desc"><code>hasEnoughData</code> por componente y <code>"insufficient_data"</code> en <code>HealthTrend</code>. Un dashboard que muestra 50 inventado pierde credibilidad en la primera demo.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot" style="background:var(--accent)"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">R-02 · Cerrar el pooling de Neon</div>
+            <div class="tl-desc">Cablear el driver adapter serverless y separar URL pooled de directa para migraciones. El singleton ya está bien; falta el adapter.</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Package dependency graph -->
-  <div class="card" style="margin-top:20px;">
-    <div class="card-title">Package Dependency Graph — Import Rules</div>
-    <svg viewBox="0 0 860 200" style="width:100%; max-width:100%;">
-      <defs>
-        <marker id="dep-arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-          <polygon points="0 0, 7 2.5, 0 5" fill="#4f7fff" opacity=".5"/>
-        </marker>
-        <marker id="dep-arr-ok" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-          <polygon points="0 0, 7 2.5, 0 5" fill="#22c55e" opacity=".6"/>
-        </marker>
-        <marker id="dep-arr-bad" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
-          <polygon points="0 0, 7 2.5, 0 5" fill="#ef4444" opacity=".8"/>
-        </marker>
-      </defs>
+  <div class="card">
+    <div class="card-title">El movimiento que más valor devuelve</div>
+    <div class="note" style="border-left-color:var(--accent)">
+      Persistir los scans del grader a través de <code>packages/infrastructure</code> (Ola 2, primer ítem) es
+      la única tarea que arregla cuatro cosas de golpe: le da durabilidad al producto vivo, reconecta el núcleo
+      hexagonal que hoy vale 0 en runtime, crea el <code>scanId</code> real que N-01 necesita para dejar de
+      confiar en el cliente, y abre la puerta al outbox de eventos. Todo lo demás de la Ola 1 es contención;
+      esto es lo que mueve el score estructural.
+    </div>
+  </div>
+</div>
 
-      <!-- Boxes -->
-      <rect x="10" y="75" width="110" height="50" rx="8" fill="#10b981" fill-opacity=".1" stroke="#10b981" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="65" y="96" text-anchor="middle" font-size="12" fill="#10b981" font-family="system-ui" font-weight="700">apps/web</text>
-      <text x="65" y="111" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui">Next.js app</text>
+<!-- ════════════════ DEPS ════════════════ -->
+<div id="tab-deps" class="tab-panel">
+  <div class="section-header">
+    <div>
+      <h2>Modelo de dominio y dependencias</h2>
+      <p>18 modelos Prisma (eran 15 en la Rev. 1) · ninguno recibe escrituras en producción</p>
+    </div>
+  </div>
 
-      <rect x="180" y="75" width="120" height="50" rx="8" fill="#7c5cfc" fill-opacity=".1" stroke="#7c5cfc" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="240" y="96" text-anchor="middle" font-size="12" fill="#7c5cfc" font-family="system-ui" font-weight="700">application</text>
-      <text x="240" y="111" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui">use cases</text>
+  <div class="card">
+    <div class="card-title">Entidades — <code>packages/infrastructure/prisma/schema.prisma</code></div>
+    <div class="entity-grid">
+      <div class="entity-card" style="--c:var(--domain)"><div class="entity-name">Tenant</div><div class="entity-fields">root aggregate · loyaltyConfig</div></div>
+      <div class="entity-card"><div class="entity-name">Location</div><div class="entity-fields">googlePlaceId · unidad de negocio</div></div>
+      <div class="entity-card"><div class="entity-name">Order</div><div class="entity-fields">channel · totalAmount</div></div>
+      <div class="entity-card"><div class="entity-name">Customer</div><div class="entity-fields">churnRisk · loyaltyTier</div></div>
+      <div class="entity-card"><div class="entity-name">CustomerIdentifier</div><div class="entity-fields">nuevo · identidad cruzada</div></div>
+      <div class="entity-card"><div class="entity-name">CustomerActivity</div><div class="entity-fields">nuevo · timeline</div></div>
+      <div class="entity-card"><div class="entity-name">CustomerSegment</div><div class="entity-fields">nuevo · reglas system</div></div>
+      <div class="entity-card"><div class="entity-name">Review</div><div class="entity-fields">rating · sentimentScore</div></div>
+      <div class="entity-card"><div class="entity-name">RevenueSnapshot</div><div class="entity-fields">periodo · avgTicket</div></div>
+      <div class="entity-card"><div class="entity-name">LocationHealth</div><div class="entity-fields">score · trend ⚠️ sin insufficient</div></div>
+      <div class="entity-card"><div class="entity-name">TrafficSnapshot</div><div class="entity-fields">sessions · source</div></div>
+      <div class="entity-card"><div class="entity-name">KeywordSnapshot</div><div class="entity-fields">position · clicks</div></div>
+      <div class="entity-card"><div class="entity-name">Alert</div><div class="entity-fields">severity · payload</div></div>
+      <div class="entity-card"><div class="entity-name">Recommendation</div><div class="entity-fields">rationale · status</div></div>
+      <div class="entity-card"><div class="entity-name">Campaign</div><div class="entity-fields">promoCode · status</div></div>
+      <div class="entity-card"><div class="entity-name">User</div><div class="entity-fields">⚠️ emailVerifiedAt sin usar</div></div>
+      <div class="entity-card"><div class="entity-name">ConnectorCredential</div><div class="entity-fields">⚠️ "encrypted" sin cifrar</div></div>
+      <div class="entity-card"><div class="entity-name">ConnectorEvent</div><div class="entity-fields">infra-only</div></div>
+      <div class="entity-card" style="border-color:rgba(239,68,68,.4)"><div class="entity-name" style="color:var(--red)">Scan</div><div class="entity-fields">FALTA — el producto vivo no tiene tabla</div></div>
+    </div>
+    <div class="note">
+      Lo que produce el grader —perfil, pasos de diagnóstico, scores, versiones, narrativa— no tiene
+      representación en el schema. Es la brecha entre el modelo que se diseñó (dashboard multi-tenant con
+      conectores) y el producto que hoy corre (diagnóstico público de una sola pasada).
+    </div>
+  </div>
 
-      <rect x="370" y="75" width="110" height="50" rx="8" fill="#4f7fff" fill-opacity=".1" stroke="#4f7fff" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="425" y="96" text-anchor="middle" font-size="12" fill="#4f7fff" font-family="system-ui" font-weight="700">domain</text>
-      <text x="425" y="111" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui">pure logic</text>
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Stack verificado</div>
+      <div class="dep-grid">
+        <div class="dep-card">
+          <div class="dep-name">next</div>
+          <div class="dep-version">16.2.9 (website) · ^15 (grader)</div>
+          <div class="dep-status" style="color:var(--yellow)">⚠️ dos majors en el monorepo</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">react</div>
+          <div class="dep-version">19.2.4 · 19.x</div>
+          <div class="dep-status" style="color:var(--green)">✅ al día</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">@prisma/client</div>
+          <div class="dep-version">^7.8.0</div>
+          <div class="dep-status" style="color:var(--yellow)">⚠️ sin consumidor en runtime</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">@neondatabase/serverless</div>
+          <div class="dep-version">declarado</div>
+          <div class="dep-status" style="color:var(--yellow)">⚠️ driver adapter sin cablear</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">ai + @ai-sdk/*</div>
+          <div class="dep-version">ai ^7 · anthropic/google/openai</div>
+          <div class="dep-status" style="color:var(--yellow)">⚠️ sin timeout ni retry</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">zod</div>
+          <div class="dep-version">^4.4.3</div>
+          <div class="dep-status" style="color:var(--yellow)">⚠️ usado en la salida del LLM, no en la entrada HTTP</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">jose · bcrypt</div>
+          <div class="dep-version">jose: ya no está</div>
+          <div class="dep-status" style="color:var(--muted)">— se fue con apps/web (bcrypt sigue en infra)</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">biome · turbo · bun</div>
+          <div class="dep-version">2.5 · 2.3 · 1.3.2</div>
+          <div class="dep-status" style="color:var(--green)">✅ typecheck 9/9 · lint 2 warns</div>
+        </div>
+        <div class="dep-card" style="border-color:rgba(239,68,68,.4)">
+          <div class="dep-name">@upstash/ratelimit</div>
+          <div class="dep-version">— sin instalar —</div>
+          <div class="dep-status" style="color:var(--red)">❌ bloquea N-03 y N-04</div>
+        </div>
+        <div class="dep-card" style="border-color:rgba(239,68,68,.4)">
+          <div class="dep-name">CI (GitHub Actions)</div>
+          <div class="dep-version">— sin configurar —</div>
+          <div class="dep-status" style="color:var(--red)">❌ N-08</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">trigger.dev</div>
+          <div class="dep-version">planeado</div>
+          <div class="dep-status" style="color:var(--muted)">⏳ empezar por bus in-process</div>
+        </div>
+        <div class="dep-card">
+          <div class="dep-name">next-cloudinary</div>
+          <div class="dep-version">^6.17.5</div>
+          <div class="dep-status" style="color:var(--yellow)">⚠️ env var obligatoria sin validar</div>
+        </div>
+      </div>
+    </div>
 
-      <rect x="560" y="75" width="120" height="50" rx="8" fill="#06b6d4" fill-opacity=".1" stroke="#06b6d4" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="620" y="96" text-anchor="middle" font-size="12" fill="#06b6d4" font-family="system-ui" font-weight="700">infrastructure</text>
-      <text x="620" y="111" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui">Prisma · DB</text>
+    <div class="card">
+      <div class="card-title">Grafo de dependencias — real, no el planeado</div>
+      <div class="flow-container" style="padding:16px">
+        <svg class="flow-svg" viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" style="min-width:480px">
+          <defs>
+            <marker id="d1" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#22c55e"/></marker>
+            <marker id="d2" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#64748b"/></marker>
+          </defs>
 
-      <rect x="370" y="145" width="110" height="45" rx="8" fill="#ec4899" fill-opacity=".1" stroke="#ec4899" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="425" y="165" text-anchor="middle" font-size="12" fill="#ec4899" font-family="system-ui" font-weight="700">shared</text>
-      <text x="425" y="180" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui">Money·Result·types</text>
+          <g font-size="11" fill="#e2e8f0">
+            <rect x="30" y="20" width="150" height="44" rx="6" fill="#1a1f2c" stroke="#10b981"/>
+            <text x="105" y="40" text-anchor="middle" font-weight="700">atrium.grader</text>
+            <text x="105" y="55" text-anchor="middle" fill="#64748b" font-size="9">application · ui</text>
 
-      <rect x="370" y="10" width="110" height="45" rx="8" fill="#f59e0b" fill-opacity=".1" stroke="#f59e0b" stroke-opacity=".5" stroke-width="1.5"/>
-      <text x="425" y="30" text-anchor="middle" font-size="12" fill="#f59e0b" font-family="system-ui" font-weight="700">events</text>
-      <text x="425" y="45" text-anchor="middle" font-size="10" fill="#64748b" font-family="system-ui">DomainEvent types</text>
+            <rect x="230" y="20" width="150" height="44" rx="6" fill="#1a1f2c" stroke="#10b981"/>
+            <text x="305" y="40" text-anchor="middle" font-weight="700">atrium.website</text>
+            <text x="305" y="55" text-anchor="middle" fill="#64748b" font-size="9">solo ui</text>
 
-      <!-- Arrows — allowed -->
-      <line x1="120" y1="100" x2="178" y2="100" stroke="#22c55e" stroke-opacity=".6" stroke-width="2" marker-end="url(#dep-arr-ok)"/>
-      <text x="149" y="95" font-size="8" fill="#22c55e" text-anchor="middle" font-family="system-ui">✓</text>
+            <rect x="430" y="20" width="150" height="44" rx="6" fill="#1a1f2c" stroke="#10b981"/>
+            <text x="505" y="40" text-anchor="middle" font-weight="700">atrium.cdn</text>
+            <text x="505" y="55" text-anchor="middle" fill="#64748b" font-size="9">sin deps internas</text>
 
-      <line x1="300" y1="100" x2="368" y2="100" stroke="#22c55e" stroke-opacity=".6" stroke-width="2" marker-end="url(#dep-arr-ok)"/>
-      <text x="334" y="95" font-size="8" fill="#22c55e" text-anchor="middle" font-family="system-ui">✓</text>
+            <rect x="30" y="120" width="150" height="44" rx="6" fill="#1a1f2c" stroke="#7c5cfc"/>
+            <text x="105" y="140" text-anchor="middle" font-weight="700">application</text>
+            <text x="105" y="155" text-anchor="middle" fill="#64748b" font-size="9">domain · events · shared</text>
 
-      <line x1="620" y1="75" x2="538" y2="52" stroke="#22c55e" stroke-opacity=".6" stroke-width="2" marker-end="url(#dep-arr-ok)"/>
-      <text x="583" y="57" font-size="8" fill="#22c55e" text-anchor="middle" font-family="system-ui">✓</text>
+            <rect x="230" y="120" width="150" height="44" rx="6" fill="#1a1f2c" stroke="#ec4899"/>
+            <text x="305" y="140" text-anchor="middle" font-weight="700">ui</text>
+            <text x="305" y="155" text-anchor="middle" fill="#64748b" font-size="9">tokens + componentes</text>
 
-      <!-- shared arrows -->
-      <line x1="425" y1="125" x2="425" y2="143" stroke="#ec4899" stroke-opacity=".5" stroke-width="1.5" marker-end="url(#dep-arr)"/>
-      <line x1="300" y1="115" x2="435" y2="143" stroke="#ec4899" stroke-opacity=".4" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#dep-arr)"/>
+            <rect x="30" y="220" width="150" height="44" rx="6" fill="#1a1f2c" stroke="#4f7fff"/>
+            <text x="105" y="240" text-anchor="middle" font-weight="700">domain</text>
+            <text x="105" y="255" text-anchor="middle" fill="#64748b" font-size="9">cero deps externas</text>
 
-      <!-- Forbidden arrow (dashed red) -->
-      <line x1="620" y1="100" x2="482" y2="100" stroke="#ef4444" stroke-opacity=".4" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#dep-arr-bad)"/>
-      <text x="551" y="94" font-size="8" fill="#ef4444" text-anchor="middle" font-family="system-ui">FORBIDDEN</text>
+            <rect x="230" y="220" width="150" height="44" rx="6" fill="#1a1f2c" stroke="#f59e0b"/>
+            <text x="305" y="240" text-anchor="middle" font-weight="700">events + shared</text>
+            <text x="305" y="255" text-anchor="middle" fill="#64748b" font-size="9">tipos</text>
 
-      <!-- infra → app (inject) -->
-      <line x1="560" y1="90" x2="302" y2="90" stroke="#06b6d4" stroke-opacity=".4" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#dep-arr)"/>
-      <text x="430" y="84" font-size="8" fill="#06b6d4" text-anchor="middle" font-family="system-ui">inject via composition root</text>
+            <rect x="430" y="220" width="150" height="44" rx="6" fill="#1a1f2c" stroke="#ef4444" stroke-dasharray="5,4"/>
+            <text x="505" y="238" text-anchor="middle" font-weight="700" fill="#ef4444">infrastructure</text>
+            <text x="505" y="253" text-anchor="middle" fill="#64748b" font-size="9">0 importadores</text>
+          </g>
 
-      <!-- Legend -->
-      <line x1="10" y1="195" x2="40" y2="195" stroke="#22c55e" stroke-opacity=".7" stroke-width="2" marker-end="url(#dep-arr-ok)"/>
-      <text x="46" y="199" font-size="9" fill="#64748b" font-family="system-ui">Allowed import</text>
-      <line x1="170" y1="195" x2="200" y2="195" stroke="#ef4444" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#dep-arr-bad)"/>
-      <text x="206" y="199" font-size="9" fill="#64748b" font-family="system-ui">Forbidden (violation = bug)</text>
-      <line x1="380" y1="195" x2="410" y2="195" stroke="#06b6d4" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="3 2" marker-end="url(#dep-arr)"/>
-      <text x="416" y="199" font-size="9" fill="#64748b" font-family="system-ui">Dependency injection</text>
-    </svg>
+          <g stroke="#22c55e" stroke-width="1.6" fill="none" marker-end="url(#d1)">
+            <path d="M85,66 L85,116"/>
+            <path d="M150,66 L280,116"/>
+            <path d="M305,66 L305,116"/>
+            <path d="M85,166 L85,216"/>
+            <path d="M150,166 L280,216"/>
+          </g>
+          <g stroke="#64748b" stroke-width="1.4" fill="none" marker-end="url(#d2)" stroke-dasharray="4,4">
+            <path d="M470,216 L180,180"/>
+            <path d="M470,224 L180,250"/>
+          </g>
+
+          <g font-size="9" fill="#64748b">
+            <text x="330" y="300">infrastructure importa domain y application…</text>
+            <text x="330" y="314" fill="#ef4444">…pero nadie importa infrastructure</text>
+          </g>
+        </svg>
+      </div>
+      <div class="note">
+        La regla "el dominio no importa infraestructura" se cumple. El problema es el opuesto y no estaba
+        previsto en las reglas: <strong>nadie importa infraestructura</strong>. La flecha que falta no viola
+        ningún principio, simplemente deja al núcleo fuera del producto.
+      </div>
+    </div>
   </div>
 </div>
 
 </main>
 
 <script>
-function showTab(id) {
+function showTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
-  event.target.classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Ping animation on layer click
 function ping(el, msg) {
   el.style.background = 'rgba(79,127,255,.12)';
   setTimeout(() => el.style.background = '', 400);
   const tt = document.getElementById('tooltip');
   tt.textContent = msg;
   tt.style.opacity = '1';
-  tt.style.left = (event.clientX + 12) + 'px';
-  tt.style.top = (event.clientY + 8) + 'px';
-  setTimeout(() => tt.style.opacity = '0', 3500);
+  tt.style.left = Math.min(window.event.clientX + 12, window.innerWidth - 280) + 'px';
+  tt.style.top = (window.event.clientY + 8) + 'px';
+  setTimeout(() => tt.style.opacity = '0', 5000);
 }
 
-// Close tooltip on click elsewhere
 document.addEventListener('click', (e) => {
-  if (!e.target.classList.contains('arch-layer')) {
+  if (!e.target.closest('.arch-layer')) {
     document.getElementById('tooltip').style.opacity = '0';
   }
 });
