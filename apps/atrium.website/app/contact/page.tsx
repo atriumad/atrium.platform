@@ -34,7 +34,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         body="The fastest first step is context: where the brand is now, what is already working, and what has become too hard for the team to manage alone."
         actions={[
           { label: 'Book a call', href: emailHref, calLink: CAL_LINKS.intro },
-          { label: 'View pricing models', href: '/pricing', variant: 'ghostLight' },
+          { label: 'View pricing models', href: '/pricing', variant: 'outlineLight' },
         ]}
         stats={[
           { value: 'HOU', label: 'Houston, TX home base' },

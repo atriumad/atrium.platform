@@ -1,28 +1,33 @@
 import { Marquee } from '@/components/ui/Marquee'
-import { cldImageUrl } from '@/lib/cloudinary'
+import { cldImageUrl, cldVideoUrl } from '@/lib/cloudinary'
+import type { HeroTile } from '@/lib/work'
 
 type Props = {
-  publicIds: string[]
+  tiles: HeroTile[]
 }
 
 const COLUMN_COUNT = 3
 const DURATIONS = ['42s', '50s', '38s']
 const ASPECT_RATIOS = ['4/5', '1/1', '3/4']
+/** Reels are shot 9:16 and keep that shape. Forcing one into the photo ratios
+ *  would crop it to a slot it was never framed for, and the difference in shape
+ *  is what tells a viewer the moving tiles are reels. */
+const REEL_ASPECT_RATIO = '9/16'
 
 /** Round-robin split: item i goes to column i % columns. Exported for a
  *  focused unit test — this is the only non-trivial logic in an otherwise
  *  presentational component. */
-export function splitIntoColumns(ids: string[], columns: number): string[][] {
-  const result: string[][] = Array.from({ length: columns }, () => [])
-  ids.forEach((id, i) => {
+export function splitIntoColumns<T>(items: T[], columns: number): T[][] {
+  const result: T[][] = Array.from({ length: columns }, () => [])
+  items.forEach((item, i) => {
     const column = result[i % columns]
-    if (column) column.push(id)
+    if (column) column.push(item)
   })
   return result
 }
 
-export default function HeroPerspectiveGallery({ publicIds }: Props) {
-  const columns = splitIntoColumns(publicIds, COLUMN_COUNT)
+export default function HeroPerspectiveGallery({ tiles }: Props) {
+  const columns = splitIntoColumns(tiles, COLUMN_COUNT)
 
   return (
     <div
@@ -36,7 +41,7 @@ export default function HeroPerspectiveGallery({ publicIds }: Props) {
         className="absolute inset-x-0 flex p-4"
         style={{ top: '-15%', height: '130%', transform: 'perspective(1600px) rotateY(-12deg) scale(1.05)' }}
       >
-        {columns.map((columnIds, colIndex) => (
+        {columns.map((columnTiles, colIndex) => (
           <Marquee
             // biome-ignore lint/suspicious/noArrayIndexKey: columns are a fixed-length, stable-order derived layout, not a reorderable list
             key={colIndex}
@@ -46,19 +51,42 @@ export default function HeroPerspectiveGallery({ publicIds }: Props) {
             className="flex-1"
             style={{ '--duration': DURATIONS[colIndex % DURATIONS.length] } as React.CSSProperties}
           >
-            {columnIds.map((id, tileIndex) => (
+            {columnTiles.map((tile, tileIndex) => (
               <div
-                key={id}
+                key={tile.src}
                 className="w-full overflow-hidden rounded-xl"
-                style={{ aspectRatio: ASPECT_RATIOS[tileIndex % ASPECT_RATIOS.length] }}
+                style={{
+                  aspectRatio:
+                    tile.kind === 'video'
+                      ? REEL_ASPECT_RATIO
+                      : ASPECT_RATIOS[tileIndex % ASPECT_RATIOS.length],
+                }}
               >
-                {/* biome-ignore lint/performance/noImgElement: marquee track of remote Cloudinary assets, next/image not suitable here */}
-                <img
-                  src={cldImageUrl(id, { width: 500 })}
-                  alt=""
-                  loading="lazy"
-                  className="h-full w-full object-cover"
-                />
+                {tile.kind === 'video' ? (
+                  // Decoration behind the hero copy: muted, looping, no controls
+                  // and hidden from assistive tech. `preload="metadata"` keeps a
+                  // handful of reels above the fold from competing with the copy
+                  // for bandwidth on a first paint.
+                  <video
+                    aria-hidden="true"
+                    autoPlay
+                    className="h-full w-full object-cover"
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    src={cldVideoUrl(tile.src, { width: 500 })}
+                    tabIndex={-1}
+                  />
+                ) : (
+                  // biome-ignore lint/performance/noImgElement: marquee track of remote CDN assets, next/image not suitable here
+                  <img
+                    alt=""
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    src={cldImageUrl(tile.src, { width: 500 })}
+                  />
+                )}
               </div>
             ))}
           </Marquee>

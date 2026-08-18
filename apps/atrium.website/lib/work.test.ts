@@ -54,16 +54,41 @@ describe('isVideoLed', () => {
   })
 })
 
-import { heroGalleryIds } from './work'
+import { heroGalleryTiles } from './work'
 
-describe('heroGalleryIds', () => {
-  test('returns a non-empty, capped list of real Cloudinary IDs', () => {
-    expect(heroGalleryIds.length).toBeGreaterThan(0)
-    expect(heroGalleryIds.length).toBeLessThanOrEqual(24)
-    expect(heroGalleryIds.every((id) => typeof id === 'string' && id.length > 0)).toBe(true)
+describe('heroGalleryTiles', () => {
+  test('returns a non-empty, capped list of deliverable sources', () => {
+    expect(heroGalleryTiles.length).toBeGreaterThan(0)
+    expect(heroGalleryTiles.length).toBeLessThanOrEqual(30)
+    expect(heroGalleryTiles.every((tile) => tile.src.length > 0)).toBe(true)
   })
 
-  test('contains no duplicate IDs', () => {
-    expect(new Set(heroGalleryIds).size).toBe(heroGalleryIds.length)
+  test('every source is a finished URL', () => {
+    // A bare Cloudinary public ID here is a broken tile above the fold: that
+    // account is disabled. This is the regression that put seven of them there.
+    expect(heroGalleryTiles.every((tile) => /^https?:\/\//i.test(tile.src))).toBe(true)
+  })
+
+  test('carries both photography and reels', () => {
+    expect(heroGalleryTiles.some((tile) => tile.kind === 'image')).toBe(true)
+    expect(heroGalleryTiles.some((tile) => tile.kind === 'video')).toBe(true)
+  })
+
+  test('photography outnumbers the reels', () => {
+    const reels = heroGalleryTiles.filter((tile) => tile.kind === 'video').length
+    expect(reels).toBeLessThan(heroGalleryTiles.length - reels)
+  })
+
+  test('spreads the reels across all three columns', () => {
+    // Round-robin over three columns, so a reel period of three would stack
+    // them all into one column.
+    const reelColumns = new Set(
+      heroGalleryTiles.flatMap((tile, index) => (tile.kind === 'video' ? [index % 3] : [])),
+    )
+    expect(reelColumns.size).toBe(3)
+  })
+
+  test('contains no duplicate sources', () => {
+    expect(new Set(heroGalleryTiles.map((tile) => tile.src)).size).toBe(heroGalleryTiles.length)
   })
 })

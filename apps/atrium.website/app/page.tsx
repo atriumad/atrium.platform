@@ -19,15 +19,25 @@ import { type CaseStudy, caseStudies } from '@/lib/work'
 // cannot take a bare public ID.
 const BENTO_CDN = 'https://cdn.atriumad.com/clients/ATRM/photos/home_bento'
 
+// `titlePosition` puts each heading at whichever end of its picture is darker,
+// which is the only thing cream type cares about. Measured mean luminance of
+// each image's top 30% vs its bottom 30% (0–255):
+//
+//   1 Content that…    77 / 34   -> bottom
+//   2 Traffic (cutout) 15 / 20   -> top   (the cut-out owns the bottom)
+//   3 Reviews caught  100 / 151  -> top
+//   4 Found when…     108 / 97   -> bottom
+//   5 A brand that…    78 / 59   -> bottom
+//   6 The guest who…   56 / 73   -> top
 const bentoItems: BentoItem[] = [
-  { size: 'large', title: <>Content that <em>shows you at your best</em></>, body: 'Your food, your chef, your room, whatever makes people crave you. We shoot what you already have and make it the reason they came.', cover: 'BTS wide shot — camera, chef plating, warm restaurant lighting', image: `${BENTO_CDN}/hf_20260814_193524_bdfb6f8a-d155-47fa-85ba-78268bf599c5_min.webp` },
+  { size: 'large', titlePosition: 'bottom', title: <>Content that <em>shows you at your best</em></>, body: 'Your food, your chef, your room, whatever makes people crave you. We shoot what you already have and make it the reason they came.', cover: 'BTS wide shot — camera, chef plating, warm restaurant lighting', image: `${BENTO_CDN}/hf_20260814_193524_bdfb6f8a-d155-47fa-85ba-78268bf599c5_min.webp` },
   // The only cut-out in the set: the phone is on transparency, so the tile's
   // lime is what it sits on rather than a photograph of its own.
   { size: 'small', fill: 'lime', cutout: true, title: <>Traffic that <em>turns into tables</em></>, body: 'We send people from Instagram and Google straight to your reservation and your online order, not just to your profile.', cover: 'Hands holding a phone open on a restaurant reservation page', image: `${BENTO_CDN}/hf_20260814_192712_bea1ee09-0c5a-489c-9c39-6e77f1621b9e_min.png` },
-  { size: 'small', title: <>Reviews caught <em>before they go public</em></>, cover: 'Three plated dishes on a marble table against a green banquette', image: `${BENTO_CDN}/DSC06328.jpg` },
-  { size: 'small', title: <>Found when they&apos;re <em>ready to decide</em></>, body: 'Forty six percent of Google searches are local. When someone three blocks away is hungry, you are what they find.', cover: 'A phone in an orange jacket pocket showing a restaurant story', image: `${BENTO_CDN}/hf_20260814_191805_04781e92-1d07-419d-907e-aec6490112c2_min.webp` },
-  { size: 'large', title: <>A brand that sounds like <em>you</em></>, cover: 'A roadside billboard carrying the brand at dusk', image: `${BENTO_CDN}/hf_20260814_192354_2dcf196c-f797-434e-a9eb-3b64a9c68601_min.webp` },
-  { size: 'small', title: <>The guest who returns <em>is the business</em></>, cover: 'A guest reading a win-back message on his phone at home', image: `${BENTO_CDN}/hf_20260813_164755_d9e5278d-7df6-4814-8113-08c1d2a474db.jpg` },
+  { size: 'small', titlePosition: 'top', title: <>Reviews caught <em>before they go public</em></>, cover: 'Three plated dishes on a marble table against a green banquette', image: `${BENTO_CDN}/DSC06328.jpg` },
+  { size: 'small', titlePosition: 'bottom', title: <>Found when they&apos;re <em>ready to decide</em></>, body: 'Forty six percent of Google searches are local. When someone three blocks away is hungry, you are what they find.', cover: 'A phone in an orange jacket pocket showing a restaurant story', image: `${BENTO_CDN}/hf_20260814_191805_04781e92-1d07-419d-907e-aec6490112c2_min.webp` },
+  { size: 'large', titlePosition: 'bottom', title: <>A brand that sounds like <em>you</em></>, cover: 'A roadside billboard carrying the brand at dusk', image: `${BENTO_CDN}/hf_20260814_192354_2dcf196c-f797-434e-a9eb-3b64a9c68601_min.webp` },
+  { size: 'small', titlePosition: 'top', title: <>The guest who returns <em>is the business</em></>, cover: 'A guest reading a win-back message on his phone at home', image: `${BENTO_CDN}/hf_20260813_164755_d9e5278d-7df6-4814-8113-08c1d2a474db.jpg` },
 ]
 
 const selectedWorkDetails = [
@@ -90,8 +100,6 @@ export default function HomePage() {
         eyebrow="How We Work"
         headline={<>A monthly engine. <em className="font-serif italic">Not random posts.</em></>}
         body="Strategy, content, and technology run as one system on a 28-day cycle — so marketing stops being guesswork and you can focus on the food."
-        cta="See the process"
-        ctaHref="/process"
         steps={processSteps}
         stats={processStats}
       />

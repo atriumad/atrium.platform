@@ -25,7 +25,6 @@ const serviceColumns = STAGES.map(({ category, dotClass }) => ({
 
 const companyLinks = [
   { label: 'Our Work', href: '/work' },
-  { label: 'How It Works', href: '/process' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
   { label: 'Resources', href: '/resources' },

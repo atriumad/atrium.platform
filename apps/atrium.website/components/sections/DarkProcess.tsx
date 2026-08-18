@@ -2,7 +2,7 @@
 import { Eyebrow, NumberReel } from '@atrium/ui'
 import type { ReactNode } from 'react'
 import { useEffect, useRef } from 'react'
-import TransitionCTA from '@/components/ui/TransitionCTA'
+import TransitionButton from '@/components/ui/TransitionButton'
 import { gsap } from '@/lib/gsap'
 
 export type ProcessStep = { eyebrow: string; title: string; body: string }
@@ -12,8 +12,10 @@ type Props = {
   eyebrow?: string
   headline: ReactNode
   body: string
-  cta: string
-  ctaHref: string
+  /** Optional: the section stands on its own steps and stats without a
+   *  button, which is how the home page uses it. */
+  cta?: string
+  ctaHref?: string
   steps: ProcessStep[]
   stats: ProcessStat[]
 }
@@ -44,7 +46,9 @@ export default function DarkProcess({ eyebrow, headline, body, cta, ctaHref, ste
             {headline}
           </h2>
           <p className="max-w-sm text-base leading-relaxed text-body">{body}</p>
-          <div className="mt-2"><TransitionCTA href={ctaHref} variant="outline">{cta}</TransitionCTA></div>
+          {cta && ctaHref && (
+            <div className="mt-2"><TransitionButton href={ctaHref} variant="outline">{cta}</TransitionButton></div>
+          )}
           <div className="mt-8 flex gap-10 border-t border-line pt-8">
             {stats.map((s) => (
               <div key={`${s.number}-${s.label}`}>
