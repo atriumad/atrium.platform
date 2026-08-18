@@ -11,6 +11,7 @@ import { googlePlaces } from "./google-places"
 import { llmProviders } from "./llm-providers"
 import { postgres } from "./postgres"
 import { scrapecreators } from "./scrapecreators"
+import { upstash } from "./upstash"
 
 /**
  * The registry. Adding a system is: one file next to this one, one line here.
@@ -21,6 +22,7 @@ export const SYSTEMS: SystemDefinition[] = [
   atriumGrader,
   atriumStatus,
   atriumCdn,
+  upstash,
   postgres,
   cloudinary,
   googlePlaces,

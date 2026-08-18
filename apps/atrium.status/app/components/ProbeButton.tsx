@@ -43,7 +43,7 @@ export function ProbeButton({
   return (
     <span className="inline-flex items-center gap-2">
       <button
-        className={`rounded-full border border-[color:var(--color-line)] px-3 py-1 text-[0.76rem] transition-colors hover:border-[color:var(--color-ink)] disabled:opacity-60 ${
+        className={`rounded-full border border-[color:var(--color-line)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)] px-3 py-1 text-[0.76rem] transition-colors hover:border-[color:var(--color-ink)] disabled:opacity-60 ${
           compact ? "" : "bg-[color:var(--color-card)]"
         }`}
         disabled={busy || pending}

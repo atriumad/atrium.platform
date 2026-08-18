@@ -1,4 +1,5 @@
 import { allMonitors, enabledMonitors, findMonitor } from "@/config/systems"
+import { announce } from "./alerts"
 import { store } from "./store"
 import type { Incident, MonitorDefinition, MonitorRun, MonitorStatus } from "./types"
 
@@ -12,6 +13,34 @@ import type { Incident, MonitorDefinition, MonitorRun, MonitorStatus } from "./t
 
 const DEFAULT_TIMEOUT_MS = 10_000
 const DEFAULT_DEGRADED_MS = 2500
+
+/**
+ * A single failed request is not an outage. One dropped packet, one cold start
+ * that overran the timeout, one DNS hiccup — each of those used to open an
+ * incident and leave a permanent dent in the 30-day uptime number.
+ *
+ * So a failing attempt is retried before the sweep records a verdict. Only a
+ * monitor that fails every attempt is recorded as down. The retry is immediate
+ * (a short backoff, not another sweep), so a real outage is still caught on the
+ * pass that finds it — the filter costs a second, not ten minutes.
+ *
+ * `ATTEMPTS` counts the total tries, so 2 means one retry.
+ */
+const ATTEMPTS = Math.max(1, Number(process.env.MONITOR_ATTEMPTS ?? 2))
+const RETRY_BACKOFF_MS = Math.max(0, Number(process.env.MONITOR_RETRY_BACKOFF_MS ?? 1200))
+
+/**
+ * How many consecutive failing sweeps it takes to open an incident, on top of
+ * the per-sweep retries. 1 means the sweep that confirms a failure also opens
+ * the incident, which is what the retry above makes safe. Raise it if a flapping
+ * dependency starts paging people.
+ */
+const SWEEPS_BEFORE_INCIDENT = Math.max(1, Number(process.env.MONITOR_SWEEPS_BEFORE_INCIDENT ?? 1))
+
+const FAILING: MonitorStatus[] = ["down"]
+const isFailing = (status: MonitorStatus) => FAILING.includes(status)
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 function classify(
   monitor: MonitorDefinition,
@@ -40,10 +69,8 @@ function classify(
   return { status: "up" }
 }
 
-export async function runMonitor(
-  monitor: MonitorDefinition,
-  systemId: string,
-): Promise<MonitorRun> {
+/** One request. No retry logic here — `runMonitor` owns that. */
+async function attempt(monitor: MonitorDefinition, systemId: string): Promise<MonitorRun> {
   const at = new Date().toISOString()
 
   if (monitor.enabled === false) {
@@ -101,6 +128,29 @@ export async function runMonitor(
   }
 }
 
+/**
+ * Runs one monitor to a verdict: the first attempt that does not fail wins, and
+ * a monitor that fails every attempt reports the last failure. `attempts` is
+ * recorded on the run so the dashboard can say a result was confirmed rather
+ * than seen once.
+ */
+export async function runMonitor(
+  monitor: MonitorDefinition,
+  systemId: string,
+): Promise<MonitorRun> {
+  let last = await attempt(monitor, systemId)
+  if (!isFailing(last.status)) return { ...last, attempts: 1 }
+
+  for (let tries = 2; tries <= ATTEMPTS; tries++) {
+    await sleep(RETRY_BACKOFF_MS)
+    const next = await attempt(monitor, systemId)
+    if (!isFailing(next.status)) return { ...next, attempts: tries }
+    last = next
+  }
+
+  return { ...last, attempts: ATTEMPTS }
+}
+
 export type SweepResult = {
   runs: MonitorRun[]
   opened: Incident[]
@@ -145,10 +195,28 @@ export async function sweep(): Promise<SweepResult> {
     resolved.push(closed)
   }
 
+  // Recent history per monitor, only as deep as the threshold needs. Asked for
+  // once here rather than inside the loop.
+  const recent =
+    SWEEPS_BEFORE_INCIDENT > 1
+      ? await historyByMonitor(healthStore, runs, SWEEPS_BEFORE_INCIDENT)
+      : new Map<string, MonitorRun[]>()
+
   for (const run of runs) {
     const existing = openByMonitor.get(run.monitorId)
 
-    if (run.status === "down" && !existing) {
+    if (isFailing(run.status) && !existing) {
+      // The run already survived its retries. This is the second gate: the
+      // failure also has to have persisted across the last N sweeps. At the
+      // default of 1 the retry is the only filter and this is a no-op.
+      const confirmed =
+        SWEEPS_BEFORE_INCIDENT === 1 ||
+        (recent.get(run.monitorId) ?? [])
+          .slice(0, SWEEPS_BEFORE_INCIDENT - 1)
+          .every((previous) => isFailing(previous.status))
+
+      if (!confirmed) continue
+
       const incident: Incident = {
         id: `${run.monitorId}-${run.at}`,
         monitorId: run.monitorId,
@@ -170,7 +238,13 @@ export async function sweep(): Promise<SweepResult> {
     }
   }
 
-  return { runs, opened, resolved, durationMs: Date.now() - startedAt }
+  const result: SweepResult = { runs, opened, resolved, durationMs: Date.now() - startedAt }
+
+  // Alerts are the last thing and they never throw: a broken webhook must not
+  // turn a recorded sweep into a failed one.
+  await announce(result)
+
+  return result
 }
 
 /**
@@ -212,6 +286,26 @@ export async function probe(monitorId: string): Promise<MonitorRun | null> {
   const run = await runMonitor(target.monitor, target.system.id)
   await store().recordRuns([run])
   return run
+}
+
+/**
+ * The stored runs for each monitor that just failed, newest first, with the run
+ * from this sweep dropped. `recordRuns` has already written it, so it would
+ * otherwise count itself toward its own confirmation.
+ */
+async function historyByMonitor(
+  healthStore: ReturnType<typeof store>,
+  runs: MonitorRun[],
+  depth: number,
+): Promise<Map<string, MonitorRun[]>> {
+  const failing = runs.filter((run) => isFailing(run.status))
+  const entries = await Promise.all(
+    failing.map(async (run) => {
+      const history = await healthStore.history(run.monitorId, depth + 1)
+      return [run.monitorId, history.filter((previous) => previous.at !== run.at)] as const
+    }),
+  )
+  return new Map(entries)
 }
 
 /** Every monitor id in the registry, enabled or not. */

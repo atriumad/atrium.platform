@@ -14,7 +14,7 @@ export const atriumWebsite: SystemDefinition = {
   criticality: "critical",
   owner: "Atrium",
   workspace: "@atrium/website",
-  summary: "The public marketing site: home, services, work, pricing, process, contact.",
+  summary: "The public marketing site: home, services, work, pricing, about, resources, contact.",
   overview: `The front door. Next.js 16 on the App Router, built as a static site with a single
 dynamic route (\`/contact\`). Everything a visitor sees is prerendered at build time, so an outage
 here is almost always a deploy problem or a CDN problem, not a runtime one.
