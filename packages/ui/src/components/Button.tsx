@@ -1,13 +1,18 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 import { cn } from '../lib/cn'
 
-type Variant = 'primary' | 'secondary' | 'accent' | 'ghost' | 'light' | 'outlineLight'
+type Variant = 'primary' | 'secondary' | 'accent' | 'mint' | 'outline' | 'ghost' | 'light' | 'outlineLight'
 type Size = 'sm' | 'md' | 'lg' | 'pill'
 
 const variants: Record<Variant, string> = {
   primary: 'bg-ink text-lime shadow-soft',
   secondary: 'bg-card text-charcoal border border-line shadow-soft',
   accent: 'bg-amber text-charcoal shadow-soft',
+  // The lead action on a dark ground. Charcoal on lime is 11.49:1.
+  mint: 'bg-lime text-charcoal shadow-soft',
+  // The quiet one on a light ground: the border is the button, so no fill and
+  // no shadow. `secondary` is the filled counterpart.
+  outline: 'bg-transparent text-charcoal border border-line hover:border-charcoal/40 hover:bg-ink/[0.04]',
   ghost: 'bg-transparent text-charcoal hover:bg-ink/5',
   // For dark grounds. `light` is the solid counterpart to `primary`;
   // `outlineLight` is the quiet one beside it.
