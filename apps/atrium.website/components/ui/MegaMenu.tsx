@@ -112,7 +112,7 @@ export default function MegaMenu({
       <button
         aria-controls="mega-menu-test"
         aria-expanded={open}
-        className="flex items-center gap-1 text-sm transition-opacity hover:opacity-70"
+        className="flex items-center gap-1 rounded-md text-sm transition-opacity hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)]"
         onClick={() => setOpen((value) => !value)}
         ref={triggerRef}
         style={textColor ? { color: textColor } : undefined}

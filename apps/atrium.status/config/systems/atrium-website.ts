@@ -5,7 +5,7 @@ import type { SystemDefinition } from "@/lib/health/types"
  * `https://atrium.agency`, does not resolve today — pointing monitors at it
  * would paint the dashboard red forever and teach everyone to ignore it.
  */
-const PROD = process.env.NEXT_PUBLIC_WEBSITE_URL ?? ""
+const PROD = (process.env.NEXT_PUBLIC_WEBSITE_URL ?? "").replace(/\/$/, "")
 
 export const atriumWebsite: SystemDefinition = {
   id: "atrium-website",
@@ -14,7 +14,7 @@ export const atriumWebsite: SystemDefinition = {
   criticality: "critical",
   owner: "Atrium",
   workspace: "@atrium/website",
-  summary: "The public marketing site: home, services, work, pricing, process, contact.",
+  summary: "The public marketing site: home, services, work, pricing, about, resources, contact.",
   overview: `The front door. Next.js 16 on the App Router, built as a static site with a single
 dynamic route (\`/contact\`). Everything a visitor sees is prerendered at build time, so an outage
 here is almost always a deploy problem or a CDN problem, not a runtime one.

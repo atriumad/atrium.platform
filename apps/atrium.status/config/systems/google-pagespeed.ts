@@ -30,13 +30,31 @@ section, not an error — another quiet degradation worth watching from here.`,
   ],
   monitors: [
     {
+      id: "pagespeed-liveness",
+      label: "PageSpeed API reachable",
+      meaning: "Google is not answering at all — grader reports lose their Lighthouse scores.",
+      url: "https://pagespeedonline.googleapis.com/pagespeedonline/v5/runPagespeed",
+      // Unauthenticated on purpose. The rejection *is* the signal: an endpoint
+      // that refuses an anonymous caller is an endpoint that is answering. A
+      // real outage looks like a 5xx or a timeout, neither of which is in the
+      // expected list. Costs nothing and consumes no quota, which is what lets
+      // this run every sweep against an API that bills per call.
+      //
+      // 429 is what an anonymous caller gets here: the shared unauthenticated
+      // quota is already spent, which still proves the service is serving. 400
+      // and 403 are accepted too, since which refusal Google picks is not
+      // something to depend on.
+      expectStatus: [429, 400, 403, 401],
+      degradedAboveMs: 3000,
+    },
+    {
       id: "pagespeed-api",
-      label: "PageSpeed API",
+      label: "PageSpeed audit run",
       meaning: "Grader reports lose their Lighthouse scores.",
       url: "https://pagespeedonline.googleapis.com/pagespeedonline/v5/runPagespeed",
       enabled: false,
       disabledReason:
-        "A real probe costs a full Lighthouse run and counts against quota. Quota is watched in the Google Cloud console.",
+        "A real probe costs a full Lighthouse run and counts against quota, so it stays off. The liveness check above covers the outage case for free; quota is watched in the Google Cloud console.",
     },
   ],
   tags: ["google", "grader", "performance"],

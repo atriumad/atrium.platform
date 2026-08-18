@@ -4,7 +4,7 @@ describe("@atrium/ui entry points", () => {
   test("the new barrel exports the primitives", async () => {
     const mod = await import("../src/index.ts")
     expect(Object.keys(mod).sort()).toEqual(
-      ["Button", "Card", "Eyebrow", "Input", "Logo", "Meter", "NumberReel", "Stat", "Tag"],
+      ["Button", "Card", "Eyebrow", "Input", "Logo", "Meter", "NumberReel", "PillTags", "Stat", "Tag"],
     )
   })
 

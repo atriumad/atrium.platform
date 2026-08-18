@@ -1,4 +1,5 @@
 import { allMonitors, dependents, getSystem, SYSTEMS } from "@/config/systems"
+import { alertingIsConfigured } from "./alerts"
 import { store } from "./store"
 import type {
   Incident,
@@ -174,6 +175,10 @@ export async function healthPayload() {
     ),
     checkedAt: data.lastCheckedAt,
     durable: data.storeKind === "upstash",
+    // Both of these are about whether the app can be trusted, not about whether
+    // the estate is healthy: undurable storage means the history is fiction, and
+    // no alert channel means nobody finds out unless they look.
+    alerting: { configured: alertingIsConfigured(), channel: "slack" },
     counts: data.counts,
     systems: data.systems.map((system) => ({
       id: system.system.id,

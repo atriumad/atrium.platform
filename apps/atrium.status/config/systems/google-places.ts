@@ -40,13 +40,29 @@ scan failures are the real signal, and quota lives in the Google Cloud console.`
   links: [{ label: "Google Cloud console", href: "https://console.cloud.google.com/apis" }],
   monitors: [
     {
+      id: "google-places-liveness",
+      label: "Places API reachable",
+      meaning: "Google is not answering at all — no grader scan can produce business data.",
+      url: "https://places.googleapis.com/v1/places:searchText",
+      // Unauthenticated on purpose. The rejection *is* the signal: an endpoint
+      // that refuses an anonymous caller is an endpoint that is answering. A
+      // real outage looks like a 5xx or a timeout, neither of which is in the
+      // expected list. Costs nothing and consumes no quota, which is what lets
+      // this run every sweep against an API that bills per call.
+      // 403 is the documented refusal ("Method doesn't allow unregistered
+      // callers"); 401 is accepted alongside it in case Google changes which
+      // one it uses.
+      expectStatus: [403, 401],
+      degradedAboveMs: 2500,
+    },
+    {
       id: "google-places-api",
-      label: "Places API",
+      label: "Places API billable call",
       meaning: "No grader scan can produce business data.",
       url: "https://places.googleapis.com/v1/places:searchText",
       enabled: false,
       disabledReason:
-        "Every request that would prove health is billable. Watch quota in the Google Cloud console instead.",
+        "A request that proves the key and quota work is billable, so it stays off. The liveness check above covers the outage case for free; quota and billing are watched in the Google Cloud console.",
     },
   ],
   tags: ["google", "paid", "grader"],

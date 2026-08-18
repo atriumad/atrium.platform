@@ -5,7 +5,7 @@ import HeroPerspectiveGallery from '@/components/sections/HeroPerspectiveGallery
 import { OutlineCTA, PillCTA } from '@/components/ui/PillCTA'
 import { CTA } from '@/lib/cta'
 import { gsap } from '@/lib/gsap'
-import { heroGalleryIds } from '@/lib/work'
+import { heroGalleryTiles } from '@/lib/work'
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -72,7 +72,7 @@ export default function HeroSection() {
         </div>
 
         <div className="hidden lg:block lg:w-1/2">
-          <HeroPerspectiveGallery publicIds={heroGalleryIds} />
+          <HeroPerspectiveGallery tiles={heroGalleryTiles} />
         </div>
       </div>
     </section>

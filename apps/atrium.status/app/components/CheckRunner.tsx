@@ -102,7 +102,7 @@ export function CheckRunner({
 
           return (
             <button
-              className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[0.8rem] font-medium transition-colors hover:border-[color:var(--color-ink)] disabled:opacity-70 ${tone}`}
+              className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[0.8rem] font-medium transition-colors hover:border-[color:var(--color-ink)] disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)] ${tone}`}
               disabled={entry?.running}
               key={task}
               onClick={() => run(task)}
@@ -129,7 +129,7 @@ export function CheckRunner({
 
         {tasks.length > 1 ? (
           <button
-            className="rounded-full bg-[color:var(--color-ink)] px-3.5 py-1.5 text-[0.8rem] font-medium text-[color:var(--color-lime)] transition-opacity hover:opacity-90"
+            className="rounded-full bg-[color:var(--color-ink)] px-3.5 py-1.5 text-[0.8rem] font-medium text-[color:var(--color-lime)] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)]"
             onClick={runAll}
             type="button"
           >
@@ -153,7 +153,7 @@ export function CheckRunner({
             return (
               <div key={task}>
                 <button
-                  className="text-[0.76rem] text-[color:var(--color-muted)] underline underline-offset-2"
+                  className="rounded text-[0.76rem] text-[color:var(--color-muted)] underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)]"
                   onClick={() => setOpen(isOpen ? null : task)}
                   type="button"
                 >

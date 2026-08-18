@@ -1,9 +1,9 @@
 'use client'
+import { Button } from '@atrium/ui'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { CTA } from '@/lib/cta'
-import Button from './Button'
 import MegaMenu from './MegaMenu'
 import { PillCTA } from './PillCTA'
 import TransitionLink from './TransitionLink'
@@ -123,7 +123,6 @@ const rightGroups = [
 
 const otherLinks = [
   { label: 'Our Work', href: '/work' },
-  { label: 'How It Works', href: '/process' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
 ]
@@ -201,19 +200,32 @@ export default function Navbar() {
   }, [mobileOpen])
 
   const closeMobile = () => setMobileOpen(false)
-  const isEditorialCase = pathname.startsWith('/work/')
-  // Only the home page animates the header from transparent → solid on scroll.
-  // Every other page shows a solid header from the start.
+  // The light heroes: a case study and a single service page both open on cream
+  // with the glint cluster running to the top edge, so their bar fills in cream
+  // with dark nav text. `/services` itself is not one of them — its hero is the
+  // full-screen dark panel, which the bar sits on cleanly.
+  const isLightHero = pathname.startsWith('/work/') || /^\/services\/[^/]+/.test(pathname)
   const isHome = pathname === '/'
-  const effOpacity = isHome ? bgOpacity : 1
-  const navTextColor = isEditorialCase ? 'var(--text-strong)' : 'var(--color-surface)'
-  const headerBorder = isEditorialCase
-    ? '1px solid rgba(7,47,52,0.08)'
+  // Home and the light heroes all open on a full-bleed hero the bar should not
+  // cut into, so they animate from transparent → solid on scroll. Every other
+  // page shows a solid header from the start.
+  const effOpacity = isHome || isLightHero ? bgOpacity : 1
+  // The bar has to finish opaque on the light-hero pages: the dark story section
+  // scrolls under it further down, and a translucent cream bar over that ground
+  // leaves the nav text unreadable.
+  const caseBarAlpha = effOpacity * 0.95
+  const navTextColor = isLightHero ? 'var(--text-strong)' : 'var(--color-surface)'
+  const headerBorder = isLightHero
+    ? effOpacity > 0.3
+      ? `1px solid rgba(7,47,52,${effOpacity * 0.08})`
+      : '1px solid transparent'
     : effOpacity > 0.3
       ? `1px solid rgba(228,238,240,${effOpacity * 0.08})`
       : '1px solid transparent'
-  const headerShadow = isEditorialCase
-    ? '0 1px 24px rgba(7,47,52,0.05)'
+  const headerShadow = isLightHero
+    ? effOpacity > 0.6
+      ? `0 1px 24px rgba(7,47,52,${effOpacity * 0.05})`
+      : 'none'
     : effOpacity > 0.6
       ? `0 1px 24px rgba(4,32,36,${effOpacity * 0.4})`
       : 'none'
@@ -234,9 +246,9 @@ export default function Navbar() {
         aria-hidden="true"
         className="absolute inset-0 -z-10 transition-opacity duration-300"
         style={{
-          background: isEditorialCase ? 'rgba(247,249,242,0.94)' : `rgba(7,47,52,${effOpacity})`,
-          backdropFilter: isEditorialCase || effOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(effOpacity * 14)}px)` : 'none',
-          WebkitBackdropFilter: isEditorialCase || effOpacity > 0.05 ? `blur(${isEditorialCase ? 14 : Math.round(effOpacity * 14)}px)` : 'none',
+          background: isLightHero ? `rgba(247,249,242,${caseBarAlpha})` : `rgba(7,47,52,${effOpacity})`,
+          backdropFilter: effOpacity > 0.05 ? `blur(${Math.round(effOpacity * 14)}px)` : 'none',
+          WebkitBackdropFilter: effOpacity > 0.05 ? `blur(${Math.round(effOpacity * 14)}px)` : 'none',
         }}
       />
       {/* Logo */}
@@ -248,7 +260,7 @@ export default function Navbar() {
           height={24}
           priority
           unoptimized
-          style={{ height: '24px', width: 'auto', filter: isEditorialCase ? 'brightness(0)' : 'brightness(0) invert(1)' }}
+          style={{ height: '24px', width: 'auto', filter: isLightHero ? 'brightness(0)' : 'brightness(0) invert(1)' }}
         />
       </TransitionLink>
 
@@ -271,7 +283,7 @@ export default function Navbar() {
       {/* Right column — CTA on desktop, menu toggle on mobile */}
       <div className="flex gap-4 justify-end justify-self-end items-center">
         <div className="hidden md:flex">
-          <PillCTA external={CTA.primary.external} href={CTA.primary.href} size="sm" tone={isEditorialCase ? 'on-light' : 'on-dark'}>
+          <PillCTA external={CTA.primary.external} href={CTA.primary.href} size="sm" tone={isLightHero ? 'on-light' : 'on-dark'}>
             {CTA.primary.label}
           </PillCTA>
         </div>
@@ -282,11 +294,11 @@ export default function Navbar() {
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex md:hidden items-center justify-center p-2 -m-2"
+          className="-m-2 flex items-center justify-center rounded-md p-2 md:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)]"
         >
           <span
             className="relative flex-shrink-0 w-4 h-4"
-            style={{ color: isEditorialCase ? 'var(--text-strong)' : 'var(--color-accent)' }}
+            style={{ color: isLightHero ? 'var(--text-strong)' : 'var(--color-accent)' }}
           >
             <span
               className={`absolute left-0 top-1/2 w-full h-px transition-transform duration-200 ${mobileOpen ? 'rotate-45' : '-translate-y-[3px]'}`}
@@ -353,7 +365,7 @@ export default function Navbar() {
             </div>
           ))}
 
-          <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="primary" onClick={closeMobile} className="justify-center px-4 py-3 w-full text-xs">
+          <Button href={CTA.primary.href} {...(CTA.primary.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})} variant="primary" onClick={closeMobile} size="sm" className="w-full justify-center">
             {CTA.primary.label}
           </Button>
         </div>

@@ -19,6 +19,12 @@ const INCIDENT_LOG_KEPT = 200
 
 export interface HealthStore {
   readonly kind: "upstash" | "memory"
+  /**
+   * Take a short-lived exclusive lock. Used so that many people opening the
+   * dashboard at once trigger one sweep between them, not one each.
+   * Returns false when someone else holds it.
+   */
+  acquireLock(name: string, ttlSeconds: number): Promise<boolean>
   recordRuns(runs: MonitorRun[]): Promise<void>
   latest(monitorIds: string[]): Promise<Record<string, MonitorRun | null>>
   history(monitorId: string, limit?: number): Promise<MonitorRun[]>
@@ -31,11 +37,20 @@ export interface HealthStore {
 const runKey = (id: string) => `${PREFIX}:monitor:${id}:runs`
 const lastKey = (id: string) => `${PREFIX}:monitor:${id}:last`
 const incidentKey = (id: string) => `${PREFIX}:incident:${id}`
+const lockKey = (name: string) => `${PREFIX}:lock:${name}`
 const INCIDENT_LOG = `${PREFIX}:incidents:log`
 
 class UpstashStore implements HealthStore {
   readonly kind = "upstash" as const
   constructor(private readonly redis: Redis) {}
+
+  async acquireLock(name: string, ttlSeconds: number): Promise<boolean> {
+    const result = await this.redis.set(lockKey(name), Date.now(), {
+      nx: true,
+      ex: ttlSeconds,
+    })
+    return result === "OK"
+  }
 
   async recordRuns(runs: MonitorRun[]): Promise<void> {
     if (runs.length === 0) return
@@ -91,14 +106,28 @@ const globalMemory = globalThis as unknown as {
     runs: Map<string, MonitorRun[]>
     incidents: Map<string, Incident>
     log: Incident[]
+    locks: Map<string, number>
   }
 }
 
 class MemoryStore implements HealthStore {
   readonly kind = "memory" as const
   private get state() {
-    globalMemory.__atriumHealthMemory ??= { runs: new Map(), incidents: new Map(), log: [] }
+    globalMemory.__atriumHealthMemory ??= {
+      runs: new Map(),
+      incidents: new Map(),
+      log: [],
+      locks: new Map(),
+    }
     return globalMemory.__atriumHealthMemory
+  }
+
+  async acquireLock(name: string, ttlSeconds: number): Promise<boolean> {
+    const now = Date.now()
+    const heldUntil = this.state.locks.get(name) ?? 0
+    if (heldUntil > now) return false
+    this.state.locks.set(name, now + ttlSeconds * 1000)
+    return true
   }
 
   async recordRuns(runs: MonitorRun[]): Promise<void> {

@@ -8,11 +8,10 @@ import { usePageTransition } from './PageTransitionProvider'
 
 type Props = ComponentProps<typeof Button> & { href: string }
 
-/** The design-system Button with the page-transition wipe attached.
- *
- *  TransitionCTA does the same for the legacy Button and keeps its own variant
- *  list, so it cannot render the design system's variants — this is the
- *  equivalent for surfaces that have moved over. */
+/** The design-system Button with the page-transition wipe attached. The only
+ *  button wrapper the site has: a second one existed for the legacy Button and
+ *  carried its own variant list, which is how two vocabularies stayed alive at
+ *  once. Every surface renders this now. */
 export default function TransitionButton({ href, onClick, ...rest }: Props) {
   const pathname = usePathname()
   const { navigate } = usePageTransition()

@@ -1,6 +1,27 @@
 @import "./theme.css";
 
 @layer components {
+  /* Pill tags — the row under a hero headline. Four brand tints in rotation,
+     so a row of any length keeps its rhythm. Charcoal on each of them measures
+     10.9:1 or better, which is what lets the tints carry real colour rather
+     than the near-white a tighter ratio would force.
+
+     The fills live here rather than on the component because they are a
+     rotation, and nth-child is the only way to express one without handing
+     every call site an index. */
+  .atr-pill-tags > li {
+    border-radius: 0.6rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.9375rem;
+    line-height: 1.25;
+    color: var(--color-charcoal);
+    background-color: var(--pill-tint);
+  }
+  .atr-pill-tags > li:nth-child(4n + 1) { --pill-tint: var(--color-lime); }
+  .atr-pill-tags > li:nth-child(4n + 2) { --pill-tint: color-mix(in srgb, var(--color-amber) 62%, white); }
+  .atr-pill-tags > li:nth-child(4n + 3) { --pill-tint: color-mix(in srgb, var(--color-green-fill) 30%, white); }
+  .atr-pill-tags > li:nth-child(4n + 4) { --pill-tint: color-mix(in srgb, var(--color-red-fill) 42%, white); }
+
   /* Score ring — conic-gradient repainted from JS, masked to an annulus. */
   .atr-ring {
     width: 100%;

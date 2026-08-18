@@ -42,7 +42,7 @@ export function SweepButton() {
   return (
     <div className="flex flex-wrap items-center gap-3">
       <button
-        className="rounded-full bg-[color:var(--color-ink)] px-4 py-1.5 text-[0.82rem] font-medium text-[color:var(--color-lime)] transition-opacity hover:opacity-90 disabled:opacity-60"
+        className="rounded-full bg-[color:var(--color-ink)] px-4 py-1.5 text-[0.82rem] font-medium text-[color:var(--color-lime)] transition-opacity hover:opacity-90 disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-green-fill)]"
         disabled={busy || pending}
         onClick={sweep}
         type="button"

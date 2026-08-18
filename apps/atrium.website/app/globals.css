@@ -326,3 +326,128 @@
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
 }
+
+/* ─── Hero glints ──────────────────────────────────────────────────────────
+   The light source behind a hero headline, shared by the case studies and the
+   service pages.
+
+   It is centred on the text block by construction, not by tuned numbers: the
+   layer is absolutely positioned against the copy column and pulled back to
+   its own centre, so it tracks the type on every page and every breakpoint
+   without anyone having to re-measure. Sizes are relative to that column too,
+   which is why nothing here is expressed as an offset from the section edge —
+   a case study hero runs past 1200px because it carries the reels while a
+   service header is barely 500px, and any measurement from the top lands in a
+   different place on each.
+
+   Two colours only, both from the brand's green family: lime carries the light
+   and the deep green the body. Depth comes from the stacking — the wide green
+   blooms are painted underneath and the small lime cores on top, each with its
+   own falloff, so the overlaps deepen and the centres stay bright. The green
+   sits at real strength; pale enough and it goes grey over cream rather than
+   green, which is the failure mode this palette has.
+
+   The points sum to dead centre horizontally (50, 62, 38, 50, 40, 60), so the
+   cluster reads as one mass behind the text rather than drifting to a side.
+
+   The layer is bigger than the copy column and is meant to spill past the
+   section: the heroes carry no `overflow-hidden` for that reason, and the
+   escape is safe because globals.css already hides the body's horizontal
+   overflow. Clipping it is what makes the cluster read as a rectangle.
+
+   The mask is radial and closest-side, so the layer fades out on every edge
+   instead of being cut off on one. Ordering is done by the DOM rather than by
+   a negative z-index: the layer comes first and the copy sits in a positioned
+   wrapper after it, which is sturdier than a negative index inside a section
+   that isolates and a child that blends. Same grain as the dark hero's
+   bloom, and for the same reason: transitions this wide and this soft band
+   visibly on 8-bit displays. */
+.atr-hero-glints {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 156%;
+  height: 176%;
+  translate: -50% -50%;
+  pointer-events: none;
+  background-image:
+    radial-gradient(
+      22% 20% at 50% 38%,
+      color-mix(in srgb, var(--color-lime) 92%, white) 0%,
+      color-mix(in srgb, var(--color-lime) 62%, transparent) 38%,
+      transparent 72%
+    ),
+    radial-gradient(
+      18% 17% at 62% 52%,
+      color-mix(in srgb, var(--color-lime) 74%, transparent) 0%,
+      color-mix(in srgb, var(--color-lime) 26%, transparent) 42%,
+      transparent 74%
+    ),
+    radial-gradient(
+      16% 15% at 38% 55%,
+      color-mix(in srgb, var(--color-lime) 58%, transparent) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      31% 27% at 50% 30%,
+      color-mix(in srgb, var(--color-green) 62%, transparent) 0%,
+      color-mix(in srgb, var(--color-green) 22%, transparent) 44%,
+      transparent 76%
+    ),
+    radial-gradient(
+      28% 25% at 40% 48%,
+      color-mix(in srgb, var(--color-green) 40%, transparent) 0%,
+      color-mix(in srgb, var(--color-green) 14%, transparent) 44%,
+      transparent 76%
+    ),
+    radial-gradient(
+      36% 29% at 60% 44%,
+      color-mix(in srgb, var(--color-green) 26%, transparent) 0%,
+      transparent 74%
+    );
+  -webkit-mask-image: radial-gradient(closest-side, #000 46%, rgba(0, 0, 0, 0.6) 72%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 46%, rgba(0, 0, 0, 0.6) 72%, transparent 100%);
+}
+
+.atr-hero-glints::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.26;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* ─── Bento copy reveal ────────────────────────────────────────────────────
+   The tile leads with its picture and heading; the paragraph arrives on hover.
+
+   Written as CSS rather than as Tailwind's arbitrary at-rule variant, because
+   `[@media(hover:hover)]:opacity-0` compiles to a bare class with no media
+   query in this version — which hides the copy on a phone forever, since there
+   is no hover to bring it back. The gate has to be real.
+
+   `--reveal-op` is the resting opacity the copy returns to: cream over a
+   photograph holds at full strength, ink on a filled tile is knocked back. */
+.bento-reveal {
+  opacity: var(--reveal-op, 1);
+  transition: opacity 500ms var(--ease-atrium), translate 500ms var(--ease-atrium);
+}
+
+@media (hover: hover) {
+  .bento-reveal {
+    opacity: 0;
+    /* The copy arrives from the tile's empty side: downward when the heading
+       is above it, upward when the heading is pinned to the foot. */
+    translate: 0 var(--reveal-from, 0.25rem);
+  }
+  .group:hover .bento-reveal {
+    opacity: var(--reveal-op, 1);
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bento-reveal {
+    transition: none;
+  }
+}

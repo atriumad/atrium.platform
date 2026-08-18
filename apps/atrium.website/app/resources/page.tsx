@@ -41,7 +41,7 @@ export default function ResourcesPage() {
         eyebrow="RESOURCES"
         title={<>Useful thinking for <em>restaurant operators.</em></>}
         body="A focused resource library for owners and marketing leads who need clearer decisions around content, reviews, retention, and local demand."
-        actions={[{ label: 'Read customer stories', href: '/work' }, { label: 'Talk through your market', href: CTA.primary.href, external: CTA.primary.external, variant: 'ghostLight' }]}
+        actions={[{ label: 'Read customer stories', href: '/work' }, { label: 'Talk through your market', href: CTA.primary.href, external: CTA.primary.external, variant: 'outlineLight' }]}
         stats={[
           { value: '3', label: 'resource tracks' },
           { value: '10+', label: 'case studies and guides planned' },

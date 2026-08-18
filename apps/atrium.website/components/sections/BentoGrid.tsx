@@ -24,6 +24,13 @@ export type BentoItem = {
    *  frame. It sits inside the tile at its own scale and the tile keeps its
    *  `fill` colour behind it, instead of the picture becoming the ground. */
   cutout?: boolean
+  /** Which end of the tile the heading sits at — `top` by default, `bottom` to
+   *  pin it to the foot with the copy above it. The heading never leaves the
+   *  tile.
+   *
+   *  Per card rather than derived, because it depends on the picture: cream
+   *  type belongs at whichever end of the photograph stays dark. */
+  titlePosition?: 'top' | 'bottom'
 }
 
 type Props = {
@@ -99,25 +106,69 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
             const photo = Boolean(item.image) && !item.cutout
             const isDark = photo ? true : item.fill ? false : (item.dark ?? i === 0)
             const tone = photo ? 'dark' : (item.fill ?? (isDark ? 'dark' : i % 2 === 0 ? 'warm' : 'surface'))
+            // Cream type belongs at whichever end of the picture stays dark,
+            // so the heading swaps ends rather than the copy moving to suit it.
+            const titleAtBottom = item.titlePosition === 'bottom'
+
+            const heading = (
+              // The marker is what a plain tile has instead of a picture — it
+              // gives the heading a right edge to sit against, so the filled
+              // tiles keep the same line as the photo ones.
+              // `mt-auto` is what actually pins it: on a tile with no copy the
+              // heading is the only child, and `justify-between` leaves a lone
+              // child at the top.
+              <div className={`relative flex items-start justify-between gap-4 ${titleAtBottom ? 'mt-auto' : ''}`}>
+                <h3
+                  className={`m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] ${
+                    photo ? 'text-cream' : isDark ? 'text-lime' : ''
+                  }`}
+                >
+                  {item.title}
+                </h3>
+                {!item.image && (
+                  <Asterisk
+                    aria-hidden="true"
+                    className="mt-1.5 h-4 w-4 flex-shrink-0 opacity-45"
+                    strokeWidth={1.5}
+                  />
+                )}
+              </div>
+            )
+
+            const copy = item.body ? (
+              <p
+                className={`bento-reveal relative m-0 text-sm leading-relaxed ${copyWidthClass[item.size]} ${
+                  // Over a photo, 75% opacity gives out wherever the picture
+                  // goes bright; cream at 90% holds against both.
+                  photo ? 'text-cream/90' : ''
+                }`}
+                style={
+                  {
+                    '--reveal-op': photo ? 1 : 0.75,
+                    '--reveal-from': titleAtBottom ? '-0.25rem' : '0.25rem',
+                  } as React.CSSProperties
+                }
+              >
+                {item.body}
+              </p>
+            ) : null
+
             return (
               <Card
                 key={item.title as unknown as string}
                 tone={tone}
                 elevation={isDark ? 'float' : 'soft'}
-                // Title top, copy bottom, on every tile. Now that they are all
-                // one row tall the split lands the same everywhere, so the row
-                // reads as one band of headings over one band of copy.
                 className={`bento-card group relative flex flex-col overflow-hidden opacity-0 ${
                   // A cut-out owns the bottom of its tile, so the copy sits
-                  // straight under the heading instead of being pushed into
-                  // the picture.
+                  // straight under the heading instead of being pushed into the
+                  // picture.
                   item.cutout ? 'justify-start gap-3' : 'justify-between gap-6'
                 } ${sizeClass[item.size]}`}
               >
                 {item.cutout && (
-                  // Lime knocked back with the deep green, lightening toward
-                  // the corner the object sits in. Mixed from the tokens
-                  // rather than pinned to a hex, so it follows the palette.
+                  // Lime knocked back with the deep green, lightening toward the
+                  // corner the object sits in. Mixed from the tokens rather than
+                  // pinned to a hex, so it follows the palette.
                   <div
                     aria-hidden="true"
                     className="absolute inset-0"
@@ -129,65 +180,36 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                 )}
 
                 {item.image && (
-                  <>
-                    <Image
-                      alt={item.cover ?? ''}
-                      // A cut-out is sized to sit in the lower half of the
-                      // tile, clear of the heading, and is not cropped — the
-                      // whole object is the point.
-                      className={`transition-transform duration-700 ease-atrium group-hover:scale-[1.04] ${
-                        // Clears the heading and the copy above it, then runs
-                        // to the bottom edge — the object is never cropped.
-                        // Flush to the bottom and right edges. The top padding
-                        // is the only inset — it holds the object clear of the
-                        // copy; anything on the sides would just shrink it,
-                        // since `contain` already letterboxes.
-                        item.cutout
-                          ? 'object-contain object-right-bottom pt-[8.5rem]'
-                          : 'object-cover'
-                      }`}
-                      fill
-                      // The first tile is the LCP element on the home page.
-                      priority={i === 0}
-                      sizes={imageSizes[item.size]}
-                      src={item.image}
-                    />
-                    {/* No scrim: the pictures carry the tiles at full strength.
-                        The copy is cream straight onto the photograph, so a
-                        tile only works if its picture stays dark where the
-                        heading and the copy sit. */}
-                  </>
+                  <Image
+                    alt={item.cover ?? ''}
+                    className={`transition-transform duration-700 ease-atrium group-hover:scale-[1.04] motion-reduce:transition-none ${
+                      // Clears the heading and the copy above it, then runs to
+                      // the bottom edge — the object is never cropped. The top
+                      // padding is the only inset; anything on the sides would
+                      // just shrink it, since `contain` already letterboxes.
+                      item.cutout ? 'object-contain object-right-bottom pt-[8.5rem]' : 'object-cover'
+                    }`}
+                    fill
+                    // The first tile is the LCP element on the home page.
+                    priority={i === 0}
+                    // No scrim: the pictures carry the tiles at full strength.
+                    // The copy is cream straight onto the photograph, so a tile
+                    // only works if its picture stays dark where the type sits.
+                    sizes={imageSizes[item.size]}
+                    src={item.image}
+                  />
                 )}
 
-                {/* The marker is what a plain tile has instead of a picture —
-                    it gives the heading a right edge to sit against, so the
-                    filled tiles keep the same top line as the photo ones. */}
-                <div className="relative flex items-start justify-between gap-4">
-                  <h3
-                    className={`m-0 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] ${
-                      photo ? 'text-cream' : isDark ? 'text-lime' : ''
-                    }`}
-                  >
-                    {item.title}
-                  </h3>
-                  {!item.image && (
-                    <Asterisk
-                      aria-hidden="true"
-                      className="mt-1.5 h-4 w-4 flex-shrink-0 opacity-45"
-                      strokeWidth={1.5}
-                    />
-                  )}
-                </div>
-                {item.body && (
-                  <p
-                    className={`relative m-0 text-sm leading-relaxed ${copyWidthClass[item.size]} ${
-                      // Over a photo, 75% opacity gives out wherever the picture
-                      // goes bright; cream at 90% holds against both.
-                      photo ? 'text-cream/90' : 'opacity-75'
-                    }`}
-                  >
-                    {item.body}
-                  </p>
+                {titleAtBottom ? (
+                  <>
+                    {copy}
+                    {heading}
+                  </>
+                ) : (
+                  <>
+                    {heading}
+                    {copy}
+                  </>
                 )}
               </Card>
             )

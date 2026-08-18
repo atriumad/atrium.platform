@@ -1,4 +1,4 @@
-import { Eyebrow, NumberReel } from '@atrium/ui'
+import { Eyebrow, NumberReel, PillTags } from '@atrium/ui'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import CTABanner from '@/components/sections/CTABanner'
@@ -24,41 +24,41 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 }
 
-function ServiceList({ services }: { services: string[] }) {
-  return (
-    <ul className="m-0 flex list-none flex-wrap justify-center gap-2 p-0" aria-label="Services">
-      {services.map((service) => (
-        <li
-          className="rounded-full border border-line px-3.5 py-1.5 text-[0.8125rem] text-body leading-none"
-          key={service}
-        >
-          {service}
-        </li>
-      ))}
-    </ul>
-  )
-}
-
-/** Type only, then the work itself. The cover photograph is gone: the reels
- *  are the first thing a case study should show, and a still of the same
- *  footage above them was saying it twice. */
+/** Colour, then type, then the work itself. The cover photograph is gone: the
+ *  reels are the first thing a case study should show, and a still of the same
+ *  footage above them was saying it twice. What replaces it is light rather
+ *  than an image — a wash of the brand palette hung off the top edge and gone
+ *  by the time the headline starts, so cream is still the ground the type
+ *  sits on. */
 export function CaseHero({ study }: { study: CaseStudy }) {
   return (
-    <section className="overflow-hidden bg-cream pt-32 pb-24 md:pt-40 md:pb-36">
+    <section className="relative isolate bg-cream pt-32 pb-24 md:pt-40 md:pb-36">
       <div className="px-[var(--gutter)]">
-        <div className="mx-auto max-w-3xl text-center">
-          <Eyebrow className="mb-6">{study.client}</Eyebrow>
-          <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
-            {study.heroHeadline ?? study.client}
-          </h1>
-          <div className="mt-8">
-            <ServiceList services={study.serviceTags} />
+        {/* The glint layer lives in here, not in the section: it centres on
+            whatever box it is positioned against, and that box has to be the
+            copy column for the light to sit behind the type. It is deliberately
+            larger than the column and spills past the section — no
+            `overflow-hidden` here, or the cluster reads as a clipped
+            rectangle. */}
+        <div className="relative mx-auto max-w-3xl text-center">
+          <div aria-hidden="true" className="atr-hero-glints" />
+
+          {/* Positioned so it paints over the layer above: both are positioned,
+              so DOM order decides, and no negative z-index is needed. */}
+          <div className="relative">
+            <Eyebrow className="mb-6">{study.client}</Eyebrow>
+            <h1 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+              {study.heroHeadline ?? study.client}
+            </h1>
+            <div className="mt-8">
+              <PillTags items={study.serviceTags} label="Services" />
+            </div>
           </div>
         </div>
       </div>
 
       {study.videoIds?.length ? (
-        <div className="mt-16 md:mt-20">
+        <div className="relative mt-16 md:mt-20">
           <VideoMarquee publicIds={study.videoIds} />
         </div>
       ) : null}

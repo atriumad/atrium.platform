@@ -101,6 +101,10 @@ export type MonitorRun = {
   /** ISO timestamp */
   at: string
   error?: string
+  /** How many requests it took to reach this verdict. A `down` run with more
+   *  than one attempt failed every try, which is what separates a real outage
+   *  from a single dropped packet. */
+  attempts?: number
 }
 
 export type Incident = {

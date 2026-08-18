@@ -1,6 +1,6 @@
 import type { SystemDefinition } from "@/lib/health/types"
 
-const SITE = process.env.NEXT_PUBLIC_CLIENT_CHWF_URL ?? ""
+const SITE = (process.env.NEXT_PUBLIC_CLIENT_CHWF_URL ?? "").replace(/\/$/, "")
 
 /**
  * The worked example for client systems. Every other client follows this shape:

@@ -27,12 +27,30 @@ step is skipped — a wrong social profile in a sales report is worse than no so
   ],
   monitors: [
     {
+      id: "scrapecreators-liveness",
+      label: "ScrapeCreators reachable",
+      meaning: "The vendor is not answering — grader reports lose their social section.",
+      url: "https://api.scrapecreators.com/v1/instagram/profile",
+      // Unauthenticated on purpose. The rejection *is* the signal: an endpoint
+      // that refuses an anonymous caller is an endpoint that is answering. A
+      // real outage looks like a 5xx or a timeout, neither of which is in the
+      // expected list. Costs nothing and consumes no quota, which is what lets
+      // this run every sweep against an API that bills per call.
+      //
+      // A real endpoint rather than the bare host: the host answers even when
+      // the API behind it does not, so probing `/` would go green through an
+      // outage. Without a key this returns 401 and spends no credits.
+      expectStatus: [401, 403],
+      degradedAboveMs: 3000,
+    },
+    {
       id: "scrapecreators-api",
-      label: "ScrapeCreators API",
+      label: "ScrapeCreators authenticated call",
       meaning: "Grader reports lose their social section — reports still complete.",
       url: "https://api.scrapecreators.com",
       enabled: false,
-      disabledReason: "Requests consume paid credits. Balance is watched in the vendor dashboard.",
+      disabledReason:
+        "An authenticated request consumes paid credits, so it stays off. The liveness check above covers the outage case for free; credit balance is watched in the vendor dashboard.",
     },
   ],
   tags: ["social", "grader", "optional"],

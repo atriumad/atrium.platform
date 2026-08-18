@@ -292,7 +292,7 @@ export const caseStudies: CaseStudy[] = [
     slug: 'old-shawnee-pizza',
     highlights: ['$363K+ Retention Revenue', '2.69M+ Social Impressions'],
     client: 'Old Shawnee Pizza',
-    coverImageId: 'v1784312607/OSPZ_FEB17_Slide_1_d9udr9',
+    coverImageId: 'https://cdn.atriumad.com/clients/OSPZ/photos/DSC03168.jpg',
     coverLogo: '/logos/clients/ospz.png',
     category: 'Pizza Restaurant · Legacy Brand Revitalization',
     serviceTags: [
@@ -433,7 +433,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'jerusalem-cafe',
     client: 'Jerusalem Cafe',
-    coverImageId: 'v1784558603/JECA__APR26_Creative_Graphic_2_oemnjw',
+    coverImageId: 'https://cdn.atriumad.com/clients/JECA/photos/JECA_MAR26%20Photo%20creative%20compilation.jpg',
     coverLogo: '/logos/clients/jeca.png',
     location: 'Kansas City, Missouri',
     category: 'Multi-Location Restaurant Group',
@@ -564,15 +564,59 @@ for (const study of caseStudies) {
   if (!study.coverImageId && assets.images[0]) study.coverImageId = assets.images[0]
 }
 
-const HERO_GALLERY_SLUGS = ['taco-naco', 'aahaa', 'hotel-kc', 'grand-coffee', 'jerusalem-cafe', 'taha']
+/** Which case studies feed the homepage hero. Every one of these delivers from
+ *  our own CDN. `hotel-kc` and `grand-coffee` used to be here and were the
+ *  seven broken tiles in the hero: their assets are still Cloudinary public IDs
+ *  and that account is gone. They can come back the day their media is on the
+ *  CDN. */
+const HERO_GALLERY_SLUGS = [
+  'taco-naco',
+  'aahaa',
+  'jerusalem-cafe',
+  'taha',
+  'don-chuys',
+  'old-shawnee-pizza',
+]
 
-/** Curated cross-case-study sample for the homepage hero's perspective
- *  gallery panel — real photography, not stock. Draws from `galleryIds`
- *  already populated by the sync loop above, so it degrades gracefully
- *  (fewer images, never throws) if a slug's assets haven't synced yet. */
-export const heroGalleryIds: string[] = HERO_GALLERY_SLUGS.flatMap(
-  (slug) => caseStudies.find((c) => c.slug === slug)?.galleryIds?.slice(0, 4) ?? [],
-)
+export type HeroTile = { kind: 'image' | 'video'; src: string }
+
+/** A finished URL delivers; a bare Cloudinary public ID does not, because that
+ *  account is disabled. The hero is the first thing on the site, so it filters
+ *  rather than trusting the list — one unsynced slug should thin the gallery,
+ *  never put a broken tile above the fold. */
+const isDeliverable = (src: string) => /^https?:\/\//i.test(src)
+
+function take(pick: (study: CaseStudy) => string[] | undefined, perStudy: number): string[] {
+  return HERO_GALLERY_SLUGS.flatMap((slug) => {
+    const study = caseStudies.find((c) => c.slug === slug)
+    return (study ? (pick(study) ?? []) : []).filter(isDeliverable).slice(0, perStudy)
+  })
+}
+
+/** Cross-case-study sample for the hero's perspective gallery — real client
+ *  work, not stock. Photography carries it and a reel lands every fourth tile.
+ *
+ *  Four, not three: the gallery splits tiles round-robin across three columns,
+ *  so a period of three would stack every reel into one column. Four rotates
+ *  them through all three. */
+const REEL_EVERY = 4
+
+export const heroGalleryTiles: HeroTile[] = (() => {
+  const photos = take((study) => study.galleryIds, 3)
+  const reels = take((study) => study.videoIds, 1)
+  const tiles: HeroTile[] = []
+  let nextReel = 0
+
+  for (const src of photos) {
+    if (tiles.length > 0 && tiles.length % REEL_EVERY === REEL_EVERY - 1 && nextReel < reels.length) {
+      const reel = reels[nextReel++]
+      if (reel) tiles.push({ kind: 'video', src: reel })
+    }
+    tiles.push({ kind: 'image', src })
+  }
+
+  return tiles
+})()
 
 const caseSummaries: Record<string, string> = {
   'taco-naco': 'A unified content and growth system built to make three locations feel like one unmistakable brand.',

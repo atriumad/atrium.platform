@@ -1,14 +1,13 @@
-import { Eyebrow } from '@atrium/ui'
+import { Button, Eyebrow } from '@atrium/ui'
 import type { ReactNode } from 'react'
-import Button from '@/components/ui/Button'
-import TransitionCTA from '@/components/ui/TransitionCTA'
+import TransitionButton from '@/components/ui/TransitionButton'
 import { CAL_CONFIG } from '@/lib/cal'
 
 type HeroAction = {
   label: string
   /** Real destination — also the fallback if the Cal.com embed script fails to load. */
   href: string
-  variant?: 'primary' | 'ghost' | 'ghostLight' | 'mint' | 'amber'
+  variant?: 'primary' | 'secondary' | 'accent' | 'mint' | 'outline' | 'ghost' | 'light' | 'outlineLight'
   external?: boolean
   /** When set, the button opens this Cal.com event as a popup instead of navigating. */
   calLink?: string
@@ -53,19 +52,19 @@ export default function PageHero({ eyebrow, title, body, actions, stats }: PageH
                     data-cal-link={action.calLink}
                     href={action.href}
                     key={action.href}
-                    variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
+                    variant={action.variant ?? (index === 0 ? 'mint' : 'outlineLight')}
                   >
                     {action.label}
                   </Button>
                 ) : (
-                  <TransitionCTA
+                  <TransitionButton
                     href={action.href}
                     key={action.href}
-                    variant={action.variant ?? (index === 0 ? 'mint' : 'ghostLight')}
+                    variant={action.variant ?? (index === 0 ? 'mint' : 'outlineLight')}
                     {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   >
                     {action.label}
-                  </TransitionCTA>
+                  </TransitionButton>
                 ),
               )}
             </div>

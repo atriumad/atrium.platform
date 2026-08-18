@@ -1,6 +1,6 @@
 import type { SystemDefinition } from "@/lib/health/types"
 
-const PROD = process.env.NEXT_PUBLIC_GRADER_URL ?? ""
+const PROD = (process.env.NEXT_PUBLIC_GRADER_URL ?? "").replace(/\/$/, "")
 
 export const atriumGrader: SystemDefinition = {
   id: "atrium-grader",
