@@ -33,17 +33,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export function CaseHero({ study }: { study: CaseStudy }) {
   return (
     <section className="relative isolate bg-cream pt-32 pb-24 md:pt-40 md:pb-36">
-      <div className="px-[var(--gutter)]">
-        {/* The glint layer lives in here, not in the section: it centres on
-            whatever box it is positioned against, and that box has to be the
-            copy column for the light to sit behind the type. It is deliberately
-            larger than the column and spills past the section — no
-            `overflow-hidden` here, or the cluster reads as a clipped
-            rectangle. */}
-        <div className="relative mx-auto max-w-3xl text-center">
-          <div aria-hidden="true" className="atr-hero-glints" />
+      {/* The light hangs off the top edge of the section, so it is a child of
+          the section rather than of the copy column. Its wrapper is what cuts
+          the top — `overflow-hidden` on the section itself would also clip the
+          reel marquee below, which has to keep running past both edges. */}
+      <div aria-hidden="true" className="atr-hero-glint-clip">
+        <div className="atr-hero-glints" />
+      </div>
 
-          {/* Positioned so it paints over the layer above: both are positioned,
+      <div className="px-[var(--gutter)]">
+        <div className="relative mx-auto max-w-3xl text-center">
+          {/* Positioned so it paints over the glint layer: both are positioned,
               so DOM order decides, and no negative z-index is needed. */}
           <div className="relative">
             <Eyebrow className="mb-6">{study.client}</Eyebrow>

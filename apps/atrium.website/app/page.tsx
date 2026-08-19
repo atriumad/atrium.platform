@@ -8,11 +8,12 @@ import HeroSection from '@/components/sections/HeroSection'
 import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import SplitSection from '@/components/sections/SplitSection'
 import StatsStrip, { type Stat } from '@/components/sections/StatsStrip'
-import TestimonialBento, { type BentoCard } from '@/components/sections/TestimonialBento'
+import TestimonialMarquee from '@/components/sections/TestimonialMarquee'
 import WorkGrid, { type Project } from '@/components/sections/WorkGrid'
 import LogoTicker from '@/components/ui/LogoTicker'
 import { clients } from '@/lib/clients'
 import { CTA } from '@/lib/cta'
+import { railTestimonials } from '@/lib/testimonials'
 import { type CaseStudy, caseStudies } from '@/lib/work'
 
 // Shot for the home bento and staged on our own CDN. Absolute URLs: next/image
@@ -43,7 +44,7 @@ const bentoItems: BentoItem[] = [
 const selectedWorkDetails = [
   { slug: 'taco-naco', result: '3 locations. One brand. Full system activation.' },
   { slug: 'taha', result: 'Single campaign. Measurable revenue lift.' },
-  { slug: 'aahaa', result: 'Visual identity that found its voice.' },
+  { slug: 'don-chuys', result: '7,200+ followers across social.' },
   { slug: 'hotel-kc', result: 'Two-part campaign storytelling.' },
   { slug: 'chick-in-waffle', result: '$74K+ in email-attributed sales.' },
 ] as const
@@ -61,13 +62,6 @@ const processSteps: ProcessStep[] = [
 const processStats: ProcessStat[] = [
   { number: '15+', label: 'Active hospitality brand partnerships' },
   { number: '28', label: 'Day engine cycle — shoot to report' },
-]
-
-const testimonialCards: BentoCard[] = [
-  { type: 'stat', stat: '74%', statLabel: 'of diners use social media to decide where to eat. Your feed is their first impression.' },
-  { type: 'testimonial', quote: 'Working with Atrium across our 3 Taco Naco locations changed how we think about marketing. One system, one voice, real results.', author: 'Brian Goldman Ruiz', role: 'Owner', company: 'Taco Naco KC' },
-  { type: 'testimonial', quote: 'The brunch campaign they built moved real revenue. Not followers — people sitting down on Sunday mornings.', author: '', role: 'Owner', company: "T'ÄHÄ Mexican Kitchen" },
-  { type: 'stat', stat: '88%', statLabel: 'of diners trust online reviews as much as personal recommendations. We manage every one of yours.' },
 ]
 
 const homeStats: Stat[] = [
@@ -95,7 +89,12 @@ export default function HomePage() {
       <WorkGrid projects={selectedWork} />
       <ComparisonMatrix />
       <StatsStrip stats={homeStats} />
-      <TestimonialBento items={testimonialCards} eyebrow="Evidence from the operators" />
+      <TestimonialMarquee
+        body="Owners, chefs and operators across Kansas City — in their words, not ours."
+        eyebrow="Evidence from the operators"
+        headline={<>We could tell you it works. <em className="font-serif italic">They already did.</em></>}
+        items={railTestimonials}
+      />
       <DarkProcess
         eyebrow="How We Work"
         headline={<>A monthly engine. <em className="font-serif italic">Not random posts.</em></>}
