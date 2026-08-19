@@ -16,17 +16,18 @@ import { parseHeadline } from './utils'
 export default function ServiceEditorialHero({ svc }: { svc: Service }) {
   return (
     <section className="relative isolate bg-cream pt-32 pb-20 md:pt-40 md:pb-28">
+      {/* The light hangs off the top edge of the section, so it is a child of
+          the section rather than of the copy column. Its wrapper is what cuts
+          the top; the layer itself bleeds past it. */}
+      <div aria-hidden="true" className="atr-hero-glint-clip">
+        <div className="atr-hero-glints" />
+      </div>
+
       {/* Gutter and container nest rather than share an element, so the header
           starts at the same left edge as every section below it. */}
       <div className="px-[var(--gutter)]">
         <div className="relative mx-auto max-w-3xl text-center">
-          {/* The glint layer centres on the box it is positioned against, so it
-              belongs in the copy column rather than in the section. It is larger
-              than the column and spills past the section — no `overflow-hidden`
-              here, or the cluster reads as a clipped rectangle. */}
-          <div aria-hidden="true" className="atr-hero-glints" />
-
-          {/* Positioned so it paints over the layer above: both are positioned,
+          {/* Positioned so it paints over the glint layer: both are positioned,
               so DOM order decides, and no negative z-index is needed. */}
           <div className="relative flex flex-col items-center">
             <CategoryBadge category={svc.category} />

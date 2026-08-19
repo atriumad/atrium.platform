@@ -221,6 +221,50 @@
 
 /* service-detail CSS removed — components now use Tailwind + design tokens */
 
+/* ─── Testimonial rail ─────────────────────────────────────────────────────
+   Same loop as the logo strip: two copies of the set, translated by exactly
+   half the track, so the second copy arrives where the first started and the
+   seam never shows. Hover pauses it — a quote that keeps sliding while it is
+   being read is a quote nobody finishes. */
+@keyframes testimonial-marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* The card floor lives here rather than in a utility class: this theme's
+   spacing scale does not generate the tall `h-*`/`min-h-*` steps, and a height
+   that produces no rule collapses the card silently instead of erroring.
+
+   A floor rather than a fixed height — the row is `items-stretch`, so the
+   longest quote sets the height and the short ones grow to match it. The floor
+   only stops a one-line quote from making a card that reads as a stub. */
+.testimonial-card {
+  min-height: 21rem;
+}
+
+.testimonial-marquee-track {
+  animation: testimonial-marquee-scroll 64s linear infinite;
+  will-change: transform;
+}
+
+.testimonial-marquee-window:hover .testimonial-marquee-track,
+.testimonial-marquee-window:focus-within .testimonial-marquee-track {
+  animation-play-state: paused;
+}
+
+/* The cards are tall, so the fade is narrower than the logo strip's: a wide
+   ramp would wash out a whole quote before it reached the edge. */
+.testimonial-marquee-window {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 5%, #000 95%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
 /* ─── Reels marquee ────────────────────────────────────────────────────────── */
 @keyframes marquee-x {
   from {
@@ -328,17 +372,21 @@
 }
 
 /* ─── Hero glints ──────────────────────────────────────────────────────────
-   The light source behind a hero headline, shared by the case studies and the
+   The light source at the top of a hero, shared by the case studies and the
    service pages.
 
-   It is centred on the text block by construction, not by tuned numbers: the
-   layer is absolutely positioned against the copy column and pulled back to
-   its own centre, so it tracks the type on every page and every breakpoint
-   without anyone having to re-measure. Sizes are relative to that column too,
-   which is why nothing here is expressed as an offset from the section edge —
-   a case study hero runs past 1200px because it carries the reels while a
-   service header is barely 500px, and any measurement from the top lands in a
-   different place on each.
+   It hangs off the top edge of the page rather than sitting behind the type:
+   the layer is centred horizontally on the section and pulled up past its own
+   top, so the mass bleeds off the edge and the visible part is the lower arc
+   of the cluster. That is why the width is an absolute measure against the
+   viewport instead of a percentage of the copy column — the light belongs to
+   the page here, not to the text block, and a case study hero and a service
+   header should open with the same wash even though their columns differ in
+   height by several hundred pixels.
+
+   `.atr-hero-glint-clip` is what cuts the top. It is a separate wrapper rather
+   than `overflow-hidden` on the section because the case study hero carries
+   the reel marquee, which has to keep overflowing sideways.
 
    Two colours only, both from the brand's green family: lime carries the light
    and the deep green the body. Depth comes from the stacking — the wide green
@@ -347,66 +395,138 @@
    sits at real strength; pale enough and it goes grey over cream rather than
    green, which is the failure mode this palette has.
 
-   The points sum to dead centre horizontally (50, 62, 38, 50, 40, 60), so the
-   cluster reads as one mass behind the text rather than drifting to a side.
-
-   The layer is bigger than the copy column and is meant to spill past the
-   section: the heroes carry no `overflow-hidden` for that reason, and the
-   escape is safe because globals.css already hides the body's horizontal
-   overflow. Clipping it is what makes the cluster read as a rectangle.
+   Each family sums to dead centre horizontally — the cores at 50/63/37 and
+   the bodies at 50/39/61 — so the cluster reads as one mass rather than
+   drifting to a side. The vertical offset is tuned so the brightest core lands
+   just under the cut instead of above it: pull it much further up and the
+   visible remainder is only the dim outer falloff.
 
    The mask is radial and closest-side, so the layer fades out on every edge
-   instead of being cut off on one. Ordering is done by the DOM rather than by
-   a negative z-index: the layer comes first and the copy sits in a positioned
-   wrapper after it, which is sturdier than a negative index inside a section
-   that isolates and a child that blends. Same grain as the dark hero's
-   bloom, and for the same reason: transitions this wide and this soft band
-   visibly on 8-bit displays. */
+   instead of being cut off on one; the clip is what gives the top its hard
+   line. Ordering is done by the DOM rather than by a negative z-index: the
+   layer comes first and the copy sits in a positioned wrapper after it, which
+   is sturdier than a negative index inside a section that isolates and a child
+   that blends. Same grain as the dark hero's bloom, and for the same reason:
+   transitions this wide and this soft band visibly on 8-bit displays. */
+.atr-hero-glint-clip {
+  position: absolute;
+  inset: 0 0 auto;
+  height: clamp(22rem, 38vw, 34rem);
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .atr-hero-glints {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
-  width: 156%;
-  height: 176%;
-  translate: -50% -50%;
+  width: min(940px, 70vw);
+  aspect-ratio: 1.35;
+  translate: -50% -31%;
   pointer-events: none;
+  /* Weight is set here rather than by editing forty colour stops: the ramps
+     above are tuned relative to each other, and a single opacity scales the
+     whole cluster without disturbing them. It is what keeps the wash off the
+     eyebrow — at full strength the green reaches the type and takes contrast
+     out of it. */
+  opacity: 0.74;
   background-image:
+    /* The lime cores carry the light. Each one runs six stops on an eased
+       curve rather than the two or three a radial needs to exist — a short
+       stop list puts a visible rim where the last colour meets `transparent`,
+       and six of those rims is what makes a cluster read as separate discs
+       instead of one body of light. */
     radial-gradient(
-      22% 20% at 50% 38%,
-      color-mix(in srgb, var(--color-lime) 92%, white) 0%,
-      color-mix(in srgb, var(--color-lime) 62%, transparent) 38%,
-      transparent 72%
+      38% 34% at 50% 32%,
+      color-mix(in srgb, var(--color-lime) 88%, white) 0%,
+      color-mix(in srgb, var(--color-lime) 70%, transparent) 16%,
+      color-mix(in srgb, var(--color-lime) 50%, transparent) 32%,
+      color-mix(in srgb, var(--color-lime) 31%, transparent) 48%,
+      color-mix(in srgb, var(--color-lime) 16%, transparent) 64%,
+      color-mix(in srgb, var(--color-lime) 6%, transparent) 80%,
+      transparent 100%
     ),
     radial-gradient(
-      18% 17% at 62% 52%,
-      color-mix(in srgb, var(--color-lime) 74%, transparent) 0%,
+      30% 27% at 63% 45%,
+      color-mix(in srgb, var(--color-lime) 60%, transparent) 0%,
+      color-mix(in srgb, var(--color-lime) 43%, transparent) 22%,
       color-mix(in srgb, var(--color-lime) 26%, transparent) 42%,
-      transparent 74%
+      color-mix(in srgb, var(--color-lime) 12%, transparent) 62%,
+      color-mix(in srgb, var(--color-lime) 4%, transparent) 80%,
+      transparent 100%
     ),
     radial-gradient(
-      16% 15% at 38% 55%,
-      color-mix(in srgb, var(--color-lime) 58%, transparent) 0%,
-      transparent 72%
+      28% 25% at 37% 47%,
+      color-mix(in srgb, var(--color-lime) 48%, transparent) 0%,
+      color-mix(in srgb, var(--color-lime) 33%, transparent) 24%,
+      color-mix(in srgb, var(--color-lime) 19%, transparent) 44%,
+      color-mix(in srgb, var(--color-lime) 8%, transparent) 64%,
+      transparent 100%
+    ),
+    /* The green bodies sit under the cores and overlap each other on purpose:
+       the lobes are wide enough that no gap of bare cream opens between them,
+       which is the other half of reading as one mass. */
+    radial-gradient(
+      52% 44% at 50% 28%,
+      color-mix(in srgb, var(--color-green) 56%, transparent) 0%,
+      color-mix(in srgb, var(--color-green) 43%, transparent) 20%,
+      color-mix(in srgb, var(--color-green) 29%, transparent) 40%,
+      color-mix(in srgb, var(--color-green) 16%, transparent) 60%,
+      color-mix(in srgb, var(--color-green) 6%, transparent) 78%,
+      transparent 100%
     ),
     radial-gradient(
-      31% 27% at 50% 30%,
-      color-mix(in srgb, var(--color-green) 62%, transparent) 0%,
-      color-mix(in srgb, var(--color-green) 22%, transparent) 44%,
-      transparent 76%
+      46% 40% at 39% 42%,
+      color-mix(in srgb, var(--color-green) 36%, transparent) 0%,
+      color-mix(in srgb, var(--color-green) 26%, transparent) 24%,
+      color-mix(in srgb, var(--color-green) 15%, transparent) 46%,
+      color-mix(in srgb, var(--color-green) 6%, transparent) 68%,
+      transparent 100%
     ),
     radial-gradient(
-      28% 25% at 40% 48%,
-      color-mix(in srgb, var(--color-green) 40%, transparent) 0%,
-      color-mix(in srgb, var(--color-green) 14%, transparent) 44%,
-      transparent 76%
+      50% 42% at 61% 40%,
+      color-mix(in srgb, var(--color-green) 31%, transparent) 0%,
+      color-mix(in srgb, var(--color-green) 21%, transparent) 26%,
+      color-mix(in srgb, var(--color-green) 12%, transparent) 48%,
+      color-mix(in srgb, var(--color-green) 4%, transparent) 70%,
+      transparent 100%
     ),
+    /* One wash wider than the layer itself, painted last so it sits under
+       everything. It has no centre a viewer can find, so it fills whatever is
+       left between the lobes and gives the whole cluster a single falloff. */
     radial-gradient(
-      36% 29% at 60% 44%,
-      color-mix(in srgb, var(--color-green) 26%, transparent) 0%,
-      transparent 74%
+      82% 68% at 50% 34%,
+      color-mix(in srgb, var(--color-green) 19%, transparent) 0%,
+      color-mix(in srgb, var(--color-green) 13%, transparent) 30%,
+      color-mix(in srgb, var(--color-green) 7%, transparent) 56%,
+      color-mix(in srgb, var(--color-green) 3%, transparent) 78%,
+      transparent 100%
     );
-  -webkit-mask-image: radial-gradient(closest-side, #000 46%, rgba(0, 0, 0, 0.6) 72%, transparent 100%);
-  mask-image: radial-gradient(closest-side, #000 46%, rgba(0, 0, 0, 0.6) 72%, transparent 100%);
+  /* The mask ramps across eight stops for the same reason the colours do: the
+     old three-stop version stepped from solid to 60% in one move and left a
+     ring you could point at. */
+  -webkit-mask-image: radial-gradient(
+    closest-side,
+    #000 0%,
+    rgba(0, 0, 0, 0.98) 30%,
+    rgba(0, 0, 0, 0.88) 48%,
+    rgba(0, 0, 0, 0.68) 62%,
+    rgba(0, 0, 0, 0.44) 74%,
+    rgba(0, 0, 0, 0.22) 85%,
+    rgba(0, 0, 0, 0.07) 94%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    closest-side,
+    #000 0%,
+    rgba(0, 0, 0, 0.98) 30%,
+    rgba(0, 0, 0, 0.88) 48%,
+    rgba(0, 0, 0, 0.68) 62%,
+    rgba(0, 0, 0, 0.44) 74%,
+    rgba(0, 0, 0, 0.22) 85%,
+    rgba(0, 0, 0, 0.07) 94%,
+    transparent 100%
+  );
 }
 
 .atr-hero-glints::after {

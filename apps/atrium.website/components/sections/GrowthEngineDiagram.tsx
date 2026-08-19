@@ -100,6 +100,15 @@ export default function GrowthEngineDiagram() {
                     src={cover}
                   />
                 )}
+
+                {/* Hover scrim, same as the home bento. It carries no z-index
+                    so it stays under the numeral and the copy panel, both of
+                    which sit at z-10. */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-charcoal/40 opacity-0 transition-opacity duration-500 ease-atrium group-focus-within:opacity-100 group-hover:opacity-100 motion-reduce:transition-none"
+                />
+
                 <span className="absolute top-5 left-5 z-10 font-serif text-[1.1rem] text-cream/70 italic">
                   {stage.n}
                 </span>

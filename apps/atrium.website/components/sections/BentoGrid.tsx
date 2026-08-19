@@ -200,6 +200,16 @@ export default function BentoGrid({ items, eyebrow, headline }: Props) {
                   />
                 )}
 
+                {/* Hover scrim. It paints over the picture and the cut-out fill
+                    but under the copy, which is positioned and comes later in
+                    the DOM — so neither side needs a z-index. Charcoal rather
+                    than black: a neutral black turns the lime tiles grey, while
+                    the brand's own dark keeps them green. */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-charcoal/40 opacity-0 transition-opacity duration-500 ease-atrium group-focus-within:opacity-100 group-hover:opacity-100 motion-reduce:transition-none"
+                />
+
                 {titleAtBottom ? (
                   <>
                     {copy}
