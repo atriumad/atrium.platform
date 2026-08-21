@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import CTABanner from '@/components/sections/CTABanner'
 import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
 import ServiceTimeline from '@/components/sections/ServiceTimeline'
-import RelatedCase from '@/components/services/RelatedCase'
 import ServiceBento from '@/components/services/ServiceBento'
 import ServiceDeliverables from '@/components/services/ServiceDeliverables'
 import ServiceEditorialHero from '@/components/services/ServiceEditorialHero'
@@ -55,8 +54,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {svc.timeline && <ServiceTimeline steps={svc.timeline} />}
 
-      <RelatedCase serviceSlug={svc.slug} />
-
       <ServiceEngagementModel svc={svc} />
 
       <PurchaseFAQ
@@ -72,7 +69,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         cta={CTA.primary.label}
         ctaHref={CTA.primary.href}
         ctaExternal={CTA.primary.external}
-        coverAlt="Team at table in restaurant — natural, warm, working together"
       />
     </>
   )

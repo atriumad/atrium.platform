@@ -203,7 +203,6 @@ export default function PricingPage() {
         cta={CTA.primary.label}
         ctaHref={CTA.primary.href}
         ctaExternal={CTA.primary.external}
-        coverAlt="Engagement model notes for a hospitality marketing plan"
       />
     </>
   )

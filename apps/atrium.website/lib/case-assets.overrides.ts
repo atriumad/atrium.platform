@@ -10,6 +10,14 @@
 import type { CaseAssets } from './cloudinary-assets.generated'
 
 export const caseAssetOverrides: Record<string, CaseAssets> = {
+  // Film work, not a social calendar: what these two delivered is a shoot, and
+  // the films are listed on the case study itself under `films`. The empty
+  // lists are deliberate — both slugs still carry Cloudinary IDs from the
+  // disabled account, and without this the gallery and the reel rail would
+  // render them.
+  'hotel-kc': { images: [], videos: [] },
+  'town-company': { images: [], videos: [] },
+
   'aahaa': {
     images: [
       'https://cdn.atriumad.com/clients/AAHA/photos/AAHA_%20APR13%20Slide%201.jpg',
@@ -43,16 +51,16 @@ export const caseAssetOverrides: Record<string, CaseAssets> = {
       'https://cdn.atriumad.com/clients/AAHA/photos/AAHA_%20MAY30%20Regular%20Buffet.jpg',
     ],
     videos: [
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL12%20Compilation%202%20Standing%C2%A0Up.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL13%20New%20chef%20specialties%20general%C2%A0presentation.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL15%20New%20chef%20specialty%20Zafrani%20Chicken%C2%A0Tikka.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL16%20New%20chef%20specialty%20lamb%C2%A0burger.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUN25%20BTS-Process-result.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUN26%20Banquet%20General%20Compilation.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUN30%20Lunch%20buffet%20compilation%20people%20and%20food%C2%A0focus.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20MAY16%20Compilation%201-Dinner%20on%20the%C2%A0Patio.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20MAY18%20Compialion%20Food%28Cooking%C2%A0and%C2%A0Plating%C2%A0%29.mp4',
-      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_JUN04%20Compialion%20Food%28Serving%C2%A0and%C2%A0lifestyle%29.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL12%20Compilation%202%20Standing%C2%A0Up%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL13%20New%20chef%20specialties%20general%C2%A0presentation%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL15%20New%20chef%20specialty%20Zafrani%20Chicken%C2%A0Tikka%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL16%20New%20chef%20specialty%20lamb%C2%A0burger%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUN25%20BTS-Process-result%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUN26%20Banquet%20General%20Compilation%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUN30%20Lunch%20buffet%20compilation%20people%20and%20food%C2%A0focus%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20MAY16%20Compilation%201-Dinner%20on%20the%C2%A0Patio%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20MAY18%20Compialion%20Food(Cooking%C2%A0and%C2%A0Plating%C2%A0)%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/AAHA/reels/AAHA_JUN04%20Compialion%20Food(Serving%C2%A0and%C2%A0lifestyle)%20-%2001.mp4',
     ],
   },
   // Filenames carry non-breaking spaces (%C2%A0) exactly as they sit on the
@@ -93,25 +101,25 @@ export const caseAssetOverrides: Record<string, CaseAssets> = {
     // Three clips ship twice on the CDN, once with a " (1)" suffix. Only one
     // copy of each is listed — the marquee would otherwise play it back to back.
     videos: [
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20APR24%20GARLIC%20PARM%20CHICK%20IN%20BUN-%20PREPARATION.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG04%20My%20inner%20voice%C2%A0trend.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG05%20POV%20ASMR%201.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG06%20POV%20ASMR%202.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG09%20When%20im%20hungry%C2%A0Skit.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG14%20Chicken%20Wing%20Day%20(Jul%C2%A029).mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20SEP17%20Skit-%20social%20media%C2%A0girl.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20AUG07%20Dumb%20and%20dumber%20skit.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20AUG13%20Mac%20%26%20Cheese%20Day%20(Jul%C2%A014).mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL12%20POV%20Preparation.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL15%20THE%20CLASSIC%20COMBO%20PREP%C2%A0Skit.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL17%20Dipping%20a%20lot%20of%C2%A0syrup.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL19%20The%20Favorite%20Costumer%C2%A0Skit.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL22%20FOOD%20DROP%20ON%20THE%20FLOOR%20-%20CHICK-IN%C2%A0QUESO.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL23%20WITH%20THE%20BOSS%C2%A0Skit.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN06%20Giveaway%20winner_1.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN14%20Dennis%20Favorite%20Thing%20on%20the%20menu%C2%A0-.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN18%20THE%20TENDER%20COMBO%C2%A0PREP.mp4',
-      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN32%20Giveaway-.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20APR24%20GARLIC%20PARM%20CHICK%20IN%20BUN-%20PREPARATION%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG04%20My%20inner%20voice%C2%A0trend%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG05%20POV%20ASMR%201%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG06%20POV%20ASMR%202%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG09%20When%20im%20hungry%C2%A0Skit%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20AUG14%20Chicken%20Wing%20Day%20(Jul%C2%A029)%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/%40CHWF_%20SEP17%20Skit-%20social%20media%C2%A0girl%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20AUG07%20Dumb%20and%20dumber%20skit%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20AUG13%20Mac%20%26%20Cheese%20Day%20(Jul%C2%A014)%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL12%20POV%20Preparation%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL15%20THE%20CLASSIC%20COMBO%20PREP%C2%A0Skit%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL17%20Dipping%20a%20lot%20of%C2%A0syrup%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL19%20The%20Favorite%20Costumer%C2%A0Skit%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL22%20FOOD%20DROP%20ON%20THE%20FLOOR%20-%20CHICK-IN%C2%A0QUESO%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL23%20WITH%20THE%20BOSS%C2%A0Skit%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN06%20Giveaway%20winner_1%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN14%20Dennis%20Favorite%20Thing%20on%20the%20menu%C2%A0-%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN18%20THE%20TENDER%20COMBO%C2%A0PREP%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN32%20Giveaway-%20-%2001.mp4',
     ],
   },
   // Cloudinary's copy of this client is gone (the account returns
@@ -153,17 +161,17 @@ export const caseAssetOverrides: Record<string, CaseAssets> = {
     // Cover reel first: the ambience compilation carries the "sell the
     // destination" angle the case study opens on.
     videos: [
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20JUL20%20Compilation%20Ambience%202.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR18%20MANGO%20VODKA%20FLIGTH%20-%20DRINK%201%20PREPDCOP_%20APR18%20MANGO%20VODKA%20FLIGTH%20-%20DRINK%201%20PREP.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR24%20you%20walked%20in.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR27%20BORN%20TO%20EAT%20-%20FORCED%20TO%20SEND%20EMAILS.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG01%20Taco%20Tuesday.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG12%20Exotic%20Drinks%20Compilation.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG18%20Lunch%20Special.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20JUL26%20Compilation%20for%20the%C2%A0truck.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAY01%205%20mayo%20reel-.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAY08%20Serving.mp4',
-      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAYHappy%20Hour%20is%20waiting-.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20JUL20%20Compilation%20Ambience%202%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR18%20MANGO%20VODKA%20FLIGTH%20-%20DRINK%201%20PREPDCOP_%20APR18%20MANGO%20VODKA%20FLIGTH%20-%20DRINK%201%20PREP%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR24%20you%20walked%20in%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR27%20BORN%20TO%20EAT%20-%20FORCED%20TO%20SEND%20EMAILS%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG01%20Taco%20Tuesday%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG12%20Exotic%20Drinks%20Compilation%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG18%20Lunch%20Special%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20JUL26%20Compilation%20for%20the%C2%A0truck%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAY01%205%20mayo%20reel-%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAY08%20Serving%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20MAYHappy%20Hour%20is%20waiting-%20-%2001.mp4',
     ],
   },
   'jerusalem-cafe': {
@@ -201,19 +209,19 @@ export const caseAssetOverrides: Record<string, CaseAssets> = {
     // Cover reel first: the case study's own copy names texture and appetite
     // appeal as what the content was built on, and this is that clip.
     videos: [
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUN10%20Compilation%201%20Serving%20%2B%C2%A0Texture.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG02%20Reedit%20Zattar%20Manak--eesmm.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG05%20Can%20i%20get%20it%20to%20go%C2%A0skit.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG08%20Magic%20trick%20skit.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG10%20Compilation%20Build%20a%C2%A0bowl.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG13%20ITEM%203.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUL01%20Build%20a%20bowl-prep.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUL02%20Transition%20full%20table.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUL13%20Where%20are%20we%20going%C2%A0funny.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUN03_Curry%20Chicken%20Serving-Presentation-Testing-.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUN05_%20Compilation%202.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20MAY02_Jerusalem%20Combo%20Appetizer%20Assambly-serving.mp4',
-      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20MAY07_Stop%20Motion%20Late%20Nigth%20Eats-.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUN10%20Compilation%201%20Serving%20%2B%C2%A0Texture%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG02%20Reedit%20Zattar%20Manak--eesmm%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG05%20Can%20i%20get%20it%20to%20go%C2%A0skit%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG08%20Magic%20trick%20skit%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG10%20Compilation%20Build%20a%C2%A0bowl%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG13%20ITEM%203%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUL01%20Build%20a%20bowl-prep%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUL02%20Transition%20full%20table%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUL13%20Where%20are%20we%20going%C2%A0funny%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUN03_Curry%20Chicken%20Serving-Presentation-Testing-%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUN05_%20Compilation%202%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20MAY02_Jerusalem%20Combo%20Appetizer%20Assambly-serving%20-%2001.mp4',
+      'https://cdn.atriumad.com/clients/JECA/reels/JECA_%20MAY07_Stop%20Motion%20Late%20Nigth%20Eats-%20-%2001.mp4',
     ],
   },
   'old-shawnee-pizza': {

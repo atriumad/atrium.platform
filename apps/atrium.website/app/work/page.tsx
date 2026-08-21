@@ -1,5 +1,6 @@
 import { Eyebrow } from '@atrium/ui'
 import type { Metadata } from 'next'
+import LazyVideo from '@/components/media/LazyVideo'
 import CTABanner from '@/components/sections/CTABanner'
 import TransitionLink from '@/components/ui/TransitionLink'
 import WorkStoryBlock from '@/components/work/WorkStoryBlock'
@@ -76,19 +77,10 @@ export default function WorkPage() {
           {/* Our own reel, not a client's. The file is shot 9:16, so a wide
               frame crops it to a band — object-cover keeps the centre. */}
           <div className="mt-12 h-[26rem] overflow-hidden rounded-card md:h-[34rem]">
-            <video
-              autoPlay
+            <LazyVideo
               className="h-full w-full object-cover"
-              loop
-              muted
-              playsInline
-              preload="metadata"
-            >
-              <source
-                src="https://cdn.atriumad.com/clients/ATRM/reels/ATRM_%20JUL02%20Recap%209-16.mp4"
-                type="video/mp4"
-              />
-            </video>
+              src="https://cdn.atriumad.com/clients/ATRM/reels/ATRM_%20JUL02%20Recap%209-16.mp4"
+            />
           </div>
 
           <div className="mt-7 grid gap-6 border-line border-t pt-7 lg:grid-cols-12 lg:gap-16">
@@ -160,7 +152,6 @@ export default function WorkPage() {
 
       <CTABanner
         body="If your marketing has activity but not a clear story of growth, Atrium can rebuild the system around outcomes."
-        coverAlt="A restaurant marketing result sheet being reviewed by the team"
         cta={CTA.primary.label}
         ctaExternal={CTA.primary.external}
         ctaHref={CTA.primary.href}

@@ -54,6 +54,7 @@ describe('isVideoLed', () => {
   })
 })
 
+import { reelDelivery } from './reels'
 import { heroGalleryTiles } from './work'
 
 describe('heroGalleryTiles', () => {
@@ -69,23 +70,27 @@ describe('heroGalleryTiles', () => {
     expect(heroGalleryTiles.every((tile) => /^https?:\/\//i.test(tile.src))).toBe(true)
   })
 
-  test('carries both photography and reels', () => {
-    expect(heroGalleryTiles.some((tile) => tile.kind === 'image')).toBe(true)
-    expect(heroGalleryTiles.some((tile) => tile.kind === 'video')).toBe(true)
+  test('is reels only', () => {
+    // A still among a wall of moving tiles reads as a video that failed to
+    // start, which is why the hero was made video-only.
+    expect(heroGalleryTiles.every((tile) => tile.kind === 'video')).toBe(true)
   })
 
-  test('photography outnumbers the reels', () => {
-    const reels = heroGalleryTiles.filter((tile) => tile.kind === 'video').length
-    expect(reels).toBeLessThan(heroGalleryTiles.length - reels)
+  test('every reel has an optimized variant to play', () => {
+    // The hero is the heaviest thing on the site. A tile whose source never got
+    // encoded falls back to a ~17 MB delivery copy, which is the bill this was
+    // meant to end.
+    for (const tile of heroGalleryTiles) {
+      expect(reelDelivery(tile.src).src).toContain('/web/')
+    }
   })
 
-  test('spreads the reels across all three columns', () => {
-    // Round-robin over three columns, so a reel period of three would stack
-    // them all into one column.
-    const reelColumns = new Set(
-      heroGalleryTiles.flatMap((tile, index) => (tile.kind === 'video' ? [index % 3] : [])),
-    )
-    expect(reelColumns.size).toBe(3)
+  test('no two neighbouring tiles come from the same client', () => {
+    // Tiles are dealt round-robin into three columns, so neighbours in this
+    // list land in different columns — and a run of one client here would put
+    // that brand down a whole column.
+    const codes = heroGalleryTiles.map((tile) => tile.src.match(/\/clients\/([^/]+)\//)?.[1])
+    for (let i = 1; i < codes.length; i += 1) expect(codes[i]).not.toBe(codes[i - 1])
   })
 
   test('contains no duplicate sources', () => {

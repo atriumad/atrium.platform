@@ -155,7 +155,6 @@ export default function ServicesPage() {
         cta={CTA.primary.label}
         ctaHref={CTA.primary.href}
         ctaExternal={CTA.primary.external}
-        coverAlt="Team at table in restaurant — natural, warm, working together"
       />
     </>
   )

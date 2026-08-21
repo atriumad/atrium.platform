@@ -3,80 +3,120 @@
 import { Eyebrow } from '@atrium/ui'
 import TransitionLink from '@/components/ui/TransitionLink'
 
+// Each path carries a `filled` count out of the twelve cells in the footprint
+// diagram below. The diagram is the section's whole visual idea: one room, a
+// handful, a full board — the scale is read before a single word is.
 const paths = [
   {
     count: '1',
+    filled: 1,
     label: 'Independent restaurant',
-    tension: 'Fill the room consistently without handing your voice to another generic agency.',
-    outcome: 'Build a dependable local demand system.',
+    tension: 'You are the marketing department, and it happens after close — between payroll, a vendor call, and a line that never really ends.',
+    outcome: 'A local demand system that runs without you in it.',
     href: '/pricing#foundation',
-    cta: 'See the Foundation model',
+    cta: 'Foundation model',
   },
   {
     count: '3–10',
+    filled: 6,
     label: 'Multi-location group',
-    tension: 'Stop asking five operators and five vendors to execute one brand differently.',
-    outcome: 'Run every location from one accountable system.',
+    tension: 'Five rooms, five vendors, five versions of the same brand — and no single number that tells you which one is working.',
+    outcome: 'One brand, one calendar, one team accountable for the result.',
     href: '/pricing#growth',
-    cta: 'See the Growth model',
+    cta: 'Growth model',
   },
   {
     count: '10+',
+    filled: 12,
     label: 'Franchise or enterprise',
-    tension: 'Keep national consistency while each market stays locally relevant and measurable.',
-    outcome: 'Create a playbook that repeats without flattening the brand.',
+    tension: 'Corporate ships the assets. Every market posts something else, and the brand arrives differently in each city.',
+    outcome: 'A playbook markets follow because it performs locally.',
     href: '/pricing#full-system',
-    cta: 'See the Full System model',
+    cta: 'Full System model',
   },
 ]
+
+// Stable keys for a fixed, never-reordered diagram — the cells have no
+// identity of their own beyond their position in the grid.
+const CELLS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']
+
+// Twelve cells, four across. Purely decorative — the count beside it is the
+// accessible version of the same information.
+function Footprint({ filled }: { filled: number }) {
+  return (
+    <div aria-hidden="true" className="grid w-[5.25rem] grid-cols-4 gap-1.5">
+      {CELLS.map((cell, i) => (
+        <span
+          className={`aspect-square rounded-[3px] transition-colors duration-500 ease-atrium ${
+            i < filled ? 'bg-green-fill' : 'bg-ink/10'
+          }`}
+          key={cell}
+        />
+      ))}
+    </div>
+  )
+}
 
 export default function AudiencePaths() {
   return (
     <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
       <div className="mx-auto max-w-[var(--container-max)]">
-        {/* Headline left, the qualifier beside it — the same two-column opener
-            every other section on the page uses. The decorative portrait that
-            used to sit here was the page's last Cloudinary asset, and it broke
-            the grid as badly as it broke the visual: a tall box hanging off the
-            right edge with nothing under it. */}
+        {/* The same two-column opener every other section on the page uses. */}
         <div className="mb-14 grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
           <div className="lg:col-span-7">
-            <Eyebrow className="mb-6">Built for your stage</Eyebrow>
+            <Eyebrow className="mb-6">Where you are now</Eyebrow>
             <h2 className="max-w-[13ch] text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em]">
               Different footprint. <em className="font-serif italic">Different first move.</em>
             </h2>
           </div>
           <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
-            A single dining room, a regional group, and a national rollout should not enter through the same scope. Start with the operating problem that matches your footprint.
+            One dining room, a regional group, and a national rollout do not share a problem — so they should not share a scope. Start with the one that sounds like your week.
           </p>
         </div>
 
-        <div className="border-y border-line">
+        {/* Cards rather than rows: the old layout put four columns on one line
+            per path, which read as a spreadsheet and flattened the copy. */}
+        <div className="grid gap-5 md:grid-cols-3">
           {paths.map((path, index) => (
             <TransitionLink
-              key={path.label}
+              className="group flex flex-col rounded-card border border-line bg-card p-8 no-underline shadow-soft transition duration-500 ease-atrium hover:-translate-y-1 hover:shadow-float motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:p-9"
               href={path.href}
-              className="group grid gap-7 border-b border-line py-9 no-underline last:border-b-0 md:grid-cols-[10rem_minmax(0,0.8fr)_minmax(0,1.2fr)_14rem] md:items-center md:gap-10 md:py-11"
+              key={path.label}
             >
-              {/* nowrap and a column wide enough for the longest count: at the
-                  old size "3–10" broke over two lines, which doubled that row's
-                  height and knocked its copy out of line with the other two. */}
-              <p className="m-0 whitespace-nowrap font-serif text-[clamp(3rem,4.6vw,4.75rem)] font-normal leading-none tracking-[-0.05em] text-charcoal">
-                {path.count}
-              </p>
-              <div>
+              <div className="flex items-start justify-between gap-6">
+                <Footprint filled={path.filled} />
+                {/* nowrap: at this size "3–10" would otherwise break over two
+                    lines and knock its card's copy out of line with the rest. */}
+                <p className="m-0 whitespace-nowrap font-serif text-[clamp(2.75rem,3.6vw,3.75rem)] font-normal leading-none tracking-[-0.05em] text-charcoal">
+                  {path.count}
+                </p>
+              </div>
+
+              <div className="mt-9 border-t border-line pt-6">
                 <Eyebrow>Path {String(index + 1).padStart(2, '0')}</Eyebrow>
                 <h3 className="mt-3 text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.15] text-charcoal">
                   {path.label}
                 </h3>
+                <p className="mt-4 text-base leading-relaxed text-body">{path.tension}</p>
               </div>
-              <div>
-                <p className="m-0 max-w-xl text-base leading-relaxed text-body">{path.tension}</p>
-                <p className="mt-3 text-[0.875rem] text-charcoal">{path.outcome}</p>
-              </div>
-              <span className="inline-flex items-center justify-between gap-3 whitespace-nowrap text-[0.875rem] text-charcoal">
+
+              {/* mt-auto pins the outcome and the CTA to the bottom, so the
+                  three cards line up on both despite uneven copy lengths. */}
+              {/* The outcome takes the serif the rest of the page reserves for
+                  the turn in a sentence: it is the answer to the paragraph
+                  above it, and at the same weight the two read as one block. */}
+              <p className="mt-7 mb-8 font-serif text-[1.2rem] leading-[1.35] text-charcoal italic">
+                {path.outcome}
+              </p>
+
+              <span className="mt-auto flex items-center justify-between gap-3 border-t border-line pt-6 text-[0.875rem] text-charcoal">
                 <span>{path.cta}</span>
-                <span className="text-xl transition-transform duration-300 group-hover:translate-x-2" aria-hidden="true">→</span>
+                <span
+                  aria-hidden="true"
+                  className="text-xl transition-transform duration-300 ease-atrium group-hover:translate-x-2 motion-reduce:transition-none"
+                >
+                  →
+                </span>
               </span>
             </TransitionLink>
           ))}

@@ -2,7 +2,7 @@ import AudiencePaths from '@/components/sections/AudiencePaths'
 import BentoGrid, { type BentoItem } from '@/components/sections/BentoGrid'
 import ComparisonMatrix from '@/components/sections/ComparisonMatrix'
 import CTABanner from '@/components/sections/CTABanner'
-import DarkProcess, { type ProcessStat, type ProcessStep } from '@/components/sections/DarkProcess'
+import DarkProcess, { type ProcessStep } from '@/components/sections/DarkProcess'
 import GrowthEngineDiagram from '@/components/sections/GrowthEngineDiagram'
 import HeroSection from '@/components/sections/HeroSection'
 import PurchaseFAQ from '@/components/sections/PurchaseFAQ'
@@ -59,10 +59,6 @@ const processSteps: ProcessStep[] = [
   { eyebrow: 'CREATIVE', title: 'Strategy lock + first shoot', body: 'Brand direction, visual system, and content calendar defined. Then we walk into your kitchen with cameras.' },
   { eyebrow: 'SYSTEMATIC', title: 'Activate every channel', body: 'Content goes live. Google optimized. Email flows activated. Ads launched on proven creative.' },
 ]
-const processStats: ProcessStat[] = [
-  { number: '15+', label: 'Active hospitality brand partnerships' },
-  { number: '28', label: 'Day engine cycle — shoot to report' },
-]
 
 const homeStats: Stat[] = [
   { number: '$42', label: 'return on every $1 spent on restaurant email. The highest-ROI channel in hospitality.' },
@@ -100,7 +96,6 @@ export default function HomePage() {
         headline={<>A monthly engine. <em className="font-serif italic">Not random posts.</em></>}
         body="Strategy, content, and technology run as one system on a 28-day cycle — so marketing stops being guesswork and you can focus on the food."
         steps={processSteps}
-        stats={processStats}
       />
       <SplitSection
         eyebrow="One team, not five vendors"
@@ -118,7 +113,6 @@ export default function HomePage() {
         cta={CTA.primary.label}
         ctaHref={CTA.primary.href}
         ctaExternal={CTA.primary.external}
-        coverAlt="Team at table in restaurant — natural, warm, working together"
       />
     </>
   )
