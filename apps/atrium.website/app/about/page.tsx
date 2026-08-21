@@ -257,7 +257,6 @@ export default function AboutPage() {
         cta={CTA.primary.label}
         ctaHref={CTA.primary.href}
         ctaExternal={CTA.primary.external}
-        coverAlt="Atrium team planning a hospitality campaign"
       />
     </>
   )

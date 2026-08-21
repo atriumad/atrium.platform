@@ -1,12 +1,21 @@
 import { Eyebrow, NumberReel, PillTags } from '@atrium/ui'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import FeatureFilm from '@/components/media/FeatureFilm'
 import CTABanner from '@/components/sections/CTABanner'
 import TransitionLink from '@/components/ui/TransitionLink'
 import DragGallery from '@/components/work/DragGallery'
 import VideoMarquee from '@/components/work/VideoMarquee'
 import { CTA } from '@/lib/cta'
-import { type CaseMetric, type CaseStudy, caseStudies, getCaseStudy, getCaseSummary, isVideoLed } from '@/lib/work'
+import {
+  type CaseMetric,
+  type CaseStudy,
+  caseStudies,
+  filmPoster,
+  getCaseStudy,
+  getCaseSummary,
+  isVideoLed,
+} from '@/lib/work'
 
 export async function generateStaticParams() {
   return caseStudies.map(study => ({ slug: study.slug }))
@@ -57,7 +66,19 @@ export function CaseHero({ study }: { study: CaseStudy }) {
         </div>
       </div>
 
-      {study.videoIds?.length ? (
+      {/* A film-led study opens on its feature instead of a rail: the work was
+          one piece to sit through, not a calendar of cuts to scroll past. */}
+      {study.films ? (
+        <div className="relative mt-16 px-[var(--gutter)] md:mt-20">
+          <div className="mx-auto max-w-[var(--container-max)]">
+            <FeatureFilm
+              poster={filmPoster(study.films.feature)}
+              src={study.films.feature}
+              title={`${study.client} — brand film`}
+            />
+          </div>
+        </div>
+      ) : study.videoIds?.length ? (
         <div className="relative mt-16 md:mt-20">
           <VideoMarquee publicIds={study.videoIds} />
         </div>
@@ -98,6 +119,95 @@ export function ChallengeSolutionSection({ study }: { study: CaseStudy }) {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  )
+}
+
+/** The client, on camera. A film-led case study argues through the people who
+ *  were shot, so the interviews get the dark band to themselves rather than a
+ *  slot in a rail where they would play muted and unwatched. */
+export function InterviewsSection({ study }: { study: CaseStudy }) {
+  const interviews = study.films?.interviews ?? []
+  if (interviews.length === 0) return null
+
+  return (
+    <section className="bg-dark px-[var(--gutter)] py-24 md:py-36">
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="mx-auto mb-14 max-w-3xl text-center md:mb-20">
+          <Eyebrow tone="on-dark" className="mb-6">On camera</Eyebrow>
+          <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-cream">
+            In their <em>own words.</em>
+          </h2>
+        </div>
+
+        <div className={`grid gap-10 ${interviews.length > 1 ? 'md:grid-cols-2 md:gap-12' : 'mx-auto max-w-4xl'}`}>
+          {interviews.map((interview) => (
+            <figure className="m-0" key={interview.src}>
+              <FeatureFilm
+                poster={interview.poster ?? filmPoster(interview.src)}
+                src={interview.src}
+                title={`${interview.name} on ${study.client}`}
+              />
+              <figcaption className="mt-6 border-cream/20 border-t pt-6">
+                <p className="m-0 text-cream">{interview.name}</p>
+                {interview.role ? (
+                  <p className="m-0 mt-1 font-serif text-cream/70 italic">{interview.role}</p>
+                ) : null}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/** Everything else off the shoot: the rest of the landscape films, then the
+ *  vertical cuts that were delivered for social. Same section because they are
+ *  the same job — what the campaign produced beyond the headline piece. */
+export function FilmLibrarySection({ study }: { study: CaseStudy }) {
+  const films = study.films?.films ?? []
+  const cuts = study.films?.cuts ?? []
+  if (films.length === 0 && cuts.length === 0) return null
+
+  return (
+    <section className="bg-cream px-[var(--gutter)] py-24 md:py-36">
+      <div className="mx-auto max-w-[var(--container-max)]">
+        <div className="mb-14 grid gap-8 border-t border-line pt-8 lg:grid-cols-12 lg:items-end lg:gap-16 md:mb-20">
+          <div className="lg:col-span-7">
+            <Eyebrow className="mb-6">The library</Eyebrow>
+            <h2 className="text-[clamp(2.6rem,4.5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] text-charcoal">
+              {study.galleryHeadline ?? <>Shot once, <em>cut many ways.</em></>}
+            </h2>
+          </div>
+          <p className="m-0 max-w-md text-base leading-relaxed text-muted lg:col-span-5">
+            {study.galleryNote ??
+              'One production, edited into a library: the long pieces for the brand, the vertical cuts for the feed.'}
+          </p>
+        </div>
+
+        {films.length > 0 ? (
+          <div className="grid gap-8 md:grid-cols-2 md:gap-10">
+            {films.map((src) => (
+              <FeatureFilm key={src} poster={filmPoster(src)} src={src} title={`${study.client} — film`} />
+            ))}
+          </div>
+        ) : null}
+
+        {cuts.length > 0 ? (
+          <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-4 ${films.length > 0 ? 'mt-8 md:mt-10' : ''}`}>
+            {cuts.map((src) => (
+              <FeatureFilm
+                key={src}
+                poster={filmPoster(src)}
+                ratio="9/16"
+                src={src}
+                title={`${study.client} — social cut`}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
     </section>
   )
@@ -329,8 +439,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           shoot to build a gallery from, so that one section drops out. */}
       <CaseHero study={study} />
       <ChallengeSolutionSection study={study} />
+      <InterviewsSection study={study} />
       <ResultsSection study={study} metrics={study.metrics.slice(0, 3)} />
-      {!isVideoLed(study) && <PhotoGallerySection study={study} />}
+      <FilmLibrarySection study={study} />
+      {!study.films && !isVideoLed(study) && <PhotoGallerySection study={study} />}
       <ApproachSection study={study} />
       <TestimonialSection study={study} />
       <NextCasePreview nextStudy={nextStudy} />
@@ -341,7 +453,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         cta={CTA.primary.label}
         ctaHref={CTA.primary.href}
         ctaExternal={CTA.primary.external}
-        coverAlt="Team at table in restaurant — natural, warm, working together"
       />
     </article>
   )

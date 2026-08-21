@@ -6,6 +6,8 @@
     "build": "node scripts/build.mjs",
     "deploy": "node scripts/deploy.mjs",
     "manifest": "bun scripts/manifest.ts",
+    "reels": "node scripts/optimize-reels.mjs",
+    "reels:manifest": "node scripts/optimize-reels.mjs --manifest",
     "lint": "biome check .",
     "typecheck": "tsc --noEmit"
   },

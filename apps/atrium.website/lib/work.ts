@@ -69,7 +69,63 @@ export type CaseStudy = {
   galleryIds?: string[]
   /** Cloudinary public IDs for the case-study video marquee. */
   videoIds?: string[]
+  /** Film work, for the studies whose deliverable was a shoot rather than a
+   *  social calendar. Set this and the case study renders film-led. */
+  films?: CaseFilms
   order: number
+}
+
+/** One person on camera. The interviews are the argument in a film-led case —
+ *  the client saying what changed, in their own words — so they get a section
+ *  rather than a slot in a rail. */
+export type CaseInterview = { src: string; poster?: string; name: string; role?: string }
+
+/** The films a case study delivered, sorted by the job each one does.
+ *
+ *  Unlike `videoIds`, these are finished CDN URLs: film masters are 4K at
+ *  60–80 Mbps and never lived on the CDN, so `apps/atrium.cdn/ingest-films.mjs`
+ *  encodes them locally and uploads only the web variants. */
+export type CaseFilms = {
+  /** The one that opens the page, in place of the reel rail. */
+  feature: string
+  /** Everything else shot landscape. */
+  films?: string[]
+  interviews?: CaseInterview[]
+  /** Vertical cuts off the same shoot. */
+  cuts?: string[]
+}
+
+/** Every film variant is uploaded with a poster of the same name beside it. */
+export function filmPoster(src: string): string {
+  return src.replace(/\.mp4$/i, '.jpg')
+}
+
+/** The reel a case study's card plays, and therefore the frame it sits on.
+ *
+ *  `videoIds` is delivery order, not editorial order: its first entry is
+ *  whatever the folder happened to list first, which for two clients is a promo
+ *  card of type. A card is one tile on the homepage, so it gets the one reel
+ *  that shows the work — food, a pour, a plate going out. Anything not named
+ *  here falls back to the first reel it has. */
+const CASE_CARD_REELS: Record<string, string> = {
+  'taco-naco': "https://cdn.atriumad.com/clients/TNKC/reels/TNKC_%20APR29_Ceviche%20Tostada-.mp4", // TNKC_ APR29_Ceviche Tostada-
+  'taha': "https://cdn.atriumad.com/clients/TAHA/reels/TAHA_%20AUG22%20Grilled%20Salmon%20Prep.mp4", // TAHA_ AUG22 Grilled Salmon Prep
+  'don-chuys': "https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG01%20Taco%20Tuesday%20-%2001.mp4", // DCOP_ AUG01 Taco Tuesday - 01
+  'chick-in-waffle': "https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN18%20THE%20TENDER%20COMBO%C2%A0PREP%20-%2001.mp4", // CHWF_ JUN18 THE TENDER COMBO PREP - 01
+  'aahaa': "https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL15%20New%20chef%20specialty%20Zafrani%20Chicken%C2%A0Tikka%20-%2001.mp4", // AAHA_ JUL15 New chef specialty Zafrani Chicken Tikka - 01
+  'jerusalem-cafe': "https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUL01%20Build%20a%20bowl-prep%20-%2001.mp4", // JECA_ JUL01 Build a bowl-prep - 01
+  'old-shawnee-pizza': "https://cdn.atriumad.com/clients/OSPZ/reels/OSPZ_%20JUL28%20Big%20Joe%20Pizza.mp4", // OSPZ_ JUL28 Big Joe Pizza
+}
+
+/** Absolute URL of the reel a card should play, or null to fall back to the
+ *  cover photograph. Only an absolute URL qualifies: `videoIds` still carries
+ *  bare Cloudinary public IDs for clients that have not moved to our CDN, and
+ *  that account is disabled. */
+export function getCaseCardReel(study: CaseStudy): string | null {
+  const curated = CASE_CARD_REELS[study.slug]
+  if (curated) return curated
+  const first = study.videoIds?.[0]?.trim()
+  return first && /^https?:\/\//i.test(first) ? first : null
 }
 
 export function getCaseCover(study: CaseStudy) {
@@ -516,6 +572,25 @@ export const caseStudies: CaseStudy[] = [
     ],
     takeaway:
       'A premium content ecosystem that strengthened brand perception, increased content versatility, and showcased the unique character of Hotel Kansas City.',
+    coverImageId: 'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-spaces-highlight.jpg',
+    films: {
+      // The ballroom piece opens the page: it is the property, and the reason
+      // the campaign existed was to sell the property as a destination.
+      feature: 'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-spaces-highlight.mp4',
+      films: [
+        'https://cdn.atriumad.com/clients/HOKC/films/web/guest-hotel-room.mp4',
+        'https://cdn.atriumad.com/clients/HOKC/films/web/guest-hotel-city.mp4',
+      ],
+      interviews: [
+        { src: 'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-christopher-speach.mp4', name: 'Christopher' },
+      ],
+      cuts: [
+        'https://cdn.atriumad.com/clients/HOKC/films/web/hero-kc-hotel-ambience.mp4',
+        'https://cdn.atriumad.com/clients/HOKC/films/web/hokc-welcome-to-nighthawk.mp4',
+        'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-a-taste-of-hotel-kc.mp4',
+        'https://cdn.atriumad.com/clients/HOKC/films/web/hotel-speach-experience.mp4',
+      ],
+    },
     order: 9,
   },
 
@@ -523,13 +598,8 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'town-company',
     client: 'The Town Company',
-    coverImageId: 'v1784751133/TOWN_CO_frgw8z',
+    coverImageId: 'https://cdn.atriumad.com/clients/TWCO/films/web/town-co-helen-jo.jpg',
     coverLogo: '/logos/clients/ttco.svg',
-    videoIds: [
-      'v1784751095/TOWN_CO_JONNY_-_01_p6ny3n',
-      'v1784751043/TOWN_CO_FINE_CUISINE_BOTH_COMBINED_-_01_puu9ir',
-      'v1784751112/TOWN_CO_HELEN_JO_-_01_bgg0si',
-    ],
     category: 'Restaurant · Cinematic Content',
     serviceTags: ['Film & Photo', 'Brand Film', 'Social Content'],
     resultHeadline: 'Building a Culinary Brand Around the People Behind the Experience',
@@ -548,6 +618,17 @@ export const caseStudies: CaseStudy[] = [
     ],
     takeaway:
       'By making Johnny Leach and Helen Jo the central characters, the campaign transformed The Town Company from a restaurant people visit into a story people want to be part of.',
+    films: {
+      // Chef Johnny Leach opens it: the campaign's whole idea was to put the
+      // people who run the room in front of the food.
+      feature: 'https://cdn.atriumad.com/clients/TWCO/films/web/town-co-jonny.mp4',
+      // No library section here: what this shoot delivered that is worth
+      // showing is the two people, and a single vertical cut under them was
+      // padding a section out rather than filling one.
+      interviews: [
+        { src: 'https://cdn.atriumad.com/clients/TWCO/films/web/town-co-helen-jo.mp4', name: 'Helen Jo' },
+      ],
+    },
     order: 10,
   },
 
@@ -564,59 +645,49 @@ for (const study of caseStudies) {
   if (!study.coverImageId && assets.images[0]) study.coverImageId = assets.images[0]
 }
 
-/** Which case studies feed the homepage hero. Every one of these delivers from
- *  our own CDN. `hotel-kc` and `grand-coffee` used to be here and were the
- *  seven broken tiles in the hero: their assets are still Cloudinary public IDs
- *  and that account is gone. They can come back the day their media is on the
- *  CDN. */
-const HERO_GALLERY_SLUGS = [
-  'taco-naco',
-  'aahaa',
-  'jerusalem-cafe',
-  'taha',
-  'don-chuys',
-  'old-shawnee-pizza',
-]
-
 export type HeroTile = { kind: 'image' | 'video'; src: string }
 
-/** A finished URL delivers; a bare Cloudinary public ID does not, because that
- *  account is disabled. The hero is the first thing on the site, so it filters
- *  rather than trusting the list — one unsynced slug should thin the gallery,
- *  never put a broken tile above the fold. */
-const isDeliverable = (src: string) => /^https?:\/\//i.test(src)
-
-function take(pick: (study: CaseStudy) => string[] | undefined, perStudy: number): string[] {
-  return HERO_GALLERY_SLUGS.flatMap((slug) => {
-    const study = caseStudies.find((c) => c.slug === slug)
-    return (study ? (pick(study) ?? []) : []).filter(isDeliverable).slice(0, perStudy)
-  })
-}
-
-/** Cross-case-study sample for the hero's perspective gallery — real client
- *  work, not stock. Photography carries it and a reel lands every fourth tile.
+/** The reels the homepage hero plays, in the order they are dealt out.
  *
- *  Four, not three: the gallery splits tiles round-robin across three columns,
- *  so a period of three would stack every reel into one column. Four rotates
- *  them through all three. */
-const REEL_EVERY = 4
+ *  Hand-picked rather than derived: the hero is the first thing anyone sees,
+ *  and what belongs there is food — a dish being plated, a drink being poured,
+ *  a preparation shot. The library also holds skits, giveaways and promo cards,
+ *  which read as social posts rather than as the work, so they are left out.
+ *
+ *  Ordered client-by-client on rotation. The gallery deals tiles round-robin
+ *  into three columns, so listing a client's reels together would stack one
+ *  brand into one column. */
+const HERO_REELS = [
+  "https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL13%20New%20chef%20specialties%20general%C2%A0presentation%20-%2001.mp4", // AAHA_ JUL13 New chef specialties general presentation - 01
+  "https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20APR24%20GARLIC%20PARM%20CHICK%20IN%20BUN-%20PREPARATION%20-%2001.mp4", // CHWF_ APR24 GARLIC PARM CHICK IN BUN- PREPARATION - 01
+  "https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG01%20Taco%20Tuesday%20-%2001.mp4", // DCOP_ AUG01 Taco Tuesday - 01
+  "https://cdn.atriumad.com/clients/JECA/reels/JECA_%20AUG10%20Compilation%20Build%20a%C2%A0bowl%20-%2001.mp4", // JECA_ AUG10 Compilation Build a bowl - 01
+  "https://cdn.atriumad.com/clients/OSPZ/reels/OSPZ_%20AUG02%20Doing%20the%20OSP%20Sandwich-.mp4", // OSPZ_ AUG02 Doing the OSP Sandwich-
+  "https://cdn.atriumad.com/clients/TAHA/reels/TAHA_%20AUG22%20Grilled%20Salmon%20Prep.mp4", // TAHA_ AUG22 Grilled Salmon Prep
+  "https://cdn.atriumad.com/clients/TNKC/reels/TNKC_%20APR29_Ceviche%20Tostada-.mp4", // TNKC_ APR29_Ceviche Tostada-
+  "https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20JUL15%20New%20chef%20specialty%20Zafrani%20Chicken%C2%A0Tikka%20-%2001.mp4", // AAHA_ JUL15 New chef specialty Zafrani Chicken Tikka - 01
+  "https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL17%20Dipping%20a%20lot%20of%C2%A0syrup%20-%2001.mp4", // CHWF_ JUL17 Dipping a lot of syrup - 01
+  "https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20AUG18%20Lunch%20Special%20-%2001.mp4", // DCOP_ AUG18 Lunch Special - 01
+  "https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUL01%20Build%20a%20bowl-prep%20-%2001.mp4", // JECA_ JUL01 Build a bowl-prep - 01
+  "https://cdn.atriumad.com/clients/OSPZ/reels/OSPZ_%20AUG05%20Presentation%20Cellar%20Door.mp4", // OSPZ_ AUG05 Presentation Cellar Door
+  "https://cdn.atriumad.com/clients/TAHA/reels/TAHA_%20AUG30%20Oysters%20Day.mp4", // TAHA_ AUG30 Oysters Day
+  "https://cdn.atriumad.com/clients/TNKC/reels/TNKC_%20AUG06%20Loaded%20Nachos%20-Prep%20Reedit-.mp4", // TNKC_ AUG06 Loaded Nachos -Prep Reedit-
+  "https://cdn.atriumad.com/clients/AAHA/reels/AAHA_%20MAY18%20Compialion%20Food(Cooking%C2%A0and%C2%A0Plating%C2%A0)%20-%2001.mp4", // AAHA_ MAY18 Compialion Food(Cooking and Plating ) - 01
+  "https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUN18%20THE%20TENDER%20COMBO%C2%A0PREP%20-%2001.mp4", // CHWF_ JUN18 THE TENDER COMBO PREP - 01
+  "https://cdn.atriumad.com/clients/DCOP/reels/DCOP_%20APR18%20MANGO%20VODKA%20FLIGTH%20-%20DRINK%201%20PREPDCOP_%20APR18%20MANGO%20VODKA%20FLIGTH%20-%20DRINK%201%20PREP%20-%2001.mp4", // DCOP_ APR18 MANGO VODKA FLIGTH - DRINK 1 PREPDCOP_ APR18 MANGO VODKA FLIGTH - DRINK 1 PREP - 01
+  "https://cdn.atriumad.com/clients/JECA/reels/JECA_%20JUN10%20Compilation%201%20Serving%20%2B%C2%A0Texture%20-%2001.mp4", // JECA_ JUN10 Compilation 1 Serving + Texture - 01
+  "https://cdn.atriumad.com/clients/OSPZ/reels/OSPZ_%20JUL28%20Big%20Joe%20Pizza.mp4", // OSPZ_ JUL28 Big Joe Pizza
+  "https://cdn.atriumad.com/clients/TAHA/reels/TAHA_FEB31%20croquetas.mp4", // TAHA_FEB31 croquetas
+  "https://cdn.atriumad.com/clients/TNKC/reels/TNKC_%20JUL01%20Chilaquiles.mp4", // TNKC_ JUL01 Chilaquiles
+  "https://cdn.atriumad.com/clients/JECA/reels/JECA_%20MAY02_Jerusalem%20Combo%20Appetizer%20Assambly-serving%20-%2001.mp4", // JECA_ MAY02_Jerusalem Combo Appetizer Assambly-serving - 01
+  "https://cdn.atriumad.com/clients/TNKC/reels/TNKC_%20JUL06%20Tosta-Guac%20Build%20Up.mp4", // TNKC_ JUL06 Tosta-Guac Build Up
+  "https://cdn.atriumad.com/clients/CHWF/reels/CHWF_%20JUL12%20POV%20Preparation%20-%2001.mp4", // CHWF_ JUL12 POV Preparation - 01
+]
 
-export const heroGalleryTiles: HeroTile[] = (() => {
-  const photos = take((study) => study.galleryIds, 3)
-  const reels = take((study) => study.videoIds, 1)
-  const tiles: HeroTile[] = []
-  let nextReel = 0
-
-  for (const src of photos) {
-    if (tiles.length > 0 && tiles.length % REEL_EVERY === REEL_EVERY - 1 && nextReel < reels.length) {
-      const reel = reels[nextReel++]
-      if (reel) tiles.push({ kind: 'video', src: reel })
-    }
-    tiles.push({ kind: 'image', src })
-  }
-
-  return tiles
-})()
+/** Tiles for the hero's perspective gallery — real client work, not stock.
+ *  Every one is a reel: a wall of moving food is the point, and a still tile
+ *  among them reads as a video that failed to start. */
+export const heroGalleryTiles: HeroTile[] = HERO_REELS.map((src) => ({ kind: 'video', src }))
 
 const caseSummaries: Record<string, string> = {
   'taco-naco': 'A unified content and growth system built to make three locations feel like one unmistakable brand.',

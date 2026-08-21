@@ -11,6 +11,7 @@
 // so both clean IDs and legacy version-prefixed IDs resolve correctly.
 
 import { getCldImageUrl, getCldVideoUrl } from 'next-cloudinary'
+import { reelDelivery } from './reels'
 
 const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ?? ''
 
@@ -53,17 +54,22 @@ type VideoOpts = { width?: number }
  *  the source resolution when the video renders far smaller on screen is
  *  the main cause of stutter on slower connections. */
 export function cldVideoUrl(publicId: string, opts: VideoOpts = {}): string {
-  if (isAbsoluteUrl(publicId)) return publicId.trim()
+  // A CDN reel has no transformation URL, but it may have a web variant that
+  // `apps/atrium.cdn` encoded — 1280 tall instead of 1920, ~20x smaller. The
+  // manifest only names variants that exist, so anything unencoded still
+  // resolves to the source it always did.
+  if (isAbsoluteUrl(publicId)) return reelDelivery(publicId).src
   return getCldVideoUrl({ src: stripVersion(publicId), width: opts.width })
 }
 
-/** Poster frame for a Cloudinary video public ID (first frame).
- *  Returns an empty string for CDN-delivered videos: there is no frame to
- *  derive. Callers must convert that to `undefined` — an empty poster
+/** Poster frame for a video (first frame).
+ *  A CDN reel has one only once it has been encoded — the same pass that
+ *  builds the web variant writes a JPEG beside it. Until then this is the
+ *  empty string, which callers must convert to `undefined`: an empty poster
  *  attribute resolves against the document URL and the browser tries to
  *  load the page itself as the poster image. */
 export function cldVideoPoster(publicId: string): string {
-  if (isAbsoluteUrl(publicId)) return ''
+  if (isAbsoluteUrl(publicId)) return reelDelivery(publicId).poster ?? ''
   return getCldImageUrl({
     src: stripVersion(publicId),
     assetType: 'video',

@@ -101,7 +101,6 @@ export default function ResourcesPage() {
         cta={CTA.primary.label}
         ctaHref={CTA.primary.href}
         ctaExternal={CTA.primary.external}
-        coverAlt="Restaurant marketing notes organized into a clear next step"
       />
     </>
   )

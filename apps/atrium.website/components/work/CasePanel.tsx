@@ -1,10 +1,11 @@
 'use client'
 
 import { ArrowUpRight } from 'lucide-react'
-import { useEffect, useRef } from 'react'
+import LazyVideo from '@/components/media/LazyVideo'
 import TransitionLink from '@/components/ui/TransitionLink'
 import CaseCover from '@/components/work/CaseCover'
-import { type CaseStudy, getCaseCover } from '@/lib/work'
+import { reelDelivery } from '@/lib/reels'
+import { type CaseStudy, getCaseCardReel, getCaseCover } from '@/lib/work'
 
 /** The two claims that sit on the picture. A study that has not had its
  *  `highlights` written yet falls back to its first two metrics, so a card
@@ -14,24 +15,22 @@ function caseHighlights(study: CaseStudy): string[] {
   return study.metrics.slice(0, 2).map((metric) => `${metric.number} ${metric.label}`)
 }
 
-/** The reel that fills the card, or null to fall back to the cover photograph.
+/** Still frame to hold the card while the reel downloads.
  *
- *  Only an absolute URL qualifies. `videoIds` still carries bare Cloudinary
- *  public IDs for the clients that have not moved to our CDN, and that account
- *  is disabled — building a delivery URL from one gives a video element that
- *  can only fail. Absolute means CDN-hosted, which means it plays. Migrate a
- *  client's reels and its card picks this up with no change here. */
-function caseReel(study: CaseStudy): string | null {
-  const first = study.videoIds?.[0]
-  if (!first) return null
-  return /^https?:\/\//i.test(first.trim()) ? first.trim() : null
-}
-
-/** Still frame to hold the card while the reel downloads. The reels are large
- *  files served straight from the CDN with no transcode, so without a poster
- *  the card sits black for as long as the first frame takes to arrive. Same
- *  absolute-URL rule as the reel: a Cloudinary ID would build a dead URL. */
-function casePoster(study: CaseStudy): string | undefined {
+ *  The reel's own frame, not the cover photograph. The card plays the reel on
+ *  hover, so a cover shot here meant the still and the moving image were two
+ *  different pictures — one card sat on a promo card of type, another on a
+ *  photo of guests from behind, and neither was what started playing. The
+ *  encoded poster is taken a third of the way into the same reel.
+ *
+ *  Falls back to the cover for a reel that has no variant yet, and to nothing
+ *  at all if that cover is a Cloudinary ID: that account is disabled, so the
+ *  URL it would build is dead. */
+function casePoster(study: CaseStudy, reel: string | null): string | undefined {
+  if (reel) {
+    const { poster } = reelDelivery(reel)
+    if (poster) return poster
+  }
   const cover = getCaseCover(study).imageId
   return cover && /^https?:\/\//i.test(cover.trim()) ? cover.trim() : undefined
 }
@@ -48,26 +47,7 @@ export default function CasePanel({
   revealClass?: string
 }) {
   const highlights = caseHighlights(study)
-  const reel = caseReel(study)
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  // Five autoplaying reels on one row is a lot of decoding for footage that is
-  // mostly off screen. Each one plays only while it is actually in view.
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry) return
-        if (entry.isIntersecting) void video.play().catch(() => {})
-        else video.pause()
-      },
-      { rootMargin: '200px' },
-    )
-    observer.observe(video)
-    return () => observer.disconnect()
-  }, [])
+  const reel = getCaseCardReel(study)
 
   return (
     <TransitionLink
@@ -80,16 +60,10 @@ export default function CasePanel({
             {/* No `controls` and no caption track: this is wallpaper, not a
                 player. Left out of the tab order rather than aria-hidden,
                 which would be wrong on an element that can take focus. */}
-            <video
+            <LazyVideo
               className="absolute inset-0 h-full w-full object-cover"
-              loop
-              muted
-              playsInline
-              poster={casePoster(study)}
-              preload="metadata"
-              ref={videoRef}
+              poster={casePoster(study, reel)}
               src={reel}
-              tabIndex={-1}
             />
             {/* The reel is graded footage, so it needs less help than a photo,
                 but the pills still land on whatever frame is playing. */}

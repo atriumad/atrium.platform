@@ -1,5 +1,6 @@
+import LazyVideo from '@/components/media/LazyVideo'
 import { Marquee } from '@/components/ui/Marquee'
-import { cldImageUrl, cldVideoUrl } from '@/lib/cloudinary'
+import { cldImageUrl, cldVideoPoster, cldVideoUrl } from '@/lib/cloudinary'
 import type { HeroTile } from '@/lib/work'
 
 type Props = {
@@ -64,19 +65,14 @@ export default function HeroPerspectiveGallery({ tiles }: Props) {
               >
                 {tile.kind === 'video' ? (
                   // Decoration behind the hero copy: muted, looping, no controls
-                  // and hidden from assistive tech. `preload="metadata"` keeps a
-                  // handful of reels above the fold from competing with the copy
-                  // for bandwidth on a first paint.
-                  <video
-                    aria-hidden="true"
-                    autoPlay
+                  // and hidden from assistive tech. Three columns of these run
+                  // at once and each is duplicated for the wrap, so nothing is
+                  // fetched until a tile is actually near the viewport — the
+                  // poster holds the slot until then.
+                  <LazyVideo
                     className="h-full w-full object-cover"
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
+                    poster={cldVideoPoster(tile.src) || undefined}
                     src={cldVideoUrl(tile.src, { width: 500 })}
-                    tabIndex={-1}
                   />
                 ) : (
                   // biome-ignore lint/performance/noImgElement: marquee track of remote CDN assets, next/image not suitable here

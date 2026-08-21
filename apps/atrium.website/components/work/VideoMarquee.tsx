@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef } from 'react'
 import { cldVideoPoster, cldVideoUrl } from '@/lib/cloudinary'
+import { reelDelivery } from '@/lib/reels'
 
 // ─── Reels marquee — curved 3D auto-scroll ─────────────────────────────────
 // Vertical (9:16) videos flow across a concave, perspective-curved wall (each
@@ -53,7 +54,13 @@ export default function VideoMarquee({ publicIds, videos, height = 460, gap = 24
             return poster ? { src: cldVideoUrl(id), poster } : { src: cldVideoUrl(id) }
           })
         : videos && videos.length > 0
-          ? videos
+          ? // Explicit sources may be CDN reels, which have a web variant and a
+            // poster the caller has no way to know about.
+            videos.map((reel): Reel => {
+              const delivery = reelDelivery(reel.src)
+              const poster = reel.poster ?? delivery.poster
+              return poster ? { src: delivery.src, poster } : { src: delivery.src }
+            })
           : STOCK
     const filled: Reel[] = []
     while (filled.length < MIN_ITEMS) filled.push(...base)
@@ -180,7 +187,9 @@ export default function VideoMarquee({ publicIds, videos, height = 460, gap = 24
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                // The poster carries the frame until the observer below decides
+                // this card is close enough to the visible edge to play.
+                preload="none"
                 tabIndex={-1}
                 aria-hidden="true"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none', display: 'block' }}

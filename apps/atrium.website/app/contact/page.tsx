@@ -93,7 +93,6 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         cta="Book a call"
         ctaHref={emailHref}
         ctaCalLink={CAL_LINKS.intro}
-        coverAlt="Atrium contact path from project context to practical scope"
       />
     </>
   )
